@@ -4,6 +4,7 @@ var html = require("html");
 var fs = require('fs');
 var request = require("request");
 const cheerio = require('cheerio');
+const { Pool, Client } = require('pg')
 
 
 app.use(express.static(__dirname + '/domainParserviews'));
@@ -26,8 +27,17 @@ import {DOCS} from "./docList"
 var available_documents = {}
 var abs_index = []
 
-function main(){
 
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'ihw_annotator',
+  password: 'melacome86',
+  port: 5432,
+})
+
+
+function prepareAvailableDocuments(){
   // Preparing the variable to hold all data records.
   for ( var d in DOCS ){
 
@@ -50,7 +60,32 @@ function main(){
 
   }
 
-  // console.log(abs_index)
+}
+
+// async function connectDB(){
+//
+//   var client = await pool.connect()
+//   var result = await client.query({
+//     rowMode: 'array',
+//     text: 'SELECT * FROM annotations;'
+//   })
+//
+//   console.log("rows: "+ result.rows) // [1, 2]
+//   await client.end()
+//
+// }
+
+async function insertAnnotation(docid, page, user, annotation){
+  var client = await pool.connect()
+  var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4)', [docid, page, user, annotation])
+  await client.end()
+}
+
+// preinitialisation of components if needed.
+function main(){
+  // prepare available_documents variable
+  prepareAvailableDocuments()
+
 }
 
 main();
@@ -59,20 +94,23 @@ app.get('/',function(req,res){
   res.send("this is home")
 });
 
-app.get('/abs_index',function(req,res){
+app.get('/api/abs_index',function(req,res){
   res.send(abs_index)
 });
 
-app.get('/totalTables',function(req,res){
+app.get('/api/totalTables',function(req,res){
   res.send({total : DOCS.length})
 });
 
 
-app.get('/getTable',function(req,res){
-
+app.get('/api/getTable',function(req,res){
   //debugger
   // try{
-    if(req.query && req.query.docid && req.query.page && available_documents[req.query.docid] && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1){
+  console.log("GET TABLE CALLED")
+
+    if(req.query && req.query.docid
+      && req.query.page && available_documents[req.query.docid]
+      && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1){
 
         var docid = req.query.docid+"_"+req.query.page+".xlsx"
 
@@ -94,24 +132,28 @@ app.get('/getTable',function(req,res){
     } else {
       res.send({status: "wrong parameters", query : req.query})
     }
+
 // } catch (e){
 //   res.send({status: "probably page out of bounds, or document does not exist", query : req.query})
 // }
 
 });
 
-app.get('/getAvailableTables',function(req,res){
+app.get('/api/getAvailableTables',function(req,res){
   res.send(available_documents)
 });
 
-app.get('/getAnnotation',function(req,res){
+app.get('/api/getAnnotation',function(req,res){
   res.send("annotaion")
 });
 
-app.get('/recordAnnotation',function(req,res){
-  res.send("saved annotation")
+app.get('/api/recordAnnotation',function(req,res){
+
+  console.log(req.query)
+  //insertAnnotation("a doucment",2, "a user", {})
+  res.send("saved annotation: "+req.query)
 });
 
 app.listen(PORT, function () {
-  console.log('Application Running on port '+PORT+' ' + new Date().toISOString());
+  console.log('Express Server running on port '+PORT+' ' + new Date().toISOString());
 });

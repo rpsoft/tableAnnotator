@@ -1,7 +1,7 @@
 {
-  "name": "StationersRegister",
+  "name": "IHW Table Annotator",
   "version": "0.0.1",
-  "description": "Stationers' Register Online Phase II",
+  "description": "IHW Table Annotator",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,13 +11,11 @@
     "url": "git+ssh://git@github.com:rpsoft/StationersRegister.git"
   },
   "keywords": [
-    "IP",
-    "analysis",
-    "tracking"
+    "analysis"
   ],
   "author": "Jesus Rodriguez Perez",
   "license": "ISC",
-  "homepage": "https://github.com/rpsoft/StationersRegister",
+  "homepage": "https://github.com/rpsoft/tableAnnotator",
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.2.0",

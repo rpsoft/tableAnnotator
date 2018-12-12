@@ -21,6 +21,8 @@ export default class HttpClient {
   }
 
   send(messageBody='', options={}) {
+
+  //  debugger
     return new Promise(
       (resolve, reject) => {
         http.request(
