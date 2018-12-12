@@ -1,7 +1,7 @@
 {
-  "name": "SROFrontEnd",
+  "name": "IHWTableannotatorUI",
   "version": "0.0.1",
-  "description": "SROFrontEnd",
+  "description": "IHW Table annotator UI",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
@@ -10,17 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rpsoft/SROFrontEnd.git"
+    "url": "git+ssh://git@github.com:rpsoft/tableAnnotator.git"
   },
   "keywords": [
     "SRO"
   ],
   "author": "Bennett and Rodriguez",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rpsoft/SROFrontEnd/issues"
-  },
-  "homepage": "https://github.com/rpsoft/SROFrontEnd#readme",
+  "homepage": "https://github.com/rpsoft/tableAnnotator",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^4.1.3",
@@ -49,6 +46,7 @@
     "amdefine": "^1.0.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-react-native": "^5.0.2",
     "babili": "0.0.10",
     "bootstrap": "^3.3.7",
     "browserify-css": "^0.10.1",
@@ -71,7 +69,8 @@
     "react-dom": "^15.6.2",
     "react-image-lightbox": "^3.5.0",
     "react-measure": "^1.4.7",
-    "react-native": "^0.38.1",
+    "react-native": "^0.57.7",
+    "react-native-htmlview": "^0.13.0",
     "react-preload": "^0.5.1",
     "react-redux": "^4.4.8",
     "react-responsive-carousel": "^3.1.27",

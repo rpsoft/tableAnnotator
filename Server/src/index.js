@@ -50,10 +50,11 @@ function prepareAvailableDocuments(){
     if ( available_documents[docid] ){
       var prev_data = available_documents[docid]
           prev_data.pages[prev_data.pages.length] = page
+          prev_data.abs_pos[prev_data.abs_pos.length] = abs_index.length
           prev_data.maxPage = page > prev_data.maxPage ? page : prev_data.maxPage
           available_documents[docid] = prev_data
     } else {
-          available_documents[docid] = {pages : [ page ] , extension, maxPage : page}
+          available_documents[docid] = {abs_pos: [ abs_index.length ], pages : [ page ] , extension, maxPage : page}
     }
 
     abs_index[abs_index.length] = {docid, page, extension, docfile}
@@ -94,6 +95,16 @@ app.get('/',function(req,res){
   res.send("this is home")
 });
 
+app.get('/api/allMetaData',function(req,res){
+  res.send({
+    abs_index,
+    total : DOCS.length,
+    available_documents
+  })
+});
+
+
+
 app.get('/api/abs_index',function(req,res){
   res.send(abs_index)
 });
@@ -107,6 +118,8 @@ app.get('/api/getTable',function(req,res){
   //debugger
   // try{
   console.log("GET TABLE CALLED")
+
+
 
     if(req.query && req.query.docid
       && req.query.page && available_documents[req.query.docid]

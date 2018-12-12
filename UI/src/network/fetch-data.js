@@ -38,7 +38,17 @@ export default class fetchData {
 
   async getTable(docid,page) {
 
-        var urlQueryRequest = urlBase+ "getTable?docid="+docid+"&page="+page
+        var urlQueryRequest = urlBase+ "getTable?docid="+encodeURIComponent(docid)+"&page="+page
+
+        var r = await this.getGeneric( urlQueryRequest  )
+        // debugger
+        return r
+
+  }
+
+  async getAllInfo() {
+
+        var urlQueryRequest = urlBase+ "allMetaData"
 
         var r = await this.getGeneric( urlQueryRequest  )
         // debugger

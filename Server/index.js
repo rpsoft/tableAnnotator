@@ -58,10 +58,12 @@ function prepareAvailableDocuments() {
     if (available_documents[docid]) {
       var prev_data = available_documents[docid];
       prev_data.pages[prev_data.pages.length] = page;
+      prev_data.abs_pos[prev_data.abs_pos.length] = abs_index.length;
       prev_data.maxPage = page > prev_data.maxPage ? page : prev_data.maxPage;
       available_documents[docid] = prev_data;
     } else {
       available_documents[docid] = {
+        abs_pos: [abs_index.length],
         pages: [page],
         extension: extension,
         maxPage: page
@@ -134,6 +136,13 @@ function main() {
 main();
 app.get('/', function (req, res) {
   res.send("this is home");
+});
+app.get('/api/allMetaData', function (req, res) {
+  res.send({
+    abs_index: abs_index,
+    total: _docList.DOCS.length,
+    available_documents: available_documents
+  });
 });
 app.get('/api/abs_index', function (req, res) {
   res.send(abs_index);

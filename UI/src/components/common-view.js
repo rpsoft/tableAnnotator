@@ -20,82 +20,99 @@ import Divider from 'material-ui/Divider';
 import DownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import { push } from 'react-router-redux'
 
+import {StyleSheet} from 'react-native';
+import HTMLView from 'react-native-htmlview';
+
 class CommonView extends Component {
 
   constructor(props) {
     super()
-
     this.state = {
         table: null
     };
 
-
-
-    // if ( Object.keys(props.location.query).length > 0 ) {
-    //
-    //   this.runSearch()
-    // }
   }
+
   async componentWillReceiveProps(next) {
         this.loadPageFromProps(next)
-    }
+  }
 
   async componentWillMount() {
+
       this.loadPageFromProps(this.props)
-   }
+  }
 
   async loadPageFromProps(props){
-    let fetch = new fetchData();
 
-    var data = await fetch.getTable("24383720",2)
+    if ( Object.keys(props.location.query).length > 0 &&
+        props.location.query.docid && props.location.query.page) {
 
-    this.setState({table: data})
+
+        let fetch = new fetchData();
+
+        var data = await fetch.getTable(props.location.query.docid,props.location.query.page)
+        var allInfo = JSON.parse(await fetch.getAllInfo())
+
+        // debugger
+        this.setState({table: data, docid: props.location.query.docid, page: props.location.query.page, allInfo})
+
+    }
    }
 
- // updateAdvancedSearch = (adSearch) => {
- //   this.setState({advancedSearch : adSearch, query: adSearch.query })
- // }
+   // Retrieve the table given general index and number N.
+   shiftTables(n){
+
+     var documentData = this.state.allInfo.available_documents[this.state.docid]
+     var current_table_g_index = documentData.abs_pos[this.state.page-1]
+
+     var new_index = current_table_g_index+n
+
+      // check it is not out of bounds on the right
+         new_index = new_index > this.state.allInfo.abs_index.length-1 ? this.state.allInfo.abs_index.length-1 : new_index
+      //  now left
+         new_index = new_index < 0 ? 0 : new_index
 
 
+     var newDocument = this.state.allInfo.abs_index[new_index]
 
- render() {
-    //
-    // let logoStyle = {height: 50,marginLeft:5}
-    // let buttonStyle = {marginRight:10}
-    // let bodyStyle = {padding:10, maxWidth:960,minWidth:960,marginLeft:"auto",marginRight:"auto"}
-    // let bgStyle = {height: 50,marginLeft:5, backgroundColor: "#002147"}
-    //
-    // let dividerFormat = {width:"90%",marginLeft:"5%"}
-    //
-    // let buttonColor = "#e6e6e6"
-    // let buttonHoverColor = "#b5b5b5"
-    //
+     this.props.goToUrl("/?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page)
 
-    return <div>
+     console.log("palante: "+n)
 
-      <Card id="userData">
-        <div> User data </div>
-
-      </Card>
-
-      <Card id="navigation">
-        <div> navigation </div>
-
-      </Card>
-
-      <Card id="tableHolder">
-        <div dangerouslySetInnerHTML={ {__html:this.state.table}} ></div>
-
-      </Card>
+   }
 
 
-      <Card id="annotations">
-        <div> annotations </div>
+   render() {
+     // <div dangerouslySetInnerHTML={ {__html:this.state.table+"<script type='text/javascript'>alert('fuck!')</script>"}} ></div>
+      return <div>
 
-      </Card>
+        <Card id="userData">
+          <div> User data </div>
 
-    </div>
-  }
+        </Card>
+
+        <Card id="navigation" style={{textAlign:"right"}}>
+
+          <RaisedButton onClick={ () => {this.shiftTables(-1)} }>Previous Table</RaisedButton>
+          <RaisedButton onClick={ () => {this.shiftTables(1)} }>Next Table</RaisedButton>;
+
+        </Card>
+
+        <Card id="tableHolder">
+
+          <HTMLView
+                  value={this.state.table}
+                  stylesheet={styles}
+                />
+        </Card>
+
+        <Card id="annotations">
+          <div> annotations </div>
+
+        </Card>
+
+      </div>
+    }
 }
 
 const mapStateToProps = (state, ownProps) => ({
