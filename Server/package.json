@@ -1,5 +1,5 @@
 {
-  "name": "IHW Table Annotator",
+  "name": "IHWTableAnnotator",
   "version": "0.0.1",
   "description": "IHW Table Annotator",
   "main": "index.js",
