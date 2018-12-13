@@ -36,6 +36,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 // const XmlReader = require('xml-reader');
 // const xmlQuery = require('xml-query');
+var ops_counter = 0;
 var available_documents = {};
 var abs_index = [];
 var pool = new Pool({
@@ -91,7 +92,7 @@ function prepareAvailableDocuments() {
 // }
 
 
-function insertAnnotation(_x, _x2, _x3, _x4, _x5) {
+function insertAnnotation(_x, _x2, _x3, _x4, _x5, _x6) {
   return _insertAnnotation.apply(this, arguments);
 } // preinitialisation of components if needed.
 
@@ -99,7 +100,7 @@ function insertAnnotation(_x, _x2, _x3, _x4, _x5) {
 function _insertAnnotation() {
   _insertAnnotation = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee2(docid, page, user, annotation, corrupted) {
+  _regenerator.default.mark(function _callee2(docid, page, user, annotation, corrupted, tableType) {
     var client, done;
     return _regenerator.default.wrap(function _callee2$(_context2) {
       while (1) {
@@ -111,12 +112,19 @@ function _insertAnnotation() {
           case 2:
             client = _context2.sent;
             _context2.next = 5;
-            return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5)', [docid, page, user, annotation, corrupted]);
+            return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6)', [docid, page, user, annotation, corrupted, tableType]).then(function (result) {
+              return console.log(result);
+            }).catch(function (e) {
+              return console.error(e.stack);
+            }).then(function () {
+              return client.release();
+            });
 
           case 5:
             done = _context2.sent;
-            _context2.next = 8;
-            return client.end();
+            console.log("Awaiting done: " + ops_counter++); // await client.end()
+
+            console.log("DONE: " + ops_counter++);
 
           case 8:
           case "end":
@@ -162,8 +170,9 @@ app.get('/api/getTable', function (req, res) {
     fs.readFile("HTML_TABLES/" + docid + "_files/sheet001.html", "utf8", function (err, data) {
       fs.readFile("HTML_TABLES/" + docid + "_files/stylesheet.css", "utf8", function (err, data_ss) {
         var tablePage = cheerio.load(data);
+        tablePage("col").removeAttr('style');
         var actual_table = tablePage("table").parent().html();
-        var ss = "<style>" + data_ss + " td {width: auto;} </style>";
+        var ss = "<style>" + data_ss + " td {width: auto;} tr:hover {background: aliceblue} col{width:100pt} </style>";
         var formattedPage = "<div>" + ss + "</head>" + actual_table + "</div>";
         res.send(formattedPage);
       });
@@ -204,7 +213,7 @@ function () {
             _context.next = 4;
             return insertAnnotation(req.query.docid, req.query.page, req.query.user, {
               annotations: JSON.parse(req.query.annotation)
-            }, req.query.corrupted);
+            }, req.query.corrupted, req.query.tableType);
 
           case 4:
             //insertAnnotation("a doucment",2, "a user", {})
@@ -218,7 +227,7 @@ function () {
     }, _callee, this);
   }));
 
-  return function (_x6, _x7) {
+  return function (_x7, _x8) {
     return _ref.apply(this, arguments);
   };
 }());

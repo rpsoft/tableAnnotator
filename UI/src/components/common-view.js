@@ -20,6 +20,9 @@ import Divider from 'material-ui/Divider';
 import DownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import TextField from 'material-ui/TextField';
 
+import SelectField from 'material-ui/SelectField';
+
+
 import { push } from 'react-router-redux'
 
 import Checkbox from 'material-ui/Checkbox';
@@ -40,7 +43,8 @@ class CommonView extends Component {
     super()
     this.state = {
         table: null,
-        annotations:[]
+        annotations:[],
+        tableType : "subgroup_table"
     };
 
   }
@@ -109,7 +113,30 @@ class CommonView extends Component {
      this.setState({annotations})
    }
 
+   removeFalseKeys(obj){
+
+     var newObject = {}
+
+     var keys = Object.keys(obj)
+
+     for(var k in keys){
+       var ckey = keys[k]
+       if ( obj[ckey] != false ){
+         newObject[ckey] = obj[ckey]
+       }
+
+     }
+     return newObject
+   }
+
    addAnnotation(i,data){
+
+     var content = this.removeFalseKeys(data.content)
+     var qualifiers = this.removeFalseKeys(data.qualifiers)
+
+     data.content = content
+     data.qualifiers = qualifiers
+
 
      var annotations = this.state.annotations
          annotations[i] = data
@@ -139,7 +166,7 @@ class CommonView extends Component {
 
    async saveAnnotations(){
      let fetch = new fetchData();
-     await fetch.saveAnnotation(this.props.location.query.docid,this.props.location.query.page,"user",this.state.annotations,this.state.corrupted)
+     await fetch.saveAnnotation(this.props.location.query.docid,this.props.location.query.page,"user",this.state.annotations,this.state.corrupted, this.state.tableType)
 
    }
 
@@ -227,12 +254,27 @@ class CommonView extends Component {
         </Card>
 
         <Card style={{padding:8,marginTop:10,fontWeight:"bold"}}>
-            <div style={{width:250}}>
-                <Checkbox label={"Is the table corrupted?"}
+            <div style={{width:350}}>
+                <Checkbox
+                      label={"I don’t understand how to fill out the form for this table?"}
                       labelPosition= "left"
                       checked={ this.state.corrupted }
                       onCheck={ () => {this.setState({corrupted : !this.state.corrupted})}}
                 />
+
+                <SelectField
+
+                     value={this.state.tableType}
+                     floatingLabelText="Specify Table type"
+                     onChange={(event,index,value) => {this.setState({tableType : value})} }
+
+                   >
+                     <MenuItem value={"baseline_table"} key={1} primaryText={`baseline characteristic table`} />
+                     <MenuItem value={"other_table"} key={2} primaryText={`other table`} />
+                     <MenuItem value={"subgroup_text"} key={3} primaryText={`sub-group text`} />
+                     <MenuItem value={"subgroup_table"} key={4} primaryText={`sub-group table`} />
+                </SelectField>
+
             </div>
         </Card>
 

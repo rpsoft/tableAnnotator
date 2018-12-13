@@ -24,17 +24,18 @@ import {DOCS} from "./docList"
 // const XmlReader = require('xml-reader');
 // const xmlQuery = require('xml-query');
 
+var ops_counter = 0;
+
 var available_documents = {}
 var abs_index = []
 
-
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'ihw_annotator',
-  password: 'melacome86',
-  port: 5432,
-})
+    user: 'postgres',
+    host: 'localhost',
+    database: 'ihw_annotator',
+    password: 'melacome86',
+    port: 5432,
+  })
 
 
 function prepareAvailableDocuments(){
@@ -76,10 +77,18 @@ function prepareAvailableDocuments(){
 //
 // }
 
-async function insertAnnotation(docid, page, user, annotation, corrupted){
+async function insertAnnotation(docid, page, user, annotation, corrupted, tableType){
+
   var client = await pool.connect()
-  var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5)', [docid, page, user, annotation, corrupted])
-  await client.end()
+  var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6)', [docid, page, user, annotation, corrupted,tableType])
+    .then(result => console.log(result))
+    .catch(e => console.error(e.stack))
+    .then(() => client.release())
+
+
+  console.log("Awaiting done: "+(ops_counter++))
+  // await client.end()
+  console.log("DONE: "+(ops_counter++))
 }
 
 // preinitialisation of components if needed.
@@ -102,8 +111,6 @@ app.get('/api/allMetaData',function(req,res){
     available_documents
   })
 });
-
-
 
 app.get('/api/abs_index',function(req,res){
   res.send(abs_index)
@@ -134,8 +141,9 @@ app.get('/api/getTable',function(req,res){
                                   "utf8",
                                   function(err, data_ss) {
                                       var tablePage = cheerio.load(data);
+                                          tablePage("col").removeAttr('style');
                                       var actual_table = tablePage("table").parent().html()
-                                      var ss = "<style>"+data_ss+" td {width: auto;} </style>"
+                                      var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} col{width:100pt} </style>"
                                       var formattedPage = "<div>"+ss+"</head>"+actual_table+"</div>"
                                       res.send(formattedPage)
                                   });
@@ -168,7 +176,7 @@ app.get('/api/recordAnnotation',async function(req,res){
               && req.query.page.length > 0
               && req.query.user.length > 0
               && req.query.annotation.length > 0 ){
-      await insertAnnotation( req.query.docid , req.query.page, req.query.user, {annotations:JSON.parse(req.query.annotation)}, req.query.corrupted )
+      await insertAnnotation( req.query.docid , req.query.page, req.query.user, {annotations:JSON.parse(req.query.annotation)}, req.query.corrupted, req.query.tableType)
   }
   //insertAnnotation("a doucment",2, "a user", {})
   res.send("saved annotation: "+JSON.stringify(req.query))

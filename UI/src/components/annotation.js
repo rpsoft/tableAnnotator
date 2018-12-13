@@ -79,7 +79,7 @@ export default class Annotation extends Component {
                 />
 
            <MultiplePopover variable={"content"}
-                            options={["outcomes", "arms", "measures", "subgroup_name", "subgroup_level", "other"]}
+                            options={["outcomes", "arms", "measures", "subgroup_name", "subgroup_level", "other", "p-interaction","baseline_level_1","baseline_level_2","empty_row_with_p_value"]}
                             updateAnnotation={ (values) => { this.handleMultiChoice("content",values) } }
                             />
 

@@ -36,9 +36,9 @@ export default class fetchData {
   //                                         + ( direction ? "&direction="+direction : "" ) )
   // }
 
-  async saveAnnotation(docid,page,user,annotation,corrupted) {
+  async saveAnnotation(docid,page,user,annotation,corrupted, tableType) {
 
-    var urlQueryRequest = urlBase+ "recordAnnotation?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user+"&annotation="+encodeURIComponent(JSON.stringify(annotation))+"&corrupted="+ (corrupted == undefined ? false : corrupted)
+    var urlQueryRequest = urlBase+ "recordAnnotation?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user+"&annotation="+encodeURIComponent(JSON.stringify(annotation))+"&corrupted="+ (corrupted == undefined ? false : corrupted)+"&tableType="+tableType
 
     console.log(urlQueryRequest)
 
