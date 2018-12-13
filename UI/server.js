@@ -19,7 +19,7 @@ new WebpackDevServer(webpack(config), {
       target: targetUrl,
     }
   }
-}).listen(listeningPort, 'localhost', function (err, result) {
+}).listen(listeningPort, "0.0.0.0", function (err, result) {
   if (err) {
     return console.log(err);
   }
