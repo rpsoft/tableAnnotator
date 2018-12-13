@@ -77,6 +77,32 @@ function prepareAvailableDocuments(){
 //
 // }
 
+async function getAnnotationResults(){
+
+  var client = await pool.connect()
+  var result = await client.query(`SELECT "docid","page","user","corrupted","tableType" ,
+                  	results->>'location' "location",
+                  	results->>'number' "number",
+                  	results->'content' as jsoncontent,
+                  	results->'qualifiers' as jsonqualifier, "N"
+
+                  FROM
+                  (
+                  	SELECT json_array_elements(
+                  				("annotation"#>>'{annotations}')::json
+                  				) "results","docid","page","user","corrupted","tableType", "N"
+
+                  	FROM (
+                  		select distinct on ("docid") docid,"page","user","corrupted","tableType","N","annotation"
+                  		from annotations
+                  		order by "docid", "N" desc
+                  	) AS annotations
+                  ) as final_annotations`)
+        client.release()
+  return result
+}
+
+
 async function insertAnnotation(docid, page, user, annotation, corrupted, tableType){
 
   var client = await pool.connect()
@@ -111,6 +137,9 @@ app.get('/api/allMetaData',function(req,res){
     available_documents
   })
 });
+
+
+
 
 app.get('/api/abs_index',function(req,res){
   res.send(abs_index)
@@ -164,8 +193,8 @@ app.get('/api/getAvailableTables',function(req,res){
   res.send(available_documents)
 });
 
-app.get('/api/getAnnotation',function(req,res){
-  res.send("annotaion")
+app.get('/api/getAnnotations',async function(req,res){
+  res.send( await getAnnotationResults() )
 });
 
 app.get('/api/recordAnnotation',async function(req,res){

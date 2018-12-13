@@ -17,7 +17,8 @@ import {
   // Core components
   AppContainer,
   CommonView,
-  // BrowserContainer,
+  ResultsView,
+  ResultsContainer,
   // Browse,
   // BrowseNames,
   // BrowseFilter,
@@ -38,6 +39,12 @@ var routes = (history) => (
       <Route path={"/"} component={AppContainer} >
         <IndexRoute component={CommonView} />
       </Route>
+
+      <Route path="allresults" component={ResultsContainer}>
+            <Route path={urlBase + "allresults"} component={ResultsView} ></Route>
+      </Route>
+
+
   </Router>
 )
 

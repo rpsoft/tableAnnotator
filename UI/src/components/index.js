@@ -10,10 +10,11 @@ export AppContainer from './app-container'
 
 
 export CommonView from './common-view'
+export ResultsView from './results-view'
 // export StaticPage from './staticPage'
 // // export Project from './project.js'
 // // export About from './about.js'
-// export BrowserContainer from './browser-container'
+export ResultsContainer from './results-container'
 // export Browse from './browse'
 // export BrowseNames from './browse-names'
 // export BrowseFilter from './browse-filter'

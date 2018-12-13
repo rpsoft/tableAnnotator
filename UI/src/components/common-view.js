@@ -165,9 +165,15 @@ class CommonView extends Component {
    // }
 
    async saveAnnotations(){
-     let fetch = new fetchData();
-     await fetch.saveAnnotation(this.props.location.query.docid,this.props.location.query.page,"user",this.state.annotations,this.state.corrupted, this.state.tableType)
 
+    if (!this.state.user){
+        alert("Specify a user before saving and try again!!")
+        return
+    }
+
+    let fetch = new fetchData();
+    await fetch.saveAnnotation(this.props.location.query.docid,this.props.location.query.page,this.state.user,this.state.annotations,this.state.corrupted, this.state.tableType)
+    alert("Annotations Saved!")
    }
 
    render() {
@@ -228,6 +234,12 @@ class CommonView extends Component {
       return <div>
 
         <Card id="userData" style={{padding:15}}>
+          <TextField
+            value={this.state.user}
+            hintText="Set your username here"
+            onChange={(event,value) => {this.setState({user: value})}}
+            style={{width:200,marginLeft:20,marginRight:20,float:"left"}}
+            />
 
           <div>{this.state.gindex+" / "+ (this.state.allInfo ? this.state.allInfo.total-1 : "")}
           <TextField

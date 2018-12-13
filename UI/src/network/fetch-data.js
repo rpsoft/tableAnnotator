@@ -68,5 +68,15 @@ export default class fetchData {
 
   }
 
+  async getAllAnnotations() {
+
+        var urlQueryRequest = urlBase+ "getAnnotations"
+
+        var r = await this.getGeneric( urlQueryRequest  )
+        
+        return r
+
+  }
+
 
 }
