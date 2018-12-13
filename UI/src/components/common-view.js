@@ -45,6 +45,13 @@ class CommonView extends Component {
 
   }
 
+  // componentDidMount () {
+  //
+  //   //document.append('<script type="text/javascript">document.getElementsByTagName("col")[0].style.width = "200pt"</script>');
+  //   debugger
+  //
+  // }
+
   async componentWillReceiveProps(next) {
         this.loadPageFromProps(next)
   }

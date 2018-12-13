@@ -159,8 +159,8 @@ app.get('/api/getTable', function (req, res) {
 
   if (req.query && req.query.docid && req.query.page && available_documents[req.query.docid] && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1) {
     var docid = req.query.docid + "_" + req.query.page + ".xlsx";
-    fs.readFile("/home/suso/ihw/tableAnnotator/Server/HTML_TABLES/" + docid + "_files/sheet001.html", "utf8", function (err, data) {
-      fs.readFile("/home/suso/ihw/tableAnnotator/Server/HTML_TABLES/" + docid + "_files/stylesheet.css", "utf8", function (err, data_ss) {
+    fs.readFile("HTML_TABLES/" + docid + "_files/sheet001.html", "utf8", function (err, data) {
+      fs.readFile("HTML_TABLES/" + docid + "_files/stylesheet.css", "utf8", function (err, data_ss) {
         var tablePage = cheerio.load(data);
         var actual_table = tablePage("table").parent().html();
         var ss = "<style>" + data_ss + " td {width: auto;} </style>";
