@@ -18,6 +18,8 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import Divider from 'material-ui/Divider';
 import DownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
+import TextField from 'material-ui/TextField';
+
 import { push } from 'react-router-redux'
 
 import Checkbox from 'material-ui/Checkbox';
@@ -63,8 +65,10 @@ class CommonView extends Component {
         var data = await fetch.getTable(props.location.query.docid,props.location.query.page)
         var allInfo = JSON.parse(await fetch.getAllInfo())
 
+        var documentData = allInfo.available_documents[props.location.query.docid]
+        var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(props.location.query.page)]
         // debugger
-        this.setState({table: data, docid: props.location.query.docid, page: props.location.query.page, allInfo})
+        this.setState({table: data, docid: props.location.query.docid, page: props.location.query.page, allInfo, gindex: current_table_g_index})
 
     }
    }
@@ -85,7 +89,7 @@ class CommonView extends Component {
 
      var newDocument = this.state.allInfo.abs_index[new_index]
 
-     this.setState({annotations:[]})
+     this.setState({annotations:[],gindex: current_table_g_index})
 
      this.props.goToUrl("/?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page)
 
@@ -114,6 +118,17 @@ class CommonView extends Component {
 
      this.setState({annotations})
    }
+
+   goToGIndex(index){
+     var newDocument = this.state.allInfo.abs_index[index]
+     this.props.goToUrl("/?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page)
+   }
+
+   // textChange(event,value) {
+   //
+   //
+   //
+   // }
 
    async saveAnnotations(){
      let fetch = new fetchData();
@@ -179,8 +194,16 @@ class CommonView extends Component {
       return <div>
 
         <Card id="userData" style={{padding:15}}>
-          <div> User data </div>
 
+          <div>{this.state.gindex+" / "+ (this.state.allInfo ? this.state.allInfo.total-1 : "")}
+          <TextField
+            value={this.state.currentGPage}
+            hintText="Go to page"
+            onChange={(event,value) => {this.setState({currentGPage: value})}}
+            style={{width:100,marginLeft:20}}
+            />
+            <RaisedButton onClick={ () => { this.goToGIndex(this.state.currentGPage) } }>Go!</RaisedButton>
+          </div>
         </Card>
 
         <Card id="navigation" style={{textAlign:"right",padding:5,marginTop:10}}>
