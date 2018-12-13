@@ -76,9 +76,9 @@ function prepareAvailableDocuments(){
 //
 // }
 
-async function insertAnnotation(docid, page, user, annotation){
+async function insertAnnotation(docid, page, user, annotation, corrupted){
   var client = await pool.connect()
-  var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4)', [docid, page, user, annotation])
+  var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5)', [docid, page, user, annotation, corrupted])
   await client.end()
 }
 
@@ -136,7 +136,7 @@ app.get('/api/getTable',function(req,res){
                                       var tablePage = cheerio.load(data);
                                       var actual_table = tablePage("table").parent().html()
                                       var ss = "<style>"+data_ss+" td {width: auto;} </style>"
-                                      var formattedPage = "<html><head>"+ss+"</head>"+actual_table+"</html>"
+                                      var formattedPage = "<div>"+ss+"</head>"+actual_table+"</div>"
                                       res.send(formattedPage)
                                   });
 
@@ -160,11 +160,18 @@ app.get('/api/getAnnotation',function(req,res){
   res.send("annotaion")
 });
 
-app.get('/api/recordAnnotation',function(req,res){
+app.get('/api/recordAnnotation',async function(req,res){
 
-  console.log(req.query)
+  console.log(JSON.stringify(req.query))
+
+  if(req.query && req.query.docid.length > 0
+              && req.query.page.length > 0
+              && req.query.user.length > 0
+              && req.query.annotation.length > 0 ){
+      await insertAnnotation( req.query.docid , req.query.page, req.query.user, {annotations:JSON.parse(req.query.annotation)}, req.query.corrupted )
+  }
   //insertAnnotation("a doucment",2, "a user", {})
-  res.send("saved annotation: "+req.query)
+  res.send("saved annotation: "+JSON.stringify(req.query))
 });
 
 app.listen(PORT, function () {

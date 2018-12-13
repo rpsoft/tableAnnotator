@@ -91,7 +91,7 @@ function prepareAvailableDocuments() {
 // }
 
 
-function insertAnnotation(_x, _x2, _x3, _x4) {
+function insertAnnotation(_x, _x2, _x3, _x4, _x5) {
   return _insertAnnotation.apply(this, arguments);
 } // preinitialisation of components if needed.
 
@@ -99,31 +99,31 @@ function insertAnnotation(_x, _x2, _x3, _x4) {
 function _insertAnnotation() {
   _insertAnnotation = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee(docid, page, user, annotation) {
+  _regenerator.default.mark(function _callee2(docid, page, user, annotation, corrupted) {
     var client, done;
-    return _regenerator.default.wrap(function _callee$(_context) {
+    return _regenerator.default.wrap(function _callee2$(_context2) {
       while (1) {
-        switch (_context.prev = _context.next) {
+        switch (_context2.prev = _context2.next) {
           case 0:
-            _context.next = 2;
+            _context2.next = 2;
             return pool.connect();
 
           case 2:
-            client = _context.sent;
-            _context.next = 5;
-            return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4)', [docid, page, user, annotation]);
+            client = _context2.sent;
+            _context2.next = 5;
+            return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5)', [docid, page, user, annotation, corrupted]);
 
           case 5:
-            done = _context.sent;
-            _context.next = 8;
+            done = _context2.sent;
+            _context2.next = 8;
             return client.end();
 
           case 8:
           case "end":
-            return _context.stop();
+            return _context2.stop();
         }
       }
-    }, _callee, this);
+    }, _callee2, this);
   }));
   return _insertAnnotation.apply(this, arguments);
 }
@@ -164,7 +164,7 @@ app.get('/api/getTable', function (req, res) {
         var tablePage = cheerio.load(data);
         var actual_table = tablePage("table").parent().html();
         var ss = "<style>" + data_ss + " td {width: auto;} </style>";
-        var formattedPage = "<html><head>" + ss + "</head>" + actual_table + "</html>";
+        var formattedPage = "<div>" + ss + "</head>" + actual_table + "</div>";
         res.send(formattedPage);
       });
     });
@@ -184,11 +184,44 @@ app.get('/api/getAvailableTables', function (req, res) {
 app.get('/api/getAnnotation', function (req, res) {
   res.send("annotaion");
 });
-app.get('/api/recordAnnotation', function (req, res) {
-  console.log(req.query); //insertAnnotation("a doucment",2, "a user", {})
+app.get('/api/recordAnnotation',
+/*#__PURE__*/
+function () {
+  var _ref = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee(req, res) {
+    return _regenerator.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            console.log(JSON.stringify(req.query));
 
-  res.send("saved annotation: " + req.query);
-});
+            if (!(req.query && req.query.docid.length > 0 && req.query.page.length > 0 && req.query.user.length > 0 && req.query.annotation.length > 0)) {
+              _context.next = 4;
+              break;
+            }
+
+            _context.next = 4;
+            return insertAnnotation(req.query.docid, req.query.page, req.query.user, {
+              annotations: JSON.parse(req.query.annotation)
+            }, req.query.corrupted);
+
+          case 4:
+            //insertAnnotation("a doucment",2, "a user", {})
+            res.send("saved annotation: " + JSON.stringify(req.query));
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, this);
+  }));
+
+  return function (_x6, _x7) {
+    return _ref.apply(this, arguments);
+  };
+}());
 app.listen(_config.PORT, function () {
   console.log('Express Server running on port ' + _config.PORT + ' ' + new Date().toISOString());
 });

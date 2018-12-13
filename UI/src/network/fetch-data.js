@@ -36,6 +36,18 @@ export default class fetchData {
   //                                         + ( direction ? "&direction="+direction : "" ) )
   // }
 
+  async saveAnnotation(docid,page,user,annotation,corrupted) {
+
+    var urlQueryRequest = urlBase+ "recordAnnotation?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user+"&annotation="+encodeURIComponent(JSON.stringify(annotation))+"&corrupted="+ (corrupted == undefined ? false : corrupted)
+
+    console.log(urlQueryRequest)
+
+    var r = await this.getGeneric( urlQueryRequest  )
+    // debugger
+    return r
+
+  }
+
   async getTable(docid,page) {
 
         var urlQueryRequest = urlBase+ "getTable?docid="+encodeURIComponent(docid)+"&page="+page
