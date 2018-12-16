@@ -111,7 +111,7 @@ function _getAnnotationResults() {
           case 2:
             client = _context3.sent;
             _context3.next = 5;
-            return client.query("SELECT \"docid\",\"page\",\"user\",\"corrupted\",\"tableType\" ,\n                  \tresults->>'location' \"location\",\n                  \tresults->>'number' \"number\",\n                  \tresults->'content' as jsoncontent,\n                  \tresults->'qualifiers' as jsonqualifier, \"N\"\n\n                  FROM\n                  (\n                  \tSELECT json_array_elements(\n                  \t\t\t\t(\"annotation\"#>>'{annotations}')::json\n                  \t\t\t\t) \"results\",\"docid\",\"page\",\"user\",\"corrupted\",\"tableType\", \"N\"\n\n                  \tFROM (\n                  \t\tselect distinct on (\"docid\") docid,\"page\",\"user\",\"corrupted\",\"tableType\",\"N\",\"annotation\"\n                  \t\tfrom annotations\n                  \t\torder by \"docid\", \"N\" desc\n                  \t) AS annotations\n                  ) as final_annotations");
+            return client.query("select * from annotations order by docid desc,page asc");
 
           case 5:
             result = _context3.sent;
