@@ -103,6 +103,7 @@ class ResultsView extends Component {
         }
 
 
+        debugger
 
       return <div>
 
@@ -114,7 +115,7 @@ class ResultsView extends Component {
 
               return value.annotation.annotations.map( (ann , j ) => {
                 try {
-                return <div key={i}>{  '"'+value.user
+                return <div key={i+"_"+j}>{  '"'+value.user
                                             +'","'+value.docid
                                             +'","'+value.page
                                             +'","'+value.corrupted
