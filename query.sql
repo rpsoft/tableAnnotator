@@ -15,4 +15,4 @@ FROM
 		from annotations
 		order by "docid", "N" desc
 	) AS annotations
-) as mytable1
+) as final_annotations

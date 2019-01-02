@@ -61,7 +61,6 @@ function prepareAvailableDocuments(){
     abs_index[abs_index.length] = {docid, page, extension, docfile}
 
   }
-
 }
 
 // async function connectDB(){
@@ -142,7 +141,18 @@ app.get('/api/allMetaData',function(req,res){
 
 
 app.get('/api/abs_index',function(req,res){
-  res.send(abs_index)
+
+  var output = "";
+  for (var i in abs_index){
+
+    output = output + i
+              +","+abs_index[i].docid
+              +","+abs_index[i].page
+              +"\n";
+
+  }
+
+  res.send(output)
 });
 
 app.get('/api/totalTables',function(req,res){
