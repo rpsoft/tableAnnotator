@@ -38,14 +38,17 @@ app.set('view engine', 'html');
 // const xmlQuery = require('xml-query');
 var ops_counter = 0;
 var available_documents = {};
-var abs_index = [];
+var abs_index = []; // Postgres configuration.
+
 var pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'ihw_annotator',
   password: 'melacome86',
   port: 5432
-});
+}); //NODE R CONFIGURATION.
+
+var R = require("r-script");
 
 function prepareAvailableDocuments() {
   // Preparing the variable to hold all data records.
@@ -99,31 +102,31 @@ function getAnnotationResults() {
 function _getAnnotationResults() {
   _getAnnotationResults = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee3() {
+  _regenerator.default.mark(function _callee4() {
     var client, result;
-    return _regenerator.default.wrap(function _callee3$(_context3) {
+    return _regenerator.default.wrap(function _callee4$(_context4) {
       while (1) {
-        switch (_context3.prev = _context3.next) {
+        switch (_context4.prev = _context4.next) {
           case 0:
-            _context3.next = 2;
+            _context4.next = 2;
             return pool.connect();
 
           case 2:
-            client = _context3.sent;
-            _context3.next = 5;
+            client = _context4.sent;
+            _context4.next = 5;
             return client.query("select * from annotations order by docid desc,page asc");
 
           case 5:
-            result = _context3.sent;
+            result = _context4.sent;
             client.release();
-            return _context3.abrupt("return", result);
+            return _context4.abrupt("return", result);
 
           case 8:
           case "end":
-            return _context3.stop();
+            return _context4.stop();
         }
       }
-    }, _callee3, this);
+    }, _callee4, this);
   }));
   return _getAnnotationResults.apply(this, arguments);
 }
@@ -136,18 +139,18 @@ function insertAnnotation(_x, _x2, _x3, _x4, _x5, _x6) {
 function _insertAnnotation() {
   _insertAnnotation = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee4(docid, page, user, annotation, corrupted, tableType) {
+  _regenerator.default.mark(function _callee5(docid, page, user, annotation, corrupted, tableType) {
     var client, done;
-    return _regenerator.default.wrap(function _callee4$(_context4) {
+    return _regenerator.default.wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
-            _context4.next = 2;
+            _context5.next = 2;
             return pool.connect();
 
           case 2:
-            client = _context4.sent;
-            _context4.next = 5;
+            client = _context5.sent;
+            _context5.next = 5;
             return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6)', [docid, page, user, annotation, corrupted, tableType]).then(function (result) {
               return console.log(result);
             }).catch(function (e) {
@@ -157,17 +160,17 @@ function _insertAnnotation() {
             });
 
           case 5:
-            done = _context4.sent;
+            done = _context5.sent;
             console.log("Awaiting done: " + ops_counter++); // await client.end()
 
             console.log("DONE: " + ops_counter++);
 
           case 8:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
       }
-    }, _callee4, this);
+    }, _callee5, this);
   }));
   return _insertAnnotation.apply(this, arguments);
 }
@@ -188,6 +191,37 @@ app.get('/api/allMetaData', function (req, res) {
     available_documents: available_documents
   });
 });
+app.get('/api/rscript',
+/*#__PURE__*/
+function () {
+  var _ref = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee(req, res) {
+    var result;
+    return _regenerator.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            try {
+              result = R("./src/test.R");
+              result = result.data("hello world", 20).callSync();
+              res.send(JSON.stringify(result));
+            } catch (e) {
+              res.send("FAIL: " + e);
+            }
+
+          case 1:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, this);
+  }));
+
+  return function (_x7, _x8) {
+    return _ref.apply(this, arguments);
+  };
+}());
 app.get('/api/abs_index', function (req, res) {
   var output = "";
 
@@ -235,37 +269,6 @@ app.get('/api/getAvailableTables', function (req, res) {
 app.get('/api/getAnnotations',
 /*#__PURE__*/
 function () {
-  var _ref = (0, _asyncToGenerator2.default)(
-  /*#__PURE__*/
-  _regenerator.default.mark(function _callee(req, res) {
-    return _regenerator.default.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.t0 = res;
-            _context.next = 3;
-            return getAnnotationResults();
-
-          case 3:
-            _context.t1 = _context.sent;
-
-            _context.t0.send.call(_context.t0, _context.t1);
-
-          case 5:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, this);
-  }));
-
-  return function (_x7, _x8) {
-    return _ref.apply(this, arguments);
-  };
-}());
-app.get('/api/recordAnnotation',
-/*#__PURE__*/
-function () {
   var _ref2 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee2(req, res) {
@@ -273,21 +276,14 @@ function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            console.log(JSON.stringify(req.query));
+            _context2.t0 = res;
+            _context2.next = 3;
+            return getAnnotationResults();
 
-            if (!(req.query && req.query.docid.length > 0 && req.query.page.length > 0 && req.query.user.length > 0 && req.query.annotation.length > 0)) {
-              _context2.next = 4;
-              break;
-            }
+          case 3:
+            _context2.t1 = _context2.sent;
 
-            _context2.next = 4;
-            return insertAnnotation(req.query.docid, req.query.page, req.query.user, {
-              annotations: JSON.parse(req.query.annotation)
-            }, req.query.corrupted, req.query.tableType);
-
-          case 4:
-            //insertAnnotation("a doucment",2, "a user", {})
-            res.send("saved annotation: " + JSON.stringify(req.query));
+            _context2.t0.send.call(_context2.t0, _context2.t1);
 
           case 5:
           case "end":
@@ -299,6 +295,44 @@ function () {
 
   return function (_x9, _x10) {
     return _ref2.apply(this, arguments);
+  };
+}());
+app.get('/api/recordAnnotation',
+/*#__PURE__*/
+function () {
+  var _ref3 = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee3(req, res) {
+    return _regenerator.default.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            console.log(JSON.stringify(req.query));
+
+            if (!(req.query && req.query.docid.length > 0 && req.query.page.length > 0 && req.query.user.length > 0 && req.query.annotation.length > 0)) {
+              _context3.next = 4;
+              break;
+            }
+
+            _context3.next = 4;
+            return insertAnnotation(req.query.docid, req.query.page, req.query.user, {
+              annotations: JSON.parse(req.query.annotation)
+            }, req.query.corrupted, req.query.tableType);
+
+          case 4:
+            //insertAnnotation("a doucment",2, "a user", {})
+            res.send("saved annotation: " + JSON.stringify(req.query));
+
+          case 5:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, this);
+  }));
+
+  return function (_x11, _x12) {
+    return _ref3.apply(this, arguments);
   };
 }());
 app.listen(_config.PORT, function () {

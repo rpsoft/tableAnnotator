@@ -29,6 +29,7 @@ var ops_counter = 0;
 var available_documents = {}
 var abs_index = []
 
+// Postgres configuration.
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
@@ -36,6 +37,10 @@ const pool = new Pool({
     password: 'melacome86',
     port: 5432,
   })
+
+//NODE R CONFIGURATION.
+const R = require("r-script");
+
 
 
 function prepareAvailableDocuments(){
@@ -121,7 +126,21 @@ app.get('/api/allMetaData',function(req,res){
 });
 
 
+app.get('/api/rscript',async function(req,res){
 
+  try{
+
+    var result = R("./src/test.R")
+
+      result = result.data("hello world", 20)
+      .callSync()
+
+      res.send( JSON.stringify(result) )
+
+  } catch (e){
+    res.send("FAIL: "+ e)
+  }
+});
 
 app.get('/api/abs_index',function(req,res){
 
