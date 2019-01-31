@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router'
+
+import { templateListSet } from '../actions/actions';
+
 
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -17,7 +22,7 @@ import MultiplePopover from './MultiplePopover'
 
 // import ContentLinkIcon from 'material-ui/svg-icons/content/link';
 
-export default class Annotation extends Component {
+class Annotation extends Component {
   constructor(props) {
       super()
       this.state = {
@@ -94,3 +99,22 @@ export default class Annotation extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  templateList: state.templateList || null,
+  // if route contains params
+  params: ownProps.params,
+  location: ownProps.location
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setTemplateList: (templateList) => {
+    dispatch(templateListSet(templateList))
+  },
+  goToUrl: (url) => dispatch(push(url))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Annotation);

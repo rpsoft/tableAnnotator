@@ -73,17 +73,19 @@ class ResultsView extends Component {
      if ( this.state.results ){
 
         var results = this.state.results
-
         var finalResults = {}
 
+        /**
+        * There are multiple versions of the annotations. When calling reading the results from the database, here we will return only the latest/ most complete version of the annotation.
+        * Independently from the author of it. Completeness here measured as the result with the highest number of annotations and the highest index number (I.e. Newest, but only if it has more information/annotations).
+        * May not be the best in some cases.
+        *
+        */
+
         for ( var r in results.rows){
-
           var ann = results.rows[r]
-
           var existing = finalResults[ann.docid+"_"+ann.page]
-
           if ( existing ){
-
             if ( ann.N > existing.N && ann.annotation.annotations.length >= existing.annotation.annotations.length ){
                   finalResults[ann.docid+"_"+ann.page] = ann
             }
@@ -93,17 +95,12 @@ class ResultsView extends Component {
         }
 
         var finalResults_array = []
-
         for (  var r in finalResults ){
-
           var ann = finalResults[r]
-
           finalResults_array[finalResults_array.length] = ann
-
         }
 
-
-        debugger
+        // debugger
 
       return <div>
 

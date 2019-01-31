@@ -81,19 +81,7 @@ function prepareAvailableDocuments() {
       docfile: docfile
     };
   }
-} // async function connectDB(){
-//
-//   var client = await pool.connect()
-//   var result = await client.query({
-//     rowMode: 'array',
-//     text: 'SELECT * FROM annotations;'
-//   })
-//
-//   console.log("rows: "+ result.rows) // [1, 2]
-//   await client.end()
-//
-// }
-
+}
 
 function getAnnotationResults() {
   return _getAnnotationResults.apply(this, arguments);
@@ -102,36 +90,74 @@ function getAnnotationResults() {
 function _getAnnotationResults() {
   _getAnnotationResults = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee4() {
+  _regenerator.default.mark(function _callee6() {
     var client, result;
-    return _regenerator.default.wrap(function _callee4$(_context4) {
+    return _regenerator.default.wrap(function _callee6$(_context6) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
-            _context4.next = 2;
+            _context6.next = 2;
             return pool.connect();
 
           case 2:
-            client = _context4.sent;
-            _context4.next = 5;
+            client = _context6.sent;
+            _context6.next = 5;
             return client.query("select * from annotations order by docid desc,page asc");
 
           case 5:
-            result = _context4.sent;
+            result = _context6.sent;
             client.release();
-            return _context4.abrupt("return", result);
+            return _context6.abrupt("return", result);
 
           case 8:
           case "end":
-            return _context4.stop();
+            return _context6.stop();
         }
       }
-    }, _callee4, this);
+    }, _callee6, this);
   }));
   return _getAnnotationResults.apply(this, arguments);
 }
 
-function insertAnnotation(_x, _x2, _x3, _x4, _x5, _x6) {
+function getAnnotationByID(_x, _x2) {
+  return _getAnnotationByID.apply(this, arguments);
+}
+
+function _getAnnotationByID() {
+  _getAnnotationByID = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee7(docid, page) {
+    var client, query, result;
+    return _regenerator.default.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            _context7.next = 2;
+            return pool.connect();
+
+          case 2:
+            client = _context7.sent;
+            query = "select * from annotations where docid='" + docid + "' AND page=" + page + " order by docid desc,page asc";
+            console.log(query);
+            _context7.next = 7;
+            return client.query(query);
+
+          case 7:
+            result = _context7.sent;
+            client.release();
+            return _context7.abrupt("return", result);
+
+          case 10:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7, this);
+  }));
+  return _getAnnotationByID.apply(this, arguments);
+}
+
+function insertAnnotation(_x3, _x4, _x5, _x6, _x7, _x8) {
   return _insertAnnotation.apply(this, arguments);
 } // preinitialisation of components if needed.
 
@@ -139,18 +165,18 @@ function insertAnnotation(_x, _x2, _x3, _x4, _x5, _x6) {
 function _insertAnnotation() {
   _insertAnnotation = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee5(docid, page, user, annotation, corrupted, tableType) {
+  _regenerator.default.mark(function _callee8(docid, page, user, annotation, corrupted, tableType) {
     var client, done;
-    return _regenerator.default.wrap(function _callee5$(_context5) {
+    return _regenerator.default.wrap(function _callee8$(_context8) {
       while (1) {
-        switch (_context5.prev = _context5.next) {
+        switch (_context8.prev = _context8.next) {
           case 0:
-            _context5.next = 2;
+            _context8.next = 2;
             return pool.connect();
 
           case 2:
-            client = _context5.sent;
-            _context5.next = 5;
+            client = _context8.sent;
+            _context8.next = 5;
             return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6)', [docid, page, user, annotation, corrupted, tableType]).then(function (result) {
               return console.log(result);
             }).catch(function (e) {
@@ -160,17 +186,17 @@ function _insertAnnotation() {
             });
 
           case 5:
-            done = _context5.sent;
+            done = _context8.sent;
             console.log("Awaiting done: " + ops_counter++); // await client.end()
 
             console.log("DONE: " + ops_counter++);
 
           case 8:
           case "end":
-            return _context5.stop();
+            return _context8.stop();
         }
       }
-    }, _callee5, this);
+    }, _callee8, this);
   }));
   return _insertAnnotation.apply(this, arguments);
 }
@@ -203,10 +229,12 @@ function () {
         switch (_context.prev = _context.next) {
           case 0:
             try {
-              result = R("./src/test.R");
+              result = R("./src/tableScript.R");
+              debugger;
               result = result.data("hello world", 20).callSync();
               res.send(JSON.stringify(result));
             } catch (e) {
+              debugger;
               res.send("FAIL: " + e);
             }
 
@@ -218,8 +246,114 @@ function () {
     }, _callee, this);
   }));
 
-  return function (_x7, _x8) {
+  return function (_x9, _x10) {
     return _ref.apply(this, arguments);
+  };
+}());
+app.get('/api/annotationPreview',
+/*#__PURE__*/
+function () {
+  var _ref2 = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee2(req, res) {
+    var annotations, page, final_annotations, r, ann, existing, final_annotations_array, result, entry, toreturn;
+    return _regenerator.default.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+
+            if (!(req.query && req.query.docid && req.query.docid.length > 0)) {
+              _context2.next = 8;
+              break;
+            }
+
+            page = req.query.page && req.query.page.length > 0 ? req.query.page : 1;
+            _context2.next = 5;
+            return getAnnotationByID(req.query.docid, page);
+
+          case 5:
+            annotations = _context2.sent;
+            _context2.next = 9;
+            break;
+
+          case 8:
+            res.send({
+              state: "badquery: " + JSON.stringify(req.query)
+            });
+
+          case 9:
+            final_annotations = {};
+            /**
+            * There are multiple versions of the annotations. When calling reading the results from the database, here we will return only the latest/ most complete version of the annotation.
+            * Independently from the author of it. Completeness here measured as the result with the highest number of annotations and the highest index number (I.e. Newest, but only if it has more information/annotations).
+            * May not be the best in some cases.
+            *
+            */
+
+            for (r in annotations.rows) {
+              ann = annotations.rows[r];
+              existing = final_annotations[ann.docid + "_" + ann.page];
+
+              if (existing) {
+                if (ann.N > existing.N && ann.annotation.annotations.length >= existing.annotation.annotations.length) {
+                  final_annotations[ann.docid + "_" + ann.page] = ann;
+                }
+              } else {
+                // Didn't exist so add it.
+                final_annotations[ann.docid + "_" + ann.page] = ann;
+              }
+            }
+
+            final_annotations_array = [];
+
+            for (r in final_annotations) {
+              ann = final_annotations[r];
+              final_annotations_array[final_annotations_array.length] = ann;
+            }
+
+            if (final_annotations_array.length > 0) {
+              result = R("./src/tableScript.R");
+              entry = final_annotations_array[0];
+              entry.annotation = entry.annotation.annotations.map(function (v, i) {
+                var ann = v;
+                ann.content = Object.keys(ann.content).join(";");
+                ann.qualifiers = Object.keys(ann.qualifiers).join(";");
+                return ann;
+              });
+              console.log(JSON.stringify(entry));
+              result = result.data(entry).callSync();
+              toreturn = {
+                "state": "good",
+                result: result
+              };
+              res.send(toreturn);
+            } else {
+              res.send({
+                "state": "empty"
+              });
+            }
+
+            _context2.next = 19;
+            break;
+
+          case 16:
+            _context2.prev = 16;
+            _context2.t0 = _context2["catch"](0);
+            res.send({
+              "state": "failed"
+            });
+
+          case 19:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, this, [[0, 16]]);
+  }));
+
+  return function (_x11, _x12) {
+    return _ref2.apply(this, arguments);
   };
 }());
 app.get('/api/abs_index', function (req, res) {
@@ -269,37 +403,6 @@ app.get('/api/getAvailableTables', function (req, res) {
 app.get('/api/getAnnotations',
 /*#__PURE__*/
 function () {
-  var _ref2 = (0, _asyncToGenerator2.default)(
-  /*#__PURE__*/
-  _regenerator.default.mark(function _callee2(req, res) {
-    return _regenerator.default.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.t0 = res;
-            _context2.next = 3;
-            return getAnnotationResults();
-
-          case 3:
-            _context2.t1 = _context2.sent;
-
-            _context2.t0.send.call(_context2.t0, _context2.t1);
-
-          case 5:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, this);
-  }));
-
-  return function (_x9, _x10) {
-    return _ref2.apply(this, arguments);
-  };
-}());
-app.get('/api/recordAnnotation',
-/*#__PURE__*/
-function () {
   var _ref3 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee3(req, res) {
@@ -307,14 +410,91 @@ function () {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            console.log(JSON.stringify(req.query));
+            _context3.t0 = res;
+            _context3.next = 3;
+            return getAnnotationResults();
 
-            if (!(req.query && req.query.docid.length > 0 && req.query.page.length > 0 && req.query.user.length > 0 && req.query.annotation.length > 0)) {
-              _context3.next = 4;
+          case 3:
+            _context3.t1 = _context3.sent;
+
+            _context3.t0.send.call(_context3.t0, _context3.t1);
+
+          case 5:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, this);
+  }));
+
+  return function (_x13, _x14) {
+    return _ref3.apply(this, arguments);
+  };
+}());
+app.get('/api/getAnnotationByID',
+/*#__PURE__*/
+function () {
+  var _ref4 = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee4(req, res) {
+    var page;
+    return _regenerator.default.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            if (!(req.query && req.query.docid && req.query.docid.length > 0)) {
+              _context4.next = 9;
               break;
             }
 
-            _context3.next = 4;
+            page = req.query.page && req.query.page.length > 0 ? req.query.page : 1;
+            _context4.t0 = res;
+            _context4.next = 5;
+            return getAnnotationByID(req.query.docid, page);
+
+          case 5:
+            _context4.t1 = _context4.sent;
+
+            _context4.t0.send.call(_context4.t0, _context4.t1);
+
+            _context4.next = 10;
+            break;
+
+          case 9:
+            res.send({
+              error: "failed request"
+            });
+
+          case 10:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, this);
+  }));
+
+  return function (_x15, _x16) {
+    return _ref4.apply(this, arguments);
+  };
+}());
+app.get('/api/recordAnnotation',
+/*#__PURE__*/
+function () {
+  var _ref5 = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee5(req, res) {
+    return _regenerator.default.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            console.log(JSON.stringify(req.query));
+
+            if (!(req.query && req.query.docid.length > 0 && req.query.page.length > 0 && req.query.user.length > 0 && req.query.annotation.length > 0)) {
+              _context5.next = 4;
+              break;
+            }
+
+            _context5.next = 4;
             return insertAnnotation(req.query.docid, req.query.page, req.query.user, {
               annotations: JSON.parse(req.query.annotation)
             }, req.query.corrupted, req.query.tableType);
@@ -325,14 +505,14 @@ function () {
 
           case 5:
           case "end":
-            return _context3.stop();
+            return _context5.stop();
         }
       }
-    }, _callee3, this);
+    }, _callee5, this);
   }));
 
-  return function (_x11, _x12) {
-    return _ref3.apply(this, arguments);
+  return function (_x17, _x18) {
+    return _ref5.apply(this, arguments);
   };
 }());
 app.listen(_config.PORT, function () {

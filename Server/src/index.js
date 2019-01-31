@@ -68,19 +68,6 @@ function prepareAvailableDocuments(){
   }
 }
 
-// async function connectDB(){
-//
-//   var client = await pool.connect()
-//   var result = await client.query({
-//     rowMode: 'array',
-//     text: 'SELECT * FROM annotations;'
-//   })
-//
-//   console.log("rows: "+ result.rows) // [1, 2]
-//   await client.end()
-//
-// }
-
 async function getAnnotationResults(){
 
   var client = await pool.connect()
@@ -88,6 +75,19 @@ async function getAnnotationResults(){
         client.release()
   return result
 }
+
+async function getAnnotationByID(docid,page){
+
+  var client = await pool.connect()
+
+  var query = `select * from annotations where docid='`+docid+`' AND page=`+page+` order by docid desc,page asc`
+      console.log(query)
+  var result = await client.query(query)
+        client.release()
+  return result
+}
+
+
 
 
 async function insertAnnotation(docid, page, user, annotation, corrupted, tableType){
@@ -130,17 +130,87 @@ app.get('/api/rscript',async function(req,res){
 
   try{
 
-    var result = R("./src/test.R")
-
-      result = result.data("hello world", 20)
+    var result = R("./src/tableScript.R")
+    debugger
+        result = result.data("hello world", 20)
       .callSync()
 
       res.send( JSON.stringify(result) )
 
   } catch (e){
+    debugger
     res.send("FAIL: "+ e)
   }
 });
+
+app.get('/api/annotationPreview',async function(req,res){
+
+  try{
+
+        var annotations
+
+        if(req.query && req.query.docid && req.query.docid.length > 0 ){
+          var page = req.query.page && (req.query.page.length > 0) ? req.query.page : 1
+
+          annotations = await getAnnotationByID(req.query.docid,page)
+
+        } else{
+          res.send( {state:"badquery: "+JSON.stringify(req.query)} )
+        }
+
+
+        var final_annotations = {}
+
+        /**
+        * There are multiple versions of the annotations. When calling reading the results from the database, here we will return only the latest/ most complete version of the annotation.
+        * Independently from the author of it. Completeness here measured as the result with the highest number of annotations and the highest index number (I.e. Newest, but only if it has more information/annotations).
+        * May not be the best in some cases.
+        *
+        */
+
+        for ( var r in annotations.rows){
+          var ann = annotations.rows[r]
+          var existing = final_annotations[ann.docid+"_"+ann.page]
+          if ( existing ){
+            if ( ann.N > existing.N && ann.annotation.annotations.length >= existing.annotation.annotations.length ){
+                  final_annotations[ann.docid+"_"+ann.page] = ann
+            }
+          } else { // Didn't exist so add it.
+            final_annotations[ann.docid+"_"+ann.page] = ann
+          }
+        }
+
+        var final_annotations_array = []
+        for (  var r in final_annotations ){
+          var ann = final_annotations[r]
+          final_annotations_array[final_annotations_array.length] = ann
+        }
+
+        if( final_annotations_array.length > 0){
+
+              var result = R("./src/tableScript.R")
+                  var entry = final_annotations_array[0]
+                      entry.annotation = entry.annotation.annotations.map( (v,i) => {var ann = v; ann.content = Object.keys(ann.content).join(";"); ann.qualifiers = Object.keys(ann.qualifiers).join(";"); return ann} )
+
+                  console.log(JSON.stringify(entry))
+                  result = result.data(entry)
+                .callSync()
+
+                var toreturn = {"state" : "good", result }
+                res.send( toreturn )
+        } else {
+          res.send({"state" : "empty"})
+        }
+
+  } catch (e){
+
+    res.send({"state" : "failed"})
+  }
+
+
+});
+
+
 
 app.get('/api/abs_index',function(req,res){
 
@@ -157,6 +227,7 @@ app.get('/api/abs_index',function(req,res){
   res.send(output)
 });
 
+
 app.get('/api/totalTables',function(req,res){
   res.send({total : DOCS.length})
 });
@@ -166,8 +237,6 @@ app.get('/api/getTable',function(req,res){
   //debugger
   // try{
   console.log("GET TABLE CALLED")
-
-
 
     if(req.query && req.query.docid
       && req.query.page && available_documents[req.query.docid]
@@ -208,6 +277,19 @@ app.get('/api/getAvailableTables',function(req,res){
 app.get('/api/getAnnotations',async function(req,res){
   res.send( await getAnnotationResults() )
 });
+
+app.get('/api/getAnnotationByID',async function(req,res){
+
+  if(req.query && req.query.docid && req.query.docid.length > 0 ){
+    var page = req.query.page && (req.query.page.length > 0) ? req.query.page : 1
+
+              res.send( await getAnnotationByID(req.query.docid,page) )
+  } else{
+    res.send( {error:"failed request"} )
+  }
+
+});
+
 
 app.get('/api/recordAnnotation',async function(req,res){
 

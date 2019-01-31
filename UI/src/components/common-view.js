@@ -174,62 +174,48 @@ class CommonView extends Component {
     let fetch = new fetchData();
     await fetch.saveAnnotation(this.props.location.query.docid,this.props.location.query.page,this.state.user,this.state.annotations,this.state.corrupted, this.state.tableType)
     alert("Annotations Saved!")
+
+    var preview = await fetch.getAnnotationPreview(this.props.location.query.docid,this.props.location.query.page)
+    this.setState({preview})
+
    }
 
+   async getPreview(){
+
+     let fetch = new fetchData();
+     var preview = JSON.parse(await fetch.getAnnotationPreview(this.props.location.query.docid,this.props.location.query.page))
+     this.setState({preview})
+
+   }
+
+
    render() {
-     // <div dangerouslySetInnerHTML={ {__html:this.state.table+"<script type='text/javascript'>alert('fuck!')</script>"}} ></div>
 
-     // var reactElement;
-     //
-     // if ( this.state.table ){
-     //     var htmlInput = this.state.table;
-     //     var htmlToReactParser = new HtmlToReactParser();
-     //         reactElement = htmlToReactParser.parse(htmlInput);
-     //     var reactHtml = ReactDOMServer.renderToStaticMarkup(reactElement);
-     //    // debugger
-     //
-     //    var isValidNode = function () {
-     //      return true;
-     //    };
-     //
-     //    var processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
-     //
-     //    // Order matters. Instructions are processed in
-     //    // the order they're defined
-     //    var processingInstructions = [
-     //      {
-     //        // This is REQUIRED, it tells the parser
-     //        // that we want to insert our React
-     //        // component as a child
-     //        replaceChildren: false,
-     //        shouldProcessNode: function (node) {
-     //
-     //          return node.name === "td" ;
-     //        },
-     //        processNode: function (node, children, index) {
-     //          // debugger
-     //          return React.createElement('td', {key: index, onClick: () => {alert("BOOM") }}, children);
-     //        }
-     //      },
-     //      {
-     //        // Anything else
-     //        shouldProcessNode: function (node) {
-     //          return true;
-     //        },
-     //        processNode: processNodeDefinitions.processDefaultNode,
-     //      },
-     //    ];
-     //
-     //    reactElement = htmlToReactParser.parseWithInstructions(
-     //      htmlInput, isValidNode, processingInstructions);
-     //    // var reactHtml = ReactDOMServer.renderToStaticMarkup(
-     //    //   reactComponent);
-     //
-     // }
+     var preparedPreview = <div></div>
 
-     // var scripter = '<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script><script>$( document ).ready(function() {  document.getElementsByTagName("col")[0].style.width = "200pt" });</script>'
+     if( this.state.preview ){
+          var header;
+
+          var content;
 
 
+          if(this.state.preview.state == "good" && this.state.preview.result.length > 0 ){
+
+              header = <div>{
+                      Object.keys(this.state.preview.result[0]).map( (v,i) => <div key={i} style = {{display: "inline-block", marginRight:10, fontWeight:"bold"}}>{v+","}</div>)
+              }</div>
+
+              content = <div> {this.state.preview.result.map(
+                (v,i) => <div key={i}>{
+                      Object.keys(v).map( (k,j) => <div key={i+"_"+j} style = {{display: "inline-block", marginRight:10}}>{v[k]}</div>)
+                        }</div>)}
+              </div>
+
+          }
+
+          preparedPreview = <div><div>{header}</div><div>{content}</div></div>
+
+     }
 
       return <div>
 
@@ -309,6 +295,21 @@ class CommonView extends Component {
              }
             )
           }
+
+        </Card>
+
+        <Card style={{padding:10,minHeight:200,paddingBottom:40,marginTop:10}}>
+
+
+        <RaisedButton onClick={ () => {this.getPreview()} } backgroundColor={"#99b8f1"} style={{margin:1,height:45,width:150,marginRight:5,fontWeight:"bolder"}}>Get Preview</RaisedButton>
+
+        <div>
+
+          {this.state.preview ? preparedPreview : "Save changes to see preview"}
+
+
+        </div>
+
 
         </Card>
 

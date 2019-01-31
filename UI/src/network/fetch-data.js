@@ -20,21 +20,6 @@ export default class fetchData {
 
     return result
   }
-  //
-  // async getAllEntries() {
-  //   return await this.getGeneric( urlBase + 'allEntries' )
-  // }
-  //
-  // async getStaticPage(page) {
-  //   return await this.getGeneric( urlBase + 'staticPage?page='+page )
-  // }
-  //
-  // async getAllEntriesPaged(page,limit,sortField,direction) {
-  //   return await this.getGeneric( urlBase + 'allEntriesPaged?page='+page
-  //                                         +"&limit="+limit
-  //                                         + ( sortField ? "&sortField="+sortField : "" )
-  //                                         + ( direction ? "&direction="+direction : "" ) )
-  // }
 
   async saveAnnotation(docid,page,user,annotation,corrupted, tableType) {
 
@@ -58,6 +43,16 @@ export default class fetchData {
 
   }
 
+  async getAnnotationPreview(docid,page) {
+
+        var urlQueryRequest = urlBase+ "annotationPreview?docid="+encodeURIComponent(docid)+"&page="+page
+
+        var r = await this.getGeneric( urlQueryRequest  )
+        // debugger
+        return r
+
+  }
+
   async getAllInfo() {
 
         var urlQueryRequest = urlBase+ "allMetaData"
@@ -73,7 +68,7 @@ export default class fetchData {
         var urlQueryRequest = urlBase+ "getAnnotations"
 
         var r = await this.getGeneric( urlQueryRequest  )
-        
+
         return r
 
   }
