@@ -18,16 +18,27 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import Divider from 'material-ui/Divider';
 import DownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
+import Refresh from 'material-ui/svg-icons/navigation/refresh';
 import TextField from 'material-ui/TextField';
 
 import SelectField from 'material-ui/SelectField';
 
+ import Loader from 'react-loader-spinner'
 
 import { push } from 'react-router-redux'
 
 import Checkbox from 'material-ui/Checkbox';
 
 import Annotation from './annotation'
+
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 
 // import style from './table.css'
 
@@ -41,28 +52,52 @@ class CommonView extends Component {
 
   constructor(props) {
     super()
+
+
     this.state = {
+        user: "",
         table: null,
         annotations:[],
-        tableType : "subgroup_table"
+        corrupted: false,
+        tableType : "subgroup_table",
+        preparingPreview : false
     };
 
   }
 
-  // componentDidMount () {
-  //
-  //   //document.append('<script type="text/javascript">document.getElementsByTagName("col")[0].style.width = "200pt"</script>');
-  //   debugger
-  //
-  // }
+  async componentDidMount () {
+
+
+
+
+    let fetch = new fetchData();
+    var annotation = JSON.parse(await fetch.getAnnotationByID(this.props.location.query.docid,this.props.location.query.page,this.state.user))
+
+    this.setState({
+      user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
+      corrupted : annotation.corrupted === 'true',
+      docid : (annotation || annotation.docid) || this.props.location.query.docid,
+      page: annotation.page || this.props.location.query.page,
+      tableType : annotation.tableType,
+      annotations : annotation.annotation ? annotation.annotation.annotations : []
+    })
+
+    if( !this.state.preview ){
+      this.getPreview()
+    }
+
+
+  }
 
   async componentWillReceiveProps(next) {
         this.loadPageFromProps(next)
+
   }
 
   async componentWillMount() {
 
       this.loadPageFromProps(this.props)
+
   }
 
   async loadPageFromProps(props){
@@ -74,12 +109,45 @@ class CommonView extends Component {
         let fetch = new fetchData();
 
         var data = await fetch.getTable(props.location.query.docid,props.location.query.page)
+        //debugger
         var allInfo = JSON.parse(await fetch.getAllInfo())
 
         var documentData = allInfo.available_documents[props.location.query.docid]
         var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(props.location.query.page)]
         // debugger
-        this.setState({table: data, docid: props.location.query.docid, page: props.location.query.page, allInfo, gindex: current_table_g_index})
+        // this.setState({})
+        this.getPreview()
+
+        // Here
+        var annotation
+        if( this.state.user && this.state.user.length > 0){
+          annotation = JSON.parse(await fetch.getAnnotationByID(this.props.location.query.docid,this.props.location.query.page,this.state.user))
+          //debugger
+        }
+
+        if ( annotation ){
+          this.setState({
+            table: data,
+            docid : annotation.docid || this.props.location.query.docid,
+            page: annotation.page || this.props.location.query.page,
+            allInfo,
+            gindex: current_table_g_index,
+            user : this.state.user && this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
+            corrupted : annotation.corrupted === 'true',
+            tableType : annotation.tableType,
+            annotations : annotation.annotation ? annotation.annotation.annotations : []
+          })
+        } else {
+          this.setState({
+            table: data,
+            docid : this.props.location.query.docid,
+            page: this.props.location.query.page,
+            allInfo,
+            gindex: current_table_g_index,
+            user : this.state.user && this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
+          })
+        }
+
 
     }
    }
@@ -88,7 +156,7 @@ class CommonView extends Component {
    shiftTables(n){
 
      var documentData = this.state.allInfo.available_documents[this.state.docid]
-     var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(this.state.page)]
+     var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf( (this.state.page || this.props.location.query.page) +"")]
 
      var new_index = current_table_g_index+n
 
@@ -96,13 +164,13 @@ class CommonView extends Component {
          new_index = new_index > this.state.allInfo.abs_index.length-1 ? this.state.allInfo.abs_index.length-1 : new_index
       //  now left
          new_index = new_index < 0 ? 0 : new_index
-
+         debugger
 
      var newDocument = this.state.allInfo.abs_index[new_index]
 
      this.setState({annotations:[],gindex: current_table_g_index})
 
-     this.props.goToUrl("/?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page)
+     this.props.goToUrl("/?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user)
 
    }
 
@@ -140,7 +208,7 @@ class CommonView extends Component {
 
      var annotations = this.state.annotations
          annotations[i] = data
-
+         // debugger
          console.log("ADDED ANNOTATION: "+JSON.stringify(annotations))
      this.setState({annotations})
    }
@@ -175,47 +243,109 @@ class CommonView extends Component {
     await fetch.saveAnnotation(this.props.location.query.docid,this.props.location.query.page,this.state.user,this.state.annotations,this.state.corrupted, this.state.tableType)
     alert("Annotations Saved!")
 
-    var preview = await fetch.getAnnotationPreview(this.props.location.query.docid,this.props.location.query.page)
+    var preview = await fetch.getAnnotationPreview(this.props.location.query.docid,this.props.location.query.page, this.state.user)
     this.setState({preview})
 
    }
 
-   async getPreview(){
+   async getPreview(disableAlert){
+
+     if (!this.state.user){
+       if (!disableAlert){
+          alert("Specify a user before Preview")
+        }
+         return
+     }
+
+
+     this.setState({preparingPreview : true})
 
      let fetch = new fetchData();
-     var preview = JSON.parse(await fetch.getAnnotationPreview(this.props.location.query.docid,this.props.location.query.page))
-     this.setState({preview})
+     var preview = JSON.parse(await fetch.getAnnotationPreview(this.props.location.query.docid,this.props.location.query.page, this.state.user))
+
+     this.setState({preview, preparingPreview: false})
 
    }
 
 
    render() {
 
-     var preparedPreview = <div></div>
+       var preparedPreview = <div>Preview not available</div>
+       // debugger
+       if( this.state.preview ){
+            var header = [];
+            var data;
+            var columns = []
 
-     if( this.state.preview ){
-          var header;
+            if(this.state.preview.state == "good" && this.state.preview.result.length > 0 ){
+                //
+                // header = <div>{
+                //         Object.keys(this.state.preview.result[0]).map( (v,i) => <div key={i} style = {{display: "inline-block", marginRight:10, fontWeight:"bold"}}>{v+","}</div>)
+                // }</div>
+                //
+                // content = <div> {
+                data = this.state.preview.result.map(
+                  (v,i) => {
 
-          var content;
+                        var element = {}
+
+                        for ( var n in Object.keys(v)){
+                            var key_value = Object.keys(v)[n]
+
+                            if ( key_value == "docid_page"){
+                              continue
+                            }
+
+                            element[key_value] = v[key_value]+""
+                            if ( columns.indexOf(key_value ) < 0 ){
+
+                                columns.push(key_value)
+                                header.push(
+                                            {property: key_value,
+                                              header: {
+                                                label: key_value
+                                              }
+                                            })
+                            }
+                            //columns.indexOf(Object.keys(v)[n] < 0) ? columns.push(Object.keys(v)[n]) : null
+                        }
+                        // debugger
+
+                        return element
+                        }
+                )
 
 
-          if(this.state.preview.state == "good" && this.state.preview.result.length > 0 ){
+            }
 
-              header = <div>{
-                      Object.keys(this.state.preview.result[0]).map( (v,i) => <div key={i} style = {{display: "inline-block", marginRight:10, fontWeight:"bold"}}>{v+","}</div>)
-              }</div>
 
-              content = <div> {this.state.preview.result.map(
-                (v,i) => <div key={i}>{
-                      Object.keys(v).map( (k,j) => <div key={i+"_"+j} style = {{display: "inline-block", marginRight:10}}>{v[k]}</div>)
-                        }</div>)}
-              </div>
+            if ( this.state.preview.state == "good" ){
+              preparedPreview =  <Table height={"300px"}>
+                                  <TableHeader
+                                    displaySelectAll={false}
+                                    adjustForCheckbox={false}
+                                    >
+                                    <TableRow>
+                                      {columns.map( (v,i) => <TableHeaderColumn key= {i} style={{fontWeight:"bolder",color:"black",fontSize:15}}>{v}</TableHeaderColumn>) }
+                                    </TableRow>
+                                  </TableHeader>
+                                  <TableBody
+                                    displayRowCheckbox={false}
+                                    >
+                                    {
+                                      data ? data.map( (v,i) => <TableRow key={i}>
+                                        {
+                                          columns.map( (key,j) => <TableRowColumn key={j}>{v[key]}</TableRowColumn>)
+                                        }
+                                      </TableRow>) : null
+                                    }
+                                  </TableBody>
+                                </Table>
+              } else {
+                preparedPreview = <div>{this.state.preview.state}</div>
+              }
 
-          }
-
-          preparedPreview = <div><div>{header}</div><div>{content}</div></div>
-
-     }
+       }
 
       return <div>
 
@@ -240,15 +370,18 @@ class CommonView extends Component {
 
         <Card id="navigation" style={{textAlign:"right",padding:5,marginTop:10}}>
 
-          <RaisedButton onClick={ () => {this.saveAnnotations()} } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:150,marginRight:5,float:"left",fontWeight:"bolder"}}>Save Changes!!</RaisedButton>
+          <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,float:"left",fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Reload Previous Data</RaisedButton>
+
+          {/* <RaisedButton onClick={ () => {this.saveAnnotations()} } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:150,marginRight:5,float:"left",fontWeight:"bolder"}}>Save Changes!!</RaisedButton> */}
+
 
           <RaisedButton onClick={ () => {this.shiftTables(-1)} } style={{padding:5,marginRight:5}}>Previous Table</RaisedButton>
           <RaisedButton onClick={ () => {this.shiftTables(1)} } style={{padding:5,marginRight:5}}>Next Table</RaisedButton>;
 
         </Card>
 
-        <Card id="tableHolder" style={{padding:15,marginTop:10}}>
-            <div dangerouslySetInnerHTML={{__html:this.state.table}}></div>
+        <Card id="tableHolder" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center"}}>
+            { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : <div dangerouslySetInnerHTML={{__html:this.state.table}}></div> }
         </Card>
 
         <Card style={{padding:8,marginTop:10,fontWeight:"bold"}}>
@@ -280,32 +413,38 @@ class CommonView extends Component {
 
           <h3 style={{marginBottom:0,marginTop:0}}>Annotations
 
-              <RaisedButton backgroundColor={"#aade94"} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
+              <RaisedButton backgroundColor={"#aade94"} style={{marginLeft:10}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
 
           </h3>
-
+          <hr />
           {
-            this.state.annotations.map(
+
+            this.state.annotations ? this.state.annotations.map(
               (v,i) => {
+              //  debugger
                 return <Annotation key={i}
                                    annotationData ={this.state.annotations[i]}
                                    addAnnotation={ (data) => {this.addAnnotation(i,data)}}
                                    deleteAnnotation = { () => {this.deleteAnnotations(i)} }
                                    />
              }
-            )
+           ) : null
           }
 
         </Card>
 
         <Card style={{padding:10,minHeight:200,paddingBottom:40,marginTop:10}}>
 
+        <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,float:"left",fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Reload Previous Data</RaisedButton><br /><br />
 
-        <RaisedButton onClick={ () => {this.getPreview()} } backgroundColor={"#99b8f1"} style={{margin:1,height:45,width:150,marginRight:5,fontWeight:"bolder"}}>Get Preview</RaisedButton>
+        {/* <RaisedButton onClick={ () => {this.getPreview()} } backgroundColor={"#99b8f1"} style={{margin:1,height:45,width:150,marginRight:5,fontWeight:"bolder"}}>Update Preview</RaisedButton> */}
 
+        <hr />
         <div>
 
-          {this.state.preview ? preparedPreview : "Save changes to see preview"}
+          {
+            this.state.preparingPreview ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> :  (this.state.preview ? preparedPreview : "Save changes to see preview")
+          }
 
 
         </div>

@@ -44,6 +44,8 @@ const R = require("r-script");
 
 
 function prepareAvailableDocuments(){
+
+  console.log("DLEN: " +DOCS.length)
   // Preparing the variable to hold all data records.
   for ( var d in DOCS ){
 
@@ -76,13 +78,11 @@ async function getAnnotationResults(){
   return result
 }
 
-async function getAnnotationByID(docid,page){
+async function getAnnotationByID(docid,page,user){
 
   var client = await pool.connect()
 
-  var query = `select * from annotations where docid='`+docid+`' AND page=`+page+` order by docid desc,page asc`
-      console.log(query)
-  var result = await client.query(query)
+  var result = await client.query('select * from annotations where docid=$1 AND page=$2 AND "user"=$3 order by docid desc,page asc',[docid,page,user])
         client.release()
   return result
 }
@@ -93,7 +93,15 @@ async function getAnnotationByID(docid,page){
 async function insertAnnotation(docid, page, user, annotation, corrupted, tableType){
 
   var client = await pool.connect()
-  var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6)', [docid, page, user, annotation, corrupted,tableType])
+  //
+  // INSERT INTO annotations
+  // VALUES ('28246237',2,'jesus','{"annotations":[{"location":"Row","content":{"arms":true},"qualifiers":{"bold":true},"number":"1"}]}','false','subgroup table')
+  // ON CONFLICT (docid, page,"user") DO UPDATE
+  // SET annotation = '{"annotations":[{"location":"Row","content":{"arms":true},"qualifiers":{"bold":true},"number":"1"}]}',corrupted = 'false',"tableType" = 'subgroup table';
+  //
+
+
+  var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT (docid, page,"user") DO UPDATE SET annotation = $4, corrupted = $5, "tableType" = $6 ;', [docid, page, user, annotation, corrupted,tableType])
     .then(result => console.log(result))
     .catch(e => console.error(e.stack))
     .then(() => client.release())
@@ -151,8 +159,10 @@ app.get('/api/annotationPreview',async function(req,res){
 
         if(req.query && req.query.docid && req.query.docid.length > 0 ){
           var page = req.query.page && (req.query.page.length > 0) ? req.query.page : 1
+          var user = req.query.user && (req.query.user.length > 0) ? req.query.user : ""
 
-          annotations = await getAnnotationByID(req.query.docid,page)
+          console.log(user + "  -- "+JSON.stringify(req.query))
+          annotations = await getAnnotationByID(req.query.docid,page, user)
 
         } else{
           res.send( {state:"badquery: "+JSON.stringify(req.query)} )
@@ -180,11 +190,16 @@ app.get('/api/annotationPreview',async function(req,res){
           }
         }
 
+        // console.log("FINAL: " +JSON.stringify(final_annotations))
+
         var final_annotations_array = []
         for (  var r in final_annotations ){
           var ann = final_annotations[r]
           final_annotations_array[final_annotations_array.length] = ann
         }
+
+
+        // console.log("FINAL2: " +JSON.stringify(final_annotations_array))
 
         if( final_annotations_array.length > 0){
 
@@ -192,10 +207,11 @@ app.get('/api/annotationPreview',async function(req,res){
                   var entry = final_annotations_array[0]
                       entry.annotation = entry.annotation.annotations.map( (v,i) => {var ann = v; ann.content = Object.keys(ann.content).join(";"); ann.qualifiers = Object.keys(ann.qualifiers).join(";"); return ann} )
 
-                  console.log(JSON.stringify(entry))
+                  console.log("ENTRY:: "+JSON.stringify(entry))
                   result = result.data(entry)
                 .callSync()
 
+                // console.log(JSON.stringify(result))
                 var toreturn = {"state" : "good", result }
                 res.send( toreturn )
         } else {
@@ -236,7 +252,7 @@ app.get('/api/totalTables',function(req,res){
 app.get('/api/getTable',function(req,res){
   //debugger
   // try{
-  console.log("GET TABLE CALLED")
+
 
     if(req.query && req.query.docid
       && req.query.page && available_documents[req.query.docid]
@@ -244,10 +260,33 @@ app.get('/api/getTable',function(req,res){
 
         var docid = req.query.docid+"_"+req.query.page+".xlsx"
 
-        fs.readFile("HTML_TABLES/"+docid+"_files/sheet001.html",
+        // console.log("GET TABLE CALLED0: "+"HTML_TABLES/"+docid+"_files")
+        //
+        // if (!fs.existsSync("HTML_TABLES/"+docid+"_files")) {
+        //     docid = req.query.docid + "_" + req.query.page;
+        // }
+        //
+        //
+
+        var htmlFolder = "HTML_TABLES/"+docid+"_files/"
+        var htmlFile = "sheet001.html"
+
+        console.log("GET TABLE CALLED: "+htmlFolder+htmlFile)
+
+        if (!fs.existsSync(htmlFolder+htmlFile)) {
+
+            docid = req.query.docid+"_"+req.query.page
+            htmlFolder = "HTML_TABLES/"+docid+"_files/"
+            htmlFile = "sheet001.htm"
+            console.log("GET TABLE CALLED Corrected: "+htmlFolder+htmlFile)
+        }
+
+        console.log("GET TABLE CALLED: "+htmlFile)
+
+        fs.readFile(htmlFolder+htmlFile,
                     "utf8",
                     function(err, data) {
-                      fs.readFile("HTML_TABLES/"+docid+"_files/stylesheet.css",
+                      fs.readFile(htmlFolder+"stylesheet.css",
                                   "utf8",
                                   function(err, data_ss) {
                                       var tablePage = cheerio.load(data);
@@ -282,8 +321,48 @@ app.get('/api/getAnnotationByID',async function(req,res){
 
   if(req.query && req.query.docid && req.query.docid.length > 0 ){
     var page = req.query.page && (req.query.page.length > 0) ? req.query.page : 1
+    var user = req.query.user && (req.query.user.length > 0) ? req.query.user : ""
 
-              res.send( await getAnnotationByID(req.query.docid,page) )
+              var annotations = await getAnnotationByID(req.query.docid,page,user)
+
+              var final_annotations = {}
+
+              /**
+              * There are multiple versions of the annotations. When calling reading the results from the database, here we will return only the latest/ most complete version of the annotation.
+              * Independently from the author of it. Completeness here measured as the result with the highest number of annotations and the highest index number (I.e. Newest, but only if it has more information/annotations).
+              * May not be the best in some cases.
+              *
+              */
+
+              for ( var r in annotations.rows){
+                var ann = annotations.rows[r]
+                var existing = final_annotations[ann.docid+"_"+ann.page]
+                if ( existing ){
+                  if ( ann.N > existing.N && ann.annotation.annotations.length >= existing.annotation.annotations.length ){
+                        final_annotations[ann.docid+"_"+ann.page] = ann
+                  }
+                } else { // Didn't exist so add it.
+                  final_annotations[ann.docid+"_"+ann.page] = ann
+                }
+              }
+
+              var final_annotations_array = []
+              for (  var r in final_annotations ){
+                var ann = final_annotations[r]
+                final_annotations_array[final_annotations_array.length] = ann
+              }
+
+              if( final_annotations_array.length > 0){
+
+                  var entry = final_annotations_array[0]
+                  res.send( entry )
+              } else {
+                  res.send( {} )
+              }
+
+
+
+
   } else{
     res.send( {error:"failed request"} )
   }

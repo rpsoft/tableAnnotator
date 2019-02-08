@@ -43,9 +43,19 @@ export default class fetchData {
 
   }
 
-  async getAnnotationPreview(docid,page) {
+  async getAnnotationPreview(docid,page,user) {
 
-        var urlQueryRequest = urlBase+ "annotationPreview?docid="+encodeURIComponent(docid)+"&page="+page
+        var urlQueryRequest = urlBase+ "annotationPreview?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user
+
+        var r = await this.getGeneric( urlQueryRequest  )
+        // debugger
+        return r
+
+  }
+
+  async getAnnotationByID(docid,page,user) {
+
+        var urlQueryRequest = urlBase+ "getAnnotationByID?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user
 
         var r = await this.getGeneric( urlQueryRequest  )
         // debugger

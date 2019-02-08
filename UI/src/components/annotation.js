@@ -46,21 +46,28 @@ class Annotation extends Component {
   handleMultiChoice = (variable,values) => {
     var prevState = this.state
         prevState[variable] = values
-
+      //  debugger
     console.log(prevState)
     this.setState(prevState)
-    // debugger
+  //   debugger
     this.props.addAnnotation(this.state)
   }
 
   async componentDidMount() {
+      this.setState(this.props.annotationData)
+  }
+
+  async componentWillReceiveProps(next) {
+
+      this.setState(next.annotationData)
 
   }
+
 
   render() {
 
     return (
-      <div style={{marginLeft:20, height: 40}}>
+      <div style={{marginLeft:0, height: 40}}>
             <RaisedButton
                 backgroundColor={"#ffadad"}
                 style={{marginRight:35}}
@@ -77,18 +84,22 @@ class Annotation extends Component {
             </SelectField>
 
             <TextField
-                  id={"hello"}
+                  value={this.state.number}
                   hintText="N"
                   onChange={(event,value) => {this.handleChange(event,"",value,"number")}}
                   style={{width:20,marginLeft:20}}
                 />
 
-           <MultiplePopover variable={"content"}
+           <MultiplePopover
+                            value={this.state.content}
+                            variable={"content"}
                             options={["outcomes", "arms", "measures", "subgroup_name", "subgroup_level", "other", "p-interaction","baseline_level_1","baseline_level_2"]}
                             updateAnnotation={ (values) => { this.handleMultiChoice("content",values) } }
                             />
 
-           <MultiplePopover variable={"qualifiers"}
+           <MultiplePopover
+                            value={this.state.qualifiers}
+                            variable={"qualifiers"}
                             options={["plain", "bold", "indented", "itallic", "empty_row","empty_row_with_p_value"]}
                             updateAnnotation={ (values) => { this.handleMultiChoice("qualifiers",values) } }
                             />

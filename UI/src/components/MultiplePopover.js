@@ -33,11 +33,21 @@ export default class MultiplePopover extends React.Component {
     });
   };
 
+
+  async componentWillReceiveProps(next) {
+
+
+    this.setState({checked : next.value})
+
+  }
+
   updateCheck = (value) => {
 
     var checked = this.state.checked
         checked[value] = !checked[value]
         this.setState({checked})
+
+        debugger
 
     this.props.updateAnnotation(this.state.checked)
 

@@ -70,6 +70,7 @@
     "react-css-modules": "^4.7.1",
     "react-dom": "^15.6.2",
     "react-image-lightbox": "^3.5.0",
+    "react-loader-spinner": "^2.3.0",
     "react-measure": "^1.4.7",
     "react-native": "^0.57.7",
     "react-native-htmlview": "^0.13.0",
