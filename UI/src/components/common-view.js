@@ -59,6 +59,7 @@ class CommonView extends Component {
         table: null,
         annotations:[],
         corrupted: false,
+        corrupted_text: "",
         tableType : "subgroup_table",
         preparingPreview : false
     };
@@ -76,6 +77,7 @@ class CommonView extends Component {
     this.setState({
       user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
       corrupted : annotation.corrupted === 'true',
+      corrupted_text : annotation.corrupted_text,
       docid : (annotation || annotation.docid) || this.props.location.query.docid,
       page: annotation.page || this.props.location.query.page,
       tableType : annotation.tableType,
@@ -134,6 +136,7 @@ class CommonView extends Component {
             gindex: current_table_g_index,
             user : this.state.user && this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
             corrupted : annotation.corrupted === 'true',
+            corrupted_text : annotation.corrupted_text,
             tableType : annotation.tableType,
             annotations : annotation.annotation ? annotation.annotation.annotations : []
           })
@@ -240,7 +243,7 @@ class CommonView extends Component {
     }
 
     let fetch = new fetchData();
-    await fetch.saveAnnotation(this.props.location.query.docid,this.props.location.query.page,this.state.user,this.state.annotations,this.state.corrupted, this.state.tableType)
+    await fetch.saveAnnotation(this.props.location.query.docid,this.props.location.query.page,this.state.user,this.state.annotations,this.state.corrupted, this.state.tableType,this.state.corrupted_text)
     alert("Annotations Saved!")
 
     var preview = await fetch.getAnnotationPreview(this.props.location.query.docid,this.props.location.query.page, this.state.user)
@@ -392,6 +395,13 @@ class CommonView extends Component {
                       checked={ this.state.corrupted }
                       onCheck={ () => {this.setState({corrupted : !this.state.corrupted})}}
                 />
+
+                <TextField
+                      value={this.state.corrupted_text ? this.state.corrupted_text : ""}
+                      hintText="Please specify why"
+                      onChange={(event,value) => {this.setState({corrupted_text: value})}}
+                      style={{width:500,marginLeft:20}}
+                    />
 
                 <SelectField
 

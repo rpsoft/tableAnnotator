@@ -156,7 +156,7 @@ function _getAnnotationByID() {
   return _getAnnotationByID.apply(this, arguments);
 }
 
-function insertAnnotation(_x4, _x5, _x6, _x7, _x8, _x9) {
+function insertAnnotation(_x4, _x5, _x6, _x7, _x8, _x9, _x10) {
   return _insertAnnotation.apply(this, arguments);
 } // preinitialisation of components if needed.
 
@@ -164,7 +164,7 @@ function insertAnnotation(_x4, _x5, _x6, _x7, _x8, _x9) {
 function _insertAnnotation() {
   _insertAnnotation = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee8(docid, page, user, annotation, corrupted, tableType) {
+  _regenerator.default.mark(function _callee8(docid, page, user, annotation, corrupted, tableType, corrupted_text) {
     var client, done;
     return _regenerator.default.wrap(function _callee8$(_context8) {
       while (1) {
@@ -176,8 +176,8 @@ function _insertAnnotation() {
           case 2:
             client = _context8.sent;
             _context8.next = 5;
-            return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT (docid, page,"user") DO UPDATE SET annotation = $4, corrupted = $5, "tableType" = $6 ;', [docid, page, user, annotation, corrupted, tableType]).then(function (result) {
-              return console.log(result);
+            return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT (docid, page,"user") DO UPDATE SET annotation = $4, corrupted = $5, "tableType" = $6, "corrupted_text" = $7 ;', [docid, page, user, annotation, corrupted, tableType, corrupted_text]).then(function (result) {
+              return console.log("insert: " + result);
             }).catch(function (e) {
               return console.error(e.stack);
             }).then(function () {
@@ -245,7 +245,7 @@ function () {
     }, _callee, this);
   }));
 
-  return function (_x10, _x11) {
+  return function (_x11, _x12) {
     return _ref.apply(this, arguments);
   };
 }());
@@ -356,7 +356,7 @@ function () {
     }, _callee2, this, [[0, 18]]);
   }));
 
-  return function (_x12, _x13) {
+  return function (_x13, _x14) {
     return _ref2.apply(this, arguments);
   };
 }());
@@ -448,7 +448,7 @@ function () {
     }, _callee3, this);
   }));
 
-  return function (_x14, _x15) {
+  return function (_x15, _x16) {
     return _ref3.apply(this, arguments);
   };
 }());
@@ -527,7 +527,7 @@ function () {
     }, _callee4, this);
   }));
 
-  return function (_x16, _x17) {
+  return function (_x17, _x18) {
     return _ref4.apply(this, arguments);
   };
 }());
@@ -551,7 +551,7 @@ function () {
             _context5.next = 4;
             return insertAnnotation(req.query.docid, req.query.page, req.query.user, {
               annotations: JSON.parse(req.query.annotation)
-            }, req.query.corrupted, req.query.tableType);
+            }, req.query.corrupted, req.query.tableType, req.query.corrupted_text);
 
           case 4:
             //insertAnnotation("a doucment",2, "a user", {})
@@ -565,7 +565,7 @@ function () {
     }, _callee5, this);
   }));
 
-  return function (_x18, _x19) {
+  return function (_x19, _x20) {
     return _ref5.apply(this, arguments);
   };
 }());

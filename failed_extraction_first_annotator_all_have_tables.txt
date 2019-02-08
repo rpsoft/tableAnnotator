@@ -1,0 +1,153 @@
+docid_page,message,location,number,Number of identified groups,Number of distinct formatting,app_table_number,docid,page,result
+17097378_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,174,17097378,1,Signed-off
+18539916_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,296,18539916,1,Signed-off
+20582594_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,530,20582594,1,Signed-off
+20883926_3,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,562,20883926,3,Signed-off
+21545947_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,614,21545947,1,Signed-off
+23110471_2,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,753,23110471,2,Problem
+24184169_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,885,24184169,1,Signed-off
+24206457_2,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,5,24206457,2,Signed-off
+24253831 & Supplementary Append_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,17,24253831 & Supplementary Append,1,Signed-off
+24253831 & Supplementary Append_3,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,21,24253831 & Supplementary Append,3,Signed-off
+25189213_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,75,25189213,1,Signed-off
+25189213_2,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,77,25189213,2,Signed-off
+25637937_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,147,25637937,1,Signed-off
+25670362_3,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,155,25670362,3,Signed-off
+26059896_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,199,26059896,1,Signed-off
+26271059_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,239,26271059,1,Signed-off
+26699168_2,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,331,26699168,2,Signed-off
+27144849_2,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,393,27144849,2,Signed-off
+27418597 & Supplementary Append_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,445,27418597 & Supplementary Append,1,Signed-off
+27484756_2,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,459,27484756,2,Signed-off
+27576774_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,473,27576774,1,Signed-off
+28605608_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,673,28605608,1,Signed-off
+28801539_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,693,28801539,1,Signed-off
+28877027 & Supplementary Append_1,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,713,28877027 & Supplementary Append,1,Signed-off
+29151034_3,No message just failed. Viewed tables. All appeared to be tables,NA,NA,NA,NA,820,29151034,3,Signed-off
+12456232_2,No row metadata,NA,NA,NA,NA,28,12456232,2,Signed-off
+12456232_3,No row metadata,NA,NA,NA,NA,30,12456232,3,Signed-off
+16351668_2,No row metadata,NA,NA,NA,NA,126,16351668,2,Problem
+23040830_4,No column metadata,NA,NA,NA,NA,751,23040830,4,Need to check original table
+15381674_1,metadata formatting does fully distinguish categories,Col,1,2,1,66,15381674,1,Signed-off
+15998891_1,metadata formatting does fully distinguish categories,Col,1,2,1,110,15998891,1,Signed-off
+15998891_2,metadata formatting does fully distinguish categories,Col,1,2,1,112,15998891,2,Signed-off
+17113426_1,metadata formatting does fully distinguish categories,Col,1,2,1,178,17113426,1,Signed-off
+17470434_2,metadata formatting does fully distinguish categories,Col,1,2,1,208,17470434,2,Signed-off
+17470824_2,metadata formatting does fully distinguish categories,Col,1,2,1,212,17470824,2,Need to check original table
+18094675_2,metadata formatting does fully distinguish categories,Row,1,2,1,232,18094675,2,Signed-off
+18094675_4,metadata formatting does fully distinguish categories,Row,1,2,1,236,18094675,4,Signed-off
+18499565_1,metadata formatting does fully distinguish categories,Col,1,3,2,288,18499565,1,Signed-off
+18537526_2,metadata formatting does fully distinguish categories,Row,1,2,1,294,18537526,2,Signed-off
+18667204_1,metadata formatting does fully distinguish categories,Col,1,2,1,312,18667204,1,Signed-off
+19349325_1,metadata formatting does fully distinguish categories,Row,1,2,1,386,19349325,1,Signed-off
+19443528_2,metadata formatting does fully distinguish categories,Row,1,2,1,404,19443528,2,Signed-off
+19660610_2,metadata formatting does fully distinguish categories,Col,1,2,1,418,19660610,2,Problem
+20469975_1,metadata formatting does fully distinguish categories,Col,1,2,1,514,20469975,1,Signed-off
+21454723_1,metadata formatting does fully distinguish categories,Col,1,2,1,602,21454723,1,Signed-off
+22799613_1,metadata formatting does fully distinguish categories,Col,1,2,1,720,22799613,1,Signed-off
+24245566_2,metadata formatting does fully distinguish categories,Col,1,2,1,9,24245566,2,Signed-off
+25465416_2,metadata formatting does fully distinguish categories,Col,1,2,1,113,25465416,2,Signed-off
+25465417_1,metadata formatting does fully distinguish categories,Col,1,2,1,115,25465417,1,Signed-off
+25552421_1,metadata formatting does fully distinguish categories,Col,1,2,1,131,25552421,1,Signed-off
+25637937_2,metadata formatting does fully distinguish categories,Row,1,2,1,149,25637937,2,Signed-off
+26762525_2,metadata formatting does fully distinguish categories,Row,1,2,1,353,26762525,2,Signed-off
+26792812 & Supplementary Append_1,metadata formatting does fully distinguish categories,Row,1,2,1,355,26792812 & Supplementary Append,1,Signed-off
+26792812 & Supplementary Append_2,metadata formatting does fully distinguish categories,Row,1,2,1,357,26792812 & Supplementary Append,2,Signed-off
+26994121_1,metadata formatting does fully distinguish categories,Row,1,2,1,363,26994121,1,Signed-off
+27033025_2,metadata formatting does fully distinguish categories,Row,1,2,1,373,27033025,2,Signed-off
+28278391_1,metadata formatting does fully distinguish categories,Row,1,2,1,599,28278391,1,Signed-off
+28386035_1,metadata formatting does fully distinguish categories,Col,1,2,1,623,28386035,1,Signed-off
+28386990_3,metadata formatting does fully distinguish categories,Col,2,2,1,631,28386990,3,Signed-off
+28854085_2,metadata formatting does fully distinguish categories,Col,1,2,1,711,28854085,2,Signed-off
+28902593 & Supplementary Append_2,metadata formatting does fully distinguish categories,Col,1,2,1,723,28902593 & Supplementary Append,2,Signed-off
+28910237_2,metadata formatting does fully distinguish categories,Col,1,2,1,740,28910237,2,Signed-off
+9892586_2,metadata formatting does fully distinguish categories,Col,1,2,1,882,9892586,2,Signed-off
+15998890_2,"Returned empty tibble, no messages",NA,NA,NA,NA,108,15998890,2,Signed-off
+16267322_1,"Returned empty tibble, no messages",NA,NA,NA,NA,120,16267322,1,Signed-off
+16380589_1,"Returned empty tibble, no messages",NA,NA,NA,NA,128,16380589,1,Signed-off
+16380589_2,"Returned empty tibble, no messages",NA,NA,NA,NA,130,16380589,2,Signed-off
+17145742_2,"Returned empty tibble, no messages",NA,NA,NA,NA,184,17145742,2,Signed-off
+18499565_2,"Returned empty tibble, no messages",NA,NA,NA,NA,290,18499565,2,Signed-off
+18753639_2,"Returned empty tibble, no messages",NA,NA,NA,NA,322,18753639,2,Signed-off
+18753639_3,"Returned empty tibble, no messages",NA,NA,NA,NA,324,18753639,3,Signed-off
+18836213_3,"Returned empty tibble, no messages",NA,NA,NA,NA,346,18836213,3,Signed-off
+19125778_2,"Returned empty tibble, no messages",NA,NA,NA,NA,364,19125778,2,Signed-off
+20357382_2,"Returned empty tibble, no messages",NA,NA,NA,NA,482,20357382,2,Signed-off
+20357382_3,"Returned empty tibble, no messages",NA,NA,NA,NA,484,20357382,3,Signed-off
+20393175 & Supplementary Append_2,"Returned empty tibble, no messages",NA,NA,NA,NA,492,20393175 & Supplementary Append,2,Signed-off
+20393175 & Supplementary Append_3,"Returned empty tibble, no messages",NA,NA,NA,NA,494,20393175 & Supplementary Append,3,Signed-off
+20393175 & Supplementary Append_4,"Returned empty tibble, no messages",NA,NA,NA,NA,496,20393175 & Supplementary Append,4,Signed-off
+22544891_2,"Returned empty tibble, no messages",NA,NA,NA,NA,690,22544891,2,Signed-off
+22573644_2,"Returned empty tibble, no messages",NA,NA,NA,NA,694,22573644,2,Signed-off
+23040830_1,"Returned empty tibble, no messages",NA,NA,NA,NA,745,23040830,1,Need to check original table
+23040830_3,"Returned empty tibble, no messages",NA,NA,NA,NA,749,23040830,3,Need to check original table
+23465037_2,"Returned empty tibble, no messages",NA,NA,NA,NA,789,23465037,2,Signed-off
+23471469_2,"Returned empty tibble, no messages",NA,NA,NA,NA,795,23471469,2,Problem
+24247616_2,"Returned empty tibble, no messages",NA,NA,NA,NA,13,24247616,2,Signed-off
+24247616_3,"Returned empty tibble, no messages",NA,NA,NA,NA,15,24247616,3,Signed-off
+25175921 & Supplementary Append_3,"Returned empty tibble, no messages",NA,NA,NA,NA,69,25175921 & Supplementary Append,3,Signed-off
+26400827_3,"Returned empty tibble, no messages",NA,NA,NA,NA,273,26400827,3,Signed-off
+26681720_1,"Returned empty tibble, no messages",NA,NA,NA,NA,325,26681720,1,Signed-off
+26886418_2,"Returned empty tibble, no messages",NA,NA,NA,NA,361,26886418,2,Signed-off
+28231942_2,"Returned empty tibble, no messages",NA,NA,NA,NA,581,28231942,2,Signed-off
+28237263_2,"Returned empty tibble, no messages",NA,NA,NA,NA,587,28237263,2,Signed-off
+28237263_3,"Returned empty tibble, no messages",NA,NA,NA,NA,589,28237263,3,Signed-off
+28278391_2,"Returned empty tibble, no messages",NA,NA,NA,NA,601,28278391,2,Signed-off
+28386035_2,"Returned empty tibble, no messages",NA,NA,NA,NA,625,28386035,2,Signed-off
+28386990_1,"Returned empty tibble, no messages",NA,NA,NA,NA,627,28386990,1,Signed-off
+28432746_2,"Returned empty tibble, no messages",NA,NA,NA,NA,647,28432746,2,Signed-off
+28666775_2,"Returned empty tibble, no messages",NA,NA,NA,NA,683,28666775,2,Problem
+29307087_2,"Returned empty tibble, no messages",NA,NA,NA,NA,838,29307087,2,Signed-off
+9892586_3,"Returned empty tibble, no messages",NA,NA,NA,NA,884,9892586,3,Signed-off
+9892586_4,"Returned empty tibble, no messages",NA,NA,NA,NA,886,9892586,4,Signed-off
+12813116_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,48,12813116,2,Signed-off
+13679479_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,52,13679479,2,Signed-off
+25248764_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,81,25248764,2,Signed-off
+25670362_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,153,25670362,2,Signed-off
+25852208_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,189,25852208,2,Problem
+17456819_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,204,17456819,2,Problem
+18326958_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,256,18326958,2,Problem
+26762481_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,349,26762481,2,Signed-off
+19097665_3,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,360,19097665,3,No subgroup
+19201775_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,380,19201775,2,Problem
+27046159 & Supplementary Append_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,381,27046159 & Supplementary Append,2,No subgroup
+27046159 & Supplementary Append_3,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,383,27046159 & Supplementary Append,3,No subgroup
+19389561_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,396,19389561,2,No subgroup
+19423108_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,400,19423108,2,No subgroup
+27619750_3,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,497,27619750,3,Problem
+27689735 & Supplementary Append_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,513,27689735 & Supplementary Append,2,Need to check original table
+27689735 & Supplementary Append_3,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,515,27689735 & Supplementary Append,3,Need to check original table
+27689735 & Supplementary Append_4,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,517,27689735 & Supplementary Append,4,Need to check original table
+21454723_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,604,21454723,2,Problem
+21464051_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,608,21464051,2,Signed-off
+21545947_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,616,21545947,2,Problem
+21645018_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,636,21645018,2,No subgroup
+28405473 & Supplementary Append_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,639,28405473 & Supplementary Append,2,Problem
+28432746_1,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,645,28432746,1,Problem
+28467869 & Supplementary Append_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,651,28467869 & Supplementary Append,2,Need to check original table
+28467869 & Supplementary Append_3,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,653,28467869 & Supplementary Append,3,Need to check original table
+22248871_1,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,662,22248871,1,Signed-off
+22248871_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,664,22248871,2,Signed-off
+28573499_1,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,665,28573499,1,Signed-off
+22259009_1,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,666,22259009,1,Signed-off
+28573499_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,667,28573499,2,Signed-off
+22259009_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,668,22259009,2,Problem
+28573499_3,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,669,28573499,3,Signed-off
+22305835_1,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,670,22305835,1,Signed-off
+28573499_4,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,671,28573499,4,Problem
+22305835_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,672,22305835,2,Problem
+22686416_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,702,22686416,2,Signed-off
+22873530 & Supplementary Append_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,726,22873530 & Supplementary Append,2,Problem
+28921862_3,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,746,28921862,3,Problem
+28948656_3,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,752,28948656,3,Signed-off
+28975241_3,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,770,28975241,3,Problem
+29103664_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,790,29103664,2,Problem
+23473369_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,801,23473369,2,Signed-off
+29145215_1,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,804,29145215,1,Problem
+29146124_3,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,814,29146124,3,Problem
+23564916_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,819,23564916,2,Problem
+23656980_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,827,23656980,2,Problem
+29263150_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,828,29263150,2,Problem
+24063830_1,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,855,24063830,1,Problem
+24063830_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,857,24063830,2,Problem
+9848888_2,"No metadata, all tables >=4 rows and >= 2 cols",NA,NA,NA,NA,878,9848888,2,Problem

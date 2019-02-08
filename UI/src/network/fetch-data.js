@@ -21,9 +21,9 @@ export default class fetchData {
     return result
   }
 
-  async saveAnnotation(docid,page,user,annotation,corrupted, tableType) {
+  async saveAnnotation(docid,page,user,annotation,corrupted, tableType, corrupted_text) {
 
-    var urlQueryRequest = urlBase+ "recordAnnotation?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user+"&annotation="+encodeURIComponent(JSON.stringify(annotation))+"&corrupted="+ (corrupted == undefined ? false : corrupted)+"&tableType="+tableType
+    var urlQueryRequest = urlBase+ "recordAnnotation?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user+"&annotation="+encodeURIComponent(JSON.stringify(annotation))+"&corrupted="+ (corrupted == undefined ? false : corrupted)+"&tableType="+tableType + "&corrupted_text=" + corrupted_text
 
     console.log(urlQueryRequest)
 

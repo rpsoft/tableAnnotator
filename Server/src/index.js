@@ -90,7 +90,7 @@ async function getAnnotationByID(docid,page,user){
 
 
 
-async function insertAnnotation(docid, page, user, annotation, corrupted, tableType){
+async function insertAnnotation(docid, page, user, annotation, corrupted, tableType, corrupted_text){
 
   var client = await pool.connect()
   //
@@ -100,9 +100,8 @@ async function insertAnnotation(docid, page, user, annotation, corrupted, tableT
   // SET annotation = '{"annotations":[{"location":"Row","content":{"arms":true},"qualifiers":{"bold":true},"number":"1"}]}',corrupted = 'false',"tableType" = 'subgroup table';
   //
 
-
-  var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT (docid, page,"user") DO UPDATE SET annotation = $4, corrupted = $5, "tableType" = $6 ;', [docid, page, user, annotation, corrupted,tableType])
-    .then(result => console.log(result))
+  var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT (docid, page,"user") DO UPDATE SET annotation = $4, corrupted = $5, "tableType" = $6, "corrupted_text" = $7 ;', [docid, page, user, annotation, corrupted,tableType, corrupted_text])
+    .then(result => console.log("insert: "+ result))
     .catch(e => console.error(e.stack))
     .then(() => client.release())
 
@@ -378,7 +377,7 @@ app.get('/api/recordAnnotation',async function(req,res){
               && req.query.page.length > 0
               && req.query.user.length > 0
               && req.query.annotation.length > 0 ){
-      await insertAnnotation( req.query.docid , req.query.page, req.query.user, {annotations:JSON.parse(req.query.annotation)}, req.query.corrupted, req.query.tableType)
+      await insertAnnotation( req.query.docid , req.query.page, req.query.user, {annotations:JSON.parse(req.query.annotation)}, req.query.corrupted, req.query.tableType, req.query.corrupted_text)
   }
   //insertAnnotation("a doucment",2, "a user", {})
   res.send("saved annotation: "+JSON.stringify(req.query))
