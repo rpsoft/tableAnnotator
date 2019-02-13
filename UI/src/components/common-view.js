@@ -21,6 +21,8 @@ import DownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import Refresh from 'material-ui/svg-icons/navigation/refresh';
 import TextField from 'material-ui/TextField';
 
+import SortIcon from 'material-ui/svg-icons/content/sort';
+
 import SelectField from 'material-ui/SelectField';
 
  import Loader from 'react-loader-spinner'
@@ -61,7 +63,11 @@ class CommonView extends Component {
         corrupted: false,
         corrupted_text: "",
         tableType : "",
-        preparingPreview : false
+        preparingPreview : false,
+        sortBy: {
+          key : "row",
+          dir : "asc"
+        }
     };
 
   }
@@ -203,6 +209,28 @@ class CommonView extends Component {
      return newObject
    }
 
+   doSort(v){
+
+     var sort_key = v
+     var sort_dir = this.state.sortBy.dir
+
+     if (this.state.sortBy.key == v){
+      //  debugger
+       sort_dir = sort_dir == "asc" ? "des" : "asc"
+     }
+
+     console.log(sort_key+" -- "+ sort_dir)
+
+     this.setState(
+       {
+         sortBy: {
+           key : sort_key,
+           dir : sort_dir
+         }
+       }
+     )
+   }
+
    addAnnotation(i,data){
 
      var content = this.removeFalseKeys(data.content)
@@ -325,13 +353,40 @@ class CommonView extends Component {
                 )
 
 
-            }
 
+
+            }
 
 
             if ( this.state.preview.state == "good" ){
 
               if( this.state.preview.result.length > 0){
+
+
+                      var sorting = this.state.sortBy
+
+                      data = data.sort(function (a, b) {
+                              var key = sorting.key
+                              var dir = sorting.dir
+
+                              if( key == "row" || key == "col"){
+                                if ( dir == "asc" ) {
+                                  return parseInt(a[key]) - parseInt(b[key]);
+                                } else {
+                                  return parseInt(b[key]) - parseInt(a[key]);
+                                }
+                              } else {
+                                if ( dir == "asc" ) {
+                                  return a[key].localeCompare(b[key])
+                                } else {
+                                  return b[key].localeCompare(a[key])
+                                }
+                              }
+
+                              })
+
+
+
 
               preparedPreview =  <Table height={"300px"}>
                                   <TableHeader
@@ -339,7 +394,12 @@ class CommonView extends Component {
                                     adjustForCheckbox={false}
                                     >
                                     <TableRow>
-                                      {columns.map( (v,i) => <TableHeaderColumn key= {i} style={{fontWeight:"bolder",color:"black",fontSize:15}}>{v}</TableHeaderColumn>) }
+                                      {columns.map( (v,i) => <TableHeaderColumn
+                                                                    key={i}
+                                                                    style={{fontWeight:"bolder",color:"black",fontSize:15}}
+                                                                    >
+                                                                    <div onClick={ (event) => { this.doSort(v) } } > {v}<SortIcon style={{marginLeft:5,cursor:"pointer"}}></SortIcon> </div>
+                                                            </TableHeaderColumn>) }
                                     </TableRow>
                                   </TableHeader>
                                   <TableBody
@@ -371,6 +431,13 @@ class CommonView extends Component {
             hintText="Set your username here"
             onChange={(event,value) => {this.setState({user: value})}}
             style={{width:200,marginLeft:20,marginRight:20,float:"left"}}
+            onKeyDown={(event, index) => {
+
+              if (event.key === 'Enter') {
+                  this.loadPageFromProps(this.props)
+                  event.preventDefault();
+              }
+            }}
             />
 
           <div>{this.state.gindex+" / "+ (this.state.allInfo ? this.state.allInfo.total-1 : "")}
@@ -379,13 +446,15 @@ class CommonView extends Component {
             hintText="Go to page"
             onChange={(event,value) => {
                                   this.setState({currentGPage: value})
-
-                                  if (event.key === 'Enter') {
-                                      this.goToGIndex(this.state.currentGPage)
-                                      event.preventDefault();
-                                  }
-
                                 }}
+            onKeyDown={(event, index) => {
+            //  debugger
+              if (event.key === 'Enter') {
+                  this.goToGIndex(this.state.currentGPage)
+                  event.preventDefault();
+              }
+            }}
+
             style={{width:100,marginLeft:20}}
 
             />
@@ -465,10 +534,6 @@ class CommonView extends Component {
                     </td>
                   </tr>
                 </table>
-
-
-
-
             </div>
         </Card>
 
