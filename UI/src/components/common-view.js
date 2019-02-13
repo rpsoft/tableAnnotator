@@ -60,7 +60,7 @@ class CommonView extends Component {
         annotations:[],
         corrupted: false,
         corrupted_text: "",
-        tableType : "subgroup_table",
+        tableType : "",
         preparingPreview : false
     };
 
@@ -80,7 +80,7 @@ class CommonView extends Component {
       corrupted_text : annotation.corrupted_text,
       docid : (annotation || annotation.docid) || this.props.location.query.docid,
       page: annotation.page || this.props.location.query.page,
-      tableType : annotation.tableType,
+      tableType : annotation.tableType ? annotation.tableType : "",
       annotations : annotation.annotation ? annotation.annotation.annotations : []
     })
 
@@ -107,6 +107,9 @@ class CommonView extends Component {
     if ( Object.keys(props.location.query).length > 0 &&
         props.location.query.docid && props.location.query.page) {
 
+          this.setState({
+            table: null
+          })
 
         let fetch = new fetchData();
 
@@ -129,7 +132,7 @@ class CommonView extends Component {
 
         if ( annotation ){
           this.setState({
-            table: data,
+            table: JSON.parse(data),
             docid : annotation.docid || this.props.location.query.docid,
             page: annotation.page || this.props.location.query.page,
             allInfo,
@@ -137,12 +140,12 @@ class CommonView extends Component {
             user : this.state.user && this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
             corrupted : annotation.corrupted === 'true',
             corrupted_text : annotation.corrupted_text,
-            tableType : annotation.tableType,
+            tableType : annotation.tableType ? annotation.tableType : "",
             annotations : annotation.annotation ? annotation.annotation.annotations : []
           })
         } else {
           this.setState({
-            table: data,
+            table: JSON.parse(data),
             docid : this.props.location.query.docid,
             page: this.props.location.query.page,
             allInfo,
@@ -167,7 +170,7 @@ class CommonView extends Component {
          new_index = new_index > this.state.allInfo.abs_index.length-1 ? this.state.allInfo.abs_index.length-1 : new_index
       //  now left
          new_index = new_index < 0 ? 0 : new_index
-         debugger
+         // debugger
 
      var newDocument = this.state.allInfo.abs_index[new_index]
 
@@ -274,7 +277,10 @@ class CommonView extends Component {
    render() {
 
        var preparedPreview = <div>Preview not available</div>
-       // debugger
+       // if ( this.state.table ){
+       //
+       //   debugger
+       // }
        if( this.state.preview ){
             var header = [];
             var data;
@@ -322,7 +328,11 @@ class CommonView extends Component {
             }
 
 
+
             if ( this.state.preview.state == "good" ){
+
+              if( this.state.preview.result.length > 0){
+
               preparedPreview =  <Table height={"300px"}>
                                   <TableHeader
                                     displaySelectAll={false}
@@ -344,13 +354,16 @@ class CommonView extends Component {
                                     }
                                   </TableBody>
                                 </Table>
+                } else {
+                  preparedPreview = <div>Table could not be reshaped. Try changing metadata, or move on</div>
+                }
               } else {
-                preparedPreview = <div>{this.state.preview.state}</div>
+                preparedPreview = <div>Table could not be reshaped. Try changing metadata, or move on</div>
               }
 
        }
 
-      return <div>
+      return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
         <Card id="userData" style={{padding:15}}>
           <TextField
@@ -364,57 +377,97 @@ class CommonView extends Component {
           <TextField
             value={this.state.currentGPage}
             hintText="Go to page"
-            onChange={(event,value) => {this.setState({currentGPage: value})}}
+            onChange={(event,value) => {
+                                  this.setState({currentGPage: value})
+
+                                  if (event.key === 'Enter') {
+                                      this.goToGIndex(this.state.currentGPage)
+                                      event.preventDefault();
+                                  }
+
+                                }}
             style={{width:100,marginLeft:20}}
+
             />
-            <RaisedButton onClick={ () => { this.goToGIndex(this.state.currentGPage) } }>Go!</RaisedButton>
+            <RaisedButton style={{marginLeft:20}} onClick={ () => { this.goToGIndex(this.state.currentGPage) } }>Go!</RaisedButton>
+          </div>
+
+
+          <div style={{float:"right", position: "relative", top: -47}}>
+
+                      <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Show Saved Changes</RaisedButton>
+                      <RaisedButton onClick={ () => {this.shiftTables(-1)} } style={{padding:5,marginRight:5}}>Previous Table</RaisedButton>
+                      <RaisedButton onClick={ () => {this.shiftTables(1)} } style={{padding:5,marginRight:5}}>Next Table</RaisedButton>
+
+
           </div>
         </Card>
 
-        <Card id="navigation" style={{textAlign:"right",padding:5,marginTop:10}}>
+        {/* <Card id="navigation" style={{textAlign:"right",padding:5,marginTop:10}}>
 
-          <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,float:"left",fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Reload Previous Data</RaisedButton>
-
-          {/* <RaisedButton onClick={ () => {this.saveAnnotations()} } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:150,marginRight:5,float:"left",fontWeight:"bolder"}}>Save Changes!!</RaisedButton> */}
-
-
+          <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Show Saved Changes</RaisedButton>
           <RaisedButton onClick={ () => {this.shiftTables(-1)} } style={{padding:5,marginRight:5}}>Previous Table</RaisedButton>
           <RaisedButton onClick={ () => {this.shiftTables(1)} } style={{padding:5,marginRight:5}}>Next Table</RaisedButton>;
 
+        </Card> */}
+
+        <Card id="tableHeader" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center"}}>
+
+            { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : <div>
+                                                                                                            <div style={{paddingBottom: 10, fontWeight:"bold",marginBottom:10}}>{"PMID: " + this.state.docid + " | " + (this.state.table.title ? this.state.table.title.title.trim() : "")}</div>
+                                                                                                            {/* <div style={{marginTop:10,}}> {}</div> */}
+                                                                                                            <div style={{paddingBottom: 10, fontWeight:"bold"}} dangerouslySetInnerHTML={{__html:this.state.table.htmlHeader}}></div>
+                                                                                                        </div> }
         </Card>
 
         <Card id="tableHolder" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center"}}>
-            { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : <div dangerouslySetInnerHTML={{__html:this.state.table}}></div> }
+            { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : <div dangerouslySetInnerHTML={{__html:this.state.table.formattedPage}}></div> }
         </Card>
 
         <Card style={{padding:8,marginTop:10,fontWeight:"bold"}}>
-            <div style={{width:350}}>
-                <Checkbox
+            <div style={{width:"100%"}}>
+                {/* <Checkbox
                       label={"I don’t understand how to fill out the form for this table?"}
                       labelPosition= "left"
                       checked={ this.state.corrupted }
                       onCheck={ () => {this.setState({corrupted : !this.state.corrupted})}}
-                />
+                /> */}
+                <table>
+                  <tr>
+                    <td style={{padding:"0px 0px 0px 0px", verticalAlign: "top", paddingRight:50}}>
+                      <div style={{fontWeight:"bold"}}>Any comments errors or issues?</div> <TextField
+                            value={this.state.corrupted_text ? this.state.corrupted_text : ""}
+                            hintText="Please specify here"
+                            onChange={(event,value) => {this.setState({corrupted_text: value})}}
+                            style={{width:500,marginLeft:20,fontWeight:"normal"}}
+                            multiLine={true}
+                            rows={1}
+                            rowsMax={5}
+                          />
+                    </td>
+                    <td style={{padding:"0px 0px 0px 0px", verticalAlign: "top", paddingLeft:50}}>
+                      <div style={{fontWeight:"bold"}}>Specify Table type</div> <SelectField
 
-                <TextField
-                      value={this.state.corrupted_text ? this.state.corrupted_text : ""}
-                      hintText="Please specify why"
-                      onChange={(event,value) => {this.setState({corrupted_text: value})}}
-                      style={{width:500,marginLeft:20}}
-                    />
+                           value={this.state.tableType}
+                           onChange={(event,index,value) => {this.setState({tableType : value})} }
 
-                <SelectField
+                           style={{fontWeight:"normal"}}
 
-                     value={this.state.tableType}
-                     floatingLabelText="Specify Table type"
-                     onChange={(event,index,value) => {this.setState({tableType : value})} }
+                         >
 
-                   >
-                     <MenuItem value={"baseline_table"} key={1} primaryText={`baseline characteristic table`} />
-                     <MenuItem value={"other_table"} key={2} primaryText={`other table`} />
-                     <MenuItem value={"subgroup_text"} key={3} primaryText={`sub-group text`} />
-                     <MenuItem value={"subgroup_table"} key={4} primaryText={`sub-group table`} />
-                </SelectField>
+                           <MenuItem value={"baseline_table"} key={1} primaryText={`baseline characteristic table`} />
+                           <MenuItem value={"other_table"} key={2} primaryText={`other table`} />
+                           {/* <MenuItem value={"subgroup_text"} key={3} primaryText={`sub-group text`} /> */}
+                           <MenuItem value={"result_table_subgroup"} key={3} primaryText={`results table with subgroups`} />
+                           <MenuItem value={"result_table_without_subgroup"} key={4} primaryText={`results table without subgroups`} />
+
+                      </SelectField>
+                    </td>
+                  </tr>
+                </table>
+
+
+
 
             </div>
         </Card>
@@ -443,9 +496,14 @@ class CommonView extends Component {
 
         </Card>
 
+
+        <Card style={{textAlign:"right",padding:5,marginTop:10}}><RaisedButton onClick={ () => {this.saveAnnotations()} } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:150,marginRight:5,fontWeight:"bolder"}}>Save Changes!!</RaisedButton></Card>
+
+
+
         <Card style={{padding:10,minHeight:200,paddingBottom:40,marginTop:10}}>
 
-        <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,float:"left",fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Reload Previous Data</RaisedButton><br /><br />
+        <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,float:"left",fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Show Saved Changes</RaisedButton><br /><br />
 
         {/* <RaisedButton onClick={ () => {this.getPreview()} } backgroundColor={"#99b8f1"} style={{margin:1,height:45,width:150,marginRight:5,fontWeight:"bolder"}}>Update Preview</RaisedButton> */}
 
@@ -461,8 +519,6 @@ class CommonView extends Component {
 
 
         </Card>
-
-        <Card style={{textAlign:"right",padding:5,marginTop:10}}><RaisedButton onClick={ () => {this.saveAnnotations()} } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:150,marginRight:5,fontWeight:"bolder"}}>Save Changes!!</RaisedButton></Card>
 
       </div>
     }

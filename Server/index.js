@@ -10,6 +10,8 @@ var _config = require("./config");
 
 var _docList = require("./docList");
 
+var _titles = require("./titles");
+
 var express = require('express');
 
 var app = express();
@@ -34,8 +36,17 @@ app.use(express.static(__dirname + '/dist'));
 app.use(express.static(__dirname + '/images'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-// const XmlReader = require('xml-reader');
+var titles_obj = {};
+
+for (var t in _titles.TITLES) {
+  titles_obj[_titles.TITLES[t].pmid.split(" ")[0]] = {
+    title: _titles.TITLES[t].title,
+    abstract: _titles.TITLES[t].abstract
+  };
+} // const XmlReader = require('xml-reader');
 // const xmlQuery = require('xml-query');
+
+
 var ops_counter = 0;
 var available_documents = {};
 var abs_index = []; // Postgres configuration.
@@ -402,10 +413,41 @@ app.get('/api/getTable', function (req, res) {
       fs.readFile(htmlFolder + "stylesheet.css", "utf8", function (err, data_ss) {
         var tablePage = cheerio.load(data);
         tablePage("col").removeAttr('style');
+        var spaceRow = -1;
+        var headerNodes = [];
+        var maxOUT = 0;
+
+        while (true) {
+          if (cheerio(tablePage("table").find("tr")[0]).text().trim().length < 1) {
+            cheerio(tablePage("table").find("tr")[0]).remove();
+            break;
+          }
+
+          headerNodes.push(cheerio(tablePage("table").find("tr")[0]).remove());
+
+          if (maxOUT++ > 10) {
+            break;
+          }
+        }
+
+        var htmlHeader = "";
+
+        for (var h in headerNodes) {
+          // cheerio(headerNodes[h]).css("font-size","20px");
+          var headText = cheerio(headerNodes[h]).text().trim();
+          var textLimit = 400;
+          htmlHeader = htmlHeader + '<tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">' + (headText.length > textLimit ? headText.slice(0, textLimit - 1) + " [...] " : headText) + "</td></tr>";
+        }
+
+        htmlHeader = "<table>" + htmlHeader + "</table>";
         var actual_table = tablePage("table").parent().html();
         var ss = "<style>" + data_ss + " td {width: auto;} tr:hover {background: aliceblue} col{width:100pt} </style>";
         var formattedPage = "<div>" + ss + "</head>" + actual_table + "</div>";
-        res.send(formattedPage);
+        res.send({
+          htmlHeader: htmlHeader,
+          formattedPage: formattedPage,
+          title: titles_obj[req.query.docid.split(" ")[0]]
+        });
       });
     });
   } else {

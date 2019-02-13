@@ -21,6 +21,14 @@ app.set('view engine', 'html');
 import {PORT} from "./config"
 import {DOCS} from "./docList"
 
+import {TITLES} from "./titles"
+
+var titles_obj = {}
+
+for ( var t in TITLES) {
+  titles_obj[TITLES[t].pmid.split(" ")[0]] = { title: TITLES[t].title, abstract: TITLES[t].abstract }
+}
+
 // const XmlReader = require('xml-reader');
 // const xmlQuery = require('xml-query');
 
@@ -290,10 +298,47 @@ app.get('/api/getTable',function(req,res){
                                   function(err, data_ss) {
                                       var tablePage = cheerio.load(data);
                                           tablePage("col").removeAttr('style');
+
+
+                                      var spaceRow = -1;
+
+                                      var headerNodes = []
+
+
+
+                                      var maxOUT = 0
+                                      while (true){
+                                        if ( cheerio(tablePage("table").find("tr")[0]).text().trim().length < 1){
+                                          cheerio(tablePage("table").find("tr")[0]).remove()
+                                          break;
+                                        }
+
+
+                                        headerNodes.push(cheerio(tablePage("table").find("tr")[0]).remove())
+
+                                        if ( maxOUT++ > 10){
+                                          break
+                                        }
+                                      }
+
+                                      var htmlHeader = ""
+
+                                      for ( var h in headerNodes){
+                                          // cheerio(headerNodes[h]).css("font-size","20px");
+                                          var headText = cheerio(headerNodes[h]).text().trim()
+                                          var textLimit = 400
+                                          htmlHeader = htmlHeader + '<tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">' + (headText.length > textLimit ? headText.slice(0,textLimit-1) +" [...] " : headText) + "</td></tr>"
+                                      }
+
+                                          htmlHeader = "<table>"+htmlHeader+"</table>"
+
+
+
                                       var actual_table = tablePage("table").parent().html()
+
                                       var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} col{width:100pt} </style>"
                                       var formattedPage = "<div>"+ss+"</head>"+actual_table+"</div>"
-                                      res.send(formattedPage)
+                                      res.send({htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]] })
                                   });
 
                     });
