@@ -387,78 +387,104 @@ app.get('/api/totalTables', function (req, res) {
 });
 app.get('/api/getTable', function (req, res) {
   //debugger
-  // try{
-  if (req.query && req.query.docid && req.query.page && available_documents[req.query.docid] && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1) {
-    var docid = req.query.docid + "_" + req.query.page + ".xlsx"; // console.log("GET TABLE CALLED0: "+"HTML_TABLES/"+docid+"_files")
-    //
-    // if (!fs.existsSync("HTML_TABLES/"+docid+"_files")) {
-    //     docid = req.query.docid + "_" + req.query.page;
-    // }
-    //
-    //
+  try {
+    if (req.query && req.query.docid && req.query.page && available_documents[req.query.docid] && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1) {
+      var docid = req.query.docid + "_" + req.query.page + ".xlsx"; // console.log("GET TABLE CALLED0: "+"HTML_TABLES/"+docid+"_files")
+      //
+      // if (!fs.existsSync("HTML_TABLES/"+docid+"_files")) {
+      //     docid = req.query.docid + "_" + req.query.page;
+      // }
+      //
+      //
 
-    var htmlFolder = "HTML_TABLES/" + docid + "_files/";
-    var htmlFile = "sheet001.html";
-    console.log("GET TABLE CALLED: " + htmlFolder + htmlFile);
+      var htmlFolder = "HTML_TABLES/" + docid + "_files/";
+      var htmlFile = "sheet001.html";
+      console.log("GET TABLE CALLED: " + htmlFolder + htmlFile);
 
-    if (!fs.existsSync(htmlFolder + htmlFile)) {
-      docid = req.query.docid + "_" + req.query.page;
-      htmlFolder = "HTML_TABLES/" + docid + "_files/";
-      htmlFile = "sheet001.htm";
-      console.log("GET TABLE CALLED Corrected: " + htmlFolder + htmlFile);
-    }
+      if (!fs.existsSync(htmlFolder + htmlFile)) {
+        docid = req.query.docid + "_" + req.query.page;
+        htmlFolder = "HTML_TABLES/" + docid + "_files/";
+        htmlFile = "sheet001.htm";
+        console.log("GET TABLE CALLED Corrected: " + htmlFolder + htmlFile);
+      }
 
-    console.log("GET TABLE CALLED: " + htmlFile);
-    fs.readFile(htmlFolder + htmlFile, "utf8", function (err, data) {
-      fs.readFile(htmlFolder + "stylesheet.css", "utf8", function (err, data_ss) {
-        var tablePage = cheerio.load(data);
-        tablePage("col").removeAttr('style');
-        var spaceRow = -1;
-        var headerNodes = [];
-        var maxOUT = 0;
+      console.log("GET TABLE CALLED: " + htmlFile);
+      fs.readFile(htmlFolder + htmlFile, "utf8", function (err, data) {
+        fs.readFile(htmlFolder + "stylesheet.css", "utf8", function (err2, data_ss) {
+          var tablePage;
 
-        while (true) {
-          if (cheerio(tablePage("table").find("tr")[0]).text().trim().length < 1) {
-            cheerio(tablePage("table").find("tr")[0]).remove();
-            break;
+          try {
+            tablePage = cheerio.load(data);
+            tablePage("col").removeAttr('style');
+
+            if (!tablePage) {
+              res.send({
+                htmlHeader: "",
+                formattedPage: "",
+                title: ""
+              });
+              return;
+            }
+          } catch (e) {
+            console.log(JSON.stringify(e) + " -- " + JSON.stringify(data));
+            res.send({
+              htmlHeader: "",
+              formattedPage: "",
+              title: ""
+            });
+            return;
           }
 
-          headerNodes.push(cheerio(tablePage("table").find("tr")[0]).remove());
+          var spaceRow = -1;
+          var headerNodes = [];
+          var maxOUT = 0;
 
-          if (maxOUT++ > 10) {
-            break;
+          while (true) {
+            if (cheerio(tablePage("table").find("tr")[0]).text().trim().length < 1) {
+              cheerio(tablePage("table").find("tr")[0]).remove();
+              break;
+            }
+
+            headerNodes.push(cheerio(tablePage("table").find("tr")[0]).remove());
+
+            if (maxOUT++ > 10) {
+              break;
+            }
           }
-        }
 
-        var htmlHeader = "";
+          var htmlHeader = "";
 
-        for (var h in headerNodes) {
-          // cheerio(headerNodes[h]).css("font-size","20px");
-          var headText = cheerio(headerNodes[h]).text().trim();
-          var textLimit = 400;
-          htmlHeader = htmlHeader + '<tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">' + (headText.length > textLimit ? headText.slice(0, textLimit - 1) + " [...] " : headText) + "</td></tr>";
-        }
+          for (var h in headerNodes) {
+            // cheerio(headerNodes[h]).css("font-size","20px");
+            var headText = cheerio(headerNodes[h]).text().trim();
+            var textLimit = 400;
+            htmlHeader = htmlHeader + '<tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">' + (headText.length > textLimit ? headText.slice(0, textLimit - 1) + " [...] " : headText) + "</td></tr>";
+          }
 
-        htmlHeader = "<table>" + htmlHeader + "</table>";
-        var actual_table = tablePage("table").parent().html();
-        var ss = "<style>" + data_ss + " td {width: auto;} tr:hover {background: aliceblue} col{width:100pt} </style>";
-        var formattedPage = "<div>" + ss + "</head>" + actual_table + "</div>";
-        res.send({
-          htmlHeader: htmlHeader,
-          formattedPage: formattedPage,
-          title: titles_obj[req.query.docid.split(" ")[0]]
+          htmlHeader = "<table>" + htmlHeader + "</table>";
+          var actual_table = tablePage("table").parent().html();
+          var ss = "<style>" + data_ss + " td {width: auto;} tr:hover {background: aliceblue} col{width:100pt} </style>";
+          var formattedPage = "<div>" + ss + "</head>" + actual_table + "</div>";
+          res.send({
+            status: "good",
+            htmlHeader: htmlHeader,
+            formattedPage: formattedPage,
+            title: titles_obj[req.query.docid.split(" ")[0]]
+          });
         });
       });
-    });
-  } else {
+    } else {
+      res.send({
+        status: "wrong parameters",
+        query: req.query
+      });
+    }
+  } catch (e) {
     res.send({
-      status: "wrong parameters",
+      status: "probably page out of bounds, or document does not exist",
       query: req.query
     });
-  } // } catch (e){
-  //   res.send({status: "probably page out of bounds, or document does not exist", query : req.query})
-  // }
-
+  }
 });
 app.get('/api/getAvailableTables', function (req, res) {
   res.send(available_documents);

@@ -258,7 +258,7 @@ app.get('/api/totalTables',function(req,res){
 
 app.get('/api/getTable',function(req,res){
   //debugger
-  // try{
+   try{
 
 
     if(req.query && req.query.docid
@@ -295,10 +295,22 @@ app.get('/api/getTable',function(req,res){
                     function(err, data) {
                       fs.readFile(htmlFolder+"stylesheet.css",
                                   "utf8",
-                                  function(err, data_ss) {
-                                      var tablePage = cheerio.load(data);
-                                          tablePage("col").removeAttr('style');
+                                  function(err2, data_ss) {
 
+                                      var tablePage;
+                        
+                                      try{
+                                          tablePage = cheerio.load(data);
+                                          tablePage("col").removeAttr('style');
+                                          if ( !tablePage ){
+                                                res.send({htmlHeader: "",formattedPage : "", title: "" })
+                                                return;
+                                          }
+                                      } catch (e){
+                                        console.log(JSON.stringify(e)+" -- " + JSON.stringify(data))
+                                        res.send({htmlHeader: "",formattedPage : "", title: "" })
+                                        return;
+                                      }
 
                                       var spaceRow = -1;
 
@@ -338,7 +350,7 @@ app.get('/api/getTable',function(req,res){
 
                                       var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} col{width:100pt} </style>"
                                       var formattedPage = "<div>"+ss+"</head>"+actual_table+"</div>"
-                                      res.send({htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]] })
+                                      res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]] })
                                   });
 
                     });
@@ -347,9 +359,9 @@ app.get('/api/getTable',function(req,res){
       res.send({status: "wrong parameters", query : req.query})
     }
 
-// } catch (e){
-//   res.send({status: "probably page out of bounds, or document does not exist", query : req.query})
-// }
+} catch (e){
+  res.send({status: "probably page out of bounds, or document does not exist", query : req.query})
+}
 
 });
 
