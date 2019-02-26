@@ -83,5 +83,16 @@ export default class fetchData {
 
   }
 
+  async getAllAvailableTables() {
+
+        var urlQueryRequest = urlBase + "getAvailableTables"
+
+        var r = await this.getGeneric( urlQueryRequest  )
+
+        return r
+
+  }
+
+
 
 }

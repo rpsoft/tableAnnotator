@@ -19,6 +19,8 @@ import {
   CommonView,
   ResultsView,
   ResultsContainer,
+  TableContainer,
+  AnnotationView,
   // Browse,
   // BrowseNames,
   // BrowseFilter,
@@ -43,6 +45,14 @@ var routes = (history) => (
       <Route path="allresults" component={ResultsContainer}>
             <Route path={urlBase + "allresults"} component={ResultsView} ></Route>
       </Route>
+
+
+      <Route path="table" component={TableContainer}>
+            <Route path={urlBase + "table"} component={AnnotationView} ></Route>
+      </Route>
+
+
+
 
 
   </Router>

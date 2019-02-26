@@ -10,7 +10,7 @@ import muiLMSTheme from '../muiLMSTheme';
 // More on Colors: http://www.material-ui.com/#/customization/colors
 const muiTheme = getMuiTheme(muiLMSTheme);
 
-injectTapEventPlugin();
+// injectTapEventPlugin();
 /**
  * Component that handles default App layout.
  *
@@ -26,14 +26,14 @@ injectTapEventPlugin();
  * ```
  */
 
-import CommonView from './common-view';
+import AnnotationView from './annotation-view';
 
-export default class AppContainer extends Component {
+export default class TableContainer extends Component {
   render() {
     return (
-     <div id="maincontainer" style={{ backgroundSize: "52%",backgroundAttachment:"fixed", backgroundColor:"grey", paddingTop:10,paddingBottom:10}}>
+     <div id="maincontainer" style={{height:"calc(100%)",  backgroundSize: "52%",backgroundAttachment:"fixed", backgroundColor:"grey", paddingTop:10,paddingBottom:10}}>
        <MuiThemeProvider muiTheme={ muiTheme }>
-         <CommonView {...this.props} />
+         <AnnotationView {...this.props} />
        </MuiThemeProvider>
      </div>
     );
