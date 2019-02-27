@@ -15,9 +15,9 @@ tablesDirectory <- "~/ihw/tableAnnotator/Single_table_sheets/"
 
 ################# PREPARING THE INPUT VARIABLE annotations.
 
-write_rds(x = input, path = "test2.rds")
+#write_rds(x = input, path = "test2.rds")
 
-input <- read_rds("test2.rds")
+#input <- read_rds("test2.rds")
 # input
 
 
@@ -38,9 +38,9 @@ anns <- anns %>% select(user,docid,page,corrupted,tableType,location,number,cont
   as.tibble()
 
 annotations <- anns
-# 
+#
 # saveRDS(anns, "~/ihw/tableAnnotator/Server/src/annotations2.rds")
-# 
+#
 # saveRDS(input, "~/ihw/tableAnnotator/Server/src/input2.rds")
 
 ##################
@@ -88,7 +88,7 @@ runAll <- function(){
         # IF a characteristics is nto alisted among the qualifiers, then it is not informative
         # mydf <- mydf %>%
         #   mutate_all(function(x) if_else(is.na(x), FALSE, x))
-        # 
+        #
         mydf_i <- mydf %>%
           filter(i == i_choose)
         a <- (map_lgl(mydf_i, ~ !any(.x == FALSE)))
@@ -103,7 +103,7 @@ runAll <- function(){
           }
 
         }
-      
+
         return (  mydf_i[, a] )
 
       }
@@ -144,11 +144,11 @@ runAll <- function(){
           select(-qualifiers)
 
         browser()
-        
+
         metadata_noqual[, c("bold","itallic", "plain",
                             "empty_row", "empty_row_with_p_value",
                             "indented")] <- FALSE
-  
+
         metadata <- bind_rows(metadata_qual, metadata_noqual) %>%
           arrange(docid, page, location, number, desc(richness))
         rm(metadata_noqual, metadata_qual)

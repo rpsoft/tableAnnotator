@@ -115,6 +115,18 @@ class AnnotationView extends Component {
 
         let fetch = new fetchData();
 
+        var all_annotations = JSON.parse(await fetch.getAllAnnotations())
+
+        //var annotations = this.state.annotations ? this.state.annotations.rows : []
+        var annotations_formatted = {}
+            all_annotations.rows.map( (v,i) => {
+              if ( annotations_formatted[v.docid+"_"+v.page] ){
+                annotations_formatted[v.docid+"_"+v.page].push(v.user)
+              } else {
+                annotations_formatted[v.docid+"_"+v.page] = [v.user]
+              }
+            })
+
         var data = await fetch.getTable(props.location.query.docid,props.location.query.page)
         var allInfo = JSON.parse(await fetch.getAllInfo())
 
@@ -138,7 +150,8 @@ class AnnotationView extends Component {
             corrupted : annotation.corrupted === 'true',
             corrupted_text : annotation.corrupted_text,
             tableType : annotation.tableType ? annotation.tableType : "",
-            annotations : annotation.annotation ? annotation.annotation.annotations : []
+            annotations : annotation.annotation ? annotation.annotation.annotations : [],
+            allAnnotations: annotations_formatted
           })
         } else {
           this.setState({
@@ -148,6 +161,7 @@ class AnnotationView extends Component {
             allInfo,
             gindex: current_table_g_index,
             user : this.state.user && this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
+            allAnnotations: annotations_formatted
           })
         }
     }
@@ -254,8 +268,22 @@ class AnnotationView extends Component {
     await fetch.saveAnnotation(this.props.location.query.docid,this.props.location.query.page,this.state.user,this.state.annotations,this.state.corrupted, this.state.tableType,this.state.corrupted_text)
     alert("Annotations Saved!")
 
+    var all_annotations = JSON.parse(await fetch.getAllAnnotations())
+
+    //var annotations = this.state.annotations ? this.state.annotations.rows : []
+    var annotations_formatted = {}
+        all_annotations.rows.map( (v,i) => {
+          if ( annotations_formatted[v.docid+"_"+v.page] ){
+            annotations_formatted[v.docid+"_"+v.page].push(v.user)
+          } else {
+            annotations_formatted[v.docid+"_"+v.page] = [v.user]
+          }
+        })
+
+    this.setState({preview,allAnnotations: {}})
+
     var preview = await fetch.getAnnotationPreview(this.props.location.query.docid,this.props.location.query.page, this.state.user)
-    this.setState({preview})
+    this.setState({preview,allAnnotations: annotations_formatted})
 
    }
 
