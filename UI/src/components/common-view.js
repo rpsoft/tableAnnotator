@@ -58,36 +58,40 @@ class CommonView extends Component {
 
     this.state = {
       annotations:null,
-      tables:null
+      tables:null,
+      user:props.location.query ? props.location.query.user : null,
     };
 
   }
 
   async componentDidMount () {
-
     let fetch = new fetchData();
     var annotations = JSON.parse(await fetch.getAllAnnotations())
-
     var tables = JSON.parse(await fetch.getAllAvailableTables())
+    var allInfo = JSON.parse(await fetch.getAllInfo())
 
-    this.setState({annotations,tables})
-
+    this.setState({annotations,tables,allInfo})
   }
 
   async componentWillReceiveProps(next) {
 
+    var user = next.location.query ? next.location.query.user : null
 
-  }
-
-  async componentWillMount() {
-
-
-  }
-
-  async loadPageFromProps(props){
-
-
+   if( user != this.state.user ) {
+        this.setState({user})
    }
+
+  }
+  //
+  // async componentWillMount() {
+  //
+  //
+  // }
+  //
+  // async loadPageFromProps(props){
+  //
+  //
+  //  }
 
 
 
@@ -108,25 +112,49 @@ class CommonView extends Component {
           <h2 style={{marginTop:0,padding:10}}>Welcome the Subgroup Annotator!</h2>
         </Card>
 
+        <Card id="userData" style={{padding:15,marginBottom:10}}>
+          <TextField
+            value={this.state.user}
+            hintText="Set your username here"
+            onChange={(event,value) => {this.props.goToUrl("/?user="+value)}}
+            style={{width:200,marginLeft:20,marginRight:20}}
+            // onKeyDown={(event, index) => {
+            //
+            //   if (event.key === 'Enter') {
+            //       this.loadPageFromProps(this.props)
+            //       event.preventDefault();
+            //   }
+            // }}
+            />
+        </Card>
+
         <Card >
             <Card><div style={{padding:10,fontWeight:"bold",fontSize:20}}>All tables, and annotations</div></Card>
 
-            <div style={{height:"40vw",overflowY:"scroll", marginTop:10, padding:20}}>{this.state.tables ?
+            <div style={{height:700,overflowY:"scroll", marginTop:10, padding:20,paddingTop:5}}>{this.state.tables && this.state.allInfo ?
                 (
-                    Object.keys(this.state.tables).map(
-                      (v,i) => this.state.tables[v].pages.map( (w,j) =>
-                          <div key={v+"_"+w}>
-                            <div style={{display:"inline",fontWeight:"bold"}}>{v+"_"+w +" : "}</div>
+                    this.state.allInfo.abs_index.map(
+                      (v,i) => <div key={v.docid+"_"+v.page}>
+                            <div style={{display:"inline",fontWeight:"bold"}}>{v.docid+"_"+v.page +" : "}</div>
                             {
-                              (annotations_formatted[v+"_"+w]
-                              ? annotations_formatted[v+"_"+w].map( (u,l) => {return <a target={"_blank"} style={{marginLeft:10}} href={"table/?docid="+v+"&page="+w+"&user="+u}>{u+","}</a>})
+                              (annotations_formatted[v.docid+"_"+v.page]
+                              ? annotations_formatted[v.docid+"_"+v.page].map( (u,l) => {
+                                return <a style={{cursor: "pointer", marginLeft:10, fontStyle: "italic", marginLeft: 10, textDecoration: "underline", color: "blue"}}
+                                  onClick={
+                                    () => this.props.goToUrl("table/?docid="+encodeURIComponent(v.docid)+"&page="+v.page+"&user="+u)}
+                                        >{u+","}</a>})
                               : "")
                             }
-                            <a style={{marginLeft:10}} target={"_blank"} href={"table/?docid="+v+"&page="+w}>[New]</a>
+                            <a style={{cursor: "pointer", marginLeft:10, fontStyle: "italic", marginLeft: 10, textDecoration: "underline", color: "blue"}}
+                              onClick={
+                                () => this.props.goToUrl("table/?docid="+encodeURIComponent(v.docid)+"&page="+v.page+(this.state.user ? "&user="+this.state.user : ""))}
+                                >
+                              [New]
+                            </a>
                          </div>
-                      )
+
                     )
-                ) : ""
+                ) : <Loader type="Circles" color="#00aaaa" height={150} width={150}/>
                 }</div>
         </Card>
 

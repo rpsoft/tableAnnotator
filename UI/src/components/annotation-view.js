@@ -5,9 +5,7 @@ import { Link } from 'react-router'
 import { templateListSet } from '../actions/actions';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-
 import {URL_BASE} from '../links'
-
 import fetchData from '../network/fetch-data';
 
 import Bootstrap from '../../assets/bootstrap.css';
@@ -19,16 +17,13 @@ import Menu from 'material-ui/Menu';
 import Divider from 'material-ui/Divider';
 import DownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import Refresh from 'material-ui/svg-icons/navigation/refresh';
+import Home from 'material-ui/svg-icons/action/home';
 import TextField from 'material-ui/TextField';
 
 import SortIcon from 'material-ui/svg-icons/content/sort';
-
 import SelectField from 'material-ui/SelectField';
-
- import Loader from 'react-loader-spinner'
-
+import Loader from 'react-loader-spinner'
 import { push } from 'react-router-redux'
-
 import Checkbox from 'material-ui/Checkbox';
 
 import Annotation from './annotation'
@@ -42,19 +37,14 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
-// import style from './table.css'
-
 var ReactDOMServer = require('react-dom/server');
-
 var HtmlToReact = require('html-to-react')
 var HtmlToReactParser = require('html-to-react').Parser;
-
 
 class AnnotationView extends Component {
 
   constructor(props) {
     super()
-
 
     this.state = {
         user: "",
@@ -73,12 +63,22 @@ class AnnotationView extends Component {
   }
 
   async componentDidMount () {
-
-
-
-
     let fetch = new fetchData();
     var annotation = JSON.parse(await fetch.getAnnotationByID(this.props.location.query.docid,this.props.location.query.page,this.state.user))
+
+    var all_annotations = JSON.parse(await fetch.getAllAnnotations())
+
+    //var annotations = this.state.annotations ? this.state.annotations.rows : []
+    var annotations_formatted = {}
+        all_annotations.rows.map( (v,i) => {
+          if ( annotations_formatted[v.docid+"_"+v.page] ){
+            annotations_formatted[v.docid+"_"+v.page].push(v.user)
+          } else {
+            annotations_formatted[v.docid+"_"+v.page] = [v.user]
+          }
+        })
+
+
 
     this.setState({
       user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
@@ -87,25 +87,21 @@ class AnnotationView extends Component {
       docid : (annotation || annotation.docid) || this.props.location.query.docid,
       page: annotation.page || this.props.location.query.page,
       tableType : annotation.tableType ? annotation.tableType : "",
-      annotations : annotation.annotation ? annotation.annotation.annotations : []
+      annotations : annotation.annotation ? annotation.annotation.annotations : [],
+      allAnnotations: annotations_formatted
     })
 
     if( !this.state.preview ){
       this.getPreview()
     }
-
-
   }
 
   async componentWillReceiveProps(next) {
         this.loadPageFromProps(next)
-
   }
 
   async componentWillMount() {
-
       this.loadPageFromProps(this.props)
-
   }
 
   async loadPageFromProps(props){
@@ -120,20 +116,15 @@ class AnnotationView extends Component {
         let fetch = new fetchData();
 
         var data = await fetch.getTable(props.location.query.docid,props.location.query.page)
-        //debugger
         var allInfo = JSON.parse(await fetch.getAllInfo())
 
         var documentData = allInfo.available_documents[props.location.query.docid]
         var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(props.location.query.page)]
-        // debugger
-        // this.setState({})
         this.getPreview()
 
-        // Here
         var annotation
         if( this.state.user && this.state.user.length > 0){
           annotation = JSON.parse(await fetch.getAnnotationByID(this.props.location.query.docid,this.props.location.query.page,this.state.user))
-          //debugger
         }
 
         if ( annotation ){
@@ -159,8 +150,6 @@ class AnnotationView extends Component {
             user : this.state.user && this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
           })
         }
-
-
     }
    }
 
@@ -176,7 +165,6 @@ class AnnotationView extends Component {
          new_index = new_index > this.state.allInfo.abs_index.length-1 ? this.state.allInfo.abs_index.length-1 : new_index
       //  now left
          new_index = new_index < 0 ? 0 : new_index
-         // debugger
 
      var newDocument = this.state.allInfo.abs_index[new_index]
 
@@ -231,23 +219,19 @@ class AnnotationView extends Component {
    }
 
    addAnnotation(i,data){
-
      var content = this.removeFalseKeys(data.content)
      var qualifiers = this.removeFalseKeys(data.qualifiers)
 
      data.content = content
      data.qualifiers = qualifiers
 
-
      var annotations = this.state.annotations
          annotations[i] = data
-         // debugger
          console.log("ADDED ANNOTATION: "+JSON.stringify(annotations))
      this.setState({annotations})
    }
 
    deleteAnnotations(i){
-
      var annotations = this.state.annotations
          annotations.splice(i,1);
 
@@ -279,7 +263,7 @@ class AnnotationView extends Component {
 
      if (!this.state.user){
        if (!disableAlert){
-          alert("Specify a user before Preview")
+          //alert("Specify a user before Preview")
         }
          return
      }
@@ -298,6 +282,25 @@ class AnnotationView extends Component {
    render() {
 
        var preparedPreview = <div>Preview not available</div>
+
+       var previousAnnotations = <div></div>
+
+        if( this.state.allAnnotations && this.state.allAnnotations[this.props.location.query.docid+"_"+this.props.location.query.page] ){
+
+          previousAnnotations = <div style={{color:"red",display:"inline"}}>
+                      <div style={{display:"inline"}} >Already Annotated by: </div>
+                      {
+                        this.state.allAnnotations[this.props.location.query.docid+"_"+this.props.location.query.page].map(
+                           (us,j) => <div
+                             style={{display:"inline",cursor: "pointer", textDecoration: "underline"}}
+                             key={j}
+                             onClick={ () => this.props.goToUrl("/table/?docid="+encodeURIComponent(this.props.location.query.docid)+"&page="+this.props.location.query.page+"&user="+us)}
+                             >{us+", "}</div>
+                        )
+                      }
+                    </div>
+
+        }
 
        if( this.state.preview ){
             var header = [];
@@ -403,6 +406,8 @@ class AnnotationView extends Component {
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
         <Card id="userData" style={{padding:15}}>
+          <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+(this.state.user ? "?user="+this.state.user : "" ))}/>
+
           <TextField
             value={this.state.user}
             hintText="Set your username here"
@@ -438,8 +443,9 @@ class AnnotationView extends Component {
             <RaisedButton style={{marginLeft:20}} onClick={ () => { this.goToGIndex(this.state.currentGPage) } }>Go!</RaisedButton>
           </div>
 
+          <div>{previousAnnotations}</div>
 
-          <div style={{float:"right", position: "relative", top: -47}}>
+          <div style={{float:"right", position: "relative", top: -45}}>
 
                       <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Show Saved Changes</RaisedButton>
                       <RaisedButton onClick={ () => {this.shiftTables(-1)} } style={{padding:5,marginRight:5}}>Previous Table</RaisedButton>
@@ -503,7 +509,6 @@ class AnnotationView extends Component {
 
                            <MenuItem value={"baseline_table"} key={1} primaryText={`baseline characteristic table`} />
                            <MenuItem value={"other_table"} key={2} primaryText={`other table`} />
-                           {/* <MenuItem value={"subgroup_text"} key={3} primaryText={`sub-group text`} /> */}
                            <MenuItem value={"result_table_subgroup"} key={3} primaryText={`results table with subgroups`} />
                            <MenuItem value={"result_table_without_subgroup"} key={4} primaryText={`results table without subgroups`} />
 
@@ -517,16 +522,12 @@ class AnnotationView extends Component {
         <Card id="annotations" style={{padding:10,minHeight:200,paddingBottom:40,marginTop:10}}>
 
           <h3 style={{marginBottom:0,marginTop:0}}>Annotations
-
               <RaisedButton backgroundColor={"#aade94"} style={{marginLeft:10}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
-
           </h3>
           <hr />
           {
-
             this.state.annotations ? this.state.annotations.map(
               (v,i) => {
-              //  debugger
                 return <Annotation key={i}
                                    annotationData ={this.state.annotations[i]}
                                    addAnnotation={ (data) => {this.addAnnotation(i,data)}}

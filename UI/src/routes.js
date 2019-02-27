@@ -21,11 +21,6 @@ import {
   ResultsContainer,
   TableContainer,
   AnnotationView,
-  // Browse,
-  // BrowseNames,
-  // BrowseFilter,
-  // Search,
-  // Entry,
 } from './components/'
 
 import App from './App'
