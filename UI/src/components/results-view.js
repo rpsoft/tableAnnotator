@@ -105,17 +105,19 @@ class ResultsView extends Component {
       return <div>
 
         <Card id="results" style={{padding:15}}>
-          <div>{'"user","docid","page","corrupted","tableType","location","number","content","qualifiers"'}</div>
+          <div>{'"user","docid","page","corrupted_text","tableType","location","number","content","qualifiers"'}</div>
           <div>{
 
             finalResults_array.map( (value, i) => {
 
               return value.annotation.annotations.map( (ann , j ) => {
                 try {
+                  // debugger;
                 return <div key={i+"_"+j}>{  '"'+value.user
                                             +'","'+value.docid
                                             +'","'+value.page
-                                            +'","'+value.corrupted
+                                            // +'","'+value.corrupted
+                                            +'","'+ (value.corrupted_text == "undefined" ? "" : value.corrupted_text  )
                                             +'","'+value.tableType
                                             +'","'+ann.location
                                             +'","'+ann.number
