@@ -68,6 +68,7 @@
     "less": "^3.9.0",
     "parse-domain": "~0.2.1",
     "pg": "^7.7.1",
+    "python-shell": "^1.0.7",
     "r-script": "0.0.3",
     "sqlite3": "^4.0.4",
     "xml-js": "^1.6.8",

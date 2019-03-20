@@ -6,6 +6,8 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _pythonShell = require("python-shell");
+
 var _config = require("./config");
 
 var _docList = require("./docList");
@@ -384,6 +386,28 @@ app.get('/api/totalTables', function (req, res) {
   res.send({
     total: _docList.DOCS.length
   });
+});
+app.get('/api/classify', function (req, res) {
+  if (req.query && req.query.terms) {
+    console.log(req.query.terms);
+    var options = {
+      mode: 'text',
+      pythonPath: '/home/suso/anaconda3/bin/python',
+      pythonOptions: ['-u'],
+      // get print results in real-time
+      scriptPath: '/home/suso/ihw/tableAnnotator/Server/src',
+      args: req.query.terms.split(",")
+    };
+
+    _pythonShell.PythonShell.run('classifier.py', options, function (err, results) {
+      if (err) throw err; // results is an array consisting of messages collected during execution
+
+      console.log('results: %j', eval(results[0]));
+      res.send({
+        classes: eval(results[0])
+      });
+    });
+  }
 });
 app.get('/api/getTable', function (req, res) {
   //debugger

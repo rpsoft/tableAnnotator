@@ -6,6 +6,8 @@ var request = require("request");
 const cheerio = require('cheerio');
 const { Pool, Client } = require('pg')
 
+import {PythonShell} from 'python-shell';
+
 
 app.use(express.static(__dirname + '/domainParserviews'));
 //Store all HTML files in view folder.
@@ -255,6 +257,30 @@ app.get('/api/totalTables',function(req,res){
   res.send({total : DOCS.length})
 });
 
+app.get('/api/classify',function(req,res){
+
+  if(req.query && req.query.terms){
+    console.log(req.query.terms)
+    let options = {
+      mode: 'text',
+      pythonPath: '/home/suso/anaconda3/bin/python',
+      pythonOptions: ['-u'], // get print results in real-time
+      scriptPath: '/home/suso/ihw/tableAnnotator/Server/src',
+      args: req.query.terms.split(",")
+    };
+
+    PythonShell.run('classifier.py', options, function (err, results) {
+      if (err) throw err;
+      // results is an array consisting of messages collected during execution
+      console.log('results: %j', eval(results[0]));
+      res.send({classes : eval(results[0])})
+    });
+
+  }
+
+});
+
+
 
 app.get('/api/getTable',function(req,res){
   //debugger
@@ -298,7 +324,7 @@ app.get('/api/getTable',function(req,res){
                                   function(err2, data_ss) {
 
                                       var tablePage;
-                        
+
                                       try{
                                           tablePage = cheerio.load(data);
                                           tablePage("col").removeAttr('style');
