@@ -195,6 +195,37 @@ class AnnotationView extends Component {
      this.setState({annotations})
    }
 
+   autoAdd(){
+
+    debugger;
+     this.state.table
+
+     var auto_annotations = []
+
+     var col_annotations = Object.keys(this.state.table.predicted.cols).map( (N) => {
+        var content = {}
+        for (var n in this.state.table.predicted.cols[N] ){
+          content[this.state.table.predicted.cols[N][n]] = true
+        }
+        return {"location":"Col","content":content,"qualifiers":{},"number":(parseInt(N)+1)}
+     } )
+
+
+     var row_annotations = Object.keys(this.state.table.predicted.rows).map( (N) => {
+        var content = {}
+        for (var n in this.state.table.predicted.rows[N] ){
+          content[this.state.table.predicted.rows[N][n]] = true
+        }
+        return {"location":"Row","content":content,"qualifiers":{},"number":(parseInt(N)+1)}
+     } )
+
+
+    this.setState({annotations : col_annotations.concat(row_annotations)})
+
+   }
+
+
+
    removeFalseKeys(obj){
 
      var newObject = {}
@@ -551,6 +582,7 @@ class AnnotationView extends Component {
 
           <h3 style={{marginBottom:0,marginTop:0}}>Annotations
               <RaisedButton backgroundColor={"#aade94"} style={{marginLeft:10}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
+              <RaisedButton backgroundColor={"#58cbff"} style={{marginLeft:10,float:"right"}} onClick={ () => {this.autoAdd()} }>Auto Add</RaisedButton>
           </h3>
           <hr />
           {
