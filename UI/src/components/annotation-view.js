@@ -197,9 +197,6 @@ class AnnotationView extends Component {
 
    autoAdd(){
 
-    debugger;
-     this.state.table
-
      var auto_annotations = []
 
      var col_annotations = Object.keys(this.state.table.predicted.cols).map( (N) => {
@@ -489,7 +486,6 @@ class AnnotationView extends Component {
                                   this.setState({currentGPage: value})
                                 }}
             onKeyDown={(event, index) => {
-            //  debugger
               if (event.key === 'Enter') {
                   this.goToGIndex(this.state.currentGPage)
                   event.preventDefault();
@@ -525,7 +521,7 @@ class AnnotationView extends Component {
         <Card id="tableHeader" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center"}}>
 
             { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : <div>
-                                                                                                            <div style={{paddingBottom: 10, fontWeight:"bold",marginBottom:10}}>{"PMID: " + this.state.docid + " | " + (this.state.table.title ? this.state.table.title.title.trim() : "")}</div>
+                                                                                                            <div style={{paddingBottom: 10, fontWeight:"bold",marginBottom:10}}><Link to={"https://www.ncbi.nlm.nih.gov/pubmed/?term="+ this.state.docid} target="_blank">{"PMID: " + this.state.docid }</Link> { " | " + (this.state.table.title ? this.state.table.title.title.trim() : "")}</div>
                                                                                                             {/* <div style={{marginTop:10,}}> {}</div> */}
                                                                                                             <div style={{paddingBottom: 10, fontWeight:"bold"}} dangerouslySetInnerHTML={{__html:this.state.table.htmlHeader}}></div>
                                                                                                         </div> }

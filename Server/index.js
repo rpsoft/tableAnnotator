@@ -25,7 +25,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n  sgd = pickle.load(open(\"/home/suso/ihw/tableAnnotator/Server/src/sgd_multiterm.sav\", 'rb'))\n  def classify(h):\n    d={}\n    result = sgd.predict(h)\n    for r in range(0,len(h)):\n      d[h[r]] = result[r]\n    return d\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n  sgd = pickle.load(open(\"./src/sgd_multiterm.sav\", 'rb'))\n  def classify(h):\n    d={}\n    result = sgd.predict(h)\n    for r in range(0,len(h)):\n      d[h[r]] = result[r]\n    return d\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -166,24 +166,7 @@ function _getAnnotationResults() {
 
 function getAnnotationByID(_x, _x2, _x3) {
   return _getAnnotationByID.apply(this, arguments);
-} // let options = {
-//   mode: 'text',
-//   pythonPath: '/home/suso/anaconda3/bin/python',
-//   pythonOptions: ['-u'], // get print results in real-time
-//   scriptPath: '/home/suso/ihw/tableAnnotator/Server/src',
-// };
-//
-//
-// let pyshell = new PythonShell('/home/suso/ihw/tableAnnotator/Server/src/classifier.py');
-//
-// // sends a message to the Python script via stdin
-// pyshell.on('message', function (message) {
-//   // received a message sent from the Python script (a simple "print" statement)
-//   console.log(message);
-// });
-//
-// pyshell.send('hello');
-
+}
 
 function _getAnnotationByID() {
   _getAnnotationByID = (0, _asyncToGenerator2.default)(
@@ -225,22 +208,8 @@ var python = pythonBridge({
   python: 'python3'
 });
 python.ex(_templateObject());
-python.ex(_templateObject2()); //
-// let words = ["male","Infliximab","female"]
-//
-// //
-// python`classify(["male", "female", "male", "male"])`.then(x => console.log(x));
-// //
-// python.end();
-//
-//
-// let python = pythonBridge({
-//     python: 'python3'
-// });
-//
-// python`classify(["male", "female", "male", "male"])`.then(x => console.log(x));
-// python.end();
-//
+console.log(process.cwd());
+python.ex(_templateObject2());
 
 function classify(_x4) {
   return _classify.apply(this, arguments);
