@@ -1,324 +1,516 @@
-<html xmlns:v="urn:schemas-microsoft-com:vml"
-xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:x="urn:schemas-microsoft-com:office:excel"
-xmlns="http://www.w3.org/TR/REC-html40">
-
-<head>
-<meta name="Excel Workbook Frameset">
-<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
-<meta name=ProgId content=Excel.Sheet>
-<meta name=Generator content="Microsoft Excel 15">
-<link rel=File-List href="24120253_2_files/filelist.xml">
-<![if !supportTabStrip]>
-<link id="shLink" href="24120253_2_files/sheet001.htm">
-
-<link id="shLink">
-
-<script language="JavaScript">
-<!--
- var c_lTabs=1;
-
- var c_rgszSh=new Array(c_lTabs);
- c_rgszSh[0] = "24120253";
-
-
-
- var c_rgszClr=new Array(8);
- c_rgszClr[0]="window";
- c_rgszClr[1]="buttonface";
- c_rgszClr[2]="windowframe";
- c_rgszClr[3]="windowtext";
- c_rgszClr[4]="threedlightshadow";
- c_rgszClr[5]="threedhighlight";
- c_rgszClr[6]="threeddarkshadow";
- c_rgszClr[7]="threedshadow";
-
- var g_iShCur;
- var g_rglTabX=new Array(c_lTabs);
-
-function fnGetIEVer()
-{
- var ua=window.navigator.userAgent
- var msie=ua.indexOf("MSIE")
- if (msie>0 && window.navigator.platform=="Win32")
-  return parseInt(ua.substring(msie+5,ua.indexOf(".", msie)));
- else
-  return 0;
-}
-
-function fnBuildFrameset()
-{
- var szHTML="<frameset rows=\"*,18\" border=0 width=0 frameborder=no framespacing=0>"+
-  "<frame src=\""+document.all.item("shLink")[0].href+"\" name=\"frSheet\" noresize>"+
-  "<frameset cols=\"54,*\" border=0 width=0 frameborder=no framespacing=0>"+
-  "<frame src=\"\" name=\"frScroll\" marginwidth=0 marginheight=0 scrolling=no>"+
-  "<frame src=\"\" name=\"frTabs\" marginwidth=0 marginheight=0 scrolling=no>"+
-  "</frameset></frameset><plaintext>";
-
- with (document) {
-  open("text/html","replace");
-  write(szHTML);
-  close();
- }
-
- fnBuildTabStrip();
-}
-
-function fnBuildTabStrip()
-{
- var szHTML=
-  "<html><head><style>.clScroll {font:8pt Courier New;color:"+c_rgszClr[6]+";cursor:default;line-height:10pt;}"+
-  ".clScroll2 {font:10pt Arial;color:"+c_rgszClr[6]+";cursor:default;line-height:11pt;}</style></head>"+
-  "<body onclick=\"event.returnValue=false;\" ondragstart=\"event.returnValue=false;\" onselectstart=\"event.returnValue=false;\" bgcolor="+c_rgszClr[4]+" topmargin=0 leftmargin=0><table cellpadding=0 cellspacing=0 width=100%>"+
-  "<tr><td colspan=6 height=1 bgcolor="+c_rgszClr[2]+"></td></tr>"+
-  "<tr><td style=\"font:1pt\">&nbsp;<td>"+
-  "<td valign=top id=tdScroll class=\"clScroll\" onclick=\"parent.fnFastScrollTabs(0);\" onmouseover=\"parent.fnMouseOverScroll(0);\" onmouseout=\"parent.fnMouseOutScroll(0);\"><a>&#171;</a></td>"+
-  "<td valign=top id=tdScroll class=\"clScroll2\" onclick=\"parent.fnScrollTabs(0);\" ondblclick=\"parent.fnScrollTabs(0);\" onmouseover=\"parent.fnMouseOverScroll(1);\" onmouseout=\"parent.fnMouseOutScroll(1);\"><a>&lt</a></td>"+
-  "<td valign=top id=tdScroll class=\"clScroll2\" onclick=\"parent.fnScrollTabs(1);\" ondblclick=\"parent.fnScrollTabs(1);\" onmouseover=\"parent.fnMouseOverScroll(2);\" onmouseout=\"parent.fnMouseOutScroll(2);\"><a>&gt</a></td>"+
-  "<td valign=top id=tdScroll class=\"clScroll\" onclick=\"parent.fnFastScrollTabs(1);\" onmouseover=\"parent.fnMouseOverScroll(3);\" onmouseout=\"parent.fnMouseOutScroll(3);\"><a>&#187;</a></td>"+
-  "<td style=\"font:1pt\">&nbsp;<td></tr></table></body></html>";
-
- with (frames['frScroll'].document) {
-  open("text/html","replace");
-  write(szHTML);
-  close();
- }
-
- szHTML =
-  "<html><head>"+
-  "<style>A:link,A:visited,A:active {text-decoration:none;"+"color:"+c_rgszClr[3]+";}"+
-  ".clTab {cursor:hand;background:"+c_rgszClr[1]+";font:9pt Arial;padding-left:3px;padding-right:3px;text-align:center;}"+
-  ".clBorder {background:"+c_rgszClr[2]+";font:1pt;}"+
-  "</style></head><body onload=\"parent.fnInit();\" onselectstart=\"event.returnValue=false;\" ondragstart=\"event.returnValue=false;\" bgcolor="+c_rgszClr[4]+
-  " topmargin=0 leftmargin=0><table id=tbTabs cellpadding=0 cellspacing=0>";
-
- var iCellCount=(c_lTabs+1)*2;
-
- var i;
- for (i=0;i<iCellCount;i+=2)
-  szHTML+="<col width=1><col>";
-
- var iRow;
- for (iRow=0;iRow<6;iRow++) {
-
-  szHTML+="<tr>";
-
-  if (iRow==5)
-   szHTML+="<td colspan="+iCellCount+"></td>";
-  else {
-   if (iRow==0) {
-    for(i=0;i<iCellCount;i++)
-     szHTML+="<td height=1 class=\"clBorder\"></td>";
-   } else if (iRow==1) {
-    for(i=0;i<c_lTabs;i++) {
-     szHTML+="<td height=1 nowrap class=\"clBorder\">&nbsp;</td>";
-     szHTML+=
-      "<td id=tdTab height=1 nowrap class=\"clTab\" onmouseover=\"parent.fnMouseOverTab("+i+");\" onmouseout=\"parent.fnMouseOutTab("+i+");\">"+
-      "<a href=\""+document.all.item("shLink")[i].href+"\" target=\"frSheet\" id=aTab>&nbsp;"+c_rgszSh[i]+"&nbsp;</a></td>";
-    }
-    szHTML+="<td id=tdTab height=1 nowrap class=\"clBorder\"><a id=aTab>&nbsp;</a></td><td width=100%></td>";
-   } else if (iRow==2) {
-    for (i=0;i<c_lTabs;i++)
-     szHTML+="<td height=1></td><td height=1 class=\"clBorder\"></td>";
-    szHTML+="<td height=1></td><td height=1></td>";
-   } else if (iRow==3) {
-    for (i=0;i<iCellCount;i++)
-     szHTML+="<td height=1></td>";
-   } else if (iRow==4) {
-    for (i=0;i<c_lTabs;i++)
-     szHTML+="<td height=1 width=1></td><td height=1></td>";
-    szHTML+="<td height=1 width=1></td><td></td>";
-   }
-  }
-  szHTML+="</tr>";
- }
-
- szHTML+="</table></body></html>";
- with (frames['frTabs'].document) {
-  open("text/html","replace");
-  charset=document.charset;
-  write(szHTML);
-  close();
- }
-}
-
-function fnInit()
-{
- g_rglTabX[0]=0;
- var i;
- for (i=1;i<=c_lTabs;i++)
-  with (frames['frTabs'].document.all.tbTabs.rows[1].cells[fnTabToCol(i-1)])
-   g_rglTabX[i]=offsetLeft+offsetWidth-6;
-}
-
-function fnTabToCol(iTab)
-{
- return 2*iTab+1;
-}
-
-function fnNextTab(fDir)
-{
- var iNextTab=-1;
- var i;
-
- with (frames['frTabs'].document.body) {
-  if (fDir==0) {
-   if (scrollLeft>0) {
-    for (i=0;i<c_lTabs&&g_rglTabX[i]<scrollLeft;i++);
-    if (i<c_lTabs)
-     iNextTab=i-1;
-   }
-  } else {
-   if (g_rglTabX[c_lTabs]+6>offsetWidth+scrollLeft) {
-    for (i=0;i<c_lTabs&&g_rglTabX[i]<=scrollLeft;i++);
-    if (i<c_lTabs)
-     iNextTab=i;
-   }
-  }
- }
- return iNextTab;
-}
-
-function fnScrollTabs(fDir)
-{
- var iNextTab=fnNextTab(fDir);
-
- if (iNextTab>=0) {
-  frames['frTabs'].scroll(g_rglTabX[iNextTab],0);
-  return true;
- } else
-  return false;
-}
-
-function fnFastScrollTabs(fDir)
-{
- if (c_lTabs>16)
-  frames['frTabs'].scroll(g_rglTabX[fDir?c_lTabs-1:0],0);
- else
-  if (fnScrollTabs(fDir)>0) window.setTimeout("fnFastScrollTabs("+fDir+");",5);
-}
-
-function fnSetTabProps(iTab,fActive)
-{
- var iCol=fnTabToCol(iTab);
- var i;
-
- if (iTab>=0) {
-  with (frames['frTabs'].document.all) {
-   with (tbTabs) {
-    for (i=0;i<=4;i++) {
-     with (rows[i]) {
-      if (i==0)
-       cells[iCol].style.background=c_rgszClr[fActive?0:2];
-      else if (i>0 && i<4) {
-       if (fActive) {
-        cells[iCol-1].style.background=c_rgszClr[2];
-        cells[iCol].style.background=c_rgszClr[0];
-        cells[iCol+1].style.background=c_rgszClr[2];
-       } else {
-        if (i==1) {
-         cells[iCol-1].style.background=c_rgszClr[2];
-         cells[iCol].style.background=c_rgszClr[1];
-         cells[iCol+1].style.background=c_rgszClr[2];
-        } else {
-         cells[iCol-1].style.background=c_rgszClr[4];
-         cells[iCol].style.background=c_rgszClr[(i==2)?2:4];
-         cells[iCol+1].style.background=c_rgszClr[4];
-        }
-       }
-      } else
-       cells[iCol].style.background=c_rgszClr[fActive?2:4];
-     }
-    }
-   }
-   with (aTab[iTab].style) {
-    cursor=(fActive?"default":"hand");
-    color=c_rgszClr[3];
-   }
-  }
- }
-}
-
-function fnMouseOverScroll(iCtl)
-{
- frames['frScroll'].document.all.tdScroll[iCtl].style.color=c_rgszClr[7];
-}
-
-function fnMouseOutScroll(iCtl)
-{
- frames['frScroll'].document.all.tdScroll[iCtl].style.color=c_rgszClr[6];
-}
-
-function fnMouseOverTab(iTab)
-{
- if (iTab!=g_iShCur) {
-  var iCol=fnTabToCol(iTab);
-  with (frames['frTabs'].document.all) {
-   tdTab[iTab].style.background=c_rgszClr[5];
-  }
- }
-}
-
-function fnMouseOutTab(iTab)
-{
- if (iTab>=0) {
-  var elFrom=frames['frTabs'].event.srcElement;
-  var elTo=frames['frTabs'].event.toElement;
-
-  if ((!elTo) ||
-   (elFrom.tagName==elTo.tagName) ||
-   (elTo.tagName=="A" && elTo.parentElement!=elFrom) ||
-   (elFrom.tagName=="A" && elFrom.parentElement!=elTo)) {
-
-   if (iTab!=g_iShCur) {
-    with (frames['frTabs'].document.all) {
-     tdTab[iTab].style.background=c_rgszClr[1];
-    }
-   }
-  }
- }
-}
-
-function fnSetActiveSheet(iSh)
-{
- if (iSh!=g_iShCur) {
-  fnSetTabProps(g_iShCur,false);
-  fnSetTabProps(iSh,true);
-  g_iShCur=iSh;
- }
-}
-
- window.g_iIEVer=fnGetIEVer();
- if (window.g_iIEVer>=4)
-  fnBuildFrameset();
-//-->
-</script>
-<![endif]><!--[if gte mso 9]><xml>
- <x:ExcelWorkbook>
-  <x:ExcelWorksheets>
-   <x:ExcelWorksheet>
-    <x:Name>24120253</x:Name>
-    <x:WorksheetSource HRef="24120253_2_files/sheet001.htm"/>
-   </x:ExcelWorksheet>
-  </x:ExcelWorksheets>
-  <x:Stylesheet HRef="24120253_2_files/stylesheet.css"/>
-  <x:WindowHeight>6105</x:WindowHeight>
-  <x:WindowWidth>13125</x:WindowWidth>
-  <x:WindowTopX>32767</x:WindowTopX>
-  <x:WindowTopY>32767</x:WindowTopY>
-  <x:ProtectStructure>False</x:ProtectStructure>
-  <x:ProtectWindows>False</x:ProtectWindows>
- </x:ExcelWorkbook>
-</xml><![endif]-->
-</head>
-
-<frameset rows="*,39" border=0 width=0 frameborder=no framespacing=0>
- <frame src="24120253_2_files/sheet001.htm" name="frSheet">
- <frame src="24120253_2_files/tabstrip.htm" name="frTabs" marginwidth=0 marginheight=0>
- <noframes>
-  <body>
-   <p>This page uses frames, but your browser doesn't support them.</p>
-  </body>
- </noframes>
-</frameset>
-</html>
+<div class="headers"><div>Table 1 Demographics and baseline characteristics in patient subgroups.</div><div>COPD, chronic obstructive pulmonary disease; FEV1, forced expiratory volume in 1 s; ICS, inhaled corticosteroid; LABA, long-acting b2-agonist; SD, standard deviation.</div></div><table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' >
+<thead>
+<tr>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>row/col</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>1(A)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>2(B)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>3(C)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>4(D)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>5(E)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>6(F)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>7(G)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>8(H)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>9(I)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>10(J)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>11(K)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>12(L)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>13(M)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style='text-align: left;'>1</td>
+<td style='text-align: left;'>1</td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="firstLastCol ">Pretreatment/ concomitant treatment</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="firstLastCol ">Age</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="firstLastCol ">Smoking status</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="firstLastCol ">COPD severity</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="firstLastCol indent6 ">Geographic region</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>2</td>
+<td style='text-align: left;'>2</td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="">+ICS/+ LABA n Z 945</p></td>
+<td style='text-align: left;'><p class="">-ICS/+ LABA n Z 597</p></td>
+<td style='text-align: left;'><p class=""><65 years n Z 1761</p></td>
+<td style='text-align: left;'><p class="">>65 years n Z 1330</p></td>
+<td style='text-align: left;'><p class="">Current n Z 1278</p></td>
+<td style='text-align: left;'><p class="">Former n Z 1813</p></td>
+<td style='text-align: left;'><p class="">Moderate n Z 250</p></td>
+<td style='text-align: left;'><p class="">Severe n Z 1932</p></td>
+<td style='text-align: left;'><p class="">Very severe n Z 903</p></td>
+<td style='text-align: left;'><p class="">North America n Z 786</p></td>
+<td style='text-align: left;'><p class="">Europe n Z 1831</p></td>
+<td style='text-align: left;'><p class="">Rest of world n Z 474</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>3</td>
+<td style='text-align: left;'>3</td>
+<td style='text-align: left;'><p class="indent1 ">Age, mean</p></td>
+<td style='text-align: left;'><p class="">64.6 (9.1)</p></td>
+<td style='text-align: left;'><p class="">64.2 (9.1)</p></td>
+<td style='text-align: left;'><p class="">57.3 (5.8)</p></td>
+<td style='text-align: left;'><p class="">72.4 (4.8)</p></td>
+<td style='text-align: left;'><p class="">60.4 (8.4)</p></td>
+<td style='text-align: left;'><p class="">66.2 (9.0)</p></td>
+<td style='text-align: left;'><p class="">62.4 (9.6)</p></td>
+<td style='text-align: left;'><p class="">64.4 (9.3)</p></td>
+<td style='text-align: left;'><p class="">63.0 (8.7)</p></td>
+<td style='text-align: left;'><p class="">64.9 (9.0)</p></td>
+<td style='text-align: left;'><p class="">63.9 (9.2)</p></td>
+<td style='text-align: left;'><p class="">61.3 (9.1)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>4</td>
+<td style='text-align: left;'>4</td>
+<td style='text-align: left;'><p class="firstCol ">years (SD)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>5</td>
+<td style='text-align: left;'>5</td>
+<td style='text-align: left;'><p class="indent1 ">Male, n (%)</p></td>
+<td style='text-align: left;'><p class="indent0 ">696 (73.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">453 (75.9)</p></td>
+<td style='text-align: left;'><p class="">1245 (70.7) 1091 (82.0)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent0 ">887 (69.4)</p></td>
+<td style='text-align: left;'><p class="indent0 ">1449 (79.9)</p></td>
+<td style='text-align: left;'><p class="indent0 ">159 (63.6)</p></td>
+<td style='text-align: left;'><p class="indent0 ">1425 (73.8)</p></td>
+<td style='text-align: left;'><p class="indent0 ">748 (82.8)</p></td>
+<td style='text-align: left;'><p class="indent0 ">480 (61.1) 1425 (77.8)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent0 ">431 (90.9)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>6</td>
+<td style='text-align: left;'>6</td>
+<td style='text-align: left;'><p class="firstCol indent1 ">Race, n (%)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>7</td>
+<td style='text-align: left;'>7</td>
+<td style='text-align: left;'><p class="">Asian</p></td>
+<td style='text-align: left;'><p class="indent0 ">38 (4.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">16 (2.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">246 (14.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">109 (8.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">107 (8.4)</p></td>
+<td style='text-align: left;'><p class="indent0 ">248 (13.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">25 (10.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">191 (9.9)</p></td>
+<td style='text-align: left;'><p class="">136 (15.1)</p></td>
+<td style='text-align: left;'><p class="indent0 ">5 (0.6)</p></td>
+<td style='text-align: left;'><p class="indent0 ">3 (0.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">347 (73.2)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>8</td>
+<td style='text-align: left;'>8</td>
+<td style='text-align: left;'><p class="">Black</p></td>
+<td style='text-align: left;'><p class="indent0 ">7 (0.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">12 (2.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">30 (1.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">18 (1.4)</p></td>
+<td style='text-align: left;'><p class="indent0 ">20 (1.6)</p></td>
+<td style='text-align: left;'><p class="indent0 ">28 (1.5)</p></td>
+<td style='text-align: left;'><p class="indent0 ">5 (2.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">32 (1.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">11 (1.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">46 (5.9)</p></td>
+<td style='text-align: left;'><p class="indent0 ">2 (0.1)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>9</td>
+<td style='text-align: left;'>9</td>
+<td style='text-align: left;'><p class="">White</p></td>
+<td style='text-align: left;'><p class="indent0 ">874 (92.5)</p></td>
+<td style='text-align: left;'><p class="indent0 ">559 (93.6)</p></td>
+<td style='text-align: left;'><p class="">1415 (80.4) 1181 (88.8)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent0 ">1119 (87.6)</p></td>
+<td style='text-align: left;'><p class="indent0 ">1477 (81.5)</p></td>
+<td style='text-align: left;'><p class="indent0 ">214 (85.6)</p></td>
+<td style='text-align: left;'><p class="indent0 ">1652 (85.5)</p></td>
+<td style='text-align: left;'><p class="indent0 ">727 (80.5)</p></td>
+<td style='text-align: left;'><p class="indent0 ">725 (92.2) 1791 (97.8)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent0 ">80 (16.9)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>10</td>
+<td style='text-align: left;'>10</td>
+<td style='text-align: left;'><p class="">Other</p></td>
+<td style='text-align: left;'><p class="indent0 ">26 (2.8)</p></td>
+<td style='text-align: left;'><p class="indent0 ">10 (1.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">70 (4.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">22 (1.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">32 (2.5)</p></td>
+<td style='text-align: left;'><p class="indent0 ">60 (3.3)</p></td>
+<td style='text-align: left;'><p class="indent0 ">6 (2.4)</p></td>
+<td style='text-align: left;'><p class="indent0 ">57 (3.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">29 (3.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">10 (1.3)</p></td>
+<td style='text-align: left;'><p class="indent0 ">35 (1.9)</p></td>
+<td style='text-align: left;'><p class="indent0 ">47 (9.9)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>11</td>
+<td style='text-align: left;'>11</td>
+<td style='text-align: left;'><p class="firstCol indent1 ">Smoking status, n (%)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>12</td>
+<td style='text-align: left;'>12</td>
+<td style='text-align: left;'><p class="">Current</p></td>
+<td style='text-align: left;'><p class="indent0 ">344 (36.4)</p></td>
+<td style='text-align: left;'><p class="indent0 ">236 (39.5)</p></td>
+<td style='text-align: left;'><p class="indent0 ">928 (52.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">350 (26.3)</p></td>
+<td style='text-align: left;'><p class="">1278 (100.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">126 (50.4)</p></td>
+<td style='text-align: left;'><p class="indent0 ">826 (42.8)</p></td>
+<td style='text-align: left;'><p class="indent0 ">323 (35.8)</p></td>
+<td style='text-align: left;'><p class="indent0 ">349 (44.4)</p></td>
+<td style='text-align: left;'><p class="indent0 ">781 (42.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">148 (31.2)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>13</td>
+<td style='text-align: left;'>13</td>
+<td style='text-align: left;'><p class="">Former</p></td>
+<td style='text-align: left;'><p class="indent0 ">601 (63.6)</p></td>
+<td style='text-align: left;'><p class="">361 (60.5)</p></td>
+<td style='text-align: left;'><p class="indent0 ">833 (47.3)</p></td>
+<td style='text-align: left;'><p class="indent0 ">980 (73.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="">1813 (100.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">124 (49.6)</p></td>
+<td style='text-align: left;'><p class="">1106 (57.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">580 (64.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">437 (55.6) 1050 (57.3)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent0 ">326 (68.8)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>14</td>
+<td style='text-align: left;'>14</td>
+<td style='text-align: left;'><p class="firstCol indent1 ">COPD severity, n (%)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>15</td>
+<td style='text-align: left;'>15</td>
+<td style='text-align: left;'><p class="">Mild</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">4 (0.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">2 (0.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">3 (0.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">3 (0.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">3 (0.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">3 (0.6)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>16</td>
+<td style='text-align: left;'>16</td>
+<td style='text-align: left;'><p class="">Moderate</p></td>
+<td style='text-align: left;'><p class="indent0 ">69 (7.3)</p></td>
+<td style='text-align: left;'><p class="indent0 ">35 (5.9)</p></td>
+<td style='text-align: left;'><p class="indent0 ">155 (8.8)</p></td>
+<td style='text-align: left;'><p class="indent0 ">95 (7.1)</p></td>
+<td style='text-align: left;'><p class="indent0 ">126 (9.9)</p></td>
+<td style='text-align: left;'><p class="indent0 ">124 (6.8)</p></td>
+<td style='text-align: left;'><p class="indent0 ">250 (100.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">68 (8.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">151 (8.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">31 (6.5)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>17</td>
+<td style='text-align: left;'>17</td>
+<td style='text-align: left;'><p class="">Severe</p></td>
+<td style='text-align: left;'><p class="indent0 ">602 (63.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">379 (63.5)</p></td>
+<td style='text-align: left;'><p class="">1040 (59.1)</p></td>
+<td style='text-align: left;'><p class="indent0 ">892 (67.1)</p></td>
+<td style='text-align: left;'><p class="indent0 ">826 (64.6)</p></td>
+<td style='text-align: left;'><p class="indent0 ">1106 (61.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="">1932 (100.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">451 (57.4) 1222 (66.7)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent0 ">259 (54.6)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>18</td>
+<td style='text-align: left;'>18</td>
+<td style='text-align: left;'><p class="">Very severe</p></td>
+<td style='text-align: left;'><p class="indent0 ">274 (29.0)</p></td>
+<td style='text-align: left;'><p class="">183 (30.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">562 (31.9)</p></td>
+<td style='text-align: left;'><p class="indent0 ">341 (25.6)</p></td>
+<td style='text-align: left;'><p class="indent0 ">323 (25.3)</p></td>
+<td style='text-align: left;'><p class="indent0 ">580 (32.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="">903 (100.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">267 (34.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">455 (24.8)</p></td>
+<td style='text-align: left;'><p class="indent0 ">181 (38.2)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>19</td>
+<td style='text-align: left;'>19</td>
+<td style='text-align: left;'><p class="firstCol indent1 ">Lung function, mean</p></td>
+<td style='text-align: left;'><p class="firstCol ">(SD)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>20</td>
+<td style='text-align: left;'>20</td>
+<td style='text-align: left;'><p class="">Prebronchodilator</p></td>
+<td style='text-align: left;'><p class="indent0 ">1.02 (0.36)</p></td>
+<td style='text-align: left;'><p class="indent0 ">1.01 (0.35)</p></td>
+<td style='text-align: left;'><p class="">1.04 (0.39)</p></td>
+<td style='text-align: left;'><p class="">0.97 (0.33)</p></td>
+<td style='text-align: left;'><p class="indent0 ">1.07 (0.37)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0.97 (0.35)</p></td>
+<td style='text-align: left;'><p class="">1.50 (0.39)</p></td>
+<td style='text-align: left;'><p class="indent0 ">1.09 (0.29)</p></td>
+<td style='text-align: left;'><p class="">0.70 (0.20)</p></td>
+<td style='text-align: left;'><p class="">0.92 (0.36)</p></td>
+<td style='text-align: left;'><p class="">1.08 (0.35) 0.93 (0.38)</p></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>21</td>
+<td style='text-align: left;'>21</td>
+<td style='text-align: left;'><p class="firstCol ">FEV1, L</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>22</td>
+<td style='text-align: left;'>22</td>
+<td style='text-align: left;'><p class="indent0 ">Postbronchodilator 1.10 (0.38)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent0 ">1.08 (0.36)</p></td>
+<td style='text-align: left;'><p class="">1.14 (0.40)</p></td>
+<td style='text-align: left;'><p class="">1.06 (0.34)</p></td>
+<td style='text-align: left;'><p class="indent0 ">1.16 (0.39)</p></td>
+<td style='text-align: left;'><p class="indent0 ">1.07 (0.37)</p></td>
+<td style='text-align: left;'><p class="">1.67 (0.40)</p></td>
+<td style='text-align: left;'><p class="indent0 ">1.20 (0.29)</p></td>
+<td style='text-align: left;'><p class="">0.75 (0.18)</p></td>
+<td style='text-align: left;'><p class="">1.03 (0.36)</p></td>
+<td style='text-align: left;'><p class="">1.16 (0.37) 1.05 (0.40)</p></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>23</td>
+<td style='text-align: left;'>23</td>
+<td style='text-align: left;'><p class="">FEV1, L Prebronchodilator FEV1, % predicted</p></td>
+<td style='text-align: left;'><p class="">33.6 (9.8)</p></td>
+<td style='text-align: left;'><p class="">32.8 (9.7)</p></td>
+<td style='text-align: left;'><p class="">32.8 (10.8)</p></td>
+<td style='text-align: left;'><p class="">33.7 (9.9)</p></td>
+<td style='text-align: left;'><p class="indent0 ">34.5 (10.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">32.3 (10.2)</p></td>
+<td style='text-align: left;'><p class="">50.4 (8.7)</p></td>
+<td style='text-align: left;'><p class="">35.9 (6.6)</p></td>
+<td style='text-align: left;'><p class="">22.3 (5.3)</p></td>
+<td style='text-align: left;'><p class="">31.4 (11.2)</p></td>
+<td style='text-align: left;'><p class="indent0 ">34.7 (9.6)</p></td>
+<td style='text-align: left;'><p class="indent0 ">30.2 (11.0)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>24</td>
+<td style='text-align: left;'>24</td>
+<td style='text-align: left;'><p class="indent0 ">Postbronchodilator 36.2 (10.2)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="">35.3 (9.9)</p></td>
+<td style='text-align: left;'><p class="">35.9 (11.1)</p></td>
+<td style='text-align: left;'><p class="">36.7 (10.1)</p></td>
+<td style='text-align: left;'><p class="indent0 ">37.4 (10.8)</p></td>
+<td style='text-align: left;'><p class="indent0 ">35.4 (10.5)</p></td>
+<td style='text-align: left;'><p class="">55.9 (5.3)</p></td>
+<td style='text-align: left;'><p class="">39.3 (5.5)</p></td>
+<td style='text-align: left;'><p class="">23.8 (4.3)</p></td>
+<td style='text-align: left;'><p class="">35.0 (10.9)</p></td>
+<td style='text-align: left;'><p class="">37.3 (10.1) 34.1 (11.9)</p></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>25</td>
+<td style='text-align: left;'>25</td>
+<td style='text-align: left;'><p class="firstCol ">FEV1, % predicted</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>26</td>
+<td style='text-align: left;'>26</td>
+<td style='text-align: left;'><p class="indent1 ">Concomitant</p></td>
+<td style='text-align: left;'><p class="indent0 ">945 (100.0)</p></td>
+<td style='text-align: left;'><p class="">597 (100.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">847 (48.1)</p></td>
+<td style='text-align: left;'><p class="indent0 ">695 (52.3)</p></td>
+<td style='text-align: left;'><p class="indent0 ">580 (45.4)</p></td>
+<td style='text-align: left;'><p class="indent0 ">962 (53.1)</p></td>
+<td style='text-align: left;'><p class="indent0 ">104 (41.6)</p></td>
+<td style='text-align: left;'><p class="indent0 ">981 (50.8)</p></td>
+<td style='text-align: left;'><p class="">457 (50.6)</p></td>
+<td style='text-align: left;'><p class="indent0 ">338 (43.0) 1125 (61.4)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent0 ">79 (16.7)</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>27</td>
+<td style='text-align: left;'>27</td>
+<td style='text-align: left;'><p class="firstCol ">treatment</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>28</td>
+<td style='text-align: left;'>28</td>
+<td style='text-align: left;'><p class="">with LABA, n (%) Pretreatment</p></td>
+<td style='text-align: left;'><p class="indent0 ">945 (100.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">0 (0.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">724 (41.1)</p></td>
+<td style='text-align: left;'><p class="indent0 ">583 (43.8)</p></td>
+<td style='text-align: left;'><p class="indent0 ">482 (37.7)</p></td>
+<td style='text-align: left;'><p class="indent0 ">825 (45.5)</p></td>
+<td style='text-align: left;'><p class="indent0 ">95 (38.0)</p></td>
+<td style='text-align: left;'><p class="indent0 ">838 (43.4)</p></td>
+<td style='text-align: left;'><p class="">373 (41.3)</p></td>
+<td style='text-align: left;'><p class="indent0 ">305 (38.8)</p></td>
+<td style='text-align: left;'><p class="indent0 ">862 (47.1)</p></td>
+<td style='text-align: left;'><p class="indent0 ">140 (29.5)</p></td>
+</tr>
+<tr>
+<td style='border-bottom: 2px solid grey; text-align: left;'>29</td>
+<td style='border-bottom: 2px solid grey; text-align: left;'>29</td>
+<td style='border-bottom: 2px solid grey; text-align: left;'><p class="firstCol ">with ICS, n (%)</p></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'></td>
+</tr>
+</tbody>
+</table>

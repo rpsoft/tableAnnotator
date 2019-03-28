@@ -1,324 +1,354 @@
-<html xmlns:v="urn:schemas-microsoft-com:vml"
-xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:x="urn:schemas-microsoft-com:office:excel"
-xmlns="http://www.w3.org/TR/REC-html40">
-
-<head>
-<meta name="Excel Workbook Frameset">
-<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
-<meta name=ProgId content=Excel.Sheet>
-<meta name=Generator content="Microsoft Excel 15">
-<link rel=File-List href="20937671_2_files/filelist.xml">
-<![if !supportTabStrip]>
-<link id="shLink" href="20937671_2_files/sheet001.htm">
-
-<link id="shLink">
-
-<script language="JavaScript">
-<!--
- var c_lTabs=1;
-
- var c_rgszSh=new Array(c_lTabs);
- c_rgszSh[0] = "20937671";
-
-
-
- var c_rgszClr=new Array(8);
- c_rgszClr[0]="window";
- c_rgszClr[1]="buttonface";
- c_rgszClr[2]="windowframe";
- c_rgszClr[3]="windowtext";
- c_rgszClr[4]="threedlightshadow";
- c_rgszClr[5]="threedhighlight";
- c_rgszClr[6]="threeddarkshadow";
- c_rgszClr[7]="threedshadow";
-
- var g_iShCur;
- var g_rglTabX=new Array(c_lTabs);
-
-function fnGetIEVer()
-{
- var ua=window.navigator.userAgent
- var msie=ua.indexOf("MSIE")
- if (msie>0 && window.navigator.platform=="Win32")
-  return parseInt(ua.substring(msie+5,ua.indexOf(".", msie)));
- else
-  return 0;
-}
-
-function fnBuildFrameset()
-{
- var szHTML="<frameset rows=\"*,18\" border=0 width=0 frameborder=no framespacing=0>"+
-  "<frame src=\""+document.all.item("shLink")[0].href+"\" name=\"frSheet\" noresize>"+
-  "<frameset cols=\"54,*\" border=0 width=0 frameborder=no framespacing=0>"+
-  "<frame src=\"\" name=\"frScroll\" marginwidth=0 marginheight=0 scrolling=no>"+
-  "<frame src=\"\" name=\"frTabs\" marginwidth=0 marginheight=0 scrolling=no>"+
-  "</frameset></frameset><plaintext>";
-
- with (document) {
-  open("text/html","replace");
-  write(szHTML);
-  close();
- }
-
- fnBuildTabStrip();
-}
-
-function fnBuildTabStrip()
-{
- var szHTML=
-  "<html><head><style>.clScroll {font:8pt Courier New;color:"+c_rgszClr[6]+";cursor:default;line-height:10pt;}"+
-  ".clScroll2 {font:10pt Arial;color:"+c_rgszClr[6]+";cursor:default;line-height:11pt;}</style></head>"+
-  "<body onclick=\"event.returnValue=false;\" ondragstart=\"event.returnValue=false;\" onselectstart=\"event.returnValue=false;\" bgcolor="+c_rgszClr[4]+" topmargin=0 leftmargin=0><table cellpadding=0 cellspacing=0 width=100%>"+
-  "<tr><td colspan=6 height=1 bgcolor="+c_rgszClr[2]+"></td></tr>"+
-  "<tr><td style=\"font:1pt\">&nbsp;<td>"+
-  "<td valign=top id=tdScroll class=\"clScroll\" onclick=\"parent.fnFastScrollTabs(0);\" onmouseover=\"parent.fnMouseOverScroll(0);\" onmouseout=\"parent.fnMouseOutScroll(0);\"><a>&#171;</a></td>"+
-  "<td valign=top id=tdScroll class=\"clScroll2\" onclick=\"parent.fnScrollTabs(0);\" ondblclick=\"parent.fnScrollTabs(0);\" onmouseover=\"parent.fnMouseOverScroll(1);\" onmouseout=\"parent.fnMouseOutScroll(1);\"><a>&lt</a></td>"+
-  "<td valign=top id=tdScroll class=\"clScroll2\" onclick=\"parent.fnScrollTabs(1);\" ondblclick=\"parent.fnScrollTabs(1);\" onmouseover=\"parent.fnMouseOverScroll(2);\" onmouseout=\"parent.fnMouseOutScroll(2);\"><a>&gt</a></td>"+
-  "<td valign=top id=tdScroll class=\"clScroll\" onclick=\"parent.fnFastScrollTabs(1);\" onmouseover=\"parent.fnMouseOverScroll(3);\" onmouseout=\"parent.fnMouseOutScroll(3);\"><a>&#187;</a></td>"+
-  "<td style=\"font:1pt\">&nbsp;<td></tr></table></body></html>";
-
- with (frames['frScroll'].document) {
-  open("text/html","replace");
-  write(szHTML);
-  close();
- }
-
- szHTML =
-  "<html><head>"+
-  "<style>A:link,A:visited,A:active {text-decoration:none;"+"color:"+c_rgszClr[3]+";}"+
-  ".clTab {cursor:hand;background:"+c_rgszClr[1]+";font:9pt Arial;padding-left:3px;padding-right:3px;text-align:center;}"+
-  ".clBorder {background:"+c_rgszClr[2]+";font:1pt;}"+
-  "</style></head><body onload=\"parent.fnInit();\" onselectstart=\"event.returnValue=false;\" ondragstart=\"event.returnValue=false;\" bgcolor="+c_rgszClr[4]+
-  " topmargin=0 leftmargin=0><table id=tbTabs cellpadding=0 cellspacing=0>";
-
- var iCellCount=(c_lTabs+1)*2;
-
- var i;
- for (i=0;i<iCellCount;i+=2)
-  szHTML+="<col width=1><col>";
-
- var iRow;
- for (iRow=0;iRow<6;iRow++) {
-
-  szHTML+="<tr>";
-
-  if (iRow==5)
-   szHTML+="<td colspan="+iCellCount+"></td>";
-  else {
-   if (iRow==0) {
-    for(i=0;i<iCellCount;i++)
-     szHTML+="<td height=1 class=\"clBorder\"></td>";
-   } else if (iRow==1) {
-    for(i=0;i<c_lTabs;i++) {
-     szHTML+="<td height=1 nowrap class=\"clBorder\">&nbsp;</td>";
-     szHTML+=
-      "<td id=tdTab height=1 nowrap class=\"clTab\" onmouseover=\"parent.fnMouseOverTab("+i+");\" onmouseout=\"parent.fnMouseOutTab("+i+");\">"+
-      "<a href=\""+document.all.item("shLink")[i].href+"\" target=\"frSheet\" id=aTab>&nbsp;"+c_rgszSh[i]+"&nbsp;</a></td>";
-    }
-    szHTML+="<td id=tdTab height=1 nowrap class=\"clBorder\"><a id=aTab>&nbsp;</a></td><td width=100%></td>";
-   } else if (iRow==2) {
-    for (i=0;i<c_lTabs;i++)
-     szHTML+="<td height=1></td><td height=1 class=\"clBorder\"></td>";
-    szHTML+="<td height=1></td><td height=1></td>";
-   } else if (iRow==3) {
-    for (i=0;i<iCellCount;i++)
-     szHTML+="<td height=1></td>";
-   } else if (iRow==4) {
-    for (i=0;i<c_lTabs;i++)
-     szHTML+="<td height=1 width=1></td><td height=1></td>";
-    szHTML+="<td height=1 width=1></td><td></td>";
-   }
-  }
-  szHTML+="</tr>";
- }
-
- szHTML+="</table></body></html>";
- with (frames['frTabs'].document) {
-  open("text/html","replace");
-  charset=document.charset;
-  write(szHTML);
-  close();
- }
-}
-
-function fnInit()
-{
- g_rglTabX[0]=0;
- var i;
- for (i=1;i<=c_lTabs;i++)
-  with (frames['frTabs'].document.all.tbTabs.rows[1].cells[fnTabToCol(i-1)])
-   g_rglTabX[i]=offsetLeft+offsetWidth-6;
-}
-
-function fnTabToCol(iTab)
-{
- return 2*iTab+1;
-}
-
-function fnNextTab(fDir)
-{
- var iNextTab=-1;
- var i;
-
- with (frames['frTabs'].document.body) {
-  if (fDir==0) {
-   if (scrollLeft>0) {
-    for (i=0;i<c_lTabs&&g_rglTabX[i]<scrollLeft;i++);
-    if (i<c_lTabs)
-     iNextTab=i-1;
-   }
-  } else {
-   if (g_rglTabX[c_lTabs]+6>offsetWidth+scrollLeft) {
-    for (i=0;i<c_lTabs&&g_rglTabX[i]<=scrollLeft;i++);
-    if (i<c_lTabs)
-     iNextTab=i;
-   }
-  }
- }
- return iNextTab;
-}
-
-function fnScrollTabs(fDir)
-{
- var iNextTab=fnNextTab(fDir);
-
- if (iNextTab>=0) {
-  frames['frTabs'].scroll(g_rglTabX[iNextTab],0);
-  return true;
- } else
-  return false;
-}
-
-function fnFastScrollTabs(fDir)
-{
- if (c_lTabs>16)
-  frames['frTabs'].scroll(g_rglTabX[fDir?c_lTabs-1:0],0);
- else
-  if (fnScrollTabs(fDir)>0) window.setTimeout("fnFastScrollTabs("+fDir+");",5);
-}
-
-function fnSetTabProps(iTab,fActive)
-{
- var iCol=fnTabToCol(iTab);
- var i;
-
- if (iTab>=0) {
-  with (frames['frTabs'].document.all) {
-   with (tbTabs) {
-    for (i=0;i<=4;i++) {
-     with (rows[i]) {
-      if (i==0)
-       cells[iCol].style.background=c_rgszClr[fActive?0:2];
-      else if (i>0 && i<4) {
-       if (fActive) {
-        cells[iCol-1].style.background=c_rgszClr[2];
-        cells[iCol].style.background=c_rgszClr[0];
-        cells[iCol+1].style.background=c_rgszClr[2];
-       } else {
-        if (i==1) {
-         cells[iCol-1].style.background=c_rgszClr[2];
-         cells[iCol].style.background=c_rgszClr[1];
-         cells[iCol+1].style.background=c_rgszClr[2];
-        } else {
-         cells[iCol-1].style.background=c_rgszClr[4];
-         cells[iCol].style.background=c_rgszClr[(i==2)?2:4];
-         cells[iCol+1].style.background=c_rgszClr[4];
-        }
-       }
-      } else
-       cells[iCol].style.background=c_rgszClr[fActive?2:4];
-     }
-    }
-   }
-   with (aTab[iTab].style) {
-    cursor=(fActive?"default":"hand");
-    color=c_rgszClr[3];
-   }
-  }
- }
-}
-
-function fnMouseOverScroll(iCtl)
-{
- frames['frScroll'].document.all.tdScroll[iCtl].style.color=c_rgszClr[7];
-}
-
-function fnMouseOutScroll(iCtl)
-{
- frames['frScroll'].document.all.tdScroll[iCtl].style.color=c_rgszClr[6];
-}
-
-function fnMouseOverTab(iTab)
-{
- if (iTab!=g_iShCur) {
-  var iCol=fnTabToCol(iTab);
-  with (frames['frTabs'].document.all) {
-   tdTab[iTab].style.background=c_rgszClr[5];
-  }
- }
-}
-
-function fnMouseOutTab(iTab)
-{
- if (iTab>=0) {
-  var elFrom=frames['frTabs'].event.srcElement;
-  var elTo=frames['frTabs'].event.toElement;
-
-  if ((!elTo) ||
-   (elFrom.tagName==elTo.tagName) ||
-   (elTo.tagName=="A" && elTo.parentElement!=elFrom) ||
-   (elFrom.tagName=="A" && elFrom.parentElement!=elTo)) {
-
-   if (iTab!=g_iShCur) {
-    with (frames['frTabs'].document.all) {
-     tdTab[iTab].style.background=c_rgszClr[1];
-    }
-   }
-  }
- }
-}
-
-function fnSetActiveSheet(iSh)
-{
- if (iSh!=g_iShCur) {
-  fnSetTabProps(g_iShCur,false);
-  fnSetTabProps(iSh,true);
-  g_iShCur=iSh;
- }
-}
-
- window.g_iIEVer=fnGetIEVer();
- if (window.g_iIEVer>=4)
-  fnBuildFrameset();
-//-->
-</script>
-<![endif]><!--[if gte mso 9]><xml>
- <x:ExcelWorkbook>
-  <x:ExcelWorksheets>
-   <x:ExcelWorksheet>
-    <x:Name>20937671</x:Name>
-    <x:WorksheetSource HRef="20937671_2_files/sheet001.htm"/>
-   </x:ExcelWorksheet>
-  </x:ExcelWorksheets>
-  <x:Stylesheet HRef="20937671_2_files/stylesheet.css"/>
-  <x:WindowHeight>6105</x:WindowHeight>
-  <x:WindowWidth>13125</x:WindowWidth>
-  <x:WindowTopX>32767</x:WindowTopX>
-  <x:WindowTopY>32767</x:WindowTopY>
-  <x:ProtectStructure>False</x:ProtectStructure>
-  <x:ProtectWindows>False</x:ProtectWindows>
- </x:ExcelWorkbook>
-</xml><![endif]-->
-</head>
-
-<frameset rows="*,39" border=0 width=0 frameborder=no framespacing=0>
- <frame src="20937671_2_files/sheet001.htm" name="frSheet">
- <frame src="20937671_2_files/tabstrip.htm" name="frTabs" marginwidth=0 marginheight=0>
- <noframes>
-  <body>
-   <p>This page uses frames, but your browser doesn't support them.</p>
-  </body>
- </noframes>
-</frameset>
-</html>
+<div class="headers"><div>Table 2     Summary of ef ﬁcacy outcomes </div><div>   *p<0.05, **p<0.001, ***p<0.0001 for differences vs placebo+MTX.  †Total number of patients included in rituximab 2×1000 mg autoantibody subgroups differed by two versus total number of patients included in rituximab 2×1000 mg group throughout because two patients could not be classiﬁ ed (RF-negative but no ACPA data, so unable to be assigned to either group).  ‡Adjusted mean presented for total population; standard mean presented for subgroups (where available). Analyses included baseline scores as additional covariates.  §No statistical analysis was performed on the subgroup data.  Van Elteren test for difference in distribution of changes in radiographic variables; ANOVA model adjusted for stratiﬁ cation factors (RF, region) (adjusted mean changes shown in table) for all other continuous variables; Cochran–Mantel–Haenszel test for categorical variables; non-responder imputation used for ACR major clinical response and EULAR response variables, last observation carried forward.  ACPA, anti citrullinated peptide antibodies; ACR, American College of Rheumatology; ACRn, American College of Rheumatology Index of Improvement in Rheumatoid Arthritis; ANOVA, analysis of variance; DAS28, Disease Activity Score in 28 joints; ESR, erythrocyte sedimentation rate; EULAR, European League Against Rheumatism; HAQ-DI, Health Assessment Questionnaire-Disability Index; ITT, intent-to-treat; LDA, low disease activity; mITT, modiﬁ ed intent-to-treat; mTSS, Genant-modiﬁ ed total Sharp score; MTX, methotrexate; nc, not calculated; RF, rheumatoid factor.  </div></div><table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' >
+<thead>
+<tr>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'> </th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>row/col</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>1(A)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>2(B)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>3(C)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>4(D)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>5(E)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>6(F)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>7(G)</th>
+<th style='border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>8(H)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style='text-align: left;'>1</td>
+<td style='text-align: left;'>1</td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">Total population</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="">Seropositive (RF +ve and/or ACPA +ve) subgroup</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent0 ">Seronegative (RF -ve and ACPA -ve) subgroup</p></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>2</td>
+<td style='text-align: left;'>2</td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">Placebo + MTX</p></td>
+<td style='text-align: left;'><p class="indent1 ">Rituximab (2x500 mg) + MTX</p></td>
+<td style='text-align: left;'><p class="">Rituximab (2x1000 mg) + MTX</p></td>
+<td style='text-align: left;'><p class="">Placebo + MTX</p></td>
+<td style='text-align: left;'><p class="indent1 ">Rituximab (2x1000 mg) + MTX</p></td>
+<td style='text-align: left;'><p class="">Placebo + MTX</p></td>
+<td style='text-align: left;'><p class="indent1 ">Rituximab (2x1000 mg) + MTX</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>3</td>
+<td style='text-align: left;'>3</td>
+<td style='text-align: left;'><p class="">Joint damage outcomes (mITT population)</p></td>
+<td style='text-align: left;'><p class="indent1 ">n=232</p></td>
+<td style='text-align: left;'><p class="indent1 ">n=239</p></td>
+<td style='text-align: left;'><p class="">n = 244t</p></td>
+<td style='text-align: left;'><p class="">n=211</p></td>
+<td style='text-align: left;'><p class="indent1 ">n = 218t</p></td>
+<td style='text-align: left;'><p class="">n=21</p></td>
+<td style='text-align: left;'><p class="indent1 ">n = 24卞</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>4</td>
+<td style='text-align: left;'>4</td>
+<td style='text-align: left;'><p class="firstCol ">Week 52</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>5</td>
+<td style='text-align: left;'>5</td>
+<td style='text-align: left;'><p class="">Change in mTSS (mean)</p></td>
+<td style='text-align: left;'><p class="indent1 ">1.079</p></td>
+<td style='text-align: left;'><p class="indent1 ">0.646</p></td>
+<td style='text-align: left;'><p class="">0.359**</p></td>
+<td style='text-align: left;'><p class="">1.148</p></td>
+<td style='text-align: left;'><p class="indent1 ">0.354**</p></td>
+<td style='text-align: left;'><p class="">0.387</p></td>
+<td style='text-align: left;'><p class="indent1 ">0.352</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>6</td>
+<td style='text-align: left;'>6</td>
+<td style='text-align: left;'><p class="">Change in erosion score (mean)</p></td>
+<td style='text-align: left;'><p class="indent1 ">0.738</p></td>
+<td style='text-align: left;'><p class="indent1 ">0.453</p></td>
+<td style='text-align: left;'><p class="">0.233**</p></td>
+<td style='text-align: left;'><p class="">nc</p></td>
+<td style='text-align: left;'><p class="indent1 ">nc</p></td>
+<td style='text-align: left;'><p class="">nc</p></td>
+<td style='text-align: left;'><p class="indent1 ">nc</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>7</td>
+<td style='text-align: left;'>7</td>
+<td style='text-align: left;'><p class="">% patients with no progression</p></td>
+<td style='text-align: left;'><p class="indent1 ">53</p></td>
+<td style='text-align: left;'><p class="indent1 ">58</p></td>
+<td style='text-align: left;'><p class="">64*</p></td>
+<td style='text-align: left;'><p class="">54</p></td>
+<td style='text-align: left;'><p class="indent1 ">62</p></td>
+<td style='text-align: left;'><p class="">52</p></td>
+<td style='text-align: left;'><p class="indent1 ">79</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>8</td>
+<td style='text-align: left;'>8</td>
+<td style='text-align: left;'><p class="indent1 ">OR (unadjusted)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">1.190</p></td>
+<td style='text-align: left;'><p class="">1.517</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">1.438</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">3.455</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>9</td>
+<td style='text-align: left;'>9</td>
+<td style='text-align: left;'><p class="indent1 ">95% CI</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">0.827 to 1.712</p></td>
+<td style='text-align: left;'><p class="">1.051 to 2.189</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">0.979 to 2.114</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">0.936 to 12.743</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>10</td>
+<td style='text-align: left;'>10</td>
+<td style='text-align: left;'><p class="firstCol ">Week 24</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>11</td>
+<td style='text-align: left;'>11</td>
+<td style='text-align: left;'><p class="">Change in mTSS (mean)</p></td>
+<td style='text-align: left;'><p class="indent1 ">0.701</p></td>
+<td style='text-align: left;'><p class="indent1 ">0.580</p></td>
+<td style='text-align: left;'><p class="">0.328*</p></td>
+<td style='text-align: left;'><p class="">nc</p></td>
+<td style='text-align: left;'><p class="indent1 ">nc</p></td>
+<td style='text-align: left;'><p class="">nc</p></td>
+<td style='text-align: left;'><p class="indent1 ">nc</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>12</td>
+<td style='text-align: left;'>12</td>
+<td style='text-align: left;'><p class="">% patients with no progression</p></td>
+<td style='text-align: left;'><p class="indent1 ">59</p></td>
+<td style='text-align: left;'><p class="indent1 ">63</p></td>
+<td style='text-align: left;'><p class="">70*</p></td>
+<td style='text-align: left;'><p class="">nc</p></td>
+<td style='text-align: left;'><p class="indent1 ">nc</p></td>
+<td style='text-align: left;'><p class="">nc</p></td>
+<td style='text-align: left;'><p class="indent1 ">nc</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>13</td>
+<td style='text-align: left;'>13</td>
+<td style='text-align: left;'><p class="">ITT</p></td>
+<td style='text-align: left;'><p class="indent1 ">n=249</p></td>
+<td style='text-align: left;'><p class="indent1 ">n=249</p></td>
+<td style='text-align: left;'><p class="">n=250</p></td>
+<td style='text-align: left;'><p class="">n=227</p></td>
+<td style='text-align: left;'><p class="indent1 ">n=224</p></td>
+<td style='text-align: left;'><p class="">n=22</p></td>
+<td style='text-align: left;'><p class="indent1 ">n=24</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>14</td>
+<td style='text-align: left;'>14</td>
+<td style='text-align: left;'><p class="firstCol ">Disease activity outcomes (ITT population) week 52</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'></td>
+</tr>
+<tr>
+<td style='text-align: left;'>15</td>
+<td style='text-align: left;'>15</td>
+<td style='text-align: left;'><p class="">ACR20</p></td>
+<td style='text-align: left;'><p class="indent1 ">64%</p></td>
+<td style='text-align: left;'><p class="indent1 ">77%*</p></td>
+<td style='text-align: left;'><p class="">80%***</p></td>
+<td style='text-align: left;'><p class="">64%</p></td>
+<td style='text-align: left;'><p class="indent1 ">81%</p></td>
+<td style='text-align: left;'><p class="">64%</p></td>
+<td style='text-align: left;'><p class="indent1 ">71%</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>16</td>
+<td style='text-align: left;'>16</td>
+<td style='text-align: left;'><p class="">ACR50</p></td>
+<td style='text-align: left;'><p class="indent1 ">42%</p></td>
+<td style='text-align: left;'><p class="indent1 ">59%***</p></td>
+<td style='text-align: left;'><p class="">65%***</p></td>
+<td style='text-align: left;'><p class="">41%</p></td>
+<td style='text-align: left;'><p class="indent1 ">67%</p></td>
+<td style='text-align: left;'><p class="">55%</p></td>
+<td style='text-align: left;'><p class="indent1 ">54%</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>17</td>
+<td style='text-align: left;'>17</td>
+<td style='text-align: left;'><p class="indent1 ">OR (unadjusted)</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">2.043</p></td>
+<td style='text-align: left;'><p class="">2.567</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">2.915</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">0.985</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>18</td>
+<td style='text-align: left;'>18</td>
+<td style='text-align: left;'><p class="indent1 ">95% CI</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">1.430 to 2.919</p></td>
+<td style='text-align: left;'><p class="">1.788 to 3.685</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">1.986 to 4.278</p></td>
+<td style='text-align: left;'></td>
+<td style='text-align: left;'><p class="indent1 ">0.308 to 3.146</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>19</td>
+<td style='text-align: left;'>19</td>
+<td style='text-align: left;'><p class="">ACR70</p></td>
+<td style='text-align: left;'><p class="indent1 ">25%</p></td>
+<td style='text-align: left;'><p class="indent1 ">42%***</p></td>
+<td style='text-align: left;'><p class="">47%***</p></td>
+<td style='text-align: left;'><p class="">25%</p></td>
+<td style='text-align: left;'><p class="indent1 ">50%</p></td>
+<td style='text-align: left;'><p class="">23%</p></td>
+<td style='text-align: left;'><p class="indent1 ">25%</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>20</td>
+<td style='text-align: left;'>20</td>
+<td style='text-align: left;'><p class="">ACR90</p></td>
+<td style='text-align: left;'><p class="indent1 ">9%</p></td>
+<td style='text-align: left;'><p class="indent1 ">17%*</p></td>
+<td style='text-align: left;'><p class="">16%*</p></td>
+<td style='text-align: left;'><p class="">8.8%</p></td>
+<td style='text-align: left;'><p class="indent1 ">18.3%</p></td>
+<td style='text-align: left;'><p class="">13.6%</p></td>
+<td style='text-align: left;'><p class="indent1 ">0%</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>21</td>
+<td style='text-align: left;'>21</td>
+<td style='text-align: left;'><p class="">Major clinical response</p></td>
+<td style='text-align: left;'><p class="indent1 ">8%</p></td>
+<td style='text-align: left;'><p class="indent1 ">18%*</p></td>
+<td style='text-align: left;'><p class="">21%***</p></td>
+<td style='text-align: left;'><p class="">nc</p></td>
+<td style='text-align: left;'><p class="indent1 ">nc</p></td>
+<td style='text-align: left;'><p class="">nc</p></td>
+<td style='text-align: left;'><p class="indent1 ">nc</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>22</td>
+<td style='text-align: left;'>22</td>
+<td style='text-align: left;'><p class="">Mean ACRn</p></td>
+<td style='text-align: left;'><p class="indent1 ">19.5</p></td>
+<td style='text-align: left;'><p class="indent1 ">42.9***</p></td>
+<td style='text-align: left;'><p class="">46.0***</p></td>
+<td style='text-align: left;'><p class="">29.8</p></td>
+<td style='text-align: left;'><p class="indent1 ">58.4</p></td>
+<td style='text-align: left;'><p class="">33.6</p></td>
+<td style='text-align: left;'><p class="indent1 ">40.8</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>23</td>
+<td style='text-align: left;'>23</td>
+<td style='text-align: left;'><p class="">EULAR good response</p></td>
+<td style='text-align: left;'><p class="indent1 ">18%</p></td>
+<td style='text-align: left;'><p class="indent1 ">39%***</p></td>
+<td style='text-align: left;'><p class="">42%***</p></td>
+<td style='text-align: left;'><p class="">18%</p></td>
+<td style='text-align: left;'><p class="indent1 ">43%</p></td>
+<td style='text-align: left;'><p class="">18%</p></td>
+<td style='text-align: left;'><p class="indent1 ">33%</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>24</td>
+<td style='text-align: left;'>24</td>
+<td style='text-align: left;'><p class="">DAS28-ESR LDA</p></td>
+<td style='text-align: left;'><p class="indent1 ">20%</p></td>
+<td style='text-align: left;'><p class="indent1 ">40%***</p></td>
+<td style='text-align: left;'><p class="">43%***</p></td>
+<td style='text-align: left;'><p class="">20%</p></td>
+<td style='text-align: left;'><p class="indent1 ">44%</p></td>
+<td style='text-align: left;'><p class="">23%</p></td>
+<td style='text-align: left;'><p class="indent1 ">33%</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>25</td>
+<td style='text-align: left;'>25</td>
+<td style='text-align: left;'><p class="">DAS28-ESR remission</p></td>
+<td style='text-align: left;'><p class="indent1 ">13%</p></td>
+<td style='text-align: left;'><p class="indent1 ">25%**</p></td>
+<td style='text-align: left;'><p class="">31%***</p></td>
+<td style='text-align: left;'><p class="">12%</p></td>
+<td style='text-align: left;'><p class="indent1 ">31%</p></td>
+<td style='text-align: left;'><p class="">18%</p></td>
+<td style='text-align: left;'><p class="indent1 ">25%</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>26</td>
+<td style='text-align: left;'>26</td>
+<td style='text-align: left;'><p class="">Change in DAS28-ESR (mean)i Physical function outcomes week 52</p></td>
+<td style='text-align: left;'><p class="indent1 ">-2.06</p></td>
+<td style='text-align: left;'><p class="indent1 ">-3.05***</p></td>
+<td style='text-align: left;'><p class="">-3.21***</p></td>
+<td style='text-align: left;'><p class="">-2.60§</p></td>
+<td style='text-align: left;'><p class="indent1 ">-3.64§</p></td>
+<td style='text-align: left;'><p class="">-2.95§</p></td>
+<td style='text-align: left;'><p class="indent1 ">-3.08i</p></td>
+</tr>
+<tr>
+<td style='text-align: left;'>27</td>
+<td style='text-align: left;'>27</td>
+<td style='text-align: left;'><p class="">Change in HAQ-DI (mean)t</p></td>
+<td style='text-align: left;'><p class="indent1 ">-0.628</p></td>
+<td style='text-align: left;'><p class="indent1 ">-0.905***</p></td>
+<td style='text-align: left;'><p class="">-0.916***</p></td>
+<td style='text-align: left;'><p class="">nc</p></td>
+<td style='text-align: left;'><p class="indent1 ">nc</p></td>
+<td style='text-align: left;'><p class="">nc</p></td>
+<td style='text-align: left;'><p class="indent1 ">nc</p></td>
+</tr>
+<tr>
+<td style='border-bottom: 2px solid grey; text-align: left;'>28</td>
+<td style='border-bottom: 2px solid grey; text-align: left;'>28</td>
+<td style='border-bottom: 2px solid grey; text-align: left;'><p class="">% With HAQ-DI decrease >0.22</p></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'><p class="indent1 ">77</p></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'><p class="indent1 ">87*</p></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'><p class="">88*</p></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'><p class="">nc</p></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'><p class="indent1 ">nc</p></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'><p class="">nc</p></td>
+<td style='border-bottom: 2px solid grey; text-align: left;'><p class="indent1 ">nc</p></td>
+</tr>
+</tbody>
+</table>
