@@ -97,25 +97,6 @@ async function getAnnotationByID(docid,page,user){
   return result
 }
 
-// let options = {
-//   mode: 'text',
-//   pythonPath: '/home/suso/anaconda3/bin/python',
-//   pythonOptions: ['-u'], // get print results in real-time
-//   scriptPath: '/home/suso/ihw/tableAnnotator/Server/src',
-// };
-//
-//
-// let pyshell = new PythonShell('/home/suso/ihw/tableAnnotator/Server/src/classifier.py');
-//
-// // sends a message to the Python script via stdin
-// pyshell.on('message', function (message) {
-//   // received a message sent from the Python script (a simple "print" statement)
-//   console.log(message);
-// });
-//
-// pyshell.send('hello');
-
-
 let assert = require('assert');
 let pythonBridge = require('python-bridge');
 
@@ -132,8 +113,10 @@ python.ex`
   import json
 `;
 
+console.log(process.cwd())
+
 python.ex`
-  sgd = pickle.load(open("/home/suso/ihw/tableAnnotator/Server/src/sgd_multiterm.sav", 'rb'))
+  sgd = pickle.load(open("./src/sgd_multiterm.sav", 'rb'))
   def classify(h):
     d={}
     result = sgd.predict(h)
@@ -141,25 +124,7 @@ python.ex`
       d[h[r]] = result[r]
     return d
 `;
-//
-// let words = ["male","Infliximab","female"]
 
-
-//
-// //
-// python`classify(["male", "female", "male", "male"])`.then(x => console.log(x));
-// //
-// python.end();
-//
-//
-// let python = pythonBridge({
-//     python: 'python3'
-// });
-//
-// python`classify(["male", "female", "male", "male"])`.then(x => console.log(x));
-// python.end();
-
-//
 
 async function classify(terms){
 
