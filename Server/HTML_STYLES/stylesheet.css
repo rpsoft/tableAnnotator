@@ -22,6 +22,11 @@
   padding-left: 60px
 }
 
+.bold {
+  font-weight: bold;
+}
+
+
 td {width: auto;}
 
 tr:hover {background: aliceblue}
