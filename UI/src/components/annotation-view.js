@@ -199,23 +199,24 @@ class AnnotationView extends Component {
 
      var auto_annotations = []
 
-     var col_annotations = Object.keys(this.state.table.predicted.cols).map( (N) => {
-        var content = {}
-        for (var n in this.state.table.predicted.cols[N] ){
-          content[this.state.table.predicted.cols[N][n]] = true
-        }
-        return {"location":"Col","content":content,"qualifiers":{},"number":(parseInt(N)+1)}
-     } )
+     var process_auto_annotations = (annotations,loc) => {
+       return Object.keys(annotations).map( (N) => {
 
+          var current = annotations[N]
 
-     var row_annotations = Object.keys(this.state.table.predicted.rows).map( (N) => {
-        var content = {}
-        for (var n in this.state.table.predicted.rows[N] ){
-          content[this.state.table.predicted.rows[N][n]] = true
-        }
-        return {"location":"Row","content":content,"qualifiers":{},"number":(parseInt(N)+1)}
-     } )
+          var content = {}
+          for (var n in current.descriptors ){
+            content[current.descriptors[n]] = true
+          }
 
+          var qualifier = current.unique_modifier.indexOf("indent") > -1 ? {"indented" : true} : {}
+
+          return {"location": loc,"content":content,"qualifiers":qualifier,"number":(parseInt(current.c)+1)}
+       } )
+     }
+
+     var col_annotations = process_auto_annotations (this.state.table.predicted.cols,"Col")
+     var row_annotations = process_auto_annotations (this.state.table.predicted.rows,"Row")
 
     this.setState({annotations : col_annotations.concat(row_annotations)})
 

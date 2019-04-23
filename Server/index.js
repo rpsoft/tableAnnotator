@@ -642,7 +642,7 @@ app.get('/api/getTable', function (req, res) {
           var _ref4 = (0, _asyncToGenerator2.default)(
           /*#__PURE__*/
           _regenerator.default.mark(function _callee4(err2, data_ss) {
-            var tablePage, spaceRow, headerNodes, htmlHeader, h, headText, textLimit, actual_table, formattedPage, predictions, preds_matrix, class_matrix, max_col, l, getTopDescriptors, col_top_descriptors, c, column_data, k, allfreqs, descriptors, row_top_descriptors, r, row_data, predicted;
+            var tablePage, spaceRow, headerNodes, htmlHeader, h, headText, textLimit, actual_table, formattedPage, predictions, preds_matrix, class_matrix, max_col, l, getTopDescriptors, cleanModifier, col_top_descriptors, c, unique_modifiers_in_column, u, unique_modifier, column_data, k, allfreqs, descriptors, row_top_descriptors, r, row_data, predicted;
             return _regenerator.default.wrap(function _callee4$(_context4) {
               while (1) {
                 switch (_context4.prev = _context4.next) {
@@ -732,41 +732,67 @@ app.get('/api/getTable', function (req, res) {
 
                       var limit = orderedKeys.length < N ? orderedKeys.length : N;
                       return orderedKeys.slice(0, limit);
+                    };
+
+                    cleanModifier = function cleanModifier(modifier) {
+                      return modifier.replace("firstCol", "").replace("firstLastCol", "").trim();
                     }; //Estimate column predictions.
 
 
                     debugger;
-                    col_top_descriptors = {};
+                    col_top_descriptors = [];
 
                     for (c = 0; c < max_col; c++) {
-                      column_data = preds_matrix.map(function (x) {
+                      unique_modifiers_in_column = class_matrix.map(function (x) {
                         return x[c];
-                      }).reduce(function (countMap, word) {
-                        countMap.freqs[word] = ++countMap.freqs[word] || 1;
-                        var max = countMap["max"] || 0;
-                        countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max;
-                        countMap["total"] = ++countMap["total"] || 1;
-                        return countMap;
-                      }, {
-                        total: 0,
-                        freqs: {}
+                      }).map(cleanModifier).filter(function (v, i, a) {
+                        return a.indexOf(v) === i;
                       });
 
-                      for (k in column_data.freqs) {
-                        // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
-                        if (column_data.freqs[undefined] == column_data.max || column_data.freqs[k] == 1) {
-                          allfreqs = column_data.freqs;
-                          delete allfreqs[k];
-                          column_data.freqs = allfreqs;
-                        }
-                      }
+                      for (u in unique_modifiers_in_column) {
+                        unique_modifier = unique_modifiers_in_column[u]; // if ( [""].indexOf(unique_modifier ) > -1){ //ignore these. Add at will.
+                        //   continue
+                        // }
 
-                      descriptors = getTopDescriptors(3, column_data.freqs, ["arms", "undefined"]);
-                      if (descriptors.length > 0) col_top_descriptors[c] = descriptors;
+                        column_data = preds_matrix.map(function (x, i) {
+                          return [x[c], i];
+                        }).reduce(function (countMap, word) {
+                          var i = word[1];
+                          word = word[0];
+
+                          if (unique_modifier === cleanModifier(class_matrix[i][c])) {
+                            countMap.freqs[word] = ++countMap.freqs[word] || 1;
+                            var max = countMap["max"] || 0;
+                            countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max;
+                            countMap["total"] = ++countMap["total"] || 1;
+                          }
+
+                          return countMap;
+                        }, {
+                          total: 0,
+                          freqs: {}
+                        });
+
+                        for (k in column_data.freqs) {
+                          // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
+                          if (column_data.freqs[undefined] == column_data.max || column_data.freqs[k] == 1) {
+                            allfreqs = column_data.freqs;
+                            delete allfreqs[k];
+                            column_data.freqs = allfreqs;
+                          }
+                        }
+
+                        descriptors = getTopDescriptors(3, column_data.freqs, ["arms", "undefined"]);
+                        if (descriptors.length > 0) col_top_descriptors[col_top_descriptors.length] = {
+                          descriptors: descriptors,
+                          c: c,
+                          unique_modifier: unique_modifier
+                        };
+                      }
                     } // Estimate row predictions
 
 
-                    row_top_descriptors = {}; // debugger
+                    row_top_descriptors = []; // debugger
 
                     for (r in preds_matrix) {
                       row_data = preds_matrix[r].reduce(function (countMap, word) {
@@ -790,7 +816,11 @@ app.get('/api/getTable', function (req, res) {
                       }
 
                       descriptors = getTopDescriptors(3, row_data.freqs, ["undefined"]);
-                      if (descriptors.length > 0) row_top_descriptors[r] = descriptors;
+                      if (descriptors.length > 0) row_top_descriptors[row_top_descriptors.length] = {
+                        descriptors: descriptors,
+                        c: r,
+                        unique_modifier: ""
+                      };
                     }
 
                     predicted = {
@@ -805,7 +835,7 @@ app.get('/api/getTable', function (req, res) {
                       predicted: predicted
                     });
 
-                  case 37:
+                  case 38:
                   case "end":
                     return _context4.stop();
                 }

@@ -471,38 +471,57 @@ app.get('/api/getTable',function(req,res){
                                         return orderedKeys.slice(0,limit)
                                       }
 
-
+                                      var cleanModifier = (modifier) => {
+                                        return modifier.replace("firstCol","").replace("firstLastCol","").trim()
+                                      }
                                       //Estimate column predictions.
                                       debugger
-                                      var col_top_descriptors = {}
+                                      var col_top_descriptors = []
 
                                       for ( var c=0; c < max_col; c++ ){
-                                        var column_data = preds_matrix.map(x => x[c]).reduce( (countMap, word) => {
-                                              countMap.freqs[word] = ++countMap.freqs[word] || 1
-                                              var max = (countMap["max"] || 0)
-                                              countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max
-                                             	countMap["total"] = ++countMap["total"] || 1
-                                              return countMap
-                                        },{total:0,freqs:{}})
 
-                                        for ( var k in column_data.freqs ){ // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
+                                        var unique_modifiers_in_column = class_matrix.map(x => x[c]).map(cleanModifier).filter((v, i, a) => a.indexOf(v) === i)
 
-                                          if ( (column_data.freqs[undefined] == column_data.max) || column_data.freqs[k] == 1 ) {
-                                              var allfreqs = column_data.freqs
-                                              delete allfreqs[k]
-                                              column_data.freqs = allfreqs
+                                        for( var u in unique_modifiers_in_column){
+
+                                            var unique_modifier = unique_modifiers_in_column[u]
+
+                                            // if ( [""].indexOf(unique_modifier ) > -1){ //ignore these. Add at will.
+                                            //   continue
+                                            // }
+
+                                            var column_data = preds_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
+                        												  var i = word[1]
+                        													    word = word[0]
+                                                  if ( unique_modifier === cleanModifier(class_matrix[i][c]) ){
+                                                    countMap.freqs[word] = ++countMap.freqs[word] || 1
+                                                    var max = (countMap["max"] || 0)
+                                                    countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max
+                                                   	countMap["total"] = ++countMap["total"] || 1
+                                                  }
+                                                  return countMap
+                                            },{total:0,freqs:{}})
+
+                                            for ( var k in column_data.freqs ){ // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
+
+                                              if ( (column_data.freqs[undefined] == column_data.max) || column_data.freqs[k] == 1 ) {
+                                                  var allfreqs = column_data.freqs
+                                                  delete allfreqs[k]
+                                                  column_data.freqs = allfreqs
+                                              }
+                                            }
+
+                                            var descriptors = getTopDescriptors(3,column_data.freqs,["arms","undefined"])
+
+                                            if ( descriptors.length > 0)
+                                              col_top_descriptors[col_top_descriptors.length] = {descriptors, c , unique_modifier}
+
                                           }
-                                        }
-
-                                        var descriptors = getTopDescriptors(3,column_data.freqs,["arms","undefined"])
-
-                                        if ( descriptors.length > 0)
-                                          col_top_descriptors[c] = descriptors
                                       }
 
                                       // Estimate row predictions
 
-                                      var row_top_descriptors = {}
+                                      var row_top_descriptors = []
                                       // debugger
                                       for (var r in preds_matrix){
                                           var row_data = preds_matrix[r].reduce( (countMap, word) => {
@@ -524,7 +543,8 @@ app.get('/api/getTable',function(req,res){
                                           var descriptors = getTopDescriptors(3,row_data.freqs,["undefined"])
 
                                           if ( descriptors.length > 0)
-                                            row_top_descriptors[r] = descriptors
+                                            row_top_descriptors[row_top_descriptors.length] = {descriptors,c : r,unique_modifier:""}
+
                                       }
 
 
