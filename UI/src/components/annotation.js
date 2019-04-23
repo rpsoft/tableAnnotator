@@ -66,6 +66,10 @@ class Annotation extends Component {
 
   render() {
 
+    var descriptors = ["outcomes", "arms", "measures", "subgroup_name", "subgroup_level","baseline_level_1","baseline_level_2", "time/period", "other", "p-interaction"]
+        descriptors = ["outcomes", "characteristic", "arms", "measures", "time/period", "other", "p-interaction"]
+
+
     return (
       <div style={{marginLeft:0, height: 40}}>
             <RaisedButton
@@ -93,7 +97,7 @@ class Annotation extends Component {
            <MultiplePopover
                             value={this.state.content}
                             variable={"content"}
-                            options={["outcomes", "arms", "measures", "subgroup_name", "subgroup_level", "time/period", "other", "p-interaction","baseline_level_1","baseline_level_2"]}
+                            options={descriptors}
                             updateAnnotation={ (values) => { this.handleMultiChoice("content",values) } }
                             />
 

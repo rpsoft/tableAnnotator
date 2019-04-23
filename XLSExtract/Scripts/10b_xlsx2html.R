@@ -1,0 +1,297 @@
+#10b_create_html
+
+## Pulled out of 10_unpivot tables.
+## Coverts xlsx file into a format-labelled file for export to html
+# setwd("C:/ihw/tableAnnotator/XLSExtract")
+
+library(tidyxl)
+library(unpivotr)
+library(tidyverse)
+
+MakeFormatted <- function(filename){
+
+  all_cells <- xlsx_cells(filename)
+  
+  # rectify(all_cells)
+  
+  ##  Simplify table by making all values character
+  # If no numeric or no character columns, create
+    if(!"numeric"   %in% names(all_cells)) all_cells <- all_cells %>% mutate(numeric = NA)
+    if(!"character" %in% names(all_cells)) all_cells <- all_cells %>% mutate(chracter = NA)
+  
+  all_cells <- all_cells %>%
+    mutate(data_type = if_else(is.na(character) & !is.na(numeric), "character", data_type),
+           character = if_else(is.na(character), as.character(numeric), character))
+  
+  ## Extract cell-level formatting
+  formats <- xlsx_formats(filename)
+  bold <- formats$local$font$bold
+  ital <- formats$local$font$italic
+  bold_ital <- bind_cols(formats$local$font[c("bold", "italic")])
+  ## Note indentation is relative to minimum indent, problem is that this refers to every cell, 
+  ## not just column_type
+  indt <- bind_cols(formats$local$alignment) %>% 
+    mutate(indent = indent - min(indent),
+           indent_lvl = indent,
+           indent = horizontal %in% c("center", "right") | 
+                  (indent >=1)) %>% 
+    select(indent, indent_lvl)
+  
+  ## Append to main dataset
+  formats <- bind_cols(bold_ital, indt) %>% 
+    mutate(local_format_id = seq_along(bold))
+  
+  all_cells <- all_cells %>% 
+    inner_join(formats)
+  
+  all_cells_indnt <- all_cells %>%
+    filter(indent) %>%
+    distinct(row, col, indent_lvl)
+  
+  all_cells <- all_cells %>%
+    select(-indent_lvl)
+  
+  ## Extract character formatting (can vary within cells) and aggregate to cell level, take any formatting
+  all_cells <- all_cells %>% 
+    mutate(char_format_id = seq_along(row))
+  characters <- all_cells$character_formatted
+  names(characters) <- all_cells$char_format_id
+  characters <- bind_rows(characters, .id = "char_format_id")
+  characters <- characters %>% 
+    select(char_format_id, bold, italic, character) %>% 
+    mutate(char_format_id = as.integer(char_format_id)) %>% 
+    mutate_at(vars(bold, italic), function(x) if_else(is.na(x), FALSE, x)) %>% 
+    group_by(char_format_id) %>% 
+    summarise(character = paste(character, collapse = "_|_"),
+              bold = any(bold),
+              italic = any(italic)) %>% 
+    ungroup()
+  
+  characters <- all_cells %>%
+    select(char_format_id) %>% 
+    left_join(characters) %>% 
+    mutate(bold = if_else(is.na(bold), FALSE, bold),
+           italic = if_else(is.na(italic), FALSE, italic)) %>% 
+    rename(bold_char = bold,
+           italic_char = italic)
+  
+  all_cells <- all_cells %>% 
+    left_join(characters) %>% 
+    mutate(bold = bold|bold_char,
+           italic = italic|italic_char) %>% 
+    select(sheet, address, row, col, is_blank:character, bold, italic, indent)
+  
+  ## Identify different types of empty row form completely empty of numbers
+  # to ones where the first columns alone are not empty
+  # to ones where the first and last columns are not empty 
+  
+  ## First pad the dataframe by adding back in null cells, the package omits some empty cells
+  ## ONly do so where the row or the column is already present
+  all_cells_pad <- expand.grid(row = 1:max(all_cells$row), col = 1:max(all_cells$col))
+  all_cells_pad <- all_cells_pad %>%
+    as_tibble() %>%
+    semi_join(all_cells %>% distinct(row)) %>% 
+    semi_join(all_cells %>% distinct(col))
+
+  all_cells_pad <- all_cells_pad %>%
+    left_join(all_cells) %>%
+    mutate(is_blank  = if_else(is.na(is_blank), TRUE, is_blank),
+          data_type = if_else(is.na(data_type), "blank", data_type),
+          sheet = sheet[1],
+          address = paste0(LETTERS[row], col))
+  all_cells <- all_cells_pad
+  rm(all_cells_pad)
+  
+  ## First check that all cells are either blank or character
+  if(all(all_cells$data_type %in% c("character", "blank", "numeric"))) {
+    all_cells <- all_cells %>% 
+      select(sheet, address, row, col, is_blank, character, bold, italic, indent, data_type) %>% 
+      mutate(is_empty   = is_blank | (!str_detect(character %>% str_to_lower(), "[:alnum:]")),
+             has_no_num = is_blank | (!str_detect(character %>% str_to_lower(), "[0-9]")))
+  
+  } else return("Not all cells are character, numeric or blank, code will not work")
+  # rectify(all_cells)
+  
+  BlankRow <- function (mydf) {
+    empty_rows <- mydf %>% 
+      arrange(row, col) %>% 
+      group_by(row) %>% 
+      summarise(blank_row = all(is_empty)) %>% 
+      ungroup() %>% 
+      filter(blank_row) %>% 
+      distinct(row) %>% 
+      pull(row)
+  }
+  
+  ## Identify split_header_row as the last empty row IN the first set of contiguos empty rows
+  empty_rows <- BlankRow(all_cells)
+  null_rows <- setdiff(1:max(all_cells$row), all_cells$row)
+  empty_rows <- c(empty_rows, null_rows) %>% 
+      sort()
+  empty_rows <- tibble(empty_rows = empty_rows, diff = lead(empty_rows, default = 1000L) - empty_rows)
+  empty_rows <- empty_rows %>% 
+      filter(diff != 1)
+  split_header <- empty_rows$empty_rows[1]
+  
+  # Next identify any rows which are completely blank
+  blank_row <- all_cells %>%
+    BlankRow()
+  
+  # Those which have no information after removing the first column, except a little text in some of the second columns
+  first_col_1 <- all_cells %>%
+    filter(!col %in% 1:2) %>% 
+    BlankRow()
+  first_col_1_spill <- all_cells %>% 
+    filter(col == 2, has_no_num) %>% 
+    distinct(row) %>% 
+    pull(row)
+  ## This allows for text only, but not numbers in the second column
+  first_col <- intersect(first_col_1, first_col_1_spill)
+  
+  # Those which have no information after removing the first and last column
+  first_last_col <- all_cells %>%
+    group_by(row) %>% 
+    mutate(col_max = max(col)) %>% 
+    ungroup() %>% 
+    filter(!col %in% 1:2, col != col_max) %>% 
+    BlankRow()
+  first_last_col  <- intersect(first_last_col, first_col_1_spill)
+  
+ # Those which have only one cell containing information, after removing the first and last column,
+  # and which are long rows (>= 4 blank cells)
+  first_last_col_wide <- all_cells %>%
+    group_by(row) %>% 
+    mutate(col_max = max(col)) %>% 
+    ungroup() %>% 
+    filter(!col %in% 1:2, col != col_max) %>% 
+    group_by(row) %>% 
+    summarise(few_p = sum(is_blank) >= 4) %>% 
+    filter(few_p) %>%
+    pull(row)
+
+  first_last_col_wide <- intersect(first_last_col_wide, first_col_1_spill)
+  first_last_col <- union(first_last_col, first_last_col_wide)
+  
+  first_col <- setdiff(first_col, blank_row)
+  first_last_col <- setdiff(first_last_col, c(first_col, blank_row))
+  
+  ## Add these onto all_cells
+  all_cells <- all_cells %>% 
+    mutate(blank_row = row %in% blank_row,
+           first_col = row %in% first_col,
+           first_last_col = row %in% first_last_col)
+  
+  ## Take cells before first blank_row as table/figure name
+  ## Take after this cut-point the table body
+  ## reset the table body to reflect the new row 1 (same as in table annotator)
+  if(length(split_header)==0) {
+    return("Error no blank row of cells to separate data from figure name")} else{
+  table_header <- all_cells %>% 
+    filter(row < split_header) %>% 
+    pull(character)
+  
+  table_body <- all_cells %>% 
+    filter(row > split_header) %>% 
+    mutate(row = row - split_header)
+    }
+  ## Also need to resent indent level
+  all_cells_indnt <- all_cells_indnt %>% 
+    filter(row > split_header) %>% 
+    mutate(row = row - split_header)
+  # table_header
+  
+  table_body <- table_body %>% 
+    left_join(all_cells_indnt)
+  
+  list(table_header, table_body)
+}
+
+# single_table_sheets <- list.files("Data/Single_table_sheets/", patt = "xlsx")
+# 
+# single_table_sheets_res <- map(single_table_sheets, ~ paste0("Data/Single_table_sheets/", .x))
+# single_table_sheets_res <- map(single_table_sheets_res, MakeFormatted)
+# names(single_table_sheets_res) <- single_table_sheets
+# saveRDS(single_table_sheets_res, "Scratch_data/single_table_sheets.Rds")
+# 
+# single_table_sheets_failed <- list.files("Data/single_table_sheets_failed/", 
+#                                          patt = "xlsx", recursive = TRUE)
+# single_table_sheets_failed_res <- map(single_table_sheets_failed, 
+#                                       ~ paste0("Data/single_table_sheets_failed/", .x))
+# 
+# single_table_sheets_failed_res <- map(single_table_sheets_failed_res, MakeFormatted)
+# 
+# names(single_table_sheets_failed_res) <- single_table_sheets_failed
+# 
+# saveRDS(single_table_sheets_failed_res, "Scratch_data/single_table_sheets_failed_res.Rds")
+# 
+# 
+# single_table_sheets_ys <- list.files("Data/yifan_single_sheets_xlsx/", patt = "xlsx")
+# single_table_sheets_ys_res <- map(single_table_sheets_ys, ~ paste0("Data/yifan_single_sheets_xlsx/", .x))
+# single_table_sheets_ys_res <- map(single_table_sheets_ys_res, MakeFormatted)
+# names(single_table_sheets_ys_res) <- single_table_sheets_ys
+# saveRDS(single_table_sheets_ys_res, "Scratch_data/single_table_sheets_ys_res.Rds")
+# 
+# 
+# all_cells <- xlsx_cells("/home/suso/ihw/Data_table_extract_manual/Data/yifan_single_sheets_xlsx/24716680_3.xlsx")
+
+# single_table_sheets <- list.files("Data/Single_table_sheets/", patt = "xlsx")
+# 
+
+single_table_sheets <- list.files("tables/", patt = "xlsx")
+single_table_sheets_res <- map(single_table_sheets, ~ paste0("tables/", .x))
+single_table_sheets_res <- map(single_table_sheets_res, MakeFormatted)
+names(single_table_sheets_res) <- single_table_sheets
+# saveRDS(single_table_sheets_res, "Scratch_data/single_table_sheets.Rds")
+
+
+htmlFolder <- "htmlFiles/"
+
+
+## Example of htmltable, will appear in Rstudio viewer
+html_formatting <- function(filename){
+      ex <- filename[[2]]
+      
+      cols <- (ex %>% dim())[2]
+  
+      ex[1:cols][ is.na(ex[1:cols]) ] <-FALSE
+      
+      ex <- ex %>%
+        mutate_if(is.character, function(x) x %>%
+                    stringi::stri_enc_toutf8())
+      
+      ex <- ex %>%
+        mutate(
+          
+            # character = if_else(bold, paste0('<p style="font-weight: bold;" > ',character, "</p>"), character)
+            character = paste0('">',character,"</p>"),
+            character = if_else(indent, paste0('indent',indent_lvl,' ', character), character),
+            character = if_else(italic, paste0('italic ', character), character),
+            character = if_else(first_col, paste0('firstCol ', character), character),
+            character = if_else(first_last_col, paste0('firstLastCol ', character), character),
+            character = paste0('<p class="',character)
+            )
+}
+      
+formatted_tables <- map( single_table_sheets_res, html_formatting)
+
+failed <- c()
+
+names(formatted_tables) %>% sapply(function (table_name) {
+  tryCatch({  
+    
+    headers <- paste0('<div class="headers"><div>',paste0(single_table_sheets_res[[table_name]][[1]][!is.na(single_table_sheets_res[[table_name]][[1]])],collapse = "</div><div>"),"</div></div>")
+    
+    html_res <- htmlTable::htmlTable(rectify( formatted_tables[[table_name]] ),
+                                     align = paste(rep('l',ncol(formatted_tables[[table_name]])),collapse=''))
+    html_res = paste0(headers, html_res)
+    
+    html_res %>% write(paste0(htmlFolder,table_name %>% str_replace(".xlsx",""),".html"))
+  },
+    error = function(e){
+      print(e)
+      failed <- c(failed,table_name)
+  })
+})
+
+
+table_name <- "10438259_2"

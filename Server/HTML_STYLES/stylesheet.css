@@ -1,0 +1,31 @@
+.indent0 {
+  padding-left: 10px
+}
+
+.indent1 {
+  padding-left: 20px
+}
+
+.indent2 {
+  padding-left: 30px
+}
+
+.indent3 {
+  padding-left: 40px
+}
+
+.indent4 {
+  padding-left: 50px
+}
+
+.indent5 {
+  padding-left: 60px
+}
+
+td {width: auto;}
+
+tr:hover {background: aliceblue}
+
+td:hover {background: #82c1f8}
+
+col{width:100pt}

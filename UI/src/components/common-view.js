@@ -23,6 +23,8 @@ import TextField from 'material-ui/TextField';
 
 import SortIcon from 'material-ui/svg-icons/content/sort';
 
+import WarningIcon from 'material-ui/svg-icons/alert/warning';
+
 import SelectField from 'material-ui/SelectField';
 
  import Loader from 'react-loader-spinner'
@@ -106,6 +108,16 @@ class CommonView extends Component {
             }
           })
 
+      var corrupted_texts = {}
+
+      if ( this.state.annotations ){
+          this.state.annotations.rows.map( (v) => {
+                    if (  v.corrupted_text != undefined && v.corrupted_text != "undefined" ) {
+                      corrupted_texts[v.docid+"_"+v.page] = v.corrupted_text
+                    }
+                }
+          )
+      }
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
         <Card style={{marginBottom:-10}}>
@@ -151,6 +163,7 @@ class CommonView extends Component {
                                 >
                               [New]
                             </a>
+                            {  corrupted_texts[v.docid+"_"+v.page] ? <div style={{display:"inline",fontWeight:"bold",paddingLeft:20}}><WarningIcon style={{marginRight:5}} />{  corrupted_texts[v.docid+"_"+v.page] }</div> : ""}
                          </div>
 
                     )

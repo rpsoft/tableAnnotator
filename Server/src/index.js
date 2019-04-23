@@ -21,7 +21,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 import {PORT} from "./config"
-import {DOCS} from "./docList"
+// import {DOCS} from "./docList"
 
 import {TITLES} from "./titles"
 
@@ -39,6 +39,11 @@ var ops_counter = 0;
 var available_documents = {}
 var abs_index = []
 
+
+var tables_folder = "HTML_TABLES"
+var cssFolder = "HTML_STYLES"
+var DOCS = [];
+
 // Postgres configuration.
 const pool = new Pool({
     user: 'postgres',
@@ -54,30 +59,35 @@ const R = require("r-script");
 
 
 function prepareAvailableDocuments(){
+  // console.log("preparing filed")
+  fs.readdir(tables_folder, function(err, items) {
 
-  console.log("DLEN: " +DOCS.length)
-  // Preparing the variable to hold all data records.
-  for ( var d in DOCS ){
+      DOCS = items
 
-    var docfile = DOCS[d]
-    var fileElements = docfile.split("_")
-    var docid = fileElements[0]
-    var page = fileElements[1].split(".")[0]
-    var extension = fileElements[1].split(".")[1]
+      for ( var d in DOCS ){
 
-    if ( available_documents[docid] ){
-      var prev_data = available_documents[docid]
-          prev_data.pages[prev_data.pages.length] = page
-          prev_data.abs_pos[prev_data.abs_pos.length] = abs_index.length
-          prev_data.maxPage = page > prev_data.maxPage ? page : prev_data.maxPage
-          available_documents[docid] = prev_data
-    } else {
-          available_documents[docid] = {abs_pos: [ abs_index.length ], pages : [ page ] , extension, maxPage : page}
-    }
+        var docfile = DOCS[d]
+        var fileElements = docfile.split("_")
+        var docid = fileElements[0]
+        var page = fileElements[1].split(".")[0]
+        var extension = fileElements[1].split(".")[1]
 
-    abs_index[abs_index.length] = {docid, page, extension, docfile}
+        if ( available_documents[docid] ){
+          var prev_data = available_documents[docid]
+              prev_data.pages[prev_data.pages.length] = page
+              prev_data.abs_pos[prev_data.abs_pos.length] = abs_index.length
+              prev_data.maxPage = page > prev_data.maxPage ? page : prev_data.maxPage
+              available_documents[docid] = prev_data
+        } else {
+              available_documents[docid] = {abs_pos: [ abs_index.length ], pages : [ page ] , extension, maxPage : page}
+        }
 
-  }
+        abs_index[abs_index.length] = {docid, page, extension, docfile}
+
+      }
+
+      console.log("DLEN: " +DOCS.length)
+  });
 }
 
 async function getAnnotationResults(){
@@ -114,9 +124,10 @@ python.ex`
 `;
 
 console.log(process.cwd())
+//   sgd = pickle.load(open("./src/sgd_multiterm.sav", 'rb'))
 
 python.ex`
-  sgd = pickle.load(open("./src/sgd_multiterm.sav", 'rb'))
+  sgd = pickle.load(open("./src/sgd_l_svm_char.sav", 'rb'))
   def classify(h):
     d={}
     result = sgd.predict(h)
@@ -168,13 +179,22 @@ async function attempt_predictions(actual_table){
       for( var l = 0; l < lines.length; l++ ){
           var currentLine = cheerio(lines[l])
           var terms = []
+          var cellClasses = []
+          var cellClass = ""
 
           for ( var c = 0 ; c < currentLine.children().length; c++){
             terms[terms.length] = cheerio(currentLine.children()[c]).text().trim().replace(/\n/g, " ").toLowerCase()
+
+            var cellClassSelector = (cheerio(currentLine.children()[c]).children()[0])
+            if ( cellClassSelector ){
+              cellClass = cellClassSelector.attribs.class || ""
+            }
+
+            cellClasses[cellClasses.length] = cellClass
           }
 
           var pred_class = await classify(terms)
-          predictions[l] = {pred_class,terms}
+          predictions[l] = {pred_class,terms,cellClasses}
       }
 
       resolve(predictions)
@@ -367,35 +387,15 @@ app.get('/api/getTable',function(req,res){
       && req.query.page && available_documents[req.query.docid]
       && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1){
 
-        var docid = req.query.docid+"_"+req.query.page+".xlsx"
+        var docid = req.query.docid+"_"+req.query.page+".html"
 
-        // console.log("GET TABLE CALLED0: "+"HTML_TABLES/"+docid+"_files")
-        //
-        // if (!fs.existsSync("HTML_TABLES/"+docid+"_files")) {
-        //     docid = req.query.docid + "_" + req.query.page;
-        // }
-        //
-        //
-
-        var htmlFolder = "HTML_TABLES/"+docid+"_files/"
-        var htmlFile = "sheet001.html"
-
-        console.log("GET TABLE CALLED: "+htmlFolder+htmlFile)
-
-        if (!fs.existsSync(htmlFolder+htmlFile)) {
-
-            docid = req.query.docid+"_"+req.query.page
-            htmlFolder = "HTML_TABLES/"+docid+"_files/"
-            htmlFile = "sheet001.htm"
-            console.log("GET TABLE CALLED Corrected: "+htmlFolder+htmlFile)
-        }
-
-        console.log("GET TABLE CALLED: "+htmlFile)
+        var htmlFolder = tables_folder+"/"
+        var htmlFile = docid
 
         fs.readFile(htmlFolder+htmlFile,
                     "utf8",
                     function(err, data) {
-                      fs.readFile(htmlFolder+"stylesheet.css",
+                      fs.readFile(cssFolder+"/"+"stylesheet.css",
                                   "utf8",
                                   async function(err2, data_ss) {
 
@@ -403,37 +403,21 @@ app.get('/api/getTable',function(req,res){
 
                                       try{
                                           tablePage = cheerio.load(data);
-                                          tablePage("col").removeAttr('style');
+                                          // tablePage("col").removeAttr('style');
                                           if ( !tablePage ){
                                                 res.send({htmlHeader: "",formattedPage : "", title: "" })
                                                 return;
                                           }
                                       } catch (e){
-                                        console.log(JSON.stringify(e)+" -- " + JSON.stringify(data))
+                                        // console.log(JSON.stringify(e)+" -- " + JSON.stringify(data))
                                         res.send({htmlHeader: "",formattedPage : "", title: "" })
                                         return;
                                       }
 
                                       var spaceRow = -1;
 
-                                      var headerNodes = []
+                                      var headerNodes = [cheerio(tablePage(".headers")[0]).remove()]
 
-
-
-                                      var maxOUT = 0
-                                      while (true){
-                                        if ( cheerio(tablePage("table").find("tr")[0]).text().trim().length < 1){
-                                          cheerio(tablePage("table").find("tr")[0]).remove()
-                                          break;
-                                        }
-
-
-                                        headerNodes.push(cheerio(tablePage("table").find("tr")[0]).remove())
-
-                                        if ( maxOUT++ > 10){
-                                          break
-                                        }
-                                      }
 
                                       var htmlHeader = ""
 
@@ -450,8 +434,14 @@ app.get('/api/getTable',function(req,res){
 
                                       var actual_table = tablePage("table").parent().html()
 
-                                      var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
-                                      var formattedPage = "<div>"+ss+"</head>"+actual_table+"</div>"
+                                          actual_table = cheerio.load(actual_table)
+                                          actual_table("tr > td:nth-child(1), tr > td:nth-child(2), tr > th:nth-child(1), tr > th:nth-child(2)").remove()
+
+                                          actual_table = actual_table.html()
+
+
+                                      // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
+                                      var formattedPage = "<div><style>"+data_ss+"</style>"+actual_table+"</div>"
 
 
                                       var predictions = await attempt_predictions(actual_table)
@@ -459,7 +449,11 @@ app.get('/api/getTable',function(req,res){
                                       /// this should really go into a function.
                                       var preds_matrix = predictions.map( e => e.terms.map( term => e.pred_class[term.replace(/[/(){}\[\]\|@,;]/g, " ").replace(/[^a-z #+_]/g,"").trim()])) // hell of a line!
 
-                                      debugger
+                                      var class_matrix = predictions.map( e => e.cellClasses.map( cellClass => cellClass ))
+
+
+                                      debugger;
+
                                       var max_col = 0;
                                       for ( var l=0; l < preds_matrix.length; l++){
                                           max_col = max_col > preds_matrix[l].length ? max_col : preds_matrix[l].length
@@ -491,7 +485,7 @@ app.get('/api/getTable',function(req,res){
                                               return countMap
                                         },{total:0,freqs:{}})
 
-                                        for ( var k in column_data.freqs ){ // to qualify for a row descriptor the frequency should at least be half of the length of the column headings.
+                                        for ( var k in column_data.freqs ){ // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
 
                                           if ( (column_data.freqs[undefined] == column_data.max) || column_data.freqs[k] == 1 ) {
                                               var allfreqs = column_data.freqs

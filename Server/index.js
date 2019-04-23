@@ -10,8 +10,6 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _config = require("./config");
 
-var _docList = require("./docList");
-
 var _titles = require("./titles");
 
 function _templateObject3() {
@@ -25,7 +23,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n  sgd = pickle.load(open(\"./src/sgd_multiterm.sav\", 'rb'))\n  def classify(h):\n    d={}\n    result = sgd.predict(h)\n    for r in range(0,len(h)):\n      d[h[r]] = result[r]\n    return d\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n  sgd = pickle.load(open(\"./src/sgd_l_svm_char.sav\", 'rb'))\n  def classify(h):\n    d={}\n    result = sgd.predict(h)\n    for r in range(0,len(h)):\n      d[h[r]] = result[r]\n    return d\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -82,7 +80,10 @@ for (var t in _titles.TITLES) {
 
 var ops_counter = 0;
 var available_documents = {};
-var abs_index = []; // Postgres configuration.
+var abs_index = [];
+var tables_folder = "HTML_TABLES";
+var cssFolder = "HTML_STYLES";
+var DOCS = []; // Postgres configuration.
 
 var pool = new Pool({
   user: 'postgres',
@@ -95,37 +96,42 @@ var pool = new Pool({
 var R = require("r-script");
 
 function prepareAvailableDocuments() {
-  console.log("DLEN: " + _docList.DOCS.length); // Preparing the variable to hold all data records.
+  // console.log("preparing filed")
+  fs.readdir(tables_folder, function (err, items) {
+    DOCS = items;
 
-  for (var d in _docList.DOCS) {
-    var docfile = _docList.DOCS[d];
-    var fileElements = docfile.split("_");
-    var docid = fileElements[0];
-    var page = fileElements[1].split(".")[0];
-    var extension = fileElements[1].split(".")[1];
+    for (var d in DOCS) {
+      var docfile = DOCS[d];
+      var fileElements = docfile.split("_");
+      var docid = fileElements[0];
+      var page = fileElements[1].split(".")[0];
+      var extension = fileElements[1].split(".")[1];
 
-    if (available_documents[docid]) {
-      var prev_data = available_documents[docid];
-      prev_data.pages[prev_data.pages.length] = page;
-      prev_data.abs_pos[prev_data.abs_pos.length] = abs_index.length;
-      prev_data.maxPage = page > prev_data.maxPage ? page : prev_data.maxPage;
-      available_documents[docid] = prev_data;
-    } else {
-      available_documents[docid] = {
-        abs_pos: [abs_index.length],
-        pages: [page],
+      if (available_documents[docid]) {
+        var prev_data = available_documents[docid];
+        prev_data.pages[prev_data.pages.length] = page;
+        prev_data.abs_pos[prev_data.abs_pos.length] = abs_index.length;
+        prev_data.maxPage = page > prev_data.maxPage ? page : prev_data.maxPage;
+        available_documents[docid] = prev_data;
+      } else {
+        available_documents[docid] = {
+          abs_pos: [abs_index.length],
+          pages: [page],
+          extension: extension,
+          maxPage: page
+        };
+      }
+
+      abs_index[abs_index.length] = {
+        docid: docid,
+        page: page,
         extension: extension,
-        maxPage: page
+        docfile: docfile
       };
     }
 
-    abs_index[abs_index.length] = {
-      docid: docid,
-      page: page,
-      extension: extension,
-      docfile: docfile
-    };
-  }
+    console.log("DLEN: " + DOCS.length);
+  });
 }
 
 function getAnnotationResults() {
@@ -208,7 +214,8 @@ var python = pythonBridge({
   python: 'python3'
 });
 python.ex(_templateObject());
-console.log(process.cwd());
+console.log(process.cwd()); //   sgd = pickle.load(open("./src/sgd_multiterm.sav", 'rb'))
+
 python.ex(_templateObject2());
 
 function classify(_x4) {
@@ -280,7 +287,7 @@ function _attempt_predictions() {
               var _ref8 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
               _regenerator.default.mark(function _callee11(resolve, reject) {
-                var a, lines, predictions, l, currentLine, terms, c, pred_class;
+                var a, lines, predictions, l, currentLine, terms, cellClasses, cellClass, c, cellClassSelector, pred_class;
                 return _regenerator.default.wrap(function _callee11$(_context11) {
                   while (1) {
                     switch (_context11.prev = _context11.next) {
@@ -293,48 +300,58 @@ function _attempt_predictions() {
 
                       case 5:
                         if (!(l < lines.length)) {
-                          _context11.next = 16;
+                          _context11.next = 18;
                           break;
                         }
 
                         currentLine = cheerio(lines[l]);
                         terms = [];
+                        cellClasses = [];
+                        cellClass = "";
 
                         for (c = 0; c < currentLine.children().length; c++) {
                           terms[terms.length] = cheerio(currentLine.children()[c]).text().trim().replace(/\n/g, " ").toLowerCase();
+                          cellClassSelector = cheerio(currentLine.children()[c]).children()[0];
+
+                          if (cellClassSelector) {
+                            cellClass = cellClassSelector.attribs.class || "";
+                          }
+
+                          cellClasses[cellClasses.length] = cellClass;
                         }
 
-                        _context11.next = 11;
+                        _context11.next = 13;
                         return classify(terms);
 
-                      case 11:
+                      case 13:
                         pred_class = _context11.sent;
                         predictions[l] = {
                           pred_class: pred_class,
-                          terms: terms
+                          terms: terms,
+                          cellClasses: cellClasses
                         };
 
-                      case 13:
+                      case 15:
                         l++;
                         _context11.next = 5;
                         break;
 
-                      case 16:
+                      case 18:
                         resolve(predictions);
-                        _context11.next = 22;
+                        _context11.next = 24;
                         break;
 
-                      case 19:
-                        _context11.prev = 19;
+                      case 21:
+                        _context11.prev = 21;
                         _context11.t0 = _context11["catch"](0);
                         reject(_context11.t0);
 
-                      case 22:
+                      case 24:
                       case "end":
                         return _context11.stop();
                     }
                   }
-                }, _callee11, this, [[0, 19]]);
+                }, _callee11, this, [[0, 21]]);
               }));
 
               return function (_x27, _x28) {
@@ -409,7 +426,7 @@ app.get('/', function (req, res) {
 app.get('/api/allMetaData', function (req, res) {
   res.send({
     abs_index: abs_index,
-    total: _docList.DOCS.length,
+    total: DOCS.length,
     available_documents: available_documents
   });
 });
@@ -568,7 +585,7 @@ app.get('/api/abs_index', function (req, res) {
 });
 app.get('/api/totalTables', function (req, res) {
   res.send({
-    total: _docList.DOCS.length
+    total: DOCS.length
   });
 });
 app.get('/api/classify',
@@ -615,44 +632,26 @@ app.get('/api/getTable', function (req, res) {
   //debugger
   try {
     if (req.query && req.query.docid && req.query.page && available_documents[req.query.docid] && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1) {
-      var docid = req.query.docid + "_" + req.query.page + ".xlsx"; // console.log("GET TABLE CALLED0: "+"HTML_TABLES/"+docid+"_files")
-      //
-      // if (!fs.existsSync("HTML_TABLES/"+docid+"_files")) {
-      //     docid = req.query.docid + "_" + req.query.page;
-      // }
-      //
-      //
-
-      var htmlFolder = "HTML_TABLES/" + docid + "_files/";
-      var htmlFile = "sheet001.html";
-      console.log("GET TABLE CALLED: " + htmlFolder + htmlFile);
-
-      if (!fs.existsSync(htmlFolder + htmlFile)) {
-        docid = req.query.docid + "_" + req.query.page;
-        htmlFolder = "HTML_TABLES/" + docid + "_files/";
-        htmlFile = "sheet001.htm";
-        console.log("GET TABLE CALLED Corrected: " + htmlFolder + htmlFile);
-      }
-
-      console.log("GET TABLE CALLED: " + htmlFile);
+      var docid = req.query.docid + "_" + req.query.page + ".html";
+      var htmlFolder = tables_folder + "/";
+      var htmlFile = docid;
       fs.readFile(htmlFolder + htmlFile, "utf8", function (err, data) {
-        fs.readFile(htmlFolder + "stylesheet.css", "utf8",
+        fs.readFile(cssFolder + "/" + "stylesheet.css", "utf8",
         /*#__PURE__*/
         function () {
           var _ref4 = (0, _asyncToGenerator2.default)(
           /*#__PURE__*/
           _regenerator.default.mark(function _callee4(err2, data_ss) {
-            var tablePage, spaceRow, headerNodes, maxOUT, htmlHeader, h, headText, textLimit, actual_table, ss, formattedPage, predictions, preds_matrix, max_col, l, getTopDescriptors, col_top_descriptors, c, column_data, k, allfreqs, descriptors, row_top_descriptors, r, row_data, predicted;
+            var tablePage, spaceRow, headerNodes, htmlHeader, h, headText, textLimit, actual_table, formattedPage, predictions, preds_matrix, class_matrix, max_col, l, getTopDescriptors, col_top_descriptors, c, column_data, k, allfreqs, descriptors, row_top_descriptors, r, row_data, predicted;
             return _regenerator.default.wrap(function _callee4$(_context4) {
               while (1) {
                 switch (_context4.prev = _context4.next) {
                   case 0:
                     _context4.prev = 0;
-                    tablePage = cheerio.load(data);
-                    tablePage("col").removeAttr('style');
+                    tablePage = cheerio.load(data); // tablePage("col").removeAttr('style');
 
                     if (tablePage) {
-                      _context4.next = 6;
+                      _context4.next = 5;
                       break;
                     }
 
@@ -663,14 +662,14 @@ app.get('/api/getTable', function (req, res) {
                     });
                     return _context4.abrupt("return");
 
-                  case 6:
-                    _context4.next = 13;
+                  case 5:
+                    _context4.next = 11;
                     break;
 
-                  case 8:
-                    _context4.prev = 8;
+                  case 7:
+                    _context4.prev = 7;
                     _context4.t0 = _context4["catch"](0);
-                    console.log(JSON.stringify(_context4.t0) + " -- " + JSON.stringify(data));
+                    // console.log(JSON.stringify(e)+" -- " + JSON.stringify(data))
                     res.send({
                       htmlHeader: "",
                       formattedPage: "",
@@ -678,40 +677,9 @@ app.get('/api/getTable', function (req, res) {
                     });
                     return _context4.abrupt("return");
 
-                  case 13:
+                  case 11:
                     spaceRow = -1;
-                    headerNodes = [];
-                    maxOUT = 0;
-
-                  case 16:
-                    if (!true) {
-                      _context4.next = 25;
-                      break;
-                    }
-
-                    if (!(cheerio(tablePage("table").find("tr")[0]).text().trim().length < 1)) {
-                      _context4.next = 20;
-                      break;
-                    }
-
-                    cheerio(tablePage("table").find("tr")[0]).remove();
-                    return _context4.abrupt("break", 25);
-
-                  case 20:
-                    headerNodes.push(cheerio(tablePage("table").find("tr")[0]).remove());
-
-                    if (!(maxOUT++ > 10)) {
-                      _context4.next = 23;
-                      break;
-                    }
-
-                    return _context4.abrupt("break", 25);
-
-                  case 23:
-                    _context4.next = 16;
-                    break;
-
-                  case 25:
+                    headerNodes = [cheerio(tablePage(".headers")[0]).remove()];
                     htmlHeader = "";
 
                     for (h in headerNodes) {
@@ -723,12 +691,15 @@ app.get('/api/getTable', function (req, res) {
 
                     htmlHeader = "<table>" + htmlHeader + "</table>";
                     actual_table = tablePage("table").parent().html();
-                    ss = "<style>" + data_ss + " td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>";
-                    formattedPage = "<div>" + ss + "</head>" + actual_table + "</div>";
-                    _context4.next = 33;
+                    actual_table = cheerio.load(actual_table);
+                    actual_table("tr > td:nth-child(1), tr > td:nth-child(2), tr > th:nth-child(1), tr > th:nth-child(2)").remove();
+                    actual_table = actual_table.html(); // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
+
+                    formattedPage = "<div><style>" + data_ss + "</style>" + actual_table + "</div>";
+                    _context4.next = 23;
                     return attempt_predictions(actual_table);
 
-                  case 33:
+                  case 23:
                     predictions = _context4.sent;
                     /// this should really go into a function.
                     preds_matrix = predictions.map(function (e) {
@@ -737,6 +708,11 @@ app.get('/api/getTable', function (req, res) {
                       });
                     }); // hell of a line!
 
+                    class_matrix = predictions.map(function (e) {
+                      return e.cellClasses.map(function (cellClass) {
+                        return cellClass;
+                      });
+                    });
                     debugger;
                     max_col = 0;
 
@@ -777,7 +753,7 @@ app.get('/api/getTable', function (req, res) {
                       });
 
                       for (k in column_data.freqs) {
-                        // to qualify for a row descriptor the frequency should at least be half of the length of the column headings.
+                        // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
                         if (column_data.freqs[undefined] == column_data.max || column_data.freqs[k] == 1) {
                           allfreqs = column_data.freqs;
                           delete allfreqs[k];
@@ -829,12 +805,12 @@ app.get('/api/getTable', function (req, res) {
                       predicted: predicted
                     });
 
-                  case 46:
+                  case 37:
                   case "end":
                     return _context4.stop();
                 }
               }
-            }, _callee4, this, [[0, 8]]);
+            }, _callee4, this, [[0, 7]]);
           }));
 
           return function (_x19, _x20) {
