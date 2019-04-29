@@ -23,7 +23,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n  sgd = pickle.load(open(\"./src/sgd_l_svm_char.sav\", 'rb'))\n  def classify(h):\n    d={}\n    result = sgd.predict(h)\n    for r in range(0,len(h)):\n      d[h[r]] = result[r]\n    return d\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n  sgd = pickle.load(open(\"./src/sgd_multiterm.sav\", 'rb'))\n  def classify(h):\n    d={}\n    result = sgd.predict(h)\n    for r in range(0,len(h)):\n      d[h[r]] = result[r]\n    return d\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -215,6 +215,7 @@ var python = pythonBridge({
 });
 python.ex(_templateObject());
 console.log(process.cwd()); //   sgd = pickle.load(open("./src/sgd_multiterm.sav", 'rb'))
+//   sgd = pickle.load(open("./src/sgd_l_svm_char.sav", 'rb'))
 
 python.ex(_templateObject2());
 
@@ -693,13 +694,14 @@ app.get('/api/getTable', function (req, res) {
                     actual_table = tablePage("table").parent().html();
                     actual_table = cheerio.load(actual_table);
                     actual_table("tr > td:nth-child(1), tr > td:nth-child(2), tr > th:nth-child(1), tr > th:nth-child(2)").remove();
+                    actual_table("thead").remove();
                     actual_table = actual_table.html(); // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
 
                     formattedPage = "<div><style>" + data_ss + "</style>" + actual_table + "</div>";
-                    _context4.next = 23;
+                    _context4.next = 24;
                     return attempt_predictions(actual_table);
 
-                  case 23:
+                  case 24:
                     predictions = _context4.sent;
                     /// this should really go into a function.
                     preds_matrix = predictions.map(function (e) {
@@ -835,7 +837,7 @@ app.get('/api/getTable', function (req, res) {
                       predicted: predicted
                     });
 
-                  case 38:
+                  case 39:
                   case "end":
                     return _context4.stop();
                 }

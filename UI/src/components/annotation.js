@@ -67,7 +67,7 @@ class Annotation extends Component {
   render() {
 
     var descriptors = ["outcomes", "arms", "measures", "subgroup_name", "subgroup_level","baseline_level_1","baseline_level_2", "time/period", "other", "p-interaction"]
-        descriptors = ["outcomes", "characteristic", "arms", "measures", "time/period", "other", "p-interaction"]
+        descriptors = ["outcomes", "characteristic_name", "characteristic_level", "arms", "measures", "time/period", "other", "p-interaction"]
 
 
     return (

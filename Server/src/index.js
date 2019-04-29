@@ -125,9 +125,9 @@ python.ex`
 
 console.log(process.cwd())
 //   sgd = pickle.load(open("./src/sgd_multiterm.sav", 'rb'))
-
+//   sgd = pickle.load(open("./src/sgd_l_svm_char.sav", 'rb'))
 python.ex`
-  sgd = pickle.load(open("./src/sgd_l_svm_char.sav", 'rb'))
+  sgd = pickle.load(open("./src/sgd_multiterm.sav", 'rb'))
   def classify(h):
     d={}
     result = sgd.predict(h)
@@ -432,13 +432,11 @@ app.get('/api/getTable',function(req,res){
 
 
 
-                                      var actual_table = tablePage("table").parent().html()
-
-                                          actual_table = cheerio.load(actual_table)
-                                          actual_table("tr > td:nth-child(1), tr > td:nth-child(2), tr > th:nth-child(1), tr > th:nth-child(2)").remove()
-
-                                          actual_table = actual_table.html()
-
+                                      var actual_table = tablePage("table").parent().html();
+                                          actual_table = cheerio.load(actual_table);
+                                          actual_table("tr > td:nth-child(1), tr > td:nth-child(2), tr > th:nth-child(1), tr > th:nth-child(2)").remove();
+                                          actual_table("thead").remove();
+                                					actual_table = actual_table.html();
 
                                       // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
                                       var formattedPage = "<div><style>"+data_ss+"</style>"+actual_table+"</div>"
