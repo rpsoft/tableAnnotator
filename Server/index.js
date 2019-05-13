@@ -23,7 +23,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n  sgd = pickle.load(open(\"./src/sgd_multiterm.sav\", 'rb'))\n  def classify(h):\n    d={}\n    result = sgd.predict(h)\n    for r in range(0,len(h)):\n      d[h[r]] = result[r]\n    return d\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n  sgd = pickle.load(open(\"./src/sgd_nbmr_full.sav\", 'rb'))\n  def classify(h):\n    d={}\n    result = sgd.predict(h)\n    for r in range(0,len(h)):\n      d[h[r]] = result[r]\n    return d\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -93,7 +93,12 @@ var pool = new Pool({
   port: 5432
 }); //NODE R CONFIGURATION.
 
-var R = require("r-script");
+var R = require("r-script"); //Important to use this function for all text extracted from the tables.
+
+
+function prepare_cell_text(text) {
+  return text.replace(/[0-9]+/g, 'nmbr').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g, " ").trim().toLowerCase();
+}
 
 function prepareAvailableDocuments() {
   // console.log("preparing filed")
@@ -236,7 +241,8 @@ function _classify() {
               var cleanTerms = [];
 
               for (t in terms) {
-                var term = terms[t].replace(/[/(){}\[\]\|@,;]/g, " ").replace(/[^a-z #+_]/g, "").trim().toLowerCase();
+                //var term = terms[t].replace(/[/(){}\[\]\|@,;]/g, " ").replace(/[^a-z #+_]/g,"").trim().toLowerCase()
+                var term = prepare_cell_text(terms[t]);
 
                 if (term.length > 0) {
                   if (term.replace(/[^a-z]/g, "").length > 2) {
@@ -247,7 +253,7 @@ function _classify() {
               }
 
               if (cleanTerms.length > 0) {
-                console.log(cleanTerms);
+                //console.log(cleanTerms)
                 python(_templateObject3(), cleanTerms).then(function (x) {
                   return resolve(x);
                 }).catch(python.Exception, function (e) {
@@ -319,7 +325,8 @@ function _attempt_predictions() {
                           }
 
                           cellClasses[cellClasses.length] = cellClass;
-                        }
+                        } // debugger
+
 
                         _context11.next = 13;
                         return classify(terms);
@@ -338,6 +345,7 @@ function _attempt_predictions() {
                         break;
 
                       case 18:
+                        // debugger
                         resolve(predictions);
                         _context11.next = 24;
                         break;
@@ -643,7 +651,7 @@ app.get('/api/getTable', function (req, res) {
           var _ref4 = (0, _asyncToGenerator2.default)(
           /*#__PURE__*/
           _regenerator.default.mark(function _callee4(err2, data_ss) {
-            var tablePage, spaceRow, headerNodes, htmlHeader, h, headText, textLimit, actual_table, formattedPage, predictions, preds_matrix, class_matrix, max_col, l, getTopDescriptors, cleanModifier, col_top_descriptors, c, unique_modifiers_in_column, u, unique_modifier, column_data, k, allfreqs, descriptors, row_top_descriptors, r, row_data, predicted;
+            var tablePage, spaceRow, headerNodes, htmlHeader, h, headText, textLimit, actual_table, formattedPage, predictions, preds_matrix, class_matrix, content_type_matrix, max_col, l, getTopDescriptors, cleanModifier, col_top_descriptors, c, content_types_in_column, unique_modifiers_in_column, u, unique_modifier, column_data, k, allfreqs, descriptors, row_top_descriptors, r, content_types_in_row, row_data, predicted;
             return _regenerator.default.wrap(function _callee4$(_context4) {
               while (1) {
                 switch (_context4.prev = _context4.next) {
@@ -706,16 +714,22 @@ app.get('/api/getTable', function (req, res) {
                     /// this should really go into a function.
                     preds_matrix = predictions.map(function (e) {
                       return e.terms.map(function (term) {
-                        return e.pred_class[term.replace(/[/(){}\[\]\|@,;]/g, " ").replace(/[^a-z #+_]/g, "").trim()];
+                        return e.pred_class[prepare_cell_text(term)];
                       });
-                    }); // hell of a line!
-
+                    });
                     class_matrix = predictions.map(function (e) {
                       return e.cellClasses.map(function (cellClass) {
                         return cellClass;
                       });
+                    }); // values in this matrix represent the cell contents, and can be: "text", "numeric" or ""
+
+                    content_type_matrix = predictions.map(function (e) {
+                      return e.terms.map(function (term) {
+                        var numberless_size = term.replace(/([^A-z0-9 ])/g, "").replace(/[0-9]+/g, '').replace(/ +/g, " ").trim().length;
+                        var spaceless_size = term.replace(/([^A-z0-9 ])/g, "").replace(/ +/g, " ").trim().length;
+                        return spaceless_size == 0 ? "" : numberless_size >= spaceless_size / 2 ? "text" : "numeric";
+                      });
                     });
-                    debugger;
                     max_col = 0;
 
                     for (l = 0; l < preds_matrix.length; l++) {
@@ -737,97 +751,177 @@ app.get('/api/getTable', function (req, res) {
                     };
 
                     cleanModifier = function cleanModifier(modifier) {
-                      return modifier.replace("firstCol", "").replace("firstLastCol", "").trim();
+                      // I used to .replace("firstCol","").replace("firstLastCol","") the modifier.
+                      return modifier.replace("firstCol", "empty_row").replace("firstLastCol", "empty_row_with_p_value").trim();
                     }; //Estimate column predictions.
+                    //debugger
 
 
-                    debugger;
                     col_top_descriptors = [];
+                    c = 0;
 
-                    for (c = 0; c < max_col; c++) {
-                      unique_modifiers_in_column = class_matrix.map(function (x) {
-                        return x[c];
-                      }).map(cleanModifier).filter(function (v, i, a) {
-                        return a.indexOf(v) === i;
-                      });
+                  case 34:
+                    if (!(c < max_col)) {
+                      _context4.next = 43;
+                      break;
+                    }
 
-                      for (u in unique_modifiers_in_column) {
-                        unique_modifier = unique_modifiers_in_column[u]; // if ( [""].indexOf(unique_modifier ) > -1){ //ignore these. Add at will.
-                        //   continue
-                        // }
+                    content_types_in_column = content_type_matrix.map(function (x, i) {
+                      return [x[c], i];
+                    }).reduce(function (countMap, word) {
+                      switch (word[0]) {
+                        case "numeric":
+                          countMap["total_numeric"] = ++countMap["total_numeric"] || 1;
+                          break;
 
-                        column_data = preds_matrix.map(function (x, i) {
-                          return [x[c], i];
-                        }).reduce(function (countMap, word) {
-                          var i = word[1];
-                          word = word[0];
+                        case "text":
+                          countMap["total_text"] = ++countMap["total_text"] || 1;
+                          break;
 
-                          if (unique_modifier === cleanModifier(class_matrix[i][c])) {
-                            countMap.freqs[word] = ++countMap.freqs[word] || 1;
-                            var max = countMap["max"] || 0;
-                            countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max;
-                            countMap["total"] = ++countMap["total"] || 1;
-                          }
+                        default:
+                          countMap["total_empty"] = ++countMap["total_empty"] || 1;
+                      }
 
-                          return countMap;
-                        }, {
-                          total: 0,
-                          freqs: {}
-                        });
+                      return countMap;
+                    }, {
+                      total_numeric: 0,
+                      total_text: 0,
+                      total_empty: 0
+                    });
 
-                        for (k in column_data.freqs) {
-                          // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
-                          if (column_data.freqs[undefined] == column_data.max || column_data.freqs[k] == 1) {
-                            allfreqs = column_data.freqs;
-                            delete allfreqs[k];
-                            column_data.freqs = allfreqs;
-                          }
+                    if (content_types_in_column.total_text >= content_types_in_column.total_numeric) {
+                      _context4.next = 38;
+                      break;
+                    }
+
+                    return _context4.abrupt("continue", 40);
+
+                  case 38:
+                    unique_modifiers_in_column = class_matrix.map(function (x) {
+                      return x[c];
+                    }).map(cleanModifier).filter(function (v, i, a) {
+                      return a.indexOf(v) === i;
+                    }); // debugger
+
+                    for (u in unique_modifiers_in_column) {
+                      unique_modifier = unique_modifiers_in_column[u];
+                      column_data = preds_matrix.map(function (x, i) {
+                        return [x[c], i];
+                      }).reduce(function (countMap, word) {
+                        var i = word[1];
+                        word = word[0];
+
+                        if (unique_modifier === cleanModifier(class_matrix[i][c])) {
+                          countMap.freqs[word] = ++countMap.freqs[word] || 1;
+                          var max = countMap["max"] || 0;
+                          countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max;
+                          countMap["total"] = ++countMap["total"] || 1;
                         }
 
-                        descriptors = getTopDescriptors(3, column_data.freqs, ["arms", "undefined"]);
-                        if (descriptors.length > 0) col_top_descriptors[col_top_descriptors.length] = {
-                          descriptors: descriptors,
-                          c: c,
-                          unique_modifier: unique_modifier
-                        };
-                      }
-                    } // Estimate row predictions
-
-
-                    row_top_descriptors = []; // debugger
-
-                    for (r in preds_matrix) {
-                      row_data = preds_matrix[r].reduce(function (countMap, word) {
-                        countMap.freqs[word] = ++countMap.freqs[word] || 1;
-                        var max = countMap["max"] || 0;
-                        countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max;
-                        countMap["total"] = ++countMap["total"] || 1;
                         return countMap;
                       }, {
                         total: 0,
                         freqs: {}
                       });
 
-                      for (k in row_data.freqs) {
-                        // to qualify for a row descriptor the frequency should at least be half of the length of the column headings.
-                        if (row_data.freqs[undefined] == row_data.max || row_data.freqs[k] == 1) {
-                          allfreqs = row_data.freqs;
+                      for (k in column_data.freqs) {
+                        // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
+                        if (column_data.freqs[undefined] == column_data.max || column_data.freqs[k] == 1) {
+                          allfreqs = column_data.freqs;
                           delete allfreqs[k];
-                          row_data.freqs = allfreqs;
+                          column_data.freqs = allfreqs;
                         }
                       }
 
-                      descriptors = getTopDescriptors(3, row_data.freqs, ["undefined"]);
-                      if (descriptors.length > 0) row_top_descriptors[row_top_descriptors.length] = {
+                      descriptors = getTopDescriptors(3, column_data.freqs, ["arms", "undefined"]);
+                      if (descriptors.length > 0) col_top_descriptors[col_top_descriptors.length] = {
                         descriptors: descriptors,
-                        c: r,
-                        unique_modifier: ""
+                        c: c,
+                        unique_modifier: unique_modifier
                       };
                     }
 
+                  case 40:
+                    c++;
+                    _context4.next = 34;
+                    break;
+
+                  case 43:
+                    // Estimate row predictions
+                    row_top_descriptors = []; //  debugger
+
+                    _context4.t1 = _regenerator.default.keys(preds_matrix);
+
+                  case 45:
+                    if ((_context4.t2 = _context4.t1()).done) {
+                      _context4.next = 56;
+                      break;
+                    }
+
+                    r = _context4.t2.value;
+                    content_types_in_row = content_type_matrix[r].reduce(function (countMap, word) {
+                      switch (word) {
+                        case "numeric":
+                          countMap["total_numeric"] = ++countMap["total_numeric"] || 1;
+                          break;
+
+                        case "text":
+                          countMap["total_text"] = ++countMap["total_text"] || 1;
+                          break;
+
+                        default:
+                          countMap["total_empty"] = ++countMap["total_empty"] || 1;
+                      }
+
+                      return countMap;
+                    }, {
+                      total_numeric: 0,
+                      total_text: 0,
+                      total_empty: 0
+                    });
+
+                    if (content_types_in_row.total_text >= content_types_in_row.total_numeric) {
+                      _context4.next = 50;
+                      break;
+                    }
+
+                    return _context4.abrupt("continue", 45);
+
+                  case 50:
+                    row_data = preds_matrix[r].reduce(function (countMap, word) {
+                      countMap.freqs[word] = ++countMap.freqs[word] || 1;
+                      var max = countMap["max"] || 0;
+                      countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max;
+                      countMap["total"] = ++countMap["total"] || 1;
+                      return countMap;
+                    }, {
+                      total: 0,
+                      freqs: {}
+                    });
+
+                    for (k in row_data.freqs) {
+                      // to qualify for a row descriptor the frequency should at least be half of the length of the column headings.
+                      if (row_data.freqs[undefined] == row_data.max || row_data.freqs[k] == 1) {
+                        allfreqs = row_data.freqs;
+                        delete allfreqs[k];
+                        row_data.freqs = allfreqs;
+                      }
+                    }
+
+                    descriptors = getTopDescriptors(3, row_data.freqs, ["undefined"]);
+                    if (descriptors.length > 0) row_top_descriptors[row_top_descriptors.length] = {
+                      descriptors: descriptors,
+                      c: r,
+                      unique_modifier: ""
+                    };
+                    _context4.next = 45;
+                    break;
+
+                  case 56:
                     predicted = {
                       cols: col_top_descriptors,
-                      rows: row_top_descriptors
+                      rows: row_top_descriptors //debugger
+
                     };
                     res.send({
                       status: "good",
@@ -837,7 +931,7 @@ app.get('/api/getTable', function (req, res) {
                       predicted: predicted
                     });
 
-                  case 39:
+                  case 58:
                   case "end":
                     return _context4.stop();
                 }

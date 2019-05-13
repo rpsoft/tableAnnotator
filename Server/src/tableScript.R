@@ -1,10 +1,10 @@
 #10_unpivot_tables
 #
- # library(tidyxl)
- # library(unpivotr)
- # library(tidyverse)
-
-needs(readr,tidyxl,unpivotr,tidyverse)
+ library(tidyxl)
+ library(unpivotr)
+ library(tidyverse)
+# 
+# needs(readr,tidyxl,unpivotr,tidyverse)
 
 ## Directory holding the script
 setwd("~/ihw/tableAnnotator/Server/src")
@@ -14,10 +14,10 @@ tablesDirectory <- "~/ihw/tableAnnotator/Single_table_sheets/"
 
 
 ################# PREPARING THE INPUT VARIABLE annotations.
+# 
+# write_rds(x = input, path = "test2.rds")
 
-#write_rds(x = input, path = "test2.rds")
-
-#input <- read_rds("test2.rds")
+input <- read_rds("test2.rds")
 # input
 
 
@@ -505,7 +505,7 @@ runAll <- function(){
       }
       TidyTableSafe <- safely(TidyTable)
 
-      a <- TidyTable(docid_page_selected = "28246237_2")
+      #a <- TidyTable(docid_page_selected = "28246237_2")
       ## Here can select trials for specific user
       # metadata <- metadata %>%
       #   filter(user == "Hebe")
@@ -538,5 +538,6 @@ runAll <- function(){
 # y
 
 # suppressWarnings(suppressMessages(runAll()))
+testing <- runAll()
 
 runAll()

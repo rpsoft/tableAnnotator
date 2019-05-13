@@ -209,12 +209,20 @@ class AnnotationView extends Component {
             content[current.descriptors[n]] = true
           }
 
-          var qualifier = current.unique_modifier.indexOf("indent") > -1 ? {"indented" : true} : {}
+          var qualifiers = {};
 
-          return {"location": loc,"content":content,"qualifiers":qualifier,"number":(parseInt(current.c)+1)}
+          if ( current.unique_modifier.indexOf("indent") > -1 ){ qualifiers["indented"] = true }
+          if ( current.unique_modifier.indexOf("bold") > -1 ){ qualifiers["bold"] = true }
+          if ( current.unique_modifier.indexOf("empty_row") > -1 ){ qualifiers["empty_row"] = true }
+          if ( current.unique_modifier.indexOf("empty_row_with_p_value") > -1 ){ qualifiers["empty_row_with_p_value"] = true }
+          if ( current.unique_modifier.indexOf("ital") > -1 ){ qualifiers["italic"] = true }
+
+
+          return {"location": loc,"content":content,"qualifiers":qualifiers,"number":(parseInt(current.c)+1)}
        } )
      }
 
+     debugger
      var col_annotations = process_auto_annotations (this.state.table.predicted.cols,"Col")
      var row_annotations = process_auto_annotations (this.state.table.predicted.rows,"Row")
 

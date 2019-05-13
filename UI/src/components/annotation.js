@@ -104,7 +104,7 @@ class Annotation extends Component {
            <MultiplePopover
                             value={this.state.qualifiers}
                             variable={"qualifiers"}
-                            options={["plain", "bold", "indented", "itallic", "empty_row","empty_row_with_p_value"]}
+                            options={["plain", "bold", "indented", "italic", "empty_row","empty_row_with_p_value"]}
                             updateAnnotation={ (values) => { this.handleMultiChoice("qualifiers",values) } }
                             />
 

@@ -56,7 +56,10 @@ const pool = new Pool({
 //NODE R CONFIGURATION.
 const R = require("r-script");
 
-
+//Important to use this function for all text extracted from the tables.
+function prepare_cell_text(text){
+    return text.replace(/[0-9]+/g, 'nmbr').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g," ").trim().toLowerCase()
+}
 
 function prepareAvailableDocuments(){
   // console.log("preparing filed")
@@ -127,7 +130,7 @@ console.log(process.cwd())
 //   sgd = pickle.load(open("./src/sgd_multiterm.sav", 'rb'))
 //   sgd = pickle.load(open("./src/sgd_l_svm_char.sav", 'rb'))
 python.ex`
-  sgd = pickle.load(open("./src/sgd_multiterm.sav", 'rb'))
+  sgd = pickle.load(open("./src/sgd_nbmr_full.sav", 'rb'))
   def classify(h):
     d={}
     result = sgd.predict(h)
@@ -143,7 +146,10 @@ async function classify(terms){
     var cleanTerms = []
 
     for( t in terms ){
-      var term = terms[t].replace(/[/(){}\[\]\|@,;]/g, " ").replace(/[^a-z #+_]/g,"").trim().toLowerCase()
+      //var term = terms[t].replace(/[/(){}\[\]\|@,;]/g, " ").replace(/[^a-z #+_]/g,"").trim().toLowerCase()
+
+      var term = prepare_cell_text(terms[t])
+
       if (term.length > 0){
         if ( term.replace(/[^a-z]/g,"").length > 2 ){ // na's and "to" as part of ranges matching this length. Potentially other rubbish picked up here.
           cleanTerms[cleanTerms.length] = term
@@ -152,7 +158,7 @@ async function classify(terms){
     }
 
     if ( cleanTerms.length > 0 ){
-      console.log(cleanTerms)
+      //console.log(cleanTerms)
 
       python`
         classify(${cleanTerms})
@@ -192,10 +198,12 @@ async function attempt_predictions(actual_table){
 
             cellClasses[cellClasses.length] = cellClass
           }
-
+          // debugger
           var pred_class = await classify(terms)
           predictions[l] = {pred_class,terms,cellClasses}
       }
+
+      // debugger
 
       resolve(predictions)
     }catch ( e){
@@ -445,12 +453,26 @@ app.get('/api/getTable',function(req,res){
                                       var predictions = await attempt_predictions(actual_table)
 
                                       /// this should really go into a function.
-                                      var preds_matrix = predictions.map( e => e.terms.map( term => e.pred_class[term.replace(/[/(){}\[\]\|@,;]/g, " ").replace(/[^a-z #+_]/g,"").trim()])) // hell of a line!
+                                      var preds_matrix = predictions.map(
+                                        e => e.terms.map(
+                                          term => e.pred_class[prepare_cell_text(term)]
+                                        )
+                                      )
 
                                       var class_matrix = predictions.map( e => e.cellClasses.map( cellClass => cellClass ))
 
+                                      // values in this matrix represent the cell contents, and can be: "text", "numeric" or ""
+                                      var content_type_matrix = predictions.map(
+                                        e => e.terms.map(
+                                          term => {
+                                            var numberless_size = term.replace(/([^A-z0-9 ])/g, "").replace(/[0-9]+/g, '').replace(/ +/g," ").trim().length
+                                            var spaceless_size = term.replace(/([^A-z0-9 ])/g, "").replace(/ +/g," ").trim().length
 
-                                      debugger;
+                                            return spaceless_size == 0 ? "" : (numberless_size >= spaceless_size/2 ? "text" : "numeric")
+
+                                          }
+                                        )
+                                      )
 
                                       var max_col = 0;
                                       for ( var l=0; l < preds_matrix.length; l++){
@@ -470,23 +492,41 @@ app.get('/api/getTable',function(req,res){
                                       }
 
                                       var cleanModifier = (modifier) => {
-                                        return modifier.replace("firstCol","").replace("firstLastCol","").trim()
+                                        // I used to .replace("firstCol","").replace("firstLastCol","") the modifier.
+                                        return modifier.replace("firstCol","empty_row").replace("firstLastCol","empty_row_with_p_value").trim()
                                       }
+
                                       //Estimate column predictions.
-                                      debugger
+                                      //debugger
                                       var col_top_descriptors = []
 
                                       for ( var c=0; c < max_col; c++ ){
 
+                                        var content_types_in_column = content_type_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
+                                           switch (word[0]) {
+                                             case "numeric":
+                                               countMap["total_numeric"] = ++countMap["total_numeric"] || 1
+                                               break;
+                                             case "text":
+                                               countMap["total_text"] = ++countMap["total_text"] || 1
+                                               break;
+                                             default:
+                                               countMap["total_empty"] = ++countMap["total_empty"] || 1
+                                           }
+                                           return countMap
+                                        },{ total_numeric:0, total_text:0, total_empty:0 })
+
+                                        if ( ! ( content_types_in_column.total_text >= content_types_in_column.total_numeric ) ){
+                                          continue;
+                                        }
+
+
                                         var unique_modifiers_in_column = class_matrix.map(x => x[c]).map(cleanModifier).filter((v, i, a) => a.indexOf(v) === i)
 
+                                        // debugger
                                         for( var u in unique_modifiers_in_column){
 
                                             var unique_modifier = unique_modifiers_in_column[u]
-
-                                            // if ( [""].indexOf(unique_modifier ) > -1){ //ignore these. Add at will.
-                                            //   continue
-                                            // }
 
                                             var column_data = preds_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
                         												  var i = word[1]
@@ -520,8 +560,29 @@ app.get('/api/getTable',function(req,res){
                                       // Estimate row predictions
 
                                       var row_top_descriptors = []
-                                      // debugger
+                                    //  debugger
+
                                       for (var r in preds_matrix){
+
+
+                                          var content_types_in_row = content_type_matrix[r].reduce( (countMap, word) => {
+                                            switch (word) {
+                                              case "numeric":
+                                                countMap["total_numeric"] = ++countMap["total_numeric"] || 1
+                                                break;
+                                              case "text":
+                                                countMap["total_text"] = ++countMap["total_text"] || 1
+                                                break;
+                                              default:
+                                                countMap["total_empty"] = ++countMap["total_empty"] || 1
+                                            }
+                                            return countMap
+                                         },{ total_numeric:0, total_text:0, total_empty:0 })
+
+                                         if ( ! ( content_types_in_row.total_text >= content_types_in_row.total_numeric ) ){
+                                           continue;
+                                         }
+
                                           var row_data = preds_matrix[r].reduce( (countMap, word) => {
                                               countMap.freqs[word] = ++countMap.freqs[word] || 1
                                               var max = (countMap["max"] || 0)
@@ -547,7 +608,7 @@ app.get('/api/getTable',function(req,res){
 
 
                                       var predicted = { cols: col_top_descriptors, rows: row_top_descriptors}
-
+                                      //debugger
                                       res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
                                   });
 
