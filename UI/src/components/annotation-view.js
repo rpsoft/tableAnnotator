@@ -47,7 +47,7 @@ class AnnotationView extends Component {
     super()
 
     this.state = {
-        user: "",
+        user: props.location.query.user ? props.location.query.user : "",
         table: null,
         annotations:[],
         corrupted: false,
@@ -59,7 +59,7 @@ class AnnotationView extends Component {
           dir : "asc"
         }
     };
-
+    //debugger
   }
 
   async componentDidMount () {
@@ -81,7 +81,7 @@ class AnnotationView extends Component {
 
 
     this.setState({
-      user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
+      //user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
       corrupted : annotation.corrupted === 'true',
       corrupted_text : annotation.corrupted_text,
       docid : (annotation || annotation.docid) || this.props.location.query.docid,
@@ -139,6 +139,9 @@ class AnnotationView extends Component {
           annotation = JSON.parse(await fetch.getAnnotationByID(this.props.location.query.docid,this.props.location.query.page,this.state.user))
         }
 
+        //var user = this.state.user != props.location.query.user ? this.state.user
+
+
         if ( annotation ){
           this.setState({
             table: JSON.parse(data),
@@ -146,7 +149,7 @@ class AnnotationView extends Component {
             page: annotation.page || this.props.location.query.page,
             allInfo,
             gindex: current_table_g_index,
-            user : this.state.user && this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
+            user : props.location.query.user ? props.location.query.user : "",
             corrupted : annotation.corrupted === 'true',
             corrupted_text : annotation.corrupted_text,
             tableType : annotation.tableType ? annotation.tableType : "",
@@ -160,7 +163,7 @@ class AnnotationView extends Component {
             page: this.props.location.query.page,
             allInfo,
             gindex: current_table_g_index,
-            user : this.state.user && this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
+            user : props.location.query.user ? props.location.query.user : "",
             allAnnotations: annotations_formatted
           })
         }
@@ -222,7 +225,7 @@ class AnnotationView extends Component {
        } )
      }
 
-     debugger
+     // debugger
      var col_annotations = process_auto_annotations (this.state.table.predicted.cols,"Col")
      var row_annotations = process_auto_annotations (this.state.table.predicted.rows,"Row")
 
@@ -481,7 +484,8 @@ class AnnotationView extends Component {
             onKeyDown={(event, index) => {
 
               if (event.key === 'Enter') {
-                  this.loadPageFromProps(this.props)
+                  // this.loadPageFromProps(this.props)
+                  this.shiftTables(0)
                   event.preventDefault();
               }
             }}
@@ -552,7 +556,7 @@ class AnnotationView extends Component {
                   <tr>
                     <td style={{padding:"0px 0px 0px 0px", verticalAlign: "top", paddingRight:50}}>
                       <div style={{fontWeight:"bold"}}>Any comments errors or issues?</div> <TextField
-                            value={this.state.corrupted_text ? this.state.corrupted_text : ""}
+                            value={this.state.corrupted_text && this.state.corrupted_text != 'undefined' ? this.state.corrupted_text : ""}
                             hintText="Please specify here"
                             onChange={(event,value) => {this.setState({corrupted_text: value})}}
                             style={{width:500,marginLeft:20,fontWeight:"normal"}}
@@ -605,7 +609,10 @@ class AnnotationView extends Component {
         </Card>
 
 
-        <Card style={{padding:5,marginTop:10}}><RaisedButton onClick={ () => {this.saveAnnotations();this.loadPageFromProps(this.props);} } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:200,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton></Card>
+        <Card style={{padding:5,marginTop:10}}>
+          <RaisedButton onClick={ () => {this.saveAnnotations();this.loadPageFromProps(this.props);} } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:200,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton>
+          <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Reload Changes</RaisedButton>
+        </Card>
 
 
 

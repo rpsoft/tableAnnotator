@@ -1,10 +1,10 @@
 #10_unpivot_tables
 #
- library(tidyxl)
- library(unpivotr)
- library(tidyverse)
+ # library(tidyxl)
+ # library(unpivotr)
+ # library(tidyverse)
 # 
-# needs(readr,tidyxl,unpivotr,tidyverse)
+needs(readr,tidyxl,unpivotr,tidyverse)
 
 ## Directory holding the script
 setwd("~/ihw/tableAnnotator/Server/src")
@@ -15,9 +15,9 @@ tablesDirectory <- "~/ihw/tableAnnotator/Single_table_sheets/"
 
 ################# PREPARING THE INPUT VARIABLE annotations.
 # 
-# write_rds(x = input, path = "test2.rds")
+write_rds(x = input, path = "test2.rds")
 
-input <- read_rds("test2.rds")
+# input <- read_rds("test2.rds")
 # input
 
 
@@ -143,7 +143,7 @@ runAll <- function(){
           filter(is.na(qualifiers)) %>%
           select(-qualifiers)
 
-        browser()
+        # browser()
 
         metadata_noqual[, c("bold","itallic", "plain",
                             "empty_row", "empty_row_with_p_value",
@@ -174,8 +174,9 @@ runAll <- function(){
 
       metadata <- prepareAnnotations(annotations )
 
+      
       TidyTable <- function(docid_page_selected){
-
+         # browser()
         meta <- metadata %>%
           filter(docid_page == docid_page_selected)
 
@@ -187,7 +188,7 @@ runAll <- function(){
         # a difference is asserted
         # eg if subgroup names nad subgroup labels have exactly the same fomratting
         meta_distinct <- meta %>%
-          select(location, number, bold:plain) %>%
+          select(location, number, first_col, indent, bold,  italic, plain, first_last_col) %>%
           distinct()
         meta_d1 <- meta %>%
           group_by(location, number) %>%
@@ -330,7 +331,7 @@ runAll <- function(){
           filter(diff != 1)
         split_header <- empty_rows$empty_rows[1]
 
-        # Next identify any rows which are completely blank
+        # Next identify any rows which are completely blank 
         blank_row <- all_cells %>%
           BlankRow()
 
@@ -403,9 +404,13 @@ runAll <- function(){
         if(any(meta$location == "Col" & meta$number ==2)) print("Note two columns here, this is unusual")
 
         ## take table data component from within table body by excluding row-labels and columns-labels
+        
+        ## With a twist. P-interaction columns contain data, so should not be excluded. There may be other cases. so watch out. #####!!!!#####
+        meta_for_tdata <- meta %>% filter( ! ( location == "Col" & content == 'p-interaction' & number > 1))
+        
         table_data <- table_body %>%
-          filter(! row %in% meta$number[meta$location == "Row"],
-                 ! col %in% meta$number[meta$location == "Col"])
+          filter(! row %in% meta_for_tdata$number[meta_for_tdata$location == "Row"],
+                 ! col %in% meta_for_tdata$number[meta_for_tdata$location == "Col"])
         # rectify(table_data)
 
         ## Arrange the metadata so that the most rich row and column qualifying descriptions precede the simplest
@@ -451,6 +456,7 @@ runAll <- function(){
         }
 
         data_cells <- table_data %>% select(row, col, character)
+        # browser()
         for(i_choose in unique(col_lbls_meta$i)){
           ## Select each richest column description in turn, removing that from the dataset
           # browser()
@@ -529,7 +535,7 @@ runAll <- function(){
       result_success <- bind_rows(result_success, .id = "docid_page")
       # result_fail    <- result[!map_lgl(result, is.tibble)]
       # write_csv(result_success, "temp_hebe.csv")
-
+      # browser()
       return(result_success)
 
 }
@@ -538,6 +544,7 @@ runAll <- function(){
 # y
 
 # suppressWarnings(suppressMessages(runAll()))
-testing <- runAll()
+
+# testing <- runAll()
 
 runAll()
