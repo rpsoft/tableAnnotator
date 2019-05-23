@@ -143,7 +143,7 @@ class CommonView extends Component {
         <Card >
             <Card><div style={{padding:10,fontWeight:"bold",fontSize:20}}>All tables, and annotations</div></Card>
 
-            <div style={{height:700,overflowY:"scroll", marginTop:10, padding:20,paddingTop:5}}>{this.state.tables && this.state.allInfo ?
+            <div style={{height:"70vh",overflowY:"scroll", marginTop:10, padding:20,paddingTop:5}}>{this.state.tables && this.state.allInfo ?
                 (
                     this.state.allInfo.abs_index.map(
                       (v,i) => <div key={v.docid+"_"+v.page}>

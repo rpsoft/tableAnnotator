@@ -251,11 +251,38 @@ app.get('/',function(req,res){
 });
 
 app.get('/api/allMetaData',function(req,res){
+
   res.send({
     abs_index,
     total : DOCS.length,
     available_documents
   })
+});
+
+app.get('/api/allPredictions', async function(req,res){
+
+  var predictions = "user,docid,page,corrupted,tableType,location,number,content,qualifiers\n"
+
+  for ( var a in available_documents){
+    for ( var p in available_documents[a].pages ) {
+       var page = available_documents[a].pages[p]
+       var docid = a
+       var data = await readyTableData(docid,page)
+
+       for ( var c in data.predicted.cols) {
+         var col = data.predicted.cols[c]
+         predictions += ["auto",docid,page,false,"na","Col",(parseInt(col.c)+1),col.descriptors.join(";"),col.unique_modifier.split(" ").join(";")].join(",")+"\n"
+       }
+
+       for ( var r in data.predicted.rows) {
+         var row = data.predicted.rows[r]
+         predictions += ["auto",docid,page,false,"na","Row",(parseInt(row.c)+1),row.descriptors.join(";"),row.unique_modifier.split(" ").join(";")].join(",")+"\n"
+       }
+
+    }
+  }
+
+  res.send(predictions)
 });
 
 
@@ -385,8 +412,233 @@ app.get('/api/classify', async function(req,res){
 });
 
 
+async function readyTableData(docid,page){
+  var docid = docid+"_"+page+".html"
 
-app.get('/api/getTable',function(req,res){
+  var htmlFolder = tables_folder+"/"
+  var htmlFile = docid
+
+  var result = new Promise(function(resolve, reject) {
+
+    try {
+    fs.readFile(htmlFolder+htmlFile,
+                "utf8",
+                function(err, data) {
+                  fs.readFile(cssFolder+"/"+"stylesheet.css",
+                              "utf8",
+                              async function(err2, data_ss) {
+
+                                  var tablePage;
+
+                                  try{
+                                      tablePage = cheerio.load(data);
+                                      // tablePage("col").removeAttr('style');
+                                      if ( !tablePage ){
+                                            resolve({htmlHeader: "",formattedPage : "", title: "" })
+                                            return;
+                                      }
+                                  } catch (e){
+                                    // console.log(JSON.stringify(e)+" -- " + JSON.stringify(data))
+                                    resolve({htmlHeader: "",formattedPage : "", title: "" })
+                                    return;
+                                  }
+
+                                  var spaceRow = -1;
+
+                                  var headerNodes = [cheerio(tablePage(".headers")[0]).remove()]
+
+
+                                  var htmlHeader = ""
+
+                                  for ( var h in headerNodes){
+                                      // cheerio(headerNodes[h]).css("font-size","20px");
+                                      var headText = cheerio(headerNodes[h]).text().trim()
+                                      var textLimit = 400
+                                      htmlHeader = htmlHeader + '<tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">' + (headText.length > textLimit ? headText.slice(0,textLimit-1) +" [...] " : headText) + "</td></tr>"
+                                  }
+
+                                      htmlHeader = "<table>"+htmlHeader+"</table>"
+
+
+
+                                  var actual_table = tablePage("table").parent().html();
+                                      actual_table = cheerio.load(actual_table);
+                                      actual_table("tr > td:nth-child(1), tr > td:nth-child(2), tr > th:nth-child(1), tr > th:nth-child(2)").remove();
+                                      actual_table("thead").remove();
+                                      actual_table = actual_table.html();
+
+                                  // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
+                                  var formattedPage = "<div><style>"+data_ss+"</style>"+actual_table+"</div>"
+
+
+                                  var predictions = await attempt_predictions(actual_table)
+
+                                  /// this should really go into a function.
+                                  var preds_matrix = predictions.map(
+                                    e => e.terms.map(
+                                      term => e.pred_class[prepare_cell_text(term)]
+                                    )
+                                  )
+
+                                  var class_matrix = predictions.map( e => e.cellClasses.map( cellClass => cellClass ))
+
+                                  // values in this matrix represent the cell contents, and can be: "text", "numeric" or ""
+                                  var content_type_matrix = predictions.map(
+                                    e => e.terms.map(
+                                      term => {
+                                        var numberless_size = term.replace(/([^A-z0-9 ])/g, "").replace(/[0-9]+/g, '').replace(/ +/g," ").trim().length
+                                        var spaceless_size = term.replace(/([^A-z0-9 ])/g, "").replace(/ +/g," ").trim().length
+
+                                        return spaceless_size == 0 ? "" : (numberless_size >= spaceless_size/2 ? "text" : "numeric")
+
+                                      }
+                                    )
+                                  )
+
+                                  var max_col = 0;
+                                  for ( var l=0; l < preds_matrix.length; l++){
+                                      max_col = max_col > preds_matrix[l].length ? max_col : preds_matrix[l].length
+                                  }
+
+
+                                  var getTopDescriptors = (N,freqs,ignore) => {
+                                    var orderedKeys = Object.keys(freqs).sort( (a,b) => a > b )
+                                    for (var i in ignore ){
+                                      var toRemove = orderedKeys.indexOf(ignore[i])
+                                      if ( toRemove > -1)
+                                        orderedKeys.splice(toRemove,1)
+                                    }
+                                    var limit = orderedKeys.length < N ? orderedKeys.length : N
+                                    return orderedKeys.slice(0,limit)
+                                  }
+
+                                  var cleanModifier = (modifier) => {
+                                    // I used to .replace("firstCol","").replace("firstLastCol","") the modifier.
+                                    return modifier.replace("firstCol","empty_row").replace("firstLastCol","empty_row_with_p_value").trim()
+                                  }
+
+                                  //Estimate column predictions.
+                                  //debugger
+                                  var col_top_descriptors = []
+
+                                  for ( var c=0; c < max_col; c++ ){
+
+                                    var content_types_in_column = content_type_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
+                                       switch (word[0]) {
+                                         case "numeric":
+                                           countMap["total_numeric"] = ++countMap["total_numeric"] || 1
+                                           break;
+                                         case "text":
+                                           countMap["total_text"] = ++countMap["total_text"] || 1
+                                           break;
+                                         default:
+                                           countMap["total_empty"] = ++countMap["total_empty"] || 1
+                                       }
+                                       return countMap
+                                    },{ total_numeric:0, total_text:0, total_empty:0 })
+
+                                    if ( ! ( content_types_in_column.total_text >= content_types_in_column.total_numeric ) ){
+                                      continue;
+                                    }
+
+
+                                    var unique_modifiers_in_column = class_matrix.map(x => x[c]).map(cleanModifier).filter((v, i, a) => a.indexOf(v) === i)
+
+                                    for( var u in unique_modifiers_in_column){
+
+                                        var unique_modifier = unique_modifiers_in_column[u]
+
+                                        var column_data = preds_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
+                                              var i = word[1]
+                                                  word = word[0]
+                                              if ( unique_modifier === cleanModifier(class_matrix[i][c]) ){
+                                                countMap.freqs[word] = ++countMap.freqs[word] || 1
+                                                var max = (countMap["max"] || 0)
+                                                countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max
+                                                countMap["total"] = ++countMap["total"] || 1
+                                              }
+                                              return countMap
+                                        },{total:0,freqs:{}})
+
+                                        for ( var k in column_data.freqs ){ // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
+
+                                          if ( (column_data.freqs[undefined] == column_data.max) || column_data.freqs[k] == 1 ) {
+                                              var allfreqs = column_data.freqs
+                                              delete allfreqs[k]
+                                              column_data.freqs = allfreqs
+                                          }
+                                        }
+
+                                        var descriptors = getTopDescriptors(3,column_data.freqs,["arms","undefined"])
+                                      //  debugger
+                                        if ( descriptors.length > 0)
+                                          col_top_descriptors[col_top_descriptors.length] = {descriptors, c , unique_modifier}
+
+                                      }
+                                  }
+
+                                  // Estimate row predictions
+                                  var row_top_descriptors = []
+
+                                  for (var r in preds_matrix){
+
+
+                                      var content_types_in_row = content_type_matrix[r].reduce( (countMap, word) => {
+                                        switch (word) {
+                                          case "numeric":
+                                            countMap["total_numeric"] = ++countMap["total_numeric"] || 1
+                                            break;
+                                          case "text":
+                                            countMap["total_text"] = ++countMap["total_text"] || 1
+                                            break;
+                                          default:
+                                            countMap["total_empty"] = ++countMap["total_empty"] || 1
+                                        }
+                                        return countMap
+                                     },{ total_numeric:0, total_text:0, total_empty:0 })
+
+                                     if ( ! ( content_types_in_row.total_text >= content_types_in_row.total_numeric ) ){
+                                       continue;
+                                     }
+
+                                      var row_data = preds_matrix[r].reduce( (countMap, word) => {
+                                          countMap.freqs[word] = ++countMap.freqs[word] || 1
+                                          var max = (countMap["max"] || 0)
+                                          countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max
+                                          countMap["total"] = ++countMap["total"] || 1
+                                          return countMap
+                                      },{total:0,freqs:{}})
+
+                                      for ( var k in row_data.freqs ){ // to qualify for a row descriptor the frequency should at least be half of the length of the column headings.
+                                        if ((row_data.freqs[undefined] == row_data.max) || row_data.freqs[k] == 1 ) {
+                                            var allfreqs = row_data.freqs
+                                            delete allfreqs[k]
+                                            row_data.freqs = allfreqs
+                                        }
+                                      }
+
+                                      var descriptors = getTopDescriptors(3,row_data.freqs,["undefined"])
+
+                                      if ( descriptors.length > 0)
+                                        row_top_descriptors[row_top_descriptors.length] = {descriptors,c : r,unique_modifier:""}
+
+                                  }
+
+                                  var predicted = { cols: col_top_descriptors, rows: row_top_descriptors}
+                                  // res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
+                                  resolve({status: "good", htmlHeader,formattedPage, title:  titles_obj[docid.split(" ")[0]], predicted })
+                              });
+
+                });
+        } catch ( e ){
+            reject(e)
+        }
+      });
+      return result
+}
+
+
+app.get('/api/getTable',async function(req,res){
   //debugger
    try{
 
@@ -395,230 +647,15 @@ app.get('/api/getTable',function(req,res){
       && req.query.page && available_documents[req.query.docid]
       && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1){
 
-        var docid = req.query.docid+"_"+req.query.page+".html"
-
-        var htmlFolder = tables_folder+"/"
-        var htmlFile = docid
-
-        fs.readFile(htmlFolder+htmlFile,
-                    "utf8",
-                    function(err, data) {
-                      fs.readFile(cssFolder+"/"+"stylesheet.css",
-                                  "utf8",
-                                  async function(err2, data_ss) {
-
-                                      var tablePage;
-
-                                      try{
-                                          tablePage = cheerio.load(data);
-                                          // tablePage("col").removeAttr('style');
-                                          if ( !tablePage ){
-                                                res.send({htmlHeader: "",formattedPage : "", title: "" })
-                                                return;
-                                          }
-                                      } catch (e){
-                                        // console.log(JSON.stringify(e)+" -- " + JSON.stringify(data))
-                                        res.send({htmlHeader: "",formattedPage : "", title: "" })
-                                        return;
-                                      }
-
-                                      var spaceRow = -1;
-
-                                      var headerNodes = [cheerio(tablePage(".headers")[0]).remove()]
-
-
-                                      var htmlHeader = ""
-
-                                      for ( var h in headerNodes){
-                                          // cheerio(headerNodes[h]).css("font-size","20px");
-                                          var headText = cheerio(headerNodes[h]).text().trim()
-                                          var textLimit = 400
-                                          htmlHeader = htmlHeader + '<tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">' + (headText.length > textLimit ? headText.slice(0,textLimit-1) +" [...] " : headText) + "</td></tr>"
-                                      }
-
-                                          htmlHeader = "<table>"+htmlHeader+"</table>"
-
-
-
-                                      var actual_table = tablePage("table").parent().html();
-                                          actual_table = cheerio.load(actual_table);
-                                          actual_table("tr > td:nth-child(1), tr > td:nth-child(2), tr > th:nth-child(1), tr > th:nth-child(2)").remove();
-                                          actual_table("thead").remove();
-                                					actual_table = actual_table.html();
-
-                                      // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
-                                      var formattedPage = "<div><style>"+data_ss+"</style>"+actual_table+"</div>"
-
-
-                                      var predictions = await attempt_predictions(actual_table)
-
-                                      /// this should really go into a function.
-                                      var preds_matrix = predictions.map(
-                                        e => e.terms.map(
-                                          term => e.pred_class[prepare_cell_text(term)]
-                                        )
-                                      )
-
-                                      var class_matrix = predictions.map( e => e.cellClasses.map( cellClass => cellClass ))
-
-                                      // values in this matrix represent the cell contents, and can be: "text", "numeric" or ""
-                                      var content_type_matrix = predictions.map(
-                                        e => e.terms.map(
-                                          term => {
-                                            var numberless_size = term.replace(/([^A-z0-9 ])/g, "").replace(/[0-9]+/g, '').replace(/ +/g," ").trim().length
-                                            var spaceless_size = term.replace(/([^A-z0-9 ])/g, "").replace(/ +/g," ").trim().length
-
-                                            return spaceless_size == 0 ? "" : (numberless_size >= spaceless_size/2 ? "text" : "numeric")
-
-                                          }
-                                        )
-                                      )
-
-                                      var max_col = 0;
-                                      for ( var l=0; l < preds_matrix.length; l++){
-                                          max_col = max_col > preds_matrix[l].length ? max_col : preds_matrix[l].length
-                                      }
-
-
-                                      var getTopDescriptors = (N,freqs,ignore) => {
-                                        var orderedKeys = Object.keys(freqs).sort( (a,b) => a > b )
-                                        for (var i in ignore ){
-                                          var toRemove = orderedKeys.indexOf(ignore[i])
-                                          if ( toRemove > -1)
-                                            orderedKeys.splice(toRemove,1)
-                                        }
-                                        var limit = orderedKeys.length < N ? orderedKeys.length : N
-                                        return orderedKeys.slice(0,limit)
-                                      }
-
-                                      var cleanModifier = (modifier) => {
-                                        // I used to .replace("firstCol","").replace("firstLastCol","") the modifier.
-                                        return modifier.replace("firstCol","empty_row").replace("firstLastCol","empty_row_with_p_value").trim()
-                                      }
-
-                                      //Estimate column predictions.
-                                      //debugger
-                                      var col_top_descriptors = []
-
-                                      for ( var c=0; c < max_col; c++ ){
-
-                                        var content_types_in_column = content_type_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
-                                           switch (word[0]) {
-                                             case "numeric":
-                                               countMap["total_numeric"] = ++countMap["total_numeric"] || 1
-                                               break;
-                                             case "text":
-                                               countMap["total_text"] = ++countMap["total_text"] || 1
-                                               break;
-                                             default:
-                                               countMap["total_empty"] = ++countMap["total_empty"] || 1
-                                           }
-                                           return countMap
-                                        },{ total_numeric:0, total_text:0, total_empty:0 })
-
-                                        if ( ! ( content_types_in_column.total_text >= content_types_in_column.total_numeric ) ){
-                                          continue;
-                                        }
-
-
-                                        var unique_modifiers_in_column = class_matrix.map(x => x[c]).map(cleanModifier).filter((v, i, a) => a.indexOf(v) === i)
-
-                                        // debugger
-                                        for( var u in unique_modifiers_in_column){
-
-                                            var unique_modifier = unique_modifiers_in_column[u]
-
-                                            var column_data = preds_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
-                        												  var i = word[1]
-                        													    word = word[0]
-                                                  if ( unique_modifier === cleanModifier(class_matrix[i][c]) ){
-                                                    countMap.freqs[word] = ++countMap.freqs[word] || 1
-                                                    var max = (countMap["max"] || 0)
-                                                    countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max
-                                                   	countMap["total"] = ++countMap["total"] || 1
-                                                  }
-                                                  return countMap
-                                            },{total:0,freqs:{}})
-
-                                            for ( var k in column_data.freqs ){ // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
-
-                                              if ( (column_data.freqs[undefined] == column_data.max) || column_data.freqs[k] == 1 ) {
-                                                  var allfreqs = column_data.freqs
-                                                  delete allfreqs[k]
-                                                  column_data.freqs = allfreqs
-                                              }
-                                            }
-
-                                            var descriptors = getTopDescriptors(3,column_data.freqs,["arms","undefined"])
-
-                                            if ( descriptors.length > 0)
-                                              col_top_descriptors[col_top_descriptors.length] = {descriptors, c , unique_modifier}
-
-                                          }
-                                      }
-
-                                      // Estimate row predictions
-
-                                      var row_top_descriptors = []
-                                    //  debugger
-
-                                      for (var r in preds_matrix){
-
-
-                                          var content_types_in_row = content_type_matrix[r].reduce( (countMap, word) => {
-                                            switch (word) {
-                                              case "numeric":
-                                                countMap["total_numeric"] = ++countMap["total_numeric"] || 1
-                                                break;
-                                              case "text":
-                                                countMap["total_text"] = ++countMap["total_text"] || 1
-                                                break;
-                                              default:
-                                                countMap["total_empty"] = ++countMap["total_empty"] || 1
-                                            }
-                                            return countMap
-                                         },{ total_numeric:0, total_text:0, total_empty:0 })
-
-                                         if ( ! ( content_types_in_row.total_text >= content_types_in_row.total_numeric ) ){
-                                           continue;
-                                         }
-
-                                          var row_data = preds_matrix[r].reduce( (countMap, word) => {
-                                              countMap.freqs[word] = ++countMap.freqs[word] || 1
-                                              var max = (countMap["max"] || 0)
-                                              countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max
-                                              countMap["total"] = ++countMap["total"] || 1
-                                              return countMap
-                                          },{total:0,freqs:{}})
-
-                                          for ( var k in row_data.freqs ){ // to qualify for a row descriptor the frequency should at least be half of the length of the column headings.
-                                            if ((row_data.freqs[undefined] == row_data.max) || row_data.freqs[k] == 1 ) {
-                                                var allfreqs = row_data.freqs
-                                                delete allfreqs[k]
-                                                row_data.freqs = allfreqs
-                                            }
-                                          }
-
-                                          var descriptors = getTopDescriptors(3,row_data.freqs,["undefined"])
-
-                                          if ( descriptors.length > 0)
-                                            row_top_descriptors[row_top_descriptors.length] = {descriptors,c : r,unique_modifier:""}
-
-                                      }
-
-
-                                      var predicted = { cols: col_top_descriptors, rows: row_top_descriptors}
-                                      //debugger
-                                      res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
-                                  });
-
-                    });
-
+      var tableData = await readyTableData(req.query.docid,req.query.page)
+      debugger
+      res.send( tableData  )
     } else {
       res.send({status: "wrong parameters", query : req.query})
     }
 
 } catch (e){
+  console.log(e)
   res.send({status: "probably page out of bounds, or document does not exist", query : req.query})
 }
 

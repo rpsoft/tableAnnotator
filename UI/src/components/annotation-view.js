@@ -484,7 +484,6 @@ class AnnotationView extends Component {
             onKeyDown={(event, index) => {
 
               if (event.key === 'Enter') {
-                  // this.loadPageFromProps(this.props)
                   this.shiftTables(0)
                   event.preventDefault();
               }
@@ -523,14 +522,6 @@ class AnnotationView extends Component {
           </div>
         </Card>
 
-        {/* <Card id="navigation" style={{textAlign:"right",padding:5,marginTop:10}}>
-
-          <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Show Saved Changes</RaisedButton>
-          <RaisedButton onClick={ () => {this.shiftTables(-1)} } style={{padding:5,marginRight:5}}>Previous Table</RaisedButton>
-          <RaisedButton onClick={ () => {this.shiftTables(1)} } style={{padding:5,marginRight:5}}>Next Table</RaisedButton>;
-
-        </Card> */}
-
         <Card id="tableHeader" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center"}}>
 
             { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : <div>
@@ -546,12 +537,7 @@ class AnnotationView extends Component {
 
         <Card style={{padding:8,marginTop:10,fontWeight:"bold"}}>
             <div style={{width:"100%"}}>
-                {/* <Checkbox
-                      label={"I don’t understand how to fill out the form for this table?"}
-                      labelPosition= "left"
-                      checked={ this.state.corrupted }
-                      onCheck={ () => {this.setState({corrupted : !this.state.corrupted})}}
-                /> */}
+
                 <table>
                   <tr>
                     <td style={{padding:"0px 0px 0px 0px", verticalAlign: "top", paddingRight:50}}>
@@ -610,7 +596,7 @@ class AnnotationView extends Component {
 
 
         <Card style={{padding:5,marginTop:10}}>
-          <RaisedButton onClick={ () => {this.saveAnnotations();this.loadPageFromProps(this.props);} } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:200,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton>
+          <RaisedButton onClick={ () => {this.saveAnnotations(); this.loadPageFromProps(this.props); } } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:200,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton>
           <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Reload Changes</RaisedButton>
         </Card>
 
