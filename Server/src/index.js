@@ -219,12 +219,6 @@ async function attempt_predictions(actual_table){
 async function insertAnnotation(docid, page, user, annotation, corrupted, tableType, corrupted_text){
 
   var client = await pool.connect()
-  //
-  // INSERT INTO annotations
-  // VALUES ('28246237',2,'jesus','{"annotations":[{"location":"Row","content":{"arms":true},"qualifiers":{"bold":true},"number":"1"}]}','false','subgroup table')
-  // ON CONFLICT (docid, page,"user") DO UPDATE
-  // SET annotation = '{"annotations":[{"location":"Row","content":{"arms":true},"qualifiers":{"bold":true},"number":"1"}]}',corrupted = 'false',"tableType" = 'subgroup table';
-  //
 
   var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT (docid, page,"user") DO UPDATE SET annotation = $4, corrupted = $5, "tableType" = $6, "corrupted_text" = $7 ;', [docid, page, user, annotation, corrupted,tableType, corrupted_text])
     .then(result => console.log("insert: "+ result))
@@ -291,14 +285,14 @@ app.get('/api/rscript',async function(req,res){
   try{
 
     var result = R("./src/tableScript.R")
-    // debugger
+
         result = result.data("hello world", 20)
       .callSync()
 
       res.send( JSON.stringify(result) )
 
   } catch (e){
-    // debugger
+
     res.send("FAIL: "+ e)
   }
 });
@@ -473,6 +467,7 @@ async function readyTableData(docid,page){
 
                                   var predictions = await attempt_predictions(actual_table)
 
+                                  debugger
                                   /// this should really go into a function.
                                   var preds_matrix = predictions.map(
                                     e => e.terms.map(
@@ -518,7 +513,6 @@ async function readyTableData(docid,page){
                                   }
 
                                   //Estimate column predictions.
-                                  //debugger
                                   var col_top_descriptors = []
 
                                   for ( var c=0; c < max_col; c++ ){

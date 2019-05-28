@@ -521,12 +521,10 @@ function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             try {
-              result = R("./src/tableScript.R"); // debugger
-
+              result = R("./src/tableScript.R");
               result = result.data("hello world", 20).callSync();
               res.send(JSON.stringify(result));
             } catch (e) {
-              // debugger
               res.send("FAIL: " + e);
             }
 
@@ -793,7 +791,8 @@ function _readyTableData() {
 
                             case 24:
                               predictions = _context15.sent;
-                              /// this should really go into a function.
+                              debugger; /// this should really go into a function.
+
                               preds_matrix = predictions.map(function (e) {
                                 return e.terms.map(function (term) {
                                   return e.pred_class[prepare_cell_text(term)];
@@ -836,15 +835,14 @@ function _readyTableData() {
                                 // I used to .replace("firstCol","").replace("firstLastCol","") the modifier.
                                 return modifier.replace("firstCol", "empty_row").replace("firstLastCol", "empty_row_with_p_value").trim();
                               }; //Estimate column predictions.
-                              //debugger
 
 
                               col_top_descriptors = [];
                               c = 0;
 
-                            case 34:
+                            case 35:
                               if (!(c < max_col)) {
-                                _context15.next = 43;
+                                _context15.next = 44;
                                 break;
                               }
 
@@ -872,13 +870,13 @@ function _readyTableData() {
                               });
 
                               if (content_types_in_column.total_text >= content_types_in_column.total_numeric) {
-                                _context15.next = 38;
+                                _context15.next = 39;
                                 break;
                               }
 
-                              return _context15.abrupt("continue", 40);
+                              return _context15.abrupt("continue", 41);
 
-                            case 38:
+                            case 39:
                               unique_modifiers_in_column = class_matrix.map(function (x) {
                                 return x[c];
                               }).map(cleanModifier).filter(function (v, i, a) {
@@ -924,19 +922,19 @@ function _readyTableData() {
                                 };
                               }
 
-                            case 40:
+                            case 41:
                               c++;
-                              _context15.next = 34;
+                              _context15.next = 35;
                               break;
 
-                            case 43:
+                            case 44:
                               // Estimate row predictions
                               row_top_descriptors = [];
                               _context15.t1 = _regenerator.default.keys(preds_matrix);
 
-                            case 45:
+                            case 46:
                               if ((_context15.t2 = _context15.t1()).done) {
-                                _context15.next = 56;
+                                _context15.next = 57;
                                 break;
                               }
 
@@ -963,13 +961,13 @@ function _readyTableData() {
                               });
 
                               if (content_types_in_row.total_text >= content_types_in_row.total_numeric) {
-                                _context15.next = 50;
+                                _context15.next = 51;
                                 break;
                               }
 
-                              return _context15.abrupt("continue", 45);
+                              return _context15.abrupt("continue", 46);
 
-                            case 50:
+                            case 51:
                               row_data = preds_matrix[r].reduce(function (countMap, word) {
                                 countMap.freqs[word] = ++countMap.freqs[word] || 1;
                                 var max = countMap["max"] || 0;
@@ -996,10 +994,10 @@ function _readyTableData() {
                                 c: r,
                                 unique_modifier: ""
                               };
-                              _context15.next = 45;
+                              _context15.next = 46;
                               break;
 
-                            case 56:
+                            case 57:
                               predicted = {
                                 cols: col_top_descriptors,
                                 rows: row_top_descriptors // res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
@@ -1013,7 +1011,7 @@ function _readyTableData() {
                                 predicted: predicted
                               });
 
-                            case 58:
+                            case 59:
                             case "end":
                               return _context15.stop();
                           }
