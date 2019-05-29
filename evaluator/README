@@ -1,0 +1,8 @@
+Execute as: 
+
+node evaluate.js first_batch_results.csv auto_predictions_v1.csv
+
+
+first csv file contains the manual annotations
+
+second one the automatic annotations by our software

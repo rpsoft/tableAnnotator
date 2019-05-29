@@ -44,6 +44,9 @@ var tables_folder = "HTML_TABLES"
 var cssFolder = "HTML_STYLES"
 var DOCS = [];
 
+var METHOD = "frequency"
+
+
 // Postgres configuration.
 const pool = new Pool({
     user: 'postgres',
@@ -261,7 +264,7 @@ app.get('/api/allPredictions', async function(req,res){
     for ( var p in available_documents[a].pages ) {
        var page = available_documents[a].pages[p]
        var docid = a
-       var data = await readyTableData(docid,page)
+       var data = await readyTableData(docid,page,method)
 
        for ( var c in data.predicted.cols) {
          var col = data.predicted.cols[c]
@@ -406,7 +409,7 @@ app.get('/api/classify', async function(req,res){
 });
 
 
-async function readyTableData(docid,page){
+async function readyTableData(docid,page,method){
   var docid = docid+"_"+page+".html"
 
   var htmlFolder = tables_folder+"/"
@@ -467,8 +470,12 @@ async function readyTableData(docid,page){
 
                                   var predictions = await attempt_predictions(actual_table)
 
-                                  debugger
-                                  /// this should really go into a function.
+                                  var terms_matrix = predictions.map(
+                                    e => e.terms.map(
+                                      term => prepare_cell_text(term)
+                                    )
+                                  )
+
                                   var preds_matrix = predictions.map(
                                     e => e.terms.map(
                                       term => e.pred_class[prepare_cell_text(term)]
@@ -517,108 +524,123 @@ async function readyTableData(docid,page){
 
                                   for ( var c=0; c < max_col; c++ ){
 
-                                    var content_types_in_column = content_type_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
-                                       switch (word[0]) {
-                                         case "numeric":
-                                           countMap["total_numeric"] = ++countMap["total_numeric"] || 1
-                                           break;
-                                         case "text":
-                                           countMap["total_text"] = ++countMap["total_text"] || 1
-                                           break;
-                                         default:
-                                           countMap["total_empty"] = ++countMap["total_empty"] || 1
-                                       }
-                                       return countMap
-                                    },{ total_numeric:0, total_text:0, total_empty:0 })
+                                            var content_types_in_column = content_type_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
+                                               switch (word[0]) {
+                                                 case "numeric":
+                                                   countMap["total_numeric"] = ++countMap["total_numeric"] || 1
+                                                   break;
+                                                 case "text":
+                                                   countMap["total_text"] = ++countMap["total_text"] || 1
+                                                   break;
+                                                 default:
+                                                   countMap["total_empty"] = ++countMap["total_empty"] || 1
+                                               }
+                                               return countMap
+                                            },{ total_numeric:0, total_text:0, total_empty:0 })
 
-                                    if ( ! ( content_types_in_column.total_text >= content_types_in_column.total_numeric ) ){
-                                      continue;
-                                    }
+                                            if ( ! ( content_types_in_column.total_text >= content_types_in_column.total_numeric ) ){
+                                              continue;
+                                            }
 
 
-                                    var unique_modifiers_in_column = class_matrix.map(x => x[c]).map(cleanModifier).filter((v, i, a) => a.indexOf(v) === i)
+                                            var unique_modifiers_in_column = class_matrix.map(x => x[c]).map(cleanModifier).filter((v, i, a) => a.indexOf(v) === i)
 
-                                    for( var u in unique_modifiers_in_column){
+                                            for( var u in unique_modifiers_in_column){
 
-                                        var unique_modifier = unique_modifiers_in_column[u]
+                                                var unique_modifier = unique_modifiers_in_column[u]
 
-                                        var column_data = preds_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
-                                              var i = word[1]
-                                                  word = word[0]
-                                              if ( unique_modifier === cleanModifier(class_matrix[i][c]) ){
-                                                countMap.freqs[word] = ++countMap.freqs[word] || 1
-                                                var max = (countMap["max"] || 0)
-                                                countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max
-                                                countMap["total"] = ++countMap["total"] || 1
+                                                var column_data = preds_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
+                                                      var i = word[1]
+                                                          word = word[0]
+                                                      if ( unique_modifier === cleanModifier(class_matrix[i][c]) ){
+                                                        countMap.freqs[word] = ++countMap.freqs[word] || 1
+                                                        var max = (countMap["max"] || 0)
+                                                        countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max
+                                                        countMap["total"] = ++countMap["total"] || 1
+                                                      }
+                                                      return countMap
+                                                },{total:0,freqs:{}})
+
+                                                for ( var k in column_data.freqs ){ // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
+
+                                                  if ( (column_data.freqs[undefined] == column_data.max) || column_data.freqs[k] == 1 ) {
+                                                      var allfreqs = column_data.freqs
+                                                      delete allfreqs[k]
+                                                      column_data.freqs = allfreqs
+                                                  }
+                                                }
+
+
+                                                switch (method) {
+                                                  case "frequency":
+
+                                                    break;
+                                                  default:
+                                                    var descriptors = getTopDescriptors(3,column_data.freqs,["arms","undefined"])
+                                                    if ( descriptors.length > 0)
+                                                      col_top_descriptors[col_top_descriptors.length] = {descriptors, c , unique_modifier}
+
+                                                }
+
                                               }
-                                              return countMap
-                                        },{total:0,freqs:{}})
-
-                                        for ( var k in column_data.freqs ){ // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
-
-                                          if ( (column_data.freqs[undefined] == column_data.max) || column_data.freqs[k] == 1 ) {
-                                              var allfreqs = column_data.freqs
-                                              delete allfreqs[k]
-                                              column_data.freqs = allfreqs
-                                          }
-                                        }
-
-                                        var descriptors = getTopDescriptors(3,column_data.freqs,["arms","undefined"])
-                                      //  debugger
-                                        if ( descriptors.length > 0)
-                                          col_top_descriptors[col_top_descriptors.length] = {descriptors, c , unique_modifier}
-
-                                      }
                                   }
 
                                   // Estimate row predictions
                                   var row_top_descriptors = []
 
                                   for (var r in preds_matrix){
+                                          var content_types_in_row = content_type_matrix[r].reduce( (countMap, word) => {
+                                            switch (word) {
+                                              case "numeric":
+                                                countMap["total_numeric"] = ++countMap["total_numeric"] || 1
+                                                break;
+                                              case "text":
+                                                countMap["total_text"] = ++countMap["total_text"] || 1
+                                                break;
+                                              default:
+                                                countMap["total_empty"] = ++countMap["total_empty"] || 1
+                                            }
+                                            return countMap
+                                         },{ total_numeric:0, total_text:0, total_empty:0 })
+
+                                         if ( ! ( content_types_in_row.total_text >= content_types_in_row.total_numeric ) ){
+                                           continue;
+                                         }
+
+                                          var row_data = preds_matrix[r].reduce( (countMap, word) => {
+                                              countMap.freqs[word] = ++countMap.freqs[word] || 1
+                                              var max = (countMap["max"] || 0)
+                                              countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max
+                                              countMap["total"] = ++countMap["total"] || 1
+                                              return countMap
+                                          },{total:0,freqs:{}})
+
+                                          for ( var k in row_data.freqs ){ // to qualify for a row descriptor the frequency should at least be half of the length of the column headings.
+                                            if ((row_data.freqs[undefined] == row_data.max) || row_data.freqs[k] == 1 ) {
+                                                var allfreqs = row_data.freqs
+                                                delete allfreqs[k]
+                                                row_data.freqs = allfreqs
+                                            }
+                                          }
 
 
-                                      var content_types_in_row = content_type_matrix[r].reduce( (countMap, word) => {
-                                        switch (word) {
-                                          case "numeric":
-                                            countMap["total_numeric"] = ++countMap["total_numeric"] || 1
-                                            break;
-                                          case "text":
-                                            countMap["total_text"] = ++countMap["total_text"] || 1
-                                            break;
-                                          default:
-                                            countMap["total_empty"] = ++countMap["total_empty"] || 1
-                                        }
-                                        return countMap
-                                     },{ total_numeric:0, total_text:0, total_empty:0 })
 
-                                     if ( ! ( content_types_in_row.total_text >= content_types_in_row.total_numeric ) ){
-                                       continue;
-                                     }
+                                          switch (method) {
+                                            case "frequency":
 
-                                      var row_data = preds_matrix[r].reduce( (countMap, word) => {
-                                          countMap.freqs[word] = ++countMap.freqs[word] || 1
-                                          var max = (countMap["max"] || 0)
-                                          countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max
-                                          countMap["total"] = ++countMap["total"] || 1
-                                          return countMap
-                                      },{total:0,freqs:{}})
-
-                                      for ( var k in row_data.freqs ){ // to qualify for a row descriptor the frequency should at least be half of the length of the column headings.
-                                        if ((row_data.freqs[undefined] == row_data.max) || row_data.freqs[k] == 1 ) {
-                                            var allfreqs = row_data.freqs
-                                            delete allfreqs[k]
-                                            row_data.freqs = allfreqs
-                                        }
-                                      }
-
-                                      var descriptors = getTopDescriptors(3,row_data.freqs,["undefined"])
-
-                                      if ( descriptors.length > 0)
-                                        row_top_descriptors[row_top_descriptors.length] = {descriptors,c : r,unique_modifier:""}
+                                              break;
+                                            default:
+                                              var descriptors = getTopDescriptors(3,row_data.freqs,["undefined"])
+                                              if ( descriptors.length > 0)
+                                                row_top_descriptors[row_top_descriptors.length] = {descriptors,c : r,unique_modifier:""}
+                                          }
 
                                   }
 
-                                  var predicted = { cols: col_top_descriptors, rows: row_top_descriptors}
+                                  var predicted = {
+                                                  cols: col_top_descriptors,
+                                                  rows: row_top_descriptors
+                                                }
                                   // res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
                                   resolve({status: "good", htmlHeader,formattedPage, title:  titles_obj[docid.split(" ")[0]], predicted })
                               });
@@ -641,8 +663,8 @@ app.get('/api/getTable',async function(req,res){
       && req.query.page && available_documents[req.query.docid]
       && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1){
 
-      var tableData = await readyTableData(req.query.docid,req.query.page)
-      debugger
+      var tableData = await readyTableData(req.query.docid,req.query.page, METHOD)
+
       res.send( tableData  )
     } else {
       res.send({status: "wrong parameters", query : req.query})

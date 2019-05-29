@@ -59,7 +59,7 @@ from sklearn.metrics import classification_report
 
 sgd = Pipeline([('vect', CountVectorizer()),
                 ('tfidf', TfidfTransformer()),
-                ('clf', SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, random_state=42, max_iter=5, tol=None)),
+                ('clf', SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, random_state=42, max_iter=100, tol=None)),
                ])
 sgd.fit(X_train, y_train)
 
@@ -84,3 +84,17 @@ pickle.dump(sgd, open(filename, 'wb'))
 # sgd.predict(["mean mean sd","cyclosporin", "placebo"])
 
 # sgd.predict(["nmbr - nbmr"])
+
+# sgd[2].intercept_
+
+# sgd[2].classes_
+
+# sgd[2].score( ["mean mean sd","cyclosporin", "placebo"], sgd[2].classes_)
+
+terms = "mean mean sd cyclosporin placebo sex"
+sgd.predict([terms])
+sgd.decision_function([terms]) #Predict signed ‘distance’ to the hyperplane (aka confidence score) # https://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier.decision_function
+sgd[2].classes_
+
+
+
