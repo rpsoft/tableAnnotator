@@ -6,6 +6,10 @@ var request = require("request");
 const cheerio = require('cheerio');
 const { Pool, Client } = require('pg')
 
+const csv = require('csv-parser');
+const fs = require('fs');
+
+
 // import {PythonShell} from 'python-shell';
 
 
@@ -44,7 +48,29 @@ var tables_folder = "HTML_TABLES"
 var cssFolder = "HTML_STYLES"
 var DOCS = [];
 
-var METHOD = "frequency"
+var clusters = {}
+
+fs.createReadStream('./CLUSTERS/clusters.csv')
+  .pipe(csv())
+  .on('data', (row) => {
+    var existingCluster = clusters[row.cluster]
+
+    if ( existingCluster ){
+      existingCluster.push(row.term)
+    } else {
+      existingCluster = [row.term]
+    }
+
+    clusters[row.cluster] = existingCluster
+  })
+  .on('end', () => {
+    console.log('read CSV clusters: '+Object.keys(clusters).length);
+  });
+
+
+
+// options: frequency ; grouped_predictor ;
+var METHOD = "grouped_predictor"
 
 
 // Postgres configuration.
@@ -127,6 +153,7 @@ python.ex`
   import pickle
   import sys
   import json
+  import pandas as pd
 `;
 
 console.log(process.cwd())
@@ -140,6 +167,18 @@ python.ex`
     for r in range(0,len(h)):
       d[h[r]] = result[r]
     return d
+  def getTopConfidenceTerms(df):
+      df = df.sort_values(by=['confidence'], ascending=False)
+      mean = df.mean(axis=0)
+      return df[df["confidence"] > mean[0]]["classes"].values
+  def groupedPredict( terms ):
+      result = {}
+      for t in range(0,len(terms)):
+          d = {'classes': sgd[2].classes_, 'confidence': sgd.decision_function([terms[t]])[0]}
+          df = pd.DataFrame(data=d)
+          res = getTopConfidenceTerms(df)
+          result[terms[t]] = ";".join(res)
+      return result
 `;
 
 
@@ -162,7 +201,7 @@ async function classify(terms){
 
     if ( cleanTerms.length > 0 ){
       //console.log(cleanTerms)
-
+    //  debugger
       python`
         classify(${cleanTerms})
       `.then( x => resolve(x))
@@ -174,6 +213,24 @@ async function classify(terms){
 
   return result
 }
+
+async function grouped_predictor(terms){
+
+  var result = new Promise(function(resolve, reject) {
+    if ( terms.length > 0 ){
+      python`
+        groupedPredict(${[terms]})
+      `.then( x => resolve(x))
+      .catch(python.Exception, (e) => console.log("python error: "+e));
+    } else {
+      resolve({})
+    }
+  });
+
+  //debugger
+  return result
+}
+
 
 
 async function attempt_predictions(actual_table){
@@ -203,10 +260,9 @@ async function attempt_predictions(actual_table){
           }
           // debugger
           var pred_class = await classify(terms)
+
           predictions[l] = {pred_class,terms,cellClasses}
       }
-
-      // debugger
 
       resolve(predictions)
     }catch ( e){
@@ -256,24 +312,30 @@ app.get('/api/allMetaData',function(req,res){
   })
 });
 
+app.get('/api/allClusters',function(req,res){
+  res.send(clusters)
+});
+
 app.get('/api/allPredictions', async function(req,res){
+  console.log("getting all predictions")
 
   var predictions = "user,docid,page,corrupted,tableType,location,number,content,qualifiers\n"
 
   for ( var a in available_documents){
     for ( var p in available_documents[a].pages ) {
+      console.log(a+"  --  "+p)
        var page = available_documents[a].pages[p]
        var docid = a
-       var data = await readyTableData(docid,page,method)
+       var data = await readyTableData(docid,page)
 
        for ( var c in data.predicted.cols) {
          var col = data.predicted.cols[c]
-         predictions += ["auto",docid,page,false,"na","Col",(parseInt(col.c)+1),col.descriptors.join(";"),col.unique_modifier.split(" ").join(";")].join(",")+"\n"
+         predictions += ["auto_"+METHOD,docid,page,false,"na","Col",(parseInt(col.c)+1),col.descriptors.join(";"),col.unique_modifier.split(" ").join(";")].join(",")+"\n"
        }
 
        for ( var r in data.predicted.rows) {
          var row = data.predicted.rows[r]
-         predictions += ["auto",docid,page,false,"na","Row",(parseInt(row.c)+1),row.descriptors.join(";"),row.unique_modifier.split(" ").join(";")].join(",")+"\n"
+         predictions += ["auto_"+METHOD,docid,page,false,"na","Row",(parseInt(row.c)+1),row.descriptors.join(";"),row.unique_modifier.split(" ").join(";")].join(",")+"\n"
        }
 
     }
@@ -516,7 +578,10 @@ async function readyTableData(docid,page,method){
 
                                   var cleanModifier = (modifier) => {
                                     // I used to .replace("firstCol","").replace("firstLastCol","") the modifier.
-                                    return modifier.replace("firstCol","empty_row").replace("firstLastCol","empty_row_with_p_value").trim()
+                                    return modifier.replace("firstCol","empty_row").replace("firstLastCol","empty_row_with_p_value")
+                                                   .replace("indent0","indent").replace("indent1","indent")
+                                                   .replace("indent2","indent").replace("indent3","indent")
+                                                   .replace("indent4","indent").trim()
                                   }
 
                                   //Estimate column predictions.
@@ -561,6 +626,24 @@ async function readyTableData(docid,page,method){
                                                       return countMap
                                                 },{total:0,freqs:{}})
 
+                                                var column_terms = preds_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
+
+                                                      var i = word[1]
+                                                          word = terms_matrix[i][c]
+                                                      if ( unique_modifier === cleanModifier(class_matrix[i][c]) ){
+
+                                                        if ( word.length > 0 && word != undefined ){
+                                                            if ( countMap[unique_modifier] ){
+                                                              countMap[unique_modifier].push(word)
+                                                            } else {
+                                                              countMap[unique_modifier] = [word]
+                                                            }
+                                                        }
+
+                                                      }
+                                                      return countMap
+                                                },{})
+
                                                 for ( var k in column_data.freqs ){ // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
 
                                                   if ( (column_data.freqs[undefined] == column_data.max) || column_data.freqs[k] == 1 ) {
@@ -570,9 +653,16 @@ async function readyTableData(docid,page,method){
                                                   }
                                                 }
 
+                                                switch (METHOD) {
+                                                  case "grouped_predictor":
 
-                                                switch (method) {
-                                                  case "frequency":
+                                                    var all_terms = column_terms[unique_modifier] ? column_terms[unique_modifier].join(" ") : ""
+
+                                                    if ( column_terms[unique_modifier] && all_terms && column_terms[unique_modifier].length > 1 && all_terms.length > 0) { // Only attempt prediction if group contains more than one cell.
+                                                      var descriptors = await grouped_predictor( all_terms )
+                                                          descriptors = descriptors[all_terms].split(";")
+                                                          col_top_descriptors[col_top_descriptors.length] = {descriptors, c , unique_modifier}
+                                                    }
 
                                                     break;
                                                   default:
@@ -623,10 +713,23 @@ async function readyTableData(docid,page,method){
                                             }
                                           }
 
+                                          var row_terms = terms_matrix[r].reduce ( (allTerms, term) =>{
+                                              if ( term && term.length > 0 ){
+                                                allTerms.push(term)
+                                              }
+                                              return allTerms
+                                          },[])
 
+                                          switch (METHOD) {
+                                            case "grouped_predictor":
 
-                                          switch (method) {
-                                            case "frequency":
+                                              var all_terms = row_terms.join(" ")
+                                              if ( row_terms.length > 1 ) { // Only attempt prediction if group contains more than one cell.
+                                                var descriptors = await grouped_predictor( all_terms )
+                                                    descriptors = descriptors[all_terms].split(";")
+                                                    row_top_descriptors[row_top_descriptors.length] = {descriptors,c : r,unique_modifier:""}
+                                              }
+
 
                                               break;
                                             default:
@@ -663,7 +766,7 @@ app.get('/api/getTable',async function(req,res){
       && req.query.page && available_documents[req.query.docid]
       && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1){
 
-      var tableData = await readyTableData(req.query.docid,req.query.page, METHOD)
+      var tableData = await readyTableData(req.query.docid,req.query.page)
 
       res.send( tableData  )
     } else {

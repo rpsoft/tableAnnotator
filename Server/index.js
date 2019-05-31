@@ -12,6 +12,16 @@ var _config = require("./config");
 
 var _titles = require("./titles");
 
+function _templateObject4() {
+  var data = (0, _taggedTemplateLiteral2.default)(["\n        groupedPredict(", ")\n      "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject3() {
   var data = (0, _taggedTemplateLiteral2.default)(["\n        classify(", ")\n      "]);
 
@@ -23,7 +33,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n  sgd = pickle.load(open(\"./src/sgd_nbmr_full.sav\", 'rb'))\n  def classify(h):\n    d={}\n    result = sgd.predict(h)\n    for r in range(0,len(h)):\n      d[h[r]] = result[r]\n    return d\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n  sgd = pickle.load(open(\"./src/sgd_nbmr_full.sav\", 'rb'))\n  def classify(h):\n    d={}\n    result = sgd.predict(h)\n    for r in range(0,len(h)):\n      d[h[r]] = result[r]\n    return d\n  def getTopConfidenceTerms(df):\n      df = df.sort_values(by=['confidence'], ascending=False)\n      mean = df.mean(axis=0)\n      return df[df[\"confidence\"] > mean[0]][\"classes\"].values\n  def groupedPredict( terms ):\n      result = {}\n      for t in range(0,len(terms)):\n          d = {'classes': sgd[2].classes_, 'confidence': sgd.decision_function([terms[t]])[0]}\n          df = pd.DataFrame(data=d)\n          res = getTopConfidenceTerms(df)\n          result[terms[t]] = \";\".join(res)\n      return result\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -33,7 +43,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n  import pandas\n  from sklearn import model_selection\n  from sklearn.linear_model import SGDClassifier\n  import pickle\n  import sys\n  import json\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n  import pandas\n  from sklearn import model_selection\n  from sklearn.linear_model import SGDClassifier\n  import pickle\n  import sys\n  import json\n  import pandas as pd\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -56,7 +66,11 @@ var cheerio = require('cheerio');
 
 var _require = require('pg'),
     Pool = _require.Pool,
-    Client = _require.Client; // import {PythonShell} from 'python-shell';
+    Client = _require.Client;
+
+var csv = require('csv-parser');
+
+var fs = require('fs'); // import {PythonShell} from 'python-shell';
 
 
 app.use(express.static(__dirname + '/domainParserviews')); //Store all HTML files in view folder.
@@ -84,7 +98,22 @@ var abs_index = [];
 var tables_folder = "HTML_TABLES";
 var cssFolder = "HTML_STYLES";
 var DOCS = [];
-var METHOD = "frequency"; // Postgres configuration.
+var clusters = {};
+fs.createReadStream('./CLUSTERS/clusters.csv').pipe(csv()).on('data', function (row) {
+  var existingCluster = clusters[row.cluster];
+
+  if (existingCluster) {
+    existingCluster.push(row.term);
+  } else {
+    existingCluster = [row.term];
+  }
+
+  clusters[row.cluster] = existingCluster;
+}).on('end', function () {
+  console.log('read CSV clusters: ' + Object.keys(clusters).length);
+}); // options: frequency ; grouped_predictor ;
+
+var METHOD = "grouped_predictor"; // Postgres configuration.
 
 var pool = new Pool({
   user: 'postgres',
@@ -255,6 +284,7 @@ function _classify() {
 
               if (cleanTerms.length > 0) {
                 //console.log(cleanTerms)
+                //  debugger
                 python(_templateObject3(), cleanTerms).then(function (x) {
                   return resolve(x);
                 }).catch(python.Exception, function (e) {
@@ -276,31 +306,68 @@ function _classify() {
   return _classify.apply(this, arguments);
 }
 
-function attempt_predictions(_x5) {
+function grouped_predictor(_x5) {
+  return _grouped_predictor.apply(this, arguments);
+}
+
+function _grouped_predictor() {
+  _grouped_predictor = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee12(terms) {
+    var result;
+    return _regenerator.default.wrap(function _callee12$(_context12) {
+      while (1) {
+        switch (_context12.prev = _context12.next) {
+          case 0:
+            result = new Promise(function (resolve, reject) {
+              if (terms.length > 0) {
+                python(_templateObject4(), [terms]).then(function (x) {
+                  return resolve(x);
+                }).catch(python.Exception, function (e) {
+                  return console.log("python error: " + e);
+                });
+              } else {
+                resolve({});
+              }
+            }); //debugger
+
+            return _context12.abrupt("return", result);
+
+          case 2:
+          case "end":
+            return _context12.stop();
+        }
+      }
+    }, _callee12, this);
+  }));
+  return _grouped_predictor.apply(this, arguments);
+}
+
+function attempt_predictions(_x6) {
   return _attempt_predictions.apply(this, arguments);
 }
 
 function _attempt_predictions() {
   _attempt_predictions = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee13(actual_table) {
+  _regenerator.default.mark(function _callee14(actual_table) {
     var result;
-    return _regenerator.default.wrap(function _callee13$(_context13) {
+    return _regenerator.default.wrap(function _callee14$(_context14) {
       while (1) {
-        switch (_context13.prev = _context13.next) {
+        switch (_context14.prev = _context14.next) {
           case 0:
             result = new Promise(
             /*#__PURE__*/
             function () {
               var _ref9 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee12(resolve, reject) {
+              _regenerator.default.mark(function _callee13(resolve, reject) {
                 var a, lines, predictions, l, currentLine, terms, cellClasses, cellClass, c, cellClassSelector, pred_class;
-                return _regenerator.default.wrap(function _callee12$(_context12) {
+                return _regenerator.default.wrap(function _callee13$(_context13) {
                   while (1) {
-                    switch (_context12.prev = _context12.next) {
+                    switch (_context13.prev = _context13.next) {
                       case 0:
-                        _context12.prev = 0;
+                        _context13.prev = 0;
                         a = cheerio.load(actual_table);
                         lines = a("tr");
                         predictions = new Array(lines.length);
@@ -308,7 +375,7 @@ function _attempt_predictions() {
 
                       case 5:
                         if (!(l < lines.length)) {
-                          _context12.next = 18;
+                          _context13.next = 18;
                           break;
                         }
 
@@ -329,11 +396,11 @@ function _attempt_predictions() {
                         } // debugger
 
 
-                        _context12.next = 13;
+                        _context13.next = 13;
                         return classify(terms);
 
                       case 13:
-                        pred_class = _context12.sent;
+                        pred_class = _context13.sent;
                         predictions[l] = {
                           pred_class: pred_class,
                           terms: terms,
@@ -342,45 +409,44 @@ function _attempt_predictions() {
 
                       case 15:
                         l++;
-                        _context12.next = 5;
+                        _context13.next = 5;
                         break;
 
                       case 18:
-                        // debugger
                         resolve(predictions);
-                        _context12.next = 24;
+                        _context13.next = 24;
                         break;
 
                       case 21:
-                        _context12.prev = 21;
-                        _context12.t0 = _context12["catch"](0);
-                        reject(_context12.t0);
+                        _context13.prev = 21;
+                        _context13.t0 = _context13["catch"](0);
+                        reject(_context13.t0);
 
                       case 24:
                       case "end":
-                        return _context12.stop();
+                        return _context13.stop();
                     }
                   }
-                }, _callee12, this, [[0, 21]]);
+                }, _callee13, this, [[0, 21]]);
               }));
 
-              return function (_x32, _x33) {
+              return function (_x33, _x34) {
                 return _ref9.apply(this, arguments);
               };
             }());
-            return _context13.abrupt("return", result);
+            return _context14.abrupt("return", result);
 
           case 2:
           case "end":
-            return _context13.stop();
+            return _context14.stop();
         }
       }
-    }, _callee13, this);
+    }, _callee14, this);
   }));
   return _attempt_predictions.apply(this, arguments);
 }
 
-function insertAnnotation(_x6, _x7, _x8, _x9, _x10, _x11, _x12) {
+function insertAnnotation(_x7, _x8, _x9, _x10, _x11, _x12, _x13) {
   return _insertAnnotation.apply(this, arguments);
 } // preinitialisation of components if needed.
 
@@ -388,18 +454,18 @@ function insertAnnotation(_x6, _x7, _x8, _x9, _x10, _x11, _x12) {
 function _insertAnnotation() {
   _insertAnnotation = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee14(docid, page, user, annotation, corrupted, tableType, corrupted_text) {
+  _regenerator.default.mark(function _callee15(docid, page, user, annotation, corrupted, tableType, corrupted_text) {
     var client, done;
-    return _regenerator.default.wrap(function _callee14$(_context14) {
+    return _regenerator.default.wrap(function _callee15$(_context15) {
       while (1) {
-        switch (_context14.prev = _context14.next) {
+        switch (_context15.prev = _context15.next) {
           case 0:
-            _context14.next = 2;
+            _context15.next = 2;
             return pool.connect();
 
           case 2:
-            client = _context14.sent;
-            _context14.next = 5;
+            client = _context15.sent;
+            _context15.next = 5;
             return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT (docid, page,"user") DO UPDATE SET annotation = $4, corrupted = $5, "tableType" = $6, "corrupted_text" = $7 ;', [docid, page, user, annotation, corrupted, tableType, corrupted_text]).then(function (result) {
               return console.log("insert: " + result);
             }).catch(function (e) {
@@ -409,17 +475,17 @@ function _insertAnnotation() {
             });
 
           case 5:
-            done = _context14.sent;
+            done = _context15.sent;
             console.log("Awaiting done: " + ops_counter++); // await client.end()
 
             console.log("DONE: " + ops_counter++);
 
           case 8:
           case "end":
-            return _context14.stop();
+            return _context15.stop();
         }
       }
-    }, _callee14, this);
+    }, _callee15, this);
   }));
   return _insertAnnotation.apply(this, arguments);
 }
@@ -440,6 +506,9 @@ app.get('/api/allMetaData', function (req, res) {
     available_documents: available_documents
   });
 });
+app.get('/api/allClusters', function (req, res) {
+  res.send(clusters);
+});
 app.get('/api/allPredictions',
 /*#__PURE__*/
 function () {
@@ -451,54 +520,56 @@ function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            console.log("getting all predictions");
             predictions = "user,docid,page,corrupted,tableType,location,number,content,qualifiers\n";
             _context.t0 = _regenerator.default.keys(available_documents);
 
-          case 2:
+          case 3:
             if ((_context.t1 = _context.t0()).done) {
-              _context.next = 18;
+              _context.next = 20;
               break;
             }
 
             a = _context.t1.value;
             _context.t2 = _regenerator.default.keys(available_documents[a].pages);
 
-          case 5:
+          case 6:
             if ((_context.t3 = _context.t2()).done) {
-              _context.next = 16;
+              _context.next = 18;
               break;
             }
 
             p = _context.t3.value;
+            console.log(a + "  --  " + p);
             page = available_documents[a].pages[p];
             docid = a;
-            _context.next = 11;
-            return readyTableData(docid, page, method);
+            _context.next = 13;
+            return readyTableData(docid, page);
 
-          case 11:
+          case 13:
             data = _context.sent;
 
             for (c in data.predicted.cols) {
               col = data.predicted.cols[c];
-              predictions += ["auto", docid, page, false, "na", "Col", parseInt(col.c) + 1, col.descriptors.join(";"), col.unique_modifier.split(" ").join(";")].join(",") + "\n";
+              predictions += ["auto_" + METHOD, docid, page, false, "na", "Col", parseInt(col.c) + 1, col.descriptors.join(";"), col.unique_modifier.split(" ").join(";")].join(",") + "\n";
             }
 
             for (r in data.predicted.rows) {
               row = data.predicted.rows[r];
-              predictions += ["auto", docid, page, false, "na", "Row", parseInt(row.c) + 1, row.descriptors.join(";"), row.unique_modifier.split(" ").join(";")].join(",") + "\n";
+              predictions += ["auto_" + METHOD, docid, page, false, "na", "Row", parseInt(row.c) + 1, row.descriptors.join(";"), row.unique_modifier.split(" ").join(";")].join(",") + "\n";
             }
 
-            _context.next = 5;
-            break;
-
-          case 16:
-            _context.next = 2;
+            _context.next = 6;
             break;
 
           case 18:
+            _context.next = 3;
+            break;
+
+          case 20:
             res.send(predictions);
 
-          case 19:
+          case 21:
           case "end":
             return _context.stop();
         }
@@ -506,7 +577,7 @@ function () {
     }, _callee, this);
   }));
 
-  return function (_x13, _x14) {
+  return function (_x14, _x15) {
     return _ref.apply(this, arguments);
   };
 }());
@@ -537,7 +608,7 @@ function () {
     }, _callee2, this);
   }));
 
-  return function (_x15, _x16) {
+  return function (_x16, _x17) {
     return _ref2.apply(this, arguments);
   };
 }());
@@ -648,7 +719,7 @@ function () {
     }, _callee3, this, [[0, 18]]);
   }));
 
-  return function (_x17, _x18) {
+  return function (_x18, _x19) {
     return _ref3.apply(this, arguments);
   };
 }());
@@ -702,23 +773,23 @@ function () {
     }, _callee4, this);
   }));
 
-  return function (_x19, _x20) {
+  return function (_x20, _x21) {
     return _ref4.apply(this, arguments);
   };
 }());
 
-function readyTableData(_x21, _x22, _x23) {
+function readyTableData(_x22, _x23, _x24) {
   return _readyTableData.apply(this, arguments);
 }
 
 function _readyTableData() {
   _readyTableData = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee16(docid, page, method) {
+  _regenerator.default.mark(function _callee17(docid, page, method) {
     var htmlFolder, htmlFile, result;
-    return _regenerator.default.wrap(function _callee16$(_context16) {
+    return _regenerator.default.wrap(function _callee17$(_context17) {
       while (1) {
-        switch (_context16.prev = _context16.next) {
+        switch (_context17.prev = _context17.next) {
           case 0:
             docid = docid + "_" + page + ".html";
             htmlFolder = tables_folder + "/";
@@ -731,17 +802,17 @@ function _readyTableData() {
                   function () {
                     var _ref10 = (0, _asyncToGenerator2.default)(
                     /*#__PURE__*/
-                    _regenerator.default.mark(function _callee15(err2, data_ss) {
-                      var tablePage, spaceRow, headerNodes, htmlHeader, h, headText, textLimit, actual_table, formattedPage, predictions, terms_matrix, preds_matrix, class_matrix, content_type_matrix, max_col, l, getTopDescriptors, cleanModifier, col_top_descriptors, c, content_types_in_column, unique_modifiers_in_column, u, unique_modifier, column_data, k, allfreqs, descriptors, row_top_descriptors, r, content_types_in_row, row_data, predicted;
-                      return _regenerator.default.wrap(function _callee15$(_context15) {
+                    _regenerator.default.mark(function _callee16(err2, data_ss) {
+                      var tablePage, spaceRow, headerNodes, htmlHeader, h, headText, textLimit, actual_table, formattedPage, predictions, terms_matrix, preds_matrix, class_matrix, content_type_matrix, max_col, l, getTopDescriptors, cleanModifier, col_top_descriptors, c, content_types_in_column, unique_modifiers_in_column, u, unique_modifier, column_data, column_terms, k, allfreqs, all_terms, descriptors, row_top_descriptors, r, content_types_in_row, row_data, row_terms, predicted;
+                      return _regenerator.default.wrap(function _callee16$(_context16) {
                         while (1) {
-                          switch (_context15.prev = _context15.next) {
+                          switch (_context16.prev = _context16.next) {
                             case 0:
-                              _context15.prev = 0;
+                              _context16.prev = 0;
                               tablePage = cheerio.load(data); // tablePage("col").removeAttr('style');
 
                               if (tablePage) {
-                                _context15.next = 5;
+                                _context16.next = 5;
                                 break;
                               }
 
@@ -750,22 +821,22 @@ function _readyTableData() {
                                 formattedPage: "",
                                 title: ""
                               });
-                              return _context15.abrupt("return");
+                              return _context16.abrupt("return");
 
                             case 5:
-                              _context15.next = 11;
+                              _context16.next = 11;
                               break;
 
                             case 7:
-                              _context15.prev = 7;
-                              _context15.t0 = _context15["catch"](0);
+                              _context16.prev = 7;
+                              _context16.t0 = _context16["catch"](0);
                               // console.log(JSON.stringify(e)+" -- " + JSON.stringify(data))
                               resolve({
                                 htmlHeader: "",
                                 formattedPage: "",
                                 title: ""
                               });
-                              return _context15.abrupt("return");
+                              return _context16.abrupt("return");
 
                             case 11:
                               spaceRow = -1;
@@ -787,11 +858,11 @@ function _readyTableData() {
                               actual_table = actual_table.html(); // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
 
                               formattedPage = "<div><style>" + data_ss + "</style>" + actual_table + "</div>";
-                              _context15.next = 24;
+                              _context16.next = 24;
                               return attempt_predictions(actual_table);
 
                             case 24:
-                              predictions = _context15.sent;
+                              predictions = _context16.sent;
                               terms_matrix = predictions.map(function (e) {
                                 return e.terms.map(function (term) {
                                   return prepare_cell_text(term);
@@ -837,7 +908,7 @@ function _readyTableData() {
 
                               cleanModifier = function cleanModifier(modifier) {
                                 // I used to .replace("firstCol","").replace("firstLastCol","") the modifier.
-                                return modifier.replace("firstCol", "empty_row").replace("firstLastCol", "empty_row_with_p_value").trim();
+                                return modifier.replace("firstCol", "empty_row").replace("firstLastCol", "empty_row_with_p_value").replace("indent0", "indent").replace("indent1", "indent").replace("indent2", "indent").replace("indent3", "indent").replace("indent4", "indent").trim();
                               }; //Estimate column predictions.
 
 
@@ -846,7 +917,7 @@ function _readyTableData() {
 
                             case 35:
                               if (!(c < max_col)) {
-                                _context15.next = 57;
+                                _context16.next = 65;
                                 break;
                               }
 
@@ -874,11 +945,11 @@ function _readyTableData() {
                               });
 
                               if (content_types_in_column.total_text >= content_types_in_column.total_numeric) {
-                                _context15.next = 39;
+                                _context16.next = 39;
                                 break;
                               }
 
-                              return _context15.abrupt("continue", 54);
+                              return _context16.abrupt("continue", 62);
 
                             case 39:
                               unique_modifiers_in_column = class_matrix.map(function (x) {
@@ -886,15 +957,15 @@ function _readyTableData() {
                               }).map(cleanModifier).filter(function (v, i, a) {
                                 return a.indexOf(v) === i;
                               });
-                              _context15.t1 = _regenerator.default.keys(unique_modifiers_in_column);
+                              _context16.t1 = _regenerator.default.keys(unique_modifiers_in_column);
 
                             case 41:
-                              if ((_context15.t2 = _context15.t1()).done) {
-                                _context15.next = 54;
+                              if ((_context16.t2 = _context16.t1()).done) {
+                                _context16.next = 62;
                                 break;
                               }
 
-                              u = _context15.t2.value;
+                              u = _context16.t2.value;
                               unique_modifier = unique_modifiers_in_column[u];
                               column_data = preds_matrix.map(function (x, i) {
                                 return [x[c], i];
@@ -914,6 +985,24 @@ function _readyTableData() {
                                 total: 0,
                                 freqs: {}
                               });
+                              column_terms = preds_matrix.map(function (x, i) {
+                                return [x[c], i];
+                              }).reduce(function (countMap, word) {
+                                var i = word[1];
+                                word = terms_matrix[i][c];
+
+                                if (unique_modifier === cleanModifier(class_matrix[i][c])) {
+                                  if (word.length > 0 && word != undefined) {
+                                    if (countMap[unique_modifier]) {
+                                      countMap[unique_modifier].push(word);
+                                    } else {
+                                      countMap[unique_modifier] = [word];
+                                    }
+                                  }
+                                }
+
+                                return countMap;
+                              }, {});
 
                               for (k in column_data.freqs) {
                                 // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
@@ -924,14 +1013,34 @@ function _readyTableData() {
                                 }
                               }
 
-                              _context15.t3 = method;
-                              _context15.next = _context15.t3 === "frequency" ? 49 : 50;
+                              _context16.t3 = METHOD;
+                              _context16.next = _context16.t3 === "grouped_predictor" ? 50 : 58;
                               break;
 
-                            case 49:
-                              return _context15.abrupt("break", 52);
-
                             case 50:
+                              all_terms = column_terms[unique_modifier] ? column_terms[unique_modifier].join(" ") : "";
+
+                              if (!(column_terms[unique_modifier] && all_terms && column_terms[unique_modifier].length > 1 && all_terms.length > 0)) {
+                                _context16.next = 57;
+                                break;
+                              }
+
+                              _context16.next = 54;
+                              return grouped_predictor(all_terms);
+
+                            case 54:
+                              descriptors = _context16.sent;
+                              descriptors = descriptors[all_terms].split(";");
+                              col_top_descriptors[col_top_descriptors.length] = {
+                                descriptors: descriptors,
+                                c: c,
+                                unique_modifier: unique_modifier
+                              };
+
+                            case 57:
+                              return _context16.abrupt("break", 60);
+
+                            case 58:
                               descriptors = getTopDescriptors(3, column_data.freqs, ["arms", "undefined"]);
                               if (descriptors.length > 0) col_top_descriptors[col_top_descriptors.length] = {
                                 descriptors: descriptors,
@@ -939,27 +1048,27 @@ function _readyTableData() {
                                 unique_modifier: unique_modifier
                               };
 
-                            case 52:
-                              _context15.next = 41;
+                            case 60:
+                              _context16.next = 41;
                               break;
 
-                            case 54:
+                            case 62:
                               c++;
-                              _context15.next = 35;
+                              _context16.next = 35;
                               break;
 
-                            case 57:
+                            case 65:
                               // Estimate row predictions
                               row_top_descriptors = [];
-                              _context15.t4 = _regenerator.default.keys(preds_matrix);
+                              _context16.t4 = _regenerator.default.keys(preds_matrix);
 
-                            case 59:
-                              if ((_context15.t5 = _context15.t4()).done) {
-                                _context15.next = 74;
+                            case 67:
+                              if ((_context16.t5 = _context16.t4()).done) {
+                                _context16.next = 90;
                                 break;
                               }
 
-                              r = _context15.t5.value;
+                              r = _context16.t5.value;
                               content_types_in_row = content_type_matrix[r].reduce(function (countMap, word) {
                                 switch (word) {
                                   case "numeric":
@@ -982,13 +1091,13 @@ function _readyTableData() {
                               });
 
                               if (content_types_in_row.total_text >= content_types_in_row.total_numeric) {
-                                _context15.next = 64;
+                                _context16.next = 72;
                                 break;
                               }
 
-                              return _context15.abrupt("continue", 59);
+                              return _context16.abrupt("continue", 67);
 
-                            case 64:
+                            case 72:
                               row_data = preds_matrix[r].reduce(function (countMap, word) {
                                 countMap.freqs[word] = ++countMap.freqs[word] || 1;
                                 var max = countMap["max"] || 0;
@@ -1009,14 +1118,41 @@ function _readyTableData() {
                                 }
                               }
 
-                              _context15.t6 = method;
-                              _context15.next = _context15.t6 === "frequency" ? 69 : 70;
+                              row_terms = terms_matrix[r].reduce(function (allTerms, term) {
+                                if (term && term.length > 0) {
+                                  allTerms.push(term);
+                                }
+
+                                return allTerms;
+                              }, []);
+                              _context16.t6 = METHOD;
+                              _context16.next = _context16.t6 === "grouped_predictor" ? 78 : 86;
                               break;
 
-                            case 69:
-                              return _context15.abrupt("break", 72);
+                            case 78:
+                              all_terms = row_terms.join(" ");
 
-                            case 70:
+                              if (!(row_terms.length > 1)) {
+                                _context16.next = 85;
+                                break;
+                              }
+
+                              _context16.next = 82;
+                              return grouped_predictor(all_terms);
+
+                            case 82:
+                              descriptors = _context16.sent;
+                              descriptors = descriptors[all_terms].split(";");
+                              row_top_descriptors[row_top_descriptors.length] = {
+                                descriptors: descriptors,
+                                c: r,
+                                unique_modifier: ""
+                              };
+
+                            case 85:
+                              return _context16.abrupt("break", 88);
+
+                            case 86:
                               descriptors = getTopDescriptors(3, row_data.freqs, ["undefined"]);
                               if (descriptors.length > 0) row_top_descriptors[row_top_descriptors.length] = {
                                 descriptors: descriptors,
@@ -1024,11 +1160,11 @@ function _readyTableData() {
                                 unique_modifier: ""
                               };
 
-                            case 72:
-                              _context15.next = 59;
+                            case 88:
+                              _context16.next = 67;
                               break;
 
-                            case 74:
+                            case 90:
                               predicted = {
                                 cols: col_top_descriptors,
                                 rows: row_top_descriptors // res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
@@ -1042,15 +1178,15 @@ function _readyTableData() {
                                 predicted: predicted
                               });
 
-                            case 76:
+                            case 92:
                             case "end":
-                              return _context15.stop();
+                              return _context16.stop();
                           }
                         }
-                      }, _callee15, this, [[0, 7]]);
+                      }, _callee16, this, [[0, 7]]);
                     }));
 
-                    return function (_x34, _x35) {
+                    return function (_x35, _x36) {
                       return _ref10.apply(this, arguments);
                     };
                   }());
@@ -1059,14 +1195,14 @@ function _readyTableData() {
                 reject(e);
               }
             });
-            return _context16.abrupt("return", result);
+            return _context17.abrupt("return", result);
 
           case 5:
           case "end":
-            return _context16.stop();
+            return _context17.stop();
         }
       }
-    }, _callee16, this);
+    }, _callee17, this);
   }));
   return _readyTableData.apply(this, arguments);
 }
@@ -1090,7 +1226,7 @@ function () {
             }
 
             _context5.next = 4;
-            return readyTableData(req.query.docid, req.query.page, METHOD);
+            return readyTableData(req.query.docid, req.query.page);
 
           case 4:
             tableData = _context5.sent;
@@ -1125,7 +1261,7 @@ function () {
     }, _callee5, this, [[0, 11]]);
   }));
 
-  return function (_x24, _x25) {
+  return function (_x25, _x26) {
     return _ref5.apply(this, arguments);
   };
 }());
@@ -1159,7 +1295,7 @@ function () {
     }, _callee6, this);
   }));
 
-  return function (_x26, _x27) {
+  return function (_x27, _x28) {
     return _ref6.apply(this, arguments);
   };
 }());
@@ -1238,7 +1374,7 @@ function () {
     }, _callee7, this);
   }));
 
-  return function (_x28, _x29) {
+  return function (_x29, _x30) {
     return _ref7.apply(this, arguments);
   };
 }());
@@ -1276,7 +1412,7 @@ function () {
     }, _callee8, this);
   }));
 
-  return function (_x30, _x31) {
+  return function (_x31, _x32) {
     return _ref8.apply(this, arguments);
   };
 }());

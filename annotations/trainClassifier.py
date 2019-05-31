@@ -91,10 +91,68 @@ pickle.dump(sgd, open(filename, 'wb'))
 
 # sgd[2].score( ["mean mean sd","cyclosporin", "placebo"], sgd[2].classes_)
 
-terms = "mean mean sd cyclosporin placebo sex"
-sgd.predict([terms])
-sgd.decision_function([terms]) #Predict signed ‘distance’ to the hyperplane (aka confidence score) # https://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier.decision_function
-sgd[2].classes_
+# terms = "mean mean sd cyclosporin placebo sex"
+
+# terms = 'subgroup canagliflozin placebo hazard ratio ( nmbr % ci ) p value'
 
 
 
+
+def getTopConfidenceTerms(df):
+    
+    df = df.sort_values(by=['confidence'], ascending=False)
+
+    mean = df.mean(axis=0)
+
+    return df[df["confidence"] > mean[0]]["classes"].values
+
+
+#Predict signed ‘distance’ to the hyperplane (aka confidence score) # https://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier.decision_function
+def predictTerms( terms , sgd ):
+
+    result = {}
+
+    for  t in range(0,len(terms)):
+        d = {'classes': sgd[2].classes_, 'confidence': sgd.decision_function([terms[t]])[0]}
+        df = pd.DataFrame(data=d)
+        res = getTopConfidenceTerms(df)
+
+        result[terms[t]] = res
+
+    return result
+
+
+t1 = 'age sex race ethnicity region time since diagnosis of type nmbr diabetes hba1c body mass index egfr urine albumin-to-creatinine ratio blood pressure control cardiovascular risk previous stroke atrial fibrillation heart failure hypertension smoking status metformin sulfonylurea insulin thiazolidinedione'
+t2 = "Diuretics All patients Male Female Family history of diabetes (+) Family history of diabetes (-) FBS >=100 mg/dl FBS <100 mg/dl Age>= 65 years old Age<65 years old BMI >=25Kg/m2 BMI<25Kg/m2 With Beta Blocker Without Beta Blocker With ACEI/ARB Without ACEI/ARB"
+
+
+# def classify(h):
+#     d={}
+#     result = sgd.predict(h)
+#     for r in range(0,len(h)):
+#       d[h[r]] = result[r]
+#     return d
+
+#     classify([terms]    )
+
+
+
+predictTerms([cleanTerm(t1),cleanTerm(t2)],sgd)
+    
+
+def getTopConfidenceTerms(df):
+      df = df.sort_values(by=['confidence'], ascending=False)
+      mean = df.mean(axis=0)
+      return df[df["confidence"] > mean[0]]["classes"].values
+
+def predictTerms( terms ):
+      result = {}
+      for t in range(0,len(terms)):
+          d = {'classes': sgd[2].classes_, 'confidence': sgd.decision_function([terms[t]])[0]}
+          df = pd.DataFrame(data=d)
+          res = getTopConfidenceTerms(df)
+          result[terms[t]] = ";".join(res)
+      return result
+
+
+predictTerms(["stent group ( n = nmbr )","alteplase group ( n = nmbr )"])

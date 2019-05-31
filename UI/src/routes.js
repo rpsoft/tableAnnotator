@@ -21,6 +21,9 @@ import {
   ResultsContainer,
   TableContainer,
   AnnotationView,
+  ClusterContainer,
+  ClusterView,
+  ClusterIndex,
 } from './components/'
 
 import App from './App'
@@ -46,9 +49,13 @@ var routes = (history) => (
             <Route path={urlBase + "table"} component={AnnotationView} ></Route>
       </Route>
 
+      <Route path="clusterindex" component={ClusterContainer}>
+            <Route path={urlBase + "clusterindex"} component={ClusterIndex} ></Route>
+      </Route>
 
-
-
+      <Route path="cluster" component={ClusterContainer}>
+            <Route path={urlBase + "cluster"} component={ClusterView} ></Route>
+      </Route>
 
   </Router>
 )

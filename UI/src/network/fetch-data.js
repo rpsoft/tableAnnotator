@@ -73,6 +73,16 @@ export default class fetchData {
 
   }
 
+  async getAllClusters() {
+
+        var urlQueryRequest = urlBase+ "allClusters"
+
+        var r = await this.getGeneric( urlQueryRequest  )
+        // debugger
+        return r
+
+  }
+
   async getAllAnnotations() {
 
         var urlQueryRequest = urlBase+ "getAnnotations"
