@@ -503,27 +503,53 @@ async function readyTableData(docid,page,method){
                                   }
 
                                   var spaceRow = -1;
-
-                                  var headerNodes = [cheerio(tablePage(".headers")[0]).remove()]
-
-
                                   var htmlHeader = ""
 
-                                  for ( var h in headerNodes){
-                                      // cheerio(headerNodes[h]).css("font-size","20px");
-                                      var headText = cheerio(headerNodes[h]).text().trim()
-                                      var textLimit = 400
-                                      htmlHeader = htmlHeader + '<tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">' + (headText.length > textLimit ? headText.slice(0,textLimit-1) +" [...] " : headText) + "</td></tr>"
+                                  var findHeader = (tablePage, tag) => {
+                                    var totalTextChars = 0
+
+                                    var headerNodes = [cheerio(tablePage(tag)[0]).remove()]
+                                    var htmlHeader = ""
+                                    for ( var h in headerNodes){
+                                        // cheerio(headerNodes[h]).css("font-size","20px");
+                                        var headText = cheerio(headerNodes[h]).text().trim()
+                                        var textLimit = 400
+                                        var actualText = (headText.length > textLimit ? headText.slice(0,textLimit-1) +" [...] " : headText)
+                                            totalTextChars += actualText.length
+                                        htmlHeader = htmlHeader + '<tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">' + actualText + "</td></tr>"
+                                    }
+
+                                    return {htmlHeader, totalTextChars}
                                   }
 
-                                      htmlHeader = "<table>"+htmlHeader+"</table>"
+                                  var possible_tags_for_title = [".headers",".caption",".captions",".article-table-caption"]
+
+                                  for (var t in possible_tags_for_title){
+
+                                    htmlHeader = findHeader(tablePage, possible_tags_for_title[t])
+                                    if ( htmlHeader.totalTextChars > 0){
+                                      break;
+                                    }
+
+                                  }
 
 
+                                  htmlHeader = "<table>"+htmlHeader.htmlHeader+"</table>"
 
                                   var actual_table = tablePage("table").parent().html();
                                       actual_table = cheerio.load(actual_table);
-                                      actual_table("tr > td:nth-child(1), tr > td:nth-child(2), tr > th:nth-child(1), tr > th:nth-child(2)").remove();
+
+
+                                  // The following lines remove, line numbers present in some tables, as well as positions in headings derived from the excel sheets  if present.
+                                  var colum_with_numbers = actual_table("tr > td:nth-child(1), tr > td:nth-child(2), tr > th:nth-child(1), tr > th:nth-child(2)")
+                                  if ( colum_with_numbers.text().replace( /[0-9]/gi, "").replace(/\s+/g,"").toLowerCase() === "row/col" ){
+                                    colum_with_numbers.remove()
+                                  }
+
+                                  if ( actual_table("thead").text().trim().indexOf("1(A)") > -1 ){
                                       actual_table("thead").remove();
+                                  }
+                                  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                       actual_table = actual_table.html();
 
                                   // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"

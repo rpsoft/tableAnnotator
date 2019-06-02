@@ -237,6 +237,8 @@ MakeFormatted <- function(filename){
 # single_table_sheets <- list.files("Data/Single_table_sheets/", patt = "xlsx")
 # 
 
+setwd("/home/suso/ihw/tableAnnotator/XLSExtract")
+
 single_table_sheets <- list.files("tables/", patt = "xlsx")
 single_table_sheets_res <- map(single_table_sheets, ~ paste0("tables/", .x))
 single_table_sheets_res <- map(single_table_sheets_res, MakeFormatted)
@@ -249,6 +251,7 @@ htmlFolder <- "htmlFiles/"
 
 ## Example of htmltable, will appear in Rstudio viewer
 html_formatting <- function(filename){
+    browser()
       ex <- filename[[2]]
       
       cols <- (ex %>% dim())[2]
@@ -277,6 +280,7 @@ formatted_tables <- map( single_table_sheets_res, html_formatting)
 failed <- c()
 
 names(formatted_tables) %>% sapply(function (table_name) {
+  browser()
   tryCatch({  
     
     headers <- paste0('<div class="headers"><div>',paste0(single_table_sheets_res[[table_name]][[1]][!is.na(single_table_sheets_res[[table_name]][[1]])],collapse = "</div><div>"),"</div></div>")
