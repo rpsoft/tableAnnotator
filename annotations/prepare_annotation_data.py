@@ -96,3 +96,7 @@ data1 = pd.DataFrame(data=data1)
 data2 = pd.DataFrame(data=data2)
 
 fullData = pd.concat([data1,data2])
+
+
+
+fullData

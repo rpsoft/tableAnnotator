@@ -31,11 +31,13 @@ class ClusterView extends Component {
 
   constructor(props) {
     super()
+
     this.state = {
         table: null,
-        currentPage : 0
+        currentPage : props.location.query && props.location.query.page ? props.location.query.page : 1
     };
 
+    debugger
   }
 
   async componentWillReceiveProps(next) {
@@ -43,20 +45,34 @@ class ClusterView extends Component {
   }
 
   async componentWillMount() {
-
       this.loadPageFromProps(this.props)
   }
 
   async loadPageFromProps(props){
-
         let fetch = new fetchData();
 
-        var results = JSON.parse(await fetch.getAllClusters())
 
-        this.setState({clusters : results, totalClusters : Object.keys(results).length  })
+        var results = await fetch.getAllClusters()
 
+            results = results.reduce( (acc, item) =>{ var prev = acc[item.cn_override ? item.cn_override : item.cn]; if ( prev ){ prev.push(item); } else { prev = [item] } acc[item.cn_override ? item.cn_override : item.cn] = prev; return acc },{})
+
+        this.setState({clusters : results,
+                       totalClusters : Object.keys(results).length,
+                       currentPage: props.location.query && props.location.query.page ? props.location.query.page : currentPage  })
     }
 
+
+   changePage( number ){
+     this.props.goToUrl("/cluster?page="+number)
+   }
+
+   summary(cluster) {
+
+    var clusterFreqs = cluster.reduce( (acc,item) => { var cuis = item.cuis.split(";"); for ( var i in cuis ){ var prev = acc[cuis[i]]; prev = prev ? prev+1 : 1; acc[cuis[i]] = prev } return acc} , {});
+
+    var keys = Object.keys(clusterFreqs)
+    return <div>{ keys.map( (e,i) => <div key={i}> { e+" : "+clusterFreqs[e] }</div>) }</div>
+   }
 
 
    render() {
@@ -74,37 +90,30 @@ class ClusterView extends Component {
                      onChange={(event,value) => {this.setState({user: value})}}
                      style={{width:200,marginLeft:20,marginRight:20}}
                      onKeyDown={(event, index) => {
-                       //
-                       // if (event.key === 'Enter') {
-                       //     this.shiftTables(0)
-                       //     event.preventDefault();
-                       // }
+
                      }}
                      />
 
-
-
                     <div style={{float:"right "}}>
-                     <RaisedButton onClick={ () => {this.setState({currentPage: this.state.currentPage - 1 })} } style={{float:"left"}}> {"<<"} </RaisedButton>
+                     <RaisedButton onClick={ () => {this.changePage(parseInt(this.state.currentPage) - 1)} } style={{float:"left"}}> {"<<"} </RaisedButton>
                      <div style={{float:"left",padding:15,fontWeight:"bold"}}>{"Cluster : "+this.state.currentPage +" / "+ this.state.totalClusters }</div>
-                     <RaisedButton onClick={ () => {this.setState({currentPage: this.state.currentPage + 1 })} } style={{float:"left"}}> {">>"} </RaisedButton></div>
+                     <RaisedButton onClick={ () => {this.changePage(parseInt(this.state.currentPage) + 1)} } style={{float:"left"}}> {">>"} </RaisedButton></div>
                     <div>
 
-                    <hr />
-
-                    <Card style={{float:"right", padding:20}}> <div style={{marginBottom:10}}> Related CUIs and frequencies</div> {
-                      CUIs.map( (v) => <div> {v} </div> )
+                    <Card style={{float:"right", padding:20, position:"relative", top:20}}> <div style={{marginBottom:10}}> Related CUIs and frequencies</div> {
+                      this.summary(this.state.clusters[this.state.currentPage])
                     } </Card>
 
-                    <Card> </Card>
+                    <hr />
                         {
-                          this.state.clusters[this.state.currentPage].map( v => <ClusterItem item_text={v}></ClusterItem>)
+                          this.state.clusters[this.state.currentPage].map( (v,i) => <ClusterItem key={i} item={v} clusters={this.state.clusters} currentPage={this.state.currentPage}></ClusterItem>)
                         }
 
                     </div>
 
                     <hr />
-                    <RaisedButton onClick={ () => {} } style={{padding:5}}> {"Save Changes"} </RaisedButton>
+                    {// <RaisedButton onClick={ () => {} } style={{padding:5}}> {"Save Changes"} </RaisedButton>
+                    }
               </Card>
 
 

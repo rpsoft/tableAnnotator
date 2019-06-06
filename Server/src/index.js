@@ -9,10 +9,13 @@ const { Pool, Client } = require('pg')
 const csv = require('csv-parser');
 const fs = require('fs');
 
+function sleep(ms){
+    return new Promise(resolve=>{
+        setTimeout(resolve,ms)
+    })
+}
 
 // import {PythonShell} from 'python-shell';
-
-
 app.use(express.static(__dirname + '/domainParserviews'));
 //Store all HTML files in view folder.
 app.use(express.static(__dirname + '/views'));
@@ -30,6 +33,15 @@ import {PORT} from "./config"
 import {TITLES} from "./titles"
 
 var titles_obj = {}
+
+Object.defineProperty(Array.prototype, 'flat', {
+    value: function(depth = 1) {
+      return this.reduce(function (flat, toFlatten) {
+        return flat.concat((Array.isArray(toFlatten) && (depth>1)) ? toFlatten.flat(depth-1) : toFlatten);
+      }, []);
+    }
+});
+
 
 for ( var t in TITLES) {
   titles_obj[TITLES[t].pmid.split(" ")[0]] = { title: TITLES[t].title, abstract: TITLES[t].abstract }
@@ -49,17 +61,53 @@ var cssFolder = "HTML_STYLES"
 var DOCS = [];
 
 var clusters = {}
+var clusterTerms = []
+
+function extractMMData (r) {
+  try{
+    r = JSON.parse(r)
+    r = r.AllDocuments[0].Document.Utterances.map(
+                    utterances => utterances.Phrases.map(
+                      phrases => phrases.Mappings.map(
+                        mappings => mappings.MappingCandidates.map(
+                          candidate => ({
+                                    CUI:candidate.CandidateCUI,
+                                    matchedText: candidate.CandidateMatched,
+                                    preferred: candidate.CandidatePreferred,
+                                    hasMSH: candidate.Sources.indexOf("MSH") > -1
+                                 })
+                               )
+                             )
+                           )
+                         )[0][0].flat()
+
+    // This removes duplicate cuis
+    r = r.reduce( (acc,el) => {if ( acc.cuis.indexOf(el.CUI) < 0 ){acc.cuis.push(el.CUI); acc.data.push(el)}; return acc }, {cuis: [], data: []} ).data
+    return r
+  } catch (e){
+    return []
+  }
+}
+
 
 fs.createReadStream('./CLUSTERS/clusters.csv')
   .pipe(csv())
-  .on('data', (row) => {
+  .on('data', async (row) => {
     var existingCluster = clusters[row.cluster]
+    //
+    // var conceptData = await getMMatch(row.term)
+    //
+    // var mmdata = extractMMData(conceptData)
+
+
 
     if ( existingCluster ){
       existingCluster.push(row.term)
     } else {
       existingCluster = [row.term]
     }
+
+    clusterTerms.push(row.term)
 
     clusters[row.cluster] = existingCluster
   })
@@ -312,8 +360,90 @@ app.get('/api/allMetaData',function(req,res){
   })
 });
 
-app.get('/api/allClusters',function(req,res){
-  res.send(clusters)
+async function getAllClusters(){
+
+  var client = await pool.connect()
+  var result = await client.query(`select * from clusters order by concept asc`)
+        client.release()
+  return result
+}
+
+async function updateClusterAnnotation(cn,concept,cuis,isdefault,cn_override){
+
+  var client = await pool.connect()
+
+  var done = await client.query('INSERT INTO clusters VALUES($1,$2,$3,$4,$5) ON CONFLICT (concept) DO UPDATE SET isdefault = $4, cn_override = $5;', [cn,concept,cuis,isdefault.toLowerCase() == 'true',cn_override])
+    .then(result => console.log("insert: "+ result))
+    .catch(e => console.error(e.stack))
+    .then(() => client.release())
+
+  console.log("Awaiting done: "+(ops_counter++))
+  console.log("DONE: "+(ops_counter++))
+}
+
+
+app.get('/api/allClusters', async function(req,res){
+  res.send( await getAllClusters() )
+});
+
+app.get('/api/recordClusterAnnotation',async function(req,res){
+
+  console.log(JSON.stringify(req.query))
+
+  if(req.query && req.query.cn.length > 0
+              && req.query.concept.length > 0
+              && req.query.cuis.length > 0
+              && req.query.isdefault.length > 0
+              && req.query.cn_override.length > 0){
+      await updateClusterAnnotation( req.query.cn , req.query.concept, req.query.cuis, req.query.isdefault, req.query.cn_override)
+  }
+
+  res.send("saved cluster annotation: "+JSON.stringify(req.query))
+});
+
+
+// const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+// const csvWriter = createCsvWriter({
+//   path: 'CLUSTERS/cuis.csv',
+// });
+
+app.get('/api/allCUIs',async function(req,res){
+
+  var fs = require('fs')
+  var csvWriter = fs.createWriteStream('CLUSTERS/cuis.csv', {
+    flags: 'a' // 'a' means appending (old data will be preserved)
+  })
+
+  var indexWriter = fs.createWriteStream('CLUSTERS/cuis-index.csv', {
+    flags: 'a' // 'a' means appending (old data will be preserved)
+  })
+
+  indexWriter.write("CUI,preferred,hasMSH\n")
+
+  var CUIs = []
+
+   for ( var i = 0; i < clusterTerms.length; i++){
+     var mmdata = await getMMatch(clusterTerms[i])
+         mmdata = extractMMData(mmdata)
+
+    var csvLine = clusterTerms[i].replace(/;/gi,"").replace(/,/gi,"")+","+
+                                    mmdata.map( c => {
+                                                if ( CUIs.indexOf(c.CUI) < 0){
+                                                  debugger
+                                                  CUIs.push(c.CUI);
+                                                  indexWriter.write(c.CUI+","+c.preferred+","+c.hasMSH+"\n")
+                                                }
+                                                return c.CUI
+                                              }).join(";")+","+
+                                    mmdata.map( c => c.hasMSH ).join(";")+","+i+"/"+clusterTerms.length
+     //CUIs = CUIs+clusterTerms[i]+","+mmdata.map( c => c.CUI ).join(";")+"\n"
+
+     csvWriter.write(csvLine+"\n")
+     console.log(i+"/"+clusterTerms.length)
+   }
+   csvWriter.end()
+   indexWriter.end()
+  res.send("done")
 });
 
 app.get('/api/allPredictions', async function(req,res){
@@ -455,9 +585,57 @@ app.get('/api/abs_index',function(req,res){
 });
 
 
+
 app.get('/api/totalTables',function(req,res){
   res.send({total : DOCS.length})
 });
+
+async function getMMatch(phrase){
+
+  // console.log(phrase)
+  phrase = phrase.replace(/[\W_]+/g," ");
+  // console.log(phrase)
+
+  var result = new Promise(function(resolve, reject) {
+
+    request.post({
+        headers: {'content-type' : 'application/x-www-form-urlencoded'},
+        url:     'http://localhost:8080/form',
+        body:    "input="+phrase+" &args=--JSONn -E"
+      }, (error, res, body) => {
+      if (error) {
+        reject(error)
+        return
+      }
+
+      var start = body.indexOf('{"AllDocuments"')
+      var end = body.indexOf("'EOT'.")
+
+      resolve(body.slice(start, end))
+    })
+
+
+  });
+
+  return result
+}
+
+app.get('/api/getMMatch',async function(req,res){
+  try{
+   if(req.query && req.query.phrase ){
+
+     var mm_match = await getMMatch(req.query.phrase)
+
+     res.send( mm_match )
+   } else {
+     res.send({status: "wrong parameters", query : req.query})
+   }
+ }catch (e){
+   console.log(e)
+ }
+});
+
+
 
 app.get('/api/classify', async function(req,res){
 

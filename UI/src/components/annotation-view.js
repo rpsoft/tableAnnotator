@@ -68,7 +68,6 @@ class AnnotationView extends Component {
 
     var all_annotations = JSON.parse(await fetch.getAllAnnotations())
 
-    //var annotations = this.state.annotations ? this.state.annotations.rows : []
     var annotations_formatted = {}
         all_annotations.rows.map( (v,i) => {
           if ( annotations_formatted[v.docid+"_"+v.page] ){
@@ -306,7 +305,7 @@ class AnnotationView extends Component {
 
     let fetch = new fetchData();
     await fetch.saveAnnotation(this.props.location.query.docid,this.props.location.query.page,this.state.user,this.state.annotations,this.state.corrupted, this.state.tableType,this.state.corrupted_text)
-    alert("Annotations Saved!")
+    //alert("Annotations Saved!")
 
     var all_annotations = JSON.parse(await fetch.getAllAnnotations())
 
@@ -417,17 +416,20 @@ class AnnotationView extends Component {
                               var key = sorting.key
                               var dir = sorting.dir
 
+                              var ak = a[key] ? a[key] : ""
+                              var bk = b[key] ? b[key] : ""
+
                               if( key == "row" || key == "col"){
                                 if ( dir == "asc" ) {
-                                  return parseInt(a[key]) - parseInt(b[key]);
+                                  return parseInt(ak) - parseInt(bk);
                                 } else {
-                                  return parseInt(b[key]) - parseInt(a[key]);
+                                  return parseInt(bk) - parseInt(ak);
                                 }
                               } else {
                                 if ( dir == "asc" ) {
-                                  return a[key].localeCompare(b[key])
+                                  return ak.localeCompare(bk)
                                 } else {
-                                  return b[key].localeCompare(a[key])
+                                  return bk.localeCompare(ak)
                                 }
                               }
 

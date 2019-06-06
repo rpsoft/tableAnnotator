@@ -27,7 +27,7 @@
 }
 
 
-td {width: auto;}
+td {width: auto; min-width:20px;}
 
 tr:hover {background: aliceblue}
 

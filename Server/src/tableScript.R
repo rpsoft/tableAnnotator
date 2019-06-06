@@ -1,9 +1,9 @@
 #10_unpivot_tables
 #
- # library(tidyxl)
- # library(unpivotr)
- # library(tidyverse)
-# 
+# library(tidyxl)
+# library(unpivotr)
+# library(tidyverse)
+#
 needs(readr,tidyxl,unpivotr,tidyverse)
 
 ## Directory holding the script
@@ -14,10 +14,12 @@ tablesDirectory <- "~/ihw/tableAnnotator/Single_table_sheets/"
 
 
 ################# PREPARING THE INPUT VARIABLE annotations.
-# 
-write_rds(x = input, path = "test2.rds")
+#
+#write_rds(x = input, path = "test2.rds")
 
-# input <- read_rds("test2.rds")
+new_obj <- readRDS("~/ihw/tableAnnotator/Server/src/new_obj.rds")
+
+#input <- readRDS("~/ihw/tableAnnotator/Server/src/test-nonworking-test.rds")
 # input
 
 
@@ -174,9 +176,9 @@ runAll <- function(){
 
       metadata <- prepareAnnotations(annotations )
 
-      
+
       TidyTable <- function(docid_page_selected){
-         # browser()
+          # browser()
         meta <- metadata %>%
           filter(docid_page == docid_page_selected)
 
@@ -207,7 +209,19 @@ runAll <- function(){
 
         filename <- paste(meta$docid[1], meta$page[1], sep = "_")
 
-        all_cells <- xlsx_cells(paste0(tablesDirectory, filename, ".xlsx"))
+        if(file.exists(paste0(tablesDirectory, filename, ".xlsx"))){
+          all_cells <- xlsx_cells(paste0(tablesDirectory, filename, ".xlsx"))
+        } else {
+          all_cells <- new_obj %>% filter( pmid_tbl == filename) %>% select("sheet", "address", "row", "col", "is_blank", "data_type",
+                                                               "error", "logical", "numeric", "date", "character", "character_formatted",
+                                                               "formula", "is_array", "formula_ref", "formula_group", "comment",
+                                                               "height", "width", "style_format", "local_format_id")
+        }
+
+        # browser()
+        #all_cells2 <- new_obj
+        #all_cells2 %>% select(colnames(all_cells)) -> all_cells
+
         # rectify(all_cells)
 
         ##  Simplify table by making all values character
@@ -220,18 +234,56 @@ runAll <- function(){
                  character = if_else(is.na(character), as.character(numeric), character))
 
         ## Extract cell-level formatting
-        formats <- xlsx_formats(paste0(tablesDirectory, filename, ".xlsx"))
-        bold <- formats$local$font$bold
-        ital <- formats$local$font$italic
-        bold_ital <- bind_cols(formats$local$font[c("bold", "italic")])
-        ## Note indentation is relative to minimum indent, problem is that this refers to every cell,
-        ## not just column_type
-        indt <- bind_cols(formats$local$alignment) %>%
-          mutate(indent = indent - min(indent),
-                 indent_lvl = indent,
-                 indent = horizontal %in% c("center", "right") |
-                   (indent >=1)) %>%
-          select(indent, indent_lvl)
+        if(file.exists(paste0(tablesDirectory, filename, ".xlsx"))){
+          formats <- xlsx_formats(paste0(tablesDirectory, filename, ".xlsx"))
+
+          bold <- formats$local$font$bold
+          ital <- formats$local$font$italic
+          bold_ital <- bind_cols(formats$local$font[c("bold", "italic")])
+          ## Note indentation is relative to minimum indent, problem is that this refers to every cell,
+          ## not just column_type
+          indt <- bind_cols(formats$local$alignment) %>%
+            mutate(indent = indent - min(indent),
+                   indent_lvl = indent,
+                   indent = horizontal %in% c("center", "right") |
+                     (indent >=1)) %>%
+            select(indent, indent_lvl)
+
+        } else {
+
+          formats <- new_obj %>% filter( pmid_tbl == filename) %>% select(bold, italic,"indent","indent_lvl")
+
+          # totalRows <- all_cells$character_formatted %>% length
+
+          bold <- formats$bold
+          italic <- formats$italic
+          bold_ital <- cbind(bold,italic) %>% as_tibble
+          indt <- formats %>% select("indent","indent_lvl")
+
+          all_cells <- all_cells %>% mutate(local_format_id = seq_along(local_format_id))
+          #
+          # for ( r in 1:totalRows ) {
+          #
+          #   obj <- all_cells$character_formatted[[r]]
+          #   bold <- c(bold, obj$bold)
+          #   ital <- c(ital, obj$italic)
+          #
+          # }
+          #
+          # browser()
+          #
+          #
+          # indt <- bind_cols(formats$local$alignment) %>%
+          #   mutate(indent = indent - min(indent),
+          #          indent_lvl = indent,
+          #          indent = horizontal %in% c("center", "right") |
+          #            (indent >=1)) %>%
+          #   select(indent, indent_lvl)
+
+        }
+
+
+
 
         ## Append to main dataset
         formats <- bind_cols(bold_ital, indt) %>%
@@ -246,6 +298,7 @@ runAll <- function(){
 
         all_cells <- all_cells %>%
           select(-indent_lvl)
+
 
         ## Extract character formatting (can vary within cells) and aggregate to cell level, take any formatting
         all_cells <- all_cells %>%
@@ -262,6 +315,8 @@ runAll <- function(){
                     bold = any(bold),
                     italic = any(italic)) %>%
           ungroup()
+
+
 
         suppressWarnings(suppressMessages(characters <- all_cells %>%
           select(char_format_id) %>%
@@ -300,6 +355,7 @@ runAll <- function(){
         all_cells <- all_cells_pad
         rm(all_cells_pad)
 
+
         ## First check that all cells are either blank or character
         if(all(all_cells$data_type %in% c("character", "blank", "numeric"))) {
           all_cells <- all_cells %>%
@@ -321,6 +377,8 @@ runAll <- function(){
             pull(row)
         }
 
+
+
         ## Identify split_header_row as the last empty row IN the first set of contiguos empty rows
         empty_rows <- BlankRow(all_cells)
         null_rows <- setdiff(1:max(all_cells$row), all_cells$row)
@@ -331,7 +389,7 @@ runAll <- function(){
           filter(diff != 1)
         split_header <- empty_rows$empty_rows[1]
 
-        # Next identify any rows which are completely blank 
+        # Next identify any rows which are completely blank
         blank_row <- all_cells %>%
           BlankRow()
 
@@ -382,6 +440,8 @@ runAll <- function(){
         ## Take cells before first blank_row as table/figure name
         ## Take after this cut-point the table body
         ## reset the table body to reflect the new row 1 (same as in table annotator)
+
+
         if(length(split_header)==0) {
           return("Error no blank row of cells to separate data from figure name")} else{
             table_header <- all_cells %>%
@@ -404,10 +464,10 @@ runAll <- function(){
         if(any(meta$location == "Col" & meta$number ==2)) print("Note two columns here, this is unusual")
 
         ## take table data component from within table body by excluding row-labels and columns-labels
-        
+
         ## With a twist. P-interaction columns contain data, so should not be excluded. There may be other cases. so watch out. #####!!!!#####
         meta_for_tdata <- meta %>% filter( ! ( location == "Col" & content == 'p-interaction' & number > 1))
-        
+
         table_data <- table_body %>%
           filter(! row %in% meta_for_tdata$number[meta_for_tdata$location == "Row"],
                  ! col %in% meta_for_tdata$number[meta_for_tdata$location == "Col"])
@@ -456,7 +516,7 @@ runAll <- function(){
         }
 
         data_cells <- table_data %>% select(row, col, character)
-        # browser()
+
         for(i_choose in unique(col_lbls_meta$i)){
           ## Select each richest column description in turn, removing that from the dataset
           # browser()
@@ -498,7 +558,7 @@ runAll <- function(){
           # print(h)
           # data_cells <- data_cells %>%
           #   enhead(header_cells = h, direction = "NNW", drop = FALSE)
-          data_cells
+
           data_cells <- NNW(data_cells, h)
           new_name <- row_lbls_meta$content[row_lbls_meta$i == i_choose] %>%  unique()
           while(new_name %in% names(data_cells)) new_name <- paste0(new_name, "_")
@@ -535,7 +595,7 @@ runAll <- function(){
       result_success <- bind_rows(result_success, .id = "docid_page")
       # result_fail    <- result[!map_lgl(result, is.tibble)]
       # write_csv(result_success, "temp_hebe.csv")
-      # browser()
+
       return(result_success)
 
 }

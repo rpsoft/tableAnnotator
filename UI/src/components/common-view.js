@@ -121,7 +121,11 @@ class CommonView extends Component {
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
         <Card style={{marginBottom:-10}}>
+        <RaisedButton style={{float:"right",marginTop:5,marginRight:5}} onClick={
+          () => this.props.goToUrl("/cluster?page=0")}
+          > Term Clustering </RaisedButton>
           <h2 style={{marginTop:0,padding:10}}>Welcome the Subgroup Annotator!</h2>
+
         </Card>
 
         <Card id="userData" style={{padding:15,marginBottom:10}}>

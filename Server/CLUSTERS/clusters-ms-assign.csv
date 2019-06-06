@@ -1,0 +1,58 @@
+cluster,concept,cuis
+0,worsening heart failure,C0018801;C0018802;C0332271;C1457868;C1546960;C4554158
+0,time since diagnosis of heart failure,C0040223;C3541383
+0,recurrent heart failure,C0018801;C0018802;C1455761;C2945760;C4554158
+0,prior heart failure ( n = nmbr  nmbr ),C0018801;C0018802;C0053917;C0332152;C1334884;C2826257;C4554158
+0,prior heart failure  n ( % ),C0018801;C0018802;C0332152;C2826257;C4554158
+0,prior heart failure  %,C0018801;C0018802;C0332152;C2826257;C4554158
+0,prior heart failure,C0018801;C0018802;C0332152;C2826257;C4554158
+0,prior congestive heart failure,C0018802;C0332152;C2826257
+0,previous heart failure,C0018801;C0018802;C0205156;C1552607;C4554158
+0,previous episode of heart failure,C0018801;C0018802;C0205156;C0332189;C1552607;C4554158
+0,previous congestive heart failure,C0018802;C0205156;C1552607
+0,not hospitalized for heart failure in the year prior to study enrollment,C1518422
+0,no prior heart failure ( n = nmbr  nmbr ),C0018801;C0018802;C0053917;C0332152;C1334884;C2826257;C4554158
+0,no prior heart failure,C0018801;C0018802;C0332152;C2826257;C4554158
+0,new york heart association congestive heart failure class,C0018802;C1882083
+0,hospitalized for heart failure during that time period,C0018801;C0018802;C0701159;C4554158
+0,hospitalization for heart failure within previous nmbr mo — no . ( % ),C3898876
+0,hospitalization for heart failure within nmbr mo,C3898876
+0,hospitalization for heart failure,C3898876
+0,history of heart failure — no . ( % ),C0455531
+0,history of heart failure  n ( % ),C0455531
+0,history of heart failure,C0455531
+0,history of congestive heart failure,C0455531;C0742742
+0,heart failurea,C0018787
+0,heart failure — no . ( % ),C0018801;C0018802;C4554158
+0,heart failure or lvef < nmbr % associated with index acs event,C0018801;C0018802;C4554158
+0,heart failure criteria met,C0018801;C0018802;C0243161;C4554158
+0,heart failure cause,C0015127;C0018801;C0018802;C1524003;C4554158
+0,heart failure *,C0018801;C0018802;C4554158
+0,heart failure ( hf )  ( % ),C0018488;C0018801;C0018802;C1313497;C1538440;C3273279;C4554158
+0,heart failure ( class l - lll ),C0018801;C0018802;C0456387;C1261077;C1518526;C1705943;C4554158
+0,heart failure  lvef < nmbr %  or both,C0018801;C0018802;C0053917;C0428772;C0488728;C1334884;C4554158
+0,heart failure,C0018801;C0018802;C4554158
+0,congestive heart failure — no . ( % ) | |,C0018802
+0,congestive heart failure — no . ( % ),C0018802
+0,congestive heart failure — %,C0018802
+0,congestive heart failure ( definite ),C0018802
+0,congestive heart failure ( chf ) ( in past nmbr weeks ),C0018802;C0053917;C1334884;C2987125
+0,congestive heart failure ( < nmbr wk ),C0018802;C0053917;C0332174;C0439230;C1334884
+0,congestive heart failure  n ( % ),C0018802
+0,congestive heart failure,C0018802
+0,class l / ll heart failure,C0456387;C1518526;C1705943
+0,chronic heart failure,C0018802;C0264716
+0,cause of heart failure — no . ( % ),C0015127;C0018801;C0018802;C1524003;C4554158
+0,cause of heart failure,C0015127;C0018801;C0018802;C1524003;C4554158
+0,baseline heart failure severity amongthose with priorheartfailure  %,C0018801;C0018802;C0168634;C0439793;C0522510;C1442488;C4554158
+0,any history of congestive heart failure,C0455531;C0742742
+-1,score on the minnesota living with heart failure scaled,C0026183;C0449820;C0595998;C4050231;C4520849;C4551704
+-1,prior heart failure yes,C0018801;C0018802;C0332152;C1549445;C1705108;C1710701;C2826257;C4554158
+-1,prior congestive heart failure yes,C0018802;C0332152;C1549445;C1705108;C1710701;C2826257
+-1,medical history duration of heart failure ( years ) primary cause of heart failure,C0015127;C0199168;C0205225;C0205476;C0439234;C0439612;C0439631;C0449238;C0455531;C1524003;C2926735
+-1,heart failure nyha ii - iii,C0018801;C0018802;C0439070;C1275491;C1705160;C1710602;C4082587;C4554158
+-1,heart failure nmbr month before admission,C0018801;C0018802;C0053917;C0184666;C0332177;C0439231;C0809949;C1334884;C4554158
+-1,heart failure nmbr mo before admission,C0018801;C0018802;C0026544;C0053917;C0184666;C0332177;C0809949;C1334884;C4554158
+-1,heart failure ( class i — iii ),C0018801;C0018802;C0021966;C0221138;C0439070;C0441885;C0441887;C1319793;C1705160;C2698967;C2698969;C4554158
+-1,devices for heart failure at screening visit,C0018787;C0018801;C0018802;C0025078;C0025080;C0220819;C0231174;C0680095;C0699733;C2024216;C4554158
+-1,baseline heart failure severity nyha class i,C0018801;C0018802;C0168634;C0439793;C0522510;C1442488;C1882084;C4554158

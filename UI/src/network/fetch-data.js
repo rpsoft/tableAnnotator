@@ -78,8 +78,20 @@ export default class fetchData {
         var urlQueryRequest = urlBase+ "allClusters"
 
         var r = await this.getGeneric( urlQueryRequest  )
-        // debugger
-        return r
+
+        return JSON.parse(r).rows
+
+  }
+
+  async saveClusterAnnotation(cn,concept,cuis,isdefault,cn_override) {
+
+    var urlQueryRequest = urlBase+ "recordClusterAnnotation?cn="+cn+"&concept="+encodeURIComponent(concept)+"&cuis="+encodeURIComponent(cuis)+"&isdefault="+encodeURIComponent(isdefault)+"&cn_override="+cn_override //;recordClusterAnnotation?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user+"&annotation="+encodeURIComponent(JSON.stringify(annotation))+"&corrupted="+ (corrupted == undefined ? false : corrupted)+"&tableType="+tableType + "&corrupted_text=" + corrupted_text
+
+    console.log(urlQueryRequest)
+
+    var r = await this.getGeneric( urlQueryRequest  )
+
+    return r
 
   }
 
@@ -103,6 +115,38 @@ export default class fetchData {
 
   }
 
+  async getMMatch(phrase) {
+
+    var urlQueryRequest = urlBase + "getMMatch?phrase="+encodeURIComponent(phrase)
+
+    var r = await this.getGeneric( urlQueryRequest  )
 
 
+    try{
+      r = JSON.parse(r)
+      r = r.AllDocuments[0].Document.Utterances.map(
+                      utterances => utterances.Phrases.map(
+                        phrases => phrases.Mappings.map(
+                          mappings => mappings.MappingCandidates.map(
+                            candidate => ({
+                                      CUI:candidate.CandidateCUI,
+                                      matchedText: candidate.CandidateMatched,
+                                      preferred: candidate.CandidatePreferred,
+                                      hasMSH: candidate.Sources.indexOf("MSH") > -1
+                                   })
+                                 )
+                               )
+                             )
+                           )[0][0].flat()
+
+      // This removes duplicate cuis
+      r = r.reduce( (acc,el) => {if ( acc.cuis.indexOf(el.CUI) < 0 ){acc.cuis.push(el.CUI); acc.data.push(el)}; return acc }, {cuis: [], data: []} ).data
+    } catch (e){
+
+      return []
+    }
+
+    return r
+
+  }
 }
