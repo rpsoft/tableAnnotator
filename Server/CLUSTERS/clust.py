@@ -15,7 +15,7 @@ def simplify(x):
 rootDir = "/home/suso/ihw/tableAnnotator/Server/CLUSTERS/"
 
 
-dataset = pd.read_csv(rootDir+'clusterData.csv')
+dataset = pd.read_csv(rootDir+'clusterDataMSH.csv')
 
 
 cuis = pd.read_csv(rootDir+'cuis.csv').fillna("")
@@ -101,19 +101,18 @@ def doit( p ):
 
 doit(0.40)
 
-doit(0.14)
+doit(0.10)
 
 doit(0.08)
 
 doit(1)
 
-doit(0.10)
+doit(0.05)
 
 ## aglomerative
-clustering = AgglomerativeClustering(linkage="complete",distance_threshold=0.90,n_clusters=None, compute_full_tree=True).fit(testing)
+clustering = AgglomerativeClustering(linkage="complete",distance_threshold=0.30,n_clusters=None, compute_full_tree=True).fit(testing)
 
 clustering = testing.assign(cluster=clustering.labels_)
-
 
 clustering = clustering.assign(concept=names)
 

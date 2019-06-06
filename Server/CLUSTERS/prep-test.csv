@@ -1,0 +1,10 @@
+systolic,C0039155,true,10455/10465
+diastolic,C0012000,true,10456/10465
+czp + mtx^mtx,C0054841;C0025677;C1417487;C1861828;C1872109,true;true;false;true;true,10457/10465
+pbo + mtx^mtx,C0031962;C0025677;C1417487,true;true;false,10458/10465
+history of paroxysmal af,C0019664;C0235480;C0019665;C0262512;C0262926;C1705255;C2004062,true;true;true;false;false;false;false,10459/10465
+no history of paroxysmal af,C0019664;C0235480;C0019665;C0262512;C0262926;C1705255;C2004062,true;true;true;false;false;false;false,10460/10465
+stage nmbr : > = nmbr,C0205390;C0053917;C1334884;C1300072;C1306673,false;true;false;false;false,10461/10465
+stage nmbr : < nmbr,C0205390;C0053917;C1334884;C1300072;C1306673,false;true;false;false;false,10462/10465
+ato nmbr mg and sim nmbr^nmbr mg ( n = nmbr ),C0053917;C0024671;C0026410;C0439269;C1960952;C2346927;C4321396;C4521761;C1334884,true;true;true;false;false;false;false;false;false,10463/10465
+ato nmbr mg and sim nmbr - nmbr mg ( n = nmbr ),C0053917;C0024671;C0026410;C0439269;C1960952;C2346927;C4321396;C4521761;C1334884,true;true;true;false;false;false;false;false;false,10464/10465

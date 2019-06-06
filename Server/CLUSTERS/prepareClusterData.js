@@ -13,14 +13,25 @@ function processFile(inputFile) {
 
         rl.on('line', function (line) {
 
+          if ( line.indexOf("concept,cuis,hasMesh,number") > -1 ){
+            return;
+          }
+
           var elements = line.split(",")
-
-
-
 
           if ( elements[1] ){
             var cuis = elements[1].split(";")
-                cuis = [...new Set(cuis.map(x => x))]
+
+            var hasMSH = elements[2].split(";")
+
+            var MSH_only_cuis = []; for (var c in cuis ){
+                    if ( hasMSH[c] == "true" ){
+                        MSH_only_cuis.push(cuis[c])
+                    }
+                }
+            cuis = MSH_only_cuis
+
+            cuis = [...new Set(cuis.map(x => x))]
 
             ConceptCUIs[elements[0]] = cuis
 
