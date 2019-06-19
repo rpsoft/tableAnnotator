@@ -1,3 +1,5 @@
+// transform cluster and cuis data in CSV to matrix of 1s and 0s.
+
 function processFile(inputFile) {
 
 

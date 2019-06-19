@@ -407,15 +407,31 @@ app.get('/api/recordClusterAnnotation',async function(req,res){
 //   path: 'CLUSTERS/cuis.csv',
 // });
 
+
+app.get('/api/cuisIndex',async function(req,res){
+
+      var cuis = {}
+
+      fs.createReadStream('./CLUSTERS/cuis-index.csv')
+        .pipe(csv())
+        .on('data', async (row) => {
+          cuis[row.CUI] = row.preferred
+        })
+        .on('end', () => {
+          res.send(cuis)
+        });
+
+});
+
 app.get('/api/allCUIs',async function(req,res){
 
   var fs = require('fs')
   var csvWriter = fs.createWriteStream('CLUSTERS/cuis.csv', {
-    flags: 'a' // 'a' means appending (old data will be preserved)
+    flags: 'w' // 'a' means appending (old data will be preserved)
   })
 
   var indexWriter = fs.createWriteStream('CLUSTERS/cuis-index.csv', {
-    flags: 'a' // 'a' means appending (old data will be preserved)
+    flags: 'w' // 'a' means appending (old data will be preserved)
   })
 
   indexWriter.write("CUI,preferred,hasMSH\n")

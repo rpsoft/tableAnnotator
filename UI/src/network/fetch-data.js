@@ -73,6 +73,17 @@ export default class fetchData {
 
   }
 
+  async getCUISIndex() {
+
+        var urlQueryRequest = urlBase+ "cuisIndex"
+
+        var r = await this.getGeneric( urlQueryRequest  )
+        // debugger
+        return JSON.parse(r)
+  }
+
+
+
   async getAllClusters() {
 
         var urlQueryRequest = urlBase+ "allClusters"
