@@ -360,13 +360,7 @@ app.get('/api/allMetaData',function(req,res){
   })
 });
 
-async function getAllClusters(){
 
-  var client = await pool.connect()
-  var result = await client.query(`select * from clusters order by concept asc`)
-        client.release()
-  return result
-}
 
 async function updateClusterAnnotation(cn,concept,cuis,isdefault,cn_override){
 
@@ -383,8 +377,53 @@ async function updateClusterAnnotation(cn,concept,cuis,isdefault,cn_override){
 
 
 app.get('/api/allClusters', async function(req,res){
+
+  var getAllClusters = async () => {
+    var client = await pool.connect()
+    var result = await client.query(`select * from clusters order by concept asc`)
+          client.release()
+    return result
+  }
+
   res.send( await getAllClusters() )
+
 });
+
+//getCUIMods  //
+app.get('/api/getCUIMods', async function(req,res){
+
+  var getCUIMods = async () => {
+    var client = await pool.connect()
+    var result = await client.query(`select * from modifiers`)
+          client.release()
+    return result
+  }
+
+  res.send( await getCUIMods() )
+
+});
+
+
+app.get('/api/setCUIMod', async function(req,res){
+
+  var setCUIMod = async (cui,type) => {
+      var client = await pool.connect()
+      var done = await client.query('INSERT INTO modifiers VALUES($1,$2) ON CONFLICT (cui) DO UPDATE SET type = $2;', [cui,type])
+        .then(result => console.log("insert: "+ result))
+        .catch(e => console.error(e.stack))
+        .then(() => client.release())
+
+  }
+
+  if ( req.query && req.query.cui && req.query.type){
+    await setCUIMod(req.query.cui, req.query.type)
+  }
+
+
+});
+
+
+
 
 app.get('/api/recordClusterAnnotation',async function(req,res){
 

@@ -254,31 +254,31 @@ function getAnnotationResults() {
 function _getAnnotationResults() {
   _getAnnotationResults = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee16() {
+  _regenerator.default.mark(function _callee21() {
     var client, result;
-    return _regenerator.default.wrap(function _callee16$(_context16) {
+    return _regenerator.default.wrap(function _callee21$(_context21) {
       while (1) {
-        switch (_context16.prev = _context16.next) {
+        switch (_context21.prev = _context21.next) {
           case 0:
-            _context16.next = 2;
+            _context21.next = 2;
             return pool.connect();
 
           case 2:
-            client = _context16.sent;
-            _context16.next = 5;
+            client = _context21.sent;
+            _context21.next = 5;
             return client.query("select * from annotations order by docid desc,page asc");
 
           case 5:
-            result = _context16.sent;
+            result = _context21.sent;
             client.release();
-            return _context16.abrupt("return", result);
+            return _context21.abrupt("return", result);
 
           case 8:
           case "end":
-            return _context16.stop();
+            return _context21.stop();
         }
       }
-    }, _callee16, this);
+    }, _callee21, this);
   }));
   return _getAnnotationResults.apply(this, arguments);
 }
@@ -290,31 +290,31 @@ function getAnnotationByID(_x2, _x3, _x4) {
 function _getAnnotationByID() {
   _getAnnotationByID = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee17(docid, page, user) {
+  _regenerator.default.mark(function _callee22(docid, page, user) {
     var client, result;
-    return _regenerator.default.wrap(function _callee17$(_context17) {
+    return _regenerator.default.wrap(function _callee22$(_context22) {
       while (1) {
-        switch (_context17.prev = _context17.next) {
+        switch (_context22.prev = _context22.next) {
           case 0:
-            _context17.next = 2;
+            _context22.next = 2;
             return pool.connect();
 
           case 2:
-            client = _context17.sent;
-            _context17.next = 5;
+            client = _context22.sent;
+            _context22.next = 5;
             return client.query('select * from annotations where docid=$1 AND page=$2 AND "user"=$3 order by docid desc,page asc', [docid, page, user]);
 
           case 5:
-            result = _context17.sent;
+            result = _context22.sent;
             client.release();
-            return _context17.abrupt("return", result);
+            return _context22.abrupt("return", result);
 
           case 8:
           case "end":
-            return _context17.stop();
+            return _context22.stop();
         }
       }
-    }, _callee17, this);
+    }, _callee22, this);
   }));
   return _getAnnotationByID.apply(this, arguments);
 }
@@ -339,11 +339,11 @@ function classify(_x5) {
 function _classify() {
   _classify = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee18(terms) {
+  _regenerator.default.mark(function _callee23(terms) {
     var result;
-    return _regenerator.default.wrap(function _callee18$(_context18) {
+    return _regenerator.default.wrap(function _callee23$(_context23) {
       while (1) {
-        switch (_context18.prev = _context18.next) {
+        switch (_context23.prev = _context23.next) {
           case 0:
             result = new Promise(function (resolve, reject) {
               var cleanTerms = [];
@@ -372,14 +372,14 @@ function _classify() {
                 resolve({});
               }
             });
-            return _context18.abrupt("return", result);
+            return _context23.abrupt("return", result);
 
           case 2:
           case "end":
-            return _context18.stop();
+            return _context23.stop();
         }
       }
-    }, _callee18, this);
+    }, _callee23, this);
   }));
   return _classify.apply(this, arguments);
 }
@@ -391,11 +391,11 @@ function grouped_predictor(_x6) {
 function _grouped_predictor() {
   _grouped_predictor = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee19(terms) {
+  _regenerator.default.mark(function _callee24(terms) {
     var result;
-    return _regenerator.default.wrap(function _callee19$(_context19) {
+    return _regenerator.default.wrap(function _callee24$(_context24) {
       while (1) {
-        switch (_context19.prev = _context19.next) {
+        switch (_context24.prev = _context24.next) {
           case 0:
             result = new Promise(function (resolve, reject) {
               if (terms.length > 0) {
@@ -409,14 +409,14 @@ function _grouped_predictor() {
               }
             }); //debugger
 
-            return _context19.abrupt("return", result);
+            return _context24.abrupt("return", result);
 
           case 2:
           case "end":
-            return _context19.stop();
+            return _context24.stop();
         }
       }
-    }, _callee19, this);
+    }, _callee24, this);
   }));
   return _grouped_predictor.apply(this, arguments);
 }
@@ -428,24 +428,24 @@ function attempt_predictions(_x7) {
 function _attempt_predictions() {
   _attempt_predictions = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee21(actual_table) {
+  _regenerator.default.mark(function _callee26(actual_table) {
     var result;
-    return _regenerator.default.wrap(function _callee21$(_context21) {
+    return _regenerator.default.wrap(function _callee26$(_context26) {
       while (1) {
-        switch (_context21.prev = _context21.next) {
+        switch (_context26.prev = _context26.next) {
           case 0:
             result = new Promise(
             /*#__PURE__*/
             function () {
-              var _ref16 = (0, _asyncToGenerator2.default)(
+              var _ref21 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee20(resolve, reject) {
+              _regenerator.default.mark(function _callee25(resolve, reject) {
                 var a, lines, predictions, l, currentLine, terms, cellClasses, cellClass, c, cellClassSelector, pred_class;
-                return _regenerator.default.wrap(function _callee20$(_context20) {
+                return _regenerator.default.wrap(function _callee25$(_context25) {
                   while (1) {
-                    switch (_context20.prev = _context20.next) {
+                    switch (_context25.prev = _context25.next) {
                       case 0:
-                        _context20.prev = 0;
+                        _context25.prev = 0;
                         a = cheerio.load(actual_table);
                         lines = a("tr");
                         predictions = new Array(lines.length);
@@ -453,7 +453,7 @@ function _attempt_predictions() {
 
                       case 5:
                         if (!(l < lines.length)) {
-                          _context20.next = 18;
+                          _context25.next = 18;
                           break;
                         }
 
@@ -474,11 +474,11 @@ function _attempt_predictions() {
                         } // debugger
 
 
-                        _context20.next = 13;
+                        _context25.next = 13;
                         return classify(terms);
 
                       case 13:
-                        pred_class = _context20.sent;
+                        pred_class = _context25.sent;
                         predictions[l] = {
                           pred_class: pred_class,
                           terms: terms,
@@ -487,39 +487,39 @@ function _attempt_predictions() {
 
                       case 15:
                         l++;
-                        _context20.next = 5;
+                        _context25.next = 5;
                         break;
 
                       case 18:
                         resolve(predictions);
-                        _context20.next = 24;
+                        _context25.next = 24;
                         break;
 
                       case 21:
-                        _context20.prev = 21;
-                        _context20.t0 = _context20["catch"](0);
-                        reject(_context20.t0);
+                        _context25.prev = 21;
+                        _context25.t0 = _context25["catch"](0);
+                        reject(_context25.t0);
 
                       case 24:
                       case "end":
-                        return _context20.stop();
+                        return _context25.stop();
                     }
                   }
-                }, _callee20, this, [[0, 21]]);
+                }, _callee25, this, [[0, 21]]);
               }));
 
-              return function (_x51, _x52) {
-                return _ref16.apply(this, arguments);
+              return function (_x57, _x58) {
+                return _ref21.apply(this, arguments);
               };
             }());
-            return _context21.abrupt("return", result);
+            return _context26.abrupt("return", result);
 
           case 2:
           case "end":
-            return _context21.stop();
+            return _context26.stop();
         }
       }
-    }, _callee21, this);
+    }, _callee26, this);
   }));
   return _attempt_predictions.apply(this, arguments);
 }
@@ -532,18 +532,18 @@ function insertAnnotation(_x8, _x9, _x10, _x11, _x12, _x13, _x14) {
 function _insertAnnotation() {
   _insertAnnotation = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee22(docid, page, user, annotation, corrupted, tableType, corrupted_text) {
+  _regenerator.default.mark(function _callee27(docid, page, user, annotation, corrupted, tableType, corrupted_text) {
     var client, done;
-    return _regenerator.default.wrap(function _callee22$(_context22) {
+    return _regenerator.default.wrap(function _callee27$(_context27) {
       while (1) {
-        switch (_context22.prev = _context22.next) {
+        switch (_context27.prev = _context27.next) {
           case 0:
-            _context22.next = 2;
+            _context27.next = 2;
             return pool.connect();
 
           case 2:
-            client = _context22.sent;
-            _context22.next = 5;
+            client = _context27.sent;
+            _context27.next = 5;
             return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT (docid, page,"user") DO UPDATE SET annotation = $4, corrupted = $5, "tableType" = $6, "corrupted_text" = $7 ;', [docid, page, user, annotation, corrupted, tableType, corrupted_text]).then(function (result) {
               return console.log("insert: " + result);
             }).catch(function (e) {
@@ -553,17 +553,17 @@ function _insertAnnotation() {
             });
 
           case 5:
-            done = _context22.sent;
+            done = _context27.sent;
             console.log("Awaiting done: " + ops_counter++); // await client.end()
 
             console.log("DONE: " + ops_counter++);
 
           case 8:
           case "end":
-            return _context22.stop();
+            return _context27.stop();
         }
       }
-    }, _callee22, this);
+    }, _callee27, this);
   }));
   return _insertAnnotation.apply(this, arguments);
 }
@@ -585,42 +585,6 @@ app.get('/api/allMetaData', function (req, res) {
   });
 });
 
-function getAllClusters() {
-  return _getAllClusters.apply(this, arguments);
-}
-
-function _getAllClusters() {
-  _getAllClusters = (0, _asyncToGenerator2.default)(
-  /*#__PURE__*/
-  _regenerator.default.mark(function _callee23() {
-    var client, result;
-    return _regenerator.default.wrap(function _callee23$(_context23) {
-      while (1) {
-        switch (_context23.prev = _context23.next) {
-          case 0:
-            _context23.next = 2;
-            return pool.connect();
-
-          case 2:
-            client = _context23.sent;
-            _context23.next = 5;
-            return client.query("select * from clusters order by concept asc");
-
-          case 5:
-            result = _context23.sent;
-            client.release();
-            return _context23.abrupt("return", result);
-
-          case 8:
-          case "end":
-            return _context23.stop();
-        }
-      }
-    }, _callee23, this);
-  }));
-  return _getAllClusters.apply(this, arguments);
-}
-
 function updateClusterAnnotation(_x15, _x16, _x17, _x18, _x19) {
   return _updateClusterAnnotation.apply(this, arguments);
 }
@@ -628,18 +592,18 @@ function updateClusterAnnotation(_x15, _x16, _x17, _x18, _x19) {
 function _updateClusterAnnotation() {
   _updateClusterAnnotation = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee24(cn, concept, cuis, isdefault, cn_override) {
+  _regenerator.default.mark(function _callee28(cn, concept, cuis, isdefault, cn_override) {
     var client, done;
-    return _regenerator.default.wrap(function _callee24$(_context24) {
+    return _regenerator.default.wrap(function _callee28$(_context28) {
       while (1) {
-        switch (_context24.prev = _context24.next) {
+        switch (_context28.prev = _context28.next) {
           case 0:
-            _context24.next = 2;
+            _context28.next = 2;
             return pool.connect();
 
           case 2:
-            client = _context24.sent;
-            _context24.next = 5;
+            client = _context28.sent;
+            _context28.next = 5;
             return client.query('INSERT INTO clusters VALUES($1,$2,$3,$4,$5) ON CONFLICT (concept) DO UPDATE SET isdefault = $4, cn_override = $5;', [cn, concept, cuis, isdefault.toLowerCase() == 'true', cn_override]).then(function (result) {
               return console.log("insert: " + result);
             }).catch(function (e) {
@@ -649,16 +613,16 @@ function _updateClusterAnnotation() {
             });
 
           case 5:
-            done = _context24.sent;
+            done = _context28.sent;
             console.log("Awaiting done: " + ops_counter++);
             console.log("DONE: " + ops_counter++);
 
           case 8:
           case "end":
-            return _context24.stop();
+            return _context28.stop();
         }
       }
-    }, _callee24, this);
+    }, _callee28, this);
   }));
   return _updateClusterAnnotation.apply(this, arguments);
 }
@@ -668,56 +632,59 @@ app.get('/api/allClusters',
 function () {
   var _ref2 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee2(req, res) {
-    return _regenerator.default.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.t0 = res;
-            _context2.next = 3;
-            return getAllClusters();
-
-          case 3:
-            _context2.t1 = _context2.sent;
-
-            _context2.t0.send.call(_context2.t0, _context2.t1);
-
-          case 5:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, this);
-  }));
-
-  return function (_x20, _x21) {
-    return _ref2.apply(this, arguments);
-  };
-}());
-app.get('/api/recordClusterAnnotation',
-/*#__PURE__*/
-function () {
-  var _ref3 = (0, _asyncToGenerator2.default)(
-  /*#__PURE__*/
   _regenerator.default.mark(function _callee3(req, res) {
+    var getAllClusters;
     return _regenerator.default.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            console.log(JSON.stringify(req.query));
+            getAllClusters =
+            /*#__PURE__*/
+            function () {
+              var _ref3 = (0, _asyncToGenerator2.default)(
+              /*#__PURE__*/
+              _regenerator.default.mark(function _callee2() {
+                var client, result;
+                return _regenerator.default.wrap(function _callee2$(_context2) {
+                  while (1) {
+                    switch (_context2.prev = _context2.next) {
+                      case 0:
+                        _context2.next = 2;
+                        return pool.connect();
 
-            if (!(req.query && req.query.cn.length > 0 && req.query.concept.length > 0 && req.query.cuis.length > 0 && req.query.isdefault.length > 0 && req.query.cn_override.length > 0)) {
-              _context3.next = 4;
-              break;
-            }
+                      case 2:
+                        client = _context2.sent;
+                        _context2.next = 5;
+                        return client.query("select * from clusters order by concept asc");
 
+                      case 5:
+                        result = _context2.sent;
+                        client.release();
+                        return _context2.abrupt("return", result);
+
+                      case 8:
+                      case "end":
+                        return _context2.stop();
+                    }
+                  }
+                }, _callee2, this);
+              }));
+
+              return function getAllClusters() {
+                return _ref3.apply(this, arguments);
+              };
+            }();
+
+            _context3.t0 = res;
             _context3.next = 4;
-            return updateClusterAnnotation(req.query.cn, req.query.concept, req.query.cuis, req.query.isdefault, req.query.cn_override);
+            return getAllClusters();
 
           case 4:
-            res.send("saved cluster annotation: " + JSON.stringify(req.query));
+            _context3.t1 = _context3.sent;
 
-          case 5:
+            _context3.t0.send.call(_context3.t0, _context3.t1);
+
+          case 6:
           case "end":
             return _context3.stop();
         }
@@ -725,8 +692,185 @@ function () {
     }, _callee3, this);
   }));
 
+  return function (_x20, _x21) {
+    return _ref2.apply(this, arguments);
+  };
+}()); //getCUIMods  //
+
+app.get('/api/getCUIMods',
+/*#__PURE__*/
+function () {
+  var _ref4 = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee5(req, res) {
+    var getCUIMods;
+    return _regenerator.default.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            getCUIMods =
+            /*#__PURE__*/
+            function () {
+              var _ref5 = (0, _asyncToGenerator2.default)(
+              /*#__PURE__*/
+              _regenerator.default.mark(function _callee4() {
+                var client, result;
+                return _regenerator.default.wrap(function _callee4$(_context4) {
+                  while (1) {
+                    switch (_context4.prev = _context4.next) {
+                      case 0:
+                        _context4.next = 2;
+                        return pool.connect();
+
+                      case 2:
+                        client = _context4.sent;
+                        _context4.next = 5;
+                        return client.query("select * from modifiers");
+
+                      case 5:
+                        result = _context4.sent;
+                        client.release();
+                        return _context4.abrupt("return", result);
+
+                      case 8:
+                      case "end":
+                        return _context4.stop();
+                    }
+                  }
+                }, _callee4, this);
+              }));
+
+              return function getCUIMods() {
+                return _ref5.apply(this, arguments);
+              };
+            }();
+
+            _context5.t0 = res;
+            _context5.next = 4;
+            return getCUIMods();
+
+          case 4:
+            _context5.t1 = _context5.sent;
+
+            _context5.t0.send.call(_context5.t0, _context5.t1);
+
+          case 6:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, this);
+  }));
+
   return function (_x22, _x23) {
-    return _ref3.apply(this, arguments);
+    return _ref4.apply(this, arguments);
+  };
+}());
+app.get('/api/setCUIMod',
+/*#__PURE__*/
+function () {
+  var _ref6 = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee7(req, res) {
+    var setCUIMod;
+    return _regenerator.default.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            setCUIMod =
+            /*#__PURE__*/
+            function () {
+              var _ref7 = (0, _asyncToGenerator2.default)(
+              /*#__PURE__*/
+              _regenerator.default.mark(function _callee6(cui, type) {
+                var client, done;
+                return _regenerator.default.wrap(function _callee6$(_context6) {
+                  while (1) {
+                    switch (_context6.prev = _context6.next) {
+                      case 0:
+                        _context6.next = 2;
+                        return pool.connect();
+
+                      case 2:
+                        client = _context6.sent;
+                        _context6.next = 5;
+                        return client.query('INSERT INTO modifiers VALUES($1,$2) ON CONFLICT (cui) DO UPDATE SET type = $2;', [cui, type]).then(function (result) {
+                          return console.log("insert: " + result);
+                        }).catch(function (e) {
+                          return console.error(e.stack);
+                        }).then(function () {
+                          return client.release();
+                        });
+
+                      case 5:
+                        done = _context6.sent;
+
+                      case 6:
+                      case "end":
+                        return _context6.stop();
+                    }
+                  }
+                }, _callee6, this);
+              }));
+
+              return function setCUIMod(_x26, _x27) {
+                return _ref7.apply(this, arguments);
+              };
+            }();
+
+            if (!(req.query && req.query.cui && req.query.type)) {
+              _context7.next = 4;
+              break;
+            }
+
+            _context7.next = 4;
+            return setCUIMod(req.query.cui, req.query.type);
+
+          case 4:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7, this);
+  }));
+
+  return function (_x24, _x25) {
+    return _ref6.apply(this, arguments);
+  };
+}());
+app.get('/api/recordClusterAnnotation',
+/*#__PURE__*/
+function () {
+  var _ref8 = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee8(req, res) {
+    return _regenerator.default.wrap(function _callee8$(_context8) {
+      while (1) {
+        switch (_context8.prev = _context8.next) {
+          case 0:
+            console.log(JSON.stringify(req.query));
+
+            if (!(req.query && req.query.cn.length > 0 && req.query.concept.length > 0 && req.query.cuis.length > 0 && req.query.isdefault.length > 0 && req.query.cn_override.length > 0)) {
+              _context8.next = 4;
+              break;
+            }
+
+            _context8.next = 4;
+            return updateClusterAnnotation(req.query.cn, req.query.concept, req.query.cuis, req.query.isdefault, req.query.cn_override);
+
+          case 4:
+            res.send("saved cluster annotation: " + JSON.stringify(req.query));
+
+          case 5:
+          case "end":
+            return _context8.stop();
+        }
+      }
+    }, _callee8, this);
+  }));
+
+  return function (_x28, _x29) {
+    return _ref8.apply(this, arguments);
   };
 }()); // const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 // const csvWriter = createCsvWriter({
@@ -736,37 +880,37 @@ function () {
 app.get('/api/cuisIndex',
 /*#__PURE__*/
 function () {
-  var _ref4 = (0, _asyncToGenerator2.default)(
+  var _ref9 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee5(req, res) {
+  _regenerator.default.mark(function _callee10(req, res) {
     var cuis;
-    return _regenerator.default.wrap(function _callee5$(_context5) {
+    return _regenerator.default.wrap(function _callee10$(_context10) {
       while (1) {
-        switch (_context5.prev = _context5.next) {
+        switch (_context10.prev = _context10.next) {
           case 0:
             cuis = {};
             fs.createReadStream('./CLUSTERS/cuis-index.csv').pipe(csv()).on('data',
             /*#__PURE__*/
             function () {
-              var _ref5 = (0, _asyncToGenerator2.default)(
+              var _ref10 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee4(row) {
-                return _regenerator.default.wrap(function _callee4$(_context4) {
+              _regenerator.default.mark(function _callee9(row) {
+                return _regenerator.default.wrap(function _callee9$(_context9) {
                   while (1) {
-                    switch (_context4.prev = _context4.next) {
+                    switch (_context9.prev = _context9.next) {
                       case 0:
                         cuis[row.CUI] = row.preferred;
 
                       case 1:
                       case "end":
-                        return _context4.stop();
+                        return _context9.stop();
                     }
                   }
-                }, _callee4, this);
+                }, _callee9, this);
               }));
 
-              return function (_x26) {
-                return _ref5.apply(this, arguments);
+              return function (_x32) {
+                return _ref10.apply(this, arguments);
               };
             }()).on('end', function () {
               res.send(cuis);
@@ -774,26 +918,26 @@ function () {
 
           case 2:
           case "end":
-            return _context5.stop();
+            return _context10.stop();
         }
       }
-    }, _callee5, this);
+    }, _callee10, this);
   }));
 
-  return function (_x24, _x25) {
-    return _ref4.apply(this, arguments);
+  return function (_x30, _x31) {
+    return _ref9.apply(this, arguments);
   };
 }());
 app.get('/api/allCUIs',
 /*#__PURE__*/
 function () {
-  var _ref6 = (0, _asyncToGenerator2.default)(
+  var _ref11 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee6(req, res) {
+  _regenerator.default.mark(function _callee11(req, res) {
     var fs, csvWriter, indexWriter, CUIs, i, mmdata, csvLine;
-    return _regenerator.default.wrap(function _callee6$(_context6) {
+    return _regenerator.default.wrap(function _callee11$(_context11) {
       while (1) {
-        switch (_context6.prev = _context6.next) {
+        switch (_context11.prev = _context11.next) {
           case 0:
             fs = require('fs');
             csvWriter = fs.createWriteStream('CLUSTERS/cuis.csv', {
@@ -810,15 +954,15 @@ function () {
 
           case 6:
             if (!(i < clusterTerms.length)) {
-              _context6.next = 17;
+              _context11.next = 17;
               break;
             }
 
-            _context6.next = 9;
+            _context11.next = 9;
             return getMMatch(clusterTerms[i]);
 
           case 9:
-            mmdata = _context6.sent;
+            mmdata = _context11.sent;
             mmdata = extractMMData(mmdata);
             csvLine = clusterTerms[i].replace(/;/gi, "").replace(/,/gi, "") + "," + mmdata.map(function (c) {
               if (CUIs.indexOf(c.CUI) < 0) {
@@ -837,7 +981,7 @@ function () {
 
           case 14:
             i++;
-            _context6.next = 6;
+            _context11.next = 6;
             break;
 
           case 17:
@@ -847,55 +991,55 @@ function () {
 
           case 20:
           case "end":
-            return _context6.stop();
+            return _context11.stop();
         }
       }
-    }, _callee6, this);
+    }, _callee11, this);
   }));
 
-  return function (_x27, _x28) {
-    return _ref6.apply(this, arguments);
+  return function (_x33, _x34) {
+    return _ref11.apply(this, arguments);
   };
 }());
 app.get('/api/allPredictions',
 /*#__PURE__*/
 function () {
-  var _ref7 = (0, _asyncToGenerator2.default)(
+  var _ref12 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee7(req, res) {
+  _regenerator.default.mark(function _callee12(req, res) {
     var predictions, a, p, page, docid, data, c, col, r, row;
-    return _regenerator.default.wrap(function _callee7$(_context7) {
+    return _regenerator.default.wrap(function _callee12$(_context12) {
       while (1) {
-        switch (_context7.prev = _context7.next) {
+        switch (_context12.prev = _context12.next) {
           case 0:
             console.log("getting all predictions");
             predictions = "user,docid,page,corrupted,tableType,location,number,content,qualifiers\n";
-            _context7.t0 = _regenerator.default.keys(available_documents);
+            _context12.t0 = _regenerator.default.keys(available_documents);
 
           case 3:
-            if ((_context7.t1 = _context7.t0()).done) {
-              _context7.next = 20;
+            if ((_context12.t1 = _context12.t0()).done) {
+              _context12.next = 20;
               break;
             }
 
-            a = _context7.t1.value;
-            _context7.t2 = _regenerator.default.keys(available_documents[a].pages);
+            a = _context12.t1.value;
+            _context12.t2 = _regenerator.default.keys(available_documents[a].pages);
 
           case 6:
-            if ((_context7.t3 = _context7.t2()).done) {
-              _context7.next = 18;
+            if ((_context12.t3 = _context12.t2()).done) {
+              _context12.next = 18;
               break;
             }
 
-            p = _context7.t3.value;
+            p = _context12.t3.value;
             console.log(a + "  --  " + p);
             page = available_documents[a].pages[p];
             docid = a;
-            _context7.next = 13;
+            _context12.next = 13;
             return readyTableData(docid, page);
 
           case 13:
-            data = _context7.sent;
+            data = _context12.sent;
 
             for (c in data.predicted.cols) {
               col = data.predicted.cols[c];
@@ -907,11 +1051,11 @@ function () {
               predictions += ["auto_" + METHOD, docid, page, false, "na", "Row", parseInt(row.c) + 1, row.descriptors.join(";"), row.unique_modifier.split(" ").join(";")].join(",") + "\n";
             }
 
-            _context7.next = 6;
+            _context12.next = 6;
             break;
 
           case 18:
-            _context7.next = 3;
+            _context12.next = 3;
             break;
 
           case 20:
@@ -919,26 +1063,26 @@ function () {
 
           case 21:
           case "end":
-            return _context7.stop();
+            return _context12.stop();
         }
       }
-    }, _callee7, this);
+    }, _callee12, this);
   }));
 
-  return function (_x29, _x30) {
-    return _ref7.apply(this, arguments);
+  return function (_x35, _x36) {
+    return _ref12.apply(this, arguments);
   };
 }());
 app.get('/api/rscript',
 /*#__PURE__*/
 function () {
-  var _ref8 = (0, _asyncToGenerator2.default)(
+  var _ref13 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee8(req, res) {
+  _regenerator.default.mark(function _callee13(req, res) {
     var result;
-    return _regenerator.default.wrap(function _callee8$(_context8) {
+    return _regenerator.default.wrap(function _callee13$(_context13) {
       while (1) {
-        switch (_context8.prev = _context8.next) {
+        switch (_context13.prev = _context13.next) {
           case 0:
             try {
               result = R("./src/tableScript.R");
@@ -950,43 +1094,43 @@ function () {
 
           case 1:
           case "end":
-            return _context8.stop();
+            return _context13.stop();
         }
       }
-    }, _callee8, this);
+    }, _callee13, this);
   }));
 
-  return function (_x31, _x32) {
-    return _ref8.apply(this, arguments);
+  return function (_x37, _x38) {
+    return _ref13.apply(this, arguments);
   };
 }());
 app.get('/api/annotationPreview',
 /*#__PURE__*/
 function () {
-  var _ref9 = (0, _asyncToGenerator2.default)(
+  var _ref14 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee9(req, res) {
+  _regenerator.default.mark(function _callee14(req, res) {
     var annotations, page, user, final_annotations, r, ann, existing, final_annotations_array, result, entry, toreturn;
-    return _regenerator.default.wrap(function _callee9$(_context9) {
+    return _regenerator.default.wrap(function _callee14$(_context14) {
       while (1) {
-        switch (_context9.prev = _context9.next) {
+        switch (_context14.prev = _context14.next) {
           case 0:
-            _context9.prev = 0;
+            _context14.prev = 0;
 
             if (!(req.query && req.query.docid && req.query.docid.length > 0)) {
-              _context9.next = 10;
+              _context14.next = 10;
               break;
             }
 
             page = req.query.page && req.query.page.length > 0 ? req.query.page : 1;
             user = req.query.user && req.query.user.length > 0 ? req.query.user : "";
             console.log(user + "  -- " + JSON.stringify(req.query));
-            _context9.next = 7;
+            _context14.next = 7;
             return getAnnotationByID(req.query.docid, page, user);
 
           case 7:
-            annotations = _context9.sent;
-            _context9.next = 11;
+            annotations = _context14.sent;
+            _context14.next = 11;
             break;
 
           case 10:
@@ -1049,26 +1193,26 @@ function () {
               });
             }
 
-            _context9.next = 21;
+            _context14.next = 21;
             break;
 
           case 18:
-            _context9.prev = 18;
-            _context9.t0 = _context9["catch"](0);
+            _context14.prev = 18;
+            _context14.t0 = _context14["catch"](0);
             res.send({
               "state": "failed"
             });
 
           case 21:
           case "end":
-            return _context9.stop();
+            return _context14.stop();
         }
       }
-    }, _callee9, this, [[0, 18]]);
+    }, _callee14, this, [[0, 18]]);
   }));
 
-  return function (_x33, _x34) {
-    return _ref9.apply(this, arguments);
+  return function (_x39, _x40) {
+    return _ref14.apply(this, arguments);
   };
 }());
 app.get('/api/abs_index', function (req, res) {
@@ -1086,18 +1230,18 @@ app.get('/api/totalTables', function (req, res) {
   });
 });
 
-function getMMatch(_x35) {
+function getMMatch(_x41) {
   return _getMMatch.apply(this, arguments);
 }
 
 function _getMMatch() {
   _getMMatch = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee25(phrase) {
+  _regenerator.default.mark(function _callee29(phrase) {
     var result;
-    return _regenerator.default.wrap(function _callee25$(_context25) {
+    return _regenerator.default.wrap(function _callee29$(_context29) {
       while (1) {
-        switch (_context25.prev = _context25.next) {
+        switch (_context29.prev = _context29.next) {
           case 0:
             // console.log(phrase)
             phrase = phrase.replace(/[\W_]+/g, " "); // console.log(phrase)
@@ -1120,14 +1264,14 @@ function _getMMatch() {
                 resolve(body.slice(start, end));
               });
             });
-            return _context25.abrupt("return", result);
+            return _context29.abrupt("return", result);
 
           case 3:
           case "end":
-            return _context25.stop();
+            return _context29.stop();
         }
       }
-    }, _callee25, this);
+    }, _callee29, this);
   }));
   return _getMMatch.apply(this, arguments);
 }
@@ -1135,28 +1279,28 @@ function _getMMatch() {
 app.get('/api/getMMatch',
 /*#__PURE__*/
 function () {
-  var _ref10 = (0, _asyncToGenerator2.default)(
+  var _ref15 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee10(req, res) {
+  _regenerator.default.mark(function _callee15(req, res) {
     var mm_match;
-    return _regenerator.default.wrap(function _callee10$(_context10) {
+    return _regenerator.default.wrap(function _callee15$(_context15) {
       while (1) {
-        switch (_context10.prev = _context10.next) {
+        switch (_context15.prev = _context15.next) {
           case 0:
-            _context10.prev = 0;
+            _context15.prev = 0;
 
             if (!(req.query && req.query.phrase)) {
-              _context10.next = 8;
+              _context15.next = 8;
               break;
             }
 
-            _context10.next = 4;
+            _context15.next = 4;
             return getMMatch(req.query.phrase);
 
           case 4:
-            mm_match = _context10.sent;
+            mm_match = _context15.sent;
             res.send(mm_match);
-            _context10.next = 9;
+            _context15.next = 9;
             break;
 
           case 8:
@@ -1166,79 +1310,79 @@ function () {
             });
 
           case 9:
-            _context10.next = 14;
+            _context15.next = 14;
             break;
 
           case 11:
-            _context10.prev = 11;
-            _context10.t0 = _context10["catch"](0);
-            console.log(_context10.t0);
+            _context15.prev = 11;
+            _context15.t0 = _context15["catch"](0);
+            console.log(_context15.t0);
 
           case 14:
           case "end":
-            return _context10.stop();
+            return _context15.stop();
         }
       }
-    }, _callee10, this, [[0, 11]]);
+    }, _callee15, this, [[0, 11]]);
   }));
 
-  return function (_x36, _x37) {
-    return _ref10.apply(this, arguments);
+  return function (_x42, _x43) {
+    return _ref15.apply(this, arguments);
   };
 }());
 app.get('/api/classify',
 /*#__PURE__*/
 function () {
-  var _ref11 = (0, _asyncToGenerator2.default)(
+  var _ref16 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee11(req, res) {
-    return _regenerator.default.wrap(function _callee11$(_context11) {
+  _regenerator.default.mark(function _callee16(req, res) {
+    return _regenerator.default.wrap(function _callee16$(_context16) {
       while (1) {
-        switch (_context11.prev = _context11.next) {
+        switch (_context16.prev = _context16.next) {
           case 0:
             if (!(req.query && req.query.terms)) {
-              _context11.next = 8;
+              _context16.next = 8;
               break;
             }
 
             console.log(req.query.terms);
-            _context11.t0 = res;
-            _context11.next = 5;
+            _context16.t0 = res;
+            _context16.next = 5;
             return classify(req.query.terms.split(","));
 
           case 5:
-            _context11.t1 = _context11.sent;
-            _context11.t2 = {
-              results: _context11.t1
+            _context16.t1 = _context16.sent;
+            _context16.t2 = {
+              results: _context16.t1
             };
 
-            _context11.t0.send.call(_context11.t0, _context11.t2);
+            _context16.t0.send.call(_context16.t0, _context16.t2);
 
           case 8:
           case "end":
-            return _context11.stop();
+            return _context16.stop();
         }
       }
-    }, _callee11, this);
+    }, _callee16, this);
   }));
 
-  return function (_x38, _x39) {
-    return _ref11.apply(this, arguments);
+  return function (_x44, _x45) {
+    return _ref16.apply(this, arguments);
   };
 }());
 
-function readyTableData(_x40, _x41, _x42) {
+function readyTableData(_x46, _x47, _x48) {
   return _readyTableData.apply(this, arguments);
 }
 
 function _readyTableData() {
   _readyTableData = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee27(docid, page, method) {
+  _regenerator.default.mark(function _callee31(docid, page, method) {
     var htmlFolder, htmlFile, result;
-    return _regenerator.default.wrap(function _callee27$(_context27) {
+    return _regenerator.default.wrap(function _callee31$(_context31) {
       while (1) {
-        switch (_context27.prev = _context27.next) {
+        switch (_context31.prev = _context31.next) {
           case 0:
             docid = docid + "_" + page + ".html";
             htmlFolder = tables_folder + "/";
@@ -1249,19 +1393,19 @@ function _readyTableData() {
                   fs.readFile(cssFolder + "/" + "stylesheet.css", "utf8",
                   /*#__PURE__*/
                   function () {
-                    var _ref17 = (0, _asyncToGenerator2.default)(
+                    var _ref22 = (0, _asyncToGenerator2.default)(
                     /*#__PURE__*/
-                    _regenerator.default.mark(function _callee26(err2, data_ss) {
+                    _regenerator.default.mark(function _callee30(err2, data_ss) {
                       var tablePage, spaceRow, htmlHeader, findHeader, possible_tags_for_title, t, actual_table, colum_with_numbers, formattedPage, predictions, terms_matrix, preds_matrix, class_matrix, content_type_matrix, max_col, l, getTopDescriptors, cleanModifier, col_top_descriptors, c, content_types_in_column, unique_modifiers_in_column, u, unique_modifier, column_data, column_terms, k, allfreqs, all_terms, descriptors, row_top_descriptors, r, content_types_in_row, row_data, row_terms, predicted;
-                      return _regenerator.default.wrap(function _callee26$(_context26) {
+                      return _regenerator.default.wrap(function _callee30$(_context30) {
                         while (1) {
-                          switch (_context26.prev = _context26.next) {
+                          switch (_context30.prev = _context30.next) {
                             case 0:
-                              _context26.prev = 0;
+                              _context30.prev = 0;
                               tablePage = cheerio.load(data); // tablePage("col").removeAttr('style');
 
                               if (tablePage) {
-                                _context26.next = 5;
+                                _context30.next = 5;
                                 break;
                               }
 
@@ -1270,22 +1414,22 @@ function _readyTableData() {
                                 formattedPage: "",
                                 title: ""
                               });
-                              return _context26.abrupt("return");
+                              return _context30.abrupt("return");
 
                             case 5:
-                              _context26.next = 11;
+                              _context30.next = 11;
                               break;
 
                             case 7:
-                              _context26.prev = 7;
-                              _context26.t0 = _context26["catch"](0);
+                              _context30.prev = 7;
+                              _context30.t0 = _context30["catch"](0);
                               // console.log(JSON.stringify(e)+" -- " + JSON.stringify(data))
                               resolve({
                                 htmlHeader: "",
                                 formattedPage: "",
                                 title: ""
                               });
-                              return _context26.abrupt("return");
+                              return _context30.abrupt("return");
 
                             case 11:
                               spaceRow = -1;
@@ -1312,26 +1456,26 @@ function _readyTableData() {
                               };
 
                               possible_tags_for_title = [".headers", ".caption", ".captions", ".article-table-caption"];
-                              _context26.t1 = _regenerator.default.keys(possible_tags_for_title);
+                              _context30.t1 = _regenerator.default.keys(possible_tags_for_title);
 
                             case 16:
-                              if ((_context26.t2 = _context26.t1()).done) {
-                                _context26.next = 23;
+                              if ((_context30.t2 = _context30.t1()).done) {
+                                _context30.next = 23;
                                 break;
                               }
 
-                              t = _context26.t2.value;
+                              t = _context30.t2.value;
                               htmlHeader = findHeader(tablePage, possible_tags_for_title[t]);
 
                               if (!(htmlHeader.totalTextChars > 0)) {
-                                _context26.next = 21;
+                                _context30.next = 21;
                                 break;
                               }
 
-                              return _context26.abrupt("break", 23);
+                              return _context30.abrupt("break", 23);
 
                             case 21:
-                              _context26.next = 16;
+                              _context30.next = 16;
                               break;
 
                             case 23:
@@ -1353,11 +1497,11 @@ function _readyTableData() {
                               actual_table = actual_table.html(); // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
 
                               formattedPage = "<div><style>" + data_ss + "</style>" + actual_table + "</div>";
-                              _context26.next = 33;
+                              _context30.next = 33;
                               return attempt_predictions(actual_table);
 
                             case 33:
-                              predictions = _context26.sent;
+                              predictions = _context30.sent;
                               terms_matrix = predictions.map(function (e) {
                                 return e.terms.map(function (term) {
                                   return prepare_cell_text(term);
@@ -1412,7 +1556,7 @@ function _readyTableData() {
 
                             case 44:
                               if (!(c < max_col)) {
-                                _context26.next = 74;
+                                _context30.next = 74;
                                 break;
                               }
 
@@ -1440,11 +1584,11 @@ function _readyTableData() {
                               });
 
                               if (content_types_in_column.total_text >= content_types_in_column.total_numeric) {
-                                _context26.next = 48;
+                                _context30.next = 48;
                                 break;
                               }
 
-                              return _context26.abrupt("continue", 71);
+                              return _context30.abrupt("continue", 71);
 
                             case 48:
                               unique_modifiers_in_column = class_matrix.map(function (x) {
@@ -1452,15 +1596,15 @@ function _readyTableData() {
                               }).map(cleanModifier).filter(function (v, i, a) {
                                 return a.indexOf(v) === i;
                               });
-                              _context26.t3 = _regenerator.default.keys(unique_modifiers_in_column);
+                              _context30.t3 = _regenerator.default.keys(unique_modifiers_in_column);
 
                             case 50:
-                              if ((_context26.t4 = _context26.t3()).done) {
-                                _context26.next = 71;
+                              if ((_context30.t4 = _context30.t3()).done) {
+                                _context30.next = 71;
                                 break;
                               }
 
-                              u = _context26.t4.value;
+                              u = _context30.t4.value;
                               unique_modifier = unique_modifiers_in_column[u];
                               column_data = preds_matrix.map(function (x, i) {
                                 return [x[c], i];
@@ -1508,23 +1652,23 @@ function _readyTableData() {
                                 }
                               }
 
-                              _context26.t5 = METHOD;
-                              _context26.next = _context26.t5 === "grouped_predictor" ? 59 : 67;
+                              _context30.t5 = METHOD;
+                              _context30.next = _context30.t5 === "grouped_predictor" ? 59 : 67;
                               break;
 
                             case 59:
                               all_terms = column_terms[unique_modifier] ? column_terms[unique_modifier].join(" ") : "";
 
                               if (!(column_terms[unique_modifier] && all_terms && column_terms[unique_modifier].length > 1 && all_terms.length > 0)) {
-                                _context26.next = 66;
+                                _context30.next = 66;
                                 break;
                               }
 
-                              _context26.next = 63;
+                              _context30.next = 63;
                               return grouped_predictor(all_terms);
 
                             case 63:
-                              descriptors = _context26.sent;
+                              descriptors = _context30.sent;
                               descriptors = descriptors[all_terms].split(";");
                               col_top_descriptors[col_top_descriptors.length] = {
                                 descriptors: descriptors,
@@ -1533,7 +1677,7 @@ function _readyTableData() {
                               };
 
                             case 66:
-                              return _context26.abrupt("break", 69);
+                              return _context30.abrupt("break", 69);
 
                             case 67:
                               descriptors = getTopDescriptors(3, column_data.freqs, ["arms", "undefined"]);
@@ -1544,26 +1688,26 @@ function _readyTableData() {
                               };
 
                             case 69:
-                              _context26.next = 50;
+                              _context30.next = 50;
                               break;
 
                             case 71:
                               c++;
-                              _context26.next = 44;
+                              _context30.next = 44;
                               break;
 
                             case 74:
                               // Estimate row predictions
                               row_top_descriptors = [];
-                              _context26.t6 = _regenerator.default.keys(preds_matrix);
+                              _context30.t6 = _regenerator.default.keys(preds_matrix);
 
                             case 76:
-                              if ((_context26.t7 = _context26.t6()).done) {
-                                _context26.next = 99;
+                              if ((_context30.t7 = _context30.t6()).done) {
+                                _context30.next = 99;
                                 break;
                               }
 
-                              r = _context26.t7.value;
+                              r = _context30.t7.value;
                               content_types_in_row = content_type_matrix[r].reduce(function (countMap, word) {
                                 switch (word) {
                                   case "numeric":
@@ -1586,11 +1730,11 @@ function _readyTableData() {
                               });
 
                               if (content_types_in_row.total_text >= content_types_in_row.total_numeric) {
-                                _context26.next = 81;
+                                _context30.next = 81;
                                 break;
                               }
 
-                              return _context26.abrupt("continue", 76);
+                              return _context30.abrupt("continue", 76);
 
                             case 81:
                               row_data = preds_matrix[r].reduce(function (countMap, word) {
@@ -1620,23 +1764,23 @@ function _readyTableData() {
 
                                 return allTerms;
                               }, []);
-                              _context26.t8 = METHOD;
-                              _context26.next = _context26.t8 === "grouped_predictor" ? 87 : 95;
+                              _context30.t8 = METHOD;
+                              _context30.next = _context30.t8 === "grouped_predictor" ? 87 : 95;
                               break;
 
                             case 87:
                               all_terms = row_terms.join(" ");
 
                               if (!(row_terms.length > 1)) {
-                                _context26.next = 94;
+                                _context30.next = 94;
                                 break;
                               }
 
-                              _context26.next = 91;
+                              _context30.next = 91;
                               return grouped_predictor(all_terms);
 
                             case 91:
-                              descriptors = _context26.sent;
+                              descriptors = _context30.sent;
                               descriptors = descriptors[all_terms].split(";");
                               row_top_descriptors[row_top_descriptors.length] = {
                                 descriptors: descriptors,
@@ -1645,7 +1789,7 @@ function _readyTableData() {
                               };
 
                             case 94:
-                              return _context26.abrupt("break", 97);
+                              return _context30.abrupt("break", 97);
 
                             case 95:
                               descriptors = getTopDescriptors(3, row_data.freqs, ["undefined"]);
@@ -1656,7 +1800,7 @@ function _readyTableData() {
                               };
 
                             case 97:
-                              _context26.next = 76;
+                              _context30.next = 76;
                               break;
 
                             case 99:
@@ -1675,14 +1819,14 @@ function _readyTableData() {
 
                             case 101:
                             case "end":
-                              return _context26.stop();
+                              return _context30.stop();
                           }
                         }
-                      }, _callee26, this, [[0, 7]]);
+                      }, _callee30, this, [[0, 7]]);
                     }));
 
-                    return function (_x53, _x54) {
-                      return _ref17.apply(this, arguments);
+                    return function (_x59, _x60) {
+                      return _ref22.apply(this, arguments);
                     };
                   }());
                 });
@@ -1690,14 +1834,14 @@ function _readyTableData() {
                 reject(e);
               }
             });
-            return _context27.abrupt("return", result);
+            return _context31.abrupt("return", result);
 
           case 5:
           case "end":
-            return _context27.stop();
+            return _context31.stop();
         }
       }
-    }, _callee27, this);
+    }, _callee31, this);
   }));
   return _readyTableData.apply(this, arguments);
 }
@@ -1705,28 +1849,28 @@ function _readyTableData() {
 app.get('/api/getTable',
 /*#__PURE__*/
 function () {
-  var _ref12 = (0, _asyncToGenerator2.default)(
+  var _ref17 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee12(req, res) {
+  _regenerator.default.mark(function _callee17(req, res) {
     var tableData;
-    return _regenerator.default.wrap(function _callee12$(_context12) {
+    return _regenerator.default.wrap(function _callee17$(_context17) {
       while (1) {
-        switch (_context12.prev = _context12.next) {
+        switch (_context17.prev = _context17.next) {
           case 0:
-            _context12.prev = 0;
+            _context17.prev = 0;
 
             if (!(req.query && req.query.docid && req.query.page && available_documents[req.query.docid] && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1)) {
-              _context12.next = 8;
+              _context17.next = 8;
               break;
             }
 
-            _context12.next = 4;
+            _context17.next = 4;
             return readyTableData(req.query.docid, req.query.page);
 
           case 4:
-            tableData = _context12.sent;
+            tableData = _context17.sent;
             res.send(tableData);
-            _context12.next = 9;
+            _context17.next = 9;
             break;
 
           case 8:
@@ -1736,13 +1880,13 @@ function () {
             });
 
           case 9:
-            _context12.next = 15;
+            _context17.next = 15;
             break;
 
           case 11:
-            _context12.prev = 11;
-            _context12.t0 = _context12["catch"](0);
-            console.log(_context12.t0);
+            _context17.prev = 11;
+            _context17.t0 = _context17["catch"](0);
+            console.log(_context17.t0);
             res.send({
               status: "probably page out of bounds, or document does not exist",
               query: req.query
@@ -1750,14 +1894,14 @@ function () {
 
           case 15:
           case "end":
-            return _context12.stop();
+            return _context17.stop();
         }
       }
-    }, _callee12, this, [[0, 11]]);
+    }, _callee17, this, [[0, 11]]);
   }));
 
-  return function (_x43, _x44) {
-    return _ref12.apply(this, arguments);
+  return function (_x49, _x50) {
+    return _ref17.apply(this, arguments);
   };
 }());
 app.get('/api/getAvailableTables', function (req, res) {
@@ -1766,57 +1910,57 @@ app.get('/api/getAvailableTables', function (req, res) {
 app.get('/api/getAnnotations',
 /*#__PURE__*/
 function () {
-  var _ref13 = (0, _asyncToGenerator2.default)(
+  var _ref18 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee13(req, res) {
-    return _regenerator.default.wrap(function _callee13$(_context13) {
+  _regenerator.default.mark(function _callee18(req, res) {
+    return _regenerator.default.wrap(function _callee18$(_context18) {
       while (1) {
-        switch (_context13.prev = _context13.next) {
+        switch (_context18.prev = _context18.next) {
           case 0:
-            _context13.t0 = res;
-            _context13.next = 3;
+            _context18.t0 = res;
+            _context18.next = 3;
             return getAnnotationResults();
 
           case 3:
-            _context13.t1 = _context13.sent;
+            _context18.t1 = _context18.sent;
 
-            _context13.t0.send.call(_context13.t0, _context13.t1);
+            _context18.t0.send.call(_context18.t0, _context18.t1);
 
           case 5:
           case "end":
-            return _context13.stop();
+            return _context18.stop();
         }
       }
-    }, _callee13, this);
+    }, _callee18, this);
   }));
 
-  return function (_x45, _x46) {
-    return _ref13.apply(this, arguments);
+  return function (_x51, _x52) {
+    return _ref18.apply(this, arguments);
   };
 }());
 app.get('/api/getAnnotationByID',
 /*#__PURE__*/
 function () {
-  var _ref14 = (0, _asyncToGenerator2.default)(
+  var _ref19 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee14(req, res) {
+  _regenerator.default.mark(function _callee19(req, res) {
     var page, user, annotations, final_annotations, r, ann, existing, final_annotations_array, entry;
-    return _regenerator.default.wrap(function _callee14$(_context14) {
+    return _regenerator.default.wrap(function _callee19$(_context19) {
       while (1) {
-        switch (_context14.prev = _context14.next) {
+        switch (_context19.prev = _context19.next) {
           case 0:
             if (!(req.query && req.query.docid && req.query.docid.length > 0)) {
-              _context14.next = 13;
+              _context19.next = 13;
               break;
             }
 
             page = req.query.page && req.query.page.length > 0 ? req.query.page : 1;
             user = req.query.user && req.query.user.length > 0 ? req.query.user : "";
-            _context14.next = 5;
+            _context19.next = 5;
             return getAnnotationByID(req.query.docid, page, user);
 
           case 5:
-            annotations = _context14.sent;
+            annotations = _context19.sent;
             final_annotations = {};
             /**
             * There are multiple versions of the annotations. When calling reading the results from the database, here we will return only the latest/ most complete version of the annotation.
@@ -1853,7 +1997,7 @@ function () {
               res.send({});
             }
 
-            _context14.next = 14;
+            _context19.next = 14;
             break;
 
           case 13:
@@ -1863,34 +2007,34 @@ function () {
 
           case 14:
           case "end":
-            return _context14.stop();
+            return _context19.stop();
         }
       }
-    }, _callee14, this);
+    }, _callee19, this);
   }));
 
-  return function (_x47, _x48) {
-    return _ref14.apply(this, arguments);
+  return function (_x53, _x54) {
+    return _ref19.apply(this, arguments);
   };
 }());
 app.get('/api/recordAnnotation',
 /*#__PURE__*/
 function () {
-  var _ref15 = (0, _asyncToGenerator2.default)(
+  var _ref20 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee15(req, res) {
-    return _regenerator.default.wrap(function _callee15$(_context15) {
+  _regenerator.default.mark(function _callee20(req, res) {
+    return _regenerator.default.wrap(function _callee20$(_context20) {
       while (1) {
-        switch (_context15.prev = _context15.next) {
+        switch (_context20.prev = _context20.next) {
           case 0:
             console.log(JSON.stringify(req.query));
 
             if (!(req.query && req.query.docid.length > 0 && req.query.page.length > 0 && req.query.user.length > 0 && req.query.annotation.length > 0)) {
-              _context15.next = 4;
+              _context20.next = 4;
               break;
             }
 
-            _context15.next = 4;
+            _context20.next = 4;
             return insertAnnotation(req.query.docid, req.query.page, req.query.user, {
               annotations: JSON.parse(req.query.annotation)
             }, req.query.corrupted, req.query.tableType, req.query.corrupted_text);
@@ -1901,14 +2045,14 @@ function () {
 
           case 5:
           case "end":
-            return _context15.stop();
+            return _context20.stop();
         }
       }
-    }, _callee15, this);
+    }, _callee20, this);
   }));
 
-  return function (_x49, _x50) {
-    return _ref15.apply(this, arguments);
+  return function (_x55, _x56) {
+    return _ref20.apply(this, arguments);
   };
 }());
 app.listen(_config.PORT, function () {

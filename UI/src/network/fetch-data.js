@@ -75,12 +75,31 @@ export default class fetchData {
 
   async getCUISIndex() {
 
-        var urlQueryRequest = urlBase+ "cuisIndex"
+        var urlQueryRequest = urlBase + "cuisIndex"
 
         var r = await this.getGeneric( urlQueryRequest  )
-        // debugger
+
         return JSON.parse(r)
   }
+
+  async getCUIModifiers() {
+
+        var urlQueryRequest = urlBase + "getCUIMods"
+
+        var r = await this.getGeneric( urlQueryRequest  )
+
+        return JSON.parse(r)
+  }
+
+  async setCUIModifiers(cuis) {
+
+        var urlQueryRequest = urlBase + "setCUIMods?cuis="+encodeURIComponent(cuis)
+
+        var r = await this.getGeneric( urlQueryRequest  )
+
+        return JSON.parse(r)
+  }
+
 
 
 
