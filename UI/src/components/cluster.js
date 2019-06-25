@@ -12,6 +12,8 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 import TextField from 'material-ui/TextField';
 
+import SelectField from 'material-ui/SelectField';
+
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -44,6 +46,9 @@ class Cluster extends Component {
         currentPage: props.currentPage,
         clusters: props.clusters,
         checkedConcepts : props.checkedConcepts,
+        excluded_cuis : props.excluded_cuis,
+        rep_cuis : props.rep_cuis,
+        cluster_status : props.status,
       };
 
     }
@@ -62,11 +67,13 @@ class Cluster extends Component {
       });
   }
 
-
-
-
   loadPageFromProps = async (props) => {
-        this.setState({ item: props.item,  currentPage: props.currentPage })
+
+        this.setState({ item: props.item,
+          currentPage: props.currentPage,
+          cluster_status : props.status,
+          excluded_cuis : props.excluded_cuis,
+          rep_cuis : props.rep_cuis})
     }
 
 
@@ -75,6 +82,7 @@ class Cluster extends Component {
   }
 
   async componentWillReceiveProps(next) {
+
     this.loadPageFromProps(next)
   }
 
@@ -86,7 +94,6 @@ handleOpen = () => {
  handleClose = () => {
    this.setState({open: false});
  };
-
 
 
  summary(cluster) {
@@ -123,19 +130,38 @@ handleOpen = () => {
 
         var currentCluster = this.props.currentCluster
 
+
+
+        var status = <SelectField
+                        value={this.state.cluster_status}
+                        onChange={(v,i,newStatus) => {this.props.handleClusterDataChange(newStatus, currentCluster, "status")}}
+                        hintText="Status"
+                        style={{width:60,top:30, marginRight: -10}}
+                        underlineStyle={{display:"none"}}
+                      >
+                          <MenuItem key={"completedchecked"} value={"completedchecked"} primaryText={<DoubleTick style={{color: "blue"}} />} />
+                          <MenuItem key={"completed"} value={"completed"} primaryText={<Tick style={{color: "green"}} />} />
+                          <MenuItem key={"inprogress"} value={"inprogress"} primaryText={<Alert style={{color: "#cfcf20"}} />} />
+
+
+                      </SelectField>
+
+
         var headerStyle = {textAlign:"center",fontWeight:"bold"}
 
+
         return (
-          <div style={{marginLeft:0, marginBottom: this.state.open ? 10 : 0}}
+          <div style={{marginLeft:0, marginBottom: this.state.open ? 10 : 0, marginTop: -25}}
                 onMouseEnter={this.onMouseEnterHandler}
                 onMouseLeave={this.onMouseLeaveHandler}>
 
-              <div> { (currentCluster == -10 ? "discard" : currentCluster) +" : "+ "n = "+this.state.item.length+" : "+ this.state.item[0].concept }
+              <div>   <div style={{display:"inline", cursor:"pointer", fontWeight:"bold"}}> { status } </div> { (currentCluster == -10 ? "discard" : currentCluster) +" : "+ "n = "+this.state.item.length+" : "+ this.state.item[0].concept }
                 <div style={{display:"inline", cursor:"pointer", fontWeight:"bold"}} onClick={ this.handleOpen }> { this.state.open ? "[-]" : "[+]" } </div>
+
 
                 {
                   this.props.anyChecked ?
-                <div style={{display:"inline", color:"red", cursor:"pointer", fontWeight: this.state.hover ? "bold" : ""}}
+                <div style={{display:"inline", color:  (this.state.hover ? "red" : "white") , cursor:"pointer", fontWeight: this.state.hover ? "bold" : ""}}
                      onClick={ () => this.props.moveAllHere(currentCluster) }
                      onMouseEnter={this.onMouseEnterHandler}
                      onMouseLeave={this.onMouseLeaveHandler}>
@@ -147,7 +173,7 @@ handleOpen = () => {
 
               { this.state.open ?
 
-                <table >
+                <table style={{marginTop:30}}>
                 <tbody>
 
                   <tr>
@@ -169,10 +195,11 @@ handleOpen = () => {
 
                                 <tr>
                                   <td style={headerStyle}><DetaultIcon style={{color: "green"}} /> </td>
+                                  <td style={headerStyle}><RemoveCircle style={{color: "red"}} /> </td>
                                   <td style={headerStyle}>#</td>
                                   <td style={headerStyle}>CUI</td>
                                   <td style={headerStyle}>CUI Text</td>
-                                  <td style={headerStyle}>Modifier</td>
+
                                 </tr>
 
                         </thead>
@@ -180,19 +207,11 @@ handleOpen = () => {
 
                               {orderedCUIS.map(
                                 (c,i) => <tr key={i}>
-                                    <td><input type="checkbox" checked={false} onClick={false } /></td>
+                                    <td><input type="checkbox" checked={this.props.rep_cuis.indexOf(c) > -1 ? true : false} onClick={() => this.props.handleClusterDataChange(c, currentCluster, "rep") } /></td>
+                                    <td><input type="checkbox" checked={this.props.excluded_cuis.indexOf(c) > -1 ? true : false } onClick={() => this.props.handleClusterDataChange(c, currentCluster, "exclude")  } /></td>
                                     <td>{cuis[c]}</td>
                                     <td>{c}</td>
                                     <td style={{  }}>{this.props.cuis_index[c]}</td>
-                                    <td> <select value={""} onChange={(v,i) => this.handleSelectChange( v.target.value, c )}>
-
-                                          <option value=""></option>
-                                          <option value="loc">Location</option>
-                                          <option value="time">Time/Period</option>
-                                          <option value="other">Other</option>
-
-                                        </select>
-                                    </td>
                                 </tr> )
                             }
 

@@ -8,6 +8,10 @@ from sklearn.cluster import AgglomerativeClustering
 from sklearn.cluster import MeanShift, estimate_bandwidth
 from sklearn.cluster import AffinityPropagation
 
+from sklearn.metrics import pairwise_distances
+
+from scipy.sparse import csr_matrix
+
 def simplify(x):
     return ";".join(np.unique(x.split(";")))
 
@@ -15,7 +19,7 @@ def simplify(x):
 rootDir = "/home/suso/ihw/tableAnnotator/Server/CLUSTERS/"
 
 
-dataset = pd.read_csv(rootDir+'clusterDataMSH.csv')
+dataset = pd.read_csv(rootDir+'clusterData.csv')
 
 
 cuis = pd.read_csv(rootDir+'cuis.csv').fillna("")
@@ -52,15 +56,19 @@ dataset = dataset.drop("concept", axis=1)
 #     print(score)
 #     return score
 
-limit = 2000
+# limit = 2000
 
 
 testing = dataset
-testing = dataset[0:limit]
-names = names[0:limit]
+# testing = dataset[0:limit]
+# names = names[0:limit]
 
 
 ### Affinity propagation
+
+
+testing = csr_matrix(testing)
+
 
 
 af = AffinityPropagation(damping = 0.5).fit(testing)
@@ -109,8 +117,9 @@ doit(1)
 
 doit(0.05)
 
+
 ## aglomerative
-clustering = AgglomerativeClustering(linkage="complete",distance_threshold=0.30,n_clusters=None, compute_full_tree=True).fit(testing)
+clustering = AgglomerativeClustering(linkage="single",affinity="cosine", distance_threshold=0.30, n_clusters=None).fit(testing.todense())
 
 clustering = testing.assign(cluster=clustering.labels_)
 
@@ -127,11 +136,18 @@ csvRes.to_csv(rootDir+'clusters-aglo-assign.csv', sep=',', encoding='utf-8',inde
 
 ## dbscan 
 
-result = dbscan(testing, metric='manhattan', min_samples=2, n_jobs=10)
+result = dbscan(testing, metric='cosine', min_samples=2, n_jobs=10, eps=0.9) # previously manhattan
 
-d_testing = testing.assign(cluster=result[1])
+d_testing = dataset.assign(cluster=result[1])
 
 d_testing = d_testing.assign(concept=names)
 
 csvRes = d_testing[["concept",'cluster']].sort_values(by='cluster', ascending=False)
-csvRes.to_csv(rootDir+'clusters-assign.csv', sep=',', encoding='utf-8')
+
+csvRes = pd.merge(csvRes, cuis, on='concept')
+
+csvRes = csvRes[['cluster','concept','cuis']]
+
+# csvRes.to_csv(rootDir+'clusters-assign.csv', sep=',', encoding='utf-8', index=False)
+
+csvRes[csvRes["cluster"] == -1]

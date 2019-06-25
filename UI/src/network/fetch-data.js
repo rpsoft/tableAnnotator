@@ -101,6 +101,27 @@ export default class fetchData {
   }
 
 
+  async getClusterData() {
+
+        var urlQueryRequest = urlBase + "getClusterData"
+        var r = await this.getGeneric( urlQueryRequest  )
+
+        return JSON.parse(r).rows
+  }
+
+  async setClusterData(cdata) {
+        var urlQueryRequest = urlBase + "setClusterData?cn="+cdata.cn
+                                      + "&rep_cuis="+cdata.rep_cuis.join(";")
+                                      + "&excluded_cuis="+cdata.excluded_cuis.join(";")
+                                      + "&status="+cdata.status
+
+        console.log(urlQueryRequest)
+        var r = await this.getGeneric( urlQueryRequest )
+
+        return r
+  }
+
+
 
 
   async getAllClusters() {

@@ -86,6 +86,54 @@ class ClusterView extends Component {
     alert(v+" -- "+c)
   };
 
+  handleClusterDataChange = async ( clusterData, clusterNumber, operation ) => {
+
+//    alert(JSON.stringify(clusterData)+" "+clusterNumber+" "+operation);
+
+    let fetch = new fetchData();
+
+    var previousData = this.state.clusterData[clusterNumber]
+
+    if ( !previousData ){
+       previousData = {cn : clusterNumber, rep_cuis: [], excluded_cuis: [], status: "inprogress"} //inprogress, completed, completedchecked
+    }
+
+    switch (operation) {
+      case "status":
+        previousData.status = clusterData
+        break;
+      case "rep":
+        var i = previousData.rep_cuis.indexOf(clusterData);
+
+        if ( i > -1){
+          previousData.rep_cuis.splice(i,1)
+        } else {
+          previousData.rep_cuis.push(clusterData)
+        }
+
+        break;
+      case "exclude":
+        var i = previousData.excluded_cuis.indexOf(clusterData);
+
+        if ( i > -1){
+          previousData.excluded_cuis.splice(i,1)
+        } else {
+          previousData.excluded_cuis.push(clusterData)
+        }
+
+        break;
+      default:
+
+    }
+
+    await fetch.setClusterData(previousData)
+
+
+
+    await this.loadPageFromProps(this.props)
+
+  }
+
 
   async componentWillReceiveProps(next) {
       this.loadPageFromProps(next)
@@ -99,16 +147,27 @@ class ClusterView extends Component {
         let fetch = new fetchData();
 
 
-        var results = await fetch.getAllClusters()
+        var clusters = await fetch.getAllClusters()
 
-            results = results.reduce( (acc, item) =>{ var prev = acc[item.cn_override ? item.cn_override : item.cn]; if ( prev ){ prev.push(item); } else { prev = [item] } acc[item.cn_override ? item.cn_override : item.cn] = prev; return acc },{})
+            clusters = clusters.reduce( (acc, item) =>{ var prev = acc[item.cn_override ? item.cn_override : item.cn]; if ( prev ){ prev.push(item); } else { prev = [item] } acc[item.cn_override ? item.cn_override : item.cn] = prev; return acc },{})
+
+        var clusterData = await fetch.getClusterData()
+
+            clusterData = clusterData.reduce( (agg,v) => {
+                    var newElem = v;
+                      newElem.rep_cuis = v.rep_cuis.trim().split(";");
+                      newElem.excluded_cuis = v.excluded_cuis.trim().split(";");
+                      agg[newElem.cn] = newElem;
+                    return agg;
+                  },{} );
 
         var cuis_index = await fetch.getCUISIndex()
 
-        this.setState({clusters : results,
-                       totalClusters : Object.keys(results).length,
+        this.setState({clusters : clusters,
+                       totalClusters : Object.keys(clusters).length,
                        checkedConcepts:{},
-                       cuis_index : cuis_index})
+                       cuis_index : cuis_index,
+                       clusterData: clusterData})
     }
 
 
@@ -216,21 +275,25 @@ class ClusterView extends Component {
                     }
 
                     <hr />
-                    <div>
+                    <div  style={{height:"40vw", overflowY:"scroll"}}>
                         {
                           this.searchTerms().map( (v,i) => <Cluster key={i} item={this.state.clusters[v]}
-                                                                                                          clusters={this.state.clusters}
-                                                                                                          currentCluster={v}
-                                                                                                          isChecked={ (c) => { return Object.keys(this.state.checkedConcepts).indexOf(c) > -1 }}
-                                                                                                          clearChecked={ () => {this.setState({checkedConcepts : {}})}}
-                                                                                                          toggleCheck={ this.toggleCheck }
-                                                                                                          moveAllHere={ this.moveAllHere }
-                                                                                                          anyChecked={ Object.keys(this.state.checkedConcepts).length > 0  }
-                                                                                                          cuis_index={ this.state.cuis_index }
-                                                                                                          handleModifierChange = { this.handleModifierChange }
-                                                                                                          modifiers={this.state.modifiers}
-                                                                                                        ></Cluster>)
-                                                                                                      }
+                                                                            clusters={this.state.clusters}
+                                                                            currentCluster={v}
+                                                                            isChecked={ (c) => { return Object.keys(this.state.checkedConcepts).indexOf(c) > -1 }}
+                                                                            clearChecked={ () => {this.setState({checkedConcepts : {}})}}
+                                                                            toggleCheck={ this.toggleCheck }
+                                                                            moveAllHere={ this.moveAllHere }
+                                                                            anyChecked={ Object.keys(this.state.checkedConcepts).length > 0  }
+                                                                            cuis_index={ this.state.cuis_index }
+                                                                            handleModifierChange = { this.handleModifierChange }
+                                                                            handleClusterDataChange = { this.handleClusterDataChange }
+                                                                            modifiers={this.state.modifiers}
+                                                                            status={this.state.clusterData[v] ? this.state.clusterData[v].status : "inprogress"}
+                                                                            rep_cuis={this.state.clusterData[v] && this.state.clusterData[v].rep_cuis ? this.state.clusterData[v].rep_cuis : []}
+                                                                            excluded_cuis={this.state.clusterData[v] && this.state.clusterData[v].excluded_cuis ? this.state.clusterData[v].excluded_cuis : []}
+                                                                          ></Cluster>)
+                                                                        }
 
                     </div>
 

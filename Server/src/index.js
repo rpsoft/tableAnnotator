@@ -60,8 +60,7 @@ var tables_folder = "HTML_TABLES"
 var cssFolder = "HTML_STYLES"
 var DOCS = [];
 
-var clusters = {}
-var clusterTerms = []
+var clusterTerms = {}
 
 function extractMMData (r) {
   try{
@@ -90,29 +89,20 @@ function extractMMData (r) {
 }
 
 
-fs.createReadStream('./CLUSTERS/clusters.csv')
+fs.createReadStream('./CLUSTERS/all_terms_June_2019.csv')
   .pipe(csv())
   .on('data', async (row) => {
-    var existingCluster = clusters[row.cluster]
-    //
-    // var conceptData = await getMMatch(row.term)
-    //
-    // var mmdata = extractMMData(conceptData)
 
+    var terms = row.terms.replace(/[0-9]+/g,"nmbr").replace(/([^A-z0-9 ])/g," $1 ").replace(/ +/g," ").toLowerCase().trim()
 
+    clusterTerms[terms] = true
 
-    if ( existingCluster ){
-      existingCluster.push(row.term)
-    } else {
-      existingCluster = [row.term]
-    }
-
-    clusterTerms.push(row.term)
-
-    clusters[row.cluster] = existingCluster
   })
   .on('end', () => {
-    console.log('read CSV clusters: '+Object.keys(clusters).length);
+    clusterTerms = Object.keys(clusterTerms)
+
+    console.log('read '+clusterTerms.length+' terms');
+
   });
 
 
@@ -389,7 +379,6 @@ app.get('/api/allClusters', async function(req,res){
 
 });
 
-//getCUIMods  //
 app.get('/api/getCUIMods', async function(req,res){
 
   var getCUIMods = async () => {
@@ -421,6 +410,42 @@ app.get('/api/setCUIMod', async function(req,res){
 
 
 });
+
+
+app.get('/api/getClusterData', async function(req,res){
+
+  var getClusterData = async () => {
+    var client = await pool.connect()
+    var result = await client.query(`select * from clusterdata`)
+          client.release()
+    return result
+  }
+
+  res.send( await getClusterData() )
+
+});
+
+
+app.get('/api/setClusterData', async function(req,res){
+
+  var setClusterData = async (cn,rep_cuis,excluded_cuis,status) => {
+      var client = await pool.connect()
+      var done = await client.query('INSERT INTO clusterdata VALUES($1,$2,$3,$4) ON CONFLICT (cn) DO UPDATE SET rep_cuis = $2, excluded_cuis = $3, status = $4 ;', [cn,rep_cuis,excluded_cuis,status])
+        .then(result => console.log("insert: "+ result))
+        .catch(e => console.error(e.stack))
+        .then(() => client.release())
+
+  }
+
+  if ( req.query && req.query.cn && req.query.status){
+    await setClusterData(req.query.cn, req.query.rep_cuis || "", req.query.excluded_cuis || "", req.query.status)
+  }
+
+  res.send( "updated" )
+
+});
+
+
 
 
 
@@ -466,11 +491,11 @@ app.get('/api/allCUIs',async function(req,res){
 
   var fs = require('fs')
   var csvWriter = fs.createWriteStream('CLUSTERS/cuis.csv', {
-    flags: 'w' // 'a' means appending (old data will be preserved)
+    flags: 'w'
   })
 
   var indexWriter = fs.createWriteStream('CLUSTERS/cuis-index.csv', {
-    flags: 'w' // 'a' means appending (old data will be preserved)
+    flags: 'w'
   })
 
   indexWriter.write("CUI,preferred,hasMSH\n")
@@ -648,8 +673,8 @@ app.get('/api/totalTables',function(req,res){
 async function getMMatch(phrase){
 
   // console.log(phrase)
-  phrase = phrase.replace(/[\W_]+/g," ");
-  // console.log(phrase)
+  phrase = phrase.toLowerCase().replace(/[\W_]+/g," ").replace(/nmbr/g," ") // this nmbr to avoid the "gene problem"
+  //console.log(phrase)
 
   var result = new Promise(function(resolve, reject) {
 
