@@ -1222,7 +1222,7 @@ homa_ % b tx difference vs pbo,C0041403;C1705241;C1705242,true;false;false,1219/
 tim nmbr nsk score,C1313407;C0449820;C4050231;C3541335;C3711667;C3827754;C3890185;C4319633,true;false;false;false;true;false;false;false,1220/20013
 indication for pci,C0392360;C4049621;C3146298,false;false;false,1221/20013
 percutaneous coronary intervention or coronary artery bypass graft surgery,C1532338,true,1222/20013
-nmbr - aminosalicylates ’ i " i ‘,C0368663;C0021966;C0221138,false;true;false,1223/20013
+nmbr - aminosalicylates ’ i   i ‘,C0368663;C0021966;C0221138,false;true;false,1223/20013
 native latin,C0302891,false,1224/20013
 patient history of disease,C0030705;C0683519;C0730226;C0850708;C0944983,true;false;false;false;false,1225/20013
 copd severity : severe / very severe,C0024117;C0439793;C0442824;C2984081;C0522510;C1412502;C3714496,true;false;false;false;false;false;false,1226/20013
@@ -3060,7 +3060,7 @@ hispanic ethnic group,C0086409;C0015031;C1879937,true;true;false,3057/20013
 multivessel coronary artery disease — no . / total no . ( % ),C0010054;C0010068;C1956346,true;true;true,3058/20013
 history,C0019664;C0019665;C0262512;C0262926;C1705255;C2004062,true;true;false;false;false;false,3059/20013
 patient ' s global assessment of disease activity ( nmbr - nmbr mm vas ),C4054228;C4330985;C0042815;C3536884;C3827561;C4554674,false;false;true;true;false;false,3060/20013
-prior cardiovascular event " ' ",C0332152;C1320716;C2826257,false;false;false,3061/20013
+prior cardiovascular event   '  ,C0332152;C1320716;C2826257,false;false;false,3061/20013
 no . with event / total no . { % ),C0441471;C0439175;C0439810;C4019010,false;false;false;false,3062/20013
 ras - aldosterone inhibitor^,C1514727;C0002006;C0034678;C0002007;C0525678,false;true;true;true;true,3063/20013
 mean ( sd ) post - bronchodilator fevnmbr / fvc,C0444504;C2699239;C2599594;C3714541;C2347634;C2348143,false;false;false;true;false;false,3064/20013
@@ -5481,7 +5481,7 @@ csf lathosterol ( | jlg / cll ),C3540512;C0064673;C0023434;C3889436,false;true;t
 diagnosis at presentation — no . ( % ),C0011900;C0449450;C1704338;C1704656,true;false;true;false,5477/20013
 number of concomitant csdmards,C0237753;C0521115;C0449788,false;false;false,5478/20013
 radiographic characteristics at baseline and randomization,C0444708;C4684572,false;false,5479/20013
-probability " of event %,C0033204;C0441471;C4019010,true;false;false,5480/20013
+probability   of event %,C0033204;C0441471;C4019010,true;false;false,5480/20013
 d - dimer ( ng / ml ),C0060323;C0439275,true;false,5481/20013
 cerebrovascular,C1880018,false,5482/20013
 methotrexate use at randomisation,C0025677;C0042153;C0034656;C0457083;C1947944,true;true;true;false;false,5483/20013
@@ -6202,7 +6202,7 @@ acei,,,6197/20013
 usa,C0041703,true,6198/20013
 class > nmbr,C0456387;C1518526;C1705943,false;false;false,6199/20013
 europe ii,C0015176;C1710602;C4082587,true;false;false,6200/20013
-/ ’ - value ",C1522609,false,6201/20013
+/ ’ - value  ,C1522609,false,6201/20013
 sabaa,,,6202/20013
 prior mi,C0332152;C3810814;C2826257,false;false;false,6203/20013
 no statin,C0360714,true,6204/20013
@@ -6620,7 +6620,7 @@ tgt,C1421391;C1428265;C4321338,false;false;false,6615/20013
 sfc ( n = nmbr ),C4521536,false,6616/20013
 prior llt,C0332152;C2347090;C2826257,false;false;false,6617/20013
 > = nmbr y,,,6618/20013
-p - value ",C1709380,false,6619/20013
+p - value  ,C1709380,false,6619/20013
 non - white,C1518422;C0007457;C0043157;C0220938,false;true;true;false,6620/20013
 ldl - c,,,6621/20013
 ( nmbr % ci]h,C0008107;C0033727;C0369286;C0441932;C0564385;C4528284;C3259781,true;true;false;false;false;false;false,6622/20013
@@ -7169,7 +7169,7 @@ glucocorticoids,C0017710;C3540777;C3540778,true;false;false,7164/20013
 glucocorticoid,C0017710,true,7165/20013
 glucocorticoids *,C0017710;C3540777;C3540778,true;false;false,7166/20013
 esr — mm / hr,C3811131;C4330985;C4554674,false;false;false,7167/20013
-esr ( mm / hour ) git config - - global user . name " your name ",C3811131;C4330985;C0439227;C1418224;C2827597;C0205246;C1548600;C1706077;C2348867;C0564385;C4554674,false;false;false;false;false;false;false;false;false;false;false,7168/20013
+esr ( mm / hour ) git config - - global user . name   your name  ,C3811131;C4330985;C0439227;C1418224;C2827597;C0205246;C1548600;C1706077;C2348867;C0564385;C4554674,false;false;false;false;false;false;false;false;false;false;false,7168/20013
 ns cardiac cisease,C0038944;C0018787;C1522601;C1112705;C1705982,true;true;false;false;false,7169/20013
 cardiac disease,C0018799,true,7170/20013
 no cardiac disease,C0018799,true,7171/20013
@@ -7449,7 +7449,7 @@ tiotropium ( n = nmbr ),C0213771,true,7444/20013
 gastroduodenum,C0391900,false,7445/20013
 gastroduodenal,C0450199,false,7446/20013
 primary endpoint,C2986535,false,7447/20013
-primary end point ",C2986535,false,7448/20013
+primary end point  ,C2986535,false,7448/20013
 dyslipidemia — no . ( % ),C0242339,true,7449/20013
 dyslipidemia — no . ( % ) |,C0242339,true,7450/20013
 tjc ( nmbr - nmbr ),,,7451/20013
@@ -7505,7 +7505,7 @@ weight - kg,C0005910;C0022718;C0439209;C4054209;C0043100;C1305866;C1705104,true;
 body - mass index ) -,C0005893;C0578022;C1305855,false;false;true,7501/20013
 body - mass indexj,C0518010,false,7502/20013
 body - mass indexf,C0518010,false,7503/20013
-body - mass index ) ",C0005893;C0578022;C1305855,false;false;true,7504/20013
+body - mass index )  ,C0005893;C0578022;C1305855,false;false;true,7504/20013
 body - mass index ),C0005893;C0578022;C1305855,false;false;true,7505/20013
 body - mass index *,C0005893;C0578022;C1305855,false;false;true,7506/20013
 body - mass index §,C0005893;C0578022;C1305855,false;false;true,7507/20013
@@ -9364,7 +9364,7 @@ exercise > once weekly ?,C0015259;C1522704,true;false,9359/20013
 nmbr - nmbr days ( % ),C0439228,false,9360/20013
 nmbr - nmbr yr ( % ),C0439234,false,9361/20013
 number stent > nmbr,C0237753;C0038257;C0449788,false;true;false,9362/20013
-number ste " t > nmbr,C0237753;C1420459;C3811127;C0449788,false;false;false;false,9363/20013
+number ste   t > nmbr,C0237753;C1420459;C3811127;C0449788,false;false;false;false,9363/20013
 most common concomitant aeds,C0205393;C0205214;C0521115;C0180309;C1522138;C3245511,false;false;false;true;false;false,9364/20013
 > nmbr % to < nmbr % ( > nmbr to nmbr mmol / mol ),C0040363;C3829066;C0041260;C1883351,true;false;true;false,9365/20013
 > nmbr % to < nmbr % ( > nmbr to < nmbr mmol / mol ),C0040363;C3829066;C0041260;C1883351,true;false;true;false,9366/20013
@@ -9547,7 +9547,7 @@ $ race was determined by the investigator during the patient ' s interview .,C00
 ( mmol / l ),C1532563,false,9543/20013
 ( mu / l $ mmol / l ) b,C0439342;C0439190,false;false,9544/20013
 ( n = nmbr ) ( n = nmbr ),C0369718;C0441922,false;false,9545/20013
-( n = nmbr ) " ' ( n = nmbr ),C0369718;C0441922,false;false,9546/20013
+( n = nmbr )   ' ( n = nmbr ),C0369718;C0441922,false;false,9546/20013
 ( n = nmbrlnmbr ),C0369718;C0441922,false;false,9547/20013
 ( n = lnmbr ),C0369718;C0441922,false;false,9548/20013
 ( ne,C0027608;C0028219;C3538705,true;true;false,9549/20013
@@ -9596,9 +9596,7 @@ $ race was determined by the investigator during the patient ' s interview .,C00
 * per nmbr participant years . composite of first occurrence death ( all cause ),C0679646;C0439234;C0205199;C0205435;C0243132;C0011065;C1306577;C4082313;C4552775;C1554210;C2745955;C1279901;C1547335;C2698741;C4554048,false;false;false;false;true;true;false;false;false;false;false;false;false;false;false,9592/20013
 * rate is number of events per nmbr patient - years of follow - up . fthe p value for number of patients from log - rank,C0871208;C1521828,false;false,9593/20013
 * reported by physicians . † data are median ( iqr ) . all data are mean ( sd ) or number ( % ) unless otherwise indicated .,C1709908;C0031831;C1511726;C3245479;C3714741,false;true;false;false;false,9594/20013
-* risk reduction  nmbr percent confidence interval ( ci )  and p value are derived from cox models . 
- for risk reductions  negative numbers indicate an increase in risk . † diabetes and hypertension were defined by clinical history . ‡ a family history was defined as having one or more first - degree relatives with either myocardial infarction or sudden death before the age of nmbr . § hdl cholesterol levels are shown according to the median value ( nmbr . nmbr mg per deciliter [nmbr . nmbr mmol per liter] ) . ¶ triglyceride levels are shown according to the median value ( nmbr mg per deciliter [nmbr . nmbr mmol per liter] ) . 
- ¿ ldl cholesterol levels are shown according to the median value ( nmbr mg per deciliter [nmbr . nmbr mmol per liter] ) and according to the values that divide the subjects into three equal groups ( < nmbr  nmbr to nmbr  and > nmbr mg per deciliter [ < nmbr . nmbr  nmbr . nmbr to nmbr . nmbr  and > nmbr . nmbr mmol per liter] ) .,C1137094;C0439165;C0009667;C0008107;C3259781,true;false;true;true;false,9595/20013
+* risk reduction  nmbr percent confidence interval ( ci )  and p value are derived from cox models . for risk reductions  negative numbers indicate an increase in risk . † diabetes and hypertension were defined by clinical history . ‡ a family history was defined as having one or more first - degree relatives with either myocardial infarction or sudden death before the age of nmbr . § hdl cholesterol levels are shown according to the median value ( nmbr . nmbr mg per deciliter [nmbr . nmbr mmol per liter] ) . ¶ triglyceride levels are shown according to the median value ( nmbr mg per deciliter [nmbr . nmbr mmol per liter] ) . ¿ ldl cholesterol levels are shown according to the median value ( nmbr mg per deciliter [nmbr . nmbr mmol per liter] ) and according to the values that divide the subjects into three equal groups ( < nmbr  nmbr to nmbr  and > nmbr mg per deciliter [ < nmbr . nmbr  nmbr . nmbr to nmbr . nmbr  and > nmbr . nmbr mmol per liter] ) .,C1137094;C0439165;C0009667;C0008107;C3259781,true;false;true;true;false,9595/20013
 * subgroups were defined on the basis of variables assessed before randomization . the lipid levels represent the averages of the values measured four weeks before randomization and those measured at randomization . to convert values for cholesterol to millimoles per liter  multiply by nmbr . nmbr  to convert values for triglycerides to millimoles per liter  multiply by nmbr . nmbr . ci denotes confidence interval  ldl low - density lipoprotein  and hdl high - density lipoprotein . tests for heterogeneity of treatment effect were undertaken across each of the subgroups . in addition  we performed tests for interaction between treatment and the following continuous base - line variables : age  total  ldl  and hdl cholesterol  and triglyceride levels . there was no evidence of significant heterogeneity of treat - ment effect in any prespecified subgroup ( p » nmbr . nmbr ) . † data were missing for three patients  two in the placebo group and one in the pravastatin group .,C1079230,false,9596/20013
 * the nmbr substrata with baseline ( bl ) ldl cholesterol nmbr to nmbr mg / dl and nmbr to nmbr mg / dl were combined to make nmbr group with bl ldl cholesterol nmbr to nmbr mg / dl because of small numbers of patients included in the substrata with nmbr to nmbr mg / dl . † bl hdl cholesterol cutoffs were nmbr or nmbr mg / dl for men and nmbr or nmbr mg / dl for women . bars indicate se . bmi body mass index  e ezetimibe nmbr mg  hdl - c hdl cholesterol  ldl - c ldl cholesterol  tg triglycerides,C0168634;C0005918;C0023824;C0202117;C0006413;C1552663;C2827109;C1442488,true;true;true;false;true;false;false;false,9597/20013
 . nmbr kg,C0022718;C0439209;C4054209,true;false;false,9598/20013
@@ -9711,7 +9709,7 @@ $ race was determined by the investigator during the patient ' s interview .,C00
 < nmbr weeks,C0439230,false,9705/20013
 < nmbr kg ' i ',C0022718;C0021966;C0221138;C0439209;C4054209,true;true;false;false;false,9706/20013
 < nmbr mi / min,C3810814;C0702093;C1524029;C3813700,false;false;false;false,9707/20013
-< nmbr ml min ’ nmbr nmbr . nmbr m " nmbr,C0439445;C0369637;C0441923,false;false;false,9708/20013
+< nmbr ml min ’ nmbr nmbr . nmbr m   nmbr,C0439445;C0369637;C0441923,false;false;false,9708/20013
 < nmbr ml / min per nmbr . nmbr mnmbr,C0439445;C0369637;C0441923,false;false;false,9709/20013
 < nmbr ml / min / nmbr . nmbr m^,C0439445;C0369637;C0441923,false;false;false,9710/20013
 < nmbr ml / min / nmbr . nmbr m^ — no . { % ),C0439445;C0369637;C0441923,false;false;false,9711/20013
@@ -9937,7 +9935,7 @@ $ race was determined by the investigator during the patient ' s interview .,C00
 « nmbr kg,C0022718;C0439209;C4054209,true;false;false,9931/20013
 » nmbr years,C0439234,false,9932/20013
 § classes on the canadian cardiovascular society ( ccs ) scale range from i to iv,C0238884;C0007226;C0037455;C1879987;C0175659;C1514721;C2348147;C3542016;C0349674;C1947916;C3887460,false;true;true;false;true;false;false;false;false;false;false,9933/20013
-† includes patients originally randomized to placebo who were switched to secukinumab per the study designs .   ‡ aes that occurred in at least nmbr . nmbr % of the patients in the any secukinumab group during the nmbr ‐ week placebo ‐ controlled period and events with an eair of at least nmbr . nmbr cases per nmbr patient ‐ years in the any secukinumab group during the entire treatment period . events listed according to preferred term in the medical dictionary for regulatory activities ( meddra version nmbr . nmbr )  sorted in descending order of eair in the any secukinumab group for the entire treatment period . the entire treatment period for safety data was from baseline to week nmbr visit of the last patient enrolled in these studies . ae  adverse event  as  ankylosing spondylitis  eair  exposure adjusted incidence rates    n  number of randomized patients  sae  serious adverse event  urti  upper respiratory tract infection .,C0332257;C1552866;C2700399,false;false;false,9934/20013
+† includes patients originally randomized to placebo who were switched to secukinumab per the study designs . ‡ aes that occurred in at least nmbr . nmbr % of the patients in the any secukinumab group during the nmbr ‐ week placebo ‐ controlled period and events with an eair of at least nmbr . nmbr cases per nmbr patient ‐ years in the any secukinumab group during the entire treatment period . events listed according to preferred term in the medical dictionary for regulatory activities ( meddra version nmbr . nmbr )  sorted in descending order of eair in the any secukinumab group for the entire treatment period . the entire treatment period for safety data was from baseline to week nmbr visit of the last patient enrolled in these studies . ae  adverse event  as  ankylosing spondylitis  eair  exposure adjusted incidence rates n  number of randomized patients  sae  serious adverse event  urti  upper respiratory tract infection .,C0332257;C1552866;C2700399,false;false;false,9934/20013
 • nmbr : death from any cause,C0007465,true,9935/20013
 • any mi,C3810814,false,9936/20013
 • any stroke,C0038454;C4554100,true;false,9937/20013
@@ -10214,8 +10212,7 @@ nmbr . i ± ii . nmbr,C0021966;C1710602;C4082587;C0221138,true;false;false;false
 nmbr nmbr . nmbr ( nmbr . nmbr ) [nmbr ( nmbr . nmbr ) ] - nmbr . nmbr ( - nmbr . nmbr to nmbr . nmbr ) [ - nmbr . nmbr ( - nmbr . nmbr to nmbr . nmbr ) ],C0040363;C0041260;C1883351,true;true;false,10208/20013
 nmbr ( nmbr cl ),C0596019,false,10209/20013
 nmbr . nmbr ( io . i ),C1046794;C0021966;C0221138;C3146236,false;true;false;false,10210/20013
-nmbrs = scandinavian simvastatin survival study . nmbr woscops = west of scotland coronary prevention study . nmbr care = cholesterol and recurrent events . nmbr post - cabg = post - coronary artery bypass graft . nmbr afcaps / texcaps = air force / texas coronary atherosclerosis prevention study . nmbr lipid = long - term intervention with pravastatin in ischaemic disease . nmbr gissi prevention = gruppo italiano per lo studio della sopravvivenza nell ’ infarto miocardico . nmbr lips = lescol intervention prevention study . nmbr hps = heart protection study . nmbr prosper = prospective study of pravastatin in the elderly at risk . nmbr allhat - llt = antihypertensive and lipid - lowering treatment to prevent heart attack trial . nmbr ascot - lla = anglo - scandinavian cardiac outcomes trial - lipid lowering arm . nmbr alert = assessment of lescol in renal transplantation . nmbr cards = collaborative atorvastatin diabetes study . nmbr s = simvastatin . 
- l = lovastatin . p = pravastatin . f = ﬂ uvastatin . a = atorvastatin . * mean duration of follow - up based on survival times within each trial . overall mean is weighted by trial - speci ﬁ c variances of logrank ( o – e ) for major vascular events . † all trials included dietary intervention : woscops  gissi prevention  lipid  nmbrs  lips  and hps provided dietary advice  afcaps / texcaps  post - cabg  care  allhat  alert  cards  and prosper used american heart association ( aha ) step nmbr diet and care intensi ﬁ ed to step nmbr diet if ldl cholesterol nmbr · nmbr mmol / l ( nmbr mg / dl ) . ‡ other chd includes patients with a history of other symptomatic chd but excludes those with a history of mi ( as already counted in mi column ) . § other vascular includes history of intracerebral bleed  transient ischaemic attack  ischaemic stroke  unknown stroke  and peripheral artery disease . ¶ none includes individuals without a history of mi  symptomatic chd  intracerebral bleed  transient ischaemic attack  ischaemic stroke  unknown stroke  or peripheral artery disease,C0565930;C0240951;C0074554;C0038952;C1705493;C0036453;C0489835;C1706420;C1947933;C0008377;C0557651;C0150158;C2603343;C0220921;C2603362,false;false;true;true;false;true;false;false;false;true;false;false;false;true;false,10211/20013
+nmbrs = scandinavian simvastatin survival study . nmbr woscops = west of scotland coronary prevention study . nmbr care = cholesterol and recurrent events . nmbr post - cabg = post - coronary artery bypass graft . nmbr afcaps / texcaps = air force / texas coronary atherosclerosis prevention study . nmbr lipid = long - term intervention with pravastatin in ischaemic disease . nmbr gissi prevention = gruppo italiano per lo studio della sopravvivenza nell ’ infarto miocardico . nmbr lips = lescol intervention prevention study . nmbr hps = heart protection study . nmbr prosper = prospective study of pravastatin in the elderly at risk . nmbr allhat - llt = antihypertensive and lipid - lowering treatment to prevent heart attack trial . nmbr ascot - lla = anglo - scandinavian cardiac outcomes trial - lipid lowering arm . nmbr alert = assessment of lescol in renal transplantation . nmbr cards = collaborative atorvastatin diabetes study . nmbr s = simvastatin . l = lovastatin . p = pravastatin . f = ﬂ uvastatin . a = atorvastatin . * mean duration of follow - up based on survival times within each trial . overall mean is weighted by trial - speci ﬁ c variances of logrank ( o – e ) for major vascular events . † all trials included dietary intervention : woscops  gissi prevention  lipid  nmbrs  lips  and hps provided dietary advice  afcaps / texcaps  post - cabg  care  allhat  alert  cards  and prosper used american heart association ( aha ) step nmbr diet and care intensi ﬁ ed to step nmbr diet if ldl cholesterol nmbr · nmbr mmol / l ( nmbr mg / dl ) . ‡ other chd includes patients with a history of other symptomatic chd but excludes those with a history of mi ( as already counted in mi column ) . § other vascular includes history of intracerebral bleed  transient ischaemic attack  ischaemic stroke  unknown stroke  and peripheral artery disease . ¶ none includes individuals without a history of mi  symptomatic chd  intracerebral bleed  transient ischaemic attack  ischaemic stroke  unknown stroke  or peripheral artery disease,C0565930;C0240951;C0074554;C0038952;C1705493;C0036453;C0489835;C1706420;C1947933;C0008377;C0557651;C0150158;C2603343;C0220921;C2603362,false;false;true;true;false;true;false;false;false;true;false;false;false;true;false,10211/20013
 nmbrth : nmbr . nmbr - nmbr pmol / l,C0039725;C0439284;C0039738;C1420718;C4282123;C4285344,true;false;true;false;false;false,10212/20013
 nmbr - nmbr / week ( n = nmbr ) nmbr - nmbr / week ( n = nmbr ),C0332174;C0439230,false;false,10213/20013
 nmbr - asa compounds,C0004057;C0205198;C1706082;C3853627,true;false;false;false,10214/20013
@@ -10223,7 +10220,7 @@ nmbr . nmbr ( nmbr . o - nmbr . o ),C0483204,false,10215/20013
 nmbr . nmbr ± l . l,C3539687,false,10216/20013
 nmbr . nmbr - nmbr . nmbr mm,C4330985;C4554674,false;false,10217/20013
 nmbr . nmbr or more,,,10218/20013
-nmbr - nmbr ml min " nmbr,C0439445,false,10219/20013
+nmbr - nmbr ml min   nmbr,C0439445,false,10219/20013
 nmbr - nmbr kg,C0022718;C0439209;C4054209,true;false;false,10220/20013
 nmbr – < nmbr ml / min,C0439445,false,10221/20013
 nmbr - < nmbr kg,C0022718;C0439209;C4054209,true;false;false,10222/20013
@@ -10340,11 +10337,7 @@ abbreviations : acei  angiotensin - converting enzyme inhibitor  arb  angiotensi
 abbreviations : bmi  body mass index  cabg  coronary artery bypass graft  nsaids  nonsteroidal anti - inflammatory drugs  pci  percutaneous coronary interventions . * values expressed as number ( percentage ) unless otherwise indicated . percentages may not equal nmbr due to rounding . fhistory of or currently taking antidiabetic or lipid - lowering medications . ^history of or currently have elevated serum creatinine level but less than nmbr mg / dl_ ( < nmbr pmol / l ) . § patients with a history of skin  prostate  and other cancers with long survival expectancy were not excluded . | | lnsulin and / or oral hypoglycemics . ildata for women only ( n = nmbr for calcium antagonist strategy and n = nmbr for non - calcium antagonist strategy ) .,C0000723;C1305855;C0010055;C0003211;C1532338;C0042295;C3536840,true;true;true;true;true;false;false,10333/20013
 abbreviations : chd  coronary heart disease  cl  confidence interval  ml  myocardial infarction  rr  relative risk . ^defined as a composite end point comprising the first of any of these events : nonfatal ml  nonfatal stroke  or cardiovascular death . tp value for interaction < . nmbr for major cardiovascular event . no other interactions are significant . ^calculated as weight in kilograms divided by the square of height in meters . § hypertension was defined as a self - reported systolic blood pressure > nmbr mm hg  a diastolic blood pressure > nmbr mm hg  or physician - diagnosed hypertension . | | hyperlipidemia was defined as a self - reported total cholesterol > nmbr mg / dl_ ( nmbr . nmbr mmol / l ) or physician - diagnosed high cholesterol . ^diabetes defined by self - report . # calculated using the framingham risk score among nmbr nmbr women who provided a blood sample at baseline .,C0000723;C0010068;C0596019;C0009667;C0439526;C0027051;C4554402;C0242492;C0428953;C2926063;C3810814;C4552959;C1705224;C3887665,true;true;false;true;false;true;false;true;false;false;false;false;false;false,10334/20013
 abbreviations : da  disc area  e - etdrs  electronic early treatment diabetic retinopathy study  iop  intraocular pressure  oct  optical coherence tomography .,C0000723;C0011318;C0180459;C0017446;C0013850;C3161471;C0011884;C0021888;C0920367;C1547561;C4281784;C0205146;C1556138;C1705370;C2348299;C3668815,true;true;false;true;false;false;true;true;true;false;true;false;false;false;false;false,10335/20013
-abbreviations : egfr = estimated glomerular filtration rate  imt = intimal medial thickness  lv = left ventricular . 
- * 
- two - sample comparison t - tests were calculated based on log - transformed variables . 
- * * 
- geometric mean with nmbr % confidence interval in parenthesis .,C0000723;C1739039;C3811844;C0334121;C0162864;C0205098;C1280412;C0023128;C0225897;C0205448;C0370003;C1707455;C0871472;C2347026;C0731033;C1881413;C1256463;C1704614;C4318736;C3812682,true;true;false;true;true;false;false;true;true;false;false;false;false;false;true;false;false;false;false;false,10336/20013
+abbreviations : egfr = estimated glomerular filtration rate  imt = intimal medial thickness  lv = left ventricular . * two - sample comparison t - tests were calculated based on log - transformed variables . * * geometric mean with nmbr % confidence interval in parenthesis .,C0000723;C1739039;C3811844;C0334121;C0162864;C0205098;C1280412;C0023128;C0225897;C0205448;C0370003;C1707455;C0871472;C2347026;C0731033;C1881413;C1256463;C1704614;C4318736;C3812682,true;true;false;true;true;false;false;true;true;false;false;false;false;false;true;false;false;false;false;false,10336/20013
 abbreviations :   teae  treatment - emergent adverse event  gly  glycopyrrolate inhalation solution  bid  twice daily .,C0000723;C4684800;C0017890;C0017970;C1154181;C0585361;C0523677,true;false;true;true;false;false;false,10337/20013
 abciximab - facilitated pci,C0288672;C4049621,true;false,10338/20013
 abciximab vs . primary,C0288672,true,10339/20013
@@ -10672,7 +10665,7 @@ alanine aminotransferase,C0001899;C0057041;C1415274;C3887708,true;true;false;fal
 alav ( per ml ),C0439526;C1705224;C3887665,false;false;false,10661/20013
 albiglutide ( n = nmbr ),C2607479,true,10662/20013
 albiglutide events / patients ( %,C2607479;C0441471;C0030705;C3541888,true;false;true;false,10663/20013
-albumin - to - creatinine ratio ' i " /,C0486293;C0021966;C0221138;C1318293,false;true;false;false,10664/20013
+albumin - to - creatinine ratio ' i   /,C0486293;C0021966;C0221138;C1318293,false;true;false;false,10664/20013
 albumin - to - creatinine ratio ( acr ),C0486293;C1412134;C1515941;C1318293,false;false;false;false,10665/20013
 albumin,C0001924,true,10666/20013
 albuminuria ( acr > nmbr m . g / g ) at baseline to normoalbuminuria,C0001925;C1412134;C0369637;C1319635;C0168634;C1442488;C0441923;C1515941,true;false;false;false;true;false;false;false,10667/20013
@@ -10803,7 +10796,7 @@ american,C0596070,false,10791/20013
 american ‐ indian / alaska native,C0002460,true,10792/20013
 american hispanic ( n   = nmbr ),C0596070;C0086409,false;true,10793/20013
 american indian or,C0002460,true,10794/20013
-american indian or alaska native " :,C0002460,true,10795/20013
+american indian or alaska native   :,C0002460,true,10795/20013
 american indian or alaskan,C0002460,true,10796/20013
 american indian / alaskan native,C0002460;C0238611,true;false,10797/20013
 american indian / native alaskan,C0002460;C0682125,true;true,10798/20013
@@ -10999,7 +10992,8 @@ aortic,C0003483,true,10987/20013
 aortic - valve replacement,C0003506,false,10988/20013
 aortic valve disease ( n = nmbr nmbr ),C1260873;C4553103,false;false,10989/20013
 ap - value from an ancova with corresponding baseline lipid value as the covariate and with a effect for treatment group .,C0002680;C1522609;C0814908;C3887950,true;false;false;false,10990/20013
-ap = nmbr . nmbr  bp nmbr . nmbr  cp = nmbr . nmbr . * the study - speci ﬁ c bp targets were sbp nmbr mm hg and dbp nmbr mm hg ( or sbp nmbr mm hg and dbp nmbr mm hg in those with dm ) . the ldl - c target was nmbr mg / dl or nmbr mg / dl  depending on risk factor status at baseline in accordance with ncep atp iii guidelines . odds ratio and p value calculated based on generalized linear mixed model with generalized estimating equations method that includes compound symmetry covariance matrix for subjects from the same site . an interaction between treatment effect and dm status was observed for bp goal attainment ( p = nmbr . nmbr ) and dual bp / ldl - c goal attainment ( p = nmbr . nmbr ) among patients with or without dm calculated based on a mixed - effects linear model ( not adjusted for differences in baseline values ) . 
+ap = nmbr . nmbr  bp nmbr . nmbr  cp = nmbr . nmbr . * the study - speci ﬁ c bp targets were sbp nmbr mm hg and dbp nmbr mm hg ( or sbp nmbr mm hg and dbp nmbr mm hg in those with dm ) . the ldl - c target was nmbr mg / dl or nmbr mg / dl  depending on risk factor status at baseline in accordance with ncep atp iii guidelines . odds ratio and p value calculated based on generalized linear mixed model with generalized estimating equations method that includes compound symmetry covariance matrix for subjects from the same site . an interaction between treatment effect and dm status was observed for bp goal attainment ( p = nmbr . nmbr ) and dual bp / ldl - c goal attainment ( p = nmbr . nmbr ) among patients with or without dm calculated based on a mixed - effects linear model ( not adjusted for differences in baseline values ) .
+ 
  abbreviations : bp  blood pressure  dbp  diastolic blood pressure  dm  diabetes mellitus  ldl - c  low - density lipoprotein cholesterol  ncep atp iii  national cholesterol education program – adult treatment panel iii  or  odds ratio  sbp  systolic blood pressure,C0002680;C0037623;C0006938;C4050020;C1415692;C1708288;C4318478;C3887950,true;true;true;false;false;false;false;false,10991/20013
 apasp ( per mmhg ),C0439475,false,10992/20013
 apixaban nmbr . nmbr mg bid,C1831808;C0024671;C0026410;C0439269;C1960952;C2346927;C4321396;C4521761,true;true;true;false;false;false;false;false,10993/20013
@@ -11050,7 +11044,7 @@ asas nmbr / nmbr,C0004057;C3853627,true;false,11037/20013
 asas partial remission,C0004057;C1521726;C4552913;C4552914;C3853627,true;false;false;false;false,11038/20013
 asasnmbr,C0004057;C3853627,true;false,11039/20013
 ascvd no prior ml,C3665365,false,11040/20013
-ascvd ",C3665365,false,11041/20013
+ascvd  ,C3665365,false,11041/20013
 ascvd * . n ( % ),C3665365,false,11042/20013
 asdas - crp δ   ≥   nmbr . nmbr,C3890735;C4048285,false;false,11043/20013
 asdas - crp *,C3890735;C4048285,false;false,11044/20013
@@ -11168,7 +11162,7 @@ atrial fibrillation type,C0004238;C0332307;C1547052;C0344434;C1963067,true;false
 atrial fibrillation . no . ( % ),C0004238;C0344434;C1963067,true;false;false,11156/20013
 attack ( % ),C0277793;C1261512;C1304680,false;false;false,11157/20013
 attain,,,11158/20013
-atv  atorvastatin  ldl - c  low - density lipoprotein cholesterol . * p - values pertain to treatment - by - stratum interaction test for stratum or treatment - by - subgroup interaction test for subgroups . ' multiplicity adjustments were not applied to this predefined subgroup analysis of ldl - c goal attainment  " [expressed as number of patients reaching ldl - c goal at week nmbr / number of patients above goal at baseline  ^treatment stratum was defined by intake of atv nmbr or nmbr mg .,C0210243;C0286651;C0023824;C1709380;C0674679;C1145759;C1334862,true;true;true;false;true;true;false,11159/20013
+atv  atorvastatin  ldl - c  low - density lipoprotein cholesterol . * p - values pertain to treatment - by - stratum interaction test for stratum or treatment - by - subgroup interaction test for subgroups . ' multiplicity adjustments were not applied to this predefined subgroup analysis of ldl - c goal attainment    [expressed as number of patients reaching ldl - c goal at week nmbr / number of patients above goal at baseline  ^treatment stratum was defined by intake of atv nmbr or nmbr mg .,C0210243;C0286651;C0023824;C1709380;C0674679;C1145759;C1334862,true;true;true;false;true;true;false,11159/20013
 atwo ‐ sample t ‐ test .,C0370003;C0871472;C2347026,false;false;false,11160/20013
 atypical absence,C0595948,false,11161/20013
 augment copd,C0205217,false,11162/20013
@@ -11200,7 +11194,7 @@ b postbronchodilator fevl ( % predicted ),C2599594,false,11187/20013
 b reslizumab nmbr . nmbr mg / kg n / n,C1869620;C0439272,true;false,11188/20013
 b ) those on inhaled corticosteroids and long - acting bronchodilators as previous treatment use .,,,11189/20013
 b . acr nmbr,C1412134;C1515941,false;false,11190/20013
-b . benralizumab nmbr mg qnmbrw ",C2982078;C0024671;C0026410;C0439269;C1960952;C2346927;C4321396;C4521761,true;true;true;false;false;false;false;false,11191/20013
+b . benralizumab nmbr mg qnmbrw  ,C2982078;C0024671;C0026410;C0439269;C1960952;C2346927;C4321396;C4521761,true;true;true;false;false;false;false;false,11191/20013
 b . i . d .  twice daily  cat  copd assessment test  copd  chronic obstructive pulmonary disease  fevnmbr    forced expiratory volume in nmbr   s  fvc  forced vital capacity  gold  global initiative for chronic obstructive lung disease  ics  inhaled corticosteroid  mcid  minimum clinically important difference  mmrc  modified medical research council  o . d .  once daily  sd  standard deviation  sgrq - c  st . george ’ s respiratory questionnaire for copd,C0152277;C0585361;C0007450;C0024117;C0178628;C0231958;C0018026;C0205246;C0424093;C2348867;C1304897;C0325090;C0524517;C1443200;C3665481;C4050461;C4284282,false;false;true;true;false;false;true;false;false;false;false;false;true;false;false;false;false,11192/20013
 b . myocardial infarction,C0027051;C0428953;C2926063;C3810814;C4552959,true;false;false;false;false,11193/20013
 b : u . s . black and non - black patients,C0041703;C0005680;C0027567;C0085756;C0439541,true;true;true;true;false,11194/20013
@@ -11597,7 +11591,7 @@ bmi ( kg = mnmbr ),C0578022;C1532718,false;false,11584/20013
 bmi ( sd ),C0578022;C2699239,false;false,11585/20013
 bmi [kg / mnmbr],C0578022;C1532718,false;false,11586/20013
 bmi £ nmbr kg / m * ( n = nmbr / nmbr ),C0578022;C1532718,false;false,11587/20013
-bmi < nmbr kg / m " ( n = nmbr / nmbr ),C0578022;C1532718,false;false,11588/20013
+bmi < nmbr kg / m   ( n = nmbr / nmbr ),C0578022;C1532718,false;false,11588/20013
 bmi < nmbr kg / m * ( n = nmbr / nmbr ),C0578022;C1532718,false;false,11589/20013
 bmi < nmbr kg / m^ ( n = nmbr / nmbr ),C0578022;C1532718,false;false,11590/20013
 bmi < nmbr kg / mnmbr ( n = nmbr / nmbr ),C0578022;C1532718,false;false,11591/20013
@@ -11610,7 +11604,7 @@ bmi > nmbr kg / mnmbr *,C0578022;C1532718,false;false,11597/20013
 bmi > nmbr obese,C0578022,false,11598/20013
 bmi ¼ body mass index  hctz ¼ hydrochlorothiazide  msdbp ¼ mean sitting diastolic blood pressure  mssbp ¼ mean sitting systolic blood pressure  sd ¼ standard deviation,C1305855;C0020261;C0444504;C1319894;C2347634;C2348143,true;true;false;false;false;false,11599/20013
 bmi nmbr - < nmbr kg / m - ( n = nmbr / nmbr ),C0578022;C1532718,false;false,11600/20013
-bmi nmbr - < nmbr kg / m " ( n = nmbr / nmbr ),C0578022;C1532718,false;false,11601/20013
+bmi nmbr - < nmbr kg / m   ( n = nmbr / nmbr ),C0578022;C1532718,false;false,11601/20013
 bmi nmbr - < nmbr kg / m * ( n = nmbr / nmbr ),C0578022;C1532718,false;false,11602/20013
 bmi nmbr - < nmbr kg / m^ ( n = nmbr / nmbr ),C0578022;C1532718,false;false,11603/20013
 bmi nmbr - < nmbr kg / ni - ( n = nmbr / nmbr ),C0578022;C0022718;C0028075;C2348274;C3869926;C3869927;C0439209;C4054209,false;true;true;false;false;false;false;false,11604/20013
@@ -11736,9 +11730,12 @@ bp goal attainment,C0037623;C0680230;C1415692;C1708288;C4318478,true;false;false
 bp goal,C0037623;C0018017;C1571704;C1415692;C1708288;C4318478,true;true;false;false;false;false,11724/20013
 bp in pre - treated patients,C0037623;C1415692;C1708288;C4318478,true;false;false;false,11725/20013
 bp variable,C0037623;C0439828;C4553760;C1415692;C1708288;C4318478,true;false;false;false;false;false,11726/20013
-bp : blood pressure  ci : confidence interval  esrd : end - stage renal disease  hr  hazard ratio . 
- all patients ( except patients with other race ) were included with missing covariates imputed . 
- event : no . of patients with esrd  rate : event rate per nmbr years of follow - up  pre - specified : a cox model with treatment group and region as covariates and baseline proteinuria level ( o or xnmbr g / g ) as strata  adjusted : a multivariate cox model with treatment group  time - varying systolic and diastolic bp as covariates . 
+bp : blood pressure  ci : confidence interval  esrd : end - stage renal disease  hr  hazard ratio .
+ 
+ all patients ( except patients with other race ) were included with missing covariates imputed .
+ 
+ event : no . of patients with esrd  rate : event rate per nmbr years of follow - up  pre - specified : a cox model with treatment group and region as covariates and baseline proteinuria level ( o or xnmbr g / g ) as strata  adjusted : a multivariate cox model with treatment group  time - varying systolic and diastolic bp as covariates .
+ 
  pre - specified analysis and adjusted for time - varying bp,C0005823;C0008107;C0009667;C0022661;C2985465;C3259781,true;true;true;true;false;false,11727/20013
 bpearson ' s chi ‐ square test .,C0008041,true,11728/20013
 bph - luts severity,C0005001;C0574785;C0439793;C0522510;C1704272,true;true;false;false;true,11729/20013
@@ -12578,31 +12575,43 @@ dapagliflozin nmbr mg + insulin ( n = nmbr ),C2353951;C0024671;C0021641;C1533581
 dapagliflozin placebo no . of events / no . of patients,C2353951;C0032042;C1696465;C1706408,true;true;false;false,12563/20013
 dasnmbr ‐ crp,C0051767;C3890735;C4048285;C0057671,true;false;false;true,12564/20013
 dasnmbr score,C0051767;C0057671,true;true,12565/20013
-data are expressed as n / total ( % ) unless otherwise speci ﬁ ed . systeme international unit conversion : to convert creatinine clearance to ml / s  multiply by nmbr . nmbr . * estimated with cockroft - gault equation  † at discharge . 
+data are expressed as n / total ( % ) unless otherwise speci ﬁ ed . systeme international unit conversion : to convert creatinine clearance to ml / s  multiply by nmbr . nmbr . * estimated with cockroft - gault equation  † at discharge .
+ 
  ace angiotensin - converting enzyme  cabg coronary artery bypass graft  ccsc canadian cardiovascular society classi ﬁ cation  mi myocardial infarction  pci percutaneous coronary intervention .,C1511726;C3245479;C3714741,false;false;false,12566/20013
 data are expressed as n / total ( % ) unless otherwise specified . systeme international unit conversion : to convert creatinine clearance to ml / s  multiply by nmbr . nmbr . * estimated with cockroft - gault equation ,C1511726;C3245479;C3714741,false;false;false,12567/20013
-data are mean ( sd ) or n ( % ) . ace = angiotensin - converting enzyme  arb = angiotensin - receptor blocker . 
+data are mean ( sd ) or n ( % ) . ace = angiotensin - converting enzyme  arb = angiotensin - receptor blocker .
+ 
  chf = congestive heart failure . * any use in nmbr h before surgery except for aspirin which only required any use in the nmbr days before surgery .,C1511726;C3245479;C3714741,false;false;false,12568/20013
-data are mean ( sd ) or number ( % ) . bmi = body - mass index . sbp = systolic blood pressure . dbp = diastolic blood pressure . lvef = left ventricular ejection fraction . 
+data are mean ( sd ) or number ( % ) . bmi = body - mass index . sbp = systolic blood pressure . dbp = diastolic blood pressure . lvef = left ventricular ejection fraction .
+ 
  hf = heart failure . ami = acute myocardial infarction . cabg = coronary artery bypass graft . pci = percutaneous coronary intervention . icd = implantable cardioverter de ﬁ brillator . copd = chronic obstructive pulmonary disease . ace = angiotensin - converting enzyme . arbs = angiotensin receptor blockers . * available for nmbr patients ( nmbr rosuvastatin  nmbr placebo ) .,C1511726;C3245479;C3714741,false;false;false,12569/20013
 data are mean ( sd ) or number ( % ) . pufa = polyunsaturated fatty acids,C1511726;C3245479;C3714741,false;false;false,12570/20013
 data are mean ± standard deviation for continuous variables and number ( % ) for categoric variables . p,C1511726;C3245479;C3714741,false;false;false,12571/20013
 data are number of patients ( % ) or hazard ratio ( nmbr % cl ),C1511726;C3245479;C3714741,false;false;false,12572/20013
 data are number of patients ( % ) or mean ( sd ),C1511726;C3245479;C3714741,false;false;false,12573/20013
-data are presented as mean sd . * n nmbr for ldl cholesterol . 
- † 
- n nmbr for ldl cholesterol . 
- ‡ 
- signi ﬁ cantly different from baseline values by repeated measures ( analysis of variance )  p nmbr . nmbr . 
- § 
- signi ﬁ cantly different from baseline values by repeated measures ( analysis of variance )  p nmbr . nmbr . 
- ¶ 
+data are presented as mean sd . * n nmbr for ldl cholesterol .
+ 
+ †
+ 
+ n nmbr for ldl cholesterol .
+ 
+ ‡
+ 
+ signi ﬁ cantly different from baseline values by repeated measures ( analysis of variance )  p nmbr . nmbr .
+ 
+ §
+ 
+ signi ﬁ cantly different from baseline values by repeated measures ( analysis of variance )  p nmbr . nmbr .
+ 
+ ¶
+ 
  signi ﬁ cantly different from baseline values by repeated measures ( analysis of variance )  p nmbr . nmbr .,C1511726;C3245479;C3714741,false;false;false,12574/20013
 data are reported as n ( % ) . event rates in parentheses are kaplan - meier estimates ( % ) at nmbr year . * cardiovascular ( cv ) death,C1511726;C3245479;C3714741,false;false;false,12575/20013
 data are reported as percentage or mean ± standard deviation  unless otherwise indicated . ng  normoglycemia  igm  impaired glucose metabolism  ldl  low - density lipoprotein  hdl  high - density lipoprotein  fpg  fasting plasma glucose . a median ( interquartile range ) . * p < nmbr . nmbr vs . ng . † p < nmbr . nmbr vs . ng .,C1511726;C3245479;C3714741,false;false;false,12576/20013
 data are reported as percentage or mean ± standard deviation  unless otherwise indicated . ng  normoglycemia  igm  impaired glucose metabolism  ldl  low - density lipoprotein  hdl  high - density lipoprotein  fpg  fasting plasma glucose . a median ( interquartile range ) . ‡ p < nmbr . nmbr vs . non - epa . § p < nmbr . nmbr vs . non - epa,C1511726;C3245479;C3714741,false;false;false,12577/20013
 data presented as mean   ±   sd  unless otherwise specified    acopd severity is based on the gold nmbr criteria [nmbr]  gold nmbr [nmbr]    bon a scale of nmbr – nmbr  with higher scores indicating worse health status  the mcid is a change of nmbr   units  on a scale of nmbr – nmbr  with higher scores indicating more severe dyspnea  on a scale of nmbr – nmbr  with higher scores indicating worse health status,C1511726;C3245479;C3714741,false;false;false,12578/20013
-data represent number of patients ( % ) or mean ( standard deviation )  unless otherwise indicated . a self - reported information . bc physician - diagnosed diabetes or fasting plasma glucose ≥ nmbr mg / dl or hemoglobin anmbrc ≥ nmbr . nmbr % . d physician - diagnosed hypertension or systolic blood pressure ≥ nmbr mmhg or diastolic blood pressure ≥ nmbr mmhg . 
+data represent number of patients ( % ) or mean ( standard deviation )  unless otherwise indicated . a self - reported information . bc physician - diagnosed diabetes or fasting plasma glucose ≥ nmbr mg / dl or hemoglobin anmbrc ≥ nmbr . nmbr % . d physician - diagnosed hypertension or systolic blood pressure ≥ nmbr mmhg or diastolic blood pressure ≥ nmbr mmhg .
+ 
  median ( interquartile range ) . ldl  low - density lipoprotein  hdl  high - density lipoprotein  tg  triglyceride .,C1511726;C3245479;C3714741,false;false;false,12579/20013
 data,C1511726;C3245479;C3714741,false;false;false,12580/20013
 dates of recruitment,C0011008;C2949735;C2348077,true;false;true,12581/20013
@@ -13008,7 +13017,7 @@ early eptifibatide,C1279919;C0253563,false;true,12980/20013
 early ichaem ic stroke,C1279919;C0020750;C0038454;C4554100;C4554818,false;true;true;false;false,12981/20013
 early invasive strategy ( n = nmbr,C1279919;C0205281;C0679199;C1334278,false;false;false;false,12982/20013
 early invasive *,C1279919;C0205281;C1334278,false;false;false,12983/20013
-early invasivenmbr ",C1279919;C0205281;C1334278,false;false;false,12984/20013
+early invasivenmbr  ,C1279919;C0205281;C1334278,false;false;false,12984/20013
 early load,C1279919,false,12985/20013
 early routine,C1279919;C0205547,false;false,12986/20013
 early use intended,C1279919,false,12987/20013
@@ -13305,7 +13314,7 @@ estimated creatinine clearance — ml / min  i ,C0750572;C0812399;C0023806;C0702
 estimated creatinine clearance — ml / min §,C0750572;C0812399;C0439445,false;false;false,13278/20013
 estimated creatinine clearance ( ml / min ),C0750572;C0812399;C0439445,false;false;false,13279/20013
 estimated creatinine clearance < nmbr ml / mint,C0750572;C0812399;C0439526;C0452249;C0522467;C1337213;C1576800;C3890003;C1705224;C3887665,false;false;false;false;true;false;false;false;false;false,13280/20013
-estimated creatinine clearance " ! ",C0750572;C0812399,false;false,13281/20013
+estimated creatinine clearance   !  ,C0750572;C0812399,false;false,13281/20013
 estimated creatinine clearancet,C0750572;C0010294;C1561535,false;true;false,13282/20013
 estimated cv risk at baseline,C3538987;C1519101;C0168634;C1442488;C4048877;C4318503,false;false;true;false;true;false,13283/20013
 estimated gfr — ml / min / nmbr . nmbr m^ |,C0750572;C0017654;C0439445;C0369637;C0441923;C1424601,false;true;false;false;false;false,13284/20013
@@ -13970,7 +13979,7 @@ hazard ratio ( nmbr % ci ) vs . placebo,C2985465;C0008107;C3259781,false;true;fa
 hazard ratio ( nmbr % ci ) nmbr with vs . without psoriasis,C2985465;C0008107;C3259781,false;true;false,13943/20013
 hazard ratio ( nmbr % cl ) nateglinide vs . placebo,C2985465;C0596019;C0903898,false;false;true,13944/20013
 hazard ratio ( nmbr % cl ) valsartan vs . placebo,C2985465;C0596019;C0216784,false;false;true,13945/20013
-hazard ratio ( nmbr % cl ) ",C2985465;C0596019,false;false,13946/20013
+hazard ratio ( nmbr % cl )  ,C2985465;C0596019,false;false,13946/20013
 hazard ratio ( nmbr % cl ) *,C2985465;C0596019,false;false,13947/20013
 hazard ratio ( nmbr % cl],C2985465;C0596019,false;false,13948/20013
 hazard ratio [nmbr % cl],C2985465;C0596019,false;false,13949/20013
@@ -14036,7 +14045,7 @@ hbalc > nmbr mmol / mol ( > nmbr . nmbr % ) ( n = nmbr / nmbr ),C3829066,false,1
 hbalc > nmbr %,,,14009/20013
 hbalc anmbr mmol / mol ( > nmbr . nmbr % ) ( n = nmbr / nmbr ),,,14010/20013
 hbalc in %,,,14011/20013
-hbau  % ",,,14012/20013
+hbau  %  ,,,14012/20013
 hc,C0020268;C0262499;C1413512,true;false;false,14013/20013
 hcru ( a ),,,14014/20013
 hctz - hydrochlorothiazide . * data were missing for some patients .,C0020261;C1511726;C3245479;C3714741,true;false;false;false,14015/20013
@@ -14183,7 +14192,7 @@ high risk ( > nmbr ),C0332167;C3272283;C4050568;C4319571,false;false;false;false
 high risk ( n nmbr nmbr ),C0332167;C3272283;C4050568;C4319571,false;false;false;false,14156/20013
 high risk for diabetes *,C0332167;C0011847;C0011849;C3272283;C4050568;C4319571;C0205250;C1171304;C1299351;C2700149;C3887512;C3889660;C4321237;C4522209,false;false;true;false;false;false;false;false;false;false;false;false;false;false,14157/20013
 high risk of diabetes,C0332167;C0011847;C0011849,false;false;true,14158/20013
-high risk of diabetes ",C0332167;C0011847;C0011849,false;false;true,14159/20013
+high risk of diabetes  ,C0332167;C0011847;C0011849,false;false;true,14159/20013
 high risk *,C0332167;C3272283;C4050568;C4319571,false;false;false;false,14160/20013
 high trs : nmbr - nmbr ( n = nmbr,C0205250;C0266427;C0968917;C1150746;C1299351;C2700149;C3887512;C3889660;C4321237;C4522209,false;true;true;false;false;false;false;false;false;false,14161/20013
 high tt > nmbr . nmbr ( n = nmbr ),C0205250;C1452561;C4554543;C1299351;C2700149;C3887512;C3889660;C4321237;C4522209,false;true;false;false;false;false;false;false;false,14162/20013
@@ -14392,10 +14401,13 @@ hr vs . warfarin ( nmbr % ci ),,,14364/20013
 hr with edoxaban ( nmbr % ci ),C2975435;C0008107;C3259781,true;true;false,14365/20013
 hr * or rr †,,,14366/20013
 hr * or rr † ( nmbr % ci ) ,,,14367/20013
-hr : nmbr . nmbr 
- ( nmbr % cl : nmbr . nmbr - nmbr . nmbr ) 
+hr : nmbr . nmbr
+ 
+ ( nmbr % cl : nmbr . nmbr - nmbr . nmbr )
+ 
  p = nmbr . nmbr,C0596019,false,14368/20013
-hr : nmbr . nmbr 
+hr : nmbr . nmbr
+ 
  ( nmbr % cl : nmbr . nmbr - nmbr . nmbr ) p = nmbr . nmbr,C0596019,false,14369/20013
 hr ‡,,,14370/20013
 hradj ( nmbr % ci ),C0008107;C3259781,true;false,14371/20013
@@ -15599,7 +15611,7 @@ median infusions — no . ( range ),C0549183;C0574032;C0876920;C2347635;C2348144
 median m / kgnmbr ( iqr ),C0549183;C0369637;C0022718;C0439209;C4054209;C0441923;C0876920;C2347635;C2348144;C2939193,false;false;true;false;false;false;false;false;false;false,15569/20013
 median nt - probnp ( iqr ) – pg / ml,C0549183;C0669479;C0439297;C0754710;C0876920;C2347635;C2348144;C2939193,false;true;false;true;false;false;false;false,15570/20013
 median of jsw,C0549183;C0876920;C2347635;C2348144;C2939193,false;false;false;false;false,15571/20013
-median pasi score { range ) ' i " i ',C0549183;C4528685;C0449820;C1514721;C0021966;C0221138;C2348147;C3542016;C4050231;C0876920;C2347635;C2348144;C2939193,false;false;false;false;true;false;false;false;false;false;false;false;false,15572/20013
+median pasi score { range ) ' i   i ',C0549183;C4528685;C0449820;C1514721;C0021966;C0221138;C2348147;C3542016;C4050231;C0876920;C2347635;C2348144;C2939193,false;false;false;false;true;false;false;false;false;false;false;false;false,15572/20013
 median seconds,C0549183;C0457385;C0876920;C2347635;C2348144;C2939193,false;false;false;false;false;false,15573/20013
 median serum periostin ( ng / ml ) t,C0549183;C0229671;C0219433;C0439275;C1424662;C3812270;C1546774;C1550100;C0876920;C2347635;C2348144;C2939193,false;true;true;false;false;false;false;false;false;false;false;false,15574/20013
 median time delay ( interquartile range ) — min,C0549183;C0522486;C1711350;C0702093;C1524029;C3813700;C0876920;C2347635;C2348144;C2939193,false;false;false;false;false;false;false;false;false;false,15575/20013
@@ -15672,7 +15684,7 @@ mepo ( n = nmbr ),,,15641/20013
 mepolizumab nmbr mg ( n = nmbr ),C0969324;C0024671;C0026410;C0439269;C1960952;C2346927;C4321396;C4521761,true;true;true;false;false;false;false;false,15642/20013
 merformin,,,15643/20013
 mesalamine use,C0127615;C0042153;C0457083;C1947944,true;true;false;false,15644/20013
-met atopy and ige nmbr - nmbr ku / l criteria " ( n = nmbr ),C0428210;C0392707;C3539705;C1550543;C4317104,false;false;false;false;false,15645/20013
+met atopy and ige nmbr - nmbr ku / l criteria   ( n = nmbr ),C0428210;C0392707;C3539705;C1550543;C4317104,false;false;false;false;false,15645/20013
 met / su / tzd,C0428210;C0038642;C1705534;C1550543;C4317104,false;true;false;false;false,15646/20013
 met / tzd,C0428210;C1550543;C4317104,false;false;false,15647/20013
 metabolic syndrome — no . ( % ) !,C0524620,true,15648/20013
@@ -17239,7 +17251,7 @@ placebo - control study,C0683952,false,17208/20013
 placebo ‐ controlled period,C1706408;C0439531;C1948053,false;false;false,17209/20013
 placebo |,C0032042;C1696465;C1706408,true;false;false,17210/20013
 placebo nmbronmbr,C0032042;C1696465;C1706408,true;false;false,17211/20013
-placebo " ( n = nmbr ),C0032042;C1696465;C1706408,true;false;false,17212/20013
+placebo   ( n = nmbr ),C0032042;C1696465;C1706408,true;false;false,17212/20013
 placebo ( « = nmbr ),C0032042;C1696465;C1706408,true;false;false,17213/20013
 placebo ( » = nmbr ),C0032042;C1696465;C1706408,true;false;false,17214/20013
 placebo ( nmbr = nmbr ),C0032042;C1696465;C1706408,true;false;false,17215/20013
@@ -17315,9 +17327,7 @@ platelet aggregation inhibitors excluding heparin,C0032177,true,17284/20013
 platelet aggregation inhibitors,C0032177,true,17285/20013
 platelets xlooo / mm^,C0005821;C4330985;C4554674;C0443116;C1963076,true;false;false;false;false,17286/20013
 pleased,C3829994;C4264468,false;false,17287/20013
-plus – minus values are means ± sd . cabg denotes coronary - artery by - pass graft  ptca percutaneous transluminal coronary angioplasty  and ace angiotensin - converting enzyme . hypertension and diabetes were de - fined by clinical history . a more complete list of base - line characteristics is given in rubins et al . 
- nmbr 
- † nitrates includes all preparations except as - needed nitroglycerin . ‡ any antianginal drug includes any nitrate ( as defined above )  calcium - channel blocker  or beta - blocker . § the body - mass index is the weight in kilograms divided by the square of the height in meters . ¶ to convert values for cholesterol to millimoles per liter  multiply by nmbr . nmbr . to convert values for triglycerides to millimoles per liter  multiply by nmbr . nmbr .,C0332288;C0042295,false;false,17288/20013
+plus – minus values are means ± sd . cabg denotes coronary - artery by - pass graft  ptca percutaneous transluminal coronary angioplasty  and ace angiotensin - converting enzyme . hypertension and diabetes were de - fined by clinical history . a more complete list of base - line characteristics is given in rubins et al . nmbr † nitrates includes all preparations except as - needed nitroglycerin . ‡ any antianginal drug includes any nitrate ( as defined above )  calcium - channel blocker  or beta - blocker . § the body - mass index is the weight in kilograms divided by the square of the height in meters . ¶ to convert values for cholesterol to millimoles per liter  multiply by nmbr . nmbr . to convert values for triglycerides to millimoles per liter  multiply by nmbr . nmbr .,C0332288;C0042295,false;false,17288/20013
 pnd,C1417807;C1956415;C4552608,false;true;false,17289/20013
 pneumonia,C0032285,true,17290/20013
 pneumonia events,C0032285;C0441471;C3541888,true;false;false,17291/20013
@@ -17411,7 +17421,7 @@ pre - bronchodilator fev i ( l ),C2599602;C3714541;C0021966;C0221138,false;true;
 pre - bronchodilator fev,C2599602;C3714541,false;true,17379/20013
 pre - bronchodilator fev^ ( l ),C2599602;C3714541,false;true,17380/20013
 pre - bronchodilator fevi change,C2599602;C0849974;C1561566;C4528367,false;false;false;false,17381/20013
-pre - bronchodilator fevi / fvc " %,C2599602;C0802741;C3815113,false;false;false,17382/20013
+pre - bronchodilator fevi / fvc   %,C2599602;C0802741;C3815113,false;false;false,17382/20013
 pre - bronchodilator fevj,C2599602,false,17383/20013
 pre - bronchodilator fevr % pred,C2599602;C1708033,false;false,17384/20013
 pre - bronchodilator fevr l,C2599602;C1708033,false;false,17385/20013
@@ -17654,7 +17664,7 @@ prior hospitalizations,C0332152;C0019993;C2826257,false;true;false,17621/20013
 prior htn ( n = nmbr,C0332152;C0020538;C2826257,false;true;false,17622/20013
 prior hypertension,C0332152;C0020538;C1963138;C2826257,false;true;false;false,17623/20013
 prior immunosuppressant failure,C0332152;C0021081;C0231174;C0680095;C2826257,false;true;false;false;false,17624/20013
-prior immunosuppressant failure ",C0332152;C0021081;C0231174;C0680095;C2826257,false;true;false;false;false,17625/20013
+prior immunosuppressant failure  ,C0332152;C0021081;C0231174;C0680095;C2826257,false;true;false;false;false,17625/20013
 prior immunosuppressant failurec,C0332152;C0021081;C2826257,false;true;false,17626/20013
 prior immunosuppressive exposure,C0332152;C0021081;C0274281;C0332157;C2826257,false;true;false;false;false,17627/20013
 prior infarction,C0332152;C0021308;C2826257,false;true;false,17628/20013
@@ -17966,9 +17976,7 @@ reduced hdl cholesterol,C0151691,false,17933/20013
 reduction in odds %,C0301630;C0392756;C1293152;C4551656,false;false;false;false,17934/20013
 reduction in risk % ( nmbr % ci ),C1137094;C0008107;C3259781;C0035647;C0520870;C4552904,true;true;false;true;false;false,17935/20013
 reduction of hbanmbrc from baseline ≥ nmbr . nmbr %,C0301630;C0019016;C1825777;C3538758;C0392756;C1293152;C4551656,false;true;false;false;false;false;false,17936/20013
-reduction 
- in risk 
- ( nmbr % ci ) %,C1137094;C0008107;C3259781;C0035647;C0520870;C4552904,true;true;false;true;false;false,17937/20013
+reduction in risk ( nmbr % ci ) %,C1137094;C0008107;C3259781;C0035647;C0520870;C4552904,true;true;false;true;false;false,17937/20013
 ref .,C1425988,false,17938/20013
 ref §,C1425988,false,17939/20013
 reference,C1514811;C1706462,false;false,17940/20013
@@ -19106,7 +19114,7 @@ total c / hdl - c ratio * *,C0439175;C3715113;C0456603;C1547037;C0439810,false;f
 total carmelina population,C3258257,false,19072/20013
 total cholesterol ( sd ),C0201950;C2699239;C0543421,false;false;false,19073/20013
 total cholesterol level,C0878805;C1445957,false;false,19074/20013
-total cholesterol  mg / dl " ^,C0201950;C0439269;C0543421,false;false;false,19075/20013
+total cholesterol  mg / dl   ^,C0201950;C0439269;C0543421,false;false;false,19075/20013
 total cholesterol^,C0201950;C0543421,false;false,19076/20013
 total cigarette pack - years,C0439175;C1303175;C0439810,false;false;false,19077/20013
 total cohort,C0439175;C0009247;C0599755;C0439810,false;true;false;false,19078/20013
@@ -19192,8 +19200,7 @@ transradial,,,19157/20013
 treated at baseline,C1522326;C0168634;C1442488,false;true;false,19158/20013
 treated for hypertension,C1522326;C0020538;C1963138,false;true;false,19159/20013
 treated lesions ‡,C1522326;C0221198,false;false,19160/20013
-treated patients with baseline and nmbr post - baseline ef ﬁ cacy measurement  bp value for treatment group comparison ( proactive intervention vs usual care ) was calculated based on a nmbr - sample t test for continuous variables and chi - square test for categorical variables  cbp values were measured at baseline ( week nmbr )  whereas information on all of the other variables listed was collected during screening . 
- abbreviations : bmi  body mass index  bp  blood pressure  chd  coronary heart disease  crucial  cluster randomized usual care vs caduet investigation assessing long - term - risk  dbp  diastolic blood pressure  dm  diabetes mellitus  hdl - c  high - density lipoprotein cholesterol  ldl - c  low - density lipoprotein cholesterol  sd  standard deviation  sbp  systolic blood pressure  tc  total cholesterol  tg  triglyceride .,C0332293;C0030705;C0168634;C1442488,false;true;true;false,19161/20013
+treated patients with baseline and nmbr post - baseline ef ﬁ cacy measurement  bp value for treatment group comparison ( proactive intervention vs usual care ) was calculated based on a nmbr - sample t test for continuous variables and chi - square test for categorical variables cbp values were measured at baseline ( week nmbr )  whereas information on all of the other variables listed was collected during screening . abbreviations : bmi  body mass index  bp  blood pressure  chd  coronary heart disease  crucial  cluster randomized usual care vs caduet investigation assessing long - term - risk  dbp  diastolic blood pressure  dm  diabetes mellitus  hdl - c  high - density lipoprotein cholesterol  ldl - c  low - density lipoprotein cholesterol  sd  standard deviation  sbp  systolic blood pressure  tc  total cholesterol  tg  triglyceride .,C0332293;C0030705;C0168634;C1442488,false;true;true;false,19161/20013
 treated vessel ( s ),C1522326;C0005847,false;true,19162/20013
 treated with atenolol ( n = nmbr ),C0332293;C0004147,false;true,19163/20013
 treated with laba,C0332293,false,19164/20013
@@ -19472,13 +19479,7 @@ valsartan n / n,C0216784,true,19436/20013
 value for nteraction,C1522609,false,19437/20013
 values are mean ± sd  median [quartile range]  or % . ace indicates angiotensin - converting enzyme  arb  angiotensin receptor blocker  bnp  b - type natriuretic peptide  bp  blood pressure  bun  blood urea nitrogen  lvef  left ventricular ejection fraction  and nt - probnp  n - terminal pro - b - type natriuretic peptide .,C0042295,false,19438/20013
 values are presented as mean sd unless stated otherwise . data shown are for the randomized population . * body mass index values were missing from nmbr patients in the aliskiren group and nmbr patients in the hydrochlorothiazide group . † obesity was defined as body mass index nmbr kg / mnmbr . ‡ metabolic syndrome was defined according to the third report of the national cholesterol education program expert panel on detection  evaluation  and treatment of high blood cholesterol in adults ( adult treatment panel iii ) criterianmbr as any nmbr of the following : waist circumference nmbr cm for men or nmbr cm for women  triglycerides nmbr mg / dl  high - density lipoprotein cholesterol nmbr mg / dl for men or nmbr mg / dl for women  mssbp nmbr mm hg or msdbp nmbr mm hg  fasting glucose nmbr mg / dl . § by medical history . aliskiren  n nmbr  hydrochlorothiazide  n nmbr .,C0042295,false,19439/20013
-values expressed as mean sd or number ( percent ) . * two patients were missing values for body mass index . 
- † 
- other forms of atherosclerosis are peripheral arterial disease  abdom - inal aortic aneurysm  symptomatic carotid artery disease  transient isch - emic attack  and stroke . 
- ‡ 
- family history of premature chd de ﬁ ned as chd in male ﬁ rst - degree relative aged nmbr years or female ﬁ rst - degree relative nmbr years . 
- § 
- blood pressure nmbr / nmbr mm hg  on antihypertensive medication  or diagnosis of hypertension based on medical history . n number of randomly assigned patients  ncep atp national cholesterol education program adult treatment panel .,C0042295,false,19440/20013
+values expressed as mean sd or number ( percent ) . * two patients were missing values for body mass index . † other forms of atherosclerosis are peripheral arterial disease  abdom - inal aortic aneurysm  symptomatic carotid artery disease  transient isch - emic attack  and stroke . ‡ family history of premature chd de ﬁ ned as chd in male ﬁ rst - degree relative aged nmbr years or female ﬁ rst - degree relative nmbr years . § blood pressure nmbr / nmbr mm hg  on antihypertensive medication  or diagnosis of hypertension based on medical history . n number of randomly assigned patients  ncep atp national cholesterol education program adult treatment panel .,C0042295,false,19440/20013
 values were calculated using t tests for continuous variables and chi - square,C0042295,false,19441/20013
 values were reported for nmbr patients in the spironolactone group and nmbr,C0042295,false,19442/20013
 valve repair / replacement only,C0184252;C0043240;C0035139;C0205171;C1720467;C0559956;C1555302;C4553149;C0374711;C4319951;C1186983;C1704414;C3888056,false;true;true;false;false;false;false;false;false;false;false;false;false,19443/20013
@@ -19626,7 +19627,7 @@ week nmbr ( mmol / l ),C0332174;C1532563;C0439230,false;false;false,19584/20013
 week nmbr ertugliflozin nmbr mg vs placebo,C0332174;C4079805;C0024671;C0026410;C0439269;C1960952;C2346927;C4321396;C4521761;C0439230,false;true;true;true;false;false;false;false;false;false,19585/20013
 week nmbr ertugliflozin nmbr   mg vs . placebo,C0332174;C4079805;C0024671;C0026410;C0439269;C1960952;C2346927;C4321396;C4521761;C0439230,false;true;true;true;false;false;false;false;false;false,19586/20013
 week nmbr ertugliflozin nmbr mg vs . placebo,C0332174;C4079805;C0024671;C0026410;C0439269;C1960952;C2346927;C4321396;C4521761;C0439230,false;true;true;true;false;false;false;false;false;false,19587/20013
-week nmbr  % ( n ) " ",C0332174;C0439230,false;false,19588/20013
+week nmbr  % ( n )    ,C0332174;C0439230,false;false,19588/20013
 week nmbr *,C0332174;C0439230,false;false,19589/20013
 week nmbr * ’ ’,C0332174;C0439230,false;false,19590/20013
 week nmbr / et,C0332174;C0439230,false;false,19591/20013
@@ -19741,7 +19742,7 @@ women ( % ),C0043210,true,19699/20013
 women ( n ( % ) ),C0043210,true,19700/20013
 women ( n = nmbr ) events,C0043210;C0441471;C3541888,true;false;false,19701/20013
 women ethnic origin,C0043210;C0015031,true;true,19702/20013
-women t ",C0043210,true,19703/20013
+women t  ,C0043210,true,19703/20013
 women taking estrogen,C0043210,true,19704/20013
 women : < nmbr mg / dl ( < nmbr . nmbr mmol / l ),C0043210;C0439269;C1532563,true;false;false,19705/20013
 women  qvanmbr - sfc,C0043210;C4521536,true;false,19706/20013

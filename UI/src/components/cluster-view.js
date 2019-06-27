@@ -21,6 +21,10 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import Checkbox from 'material-ui/Checkbox';
 
+// import Infinite from 'react-infinite';
+
+import { FixedSizeList as List } from 'react-window';
+
 // var ReactDOMServer = require('react-dom/server');
 // var HtmlToReact = require('html-to-react')
 // var HtmlToReactParser = require('html-to-react').Parser;
@@ -238,6 +242,24 @@ class ClusterView extends Component {
      if ( this.state.clusters ){
 
 
+       var currentClusters = this.searchTerms().map( (v,i) => <Cluster key={i} item={this.state.clusters[v]}
+                                                           clusters={this.state.clusters}
+                                                           currentCluster={v}
+                                                           isChecked={ (c) => { return Object.keys(this.state.checkedConcepts).indexOf(c) > -1 }}
+                                                           clearChecked={ () => {this.setState({checkedConcepts : {}})}}
+                                                           toggleCheck={ this.toggleCheck }
+                                                           moveAllHere={ this.moveAllHere }
+                                                           anyChecked={ Object.keys(this.state.checkedConcepts).length > 0  }
+                                                           cuis_index={ this.state.cuis_index }
+                                                           handleModifierChange = { this.handleModifierChange }
+                                                           handleClusterDataChange = { this.handleClusterDataChange }
+                                                           modifiers={this.state.modifiers}
+                                                           status={this.state.clusterData[v] ? this.state.clusterData[v].status : "inprogress"}
+                                                           rep_cuis={this.state.clusterData[v] && this.state.clusterData[v].rep_cuis ? this.state.clusterData[v].rep_cuis : []}
+                                                           excluded_cuis={this.state.clusterData[v] && this.state.clusterData[v].excluded_cuis ? this.state.clusterData[v].excluded_cuis : []}
+                                                         ></Cluster>)
+
+
        return <Card style={{width: "90vw", marginLeft:"5vw", padding: "1vw", minHeight:600}}>
 
                    <TextField
@@ -275,26 +297,8 @@ class ClusterView extends Component {
                     }
 
                     <hr />
-                    <div  style={{height:"40vw", overflowY:"scroll"}}>
-                        {
-                          this.searchTerms().map( (v,i) => <Cluster key={i} item={this.state.clusters[v]}
-                                                                            clusters={this.state.clusters}
-                                                                            currentCluster={v}
-                                                                            isChecked={ (c) => { return Object.keys(this.state.checkedConcepts).indexOf(c) > -1 }}
-                                                                            clearChecked={ () => {this.setState({checkedConcepts : {}})}}
-                                                                            toggleCheck={ this.toggleCheck }
-                                                                            moveAllHere={ this.moveAllHere }
-                                                                            anyChecked={ Object.keys(this.state.checkedConcepts).length > 0  }
-                                                                            cuis_index={ this.state.cuis_index }
-                                                                            handleModifierChange = { this.handleModifierChange }
-                                                                            handleClusterDataChange = { this.handleClusterDataChange }
-                                                                            modifiers={this.state.modifiers}
-                                                                            status={this.state.clusterData[v] ? this.state.clusterData[v].status : "inprogress"}
-                                                                            rep_cuis={this.state.clusterData[v] && this.state.clusterData[v].rep_cuis ? this.state.clusterData[v].rep_cuis : []}
-                                                                            excluded_cuis={this.state.clusterData[v] && this.state.clusterData[v].excluded_cuis ? this.state.clusterData[v].excluded_cuis : []}
-                                                                          ></Cluster>)
-                                                                        }
-
+                    <div >
+                        { currentClusters }
                     </div>
 
                     <hr />

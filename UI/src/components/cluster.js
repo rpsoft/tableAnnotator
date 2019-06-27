@@ -142,6 +142,8 @@ handleOpen = () => {
                           <MenuItem key={"completedchecked"} value={"completedchecked"} primaryText={<DoubleTick style={{color: "blue"}} />} />
                           <MenuItem key={"completed"} value={"completed"} primaryText={<Tick style={{color: "green"}} />} />
                           <MenuItem key={"inprogress"} value={"inprogress"} primaryText={<Alert style={{color: "#cfcf20"}} />} />
+                          <MenuItem key={"unhelpful"} value={"unhelpful"} primaryText={<RemoveCircle style={{color: "red"}} />} />
+
 
 
                       </SelectField>

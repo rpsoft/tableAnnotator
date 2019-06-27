@@ -93,7 +93,7 @@ fs.createReadStream('./CLUSTERS/all_terms_June_2019.csv')
   .pipe(csv())
   .on('data', async (row) => {
 
-    var terms = row.terms.replace(/[0-9]+/g,"nmbr").replace(/([^A-z0-9 ])/g," $1 ").replace(/ +/g," ").toLowerCase().trim()
+    var terms = row.terms
 
     clusterTerms[terms] = true
 
@@ -125,7 +125,7 @@ const R = require("r-script");
 
 //Important to use this function for all text extracted from the tables.
 function prepare_cell_text(text){
-    return text.replace(/[0-9]+/g, 'nmbr').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g," ").trim().toLowerCase()
+    return text.replace(/[0-9]+/g, '$nmbr$').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g," ").trim().toLowerCase()
 }
 
 function prepareAvailableDocuments(){
@@ -365,6 +365,21 @@ async function updateClusterAnnotation(cn,concept,cuis,isdefault,cn_override){
   console.log("DONE: "+(ops_counter++))
 }
 
+
+
+
+app.get('/api/allClusterAnnotations', async function(req,res){
+
+  var allClusterAnnotations = async () => {
+    var client = await pool.connect()
+    var result = await client.query(`select * from clusterData order by cn asc`)
+          client.release()
+    return result
+  }
+
+  res.send( await allClusterAnnotations() )
+
+});
 
 app.get('/api/allClusters', async function(req,res){
 
@@ -673,7 +688,7 @@ app.get('/api/totalTables',function(req,res){
 async function getMMatch(phrase){
 
   // console.log(phrase)
-  phrase = phrase.toLowerCase().replace(/[\W_]+/g," ").replace(/nmbr/g," ") // this nmbr to avoid the "gene problem"
+  phrase = phrase.toLowerCase().replace(/[\W_]+/g," ").replace(/\$nmbr\$/g," ") // this nmbr to avoid the "gene problem"
   //console.log(phrase)
 
   var result = new Promise(function(resolve, reject) {

@@ -81,6 +81,7 @@
     "react-router-redux": "^4.0.8",
     "react-tap-event-plugin": "^2.0.1",
     "react-tooltip": "^3.4.0",
+    "react-window": "^1.8.3",
     "redux": "^3.7.2",
     "xml-query": "^1.4.0",
     "xml-reader": "^2.4.3"

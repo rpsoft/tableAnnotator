@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import functools 
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.cluster import dbscan
 from sklearn.metrics.pairwise import cosine_similarity
@@ -59,86 +60,109 @@ dataset = dataset.drop("concept", axis=1)
 # limit = 2000
 
 
-testing = dataset
+
 # testing = dataset[0:limit]
 # names = names[0:limit]
 
 
-### Affinity propagation
+# ### Affinity propagation
 
 
-testing = csr_matrix(testing)
-
-
-
-af = AffinityPropagation(damping = 0.5).fit(testing)
-
-
-clustering = testing.assign(cluster=af.labels_)
-clustering = clustering.assign(concept=names)
-
-csvRes = clustering[["concept",'cluster']].sort_values(by=['cluster','concept'], ascending=False)
-csvRes = pd.merge(csvRes, cuis, on='concept')
-csvRes = csvRes[['cluster','concept','cuis']]
-
-csvRes.to_csv(rootDir+'clusters-af-assign.csv', sep=',', encoding='utf-8',index=False)
+# testing = csr_matrix(testing)
 
 
 
+# af = AffinityPropagation(damping = 0.5).fit(testing)
 
 
-## Meanshift
+# clustering = testing.assign(cluster=af.labels_)
+# clustering = clustering.assign(concept=names)
 
-def doit( p ):
-    bandwidth = estimate_bandwidth(testing, quantile=p, n_samples=1000, n_jobs=-1)
+# csvRes = clustering[["concept",'cluster']].sort_values(by=['cluster','concept'], ascending=False)
+# csvRes = pd.merge(csvRes, cuis, on='concept')
+# csvRes = csvRes[['cluster','concept','cuis']]
 
-    ms = MeanShift(bandwidth=bandwidth, bin_seeding=True, n_jobs=-1, cluster_all=False,min_bin_freq=2)
-    ms.fit(testing)
-    labels = ms.labels_
-    cluster_centers = ms.cluster_centers_
-
-
-    clustering = testing.assign(cluster=labels)
-    clustering = clustering.assign(concept=names)
-
-    csvRes = clustering[["concept",'cluster']].sort_values(by=['cluster','concept'], ascending=False)
-    csvRes = pd.merge(csvRes, cuis, on='concept')
-    csvRes = csvRes[['cluster','concept','cuis']]
-
-    csvRes.to_csv(rootDir+'clusters-ms-assign.csv', sep=',', encoding='utf-8',index=False)
-
-doit(0.40)
-
-doit(0.10)
-
-doit(0.08)
-
-doit(1)
-
-doit(0.05)
+# csvRes.to_csv(rootDir+'clusters-af-assign.csv', sep=',', encoding='utf-8',index=False)
 
 
-## aglomerative
-clustering = AgglomerativeClustering(linkage="single",affinity="cosine", distance_threshold=0.30, n_clusters=None).fit(testing.todense())
 
-clustering = testing.assign(cluster=clustering.labels_)
 
-clustering = clustering.assign(concept=names)
 
-csvRes = clustering[["concept",'cluster']].sort_values(by='cluster', ascending=False)
+# ## Meanshift
 
-csvRes = pd.merge(csvRes, cuis, on='concept')
+# def doit( p ):
+#     bandwidth = estimate_bandwidth(testing, quantile=p, n_samples=1000, n_jobs=-1)
 
-csvRes = csvRes[['cluster','concept','cuis']]
+#     ms = MeanShift(bandwidth=bandwidth, bin_seeding=True, n_jobs=-1, cluster_all=False,min_bin_freq=2)
+#     ms.fit(testing)
+#     labels = ms.labels_
+#     cluster_centers = ms.cluster_centers_
 
-csvRes.to_csv(rootDir+'clusters-aglo-assign.csv', sep=',', encoding='utf-8',index=False)
 
+#     clustering = testing.assign(cluster=labels)
+#     clustering = clustering.assign(concept=names)
+
+#     csvRes = clustering[["concept",'cluster']].sort_values(by=['cluster','concept'], ascending=False)
+#     csvRes = pd.merge(csvRes, cuis, on='concept')
+#     csvRes = csvRes[['cluster','concept','cuis']]
+
+#     csvRes.to_csv(rootDir+'clusters-ms-assign.csv', sep=',', encoding='utf-8',index=False)
+
+# doit(0.40)
+
+# doit(0.10)
+
+# doit(0.08)
+
+# doit(1)
+
+# doit(0.05)
+
+
+# ## aglomerative
+# clustering = AgglomerativeClustering(linkage="single",affinity="cosine", distance_threshold=0.30, n_clusters=None).fit(testing.todense())
+
+# clustering = testing.assign(cluster=clustering.labels_)
+
+# clustering = clustering.assign(concept=names)
+
+# csvRes = clustering[["concept",'cluster']].sort_values(by='cluster', ascending=False)
+
+# csvRes = pd.merge(csvRes, cuis, on='concept')
+
+# csvRes = csvRes[['cluster','concept','cuis']]
+
+# csvRes.to_csv(rootDir+'clusters-aglo-assign.csv', sep=',', encoding='utf-8',index=False)
+
+
+
+# testing = dataset
+# testing = dataset
+
+data = dataset
+
+testing = csr_matrix(data)
 
 ## dbscan 
 
-result = dbscan(testing, metric='cosine', min_samples=2, n_jobs=10, eps=0.9) # previously manhattan
 
-d_testing = dataset.assign(cluster=result[1])
+def similarity(x, y):
+
+    max_len = min(4,max(len(x.indices),len(y.indices)))
+
+    total_incommon = min(4,len(list(set(x.indices).intersection(y.indices))))
+    
+    result = 1-(total_incommon/max(max_len,0.000001)) # max ensures no division by 0. 
+
+    return result
+
+
+
+similarities = pairwise_distances(testing, metric=similarity, n_jobs=10)
+
+result = dbscan(similarities, metric="precomputed", min_samples=2, n_jobs=10, eps=0.50) # previously manhattan
+
+d_testing = data.assign(cluster=result[1])
 
 d_testing = d_testing.assign(concept=names)
 
@@ -148,6 +172,6 @@ csvRes = pd.merge(csvRes, cuis, on='concept')
 
 csvRes = csvRes[['cluster','concept','cuis']]
 
-# csvRes.to_csv(rootDir+'clusters-assign.csv', sep=',', encoding='utf-8', index=False)
+# # csvRes.to_csv(rootDir+'clusters-assign.csv', sep=',', encoding='utf-8', index=False)
 
-csvRes[csvRes["cluster"] == -1]
+# csvRes[csvRes["cluster"] == -1]

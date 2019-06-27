@@ -24,6 +24,8 @@ import {
   ClusterContainer,
   ClusterView,
   ClusterIndex,
+  ClusterResultsView,
+  ClusterResultsContainer,
 } from './components/'
 
 import App from './App'
@@ -55,6 +57,10 @@ var routes = (history) => (
 
       <Route path="cluster" component={ClusterContainer}>
             <Route path={urlBase + "cluster"} component={ClusterView} ></Route>
+      </Route>
+
+      <Route path="clusterresults" component={ClusterResultsContainer}>
+            <Route path={urlBase + "clusterresults"} component={ClusterResultsView} ></Route>
       </Route>
 
   </Router>

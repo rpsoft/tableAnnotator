@@ -18,3 +18,6 @@ export ResultsContainer from './results-container'
 export ClusterIndex from './cluster-index'
 export ClusterView from './cluster-view'
 export ClusterContainer from './cluster-container'
+
+export ClusterResultsView from './cluster-results-view'
+export ClusterResultsContainer from './cluster-results-container'
