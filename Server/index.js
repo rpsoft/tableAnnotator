@@ -1135,7 +1135,7 @@ function () {
   var _ref17 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee17(req, res) {
-    var fs, csvWriter, indexWriter, CUIs, i, mmdata, csvLine;
+    var fs, csvWriter, indexWriter, CUIs, i, phrase, phrase_terms, mmdata, search_terms, mmdata_inter, csvLine;
     return _regenerator.default.wrap(function _callee17$(_context17) {
       while (1) {
         switch (_context17.prev = _context17.next) {
@@ -1153,19 +1153,67 @@ function () {
 
           case 6:
             if (!(i < clusterTerms.length)) {
-              _context17.next = 17;
+              _context17.next = 39;
               break;
             }
 
-            _context17.next = 9;
-            return getMMatch(clusterTerms[i]);
+            phrase = clusterTerms[i];
+            phrase = phrase.toLowerCase().replace(/\$nmbr\$/g, " ").replace(/[\W_]+/g, " "); // this nmbr to avoid the "gene problem"
 
-          case 9:
+            phrase_terms = phrase.split(" ");
+            mmdata = [];
+
+            if (!(phrase_terms.length > 20)) {
+              _context17.next = 29;
+              break;
+            }
+
+          case 12:
+            if (!(phrase_terms.length >= 10)) {
+              _context17.next = 21;
+              break;
+            }
+
+            search_terms = phrase_terms.splice(0, 10);
+            _context17.next = 16;
+            return getMMatch(search_terms.join(" "));
+
+          case 16:
+            mmdata_inter = _context17.sent;
+            mmdata_inter = extractMMData(mmdata_inter);
+            mmdata = mmdata.concat(mmdata_inter);
+            _context17.next = 12;
+            break;
+
+          case 21:
+            if (!(phrase_terms.length > 0)) {
+              _context17.next = 27;
+              break;
+            }
+
+            _context17.next = 24;
+            return getMMatch(phrase_terms.join(" "));
+
+          case 24:
+            mmdata_inter = _context17.sent;
+            mmdata_inter = extractMMData(mmdata_inter);
+            mmdata = mmdata.concat(mmdata_inter);
+
+          case 27:
+            _context17.next = 33;
+            break;
+
+          case 29:
+            _context17.next = 31;
+            return getMMatch(phrase);
+
+          case 31:
             mmdata = _context17.sent;
             mmdata = extractMMData(mmdata);
+
+          case 33:
             csvLine = clusterTerms[i].replace(/;/gi, "").replace(/,/gi, "") + "," + mmdata.map(function (c) {
               if (CUIs.indexOf(c.CUI) < 0) {
-                debugger;
                 CUIs.push(c.CUI);
                 indexWriter.write(c.CUI + "," + c.preferred + "," + c.hasMSH + "\n");
               }
@@ -1178,17 +1226,17 @@ function () {
             csvWriter.write(csvLine + "\n");
             console.log(i + "/" + clusterTerms.length);
 
-          case 14:
+          case 36:
             i++;
             _context17.next = 6;
             break;
 
-          case 17:
+          case 39:
             csvWriter.end();
             indexWriter.end();
             res.send("done");
 
-          case 20:
+          case 42:
           case "end":
             return _context17.stop();
         }
@@ -1442,10 +1490,7 @@ function _getMMatch() {
       while (1) {
         switch (_context35.prev = _context35.next) {
           case 0:
-            // console.log(phrase)
-            phrase = phrase.toLowerCase().replace(/[\W_]+/g, " ").replace(/\$nmbr\$/g, " "); // this nmbr to avoid the "gene problem"
-            //console.log(phrase)
-
+            console.log("LOOKING FOR: " + phrase);
             result = new Promise(function (resolve, reject) {
               request.post({
                 headers: {

@@ -518,13 +518,40 @@ app.get('/api/allCUIs',async function(req,res){
   var CUIs = []
 
    for ( var i = 0; i < clusterTerms.length; i++){
-     var mmdata = await getMMatch(clusterTerms[i])
-         mmdata = extractMMData(mmdata)
+
+
+     var phrase = clusterTerms[i]
+         phrase = phrase.toLowerCase().replace(/\$nmbr\$/g," ").replace(/[\W_]+/g," ") // this nmbr to avoid the "gene problem"
+
+     var phrase_terms = phrase.split(" ")
+
+     var mmdata = []
+
+
+     if(phrase_terms.length > 20){
+
+        while ( phrase_terms.length >= 10 ) {
+            var search_terms = phrase_terms.splice(0,10)
+            var mmdata_inter = await getMMatch(search_terms.join(" "))
+                mmdata_inter = extractMMData(mmdata_inter)
+                mmdata = mmdata.concat(mmdata_inter)
+        }
+
+        if ( phrase_terms.length > 0){
+            var mmdata_inter = await getMMatch(phrase_terms.join(" "))
+                mmdata_inter = extractMMData(mmdata_inter)
+                mmdata = mmdata.concat(mmdata_inter)
+        }
+
+     } else {
+        mmdata = await getMMatch(phrase)
+        mmdata = extractMMData(mmdata)
+     }
+
 
     var csvLine = clusterTerms[i].replace(/;/gi,"").replace(/,/gi,"")+","+
                                     mmdata.map( c => {
                                                 if ( CUIs.indexOf(c.CUI) < 0){
-                                                  debugger
                                                   CUIs.push(c.CUI);
                                                   indexWriter.write(c.CUI+","+c.preferred+","+c.hasMSH+"\n")
                                                 }
@@ -687,9 +714,7 @@ app.get('/api/totalTables',function(req,res){
 
 async function getMMatch(phrase){
 
-  // console.log(phrase)
-  phrase = phrase.toLowerCase().replace(/[\W_]+/g," ").replace(/\$nmbr\$/g," ") // this nmbr to avoid the "gene problem"
-  //console.log(phrase)
+  console.log("LOOKING FOR: "+ phrase)
 
   var result = new Promise(function(resolve, reject) {
 
