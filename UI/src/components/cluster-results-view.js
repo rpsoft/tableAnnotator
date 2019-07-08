@@ -29,7 +29,7 @@ import Checkbox from 'material-ui/Checkbox';
 
 import Annotation from './annotation'
 
-// import style from './table.css'
+
 
 var ReactDOMServer = require('react-dom/server');
 

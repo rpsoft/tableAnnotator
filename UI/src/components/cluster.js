@@ -28,6 +28,7 @@ import MultiplePopover from './MultiplePopover'
 
 import RemoveCircle from 'material-ui/svg-icons/content/remove-circle';
 
+
 import Tick from 'material-ui/svg-icons/action/done';
 import DoubleTick from 'material-ui/svg-icons/action/done-all';
 import Alert from 'material-ui/svg-icons/alert/error';
@@ -40,9 +41,8 @@ class Cluster extends Component {
       this.state = {
         hover: false,
         item: props.item,
-        open: false,
+        open: props.open,
         searchTerm: "",
-        selectedTarget: props.item.cn,
         currentPage: props.currentPage,
         clusters: props.clusters,
         checkedConcepts : props.checkedConcepts,
@@ -73,7 +73,8 @@ class Cluster extends Component {
           currentPage: props.currentPage,
           cluster_status : props.status,
           excluded_cuis : props.excluded_cuis,
-          rep_cuis : props.rep_cuis})
+          rep_cuis : props.rep_cuis,
+          open : props.open})
     }
 
 
@@ -85,15 +86,6 @@ class Cluster extends Component {
 
     this.loadPageFromProps(next)
   }
-
-handleOpen = () => {
-   this.setState({open: this.state.open ? false : true});
-
- };
-
- handleClose = () => {
-   this.setState({open: false});
- };
 
 
  summary(cluster) {
@@ -113,7 +105,12 @@ handleOpen = () => {
 
         var cuis = this.state.item.reduce( (acc, citem) => {
 
-            var cs = citem.cuis.split(";")
+          var cs
+            try{
+             cs = citem.cuis.split(";")
+           } catch (e ){
+             cs = []
+           }
 
             for ( var c in cs){
               if ( acc[cs[c]] ){
@@ -153,12 +150,12 @@ handleOpen = () => {
 
 
         return (
-          <div style={{marginLeft:0, marginBottom: this.state.open ? 10 : 0, marginTop: -25}}
+          <div style={{marginLeft:0, marginBottom: this.state.open ? 10 : 0, marginTop: 0}}
                 onMouseEnter={this.onMouseEnterHandler}
                 onMouseLeave={this.onMouseLeaveHandler}>
 
-              <div>   <div style={{display:"inline", cursor:"pointer", fontWeight:"bold"}}> { status } </div> { (currentCluster == -10 ? "discard" : currentCluster) +" : "+ "n = "+this.state.item.length+" : "+ this.state.item[0].concept }
-                <div style={{display:"inline", cursor:"pointer", fontWeight:"bold"}} onClick={ this.handleOpen }> { this.state.open ? "[-]" : "[+]" } </div>
+              <div> <div style={{display:"inline", cursor:"pointer", fontWeight:"bold"}}> { status } </div> { (currentCluster == -10 ? "discard" : currentCluster) +" : "+ "n = "+this.state.item.length+" : "+ this.state.item[0].concept }
+                <div style={{display:"inline", cursor:"pointer", fontWeight:"bold"}} onClick={ () => this.props.handleOpen(currentCluster) }> { this.state.open ? "[-]" : "[+]" } </div>
 
 
                 {
@@ -200,6 +197,7 @@ handleOpen = () => {
                                   <td style={headerStyle}><RemoveCircle style={{color: "red"}} /> </td>
                                   <td style={headerStyle}>#</td>
                                   <td style={headerStyle}>CUI</td>
+                                  <td style={headerStyle}>Msh</td>
                                   <td style={headerStyle}>CUI Text</td>
 
                                 </tr>
@@ -213,7 +211,8 @@ handleOpen = () => {
                                     <td><input type="checkbox" checked={this.props.excluded_cuis.indexOf(c) > -1 ? true : false } onClick={() => this.props.handleClusterDataChange(c, currentCluster, "exclude")  } /></td>
                                     <td>{cuis[c]}</td>
                                     <td>{c}</td>
-                                    <td style={{  }}>{this.props.cuis_index[c]}</td>
+                                    <td style={{textAlign:"center"}}>{ this.props.cuis_index[c].hasMSH == "true" ? " * " : ""}</td>
+                                    <td>{this.props.cuis_index[c].preferred}</td>
                                 </tr> )
                             }
 
@@ -226,14 +225,11 @@ handleOpen = () => {
                   </tbody>
                 </table>
                  : ""}
-
-
-
           </div>
         );
     } else {
 
-      return <div> {this.props.currentCluster + " :: Empty Cluster" } </div>
+      return <div></div>
     }
   }
 }

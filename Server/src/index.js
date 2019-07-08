@@ -78,7 +78,7 @@ function extractMMData (r) {
                                )
                              )
                            )
-                         )[0][0].flat()
+                         ).flat().flat().flat()
 
     // This removes duplicate cuis
     r = r.reduce( (acc,el) => {if ( acc.cuis.indexOf(el.CUI) < 0 ){acc.cuis.push(el.CUI); acc.data.push(el)}; return acc }, {cuis: [], data: []} ).data
@@ -88,22 +88,22 @@ function extractMMData (r) {
   }
 }
 
-
-fs.createReadStream('./CLUSTERS/all_terms_June_2019.csv')
-  .pipe(csv())
-  .on('data', async (row) => {
-
-    var terms = row.terms
-
-    clusterTerms[terms] = true
-
-  })
-  .on('end', () => {
-    clusterTerms = Object.keys(clusterTerms)
-
-    console.log('read '+clusterTerms.length+' terms');
-
-  });
+//
+// fs.createReadStream('./CLUSTERS/testing_terms_canada.csv')
+//   .pipe(csv())
+//   .on('data', async (row) => {
+//
+//     var terms = row.terms
+//
+//     clusterTerms[terms] = true
+//
+//   })
+//   .on('end', () => {
+//     clusterTerms = Object.keys(clusterTerms)
+//
+//     console.log('read '+clusterTerms.length+' terms');
+//
+//   });
 
 
 
@@ -385,7 +385,7 @@ app.get('/api/allClusters', async function(req,res){
 
   var getAllClusters = async () => {
     var client = await pool.connect()
-    var result = await client.query(`select * from clusters order by concept asc`)
+    var result = await client.query(`select COALESCE(cn_override , cn) as cn,  concept, cuis, isdefault, cn_override from clusters order by cn asc, concept asc`)
           client.release()
     return result
   }
@@ -461,10 +461,6 @@ app.get('/api/setClusterData', async function(req,res){
 });
 
 
-
-
-
-
 app.get('/api/recordClusterAnnotation',async function(req,res){
 
   console.log(JSON.stringify(req.query))
@@ -480,13 +476,6 @@ app.get('/api/recordClusterAnnotation',async function(req,res){
   res.send("saved cluster annotation: "+JSON.stringify(req.query))
 });
 
-
-// const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-// const csvWriter = createCsvWriter({
-//   path: 'CLUSTERS/cuis.csv',
-// });
-
-
 app.get('/api/cuisIndex',async function(req,res){
 
       var cuis = {}
@@ -494,7 +483,7 @@ app.get('/api/cuisIndex',async function(req,res){
       fs.createReadStream('./CLUSTERS/cuis-index.csv')
         .pipe(csv())
         .on('data', async (row) => {
-          cuis[row.CUI] = row.preferred
+          cuis[row.CUI] = {preferred : row.preferred, hasMSH: row.hasMSH}
         })
         .on('end', () => {
           res.send(cuis)
@@ -502,71 +491,6 @@ app.get('/api/cuisIndex',async function(req,res){
 
 });
 
-app.get('/api/allCUIs',async function(req,res){
-
-  var fs = require('fs')
-  var csvWriter = fs.createWriteStream('CLUSTERS/cuis.csv', {
-    flags: 'w'
-  })
-
-  var indexWriter = fs.createWriteStream('CLUSTERS/cuis-index.csv', {
-    flags: 'w'
-  })
-
-  indexWriter.write("CUI,preferred,hasMSH\n")
-
-  var CUIs = []
-
-   for ( var i = 0; i < clusterTerms.length; i++){
-
-
-     var phrase = clusterTerms[i]
-         phrase = phrase.toLowerCase().replace(/\$nmbr\$/g," ").replace(/[\W_]+/g," ") // this nmbr to avoid the "gene problem"
-
-     var phrase_terms = phrase.split(" ")
-
-     var mmdata = []
-
-
-     if(phrase_terms.length > 20){
-
-        while ( phrase_terms.length >= 10 ) {
-            var search_terms = phrase_terms.splice(0,10)
-            var mmdata_inter = await getMMatch(search_terms.join(" "))
-                mmdata_inter = extractMMData(mmdata_inter)
-                mmdata = mmdata.concat(mmdata_inter)
-        }
-
-        if ( phrase_terms.length > 0){
-            var mmdata_inter = await getMMatch(phrase_terms.join(" "))
-                mmdata_inter = extractMMData(mmdata_inter)
-                mmdata = mmdata.concat(mmdata_inter)
-        }
-
-     } else {
-        mmdata = await getMMatch(phrase)
-        mmdata = extractMMData(mmdata)
-     }
-
-
-    var csvLine = clusterTerms[i].replace(/;/gi,"").replace(/,/gi,"")+","+
-                                    mmdata.map( c => {
-                                                if ( CUIs.indexOf(c.CUI) < 0){
-                                                  CUIs.push(c.CUI);
-                                                  indexWriter.write(c.CUI+","+c.preferred+","+c.hasMSH+"\n")
-                                                }
-                                                return c.CUI
-                                              }).join(";")+","+
-                                    mmdata.map( c => c.hasMSH ).join(";")+","+i+"/"+clusterTerms.length
-     //CUIs = CUIs+clusterTerms[i]+","+mmdata.map( c => c.CUI ).join(";")+"\n"
-
-     csvWriter.write(csvLine+"\n")
-     console.log(i+"/"+clusterTerms.length)
-   }
-   csvWriter.end()
-   indexWriter.end()
-  res.send("done")
-});
 
 app.get('/api/allPredictions', async function(req,res){
   console.log("getting all predictions")

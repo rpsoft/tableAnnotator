@@ -38,9 +38,15 @@ C3272372,Character String Data Type,false
 C1306577,Death (finding),false
 C4082313,Death Adverse Event Not Associated with More Specific CTCAE Term NOS,false
 C4552775,Death NOS, CTCAE,false
+C0019080,Hemorrhage,true
 C0034510,Racial group,true
 C1706779,AMACR wt Allele,false
 C3853635,Race,false
+C2699257,SS, Rat Strain,false
+C0168634,BaseLine dental cement,true
+C1442488,Baseline,false
+C3891295,Subject Status Domain,false
+C4551874,BLOOD GROUP, Ss,false
 C4081854,High intensity,false
 C0332152,Before,false
 C1532338,Percutaneous Coronary Intervention,true
@@ -55,9 +61,15 @@ C1079230,Subgroup A Nepoviruses,false
 C1515021,Subgroup,false
 C2603361,P prime,false
 C1831808,apixaban,true
+C0032042,Placebos,true
+C1696465,placebo,false
+C1706408,Placebo Control,false
 C0013227,Pharmaceutical Preparations,true
 C3244316,medication - HL7 publishing domain,false
 C4284232,Medications,false
+C0042153,utilization qualifier,true
+C0457083,Usage,false
+C1947944,Use - dosing instruction imperative,false
 C0205436,second (number),false
 C0457385,seconds,false
 C0565930,per second,false
@@ -88,6 +100,8 @@ C0013990,Pathological accumulation of air in tissues,true
 C0034067,Pulmonary Emphysema,true
 C0003761,Country of Argentina,true
 C1504311,Argentina genus,false
+C0449820,Score,false
+C4050231,ADHD hyperactive symptoms mean score:Score:Pt:^Patient:Qn:Calculated,false
 C0030705,Patients,true
 C2360800,Number of patients,false
 C0521115,Simultaneous,false
@@ -115,10 +129,12 @@ C0226514,Structure of deep vein,false
 C0034065,Pulmonary Embolism,true
 C0149871,Deep Vein Thrombosis,true
 C0000726,Abdomen,true
+C0267561,Perianal fistula,false
 C0010592,Cyclosporine,true
 C0010594,Cyclosporins,true
 C0017446,Geographic Locations,true
 C0454693,Indian subcontinent,false
+C0150457,Anticoagulant therapy,false
 C0221198,Lesion,false
 C1444754,Length,false
 C4330985,Per Millimeter,false
@@ -130,6 +146,11 @@ C0429089,Electrocardiogram Q waves test,false
 C1305738,Q wave,false
 C0549178,Continuous,false
 C1120149,thienopyridine,true
+C0681850,Study Subject,false
+C1550501,Subject -direct target,false
+C1706203,Subject - topic,false
+C2349001,Human Study Subject,false
+C2697811,Investigative Subject,false
 C0552346,Body weight percentile,false
 C1532718,kg-m,false
 C0549183,Midline (qualifier value),false
@@ -157,8 +178,11 @@ C3540603,PADI4 wt Allele,false
 C3669270,Strucure of thick cushion of skin,false
 C3814046,PAD Regimen,false
 C4319657,Pad (unit of presentation),false
+C0023216,Lower Extremity,true
 C0578022,Finding of body mass index,false
 C1333400,Gadolinium-Enhancing Lesion,false
+C0750480,Count,false
+C1705566,Count Dosing Unit,false
 C0015672,Fatigue,true
 C3463815,Feel Fatigue,false
 C4050243,Fatigue Subordinate Domain,false
@@ -167,15 +191,15 @@ C0520886,ST segment elevation (finding),false
 C0004482,Azathioprine,true
 C0455272,Serum urate measurement,false
 C0700634,Serum uric acid observed,false
-C0168634,BaseLine dental cement,true
 C3829066,Millimole per Mole,false
-C1442488,Baseline,false
 C3538987,Cardiovascular System Findings Domain,false
 C0439526,/mL,false
 C1705224,THPO wt Allele,false
 C3887665,Thrombopoietin, human,false
 C4048877,Dinner,true
 C4318503,ciliary vesicle,false
+C0038454,Cerebrovascular accident,true
+C4554100,Stroke, CTCAE,false
 C0004147,Atenolol,true
 C0205156,Previous,false
 C0003195,Anti-Arrhythmia Agents,true
@@ -187,18 +211,36 @@ C3887704,treatment - ActInformationManagementReason,false
 C3537142,Antiarrhythmic [EPC],false
 C1552607,Act Relationship Subset - previous,false
 C3687832,Drugs - dental services,false
+C1273517,Used by,false
+C0011847,Diabetes,false
+C0011849,Diabetes Mellitus,true
 C3179547,secukinumab,true
 C0358591,Proton Pump Inhibitors,true
 C0871125,prepulse inhibition activity,true
 C3811894,Pixels per Inch,false
+C0004057,Aspirin,true
 C0439272,ug/g,false
 C0241889,Family history,true
 C1504769,DFFB protein, human,true
 C2239547,ACOD1 gene,false
 C3813548,CALD1 wt Allele,false
 C4284121,DFFB wt Allele,false
+C0011900,Diagnosis,true
+C0439234,year,false
+C0001779,Age,false
+C0337667,Cigarette smoker (finding),false
 C1521798,trend,false
 C4554533,Trend:Type:Point in time:^Patient:Nominal,false
+C0898753,SAFB protein, human,true
+C1335803,SAFB gene,false
+C1704827,SLC22A18 wt Allele,false
+C0022885,Laboratory Procedures,false
+C0039593,Testing,false
+C0392366,Tests (qualifier value),false
+C0456984,Test Result,false
+C1515976,Anatomic Structure, System, or Substance,false
+C3831328,Blood Products Laboratory Testing,false
+C4318744,Test - temporal region,false
 C0018488,Hafnium,true
 C0019993,Hospitalization,true
 C1313497,GZMA protein, human,true
@@ -220,6 +262,9 @@ C0036572,Seizures,true
 C0332307,Type - attribute,false
 C1959629,Seizure, CTCAE 3.0,false
 C4553401,Seizure, CTCAE 5.0,false
+C0684224,Report (document),true
+C0700287,Reporting,false
+C4319718,Reported,false
 C0201950,Cholesterol measurement test,false
 C1532563,Millimole per Liter,false
 C0543421,Total cholesterol,false
@@ -229,7 +274,6 @@ C0949745,Myristica fragrans,true
 C1445339,Mace extract,false
 C1279901,Firstly,false
 C0872146,disease length,false
-C0439234,year,false
 C0002688,Amputation,true
 C0332840,Amputated structure (morphologic abnormality),false
 C1546539,Amputation Specimen Code,false
@@ -237,6 +281,8 @@ C0023779,Lipids,true
 C0441994,Lower - spatial qualifier,false
 C2003888,Lower (action),false
 C0042295,Values,false
+C1515187,Take,false
+C0043031,Warfarin,true
 C0054015,Nesiritide,true
 C0439297,Nanogram per Liter,false
 C1095989,Brain natriuretic peptide measurement,false
@@ -252,15 +298,17 @@ C0521116,Current (present time),false
 C0004238,Atrial Fibrillation,true
 C1963067,Atrial Fibrillation, CTCAE,false
 C1705970,Electrical Current,false
+C0016385,Cardiac Flutter,false
+C1623258,Electrocardiography,true
+C2242390,Flutter (respiratory device),false
 C0205281,Invasive,false
 C1334278,Invasive Lesion,false
 C0750572,Estimated,false
 C0232809,Glomerular filtration,false
 C4528685,Psoriasis Area and Severity Index Clinical Classification,false
-C0449820,Score,false
-C4050231,ADHD hyperactive symptoms mean score:Score:Pt:^Patient:Qn:Calculated,false
 C0002598,Amiodarone,true
 C0002460,American Indians,true
+C0001905,Alaska,true
 C1709595,Pooled Sample,false
 C0074554,Simvastatin,true
 C2826344,Factorial Study,false
@@ -284,9 +332,6 @@ C0041004,Triglycerides,true
 C0439190,millimole,false
 C0475211,liter,false
 C1880008,Cardiovascular History,false
-C0032042,Placebos,true
-C1696465,placebo,false
-C1706408,Placebo Control,false
 C0007220,Cardiovascular Agents,true
 C1371299,Bronchodilation [PE],false
 C3537072,Bronchodilation,false
@@ -295,6 +340,12 @@ C0441923,M+ (tumor staging),false
 C0003015,Angiotensin-Converting Enzyme Inhibitors,true
 C0597357,receptor,false
 C2757044,Angiotensin-Converting Enzyme Inhibitors [MoA],false
+C1883727,Taken,false
+C0439044,Living Alone,false
+C0679994,alone - group size,false
+C0205195,Combined,false
+C1947911,combination of objects,false
+C3811910,combination - answer to question,false
 C0972314,etoricoxib,true
 C0178602,Dosage,false
 C0869039,Unit dose,false
@@ -342,6 +393,8 @@ C3839656,Modification of diet in renal disease formula,false
 C2945599,Mild (qualifier value),false
 C0221099,Impaired,false
 C0684336,Impaired health,false
+C0025320,Menopause,true
+C0567312,Menopause present (finding),false
 C0205082,Severe (severity modifier),false
 C0007222,Cardiovascular Diseases,true
 C0205164,Major,false
@@ -350,8 +403,9 @@ C4521762,United States Military Commissioned Officer O4,false
 C1524063,Use of,false
 C4541021,Angiotensin-converting enzyme inhibitor (disposition),false
 C0333275,Hemorrhagic,false
-C0038454,Cerebrovascular accident,true
-C4554100,Stroke, CTCAE,false
+C0007787,Transient Ischemic Attack,true
+C0917805,Transient Cerebral Ischemia,true
+C1054154,Tacca leontopetaloides,false
 C0537270,insulin detemir,true
 C0907402,Insulin Glargine,true
 C0220908,Screening procedure,true
@@ -368,9 +422,16 @@ C0332287,In addition to,false
 C0877341,coronary revascularization,false
 C0439228,day,false
 C4033631,sacubitril / valsartan,true
+C0681842,prediction,false
+C1882327,Percent of Predicted Value,false
 C0000970,Acetaminophen,true
-C0004057,Aspirin,true
+C0085826,Antiplatelet Agents,true
 C3815594,Subject is Randomized,false
+C0040363,Togo,true
+C0041260,Tryptophanase,true
+C1883351,To,false
+C0053396,Beta Carotene,true
+C0696105,Beta carotene measurement,false
 C0333307,Superficial ulcer,false
 C1880549,Erosion of Medical Device Material,false
 C1959609,Erosion lesion,false
@@ -378,14 +439,15 @@ C3887524,Skin Erosion,false
 C0085096,Peripheral Vascular Diseases,true
 C1704436,Peripheral Arterial Diseases,true
 C2986535,Primary Endpoint,false
+C0441471,Event,false
+C3541888,CDISC Events Class,false
 C0013103,Drainage procedure,true
 C0180499,Drain device,false
 C4265177,Drain number:ID:Pt:^Patient:Nom,false
+C0423772,Cutaneous Fistula,true
 C0337445,Thyroglobulin measurement,false
 C3715113,HSD11B1 wt Allele,false
 C0009488,Comorbidity,true
-C0011847,Diabetes,false
-C0011849,Diabetes Mellitus,true
 C1710306,TOAST Classification,false
 C1514624,Qualifying,false
 C4521230,Acute ischemic stroke subtype:Class:Pt:^Patient:Nom:TOAST,false
@@ -414,6 +476,7 @@ C3714496,Chronic obstructive pulmonary disease of horses,false
 C0522510,With intensity,false
 C0155668,Old myocardial infarction,false
 C2936173,Percutaneous Transluminal Coronary Angioplasty,true
+C0010055,Coronary Artery Bypass Surgery,true
 C1880018,Cerebrovascular,false
 C2985465,Hazard Ratio,false
 C0428883,Diastolic blood pressure,true
@@ -421,17 +484,16 @@ C0802604,Medications:Presence or Identity:Duration of the study:^Patient:Nominal
 C2598133,Medications:-:Point in time:^Patient:-,false
 C1305849,Diastolic blood pressure measurement,false
 C0456683,U/day,false
-C0441471,Event,false
 C4019010,National reporting jurisdiction:Loc:Pt:^Event:Nom,false
 C0455829,Waist Circumference,true
 C3251812,Bleeding risk,false
 C3639721,Unified Parkinson's Disease Rating Scale,true
 C0205309,Known,false
 C0239161,Dactylitis,false
-C0750480,Count,false
-C1705566,Count Dosing Unit,false
 C0012634,Disease,true
 C0242708,Antirheumatic Drugs, Disease-Modifying,true
+C0369718,N not otherwise specified Antibody,false
+C0441922,N+ (tumor staging),false
 C1415124,GLYB gene,false
 C0017454,Georgia, Western Asia,true
 C0152277,Incision and drainage,false
@@ -449,10 +511,13 @@ C0392334,Ability to perform cognitive activity,false
 C0392335,Cognitive functions,false
 C4695788,Hyperlipidemia:Hx:Pt:^Patient:Ord,false
 C0015663,Fasting,true
+C0015688,Nonesterified Fatty Acids,true
+C0347982,Mole per Liter,false
 C0184666,Hospital admission,false
 C0809949,Admission activity,false
 C0021853,Intestines,true
 C0205146,Area,false
+C1314939,Involvement with,false
 C0007226,Cardiovascular system,true
 C3887460,Cardiovascular,false
 C0037369,Smoking,true
@@ -463,13 +528,22 @@ C1553480,Diskus,false
 C1719844,Omega,false
 C0015684,Fatty Acids,true
 C0360714,Hydroxymethylglutaryl-CoA Reductase Inhibitors,true
+C0009458,Communications Media,true
+C0439536,Medium,false
+C1705217,Medium (Substance),false
+C3244283,medium exposure,false
+C4085196,Medium Growth Rate,false
+C4522282,A Medium Amount of Time,false
+C4522283,A Medium Amount,false
+C0596836,Light intensity,false
 C1697238,NIH stroke scale,false
 C3484372,NIH stroke scale:-:Point in time:^Patient:-:NIHSS,false
 C0589507,Cognitive function: initiation,false
 C1158830,Transcription Initiation,false
 C1704686,Initiation,false
+C1328319,Ankle brachial pressure index (observable entity),true
+C3888326,Intravascular systolic.tibial artery/Brachial artery:PresRto:Pt:Arterial system:Qn,false
 C0071097,pioglitazone,true
-C3541888,CDISC Events Class,false
 C0677453,Cigarette,true
 C1706077,user - individual,false
 C1704760,Cigarette Dosage Form,false
@@ -477,6 +551,7 @@ C3890423,Cigarette Dosing Unit,false
 C0017654,Glomerular Filtration Rate,true
 C1424601,RAPGEF5 gene,false
 C0449381,Observation parameter,false
+C3888198,BESTROPHINOPATHY, AUTOSOMAL RECESSIVE,false
 C0005845,Blood urea nitrogen measurement,true
 C0600137,Blood Urea Nitrogen,false
 C0429271,Grip strength,false
@@ -502,9 +577,15 @@ C4019422,Classes - encounter,false
 C1313937,Family history of diabetes mellitus,false
 C0009080,Clubbed Fingers,true
 C0149651,Clubbing,false
+C0027051,Myocardial Infarction,true
+C0428953,Electrocardiogram: myocardial infarction (finding),false
+C2926063,Myocardial infarction:Finding:Point in time:^Patient:Ordinal,false
+C4552959,Myocardial Infarction, CTCAE,false
 C1137094,Risk Reduction,true
 C0451306,Mini-mental state examination,true
 C0042815,Visual Analog Pain Scale,true
+C0337671,Former smoker,false
+C4555205,Ex-Smokers,true
 C0456603,Ratio,false
 C1547037,data type - ratio,false
 C0054841,carzinophilin,true
@@ -519,6 +600,9 @@ C0008107,Chile,true
 C1705241,Delta (difference),false
 C1705242,Different,false
 C3259781,Coagulation Index Measurement,false
+C0428210,Methionine measurement,false
+C1550543,Fulfill,false
+C4317104,Metabolic Equivalent of Task Unit,false
 C0439609,Urgent,false
 C3272275,Urgent Procedure,false
 C0443225,Full,false
@@ -547,9 +631,6 @@ C3536851,Calcium Channel Blocker [EPC],false
 C4521885,Calcium channel blocker (disposition),false
 C0149721,Left Ventricular Hypertrophy,true
 C3484363,Left ventricular hypertrophy:Finding:Point in time:^Patient:Ordinal,false
-C0042153,utilization qualifier,true
-C0457083,Usage,false
-C1947944,Use - dosing instruction imperative,false
 C0003364,Antihypertensive Agents,true
 C1874267,Anti-anginal [EPC],false
 C3537168,Antianginals,false
@@ -634,11 +715,15 @@ C0581603,Revascularization - action,false
 C0239307,ethnic european,false
 C1535514,European race,false
 C0220938,White color,false
+C1517205,Flare,false
+C3540542,Exacerbation of cGVHD,false
 C3854258,Admission time:ClockTime:Pt:^Patient:Qn,false
 C0702093,Per Minute,false
 C1524029,Mouse MIN NOS,false
 C3813700,Percent per Minute,false
 C3854259,Admission time,false
+C0443318,Sustained,false
+C2732140,Sustain,false
 C1261082,Left coronary artery structure,false
 C0184906,Bifurcation (procedure),false
 C3146289,Anatomic bifurcation,false
@@ -652,7 +737,6 @@ C0489868,peripheral artery,false
 C0730226,H/O: Disorder,false
 C0850708,History of disease,false
 C0944983,History of symptoms & diseases:Finding:Point in time:^Patient:Nominal:Observed,false
-C0205195,Combined,false
 C0008976,Clinical Trials,true
 C0205160,Negative,false
 C1513916,Negative Finding,false
@@ -682,9 +766,6 @@ C0226004,Arterial system,false
 C1542147,Main,false
 C0443246,Left sided,false
 C1552822,Table Cell Horizontal Align - left,false
-C0040363,Togo,true
-C0041260,Tryptophanase,true
-C1883351,To,false
 C0443211,Established,false
 C1272684,Accepted,false
 C0079399,Gender,true
@@ -698,8 +779,20 @@ C1706429,Male, Self-Reported,false
 C1522384,sex,true
 C0008466,Chondroitin Sulfates,true
 C0002965,Angina, Unstable,true
+C0682125,Alaska Natives,true
 C4086878,Symptom Onset,false
+C0439659,Beginning,false
+C0035124,Reperfusion Therapy,true
+C0872913,Tenecteplase,true
+C0684253,Physiological reperfusion,false
+C0227952,Foreskin of penis,true
+C0021107,Implantation procedure,false
+C0441587,Clinical act of insertion,false
+C1512796,Insertion Mutation,true
+C1883719,Insert (object),false
+C0221464,Arterial,false
 C0060657,formoterol,true
+C1879937,CDISC SDTM Patient Ethnic Group Terminology,false
 C0012315,Dihydropyridines,true
 C0220821,dihydropyridine,true
 C2718773,canakinumab,true
@@ -713,6 +806,9 @@ C4318437,Anti-Cyclic Citrullinated Protein Antibodies,true
 C0741132,antibody positive,false
 C0304289,Oral drug preparation, NOS,false
 C0935929,Antidiabetics,true
+C1948050,Twice (Numerical Qualifier),false
+C0332173,Daily,false
+C0439505,per day,false
 C1243102,Acetaminophen Oral Tablet,false
 C1525410,Cyclic citrullinated peptide antibody,false
 C1706063,Wegener Autoantigen,false
@@ -720,6 +816,7 @@ C4441842,Major minor,false
 C0231999,Airflow,false
 C0443288,Restricted,false
 C0449295,Limitation,false
+C2603360,T prime,false
 C1511069,Baseline Dyspnea Index,false
 C2964552,Total score,false
 C0206132,Age of Onset,true
@@ -728,11 +825,22 @@ C0021308,Infarction,true
 C1999375,Ticagrelor,true
 C3887676,Kathy Mercer,false
 C0607430,Galactose Binding Lectin,true
-C0001779,Age,false
+C1527178,Basis - conceptual entity,false
+C0242931,Wilcoxon Rank Test,true
+C0370003,Specimen,false
+C1515051,Sum,false
+C2347026,Biospecimen,false
+C1705938,Base - General Qualifier,false
+C0005893,Body mass index procedure,false
+C0871472,t test,false
+C0039155,Systole,true
+C1305855,Body mass index,true
 C0012000,Diastole,true
 C0005767,Blood,true
 C0005768,In Blood,true
 C0229664,peripheral blood,false
+C4684582,Categorical Data,false
+C0439828,Variable (uniformity),false
 C0348016,Intravenous,false
 C0012963,Dobutamine,true
 C0033144,Primary Prevention,true
@@ -756,11 +864,15 @@ C1722260,indacaterol,true
 C0041573,Uganda,true
 C0439211,microgram,false
 C0010346,Crohn Disease,true
+C0439849,Relationships,false
+C0445223,Related personal status,false
+C0038894,Surgery specialty,false
+C0038895,Surgical aspects,true
+C0543467,Operative Surgical Procedures,true
+C1274039,General surgery specialty,true
 C0852949,Arteriopathic disease,false
 C0332174,Weekly,false
 C0439230,week,false
-C1517205,Flare,false
-C3540542,Exacerbation of cGVHD,false
 C4050465,Severe Extremity Pain,false
 C4050466,Borg Category-Ratio 10 Perceived Exertion Score 5,false
 C1707479,Concomitant Therapy,false
@@ -769,16 +881,21 @@ C0225860,Left atrial structure,true
 C1301886,Diameter (qualifier value),false
 C0225861,Left auricular appendage,false
 C0024119,Pulmonary function tests,true
-C0681842,prediction,false
-C1882327,Percent of Predicted Value,false
 C2598152,Pulmonary Function Tests:-:Point in time:^Patient:-,false
 C0003211,Anti-Inflammatory Agents, Non-Steroidal,true
 C0035439,Rheumatic Heart Disease,true
 C0085532,Coronary angiography,true
 C1548829,Consent Type - Coronary Angiography,false
+C0184661,Interventional procedure,true
+C0886296,Nursing interventions,false
+C1273869,Intervention regimes,false
 C0040223,Time,true
-C1623258,Electrocardiography,true
 C3541383,Time (foundation metadata concept),false
+C0336867,Balloon Aircraft,false
+C0021398,Economic Inflation,true
+C1568891,HGS protein, human,true
+C1318493,Inflation procedure,false
+C0441144,Medical Balloon Device,false
 C0683368,Symptoms aspect,true
 C1457887,Symptoms,false
 C0016704,French Polynesia,true
@@ -789,7 +906,11 @@ C1419068,PTGFR gene,false
 C1419906,SDHA gene,false
 C3541238,Succinate Dehydrogenase [Ubiquinone] Flavoprotein Subunit, Mitochondrial,false
 C3541412,SDHA wt Allele,false
+C0348080,Condition,false
+C1705253,Logical Condition,false
+C3864998,Condition:Find:Pt:^Patient:Nom,false
 C0040207,Ticlopidine,true
+C1620287,prasugrel,true
 C0035970,Russia,true
 C0017452,Georgia, USA,true
 C1302234,Fatal,false
@@ -802,7 +923,6 @@ C0523508,Apolipoproteins A measurement,false
 C4553344,LPA wt Allele,false
 C4553379,Apolipoprotein(a), human,false
 C3252643,APOB protein, human,true
-C0337671,Former smoker,false
 C0439092,Less Than,false
 C0086409,Hispanics,true
 C0001925,Albuminuria,true
@@ -812,6 +932,7 @@ C0252643,bosentan,true
 C0028125,Nitrates,true
 C0699857,Nitrate,false
 C3848573,nitrate ion,false
+C0332237,Topical surface,false
 C3842976,Left side only,false
 C0232237,S3 - Third heart sound,false
 C0232278,Protodiastolic gallop with abnormally audible third heart sound,false
@@ -833,13 +954,11 @@ C3241971,Digit - number character,false
 C1698987,symbol - solid dosage form,false
 C0428472,Serum HDL cholesterol measurement,false
 C0058890,EAP protocol,true
-C0439849,Relationships,false
-C0445223,Related personal status,false
 C0286651,atorvastatin,true
 C0278947,prior biologic therapy,false
+C0332257,Including (qualifier),false
 C0026544,Morocco,true
 C0332177,Monthly (qualifier value),false
-C0010055,Coronary Artery Bypass Surgery,true
 C0332293,Treated with,false
 C4317006,Arthritis Pain,false
 C0003872,Arthritis, Psoriatic,true
@@ -870,11 +989,15 @@ C0264995,Occlusion of artery (disorder),false
 C0018810,heart rate,true
 C0444505,Peak level,false
 C0025664,Methods aspects,true
-C0184661,Interventional procedure,true
 C2700391,Procedure (set of actions),false
 C3274430,Physical Medical Procedure,false
 C3538935,Procedure Domain,false
 C3539779,CDISC SDTM Procedure Terminology,false
+C0079613,Adoptive Immunotherapy,true
+C1704930,ACTG2 wt Allele,false
+C1869853,SERPINA3 protein, human,true
+C3890007,SERPINA3 wt Allele,false
+C4048375,Asthma Control Test Questionnaire,false
 C0231448,Extension,false
 C0206460,Enoxaparin,true
 C0231449,Extended,false
@@ -914,17 +1037,22 @@ C1277691,Pack years,false
 C0201976,Creatinine measurement, serum (procedure),false
 C0600061,Serum creatinine level,false
 C0722138,Non-Aspirin,false
-C0085826,Antiplatelet Agents,true
 C0392747,Changing,false
 C0678234,Stenosis Morphology,false
 C1261287,Stenosis,true
 C2632116,Stenosis (invertebrate),false
+C1516048,Assessed,false
+C0035173,Research Personnel,true
 C0030547,Parenteral Nutrition,true
 C4522267,Parenteral (intended site),false
 C0018387,Guinea-Bissau,true
 C0439242,milliliter,false
 C0444706,Measured,false
 C3541902,Measured Tumor Identification,false
+C4534363,At home,false
+C0205554,Automated (qualifier value),false
+C0025080,Medical Devices,true
+C0699733,Devices,true
 C0287275,Neuropilins,true
 C0027361,Persons,true
 C0237401,Individual,false
@@ -939,6 +1067,7 @@ C0391850,Physiologic pulse,false
 C1947910,Pulse phenomenon,false
 C0949236,Pulse Pressure,true
 C4086268,Exacerbation,false
+C0678226,Due to,false
 C0073633,ranolazine,true
 C0205088,End-stage,false
 C3272266,Thrombolysis in Myocardial Infarction Flow,false
@@ -947,8 +1076,10 @@ C1704687,Post Device,false
 C3469826,SLC35G1 gene,false
 C1546485,Diagnosis Type - Final,false
 C3853528,Final,false
+C1516879,Enrollment,false
+C1696073,enrollment - ResearchSubjectRoleBasis,false
+C3888021,enrollment - coverage,false
 C0033860,Psoriasis,true
-C0019080,Hemorrhage,true
 C0587081,Laboratory test finding,false
 C0439282,Nanomole/liter,false
 C0424594,Frailty,true
@@ -958,6 +1089,7 @@ C3714583,Model - style/design,false
 C3853906,Digital Model Attachment,false
 C0015252,removal technique,false
 C0728940,Excision,false
+C0884358,Performed,false
 C1456408,liraglutide,true
 C0023668,Liechtenstein,true
 C1704970,Means,false
@@ -976,11 +1108,9 @@ C0181074,Graft material,false
 C0332835,Transplanted tissue,true
 C1961139,Grafting procedure,false
 C0348013,Venous,false
-C0005893,Body mass index procedure,false
 C0439254,megajoule,false
 C0332132,Prior diagnosis,false
 C4284025,Mj antigen,false
-C1305855,Body mass index,true
 C0020616,Hypoglycemic Agents,true
 C3538806,Axial R,false
 C4048756,Right arm,false
@@ -996,6 +1126,7 @@ C0041912,Upper Respiratory Infections,true
 C1828181,Age at diagnosis,false
 C3173302,Age at diagnosis:Time:Pt:^Patient:Qn,false
 C1120110,aliskiren,true
+C4331910,Past 30 days,false
 C0857690,plasma insulin,false
 C0028971,Oman,true
 C0347978,Mu - greek letter,false
@@ -1011,7 +1142,7 @@ C4049705,Moderate Extremity Pain,false
 C4049706,Borg Category-Ratio 10 Perceived Exertion Score 3,false
 C4085643,Moderate Response,false
 C4321335,Moderate Level,false
-C1879937,CDISC SDTM Patient Ethnic Group Terminology,false
+C0547044,Smaller,false
 C0030196,Pain in limb,false
 C4553007,Pain In Extremity, CTCAE,false
 C0701159,Patient in hospital,false
@@ -1025,6 +1156,7 @@ C4255126,Angiogram - result,true
 C2347472,Percent of Abnormal Cells,false
 C2699333,Abnormal Reference Range,false
 C0205449,Three,false
+C0205172,More,false
 C1511726,Data,false
 C3245479,Data call receiving device,false
 C3714741,Data (eukaryote),false
@@ -1067,16 +1199,28 @@ C0007673,Central African Republic,true
 C3540513,PCYT1A wt Allele,false
 C3813556,Cancer/Testis Antigen,false
 C3888140,Computed Tomography Study File,false
+C0881827,Multisection:Finding:Point in time:Brain:Narrative:MRI,false
+C0034606,Radionuclide Imaging,true
+C0441633,Scanning,false
+C2826292,Related to Cancer,false
+C0596217,Brain scan,false
+C1417249,MRC1 gene,false
+C2347167,Mr. - Title,false
+C3254418,NR3C2 protein, human,true
+C4050513,Minor Response,false
 C0347985,During values,false
+C0232970,Postmenopausal state,false
 C0205258,Indeterminate,false
 C0242231,Coronary Stenosis,true
 C0741968,carotid,false
 C0007282,Carotid Stenosis,true
+C0226415,Artery of lower extremity,false
+C0020443,Hypercholesterolemia,true
+C1522133,Hypercholesterolemia result,false
 C0024115,Lung diseases,true
-C1516879,Enrollment,false
-C1696073,enrollment - ResearchSubjectRoleBasis,false
-C3888021,enrollment - coverage,false
 C1142985,ezetimibe,true
+C0444686,Calculated,false
+C1441506,Calculation,false
 C1516986,Evaluable Disease,false
 C1412134,ACR gene,false
 C1515941,American College of Radiology,false
@@ -1090,6 +1234,8 @@ C0564385,/hour,false
 C4528284,Hour Times Percent,false
 C1167956,Cardiac Resynchronization Therapy,true
 C1882086,New York Heart Association Class III,false
+C0022326,Ivory Coast,true
+C4265176,IV number:ID:Pt:^Patient:Nom,false
 C1455761,Episodic,false
 C2945760,Recurrent,false
 C0229671,Serum,true
@@ -1098,37 +1244,31 @@ C1706141,PNP wt Allele,false
 C3887659,Purine Nucleoside Phosphorylase, human,false
 C1546774,Specimen Source Codes - Serum,false
 C1550100,Specimen Type - Serum,false
-C0035173,Research Personnel,true
+C0020615,Hypoglycemia,true
+C4553659,Hypoglycemia, CTCAE,false
 C0012798,Diuretics,true
 C0021764,Interleukins,true
 C1527200,Recombinant Interleukins,false
 C1156212,chromatin silencing,false
 C1537574,LIN9 gene,false
-C0369718,N not otherwise specified Antibody,false
-C0441922,N+ (tumor staging),false
 C0242896,Anticholinergic Agents,true
+C1282927,Shortened,false
+C1806781,Short,false
+C2350002,Short Value,false
 C0028405,North America,true
 C0470187,Availability of,false
 C0178913,Blood specimen,false
-C0227952,Foreskin of penis,true
-C0021107,Implantation procedure,false
-C0441587,Clinical act of insertion,false
-C1512796,Insertion Mutation,true
-C1883719,Insert (object),false
-C0221464,Arterial,false
+C0025266,Male population group,true
 C1709380,P-Value,false
 C3494593,History of cardiac arrhythmia,false
 C0518010,body mass,false
 C0683448,Codependency Assessment Inventory,false
 C1413248,CDAN1 gene,false
 C3273706,CDAN1 wt Allele,false
-C0022326,Ivory Coast,true
-C4265176,IV number:ID:Pt:^Patient:Nom,false
 C0741614,bowel resection,false
 C0441998,Left anterior,false
 C0205386,Descending,false
 C1547177,Sequencing - Descending,false
-C0232970,Postmenopausal state,false
 C0019932,Hormones,true
 C4521914,Hormone (disposition),false
 C0015815,Structure of neck of femur,true
@@ -1141,10 +1281,7 @@ C4553389,Study Control,false
 C0078988,Asians,true
 C0242485,Measurement,false
 C0009117,Coagulants,true
-C0027051,Myocardial Infarction,true
-C0428953,Electrocardiogram: myocardial infarction (finding),false
-C2926063,Myocardial infarction:Finding:Point in time:^Patient:Ordinal,false
-C4552959,Myocardial Infarction, CTCAE,false
+C0085387,Cyclooxygenase Inhibitors,true
 C1555721,Substitution - ActClass,false
 C1706204,Substitution - change,false
 C2599594,post bronchodilator,false
@@ -1153,6 +1290,7 @@ C1142562,Vitamin B3 Assay,false
 C0017710,Glucocorticoids,true
 C3540777,Glucocorticoids, Systemic,false
 C3540778,Glucocorticoid inhalants for obstructive airway disease,false
+C0021081,Immunosuppressive Agents,true
 C0003209,Anti-Inflammatory Agents,true
 C0021966,Iodides,true
 C0221138,Blood group antibody I,false
@@ -1160,20 +1298,28 @@ C0850293,electrophysiological studies,false
 C0298130,montelukast,true
 C0031507,Phenytoin,true
 C0202454,Phenytoin measurement,false
+C1172734,natalizumab,true
 C0439148,Unit,false
+C0036043,Safety,true
+C1456447,SLC6A2 protein, human,true
+C0877248,Adverse event,false
+C1705413,Adverse Event Domain,false
+C3853572,Ephrin Type-B Receptor 1, human,false
+C3887809,Net (qualifier),false
+C3890893,SLC6A2 wt Allele,false
+C1705187,Safety Study,false
 C0741920,coronary DISEASE RISK FACTOR,false
 C3536840,Nonsteroidal Anti-inflammatory Drug [EPC],false
 C3538936,Device Exposure Domain,false
 C0449450,Presentation,false
 C0332185,Recent,false
-C0038894,Surgery specialty,false
-C0038895,Surgical aspects,true
-C0543467,Operative Surgical Procedures,true
-C1274039,General surgery specialty,true
+C0043251,Wounds and Injuries,true
+C1510467,trauma qualifier,true
+C3263723,Traumatic injury,true
+C3714660,Trauma,false
+C4049136,Trauma, nursing specialty,false
 C0699129,Coumadin,true
 C1706365,Device Panel,false
-C0036043,Safety,true
-C1705187,Safety Study,false
 C0030771,Pefloxacin,true
 C1518922,peak expiratory flow (procedure),false
 C1542834,Peak expiratory flow rate,false
@@ -1181,6 +1327,11 @@ C0205355,Permanent,false
 C1609165,tocilizumab,true
 C1269765,Assisted (qualifier value),false
 C1552861,Help document,false
+C0027552,Needs,true
+C0686904,Patient need for (contextual qualifier),false
+C0085862,Independence,false
+C1290940,Independent for Transfer,false
+C1299583,Independently able,false
 C1319312,Hemoglobin G,false
 C0441889,Levels (qualifier value),false
 C1565489,Renal Insufficiency,true
@@ -1190,7 +1341,7 @@ C2946261,Level,false
 C0745413,ischemic attack,false
 C2000145,selexipag,true
 C1441604,High sensitivity,false
-C3888198,BESTROPHINOPATHY, AUTOSOMAL RECESSIVE,false
+C2347090,MedDRA Low Level Term,false
 C0020223,Hydralazine,true
 C0354604,oral anticoagulants,false
 C4288581,Notable,false
@@ -1204,7 +1355,6 @@ C0449432,Component object,false
 C1705248,Component (part),false
 C0205485,Physical,false
 C1509143,Physical assessment findings,false
-C0332173,Daily,false
 C0001792,Elderly (population group),true
 C1999167,Old age,false
 C0028873,Odds Ratio,true
@@ -1214,6 +1364,10 @@ C1515974,Anatomic Site,false
 C4284930,Location of Pharyngeal Residue Following Swallowing,false
 C4284931,Location of Oral Residue Following Swallowing,false
 C0282402,Hormone replacement therapy,true
+C0213771,tiotropium,true
+C0030827,Penicillin G,true
+C0072225,Propylene glycol,true
+C1266240,Prostaglandin measurement,false
 C0574032,Infusion procedures,false
 C1827465,Infusion route,false
 C0521362,gastrointestinal,false
@@ -1247,9 +1401,6 @@ C1300563,Gram per Kilogram,false
 C1318330,Urine albumin:creatinine ratio result,false
 C4054490,Minimum Diameter,false
 C0669479,pro-brain natriuretic peptide (1-76),true
-C0030827,Penicillin G,true
-C0072225,Propylene glycol,true
-C1266240,Prostaglandin measurement,false
 C0754710,Amino-terminal pro-brain natriuretic peptide,true
 C0441848,Group N,false
 C1550147,Pretreatment (substance),false
@@ -1260,6 +1411,7 @@ C2317524,Family history of coronary arteriosclerosis,false
 C3258293,Valvular disease,false
 C0001617,Adrenal Cortex Hormones,true
 C3536709,Corticosteroid [EPC],false
+C0205470,immunologic,false
 C0003374,Antimalarials,true
 C1540071,TRIM67 gene,false
 C0439278,fg/mL,false
@@ -1283,13 +1435,6 @@ C4085317,How Often Diarrhea,false
 C0041980,Uric Acid,true
 C0039771,Theophylline,true
 C0019409,Heterogeneity,false
-C0022885,Laboratory Procedures,false
-C0039593,Testing,false
-C0392366,Tests (qualifier value),false
-C0456984,Test Result,false
-C1515976,Anatomic Structure, System, or Substance,false
-C3831328,Blood Products Laboratory Testing,false
-C4318744,Test - temporal region,false
 C0242960,Genetic Heterogeneity,true
 C0019576,Hispanic Americans,true
 C0205409,Isolated,false
@@ -1299,16 +1444,23 @@ C3539687,Liter Per Liter,false
 C1552826,Table Cell Vertical Align - middle,false
 C3540512,Circumferential Supracrestal Fiberotomy,false
 C3889436,LAMC2 wt Allele,false
+C0700307,hydroxyl group,false
 C1514463,Prior Therapy,false
 C0231491,Antagonist muscle action,false
 C0279936,tumor necrosis factor therapy,false
-C1273517,Used by,false
 C0581374,Single coronary vessel disease,false
 C0038766,Sulfonylurea Compounds,true
 C4704833,Secretagogues,true
 C3536898,Sulfonylurea [EPC],false
+C0231221,Asymptomatic,false
+C1547326,Unconfirmed,false
 C0231174,Failure (biologic function),false
 C0680095,Personal failure,false
+C0849164,blood medications,false
+C0033095,Pressure- physical agent,true
+C0460139,Pressure (finding),false
+C1306345,Pressure - action,false
+C4284008,Pressure (property),false
 C0451071,Crohn's disease activity index,false
 C0242492,Relative Risk,true
 C0301630,Reduction (chemical),false
@@ -1342,16 +1494,8 @@ C0305052,Gamma globulin serum,false
 C0360506,Intramuscular immunoglobulin,false
 C1121991,cangrelor,true
 C0126174,Losartan,true
-C1282927,Shortened,false
-C0079613,Adoptive Immunotherapy,true
 C3537307,Anticholinergics inhalants for obstructive airway diseases,false
 C3540711,Anticholinergic mydriatics and cycloplegics,false
-C1704930,ACTG2 wt Allele,false
-C1869853,SERPINA3 protein, human,true
-C3890007,SERPINA3 wt Allele,false
-C4048375,Asthma Control Test Questionnaire,false
-C1806781,Short,false
-C2350002,Short Value,false
 C0679403,vascular stenosis,false
 C3272847,Losmapimod,true
 C1275835,History of myocardial infarction,false
@@ -1364,6 +1508,8 @@ C1801960,Vascular,false
 C0456081,Adjustment Action,false
 C0948922,mole changes,false
 C0428475,Triglyceride level - finding,false
+C1704338,diagnosis aspect,true
+C1704656,Diagnosis Study,false
 C0008902,Classification,true
 C0008903,Taxonomic,true
 C0678229,Classification of information,false
@@ -1391,6 +1537,9 @@ C0017725,Glucose,true
 C1882084,New York Heart Association Class I,false
 C0524425,inside the blood vessel,false
 C1700035,zotarolimus,true
+C1708728,Event Log,false
+C2986775,Logarithm,false
+C1510411,metaplastic cell transformation,false
 C0041667,Underweight,true
 C1521991,Molecular,false
 C0205251,low,false
@@ -1403,6 +1552,7 @@ C4522223,IPSS Risk Category Low,false
 C0337438,Glucose measurement,false
 C0595310,Blood glucose testing kit,false
 C0180309,Automated External Defibrillators,true
+C0439508,per year,false
 C0005802,Blood Glucose,true
 C0002996,Angioplasty, Balloon,true
 C0002997,Angioplasty, Balloon, Coronary,true
@@ -1411,7 +1561,6 @@ C0007637,Inclusion Bodies,true
 C1512693,Inclusion,false
 C0002962,Angina Pectoris,true
 C0455527,H/O: hypertension,false
-C1620287,prasugrel,true
 C3274787,Diabetes Therapy,false
 C3539002,CDISC SDTM Diabetes Therapy Terminology,false
 C2608320,Low-Dose Aspirin,false
@@ -1424,8 +1573,11 @@ C1880497,Empty (qualifier),false
 C1996904,Free (available (qualifier)),false
 C3489408,Hospital Stay,true
 C0428776,Cardiac index,false
+C4032878,olodaterol / tiotropium,true
 C0205166,Long,false
 C1706317,Long Variable,false
+C0521346,respiratory,false
+C1546767,Specimen Source Codes - Respiratory,false
 C0240320,medication use,false
 C1262886,Osteoprotegerin test,false
 C1336645,TNFRSF11B gene,false
@@ -1443,6 +1595,7 @@ C1705810,Generic Role,false
 C3871154,Role,false
 C0683312,Categories,false
 C3889287,Digital Content Category,false
+C4551412,Electronic case report form,false
 C0151280,Creatinine clearance, ml/min,false
 C0003280,Anticoagulants,true
 C0848112,on anti-coagulants,false
@@ -1452,7 +1605,7 @@ C3146294,Generation (action),false
 C0023189,Least-Squares Analysis,true
 C0036919,Seychelles,true
 C0445204,Preoperative,false
-C2347090,MedDRA Low Level Term,false
+C0439385,beats per minute,false
 C1320716,Cardiovascular event,false
 C2984908,Modified Rankin Scale,false
 C3854213,Modified rankin scale:Score:Point in time:^Patient:Ordinal,false
@@ -1463,16 +1616,12 @@ C4330907,Overall Energy Level,false
 C0004239,Atrial Flutter,true
 C0344423,Atrial Flutter by ECG Finding,false
 C1963068,Atrial Flutter, CTCAE,false
-C0681850,Study Subject,false
-C1550501,Subject -direct target,false
-C1706203,Subject - topic,false
-C2349001,Human Study Subject,false
-C2697811,Investigative Subject,false
 C0205177,Active,false
 C3853793,active (HL7 RoleLink),false
 C3888249,Active License,false
 C1424025,MCM8 gene,false
 C2606415,ZDHHC2 protein, human,true
+C1522538,Leading,false
 C0455610,H/O: surgery,false
 C0032821,Potassium,true
 C0202194,Potassium measurement,false
@@ -1488,6 +1637,7 @@ C3826998,Health Assessment Questionnaire Disability Index With Pain Visual Analo
 C4321476,Health Assessment Questionnaire Disability Index,false
 C1704706,Medical History Domain,false
 C1290884,Inflammatory disorder,false
+C0175566,Open,false
 C0017628,Glyburide,true
 C0580545,Blood glucose normal,false
 C0849974,Pulmonary Function Test/Forced Expiratory Volume 1,false
@@ -1500,7 +1650,6 @@ C3887512,high - ActExposureLevelCode,false
 C3889660,High Mitosis-Karyorrhexis Index,false
 C4321237,High Level,false
 C4522209,IPSS Risk Category High,false
-C0439508,per year,false
 C3854129,Symptom:Find:Pt:^Patient:Nom,false
 C0009247,Cohort Studies,true
 C0599755,Cohort,false
@@ -1510,11 +1659,7 @@ C1524031,Minimum,false
 C1552614,ActRelationshipSubset - minimum,false
 C2826545,Minimum Value Derivation Technique,false
 C1522704,Exercise Pain Management,false
-C2603360,T prime,false
 C0199168,Medical service,false
-C0348080,Condition,false
-C1705253,Logical Condition,false
-C3864998,Condition:Find:Pt:^Patient:Nom,false
 C0205476,Medical,false
 C1519386,Smoking Status,false
 C0421330,Screening status,false
@@ -1528,19 +1673,34 @@ C0023516,Leukocytes,true
 C0427512,White blood cell count laboratory result,false
 C3272281,American College of Cardiology/American Heart Association Lesion Complexity Score A,false
 C3538919,Low Risk,false
+C0205388,Few,false
+C0441835,Group A (qualifier value),false
+C4522145,Group A (blood group),false
 C1266129,Atypical Lipoma,false
 C4553172,Antibiotic Lock Therapy,false
+C1415181,GOT1 gene,false
+C1519815,Upper Limit of Normal,false
+C1632851,Times,false
+C3891303,Atlantic Standard Time,false
+C1707491,Consecutive,false
 C0231220,Symptomatic,false
 C1320528,Time of symptom onset,false
 C3245505,potential,false
 C1960636,Dysglycemia,false
 C1319635,mg/mg,false
 C3665365,Arteriosclerotic cardiovascular disease, NOS,false
+C3539185,Corticosteroid nasal preparations for topical use,false
+C3540725,Corticosteroid otologicals,false
+C3540726,Corticosteroid ophthalmologic and otologic preparations,false
+C3540727,Corticosteroids, topical for treatment of hemorrhoids and anal fissures,false
+C0443218,Fixed behavior,false
+C2827483,Fixed Specimen,false
+C3714578,Fix,false
 C2983605,Food Consumption,false
+C0003591,Apolipoproteins,true
 C0020461,Hyperkalemia,true
 C0439375,mEq/L,false
 C4552983,Hyperkalemia, CTCAE,false
-C0043031,Warfarin,true
 C0237607,Practice Experience,false
 C0596545,Experience,false
 C1292781,Complex procedure,false
@@ -1554,6 +1714,8 @@ C1704311,Antithrombotic Agents,true
 C0086542,Leisure,true
 C0034787,Angiotensin Receptor,true
 C1622222,MAS1 protein, human,true
+C1452534,ACE protein, human,true
+C4284014,Adverse Childhood Experience Survey,false
 C0455708,Administration type,false
 C0235974,Pancreatic carcinoma,true
 C0346647,Malignant neoplasm of pancreas,true
@@ -1567,6 +1729,7 @@ C0043128,Western Australia,true
 C0022271,Israel,true
 C0239312,Western European,false
 C0004340,Australia,true
+C0037712,South Africa,true
 C0200638,Eosinophil count procedure,false
 C0034642,Rales,true
 C0445022,Loop,false
@@ -1578,18 +1741,15 @@ C0418986,Respiratory medication,false
 C0585943,Lipid-lowering therapy,false
 C1519269,Serving,false
 C4528314,Secondary Endpoint,false
+C0332181,Annual,false
 C2936643,Standard of Care,true
 C0031705,Phosphorus,true
 C0080014,Dietary Phosphorus,true
 C3714498,Phosphorus Drug Class,false
 C0428460,Finding of lipid level,false
 C4505437,Smoking Habit,true
-C0175566,Open,false
+C0205174,Triplicate,false
 C2121434,Triple Screen,false
-C1328319,Ankle brachial pressure index (observable entity),true
-C3888326,Intravascular systolic.tibial artery/Brachial artery:PresRto:Pt:Arterial system:Qn,false
-C1452534,ACE protein, human,true
-C4284014,Adverse Childhood Experience Survey,false
 C0185003,Reparative closure,false
 C1521802,Closure,false
 C1881378,Limitation of Use Based on Duration of Use,false
@@ -1606,10 +1766,6 @@ C1515884,Acupuncture and Oriental Medicine,false
 C0740304,copd exacerbation,false
 C0015179,European Union,true
 C0596197,blood treatment,false
-C0033095,Pressure- physical agent,true
-C0460139,Pressure (finding),false
-C1306345,Pressure - action,false
-C4284008,Pressure (property),false
 C0016157,Fish Oils,true
 C2348354,Duration of Administration,false
 C0005902,Body Surface Area,true
@@ -1633,10 +1789,12 @@ C0524727,Discipline of Heart Surgery,true
 C0015127,Etiology aspects,true
 C1314792,Etiology,true
 C1524003,Science of Etiology,false
+C1444637,In the past,false
+C0279025,Hormone Therapy,false
+C4284302,EHD1 wt Allele,false
 C1947933,care activity,false
 C0010294,Creatinine,true
 C1561535,Creatinine, CTCAE,false
-C0037712,South Africa,true
 C1864389,PREMATURE CHROMATID SEPARATION TRAIT,false
 C1882368,Photon Correlation Spectroscopy,true
 C0441833,Groups,false
@@ -1666,28 +1824,35 @@ C0948089,Acute Coronary Syndrome,true
 C0488053,Intravascular mean:Pressure:Point in time:Arterial system:Quantitative,false
 C0031529,Philippines,true
 C1570610,FN1 protein, human,true
-C0439505,per day,false
-C0023216,Lower Extremity,true
+C0034380,Quality of life,true
+C0518214,Perceived quality of life,false
 C0014245,Endoscopy (procedure),true
 C1283828,intent,false
 C1551357,intended - ParticipationSignature,false
 C0538927,celecoxib,true
 C1883420,Unacceptable,false
-C0877248,Adverse event,false
-C1705413,Adverse Event Domain,false
 C0206579,Slovakia,true
 C1232424,Buteo solitarius (organism),false
 C3641256,LDL Particle Size Measurement,false
 C0549193,Parameter Value,false
 C1704769,Programming Parameter,false
 C2350001,Population Parameter,false
-C0886296,Nursing interventions,false
-C1273869,Intervention regimes,false
 C0232187,Cardiac rhythm type,false
 C0026193,Minor (person),true
 C0205165,Minor (value),false
 C0815172,patient characteristics,false
 C4072694,ACC-AHA,false
+C0005773,Blood Cells,true
+C3897966,Per Picoliter,false
+C0597484,Sodium Cation,false
+C1272460,Not Applicable,false
+C1546968,No Application Type,false
+C1879645,Adverse Event by CTCAE Category,false
+C4049872,Package Type Not Applicable,false
+C4552882,XK wt Allele,false
+C4049765,Infusion pump Alert priority PL,false
+C0007584,Cell Count,true
+C0007634,Cells,true
 C0065058,Lipoprotein (a),true
 C0125953,Lipoprotein (a-),true
 C1096202,Lipoprotein (a) measurement,false
@@ -1712,19 +1877,25 @@ C2735101,Cardiac biomarkers:Complex:-:^Patient:Set,false
 C2735102,Cardiac biomarkers,false
 C0229992,Psyche structure,false
 C2349179,End Point,false
+C0175659,Weight measurement scales,true
+C0222045,Integumentary scale,false
+C0349674,Intellectual scale,false
+C1947916,Scaling,false
 C0681344,formal education,false
-C0213771,tiotropium,true
 C0040034,Thrombocytopenia,true
 C0392386,Decreased platelet count,false
 C3642216,Per Deciliter,false
 C3898312,Millimole per Liter per Milligram,false
-C0025266,Male population group,true
 C0264677,Angina, class III,false
 C0026698,mucolytic agents,true
 C2984554,Emotional Well-being,false
 C3641833,Overall Emotional Well Being,false
-C0678226,Due to,false
+C0032952,Prednisone,true
+C0044955,prednylidene,true
 C3146286,Due,false
+C0037366,Smoke,true
+C0439994,Tobacco smoke,false
+C0750523,FORMER,false
 C0745133,isolated systolic hypertension,false
 C1879646,Affected Area,false
 C0522082,Normal glucose level,false
@@ -1749,7 +1920,8 @@ C1709323,Open Label Study,false
 C0948008,Ischemic stroke,false
 C4554348,FF genotype,false
 C0205999,British Virgin Islands,true
-C0015688,Nonesterified Fatty Acids,true
+C0999593,Lama,false
+C1416775,LAMA1 gene,false
 C2347489,Person Observer,false
 C0051844,angiogenin,true
 C1367482,ANG gene,false
@@ -1799,9 +1971,13 @@ C0683314,personal health,false
 C0041700,United Kingdom,true
 C0002045,algorithm,true
 C1553907,Observation Method - algorithm,false
+C1158406,lipid modification,false
 C1414174,DSPP gene,false
 C1999216,Inhibitor,false
 C3538889,Troponin T, Cardiac Muscle,false
+C0536221,HSD17B4 protein, human,true
+C3813197,HSD17B4 wt Allele,false
+C4281799,Vitamin D-Binding Protein, human,false
 C2757061,Adrenergic beta-Antagonists [MoA],false
 C3536830,beta-Adrenergic Blocker [EPC],false
 C0042963,Vomiting,true
@@ -1812,7 +1988,9 @@ C4084767,Bothered by Vomiting,false
 C4084768,Usual Severity Vomiting,false
 C4084769,How Often Vomiting,false
 C0222762,Rib Cage,true
+C0016658,Fracture,true
 C0041703,United States,true
+C0006823,Canada,true
 C0028754,Obesity,true
 C1963185,Obesity, CTCAE,false
 C0162425,Intention - mental process,true
@@ -1833,7 +2011,6 @@ C0029161,Oral Glucose Tolerance Test,true
 C3665045,Sodium-Glucose Transporter Inhibitors,false
 C0680240,Agreement,false
 C2348070,Daily Dose,false
-C0021081,Immunosuppressive Agents,true
 C0226032,Anterior descending branch of left coronary artery,false
 C0011881,Diabetic Nephropathy,true
 C1442864,DIANPH gene,false
@@ -1847,10 +2024,6 @@ C2348589,Subtraction process,false
 C4279947,Health-Related Quality Of Life,true
 C0429706,Forced expiratory volume in 1 second finding,false
 C0005680,Black race,true
-C0007787,Transient Ischemic Attack,true
-C0917805,Transient Cerebral Ischemia,true
-C0444686,Calculated,false
-C1441506,Calculation,false
 C0289313,rosiglitazone,true
 C3826872,St. George's Respiratory Questionnaire for Chronic Obstructive Pulmonary Disease Patients,false
 C0151578,Creatinine increased,false
@@ -1861,6 +2034,11 @@ C0227327,Distal part of ileum,false
 C4553195,Low Density Array,false
 C0344315,Depressed mood,false
 C0549249,Depressed Level of Consciousness,true
+C0030971,Perception,true
+C0037438,Social support,true
+C0748877,Support System,true
+C1540833,Social support (regime/therapy),false
+C3669642,Social Support - counseling strategy,false
 C0015385,Limb structure,true
 C0750573,emergent,false
 C2188405,urgent Operation,false
@@ -1889,6 +2067,7 @@ C1186706,Bolus of ingested food,false
 C1511237,bolus infusion,false
 C1705509,Bolus Dosing Unit,false
 C3812160,Radiotherapy Bolus,false
+C1521801,Having administered,false
 C0040335,Encounter due to tobacco use,false
 C0543414,Tobacco use,true
 C0841002,History of tobacco use,false
@@ -1922,6 +2101,9 @@ C0687702,Cancer Remission,false
 C0034628,Radius Fractures,true
 C0521143,Seropositive,false
 C1507009,Pain onset,false
+C3889737,Data Change Date,false
+C0333930,eosinophilic,false
+C1292734,Treatment intent,false
 C0010068,Coronary heart disease,true
 C1956346,Coronary Artery Disease,true
 C0003484,Abdominal aorta structure,true
@@ -1931,7 +2113,6 @@ C1276802,Sudden onset (attribute),false
 C0013395,Dyspepsia,true
 C4552968,Dyspepsia, CTCAE,false
 C1519427,South Asian,false
-C0150457,Anticoagulant therapy,false
 C1880389,Domain (area of knowledge),false
 C1883221,Superkingdom (taxonomic category),false
 C3541951,Concept model domain,false
@@ -1943,19 +2124,15 @@ C0439541,Black color,false
 C0939232,fluticasone / salmeterol,true
 C0271650,Impaired glucose tolerance,true
 C1301732,Planned,false
-C0009458,Communications Media,true
-C0439536,Medium,false
-C1705217,Medium (Substance),false
-C3244283,medium exposure,false
-C4085196,Medium Growth Rate,false
-C4522282,A Medium Amount of Time,false
-C4522283,A Medium Amount,false
-C1444637,In the past,false
-C4284302,EHD1 wt Allele,false
 C0545733,vertebrobasilar,false
 C0231940,Alveolar ventilation function,false
 C0282636,Cell Respiration,true
 C0376627,Health Transition,true
+C0029408,Degenerative polyarthritis,true
+C0205421,Deferred,false
+C0443286,Reaction,false
+C1545665,Views delayed,false
+C3272602,Delayed Testing,false
 C0027473,Nationality,true
 C0005918,Bolivia,true
 C0006413,Burkitt Lymphoma,true
@@ -1965,6 +2142,8 @@ C0729790,H/O: atrial fibrillation,false
 C0205311,Paroxysmal,false
 C0028040,Nicotine,true
 C0015982,Fibrin,true
+C0205369,Specific qualifier value,false
+C1552740,Entity Determiner - specific,false
 C0439590,Prolonged,false
 C2825507,Last Observation Carried Forward Imputation Technique,false
 C0144576,Paclitaxel,true
@@ -2012,7 +2191,6 @@ C0560038,Becquerel,false
 C3541236,Bonaire, Sint Eustatius and Saba,false
 C0205682,Waist-Hip Ratio,true
 C0040336,Tobacco Use Disorder,true
-C0279025,Hormone Therapy,false
 C1427925,ELL gene,false
 C3273466,RNA Polymerase II Elongation Factor ELL,false
 C0022663,Kidney Glomerulus,true
@@ -2024,9 +2202,6 @@ C4554622,Osteoporosis, CTCAE 5.0,false
 C0001314,Acute Disease,true
 C0444921,Duration of treatment,false
 C3259042,Treatment duration:Time:Pt:^Patient:Qn,false
-C0684224,Report (document),true
-C0700287,Reporting,false
-C4319718,Reported,false
 C0257190,ivabradine,true
 C0597240,Physical State,false
 C0031843,physiological aspects,true
@@ -2041,6 +2216,8 @@ C1522492,Formation,false
 C4255237,Form:Finding:Point in time:{Setting}:Document:{Role},false
 C2964478,Short Forms,false
 C4049916,Physical Function Subordinate Domain,false
+C0332285,Within,false
+C1707101,CD44 wt Allele,false
 C0184252,Medical Valves,false
 C1186983,anatomic valve,false
 C1704414,Valve Device,false
@@ -2051,6 +2228,7 @@ C0520887,ST segment depression (finding),false
 C1454484,VCL protein, human,true
 C1705503,VCL wt Allele,false
 C4281602,Minute volume measurement,false
+C0457453,On admission,false
 C4528394,Planned Treatment Duration,false
 C0205412,Inadequate (qualifier),false
 C0871261,Response process,false
@@ -2074,15 +2252,11 @@ C2984258,Non-Small Cell Lung Cancer Pathway,false
 C3539721,NCI CTEP SDC Non-Small Cell Lung Cancer Sub-Category Terminology,false
 C0281481,anti-tumor necrosis factor therapy,false
 C0085649,Peripheral edema,false
-C0597484,Sodium Cation,false
 C3435805,Ive - copepoda,false
 C4554334,IVE Regimen,false
-C1272460,Not Applicable,false
-C1546968,No Application Type,false
-C1879645,Adverse Event by CTCAE Category,false
-C4049872,Package Type Not Applicable,false
-C4552882,XK wt Allele,false
 C0451521,Swollen joint count,false
+C0332196,Exclude,false
+C2828389,Exclusion,false
 C0039503,Tendinitis,true
 C0009905,Contraceptives, Oral,true
 C0039070,Syncope,true
@@ -2093,13 +2267,21 @@ C0439855,Complex,false
 C1704241,complex (molecular entity),false
 C2945704,Conventional Treatment,false
 C0012373,Diltiazem,true
+C0042523,Verapamil,true
 C1511113,Bilateral Disease,false
 C0429090,Pathological Q wave,false
 C0027778,Netherlands,true
 C0560008,nanolitre,false
 C3892223,Per Nanoliter,false
 C0086440,Hypolipidemic Agents,true
-C0750523,FORMER,false
+C0444708,Radiographic,false
+C0034754,Reading (activity),true
+C1705179,Reading (datum presentation),false
+C4284139,Reading Ability question,false
+C1442162,GIVEN,false
+C1550718,Entity Name Part Type - given,false
+C1947971,Give - dosing instruction imperative,false
+C3244317,Given name,false
 C0016011,Platelet Glycoprotein GPIIb-IIIa Complex,true
 C0038846,Supine Position,true
 C0439232,Minute of time,false
@@ -2113,13 +2295,15 @@ C1553035,Unit Of Measure Prefix - micro,false
 C3811161,Micro (prefix),false
 C4049106,Microbiology - Laboratory Class,false
 C3258078,Psoriasis treatment,false
+C0003009,angiotensin II,true
+C1366631,AGT gene,false
+C3714928,Angiotensin-2, Human,false
 C0011702,Desmosine,true
 C2348535,Stenting,false
 C4551552,Cerebellar Ataxia, Mental Retardation, And Dysequilibrium Syndrome 1,true
 C1707455,Comparison,false
 C1301808,Geographic state,false
 C2983136,Territory,false
-C4331910,Past 30 days,false
 C0040044,Thrombolytic Therapy,true
 C0201519,Antibody to islet cells of pancreas measurement,false
 C4034225,Stenosis degree,false
@@ -2143,8 +2327,6 @@ C3272283,American College of Cardiology/American Heart Association Lesion Comple
 C4050568,High Risk Acute Leukemia,false
 C4319571,High risk,false
 C0282416,Overall Publication Type,true
-C1292734,Treatment intent,false
-C3889737,Data Change Date,false
 C1561607,Overall,false
 C0205132,Linear,false
 C0001288,Activities of Daily Living (activity),true
@@ -2161,6 +2343,7 @@ C4551529,Renal Dialysis,true
 C0011945,Physical Dialysis,true
 C0022671,Kidney Transplantation,true
 C1059964,Genus Dialysis,false
+C0392760,Affecting,false
 C0449243,Timing,false
 C3714444,Loading dose,false
 C1704250,Timing, LOINC Axis 3,false
@@ -2171,10 +2354,6 @@ C0003864,Arthritis,true
 C4552845,Arthritis, CTCAE,false
 C0205420,Concurrent,false
 C0205231,Extensive,false
-C3539185,Corticosteroid nasal preparations for topical use,false
-C3540725,Corticosteroid otologicals,false
-C3540726,Corticosteroid ophthalmologic and otologic preparations,false
-C3540727,Corticosteroids, topical for treatment of hemorrhoids and anal fissures,false
 C0009253,Coitus,true
 C0036864,Sex Behavior,true
 C0804628,Gender:Type:Point in time:^Patient:Nominal,false
@@ -2183,7 +2362,6 @@ C1517945,Loss,false
 C0018935,Hematocrit procedure,true
 C0518014,Hematocrit level,false
 C1301725,Documented,false
-C0231221,Asymptomatic,false
 C1609436,Document completion status - Documented,false
 C0042469,Venezuela,true
 C3714652,Ventricular Premature Complex by ECG Finding,false
@@ -2195,6 +2373,9 @@ C2708283,Clinical presentation,false
 C3654025,CARDIAC THERAPY DRUGS,false
 C0015811,Femur,true
 C0023303,Length of Stay,true
+C0012621,Body Fluid Discharge,false
+C0030685,Patient Discharge,true
+C2926602,Discharge, body substance,false
 C0521117,Severity of illness,false
 C1260596,coronary artery graft device,false
 C0021212,Indicators,true
@@ -2203,12 +2384,18 @@ C1522602,Indicator,false
 C2315493,History of claudication,false
 C0205267,Intermittent,false
 C0553692,Brain hemorrhage,true
+C0021102,Implants,false
+C2828363,Implanted Medical Device (finding),false
+C1552961,point - UnitsOfMeasure,false
+C2347617,Point Name,false
+C3714763,Point,false
 C0001552,Pharmaceutical Adjuvants,true
 C2826286,Dose Adjustment Reason,false
 C0205246,Generalized,false
 C3812897,General medical service,false
 C3891294,Safety Reporting Documentation,false
 C4521767,United States Military Commissioned Officer O10,false
+C0581283,Injection into lumbar epidural space,false
 C0552409,Mean Diameter,false
 C0205460,biological,false
 C3665627,Ehrlich units per deciliter,false
@@ -2219,14 +2406,21 @@ C0750879,Eosinophil count result,false
 C0035410,Rhabdomyolysis,true
 C0026848,Myopathy,true
 C4552660,Rhabdomyolysis, CTCAE,false
+C0231528,Myalgia,true
+C0009212,Cocos (Keeling) Islands,true
+C0439775,Elevation procedure,false
+C0702240,Elevation,false
+C0010287,Creatine Kinase,true
+C1872855,CHKA protein, human,true
+C4552646,Myalgia, CTCAE 5,false
 C0031676,Phospholipids,true
 C0202177,Phospholipid measurement,false
 C0746467,medication current,false
 C0151691,Decreased HDL cholesterol concentration,false
 C0205191,chronic,false
+C1550351,Diagnosis Type,false
 C0683610,prohibition,false
 C4553947,Breath Actuated Nebulizer,false
-C0444708,Radiographic,false
 C0398623,Thrombophilia,true
 C0392885,High density lipoprotein measurement,false
 C1513126,Menopausal Status,false
@@ -2237,9 +2431,9 @@ C0264716,Chronic heart failure,false
 C0020651,Hypotension, Orthostatic,true
 C1955477,Glucose (oral),false
 C0600419,Patient Agent,true
-C0021102,Implants,false
 C0180153,Covers (device),false
 C0439844,Covered (qualifier value),false
+C4521226,Pomalidomide/Bortezomib/Dexamethasone Regimen,false
 C1320647,History of percutaneous coronary intervention,false
 C4554713,Percutaneous coronary intervention:History:Point in time:^Patient:Ordinal,false
 C0002871,Anemia,true
@@ -2250,14 +2444,21 @@ C1548600,user - Facility type,false
 C1708745,Low-Dose Treatment,false
 C3203348,Upper Gastrointestinal Tract,true
 C0205340,Repaired,false
+C1704788,Definition,false
+C3539106,Sufficiently defined concept definition status (core metadata concept),false
 C0724804,Peripheral vasodilators,false
+C1533107,Puff unit dose,false
+C1882376,Picofarad (unit of measure),false
 C0022709,Peptidyl-Dipeptidase A,true
 C0442158,Perianal,false
+C0003461,Anus,true
 C3166866,Framingham,false
 C0205042,Coronary artery,true
 C0556297,Current drinker,false
 C0497254,Musculoskeletal,false
 C2707260,Musculoskeletal:-:Point in time:^Patient:-,false
+C0050451,acetohydroxamic acid,true
+C0772110,Alpha Hydroxy Acids,false
 C0427008,Stiffness,false
 C2923536,Body mass index:Prctl:Pt:^Patient:Qn,false
 C3814772,glycopyrronium,false
@@ -2276,6 +2477,9 @@ C0049272,5-iodouracil,true
 C0439453,International Unit,false
 C0694756,Intrauterine,false
 C0730345,Microalbuminuria,false
+C0033687,Proteinuria,true
+C1962972,Proteinuria, CTCAE 3.0,false
+C4554346,Proteinuria, CTCAE 5.0,false
 C1549031,Absolute Change,false
 C1519101,Risk Estimate,false
 C0033252,Proctosigmoiditis,true
@@ -2293,13 +2497,12 @@ C0451119,Diagnostic interview schedule,false
 C1970187,Deafness, Sensorineural, And Male Infertility,true
 C2827881,Milligram per Liter per Milligram,false
 C0017631,Gliclazide,true
+C1709058,Modified Release Dosage Form,false
+C4544813,Modified-release,false
 C0439858,classical example,false
 C1554184,Dual,false
 C0012252,Genus: Digitalis,true
 C0304520,Digitalis preparation,false
-C0012621,Body Fluid Discharge,false
-C0030685,Patient Discharge,true
-C2926602,Discharge, body substance,false
 C0205103,Intermediate,false
 C1550465,Observation Interpretation - intermediate,false
 C2827755,Antimicrobial Intermediate Susceptibility Result,false
@@ -2307,6 +2510,9 @@ C3889971,Intermediate Mitosis-Karyorrhexis Index,false
 C3815322,ZNF667-AS1 gene,false
 C0019010,Hemodynamics,true
 C4281788,hemodynamics (procedure),false
+C0023128,Latvia,true
+C0731033,Leucovorin Calcium,true
+C1881413,Liposome Vesicle,false
 C0392877,infusion of drug,false
 C0073992,salmeterol,true
 C1096489,Treatment with Vitamin K antagonist,false
@@ -2316,8 +2522,6 @@ C0439164,Optical density units,false
 C1512019,Doctor of Optometry,false
 C3273373,South Sudan,true
 C3665488,Familial Osteochondritis Dissecans,true
-C0999593,Lama,false
-C1416775,LAMA1 gene,false
 C0483204,O NOS Ab,false
 C0226037,Structure of circumflex branch of left coronary artery,false
 C2981360,lebrikizumab,true
@@ -2364,12 +2568,15 @@ C3715044,AKR1A1 wt Allele,false
 C4553528,Sequence Arm,false
 C0428462,Measurement of serum lipid level,false
 C0008952,Clinic Visits,true
+C3538928,Usual,false
 C1510992,Average,false
 C0806909,Maximum,false
 C1552615,Act Relationship Subset - maximum,false
 C2826546,Maximum Value Derivation Technique,false
 C2825518,Average of Value Derivation Technique,false
 C1415800,HTN1 gene,false
+C1516691,Cognitive,false
+C4321457,Examination,false
 C0037623,Solomon Islands,true
 C1415692,HP gene,false
 C1708288,HP wt Allele,false
@@ -2393,26 +2600,24 @@ C0017431,Genotype,true
 C0600091,Identifier,false
 C1441613,Immune diffusion,false
 C0264886,Conduction disorder of the heart,true
-C0392760,Affecting,false
 C0489451,Body surface,false
-C1314939,Involvement with,false
 C0596620,glucose metabolism,false
 C0017853,Hemoglobin, Glycosylated,true
 C4553833,Mino-Lok Therapy,false
 C0034896,Rectum,true
+C0227391,Sigmoid colon,true
 C0006675,Calcium,true
 C0006726,Calcium, Dietary,true
 C2936886,Calcium [EPC],false
 C3540037,CALCIUM SUPPLEMENTS,false
 C3714611,Calcium Drug Class,false
+C0242295,Dietary Supplements,true
+C1947943,Supplement (document),false
+C2348609,Supplement,false
 C1511538,Country Code,false
 C0432633,Blood group antibody N,false
-C0020443,Hypercholesterolemia,true
-C1522133,Hypercholesterolemia result,false
 C1552027,personal relationship,false
 C1861172,Venous Thromboembolism,true
-C0027552,Needs,true
-C0686904,Patient need for (contextual qualifier),false
 C0026655,Mozambique,true
 C1705291,Mass-to-Charge Ratio,false
 C0001641,Adrenergic alpha-Antagonists,true
@@ -2437,11 +2642,15 @@ C1704212,Embolus,true
 C1425688,RAX gene,false
 C1521941,prescription document,false
 C2709207,Rx therapy,false
+C0332271,Worsening pattern,false
+C1279889,Deterioration of status,false
+C1457868,Worse,false
 C0243192,agonists,true
 C0077910,Ularitide,true
 C0205453,Seven,false
 C4321491,Moderately Able,false
 C0149931,Migraine Disorders,true
+C4522078,Group B,false
 C0007272,Carotid Arteries,true
 C0162859,Common carotid artery,true
 C0871707,daily activities,false
@@ -2460,13 +2669,13 @@ C0232804,Renal function,false
 C0427728,Blood concentration results,false
 C0699870,Blood drug concentration,false
 C1313904,Blood concentration test,false
-C0547044,Smaller,false
-C4032878,olodaterol / tiotropium,true
 C0753208,Gamma synuclein,true
 C1709991,SNCG wt Allele,false
 C3813610,Skin Response Domain,false
 C3890900,Final Statistical Report,false
 C3891546,SR cell line,false
+C0027978,New Zealand,true
+C0324547,New Zealand Rabbits,true
 C0205321,Penetration,false
 C1322815,Drug-Eluting Stents,true
 C0027362,Human Age Group,true
@@ -2478,6 +2687,8 @@ C0039240,Supraventricular tachycardia,true
 C1963244,Supraventricular Tachycardia, CTCAE,false
 C3815188,Supraventricular Tachycardia by ECG Finding,false
 C0205271,Irregular,false
+C0041582,Ulcer,true
+C3887532,Ulceration,false
 C0205403,Extreme,false
 C0333076,Tortuosity,false
 C4085555,Extreme Response,false
@@ -2488,6 +2699,7 @@ C2315323,Indication for procedure,false
 C2347896,Reason For Procedure,false
 C0205234,Focal,false
 C0848753,pacemaker implant,false
+C0686905,Unavailability,false
 C0389252,RET protein, human,true
 C0475208,Titer,false
 C0439340,Kilounit per Liter,false
@@ -2495,21 +2707,14 @@ C1880521,Enzyme Unit per Milliliter,false
 C2945590,Unit per Milliliter,false
 C3641830,Overall Quality of Life,false
 C0005821,Blood Platelets,true
-C0443286,Reaction,false
 C1627892,Microgram per Kilogram,false
 C0055729,cilostazol,true
 C0522776,Placement of stent,false
-C0682125,Alaska Natives,true
 C1706388,Array Feature,false
 C2346469,Image Feature,false
 C2348519,Feature,false
 C0168273,bivalirudin,true
 C0205448,Two,false
-C0849164,blood medications,false
-C1456447,SLC6A2 protein, human,true
-C3853572,Ephrin Type-B Receptor 1, human,false
-C3887809,Net (qualifier),false
-C3890893,SLC6A2 wt Allele,false
 C0006685,Calcium Channel,true
 C0205272,Regular,false
 C0009830,Consumption of goods,true
@@ -2523,17 +2728,17 @@ C3830527,Detectable,false
 C0162577,Angioplasty,true
 C1548817,Angioplasty - Consent Type,false
 C0001701,Exercise, Aerobic,true
+C0079809,Measures,true
+C1879489,Measures (attribute),false
 C1419115,PTPRF gene,false
 C0276828,Avian trichomoniasis,false
 C3814448,Low Anterior Resection,false
 C0439093,Greater Than,false
+C0205163,Equal,false
 C1707957,Evaluator - personnel,false
 C2698624,CDISC SDTM Evaluator Terminology,false
-C0011900,Diagnosis,true
 C0019425,Heterozygote,true
 C0241888,Familial,false
-C1704338,diagnosis aspect,true
-C1704656,Diagnosis Study,false
 C0205108,Distal (qualifier value),false
 C0677535,Walls of a building,false
 C0042402,Vasodilator Agents,true
@@ -2549,21 +2754,24 @@ C3668946,Activity (animal life circumstance),false
 C4049938,Physical Activity Measurement,false
 C4049939,FDA Establishment Activity Terminology,false
 C1948374,fluticasone furoate,true
+C2935023,vilanterol,true
 C0085201,Apolipoprotein A-I,true
 C1677784,APOA1 protein, human,true
 C1551421,Miami race,false
 C1708601,K Prime,false
 C0242751,Europa,true
 C0012265,Digoxin,true
+C0013220,Drug Tolerance,true
+C0020963,Immune Tolerance,true
+C0220929,Mental tolerance,false
+C0231197,Physiologic tolerance,false
+C1704410,Tolerance,false
 C0003695,Arachidonic Acid,true
 C0000545,Eicosapentaenoic Acid,true
 C0439632,Age values,false
 C2316832,Arachidonic acid measurement,false
 C2699193,Cholesterol to HDL-Cholesterol Ratio Measurement,false
-C0536221,HSD17B4 protein, human,true
-C3813197,HSD17B4 wt Allele,false
-C4281799,Vitamin D-Binding Protein, human,false
-C0041582,Ulcer,true
+C1882932,Representation (action),false
 C0017086,Gangrene,true
 C0020885,ileum,true
 C0205098,Medial,false
@@ -2582,6 +2790,13 @@ C0340543,Familial primary pulmonary hypertension,true
 C0637939,hydralazine 4-anisaldehyde hydrazone,true
 C1150929,2-oxo-hept-3-ene-1,7-dioate hydratase activity,false
 C1879987,Canadian Cardiovascular Society Grading Scale Class,false
+C0392761,Timed,false
+C0016504,Foot,true
+C4277740,Walk Test,true
+C0347981,Feet, unit of measurement,false
+C2346504,International Foot,false
+C2348613,Survey Foot,false
+C2348704,Foot British,false
 C0065880,Meglitinide,true
 C0718674,Ascot,false
 C0001613,Adrenal Cortex,true
@@ -2590,41 +2805,52 @@ C0022655,Structure of cortex of kidney,true
 C0023823,Low-Density Lipoproteins,true
 C2744579,ATP8A2 protein, human,true
 C4552600,Adenosine Triphosphate Measurement,false
+C1552866,include - SetOperator,false
+C2700399,Include (action),false
 C1436327,AKR1B1 protein, human,true
 C2986463,Androgen Receptor Positive,false
 C3884535,AREG protein, human,true
 C4521369,AKR1B1 wt Allele,false
-C0439044,Living Alone,false
-C0679994,alone - group size,false
+C1444656,Indicated,false
+C0036143,Salvelinus,true
+C0327953,Salvelinus fontinalis,false
+C1316572,Evaluation and management note:Finding:Point in time:{Setting}:Document:{Provider},false
+C1317574,Note (document),false
+C0332294,Resulting in,false
 C0205107,Proximal,false
 C0017189,Gastrointestinal tract structure,true
 C4489236,Proximal Resection Margin,false
 C0456525,platelets/L,false
 C0291665,B-insulin,true
-C0033687,Proteinuria,true
-C1962972,Proteinuria, CTCAE 3.0,false
-C4554346,Proteinuria, CTCAE 5.0,false
 C0497247,Increase in blood pressure,false
 C0023089,Lasers,true
 C0458142,Laser-generated electromagnetic radiation,false
 C1023865,Laser plant,false
 C1706315,Laser Device Component,false
+C0042903,Vitrectomy,true
 C4054229,Patient Assessment of Overall Well-Being,false
 C3272317,In Stent Restenosis,false
+C1335447,Positive Laboratory Test Result,false
+C0003241,Antibodies,true
 C0007674,Central America,true
+C0037713,South America,true
 C0562350,Hip circumference,false
 C0687673,Registered nurse,true
 C3272900,N-Terminal ProB-type Natriuretic Peptide Measurement,false
 C0040704,Transient Population Group,true
+C0205343,Reversible,false
 C0042027,Urinary tract,true
 C0369901,Protein/Creatinine,false
 C0428627,Protein to Creatinine Ratio Measurement,false
 C1524119,urinary,false
 C3640764,Intermediate Risk,false
+C0521093,Confirmed by,false
+C0750484,Confirmation,false
 C0729627,Non-high density lipoprotein cholesterol (substance),false
 C1535899,Non-High Density Lipoprotein Cholesterol Measurement,false
 C0439458,IU/mL,false
-C1533107,Puff unit dose,false
+C0205276,Local,false
+C0013516,Echocardiography,true
 C0340288,Stable angina,true
 C0443252,Long-term,false
 C0017168,Gastroesophageal reflux disease,true
@@ -2642,7 +2868,8 @@ C0679646,Participant,false
 C0439342,Microunit per Milliliter,false
 C1710706,Zone,false
 C1565830,PTGS1 protein, human,true
-C0039155,Systole,true
+C3538926,Endocrine System Findings Domain,false
+C0520863,Diastolic dysfunction,false
 C1424906,DTNBP1 gene,false
 C3274775,Mildly Abnormal Ejection Fraction,false
 C0239998,Recurrent infections,false
@@ -2662,6 +2889,8 @@ C0450168,Distal third,false
 C0588207,Bone structure of distal radius,false
 C0009932,Control Groups,true
 C1708760,Lowest,false
+C0745732,List,false
+C3272378,Sequence Data Type,false
 C0456712,Stroke index,false
 C0232813,Renal clearance function,false
 C0699829,Renal clearance diagnostic test,false
@@ -2679,10 +2908,8 @@ C0683469,surgical methods,false
 C0162388,Killing,true
 C0681205,Sacrifice,false
 C1550555,kill - ActRelationshipJoin,false
-C4555205,Ex-Smokers,true
 C0018017,objective (goal),true
 C1571704,Act Mood - Goal,false
-C0205470,immunologic,false
 C4076075,Infliximab therapy,false
 C0413234,Acute allergic reaction,false
 C0380964,factor V Leiden,true
@@ -2692,21 +2919,17 @@ C3542419,Factor V Leiden Measurement,false
 C0240094,Joint tenderness,false
 C4554549,Tender joint:Anatomy:Point in time:^Patient:Nominal,false
 C4696258,Tender joint:Num:Pt:^Patient:Qn,false
+C0332149,Possible,false
+C1705910,Possibly Related to Intervention,false
+C2362652,Possible diagnosis,false
 C0456389,size,false
 C0301532,Multivitamin preparation,false
 C0600080,Stretching exercises,false
 C3898876,Hospitalization Due to Heart Failure,false
-C0023128,Latvia,true
-C0731033,Leucovorin Calcium,true
-C1881413,Liposome Vesicle,false
 C0005841,Blood Transfusion,true
 C0281867,History of - blood transfusion,false
 C2963157,Anti-platelet drugs,false
 C0677547,days/week,false
-C0205421,Deferred,false
-C0439659,Beginning,false
-C1545665,Views delayed,false
-C3272602,Delayed Testing,false
 C0036154,San Marino,true
 C4553627,Subject Disease Milestones Domain,false
 C2362049,Microalbumin,false
@@ -2714,7 +2937,6 @@ C0031268,Pet Animal,true
 C1170730,wake ups,false
 C0335343,Companions,true
 C0682323,Partner in relationship,false
-C0003241,Antibodies,true
 C4505301,Anti-Citrullinated Protein Antibodies,true
 C0439596,Cyclical,false
 C1511572,event cycle,false
@@ -2724,12 +2946,10 @@ C1824728,CFB gene,false
 C0444930,End,false
 C2746065,Stop (qualifier value),false
 C0205139,Hemispheric,false
-C1054154,Tacca leontopetaloides,false
 C0333482,atherosclerotic,false
+C1299392,Mild to moderate,false
 C0028978,Omeprazole,true
 C0205463,Physiological,false
-C0079809,Measures,true
-C1879489,Measures (attribute),false
 C0449774,Patterns,false
 C0541746,Thiazides,true
 C0027441,Nasopharyngitis,true
@@ -2758,12 +2978,15 @@ C2003941,Alpha,false
 C2350010,Alpha Value,false
 C0035078,Kidney Failure,true
 C1258199,Inotropism,true
+C0042397,Vasoconstrictor Agents,true
+C1710475,Trial Phase,false
 C0332158,Contact with,false
 C0002422,Ambulances,true
 C3846685,Ambulance, not otherwise specified,false
 C0337611,contact person,false
 C1705415,Communication Contact,false
 C3812666,Personal Contact,false
+C0562508,Accident and Emergency department,true
 C0553704,increased potassium level,false
 C4553529,Concordance,false
 C0015260,Exercise stress test,true
@@ -2776,7 +2999,6 @@ C1456781,Benign melanocytic nevus,false
 C1824986,DUOXA1 gene,false
 C3665593,Melanocytic nevus of skin,false
 C0237400,Actual,false
-C0581283,Injection into lumbar epidural space,false
 C0812246,TNF gene,false
 C1710304,TNF wt Allele,false
 C0041580,Ukraine,true
@@ -2784,6 +3006,7 @@ C4688581,Helicobacter pylori Negative,false
 C1290886,Chronic inflammatory disorder,false
 C1555577,arrival - ActRelationshipType,false
 C1706079,Arrival - action,false
+C0007430,Catheterization,true
 C0393022,rituximab,true
 C0026565,Mortality Vital Statistics,true
 C0026566,Aspects of mortality statistics,true
@@ -2792,18 +3015,21 @@ C0011265,Presenile dementia,true
 C0497327,Dementia,true
 C0019682,HIV,true
 C0019699,HIV Seropositivity,true
+C0040549,Toxin,true
+C0205263,Induce (action),false
+C4522020,Toxin (disposition),false
 C0366550,Methotrexate:Mass:Pt:Dose:Qn,false
 C1881833,Milligram per Week,false
 C0242339,Dyslipidemias,true
-C0332271,Worsening pattern,false
-C1457868,Worse,false
 C1546960,Patient Outcome - Worsening,false
 C0035253,Rest,true
 C2700280,World,false
 C1622890,site-specific telomere resolvase activity,false
 C0000618,mercaptopurine,true
 C0036576,Genetic Selection,true
-C0439828,Variable (uniformity),false
+C0679637,major surgery,false
+C0042381,Vascular Surgical Procedures,true
+C3714645,Vascular surgery specialty,false
 C1303013,Baseline weight,false
 C2828255,Quartile,false
 C0021186,Indapamide,true
@@ -2826,12 +3052,10 @@ C4282437,PAK3 wt Allele,false
 C4321455,FOXC1 wt Allele,false
 C0333186,Restenosis,false
 C1563745,Selective Angiotensin II Receptor Antagonists,true
-C0337667,Cigarette smoker (finding),false
 C1513492,motor movement,false
 C3714552,Weakness,false
 C1705994,Device Motor,false
 C1882136,Obstruction within Medical Device,false
-C0872913,Tenecteplase,true
 C1180255,Extralobular part of terminal lactiferous duct,false
 C0542339,Inferior,false
 C0022742,Knee,true
@@ -2845,11 +3069,9 @@ C0014457,Eosinophilia,true
 C1416602,KCNMA1 gene,false
 C3539661,KCNMA1 wt Allele,false
 C0022341,Japan,true
-C0175659,Weight measurement scales,true
-C0349674,Intellectual scale,false
-C1947916,Scaling,false
 C3536725,Undetermined,false
 C4082977,Undetermined finding,false
+C2584321,Reaching,false
 C0026473,Monocytes,true
 C0815275,subcortical,false
 C0077973,VAD I protocol,true
@@ -2860,6 +3082,7 @@ C1706465,Subject Characteristics Domain,false
 C0166128,rolofylline,true
 C2974540,canagliflozin,true
 C0029355,Orthopedics,true
+C2934193,olodaterol,true
 C1444775,Sharp sensation quality,false
 C1539835,SPEN gene,false
 C3890003,SPEN wt Allele,false
@@ -2870,8 +3093,6 @@ C0026266,Mitral Valve Insufficiency,true
 C0038348,Compression Stockings,true
 C1447574,APOL1 protein, human,true
 C4521365,APOL1 wt Allele,false
-C0053396,Beta Carotene,true
-C0696105,Beta carotene measurement,false
 C0033105,Statistical Prevalence,true
 C0220900,Prevalence aspects,true
 C0012833,Dizziness,true
@@ -2894,45 +3115,42 @@ C1959907,Admission from,false
 C1167159,replication compartment,false
 C1419366,RGN gene,false
 C2733342,Left ventricular ejection,false
-C0027978,New Zealand,true
-C0324547,New Zealand Rabbits,true
 C0337664,Smoker,true
 C0865850,Acute respiratory insufficiency,false
+C0040537,Exposure to toxin,false
 C0036493,Sea,true
-C0205343,Reversible,false
 C2950135,Left caudomedial auditory cortex,false
 C0018792,Heart Atrium,true
 C0439534,Dimensions,false
-C1568891,HGS protein, human,true
 C4699572,High probability,false
 C0560738,VQ - Ventilation perfusion scan,true
 C0681906,Patient Self-Report,false
 C2700446,Self-Report,true
-C0336867,Balloon Aircraft,false
 C0027551,Needle device,true
 C1882041,Needle Shape,false
-C0441144,Medical Balloon Device,false
 C0007137,Squamous cell carcinoma,true
 C1302853,Squamous cell carcinoma - category,false
 C4055211,Composite Score,false
 C2348557,Study Completed,false
 C0205197,Complete,false
 C1554962,completion - ResponseLevel,false
+C0012802,Thiazide Diuretics,true
+C3536861,Thiazide Diuretic [EPC],false
 C0150369,Preventive monitoring,false
 C1283169,Monitoring - action,false
 C0852149,Ischaemic coronary artery disease,false
 C1511226,Blood Screening,false
+C1856054,HUTTERITE CEREBROOSTEONEPHRODYSPLASIA SYNDROME,true
+C2826243,Protocol Test Conditions Met,false
+C4597943,Aon,false
 C0025078,Medical Device Failure,true
 C2024216,assessment of cardiac devices,false
-C0025080,Medical Devices,true
 C0220819,device aspects,true
-C0699733,Devices,true
 C1709561,Planned Subject Number,false
 C1706907,Background,false
 C0017181,Gastrointestinal Hemorrhage,true
 C0205370,Unspecified,false
 C2114427,previous coronary angioplasty,false
-C0205263,Induce (action),false
 C0857127,Induction procedure,false
 C1698058,per protocol,false
 C0009429,Combined Modality Therapy,true
@@ -2974,6 +3192,7 @@ C0034678,ras Oncogene,true
 C1518424,Not Hispanic or Latino,false
 C0014963,Ethacrynic Acid,true
 C4055434,Asthma Quality of Life Questionnaire,false
+C1334932,Negative Test Result,false
 C1515119,systemic therapy,false
 C0332529,Consistency,false
 C1547017,Kind of quantity - Consistency,false
@@ -2985,6 +3204,7 @@ C0424575,General health,false
 C4018875,General Health:Find:Pt:^Patient:Ord,false
 C0003862,Arthralgia,true
 C4551938,Arthralgia, CTCAE 5,false
+C2986835,Tumor to Normal,false
 C0047420,3-hydroxy-3-methylglutaryl-coenzyme A,true
 C1419337,RELN gene,false
 C3539667,RELN wt Allele,false
@@ -2992,6 +3212,9 @@ C0003242,Antibodies, Anti-Idiotypic,true
 C1167408,immunoglobulin complex location,false
 C3665580,Immunoglobulin complex location, circulating,false
 C0272774,Fracture of foot,false
+C0441837,Group C,false
+C0332197,Absent,false
+C4285062,Pharyngeal Stripping Wave Absent,false
 C0042036,Urine,true
 C0042037,In Urine,true
 C2963137,Portion of urine,false
@@ -3005,6 +3228,7 @@ C0442004,Septal,false
 C0332447,Morphologically abnormal structure (morphologic abnormality),false
 C1704258,Abnormality,false
 C3890602,Bodily Pain,false
+C0558293,Once a week,false
 C2353951,dapagliflozin,true
 C0750194,Non-Sustained Ventricular Tachycardia by ECG Finding,false
 C2919575,Nonsustained ventricular tachycardia,false
@@ -3012,6 +3236,7 @@ C0042514,Tachycardia, Ventricular,true
 C0344428,Ventricular Tachycardia by ECG Finding,false
 C1963247,Ventricular Tachycardia, CTCAE 3.0,false
 C4554446,Ventricular Tachycardia, CTCAE 5.0,false
+C0232197,Fibrillation,false
 C0522523,Percutaneous,false
 C0012091,Diclofenac,true
 C1705010,TNC wt Allele,false
@@ -3023,6 +3248,9 @@ C3539655,CDISC Findings Class,false
 C0185098,Bypass graft,false
 C0006416,Myanmar,true
 C0006098,Brachytherapy,true
+C1880019,Cessation,false
+C4303340,Warfarin therapy,false
+C0018799,Heart Diseases,true
 C0020473,Hyperlipidemia,true
 C0428465,Serum lipids high (finding),false
 C4555212,Hyperlipidemia, CTCAE,false
@@ -3033,8 +3261,6 @@ C0205269,Unresponsive to Treatment,false
 C0024264,Lymphocyte,true
 C0020898,Illinois (geographic location),true
 C4018897,Lymphocyte component of blood,false
-C0032952,Prednisone,true
-C0044955,prednylidene,true
 C2826245,Pre-specified,false
 C3266262,Multiple Chronic Conditions,true
 C1955473,Others - Allergy,false
@@ -3048,12 +3274,13 @@ C0013687,effusion,false
 C2317432,Effusion (substance),false
 C0585890,History of cerebrovascular disease,false
 C0012253,Digitalis Glycosides,true
+C0023820,Lipoproteins,true
 C0003594,Apolipoproteins C,true
 C0810516,defibrillator/cardioverters,false
-C2828363,Implanted Medical Device (finding),false
 C0076829,topiramate,true
 C0301380,Cardiac depressant drug, NOS,false
 C0455488,H/O: diabetes mellitus,false
+C1999230,Providing (action),false
 C0304533,VASOPROTECTIVES,false
 C1320290,Clinical trial group,false
 C1516050,Assignment - action,false
@@ -3077,7 +3304,7 @@ C0332461,Plaque (lesion),false
 C0333463,Senile Plaques,true
 C4316797,Plaque -- tissue,false
 C3529352,evolocumab,true
-C0205172,More,false
+C2357172,Cholesterol.in HDL,false
 C2919686,Asthma control questionnaire,false
 C0043318,Xanthines,true
 C3541955,Xanthines, systemic for obstructive airway disease,false
@@ -3095,11 +3322,15 @@ C3146237,Thrombus (sponge genus),false
 C0024819,Marital Status,true
 C1716536,Marital status:Type:Point in time:^Patient:Nominal,false
 C3172566,Marital status:Find:Pt:^Patient:Nom:NHANES,false
+C0024841,Marriage, life event,true
+C0555047,Married (finding),false
 C0302600,Angiogenic Process,false
 C1519670,Tumor Angiogenesis,false
 C2603362,S prime,false
+C0580836,Old,false
 C1958126,alogliptin,true
 C2348867,Global,false
+C0030198,Pain Measurement,true
 C0007591,Cell division phases,true
 C0456533,M - Metastasis stages,false
 C4553188,Chronic Kidney Disease, CTCAE,false
@@ -3110,8 +3341,6 @@ C1322279,Dilate procedure,true
 C0079102,Cerebral Thrombosis,true
 C0151945,Thrombosis of cerebral veins,false
 C0795687,Cerebral arterial thrombosis,false
-C0050451,acetohydroxamic acid,true
-C0772110,Alpha Hydroxy Acids,false
 C0858277,angina symptom,false
 C0009667,Confidence Intervals,true
 C0684010,Rabbi,true
@@ -3121,8 +3350,8 @@ C2825051,Pack unit,false
 C2828395,Packing (action),false
 C1508496,Quintile,false
 C3891069,MRI-Based Angiogram,false
+C0961485,eplerenone,true
 C1306889,Peripheral arterial occlusive disease,false
-C0016658,Fracture,true
 C0537551,Pramlintide,true
 C0489786,Height,false
 C0439204,Inch Unit of Length,false
@@ -3137,10 +3366,6 @@ C0026183,Minnesota,true
 C0595998,Household composition,false
 C4520849,Living,false
 C4551704,Alive,false
-C0007584,Cell Count,true
-C3897966,Per Picoliter,false
-C4049765,Infusion pump Alert priority PL,false
-C0007634,Cells,true
 C1536221,Non ST elevation myocardial infarction,false
 C1536222,Non ST ELEVATION MYOCARDIAL INFARCTION,false
 C0014758,Erythrityl Tetranitrate,true
@@ -3152,15 +3377,16 @@ C0392347,Hope (emotion),true
 C3264599,Linagliptin / Metformin,false
 C0948945,carotid artery ultrasound,false
 C0086706,GTP-Binding Protein alpha Subunit, Gi,true
-C2935023,vilanterol,true
 C0354100,Loop Diuretics,true
 C3536704,Loop Diuretic [EPC],false
-C1299392,Mild to moderate,false
 C0058928,ECHO protocol,true
 C1655045,Echo (insect),false
 C0376405,Patient Non-Compliance,true
 C0457432,Non-compliance,false
 C2711563,Duration of anticoagulant therapy,false
+C0205214,Common (qualifier value),false
+C1522138,shared attribute,false
+C3245511,Common Specifications in HL7 V3 Publishing,false
 C0029400,Osteitis,true
 C2266929,Glinide [EPC],false
 C1140621,Leg,true
@@ -3198,7 +3424,6 @@ C0354566,intravenous heparin,false
 C1719274,Biventricular Pacemaker,false
 C0489652,Study duration,false
 C0025859,Metoprolol,true
-C3891295,Subject Status Domain,false
 C2348577,Subject Completed Participation in Study,false
 C0805732,Completion Status,false
 C0190211,Coronary angioplasty,false
@@ -3210,10 +3435,11 @@ C0313162,Blood group antibody s,false
 C0870811,Lifestyle changes,false
 C2960841,Lifestyle change therapy,false
 C0342245,Eye disorder due to diabetes mellitus,false
-C0016385,Cardiac Flutter,false
-C2242390,Flutter (respiratory device),false
 C1998417,History of atrial flutter,false
-C0232197,Fibrillation,false
+C0150103,MATCHING,false
+C1708943,Match,false
+C0242372,Hares (mammal),true
+C1425660,STAB2 gene,false
 C0815181,treatment phases,false
 C1415351,GTPBP1 gene,false
 C0009319,Colitis,true
@@ -3238,7 +3464,6 @@ C3164744,European system for cardiac operative risk evaluation,false
 C0442796,Additive,false
 C1550602,additive ingredient,false
 C3869583,Clinical disease activity index,false
-C0085387,Cyclooxygenase Inhibitors,true
 C0010075,Coronary Vessels,true
 C0277814,Sitting position,true
 C1283233,Seating,false
@@ -3246,9 +3471,6 @@ C1272693,Ended - status,false
 C1563164,Ropiness,false
 C1548610,Inter,false
 C4086581,Milligram per Dose,false
-C0029408,Degenerative polyarthritis,true
-C1947911,combination of objects,false
-C3811910,combination - answer to question,false
 C0560268,Volume fraction,false
 C3887614,Percent Volume per Volume,false
 C0007194,Hypertrophic Cardiomyopathy,true
@@ -3260,6 +3482,10 @@ C2945601,Dihydropyridine Calcium Channel Blocker [EPC],false
 C0017480,Germany,true
 C1704791,Demographics Domain,false
 C0003483,Aorta,true
+C0187763,Surgical procedure on lower extremity,false
+C0741847,Bypass,false
+C3274435,Prothrombin Activity Measurement,false
+C0020889,Bone structure of ilium,true
 C1522508,Details,false
 C0439801,Limited (extensiveness),false
 C2674459,Limited Walking Ability,false
@@ -3276,9 +3502,11 @@ C0449864,Threshold,false
 C2986411,Improvement,false
 C1426226,HLA-N gene,false
 C0428474,Serum LDL cholesterol measurement,false
+C1527362,grafting qualifier,true
+C0039869,Thinking, function,true
+C4319827,Thought,true
 C1610621,Prothrombin mutation,false
 C0439223,millisecond,false
-C4277740,Walk Test,true
 C0020944,Immobilization,true
 C4048292,Immobilization test,false
 C0587038,Cardiovascular therapy,false
@@ -3308,8 +3536,8 @@ C3887783,Kurtzke Expanded Disability Status Scale Questionnaire,false
 C0025663,Methods,true
 C0449851,Techniques,false
 C0871511,Test Method,false
+C1551358,Incident,false
 C0242000,morphine use,false
-C0700307,hydroxyl group,false
 C0520880,QRS interval, function,false
 C0038418,Streptokinase,true
 C0010380,Croup,true
@@ -3329,14 +3557,14 @@ C3202967,Prescribed medications:-:Point in time:^Patient:-,false
 C0228134,Spinal epidural space,true
 C0812144,Medication administration: epidural,false
 C3245499,Colombia,true
-C0686905,Unavailability,false
+C2936588,Thienopyridines,true
 C0202236,Triglycerides measurement,false
 C1519533,Tobacco Research Implementation Group,false
 C0237629,Frequency of Responses,false
 C0694535,cigarette use,false
 C0392707,Atopy,false
+C1441070,Phadiatop,false
 C3476798,KCCQ,false
-C0205163,Equal,false
 C0036183,Sao Tome and Principe,true
 C3541334,TMPO wt Allele,false
 C0205365,Subacute,false
@@ -3376,8 +3604,10 @@ C1698480,Supraventricular tachyarrhythmia,false
 C3853833,Supraventricular Tachyarrhythmia ECG Assessment,false
 C0006280,Bronchodilator Agents,true
 C0628062,apolipoprotein G,true
+C0521533,Atrial septal aneurysm,false
 C1536220,ST segment elevation myocardial infarction,true
 C0159658,Fracture of clavicle,false
+C1512899,Interphase Cell,false
 C0260877,laboratory examination,false
 C0460002,body system,false
 C0086528,Latinos,true
@@ -3385,29 +3615,39 @@ C1550015,aborted - QueryStatusCode,false
 C1609614,aborted - ActStatus,false
 C4085625,Experimental Organism Aborted,false
 C4318470,Order aborted (qualifier value),false
-C0007430,Catheterization,true
+C0018790,Cardiac Arrest,true
+C4553105,Cardiac Arrest, CTCAE 5,false
 C1264633,Fraction of,false
 C1554103,MDFAttributeType - Fraction,false
 C0007613,Cell physiology,true
 C0275518,Acute infectious disease,false
 C0036983,Septic Shock,true
-C0443218,Fixed behavior,false
-C2827483,Fixed Specimen,false
-C3714578,Fix,false
 C1723401,belimumab,true
 C0282380,Saint Kitts and Nevis,true
 C3281223,CEREBELLAR ATAXIA, NEUROPATHY, AND VESTIBULAR AREFLEXIA SYNDROME,false
 C0001737,Africa,true
+C0026068,Middle East,true
 C2183115,History of gestational diabetes mellitus,false
 C1272745,Improving (qualifier value),false
 C0179504,Electrocardiogram lead (device),false
 C0732279,Aspirin / Dipyridamole,true
+C1522196,Enteral Route of Drug Administration,false
+C0588446,Informing patient,false
+C4684572,Baseline Characteristics,false
+C1439367,unadjusted,false
 C0075691,syndecan,true
 C1419891,SDC1 gene,false
+C0043444,Democratic Republic of the Congo,true
+C0012164,Formula - diet,true
+C0489829,Mathematical formula,false
+C1705501,Chemical Formula,false
+C1567075,CTSG protein, human,true
+C3540479,CTSG wt Allele,false
 C3476791,FACIT,false
-C0580836,Old,false
+C3258203,Study year,false
 C1096021,antiplatelet therapy,false
 C0587240,bone erosion,false
+C0221191,Judge,false
 C1705272,Organ Measurement Domain,false
 C0205254,Sedentary,false
 C0441987,Side,false
@@ -3417,13 +3657,20 @@ C1881507,Macromolecular Branch,false
 C2700383,Branch of plant,false
 C2826234,Clinical Trial Branch,false
 C0861151,q wave mi,false
+C4683688,Driven,false
 C0183521,Vascular stent,false
+C0332128,Examined,false
 C1717255,Edema:Finding:Point in time:^Patient:Ordinal,false
+C0188605,Amputation of the foot (procedure),false
 C3854019,Gentamicin,true
 C3669213,Races (activity),false
 C1517741,Last,false
 C0256103,Reteplase,true
 C0205170,Good,false
+C0034869,Records,true
+C3853788,Record - QueryRequestLimit,false
+C1282910,Upper,false
+C1552828,Table Frame - above,false
 C0221874,spacer device,false
 C3279454,Renal dysfunction,false
 C0014544,Epilepsy,true
@@ -3437,7 +3684,6 @@ C0003440,Antithrombins,true
 C3541936,Direct thrombin inhibitors,false
 C4067893,Use of supplemental oxygen,false
 C4554557,Use of supplemental oxygen:Finding:Point in time:^Patient:Nominal,false
-C1439367,unadjusted,false
 C4035880,Rarely/Never,false
 C3538872,ST Elevation Myocardial Infarction by ECG Finding,false
 C0349782,Ischemic cardiomyopathy,false
@@ -3447,6 +3693,11 @@ C1328504,Hormone refractory prostate cancer,false
 C1418251,PAH gene,false
 C0008120,Chinese Language,false
 C0152035,Chinese People,true
+C0444669,Core,false
+C1167518,viral nucleocapsid location,false
+C1706352,Core Device,false
+C1882467,Processor Core,false
+C3274653,Core Specimen,false
 C0003232,Antibiotics,true
 C0003237,Antibiotics, Antitubercular,true
 C3540704,Antibiotics for systemic use,false
@@ -3456,10 +3707,9 @@ C3540707,Antibiotics FOR TREATMENT OF HEMORRHOIDS AND ANAL FISSURES FOR TOPICAL 
 C3540708,Antibiotics, Gynecological,false
 C3540709,antibiotics, intestinal,false
 C3540710,Antibiotics, ophthalmologic,false
-C0205369,Specific qualifier value,false
 C0599878,disease characteristic,false
-C1552740,Entity Determiner - specific,false
 C0043227,Work,true
+C0036375,School,true
 C0017718,Glucosamine,true
 C2584297,Sitting Function,true
 C4050224,Ability to Sit question,false
@@ -3486,6 +3736,9 @@ C0069751,oxcarbazepine,true
 C0750532,MILDLY,false
 C1704272,Benign Prostatic Hyperplasia,true
 C1522541,Protocol Treatment Arm,false
+C1960955,Millimole/millimole,false
+C1704729,Department,false
+C0553618,emergency visit,false
 C0018619,Hawaii,true
 C1836672,Total Hypotrichosis, Mari type,true
 C0239849,Harlequin Fetus,true
@@ -3493,8 +3746,6 @@ C1412082,ABCC8 gene,false
 C1412316,AKAP4 gene,false
 C1431594,AKAP4 protein, human,true
 C4552857,AKAP4 wt Allele,false
-C1519815,Upper Limit of Normal,false
-C1632851,Times,false
 C0017720,Glucosamine Sulfate,true
 C0008454,Chondroitin,true
 C0876712,CHONDROITIN/GLUCOSAMINE,false
@@ -3519,29 +3770,25 @@ C1533021,Hispanic white racial group,false
 C1151635,pyruvate synthase activity,false
 C0377265,Levetiracetam,true
 C3693636,Measurement of levetiracetam,false
-C0428210,Methionine measurement,false
-C1550543,Fulfill,false
-C4317104,Metabolic Equivalent of Task Unit,false
+C0079946,National origin,false
+C1550512,Participation Type - origin,false
 C0085619,Orthopnea,false
 C0287990,paired basic amino acid cleaving enzyme,true
 C1552930,pace - unit of measure,false
 C4048252,cisplatin/cyclophosphamide/doxorubicin/etoposide,false
-C0521346,respiratory,false
-C1546767,Specimen Source Codes - Respiratory,false
 C0015980,Interferon-beta,true
 C0549409,Packed cell volume increased,false
 C0854379,Haemoconcentration,false
 C1275571,kg/sec,false
 C0443334,Uncomplicated,false
 C0007158,Cardiac Glycosides,true
-C1704788,Definition,false
-C3539106,Sufficiently defined concept definition status (core metadata concept),false
 C0330390,Beta plant,false
 C0439096,Beta greek letter,false
 C2004068,Beta (qualifier),false
 C1552658,Historical - ParameterizedDataType,false
 C1552723,Historical - DataType,false
 C2911690,Disease Controlled,false
+C2827896,Minute Times Micromole per Milliliter,false
 C0018229,Greenland,true
 C1423073,PPP1R3B gene,false
 C1427674,OSTM1 gene,false
@@ -3554,7 +3801,6 @@ C0012544,Diphosphonates,true
 C3541401,Bisphosphonate drugs affecting bone structure and mineralization,false
 C0013221,Drug toxicity,true
 C1829939,{Non-patient},false
-C4551412,Electronic case report form,false
 C3887511,Evidence,false
 C0002911,Anesthesia, Conduction,true
 C0332256,Containing (qualifier),false
@@ -3565,9 +3811,9 @@ C0428279,Finding of creatinine level,false
 C0288171,irbesartan,true
 C0872291,Time Interval,false
 C2359859,Medication timing,false
-C1552961,point - UnitsOfMeasure,false
-C2347617,Point Name,false
-C3714763,Point,false
+C0460097,Within therapeutic range,false
+C0525032,International Normalized Ratio,true
+C1704538,Integrated Neuromusculoskeletal Release,false
 C0557775,Van (physical object),false
 C1511780,Derivative Chromosome,false
 C2700462,Bud - plant part,false
@@ -3575,13 +3821,10 @@ C2945744,Bud - CHV concept,false
 C0682082,mestizo,false
 C0753802,Neuro-Oncological Ventral Antigen 2, Human,true
 C0455536,H/O: TIA,false
-C0332149,Possible,false
-C1705910,Possibly Related to Intervention,false
-C2362652,Possible diagnosis,false
+C0677946,Stable Disease,false
+C3538874,Stable chronic Graft vs Host Disease,false
 C0018824,Heart valve disease,true
 C0031117,Peripheral Neuropathy,true
-C0231528,Myalgia,true
-C4552646,Myalgia, CTCAE 5,false
 C0042485,Venous Insufficiency,true
 C0020162,Humeral Fractures,true
 C1548802,Body Site Modifier - Lower,false
@@ -3590,7 +3833,6 @@ C0050559,Acitretin,true
 C0439393,Liter per Minute,false
 C1527415,Oral Route of Drug administration,false
 C1319171,Medication response,false
-C0012802,Thiazide Diuretics,true
 C0004604,Back Pain,true
 C1963071,Back Pain, CTCAE 3.0,false
 C4553945,Back Pain, CTCAE 5.0,false
@@ -3600,6 +3842,10 @@ C0036669,Sensitivity Training Groups,true
 C0005382,Biguanides,true
 C0360396,Biguanide antimalarial,false
 C3540012,biguanide blood glucose lower drugs,false
+C0242821,Human body,true
+C0460148,Human body structure,false
+C1268086,Body structure,false
+C4082212,Adult human body,false
 C0577559,Mass of body structure,false
 C0577573,Mass of body region,false
 C1096155,Macrophage Activation Syndrome,true
@@ -3618,20 +3864,19 @@ C1533810,Placement action,false
 C1704765,Place - dosing instruction imperative,false
 C1882509,put - instruction imperative,false
 C0751955,Brain Infarction,true
-C2934193,olodaterol,true
+C0011923,Diagnostic Imaging,true
+C0079595,Imaging Techniques,false
 C3821165,median body,false
 C0001899,Alanine Transaminase,true
 C0057041,D-Alanine Transaminase,true
 C1415274,GPT gene,false
 C3887708,Alanine Aminotransferase 1, human,false
+C0004002,Aspartate Transaminase,true
 C0021390,Inflammatory Bowel Diseases,true
 C0001962,Ethanol,true
 C0001975,Alcohols,true
 C3890035,Clinical Trial Investigator Brochure,false
 C4283819,Imipramine Blue,false
-C0205214,Common (qualifier value),false
-C1522138,shared attribute,false
-C3245511,Common Specifications in HL7 V3 Publishing,false
 C3539618,TSC22D3 wt Allele,false
 C0185115,Extraction,false
 C0684295,Chemical extraction,false
@@ -3646,9 +3891,8 @@ C1947960,Ia <mammal>,false
 C3160733,THROMBOPHILIA DUE TO THROMBIN DEFECT,false
 C0073187,Blood group antigen D,true
 C4484261,D-,false
-C0332197,Absent,false
-C4285062,Pharyngeal Stripping Wave Absent,false
 C1305215,Fracture of forearm,false
+C1527305,Feelings,true
 C2826293,Clinical Significance,false
 C1516705,Colorectal Cancer Surveillance Consortium,false
 C0376690,Area Under Curve,true
@@ -3671,8 +3915,12 @@ C0542495,Serum Triglyceride Measurement,false
 C0024138,Lupus Erythematosus, Discoid,true
 C3542918,Docetaxel Lipid Microspheres,false
 C0751956,Acute Cerebrovascular Accidents,true
+C0445542,Mini,false
+C1561567,detail - Response Level,false
 C0443324,Traditional origin,false
 C1548559,Dispense Method - Traditional,false
+C0018510,Haiti,true
+C0677607,Hashimoto Disease,true
 C0679830,patient assessment,false
 C0205976,Tolylene Diisocyanate,true
 C2674784,TLX1NB gene,false
@@ -3686,6 +3934,7 @@ C3711669,CALB2 protein, human,true
 C4084730,CALB2 wt Allele,false
 C4553336,Lugano Lymphoma Response Classification Complete Remission by PET,false
 C4553337,Lugano Lymphoma Response Classification Complete Remission by CT,false
+C0392752,Localized,false
 C1511487,Constitutional,false
 C0042014,Urinalysis,true
 C4304091,Modified Mini-Mental State Examination score,false
@@ -3694,6 +3943,8 @@ C0205363,Stratified,false
 C0034394,Questionnaires,true
 C0151539,Blood urea increased,false
 C0439834,Slow,false
+C0000921,Accidental Falls,true
+C0085639,Falls,false
 C0242698,Ventricular Dysfunction, Left,true
 C1414063,DLD gene,false
 C2826331,Division of Lung Diseases,false
@@ -3711,15 +3962,12 @@ C0159849,Fracture of patella,false
 C3242229,ineffective,false
 C0242444,Population at Risk,true
 C3666909,Glycate,false
-C0205174,Triplicate,false
 C0452249,Mint - sweet,false
 C0522467,Genus Mentha,true
 C1337213,FLAVOR,MINT,false
 C1576800,Mint extract,false
 C0231242,Complicated,false
-C1880019,Cessation,false
 C0682295,Full-time employment (finding),false
-C4303340,Warfarin therapy,false
 C2733073,aliskiren / valsartan,false
 C1096054,Urine protein/creatinine ratio measurement,false
 C0023676,Life Style,true
@@ -3731,6 +3979,8 @@ C1638318,ng/kg,false
 C1335798,S100A9 gene,false
 C1366582,S100A8 gene,false
 C4036059,Drug-disease,false
+C0030266,Panama,true
+C4049155,Infusion pump Alert priority PM,false
 C1856453,Mild thrombocytopenia,false
 C0441887,Class 3,false
 C2698969,Canadian Cardiovascular Society Grading Scale Class III,false
@@ -3739,6 +3989,7 @@ C2698968,Canadian Cardiovascular Society Grading Scale Class II,false
 C0017209,Gaza Strip,true
 C1292284,Xg blood group system,false
 C1421532,XG gene,false
+C0023190,Lebanon,true
 C0042487,Venous Thrombosis,true
 C1320928,Resident (physician),false
 C1549439,Resident - Procedure Practitioner Identifier Code Type,false
@@ -3763,20 +4014,16 @@ C3476649,Treatment satisfaction,false
 C4012475,Two-vessel umbilical cord,false
 C4037954,Two vessels,false
 C0072027,procalcitonin,true
-C0034380,Quality of life,true
-C0518214,Perceived quality of life,false
 C0743195,diet controlled,false
 C0683092,intravenous drug,false
 C4087029,Nitroglycerin/Sodium Citrate/Ethanol Solution,false
 C0234234,Tender,false
 C0039082,Syndrome,true
 C0018826,Heart Valves,true
-C0016504,Foot,true
 C0687080,Paw,false
 C1704625,Exposure Domain,false
 C0117899,fluindione,true
 C0002905,Anesthesia and Analgesia,true
-C0205276,Local,false
 C3669314,Exercise aerobic category:Type:Pt:^Patient:Nom,false
 C0679699,Secondary Prevention,true
 C0860510,Night time awakening,false
@@ -3784,23 +4031,19 @@ C3532606,History of microalbuminuria,false
 C0054201,Budesonide,true
 C2746078,Linagliptin,true
 C0178587,density,false
-C0023820,Lipoproteins,true
 C2827895,Minute Times Microgram per Milliliter,false
 C0444506,Trough,false
 C0234621,Visual,false
 C0673013,GPER protein, human,true
-C1516048,Assessed,false
 C3810521,GPER1 wt Allele,false
 C4281714,tyrosine-protein kinase MER,false
 C3848561,ferric cation,false
 C1707429,Coefficient,false
+C1512612,Ideal,false
 C0011854,Diabetes Mellitus, Insulin-Dependent,true
 C4282132,Malignancy,false
-C0037366,Smoke,true
-C0439994,Tobacco smoke,false
 C0233481,Worried,false
 C1554109,Time Range,false
-C0460097,Within therapeutic range,false
 C0014432,Enzyme Inhibitors,true
 C0919438,Enzyme Inhibitor Drugs,false
 C4521603,Enzyme inhibitor (disposition),false
@@ -3809,16 +4052,9 @@ C2936882,Estrogen [EPC],false
 C4542544,Estrogen (disposition),false
 C0439548,Temporal periods of day,false
 C1456025,Intravascular ultrasound,false
-C0020615,Hypoglycemia,true
-C4553659,Hypoglycemia, CTCAE,false
 C0743330,Resting Dyspnea,false
 C0159877,Ankle Fracture,true
 C4552974,Ankle Fracture, CTCAE,false
-C0444669,Core,false
-C1167518,viral nucleocapsid location,false
-C1706352,Core Device,false
-C1882467,Processor Core,false
-C3274653,Core Specimen,false
 C0282204,Native Americans,true
 C0238611,alaskan,false
 C1515945,American Indian or Alaska Native,false
@@ -3827,11 +4063,6 @@ C1522669,Recombinant Tumor Necrosis Factor-Alpha,false
 C0020823,Ifosfamide,true
 C0003873,Rheumatoid Arthritis,true
 C0162370,Trochanter,true
-C0030971,Perception,true
-C0037438,Social support,true
-C0748877,Support System,true
-C1540833,Social support (regime/therapy),false
-C3669642,Social Support - counseling strategy,false
 C0028101,Niobium,true
 C0919442,NBL1 gene,false
 C1705347,NBL1 wt Allele,false
@@ -3839,8 +4070,8 @@ C4553907,European Union Notified Body,false
 C1413309,CEACAM6 gene,false
 C3813543,CEACAM6 wt Allele,false
 C0456616,10*6/L,false
-C0347982,Mole per Liter,false
 C0523558,Cholesterol/HDL ratio measurement,false
+C1547282,Show,false
 C1335071,Nuclear LIM Interactor-Interacting Factor 2,false
 C1442905,CTD gene,false
 C0080356,Valproate,true
@@ -3853,18 +4084,19 @@ C2960025,Health assessment questionnaire score,false
 C3870509,Age at event onset:Time:Point in time:^Patient:Quantitative,false
 C1521863,estrogen receptor alpha, human,true
 C3495919,Enthesitis-Related Arthritis,false
+C0332147,Suspected diagnosis,false
+C0750491,Suspected qualifier,false
 C0893761,lacosamide,true
-C1172734,natalizumab,true
 C0850707,history (of) disease family,false
 C0332137,Principal diagnosis,false
 C0801658,Diagnosis.primary:Impression/interpretation of study:Point in time:^Patient:Nominal,false
+C0003011,Receptor, Angiotensin II,true
 C1549663,Unspecified - Name type,false
 C2983689,Unspecified State of Consciousness,false
 C4048188,External cause codes: Unspecified,false
 C0007193,Cardiomyopathy, Dilated,true
 C2984282,Dilated Cardiomyopathy Pathway,false
 C0679823,participation,false
-C1710475,Trial Phase,false
 C2733224,Asthma control test score,false
 C1879745,PRN (schedule frequency),false
 C0354922,Inhalation preparations,false
@@ -3874,7 +4106,6 @@ C0556216,Fish intake,false
 C0065374,Lisinopril,true
 C0064673,lathosterol,true
 C0023434,Chronic Lymphocytic Leukemia,true
-C4684572,Baseline Characteristics,false
 C1301921,Method of identification,false
 C1859695,Narrowed joint space,false
 C4055223,Clinical Response,false
@@ -3882,6 +4113,10 @@ C1570167,ATF7IP protein, human,true
 C3853311,Ham,false
 C0011135,Defecation,true
 C0444567,Ostium,false
+C4284038,NTS wt Allele,false
+C0033382,Proline,true
+C0523852,Proline measurement,false
+C2987124,Patient Reported Outcome,true
 C0751495,Seizures, Focal,true
 C0149775,Fit frequency,false
 C4084902,Got Worse,false
@@ -3896,10 +4131,9 @@ C3176928,Condition status,false
 C2757004,Aldosterone Antagonists [MoA],false
 C0037303,Bone structure of cranium,true
 C2951888,Skull,false
-C1708728,Event Log,false
+C0015455,Bone structure of face,true
 C0667477,TNFRSF11A protein, human,true
 C0699794,Rank,false
-C2986775,Logarithm,false
 C3533054,Infliximab Ab,false
 C0021610,Inspiratory Capacity,true
 C0802663,Capacity.inspiratory:Volume:Point in time:Respiratory system:Quantitative,false
@@ -3922,14 +4156,10 @@ C0203634,Nuclear medicine procedure,false
 C0312860,Neutrophil migration, function,false
 C3890923,Nuclear Medicine Study File,false
 C4554402,RR genotype,false
-C0562508,Accident and Emergency department,true
 C0040671,Psychological Transfer,true
 C1705822,Transfer Technique,false
 C4319192,Transfer Ability,false
-C0043444,Democratic Republic of the Congo,true
 C0694649,Left deltoid,false
-C1567075,CTSG protein, human,true
-C3540479,CTSG wt Allele,false
 C0023759,Lip structure,true
 C0010200,Coughing,true
 C1961131,Cough, CTCAE,false
@@ -3937,8 +4167,6 @@ C3274924,Have Been Coughing,false
 C4084725,Usual Severity Cough,false
 C4084726,How Much Distress Cough,false
 C4084727,Cough Frequency,false
-C0030266,Panama,true
-C4049155,Infusion pump Alert priority PM,false
 C0004916,Beds,true
 C0454530,Ultraviolet B therapy,false
 C0564461,Ultraviolet B radiation,false
@@ -3950,7 +4178,6 @@ C1706536,Greek letter phi,false
 C2975867,GPI protein, human,true
 C4084801,Prostate Health Index,false
 C0240859,Basilar Rales,false
-C0023190,Lebanon,true
 C0439090,Less Than or Equal to,false
 C1423767,HPS4 gene,false
 C2697858,LE, Rat Strain,false
@@ -3995,7 +4222,6 @@ C1417750,NNT gene,false
 C0003857,Congenital arteriovenous malformation,true
 C0279476,Doxorubicin/Methotrexate/Vinblastine,false
 C0205093,Lateral,false
-C4521226,Pomalidomide/Bortezomib/Dexamethasone Regimen,false
 C0035826,Romania,true
 C0039260,Taiwan,true
 C1165245,Pacis,false
@@ -4038,8 +4264,6 @@ C0024176,Luxembourg,true
 C2697939,Loomis Unit,false
 C1075468,Echinochloa frumentacea,false
 C1021495,Whitea,false
-C0441835,Group A (qualifier value),false
-C4522145,Group A (blood group),false
 C1413296,CDR2 gene,false
 C0028075,Nigeria,true
 C2348274,Dietary Nickel,false
@@ -4079,7 +4303,6 @@ C3811619,LINC-PINT gene,false
 C3890014,LINC-PINT wt Allele,false
 C3890556,Long Intergenic Non-Protein Coding RNA p53 Induced Transcript, human,false
 C1444748,Triggered by,false
-C1282910,Upper,false
 C0040188,Tic disorder,true
 C0278076,Behavioral tic,true
 C2169806,recurrent muscle twitches (symptom),false
@@ -4092,7 +4315,6 @@ C0013754,El Salvador,true
 C0205944,Sarcoma, Epithelioid,true
 C1449704,Fibrates,true
 C3540783,Fibrates, lipid modifying drugs, plain,false
-C0006823,Canada,true
 C1260875,mating,false
 C0027497,Nausea,true
 C1963179,Nausea, CTCAE 3.0,false
@@ -4106,6 +4328,7 @@ C4255480,Nausea:Presence or Threshold:Point in time:^Patient:Ordinal,false
 C4552888,Nausea Visual Analogue Scale,false
 C4552889,Feel Nausea,false
 C4553767,Nausea, CTCAE 5.0,false
+C2347310,Mutually Defined,false
 C1421391,USP14 gene,false
 C1428265,QTRT1 gene,false
 C4321338,USP14 wt Allele,false
@@ -4114,7 +4337,6 @@ C2930619,Sex Differentiation Disorders,true
 C3275277,Card (document),false
 C4300252,HRQOL method,false
 C3814444,HPX wt Allele,false
-C4522078,Group B,false
 C0019552,Hip structure,true
 C0022122,Bone structure of ischium,true
 C1505163,HHIP protein, human,true
@@ -4140,7 +4362,6 @@ C0853073,PUVA Photochemotherapy,false
 C1704892,Methoxsalen With Ultraviolet A Therapy,false
 C0006137,Brazil,true
 C1524069,Asian Indian,false
-C0441837,Group C,false
 C0032854,Poverty,true
 C0542537,Poor - grade value,false
 C2700379,Poor - qualifier,false
@@ -4174,14 +4395,14 @@ C0006376,Bumetanide,true
 C0082608,fluvastatin,true
 C0694666,Right deltoid,false
 C4553350,NELFE wt Allele,false
-C0037713,South America,true
 C1331418,Comfort,false
 C0441888,Class 4,false
 C2698970,Canadian Cardiovascular Society Grading Scale Class IV,false
 C2827929,Picogram per Hour,false
 C0439391,mL/h,false
 C0023826,Very low density lipoprotein cholesterol,true
-C0332237,Topical surface,false
+C0238767,Bilateral,false
+C0205092,Unilateral,false
 C0037052,Sick Sinus Syndrome,true
 C0723181,SSS,false
 C0451184,Geriatric depression scale (assessment scale),false
@@ -4190,9 +4411,12 @@ C1418244,PAEP gene,false
 C0037199,Sinusitis,true
 C4553555,Sinusitis, CTCAE,false
 C0039103,Synovitis,true
+C1553378,Latin American,false
 C1418224,P4HB gene,false
 C2827597,Computer Configuration,false
-C0018799,Heart Diseases,true
+C0027365,Name,true
+C1547383,Person Name,false
+C4522128,Name (property) (qualifier value),false
 C1416933,LTF gene,false
 C2986618,LTF wt Allele,false
 C4554443,LF genotype,false
@@ -4201,18 +4425,21 @@ C1420811,TNFRSF19 gene,false
 C1883402,Troy Pound (unit of mass),false
 C0870433,Dissatisfaction,false
 C4085546,Dissatisfied - response,false
+C0001688,aspects of adverse effects,true
+C0879626,Adverse effects,false
 C1570906,vildagliptin,true
-C2986835,Tumor to Normal,false
 C0623362,Matrix Metalloproteinases,true
 C0919336,MMP gene,false
 C0021368,Inflammation,true
 C0333348,inflammatory,false
+C0010182,Costa Rica,true
+C0271160,Cortical cataract,false
+C3540510,Centisecond,false
+C4085345,Condylion superiore,false
 C0043476,Zimbabwe,true
 C0619865,i-cholesterol,true
 C0523559,Intermediate density lipoprotein cholesterol measurement (procedure),false
 C0123167,Intermediate density lipoprotein cholesterol,true
-C2699257,SS, Rat Strain,false
-C4551874,BLOOD GROUP, Ss,false
 C0857121,Hypertensive (finding),false
 C3163620,Hypotension, CTCAE,false
 C0443343,Unstable status,false
@@ -4220,10 +4447,6 @@ C1883468,Unstable Medical Device Problem,false
 C0149699,Fracture of fibula,false
 C0040185,Tibial Fractures,true
 C0439194,Micromole,false
-C0010182,Costa Rica,true
-C0271160,Cortical cataract,false
-C3540510,Centisecond,false
-C4085345,Condylion superiore,false
 C0595726,Leukotriene Antagonists,true
 C2757015,Leukotriene Receptor Antagonists [MoA],false
 C3542962,Leukotriene receptor antagonists for obstructive airway diseases,false
@@ -4244,10 +4467,6 @@ C3161851,liquid-based cytology (procedure),false
 C0279686,doxorubicin/thiotepa/vinblastine,false
 C1417507,MVD gene,false
 C3272839,Microvessel Density,false
-C0242821,Human body,true
-C0460148,Human body structure,false
-C1268086,Body structure,false
-C4082212,Adult human body,false
 C0018932,Hematochezia,true
 C0267596,Rectal hemorrhage,false
 C0429964,Dependent for dressing,false
@@ -4256,16 +4475,13 @@ C0851827,Dependent - ability,false
 C1701901,Conditional,false
 C3244310,dependent,false
 C4321395,Dependent for Toilet Use,false
-C1552828,Table Frame - above,false
-C0752347,Lewy Body Disease,true
-C3890365,dendritic lamellar body,false
-C4534363,At home,false
-C1553378,Latin American,false
-C0205318,Uncontrolled,false
-C3491162,alirocumab,true
 C0521942,Angiotensin II receptor antagonist,true
 C0815017,Angiotensin Receptor Antagonists,true
 C3536793,Angiotensin 2 Receptor Blocker [EPC],false
+C0752347,Lewy Body Disease,true
+C3890365,dendritic lamellar body,false
+C0205318,Uncontrolled,false
+C3491162,alirocumab,true
 C0449297,Clearance,false
 C1382187,Clearance of substance,false
 C2825073,Clearance [PK],false
@@ -4286,12 +4502,12 @@ C0449462,Length of stent,false
 C0946289,PO N,false
 C3653316,Vitamin K antagonists,false
 C0101856,Agkistrodon contortrix contortrix protein C activator,true
+C0007481,Cayman Islands,true
 C0175754,Agenesis of corpus callosum,true
 C0282160,Aplasia Cutis Congenita,true
 C3541413,ACACA wt Allele,false
 C0441767,Stage level 2,false
 C0441771,Stage level 3,false
-C3538928,Usual,false
 C0019905,Honduras,true
 C1832110,HORNS IN SHEEP,false
 C3889614,Healthcare Encounters Domain,false
@@ -4309,6 +4525,9 @@ C1459585,Lacuna,false
 C3273112,SDC1 wt Allele,false
 C0243087,concomitant disease,true
 C1408353,Undiagnosed,false
+C1548788,Inappropriate,false
+C3537135,Inappropriate Specimen,false
+C3542467,Inappropriate component (foundation metadata concept),false
 C0151576,Creatine Phosphokinase Increased,false
 C0024853,Martinique,true
 C0025552,Metals,true
@@ -4327,13 +4546,12 @@ C0076840,torsemide,true
 C0556338,Drinker,false
 C0087130,Uncertainty,true
 C4085655,Uncertain - Response,false
+C4321267,COMP wt Allele,false
 C3541957,Thiazolidinediones, blood glucose lowering drugs,false
 C0205094,Anterior,false
 C0678975,inferiority,false
 C0455471,H/O: malignant neoplasm,false
 C0168370,adipoylbisphosphonic acid,true
-C0018510,Haiti,true
-C0677607,Hashimoto Disease,true
 C0011570,Mental Depression,true
 C0011581,Depressive disorder,true
 C0460137,Depression motion,false
@@ -4421,10 +4639,6 @@ C2697845,Killip Class II,false
 C0435632,Fracture of hand,false
 C0019557,Hip Fractures,true
 C4552776,Hip Fracture, CTCAE,false
-C1415181,GOT1 gene,false
-C3891303,Atlantic Standard Time,false
-C0025320,Menopause,true
-C0567312,Menopause present (finding),false
 C0001246,Actinium,true
 C0003354,Antigua and Barbuda,true
 C1412573,ASAH1 gene,false
@@ -4433,6 +4647,7 @@ C3539770,ASAH1 wt Allele,false
 C0439259,kilocalorie,false
 C0441635,Anatomical segmentation,false
 C0233492,Elation,false
+C0341703,Adult Fanconi syndrome,true
 C0442874,Neuropathy,false
 C3813124,ADM wt Allele,false
 C3890196,ATF7IP wt Allele,false
@@ -4462,7 +4677,6 @@ C2346625,LCN2 wt Allele,false
 C0521164,Ring (shape),false
 C1260969,Ring device,false
 C1882954,Ring Dosing Unit,false
-C3536861,Thiazide Diuretic [EPC],false
 C3853263,Obese class II,false
 C3853264,Obese class I,false
 C1299432,Multi vessel coronary artery disease,false
@@ -4472,6 +4686,7 @@ C1452561,East Timor,true
 C4554543,TT genotype,false
 C0428621,High density/low density lipoprotein ratio result,false
 C1536121,Old Cerebrovascular accidents,false
+C1512698,Yes or No Response,false
 C0150905,patient is female,false
 C0150904,patient is male,false
 C1290384,Structural disorder of heart,false
@@ -4481,8 +4696,8 @@ C1420459,SULT1E1 gene,false
 C0205393,Most,false
 C1420401,SRI gene,false
 C0451214,Hidden figures test,false
-C0030198,Pain Measurement,true
 C0235480,Paroxysmal atrial fibrillation,true
+C1420068,SIM2 gene,false
 C0004739,Barbados,true
 C0332297,Bounded by,false
 C4684719,Null Hypothesis,false
@@ -4492,18 +4707,21 @@ C0028908,Oils,true
 C0032085,Plant Oils,true
 C1517288,Food Oil,false
 C3541397,oil ingredients,false
+C0683518,patient interview,false
 C0205039,Bronchial,false
 C1442216,Bronchial system,false
 C0005126,Bermuda,true
 C2344255,BD Alcohol,false
 C4050145,Block Design Subtest (WPPSI-IV),false
 C4684837,Imaging Core Lab,false
+C1516695,Collected,false
+C1516698,Collection (action),false
+C4684790,Study Subject Enrolled,false
 C1425988,ALYREF gene,false
 C1304659,Finding of blood group B variant,false
 C0016667,Fragile X Syndrome,true
 C0268281,Infantile neuronal ceroid lipofuscinosis,true
 C1418854,PPT1 gene,false
-C0332257,Including (qualifier),false
 C1414819,FRZB gene,false
 C0027608,Neon,true
 C0028219,Niue,true
@@ -4524,21 +4742,31 @@ C4283822,Bayer Visual Acuity Changes Grade 3,false
 C0037088,Signs and Symptoms,true
 C0243095,Finding,false
 C2825141,Experimental Finding,false
-C1512698,Yes or No Response,false
 C0013893,Eligibility Determination,true
 C1548635,Eligible,false
+C0439241,deciliter,false
+C2347285,Mole per Gram (mol/g),false
 C0439583,Overnight,false
+C0018827,Heart Ventricle,true
+C1522565,Ventricular,false
+C0332849,Divide,false
 C0439300,Micromole/liter,false
 C1719797,Multiply - dosing instruction fragment,false
 C2911648,Multiplication,false
-C1316572,Evaluation and management note:Finding:Point in time:{Setting}:Document:{Provider},false
-C1317574,Note (document),false
+C0011198,Delaware,true
+C3541240,Device Events Domain,false
 C2707520,Patient data,false
 C1880022,Characterization,false
+C0040028,Thrombocythemia, Essential,true
 C0332288,Without,false
+C0036595,Self Determination,true
+C0237881,Statistical Significance,false
+C0750502,Significant,false
+C1546944,Event Seriousness - Significant,false
 C0332490,Round shape,false
+C0205120,Square shape,false
+C1552595,Style Type - Square,false
 C0441074,Meters (physical object),false
-C4284038,NTS wt Allele,false
 C1317554,Natriuretic Peptides B,false
 C1292769,Precursor B-cell lymphoblastic leukemia,false
 C1705314,Terminal Device,false
@@ -4551,19 +4779,40 @@ C0596306,Chemical Association,false
 C0699792,Relationship by association,false
 C2709270,Natriuretic peptide,false
 C3537020,Natriuretic Peptide [EPC],false
+C1709908,Reported By,false
+C0521091,Confirmation of,false
 C0596672,heart disorder diagnosis,false
+C1514873,Requirement,false
+C0332306,Quality,false
+C4522046,Better than Others,false
 C0376558,Life,true
+C0043237,World Health Organization,true
 C1281911,Hemoglobin A measurement,false
+C0332126,No treatment required for,false
+C1449832,Nuchal Translucency Screen,true
+C3889152,NT5E wt Allele,false
+C4050156,Tyrosine Nitration,false
+C4283901,Neurotensin, human,false
+C0814287,risk and protective factors,false
+C1883525,Variety (taxon),false
+C2346866,Assortment,false
 C3827682,Useful,false
+C0237913,Statistical Test,false
+C0947630,Scientific Study,false
 C0041061,Trinidad and Tobago,true
+C0750492,Probably,false
 C0026845,Muscle Tissue,true
 C4083049,Muscle (organ),false
+C1442452,1 Week,false
+C3844320,One day,false
+C3242203,incomplete data,false
 C0805162,Aspartate aminotransferase/Alanine aminotransferase,false
-C0010287,Creatine Kinase,true
+C0344329,Collapse (finding),false
+C0392748,Collapsed,false
 C1710181,Standard Error,false
 C0062152,HDL-triglyceride,true
 C1708438,CXCR1 wt Allele,false
-C0003591,Apolipoproteins,true
+C0445247,Same,false
 C0243132,occurrence characteristics,true
 C1554210,Act Relationship Type - occurrence,false
 C2745955,Occurrence,false
@@ -4574,35 +4823,69 @@ C1299582,Unable,false
 C4048706,Unable to Do,false
 C4321405,Unable to Use Stairs,false
 C4086639,Number of Hospitalizations,false
-C1709908,Reported By,false
-C0439241,deciliter,false
-C2347285,Mole per Gram (mol/g),false
-C0332849,Divide,false
+C1882348,Permutation,false
+C1441547,Derivation,false
+C0010234,Cox Models,true
+C3245521,Derived value,false
+C1171304,diabetes risk,false
+C1518469,Number of First Degree Relatives (Affected),false
+C1546180,Age at death,false
+C0202069,HDL cholesterol test,false
+C1549782,Relational Operator - Equal,false
+C1874451,Basis,false
+C0205450,Four,false
 C1883712,Add - instruction imperative,false
 C0231290,Status post,false
 C0332282,Following,false
+C0084844,trestolone,true
+C1538994,C1orf56 gene,false
 C1442160,Cutoff,false
+C0687760,Taverns,false
+C1704759,Bar Dosing Unit,false
+C1707156,CTBP1 wt Allele,false
+C3274014,Brief Ataxia Rating Scale,false
+C3541345,Barnes Akathisia Rating Scale Questionnaire,false
+C3889135,NR1H4 wt Allele,false
 C0368910,cholesterol/triglyceride,false
 C1261552,Step (specific stage),false
 C1704379,Treatment Step,false
 C1705117,Increment,false
 C2825408,Stair (equipment),false
 C3814463,Step Unit of Distance,false
+C0023694,Light Coagulation,true
+C1328010,Infrared Photocoagulation Therapy,false
 C1292300,Gerbich blood group system,false
+C2003902,Always (frequency),false
+C3812891,All of the Time,false
 C4524803,Missing Information,false
 C0013384,Dyskinetic syndrome,true
+C1882911,Reciprocal,false
 C0221102,Excretory function,false
 C0504085,Body Excretions,false
 C2699704,Pharmacokinetics: Excretion,false
-C0947630,Scientific Study,false
+C0233324,Term Birth,true
+C1515273,Term (temporal),false
+C1705313,Term (lexical),false
+C2826302,Reported Term,false
+C0042789,Vision,true
+C1947903,See,false
+C2825232,Footnote,false
+C0039224,Table - furniture,false
+C1706074,Data Table,true
 C0750591,consider,false
+C0683962,univariate statistics,false
+C1531217,DSP protein, human,true
 C0232108,Arterial pulse pressure,false
 C4288391,Planned Follow-Up Duration,false
+C0150108,Blinded,false
+C0204932,Diet education,false
 C0034036,Publications,true
 C0034037,Publishing,true
 C1704324,Scientific Publication,false
 C1637390,Milliliter per gram,false
 C0439378,cells/uL,false
+C0221430,Acquired deformity,false
+C0302142,Deformity,false
 C1514811,Bibliographic Reference,false
 C1706462,Reference Object,false
 C0013443,Ear structure,true
@@ -4618,7 +4901,6 @@ C1622657,SUMO activating enzyme complex,false
 C4553214,Serious Adverse Experience,false
 C1225105,Sia,false
 C1551538,Zia,false
-C4321267,COMP wt Allele,false
 C1417190,MLN gene,false
 C3815103,MRLN gene,false
 C1552852,HtmlLinkType - prev,false
@@ -4637,19 +4919,22 @@ C2985844,Randomization Weight,false
 C0871420,Standard deviation,false
 C0238884,Canadian,false
 C0037455,Societies,true
-C1552866,include - SetOperator,false
-C2700399,Include (action),false
+C1707719,Switch Device,false
 C0035171,Research Design,true
 C2983265,CDISC SEND Study Design Terminology,false
 C2986888,Nonclinical Study Design,false
+C1709305,Occur (action),false
 C0868928,Case (situation),false
 C1533148,Case unit dose,false
 C1709637,Preferred Name,false
 C0012113,Dictionary, Medical,true
 C2347664,Preferred Term,false
+C0220905,regulatory,true
+C1704735,Regulator,false
 C1140263,Medical Dictionary for Regulatory Activities Terminology (MedDRA),false
 C0333052,Version,false
 C2607870,Version (morphologic abnormality),false
+C1547401,Sort order,false
 C0038013,Ankylosing spondylitis,true
 C0545743,coronary artery and coronary artery,false
 C0718146,A/T/S,false
@@ -4700,10 +4985,10 @@ C4553624,With meals,false
 C0205848,Death Rate,true
 C0034640,Rain,true
 C4689466,New Day,false
+C0475219,Liter Per Day,false
 C1511559,Cumulative,false
 C1836348,Severe disorder,false
 C1720725,Twice - dosing instruction fragment,false
-C1948050,Twice (Numerical Qualifier),false
 C0240951,Scandinavian,false
 C0038952,Continuance of life,true
 C0036453,Scotland,true
@@ -4714,15 +4999,24 @@ C0039711,Texas,true
 C0023981,Longitudinal Studies,true
 C1736144,Atherosclerosis Prevention,false
 C0679698,disease prevention,false
+C3889123,SMG1 wt Allele,false
+C0591720,Lescol,true
+C1096775,Clinical Trial [Publication Type],true
 C0489835,heart study,false
 C1545588,Protection,false
+C0033522,Prospective Studies,true
+C1709709,Prospective Cohort Study,false
+C0309872,PREVENT (product),false
+C0870136,anglos,false
 C0085565,Outcome Assessment (Health Care),true
-C0591720,Lescol,true
+C0681804,collaborative study,false
+C2919552,Survival time,false
 C0012171,Dietary Fats,true
 C0420180,Dietary prophylaxis,false
 C0086153,Dietary Modification,true
-C1999230,Providing (action),false
-C0204932,Diet education,false
+C0002458,American Heart Association,true
+C1185738,Column (anatomic),false
+C1706132,Column (arrangement),false
 C0277793,Onset of illness,false
 C1261512,Attack behavior,false
 C1304680,Observation of attack,false
@@ -4736,36 +5030,55 @@ C1318464,Occupational therapy regime,true
 C1418208,OXT gene,false
 C1705587,OXT wt Allele,false
 C0442734,Nil,false
+C1704243,Greater,false
 C3540486,CRLF1 wt Allele,false
 C4553190,CRNKL1 wt Allele,false
 C0043193,Wisconsin,true
 C1520135,Western Sahara,false
 C2924612,Cephalometric point A,false
+C1315719,Diabetes status:Prid:Pt:^Patient:Nom,false
 C1549796,MFA Message Structure,false
 C1549980,Master of Fine Arts,false
 C1869620,reslizumab,true
+C0021459,Inhalation Therapy,true
+C0085166,Bacterial Vaginosis,true
+C1511278,Bouvet Island,false
 C0016993,Gambia,true
 C4042342,abaloparatide,true
 C0000723,Abbreviations,true
 C4553328,Clinical Outcome Assessment,false
 C0009226,Coenzyme A,true
 C4288115,Total Number,false
-C1185738,Column (anatomic),false
-C1706132,Column (arrangement),false
+C0541154,Colesevelam hydrochloride,true
+C0008287,Chlorpropamide,true
+C0061323,glimepiride,true
 C0040372,Tolazamide,true
+C0872972,Pioglitazone hydrochloride,true
+C0795660,Rosiglitazone maleate,true
+C0066535,miglitol,true
+C0027061,Myocardium,true
+C1522564,Myocardial,false
 C0439836,Conversions,false
-C0439385,beats per minute,false
+C0552449,equation,false
+C0871968,categorizing,false
 C1319894,Sitting diastolic blood pressure,false
+C0443150,Baseline pressure,false
 C0014122,Subacute Bacterial Endocarditis,true
 C0022067,Ireland,true
 C1881173,Inclusion Exclusion Domain,false
 C4554371,Venezuelan equine encephalitis virus subtype IE,false
+C1705850,Before - dosing instruction fragment,false
+C0302595,Skin tanning,false
+C1537110,Skin tanning function,false
+C3275241,Tan Color,false
+C3898174,Nanomole per Liter per Gram,false
 C0679831,Patient History,false
 C0444099,Skin Specimen,false
 C0033572,Prostate,true
 C1123023,Skin,true
 C4520765,Skin, Human,false
 C0679138,Expectations,true
+C1554077,Excluded - Conformance Inclusion,false
 C0475209,Meter,false
 C1706378,Gauge or Meter Device,false
 C0180459,Disks (device),false
@@ -4780,12 +5093,6 @@ C2348299,Disc Shape,false
 C0162864,Tunica Intima,true
 C1280412,Thick,false
 C1256463,Intima,false
-C0370003,Specimen,false
-C0871472,t test,false
-C2347026,Biospecimen,false
-C1527178,Basis - conceptual entity,false
-C1510411,metaplastic cell transformation,false
-C1705938,Base - General Qualifier,false
 C4684800,Treatment-Emergent Adverse Event,false
 C0017970,Glycopyrrolate,true
 C1154181,Inhalant Solution,false
@@ -4795,6 +5102,7 @@ C3890208,MTTP wt Allele,false
 C1689985,Absence (morphologic abnormality),false
 C3179139,Absolute Risk Reduction,true
 C0439546,Absolute times,false
+C0680968,spending,false
 C4554601,Amyloidosis cutis dyschromia,false
 C0189695,Anastomosis of artery with bypass graft (procedure),false
 C3640258,CDISC SDTM Canadian Cardiovascular Society Classification Terminology,false
@@ -4811,10 +5119,9 @@ C2347179,Active Study,false
 C1706449,Active Control,false
 C1704532,Active Method,false
 C4050548,Activities of Daily Living Scale (BASC-2),false
+C4329797,Estimated Body Weight,false
 C1546542,Serum, Acute,false
 C0556971,days/month,false
-C0035124,Reperfusion Therapy,true
-C0684253,Physiological reperfusion,false
 C3653470,Adamantane derivatives, dopaminergic,false
 C2986480,Subset Analysis,false
 C1510802,Adherence (attribute),false
@@ -4829,10 +5136,15 @@ C1704753,Storage Unit,false
 C1880519,Enzyme Unit,false
 C0887457,Cystamine Dihydrochloride,true
 C3898767,Inducer,false
+C0861063,Lead Reduction,false
+C0205543,Referring,false
+C0344720,Left atrial dilatation,false
 C0387288,Verteporfin,true
 C0014442,Enzymes,true
 C4521602,Enzyme (disposition),false
 C0205148,Surface,false
+C0205674,Near East,true
+C0680043,Descent,false
 C0002037,Algeria,true
 C0051080,alanylglutamine,true
 C0152305,Structure of angular gyrus,true
@@ -4840,6 +5152,7 @@ C3888235,Procedure Agents Domain,false
 C0276477,Sialodacryoadenitis of rat,false
 C1428349,B4GALNT2 gene,false
 C1553165,Strand Displacement Amplification,false
+C0232326,EKG ST segment changes,false
 C0861352,Lobular Neoplasia,false
 C1428884,MLPH gene,false
 C3714709,late nucleophagy,false
@@ -4850,6 +5163,11 @@ C1629609,Age at menopause,false
 C2916832,Age Categories [Disease/Finding],false
 C0001782,Age Distribution,true
 C0441858,Group Y,false
+C0458261,Verbal Rating Scale,false
+C3273608,Vienna Rectoscopy Score,false
+C0855329,Electrocardiographic changes,false
+C1704489,Extended Rotated Sidebent,false
+C2931783,Amelogenesis imperfecta nephrocalcinosis,true
 C3175530,Age of onset of symptoms:Time:Pt:^Patient:Qn,false
 C1412122,ACHE Gene,false
 C1424250,NLRP3 gene,false
@@ -4883,9 +5201,11 @@ C3535925,alogliptin / pioglitazone,false
 C0597153,oxidoreductase inhibitor,false
 C1655741,negative regulation of oxidoreductase activity,false
 C0002335,Alprostadil,true
-C1707491,Consecutive,false
+C0439097,Delta - greek letter,false
+C3146239,Delta <Insecta>,false
+C3540585,YY1 wt Allele,false
+C3815527,Delta-Like Protein 1, human,false
 C0683443,tests and testing,false
-C1515051,Sum,false
 C0870128,ambition,false
 C0439841,Ambulatory - qualifier value,false
 C1691222,Amended,false
@@ -4893,24 +5213,25 @@ C0442711,Protocols documentation,false
 C1522729,Library Protocol,false
 C3715209,Protocol - answer to question,false
 C4282383,REMS Protocol,false
+C0935542,aborigines,false
 C0886378,Native American Healing,false
 C2825094,Aminosalicylate [EPC],false
+C0019829,Hodgkin Disease,true
+C2247545,S-linalool synthase activity,false
 C0598284,diabetes amputation,false
 C0002771,Analgesics,true
 C0220784,anatomic,false
 C0814908,ancova,false
+C3844638,Either,false
+C0155626,Acute myocardial infarction,false
 C0002994,Angioedema,true
 C1152555,enzyme inhibitor activity,false
 C2756995,Enzyme Inhibitors [MoA],false
-C0003009,angiotensin II,true
 C0243076,antagonists,true
-C1366631,AGT gene,false
-C3714928,Angiotensin-2, Human,false
 C2757003,Angiotensin 2 Receptor Antagonists [MoA],false
 C1149183,interleukin receptor activity,false
 C0544683,reception,false
 C0235439,Ankle edema (finding),false
-C0332181,Annual,false
 C0349790,Exacerbation of asthma,false
 C2349195,Acute Anterior Wall Myocardial Infarction,true
 C3536746,Anterior Myocardial Infarction by ECG Finding,false
@@ -4949,12 +5270,20 @@ C0002680,Ampicillin,true
 C3887950,Associated Persons Domain,false
 C0006938,Captopril,true
 C4050020,Clipperton Island,false
+C0725813,depend,false
 C0162791,Guidelines,true
 C0220845,guiding characteristics,true
 C0282423,Guideline [Publication Type],true
 C0023732,Linear Models,true
-C0552449,equation,false
-C0445247,Same,false
+C0332516,Symmetrical,false
+C1704640,Matrix Array,false
+C1706515,Matrix substance,false
+C4050026,Matrix,false
+C4319583,Matrix (unit of presentation),false
+C4553629,MATRix Regimen,false
+C2825575,Physical Symmetry,false
+C2946465,Symmetry,false
+C1441672,Observed,false
 C0680230,goal attainment,false
 C3245503,National citizen,false
 C0086858,Programmed Learning,true
@@ -4963,8 +5292,12 @@ C1999270,Laboratory Order Panels,false
 C1706450,Legal Adult,false
 C0428471,HDL - High density lipoprotein cholesterol level result,false
 C0428473,LDL - Low density lipoprotein cholesterol level result,false
+C0035096,Renin-angiotensin system,true
+C2984247,Renin-Angiotensin Pathway,false
 C3541930,Beta blocking agents, antiglaucoma preparations and miotics,false
 C0017977,Glycosides,true
+C1521827,Preparation,false
+C3812761,Prepared Material,false
 C0003595,Apolipoprotein E,true
 C0523511,Apolipoproteins E measurement (procedure),false
 C1412481,APOE gene,false
@@ -4975,6 +5308,12 @@ C3273162,Reprint Carrier,false
 C1817569,acireductone dioxygenase [iron(II)-requiring] activity,false
 C1826411,ADI1 gene,false
 C4476700,Leakage of dye on fundus fluorescein angiography,false
+C1415284,GRAP2 gene,false
+C0086162,Dab fish,false
+C1081457,Limanda limanda,false
+C2348395,Electrode Grid,false
+C2825313,Computer Grid,false
+C4522144,Grid -- spatial concept,false
 C0035317,Retinal Hemorrhage,true
 C1302690,Retinal thickening,false
 C4319729,Areas <moth>,false
@@ -4982,15 +5321,13 @@ C0702102,Arthritis mutilans,false
 C1521726,partial response,false
 C4552913,Lugano Lymphoma Response Classification Partial Remission by CT,false
 C4552914,Lugano Lymphoma Response Classification Partial Remission by PET,false
-C0332196,Exclude,false
-C2828389,Exclusion,false
-C0004002,Aspartate Transaminase,true
+C0030168,Pacific Islands,true
 C0018817,Atrial Septal Defects,true
 C1093020,Asterias (invertebrate),true
+C0018684,Health,true
 C0332514,Asymmetry,false
 C0238694,ARTHRITIS, PERIPHERAL,false
 C4699158,Increased risk,false
-C0085639,Falls,false
 C0238715,Autumn,false
 C4553726,Fall, CTCAE,false
 C1268740,At risk for falls,false
@@ -4999,8 +5336,11 @@ C3711796,ATM protein, human,true
 C1708726,Locus,false
 C0541791,atonia,false
 C3539705,MS4A2 wt Allele,false
-C1441070,Phadiatop,false
 C0237455,Test Administration,false
+C0449822,Multiplicity,false
+C0376209,Individual Adjustment,true
+C2945673,Clinical adjustment,false
+C4048755,Apply,false
 C0595948,Atypical absence seizure,false
 C0206031,Logistic Regression,true
 C0259749,Autonomic neuropathy,false
@@ -5014,10 +5354,13 @@ C1306036,Forced expiratory volume procedure,false
 C0424093,Initiative,false
 C0549186,Obstructed,false
 C4277733,Minimal Clinically Important Difference,true
+C0079816,Medical Research activity,true
+C1551807,Council Eskimos,false
 C1553316,St. George Aleuts,false
 C0023767,Lipid A,true
 C0004626,Pneumonia, Bacterial,true
 C0175673,Bale out,false
+C1522634,Question (inquiry),false
 C0002055,Alkalies,true
 C0178499,Base,false
 C1880279,Dental Base,false
@@ -5032,7 +5375,6 @@ C0332169,Daytime,false
 C0231918,Nose symptoms,false
 C0948092,diabetes mellitus management,false
 C0232306,Electrocardiogram: left ventricle hypertrophy (finding),false
-C3538926,Endocrine System Findings Domain,false
 C0682547,Eosinophilic cell,false
 C0004486,Azerbaijan,true
 C0230613,Zonula Adherens,true
@@ -5043,6 +5385,7 @@ C4321547,Check,false
 C1300561,Unit/kilogram,false
 C1416822,COG2 gene,false
 C0024015,Los Angeles,true
+C0332120,Evidence of (contextual qualifier),false
 C0574785,Lower Urinary Tract Symptoms,true
 C0215825,adrenomedullin,true
 C0135567,PAVAS,true
@@ -5051,8 +5394,6 @@ C1839454,PROPERDIN DEFICIENCY, X-LINKED,true
 C2827389,CFD wt Allele,false
 C3889643,CFP wt Allele,false
 C1425219,SLC22A12 gene,false
-C0439775,Elevation procedure,false
-C0702240,Elevation,false
 C0036785,Serum Calcium Level,false
 C0728876,Serum calcium measurement,false
 C0529793,sildenafil,true
@@ -5063,7 +5404,6 @@ C1522166,Worst,false
 C0023175,Lead,true
 C0181586,Leads (device),false
 C1442948,Plumbum metallicum, homeopathic preparation,false
-C1522538,Leading,false
 C2348269,Dietary Lead,false
 C3275067,Cardiac Lead Procedure,false
 C0241886,extraocular,false
@@ -5072,6 +5412,8 @@ C1845118,SHORT STATURE, IDIOPATHIC, X-LINKED,false
 C0338248,carmustine/cytarabine/etoposide/melphalan regimen,false
 C2347880,Beam - rays of radiation or stream of particles,false
 C4521565,Beam -- chemical,false
+C4520547,Implemented,false
+C3831448,August,false
 C3659310,8-hydroxy-2,2,14,14-tetramethylpentadecanedioic acid,true
 C0053091,benazepril,true
 C0717481,benazepril / Hydrochlorothiazide,false
@@ -5079,6 +5421,8 @@ C0005064,Benzodiazepines,true
 C3536850,Benzodiazepine [EPC],false
 C4048284,Benzodiazepine,true
 C1299575,Treatment modification,false
+C1440044,A,B,false
+C3845933,A & B,false
 C0205474,Biochemical,false
 C0005532,biology (field),true
 C0005544,Biometry,true
@@ -5090,24 +5434,15 @@ C4319531,Bladder Continence Question,false
 C3713826,Blisibimod,true
 C3267174,Blood Glucose control,false
 C0005437,Bilirubin,true
-C0005773,Blood Cells,true
 C2699156,Cells per Milliliter,false
-C0443150,Baseline pressure,false
 C2704328,Blood pressure systolic & diastolic,false
 C0439493,m/s,false
 C1513009,Master of Science,false
 C3476086,Kansas City cardiomyopathy questionnaire,false
-C0332126,No treatment required for,false
-C1449832,Nuchal Translucency Screen,true
-C3889152,NT5E wt Allele,false
-C4050156,Tyrosine Nitration,false
-C4283901,Neurotensin, human,false
-C0012727,Spatial Displacement,false
-C0205419,Variant,false
-C1705236,Protocol Deviation,false
 C0441847,Group M,false
 C0340279,Ventricular hypertrophy,false
-C1515187,Take,false
+C0150936,Peripheral Blood Vessel,false
+C0947487,Peripheral vessels,false
 C0391871,Released (action),false
 C0439180,% release (qualifier value),false
 C0680255,Discharge (release),false
@@ -5116,8 +5451,9 @@ C1963578,Release (procedure),false
 C2827110,Saint Martin, French,false
 C3540639,U2AF1 wt Allele,false
 C4281819,Rn,false
-C1441672,Observed,false
+C0449829,Geometry,false
 C2699638,Statistical Imputation,false
+C0520510,Materials,false
 C0152060,Transection (procedure),false
 C0700320,Sectioning technique,false
 C1522472,section sample,false
@@ -5127,6 +5463,8 @@ C3714523,Section - Geographic Area,false
 C0053932,Bone Morphogenetic Proteins,true
 C0279266,carmustine/methotrexate/procarbazine protocol,false
 C4281808,Metabolic Panel,false
+C0441722,Force,false
+C0443221,Forced,false
 C2984917,Best Observation Carried Forward Imputation Technique,false
 C0439605,Random,false
 C4054689,Kilogram per Centimeter,false
@@ -5135,14 +5473,25 @@ C0005890,Body Height,true
 C0487985,Body height:Length:Point in time:^Patient:Quantitative,false
 C0005911,Body Weight Changes,true
 C1262477,Weight decreased,true
+C1705565,Correction Report,false
+C1947976,Correction (change),false
 C0005938,Bone Density,true
 C0177804,Bone Mineral Density Test,false
 C1879894,Bonferroni Adjustment,false
 C1511253,Boost,false
 C1874596,Boost Nutrition Supplement,false
+C0085999,Pan Genus,false
+C3887654,POLYARTERITIS NODOSA, CHILDHOOD-ONSET,false
 C0267465,Stenosis of intestine,false
+C1417861,NT5E gene,false
+C2987294,Entity Name Data Type,false
+C0332283,Followed by,false
+C1719822,Follow - dosing instruction imperative,false
+C4281991,Follow,false
+C0679845,treatment model,false
 C0008041,Chi-Square Test,true
 C0005001,Benign prostatic hypertrophy,true
+C0018759,Health Status,true
 C1626828,Hemoglobin panel,false
 C4281686,Albumin/Creatinine,false
 C0039512,Teniposide,true
@@ -5166,9 +5515,9 @@ C0243073,assay qualifier,true
 C1510438,Assay,false
 C0150375,Group education,false
 C0679841,treatment program,false
+C1552738,described,false
+C1273937,Not significant,false
 C0870261,channel blockers,false
-C0042381,Vascular Surgical Procedures,true
-C3714645,Vascular surgery specialty,false
 C0006644,Caffeine,true
 C0236734,Caffeine related disorders,false
 C0948365,caffeine consumption,false
@@ -5184,6 +5533,7 @@ C1704458,Top (position),false
 C0920424,cancer surgery,false
 C0006882,Canrenone,true
 C1560249,Adverse Event Associated with Cardiac Arrhythmia,false
+C0442818,Raised,false
 C1279986,Procedure on heart,false
 C0036980,Shock, Cardiogenic,true
 C4055270,Cardiothoracic,false
@@ -5211,13 +5561,16 @@ C0917798,Cerebral Ischemia,true
 C2828393,Exact (qualifier),false
 C4050514,Exacerbations of Chronic Pulmonary Disease Tool Patient-Reported Outcome Questionnaire,false
 C4526016,Clinical Global Impression Generic Modification Version Questionnaire,false
+C0042109,Urticaria,true
+C0443228,Largest,false
+C0221232,Welts,false
+C2349186,Fit (action),false
+C4048158,Convulsions,true
+C4553125,Prosthesis fit,false
 C0035298,Retina,true
 C0030664,Pathology,true
 C0205469,Pathological aspects,true
 C0677042,Pathology processes,false
-C0027365,Name,true
-C1547383,Person Name,false
-C4522128,Name (property) (qualifier value),false
 C4546361,Charlson Comorbidity Index,false
 C0849759,charmed,false
 C0039225,Tablet Dosage Form,true
@@ -5226,9 +5579,9 @@ C4319774,Tablet (unit of presentation),false
 C0235710,Chest discomfort,false
 C0039985,Plain chest X-ray,false
 C1552646,chi square,false
-C0019829,Hodgkin Disease,true
 C0308648,chlor,false
 C0008269,Chloroquine,true
+C0114873,Doxazosin,true
 C0008425,Cholinesterase Inhibitors,true
 C3536756,Cholinesterase Inhibitor [EPC],false
 C4521309,Cholinesterase inhibitor (disposition),false
@@ -5239,13 +5592,8 @@ C0028429,Nose,true
 C4520890,Nasal (intended site),false
 C0008731,Chylomicrons,true
 C1325761,chylomicron location,false
-C0233324,Term Birth,true
-C1515273,Term (temporal),false
-C1705313,Term (lexical),false
-C2826302,Reported Term,false
+C1517526,Geographic,false
 C0683454,internal-external locus of control scale,false
-C0009212,Cocos (Keeling) Islands,true
-C1872855,CHKA protein, human,true
 C0033325,Forecast of outcome,true
 C3854082,Prognosis:Find:Pt:^Patient:Nom,false
 C0457166,Class 5 (qualifier value),false
@@ -5261,12 +5609,10 @@ C2985073,Total Clearance Observed Normalized by Weight,false
 C1555715,entry - cluster,false
 C1704332,Cluster,false
 C0205341,Repeat,false
-C1516691,Cognitive,false
 C0450989,Alzheimer's disease assessment scale,false
 C0009262,Colchicine,true
 C0009274,Colectomy,true
 C0541155,colesevelam,true
-C0541154,Colesevelam hydrochloride,true
 C0557806,College,false
 C0449286,Degree or extent,false
 C0542560,Academic degree,false
@@ -5323,6 +5669,7 @@ C1506978,Ma+Ta Antibody,false
 C1705538,Trial Arms Domain,false
 C3272501,Ta Stage Finding,false
 C4553364,TOR1A wt Allele,false
+C1292730,Condition severity,false
 C0206277,Fatal Outcome,true
 C2353893,golimumab,true
 C0033972,Psychotherapy, Multiple,true
@@ -5332,23 +5679,26 @@ C3853530,Data operation - complete,false
 C4283785,Complete Pharyngeal Contraction,false
 C0249529,febuxostat,true
 C4551823,instruments,true
+C0009326,Collagen Diseases,true
+C0035435,Rheumatism,true
+C1948052,Now (temporal qualifier),false
+C0679006,Decision,false
+C1947967,Call (Instruction),false
 C1882460,Principal Component,false
 C1707433,Collision-Induced Dissociation,false
-C0042789,Vision,true
 C1299003,Ocular (qualifier),false
 C4521296,Ocular (intended site),false
-C0155626,Acute myocardial infarction,false
 C0919420,Oncogene EGF,false
 C1367721,EGF gene,false
 C1705448,EGF wt Allele,false
 C2699424,Concern,false
 C3850077,Drug Liberation,true
 C2347852,Concomitant Agent,false
-C2347310,Mutually Defined,false
 C0032950,prednisolone,true
 C0679827,treatment entry,false
 C0700148,Congestion,false
 C2826600,Tissue Congestion,false
+C0024944,Mauritius,true
 C0009806,Constipation,true
 C1963087,Constipation, CTCAE,false
 C3641755,Have Constipation,false
@@ -5358,15 +5708,14 @@ C4084724,Usual Severity Constipation,false
 C3495801,Granulomatosis with polyangiitis,true
 C4553145,Graded Prognostic Assessment,false
 C0009938,Contusions,true
-C4048158,Convulsions,true
 C0009967,Coping Behavior,true
 C0030840,Penicillin V,true
 C0032463,Polycythemia Vera,true
 C0598352,voltage,false
-C0741847,Bypass,false
 C2986530,Intervention Group,false
 C0026514,Montserrat,true
 C2930980,Malignant hyperthermia susceptibility type 1,true
+C4321250,Usually Need Help from Another Person for Reach,false
 C1511545,Critical,false
 C0010347,Cromoglycate,true
 C0175721,Clamp (device),false
@@ -5398,25 +5747,38 @@ C0026269,Mitral Valve Stenosis,true
 C0264766,Rheumatic mitral stenosis,false
 C3863761,Dactylitis of finger,false
 C0457451,Severity score,false
+C0278329,prescribed,false
 C0439465,IU/day,false
 C0206461,Dalteparin,true
 C0007447,Cations,true
 C0042508,Ventricular Ejection Fraction,true
-C0011198,Delaware,true
-C3541240,Device Events Domain,false
-C0205120,Square shape,false
-C1552595,Style Type - Square,false
+C1828170,Mean deviation,false
+C0162429,Malnutrition,true
+C2987487,Deficit,false
 C1516606,Clinical Data,false
-C1444656,Indicated,false
 C0522520,Transluminal approach,false
 C1522231,Transluminal Route of Drug Administration,false
 C0009235,Coenzymes,true
+C0565965,Change values,false
 C0871881,repeated measures,false
 C0002780,Analysis of Variance,true
 C1720943,Kaplan-Meier Estimate,true
 C1154908,nitroglycerin metabolic process,false
+C1552041,Bon religion,false
+C2986536,Bisphosphonate-associated osteonecrosis,true
+C2080700,severe Breathlessness,false
+C1533716,Information,false
+C2984916,Best Case Imputation Technique,false
 C2949735,Recruitment,false
+C1555436,Rand,false
 C0442603,Office,false
+C0680730,Adjudication,false
+C0019191,Infectious Canine Hepatitis,true
+C3272597,ICH Temperature/Humidity Storage Condition,false
+C3281105,HEMORRHAGE, INTRACEREBRAL, SUSCEPTIBILITY TO,false
+C0011860,Diabetes Mellitus, Non-Insulin-Dependent,true
+C0458216,Sev (substance),false
+C2983285,CDISC SEND Severity Terminology,false
 C0253563,eptifibatide,true
 C3830544,Delight,false
 C4684639,Demographic Data,false
@@ -5428,27 +5790,30 @@ C1522447,Cutaneous Route of Drug Administration,false
 C0011603,Dermatitis,true
 C0029976,Blastocyst Implantation, natural,true
 C0455713,Procedure type,false
-C0680043,Descent,false
 C0442726,Detected (finding),false
 C0220825,Evaluation,false
 C1578706,Specimen Source Codes - tumor,false
 C3273930,Tumor Mass,false
 C1511790,Detection,false
 C0868945,deterioration,false
+C0012727,Spatial Displacement,false
+C0205419,Variant,false
+C1705236,Protocol Deviation,false
 C0180860,Filters,false
 C2348248,dexlansoprazole,true
-C1417249,MRC1 gene,false
-C2347167,Mr. - Title,false
-C3254418,NR3C2 protein, human,true
-C4050513,Minor Response,false
 C1286336,Frequency of eating,false
 C2986698,Food Frequency Questionnaire,false
-C0011860,Diabetes Mellitus, Non-Insulin-Dependent,true
 C4068481,Study diagnosis,false
 C0596429,diagnostic catheterization,false
 C0376660,Diary,true
+C0022804,Kuwait,true
+C1337080,Ku Protein,false
+C1532717,Kilodalton,false
+C1881335,Kilounit,false
 C0489458,Calcium intake,false
 C0231971,Diffusion capacity of lung, function,false
+C0007018,Carbon Monoxide,true
+C4520712,Carbon Monoxide Measurement,false
 C0932510,Structure of distal interphalangeal joint,false
 C0439851,Direct type of relationship,false
 C1947931,Direct (qualifier),false
@@ -5458,6 +5823,7 @@ C1705555,Disposition Domain,false
 C0152915,Acute miliary tuberculosis,false
 C0588203,Bone structure of distal ulna,false
 C0948575,Diuretic therapy,false
+C0342257,Complications of Diabetes Mellitus,true
 C0012411,p-Dimethylaminoazobenzene,true
 C4296144,Door-to-balloon time,false
 C0013023,Dopa,true
@@ -5466,7 +5832,6 @@ C3536925,Dopaminergic Agonist [EPC],false
 C2826232,Dose Adjustment,false
 C0439463,IU/kg,false
 C4684647,Double-Dummy,false
-C0114873,Doxazosin,true
 C0544791,Inflammatory fistula,false
 C1880641,Telephone Extension Number,false
 C1366394,STAT5A protein, human,true
@@ -5479,6 +5844,8 @@ C2346509,Intervention Duration,false
 C0034693,Rattus norvegicus,true
 C0034721,Rattus,true
 C2826870,Exposure Duration,false
+C0043240,Wound Healing,true
+C0205249,Healed,false
 C1547660,Duration categories,false
 C0031847,physiopathological,true
 C0030847,Penile Erection,true
@@ -5500,10 +5867,10 @@ C0162359,Christ-Siemens-Touraine syndrome,true
 C1539327,EDA gene,false
 C3539920,ECTODERMAL DYSPLASIA 11B, HYPOHIDROTIC/HAIR/TOOTH TYPE, AUTOSOMAL RECESSIVE,false
 C3887494,ECTODERMAL DYSPLASIA 10B, HYPOHIDROTIC/HAIR/TOOTH TYPE, AUTOSOMAL RECESSIVE,false
+C0807955,slope,false
 C0814843,effect size,false
 C0439402,mL/min/kg,false
 C1300574,mL/kg,false
-C3844638,Either,false
 C1416870,LIPG gene,false
 C1447747,LIPG protein, human,true
 C1823249,TBCEL gene,false
@@ -5517,28 +5884,33 @@ C0747973,Elective procedure,false
 C0013798,Electrocardiogram,true
 C1547122,Electro-Cardiogram,false
 C0180600,Electrocardiographic recorders,true
+C1114722,ST deviation:Electrical Potential (Voltage):Point in time:Heart:Quantitative:EKG,false
+C1519133,SEG Mouse,false
+C1705293,SEG Algorithm,false
+C1116089,ST deviation,false
 C0330531,Ulmus,true
 C2980688,Elm extract,false
 C2699863,Electron Microprobe Analysis,false
 C0442418,Endoscopic approach - access,false
 C3147679,JPX gene,false
-C4684790,Study Subject Enrolled,false
+C0556581,Retinol equivalents,false
+C1999244,Cover - action,false
+C3888055,Cover (physical object),false
+C2986904,Respiratory Domain,false
 C0165921,entacapone,true
 C1170256,entocort ec,false
 C3260017,Hip fracture location,false
 C0450025,Environmental stimuli,false
-C0332120,Evidence of (contextual qualifier),false
 C1881447,Los Angeles Classification System,false
 C0014549,Tonic-Clonic Epilepsy,true
 C0494475,Tonic - clonic seizures,true
+C1720052,Awakening (time frame),false
 C0014591,Epistaxis,true
 C4554627,Epistaxis, CTCAE,false
-C0961485,eplerenone,true
 C0080078,Range of Motion, Articular,true
 C0425245,Mobility as a finding,false
 C0449580,Qualitative mobility,false
 C4318935,Mobility Ability,false
-C0018759,Health Status,true
 C3810541,Adverse Event Emergency Room Visit,false
 C0242350,Erectile dysfunction,true
 C1961100,Erectile Dysfunction, CTCAE,false
@@ -5548,11 +5920,14 @@ C0456685,U/hour,false
 C0014912,Estradiol,true
 C0242297,Dietary Supplementation,false
 C0026192,Minority Groups,true
+C0282540,arab ethnic group,true
+C1561448,Arab race,false
 C0587117,Evening,false
+C0332290,Consistent with,false
+C0729552,Genital infection,false
+C0546884,Hypovolemia,true
+C0018896,Helping Behavior,true
 C0337679,Ex-drinker,false
-C0033382,Proline,true
-C0523852,Proline measurement,false
-C2987124,Patient Reported Outcome,true
 C0205229,Expanding,false
 C1517586,Investigational,false
 C0949266,Therapies, Investigational,true
@@ -5584,10 +5959,13 @@ C0120446,Guanidine,true
 C3887515,Genitourinary,false
 C0583513,Plasma fasting glucose measurement,false
 C0583332,serum glucose level,false
+C1417154,MIA gene,false
 C0309049,favor,false
-C0347981,Feet, unit of measurement,false
 C0150831,Patient sex,false
+C0849668,peri-menopausal,false
+C3839366,Perimenopausal state,false
 C2348025,Curie per Milliliter,false
+C0012358,Dilatation and Curettage,true
 C3541307,POSTN wt Allele,false
 C4049640,Picture Naming Subtest (WPPSI-IV),false
 C4049767,Infusion pump Alert priority PN,false
@@ -5601,8 +5979,12 @@ C0016026,Fibroblast Growth Factor,true
 C0919505,Fibroblast Growth Factor Gene Family,false
 C0016059,Fibrosis,true
 C0439709,Fibrous,false
+C1413096,CALR gene,false
+C2987048,CALR wt Allele,false
+C4284875,Occurrence Indicator,false
 C4084955,Administrative - Clinical Class,false
 C0439568,Post-dose,false
+C0443287,Recurrent episode,false
 C0016229,Flecainide,true
 C0729594,Axillary lymph node group,false
 C2681220,C4orf3 gene,false
@@ -5632,12 +6014,11 @@ C0017296,gene therapy,true
 C0314603,Genetic,false
 C0740330,genital fungal infection,false
 C4545686,Geographical location (property),false
-C0449829,Geometry,false
 C2355607,Anti dsDNA antibody (finding),false
 C2746079,Anti-dsDNA Antibody,false
 C1415053,GGT1 gene,false
+C0181687,loops,false
 C0289884,glatiramer acetate,true
-C0061323,glimepiride,true
 C0125690,gamma-Glu-Asp,true
 C0004076,Glucose measurement, urine,false
 C1136206,Glycemic Index,true
@@ -5650,6 +6031,7 @@ C1522544,CSF2RA protein, human,true
 C1704695,CSF2RA wt Allele,false
 C1442103,Time Difference,false
 C1547049,*Time Difference - Kind of quantity,false
+C0718133,a & d,false
 C0441785,Stage C,false
 C0018099,Gout,true
 C1412761,BCL2A1 gene,false
@@ -5657,9 +6039,6 @@ C3539564,BCL2A1 wt Allele,false
 C1435727,FABP6 protein, human,true
 C1704693,ITGB3 wt Allele,false
 C2697657,ITGA2B wt Allele,false
-C0019191,Infectious Canine Hepatitis,true
-C3272597,ICH Temperature/Humidity Storage Condition,false
-C3281105,HEMORRHAGE, INTRACEREBRAL, SUSCEPTIBILITY TO,false
 C1299393,Moderate to severe,false
 C0079488,Helicobacter pylori,true
 C0036745,Study of serum,true
@@ -5671,6 +6050,7 @@ C1552914,hand - unit of measure,false
 C0018591,Haplotypes,true
 C1504479,Pain scale,false
 C0018599,Hardness,true
+C1019275,Amaranthus viridis,false
 C0903898,nateglinide,true
 C3843510,Hb G,false
 C0559546,Adverse reactions,false
@@ -5678,12 +6058,14 @@ C0369241,Filamentous fungus,true
 C0020268,Hydrocortisone,true
 C0262499,Head circumference,false
 C1413512,CLTC gene,false
+C0242356,Databases,false
+C0993637,Published Database,true
 C3898895,Hemodialysis Extraction Ratio,false
 C0858892,Lower triglycerides,false
 C0743559,error,false
 C1608199,Act Reason - Error,false
 C0814514,health care use,false
-C0018684,Health,true
+C3245512,HL7PublishingSubSection <practice>,false
 C3898900,Healthy,false
 C0018834,Heartburn,true
 C0018837,Heat (physical force),true
@@ -5695,21 +6077,24 @@ C0023895,Liver diseases,true
 C0342882,Familial hypercholesterolemia - heterozygous,false
 C0870649,High School Graduate,false
 C1549971,High School Graduate - Degree/license/certificate,false
+C1880947,General Equivalency Diploma Completion,false
 C2926615,Ever told by doctor or nurse that you have high blood pressure:Finding:Point in time:^Patient:Ordinal,false
 C0400966,Non-alcoholic Fatty Liver Disease,true
 C1954436,Fibrosis score:Arbitrary Concentration:Point in time:Serum/Plasma:Quantitative,false
 C1555018,Network File System,false
 C1954437,Fibrosis score,false
 C1513839,NFS/N Mouse,false
-C1171304,diabetes risk,false
 C0266427,Testicular regression syndrome,true
 C0968917,Traumeel S,true
 C1150746,threonine-tRNA ligase activity,false
 C0439822,Highly sensitive,false
 C0043262,Wrist,true
 C1322271,Wrist joint,true
+C0037949,Vertebral column,true
+C2752558,Neuron spine,false
 C4521896,Histamine receptor antagonist (disposition),false
 C0455544,H/O: asthma,false
+C0021925,Intubation,true
 C1272071,H/O: fracture,false
 C1881055,Personal History of Coronary Artery Disease,false
 C1883702,Supernumerary,false
@@ -5717,9 +6102,8 @@ C1280464,Manifestation of,false
 C1561668,History of fall,false
 C2919132,Encounter due to history of falling,false
 C0551577,History of hospitalizations:Finding:Point in time:^Patient:Nominal:Reported,false
+C2243117,Echocardiogram (image),false
 C4075937,History of osteoporotic fracture,false
-C0027061,Myocardium,true
-C1522564,Myocardial,false
 C0040132,Thyroid Gland,true
 C3540038,THYROID DIAGNOSTIC RADIOPHARMACEUTICALS,false
 C0549099,Perforation (observation),false
@@ -5745,7 +6129,6 @@ C1836830,Developmental regression,false
 C1437978,NRG1 protein, human,true
 C1705020,NRG1 wt Allele,false
 C0588053,Graduate (person),false
-C1880947,General Equivalency Diploma Completion,false
 C1547183,School type - Graduate,false
 C1417055,MBNL1 gene,false
 C0520946,Emotional hypersensitivity,false
@@ -5755,7 +6138,6 @@ C0020564,Hypertrophy,true
 C0020625,Hyponatremia,true
 C4553967,Hyponatremia, CTCAE,false
 C0857122,hyponatremic,false
-C0546884,Hypovolemia,true
 C0042890,Vitamins,true
 C0022104,Irritable Bowel Syndrome,true
 C0432306,Ichthyosis Bullosa of Siemens,true
@@ -5774,8 +6156,6 @@ C0231218,Malaise,false
 C1704254,Medical Image,false
 C1704922,Image,false
 C3542466,Image (foundation metadata concept),false
-C0011923,Diagnostic Imaging,true
-C0079595,Imaging Techniques,false
 C0001551,Immunologic Adjuvants,true
 C1527392,Immunomodulators,true
 C1825598,IMPACT gene,false
@@ -5784,32 +6164,27 @@ C0338656,Impaired cognition,true
 C0009240,Cognition,true
 C0543488,Interested,false
 C4050130,Cognitive Function Subordinate Domain,false
-C0332285,Within,false
-C1707101,CD44 wt Allele,false
 C1264674,Number rate,false
+C1444641,At risk,false
 C0083765,fluorouracil/methotrexate/mitoxantrone protocol,true
 C3848524,monomethyl fumarate,true
-C1548788,Inappropriate,false
-C3537135,Inappropriate Specimen,false
-C3542467,Inappropriate component (foundation metadata concept),false
-C1551358,Incident,false
 C0442809,Inconsistent,false
 C0016457,Food and Agriculture Organization of the United Nations,false
 C0021167,Incontinence,false
-C0000921,Accidental Falls,true
 C1849142,Increased falls,false
 C1273410,Cardiovascular event risk,false
-C1533716,Information,false
 C0021246,Indomethacin,true
 C4049995,Induction Therapy Epoch,false
 C0439663,Infected,false
 C3714514,Infection,true
+C0851341,Infestation,false
 C0340305,Inferior Wall Myocardial Infarction,true
 C3542426,Inferior Myocardial Infarction by ECG Finding,false
 C0021400,Influenza,true
 C0021403,Influenza virus vaccine,true
 C0521114,Infrequent,false
 C0021446,Repair of inguinal hernia,false
+C4552744,Daily Living,false
 C1548602,Initiate (source type),false
 C0013072,Double-Blind Method,true
 C1272883,Injection,false
@@ -5824,7 +6199,6 @@ C3811255,Tumor Identifier Domain,false
 C0199782,Administration of insulin,false
 C1708521,Insulin Aspart,true
 C0004446,Awards,true
-C0807955,slope,false
 C1421951,MIXL1 gene,false
 C1720722,Mix,false
 C4553942,Mix (transformation),false
@@ -5835,10 +6209,12 @@ C1158478,DNA Integration,false
 C1705422,Integration (data processing),false
 C1511484,consolidation therapy,false
 C1320357,Pain intensity (observable entity),false
+C0040018,Thrombin,true
 C3815179,Pharmacogenomics Findings Domain,false
 C4684691,Interim Analysis,false
 C0007276,Internal carotid artery structure,true
 C0745355,intertrochanteric,false
+C1301820,Obtain,false
 C3274035,Interventional Study,false
 C0243001,Abdominal Abscess,true
 C0442111,Intracerebral,false
@@ -5854,6 +6230,8 @@ C0578862,Intraocular pressure finding,false
 C0337174,Storage area,false
 C1698986,Storage,false
 C1753314,cellular entity storage,false
+C0042034,Urination,true
+C4067975,Voids,false
 C0441723,Irritation,false
 C1706307,Irritation (finding),false
 C2700617,Irritation - emotion,false
@@ -5879,8 +6257,8 @@ C1416656,KL gene,false
 C1704887,KITLG wt Allele,false
 C0234833,Subglottic pressure,false
 C0722388,P & S,false
+C0043197,Wit,true
 C1881342,LA Grade B,false
-C0680730,Adjudication,false
 C0333559,Infarction, Lacunar,true
 C0050940,lansoprazole,true
 C0162522,Cholecystectomy, Laparoscopic,true
@@ -5889,13 +6267,18 @@ C0279232,fluorouracil/melphalan/tamoxifen,false
 C0205087,Late,false
 C1423759,ELOVL6 gene,false
 C0353697,Carbidopa / Levodopa,true
-C3273355,Laser Cryo Enrichment,false
 C0030567,Parkinson Disease,true
 C0681889,rating scale,false
+C3273355,Laser Cryo Enrichment,false
 C1521736,Parkinson's Disease Pathway,false
 C3658298,External Lateral Ligament,true
 C1171408,High density/low density lipoprotein ratio measurement,false
 C1704429,Hypoalphalipoproteinemia, Familial,true
+C1710677,Withdrawal by Subject,false
+C2349954,Withdraw (activity),false
+C2825032,Withdrawal (dysfunction),false
+C3812880,Withdrawal - birth control,false
+C4049634,Withdrawal Scale (BASC-2),false
 C0451148,Enthesitis index,false
 C3898614,Left Main Coronary Artery Bifurcation,false
 C0524469,Structure of left shoulder region,false
@@ -5934,7 +6317,6 @@ C1416867,LIPC gene,false
 C0443264,Modulated,false
 C4284280,Modifiers,false
 C1555441,Lira,false
-C2247545,S-linalool synthase activity,false
 C1548795,Live - Specimen Condition,false
 C1634625,% live,false
 C2982691,Reside,false
@@ -5949,9 +6331,9 @@ C2986770,Line of Response,false
 C0745777,Lost,false
 C3815882,Lost Medical Device,false
 C0521170,Osteoporotic Fractures,true
-C3897137,Low Complement,false
 C0012854,DNA,true
 C0311474,DNA, Double-Stranded,true
+C3897137,Low Complement,false
 C0855389,Decreased renin,false
 C0633231,S100A6 protein, human,true
 C1533072,Nanograms per milliliter per hour,false
@@ -5970,6 +6352,7 @@ C4049711,Lepidic Predominant Adenocarcinoma,false
 C1428862,LRG1 gene,false
 C1300557,/mm3,false
 C2611142,response to lipoteichoic acid,false
+C1337105,HPR gene,false
 C1420817,TNFSF14 gene,false
 C4521367,TNFSF14 wt Allele,false
 C4521846,United States Military Commissioned Officer O9,false
@@ -5977,13 +6360,11 @@ C0024090,Lumbar Region,true
 C0876973,Infectious Lung Disorder,false
 C4552950,Lung Infection, CTCAE,false
 C0024121,Lung Neoplasms,true
-C0520863,Diastolic dysfunction,false
+C0205282,Malignant - descriptor,false
 C0302131,Ejection as a Circumstance of Injury,false
 C0336969,Ejection as a Sports activity,false
 C0812388,Ejection time,false
 C0749225,Systolic dysfunction,false
-C0013516,Echocardiography,true
-C2243117,Echocardiogram (image),false
 C0009219,Coding,true
 C0805701,Code,false
 C3889831,eTMF Content Model Code,false
@@ -5992,11 +6373,11 @@ C4282165,Swollen Lymph Node,false
 C0003250,Monoclonal Antibodies,true
 C0041696,Unipolar Depression,true
 C1269683,Major Depressive Disorder,true
-C0679637,major surgery,false
+C0429103,T wave feature,false
+C0520888,Inverted T wave,false
+C0441840,Group F,false
 C3829202,March (month),false
 C4255469,Medication administration flowsheet:Finding:Point in time:{Setting}:Document:{Role},false
-C0024841,Marriage, life event,true
-C0555047,Married (finding),false
 C3481639,Volume expired during 1.0 s of forced expiration percent change:VPctDiff:Pt:Respiratory system:Qn,false
 C0042812,Visual Acuity,true
 C1096774,Letter [Publication Type],true
@@ -6005,6 +6386,8 @@ C2360551,Letter:Finding:Point in time:{Setting}:Document:{Provider},false
 C0013903,Ellis-Van Creveld Syndrome,true
 C0429711,Expiratory vital capacity,false
 C1414479,EVC gene,false
+C1554963,ResponseLevel - modification,false
+C3840684,Modification,false
 C0457987,Renal disease diet,false
 C0724655,opium tincture,false
 C1414370,SERPINB1 gene,false
@@ -6014,29 +6397,21 @@ C4554631,Nasal Congestion, CTCAE,false
 C2827883,Milligram per Second,false
 C1264637,Substance amount,false
 C1718138,Number of medications,false
-C0237881,Statistical Significance,false
-C0750502,Significant,false
-C1546944,Event Seriousness - Significant,false
 C3854605,Mean Pulmonary Arterial Pressure,false
 C4687744,Mean Pressure Gradient,false
 C0443315,subcutaneous,false
 C2986589,Total PSA,false
 C4054557,Mean Thickness,false
-C0439097,Delta - greek letter,false
-C3146239,Delta <Insecta>,false
-C3540585,YY1 wt Allele,false
-C3815527,Delta-Like Protein 1, human,false
 C0524670,Medals,true
 C0034746,Reaction Time,true
 C0522486,Delay time,false
+C1709854,Recipient,false
 C1369882,Patient history:-:Point in time:^Patient:-,false
 C1609576,Patient History Category II Codes,false
 C3537178,Glinides,false
 C1579432,Meglitinides,false
 C0083381,meloxicam,true
 C0025242,Memantine,true
-C0084844,trestolone,true
-C1538994,C1orf56 gene,false
 C0278060,Mental state,false
 C0127615,mesalamine,true
 C0311400,Metabolic,false
@@ -6044,6 +6419,10 @@ C1524026,Metabolic Process, Cellular,false
 C2707259,Metabolic:-:Point in time:^Patient:-,false
 C0025519,Metabolism,true
 C0025520,metabolic aspects,true
+C0028707,Science of nutrition,true
+C0392209,Nutritional status,true
+C0518896,Nutrition outcomes,false
+C1442959,Nutrition function,false
 C0036525,Metastatic to,false
 C1522484,metastatic qualifier,true
 C4085632,Metastatic Disease Clinical Trial Setting,false
@@ -6051,18 +6430,14 @@ C1635037,Metformin / pioglitazone,false
 C0746573,methotrexate treatment,false
 C0066447,methylxanthine,true
 C0240339,mexican,false
-C0042034,Urination,true
 C1309950,GOLPH3 protein, human,true
 C1423498,GOLPH3 gene,false
 C4049617,GOLPH3 wt Allele,false
-C0026068,Middle East,true
 C0024968,Maxims,true
 C0038904,Minor Surgical Procedures,true
 C0026265,Diseases of mitral valve,false
 C4553832,Mitral Valve Disease, CTCAE,false
 C4049715,PedsQL-4 Scale Score,false
-C0458216,Sev (substance),false
-C2983285,CDISC SEND Severity Terminology,false
 C4081855,Moderate intensity,false
 C1550235,Cord - Body Parts,false
 C1706500,Device Cord,false
@@ -6073,9 +6448,14 @@ C3653412,MAO B Inhibitors, dopaminergic anti-parkinson drugs,false
 C0457086,Morning stiffness - joint,false
 C0200760,Morphometric analysis,false
 C0750554,MOSTLY,false
+C0242428,Satisfaction,true
+C4049977,Emotionally Satisfied with Extremity,false
+C4084799,Satisfied,false
 C0149745,Oral Ulcer,true
 C1335594,MRAS protein, human,true
 C1367476,MRAS gene,false
+C1706255,Packaging Case,false
+C1706256,Clinical Study Case,false
 C1039355,Sio,false
 C0026724,Mucous Membrane,true
 C3714835,Multivitamin Drug Class,false
@@ -6083,10 +6463,13 @@ C0883242,MYCOPHENOLATE,false
 C0027342,Nail plate,true
 C1432728,CD244 protein, human,true
 C3538766,CD244 wt Allele,false
+C0449719,Part,false
 C0870935,Napping,false
 C1423800,CTNNBL1 gene,false
 C4283878,Neutrophil Activation Probe Imaging Agent,false
 C0027396,Naproxen,true
+C0222001,Structure of nail of finger,true
+C0246689,repaglinide,true
 C0068475,nebivolol,true
 C0027540,Necrosis,true
 C1334928,Necrotic changes (finding),false
@@ -6112,16 +6495,17 @@ C0240526,Night time,false
 C0132512,nilvadipine,true
 C2930789,nintedanib,true
 C1513817,NCI-Designated Cancer Center,false
-C0525032,International Normalized Ratio,true
-C1704538,Integrated Neuromusculoskeletal Release,false
 C0750489,apparent,false
+C0205396,Identified,false
+C1550043,Container status - Identified,false
+C0205379,Visible,false
+C0205429,Uninvolved,false
 C0332325,Resistant (qualifier value),false
 C1514892,Resistance Process,false
 C1550464,resistant - Observation Interpretation Susceptibility,false
 C2827757,Antimicrobial Resistance Result,false
 C1948062,Copy (object),false
 C0068000,N-glycylglutamic acid,true
-C0222001,Structure of nail of finger,true
 C0578870,Chronic idiopathic urticaria,false
 C3896585,Total Nicotine Equivalent,false
 C0028734,Nocturia,true
@@ -6154,6 +6538,7 @@ C4085681,Oceania <genus>,false
 C0326287,Ant-thrush (organism),false
 C1518425,Not Otherwise Specified,false
 C1883425,Unevaluable,false
+C1549542,Perfuse,false
 C4316743,Not severe,false
 C0020258,Hydrocephalus, Normal Pressure,true
 C0027442,Nasopharynx,true
@@ -6164,6 +6549,10 @@ C0278962,New York Heart Association class III/IV,false
 C0029118,Opportunistic Infections,true
 C0029434,Osteogenesis Imperfecta,true
 C3641332,The Overactive Bladder Questionnaire,false
+C0005005,Benin Republic,true
+C0034700,Rats, Inbred BN,true
+C1706574,GRP wt Allele,false
+C4551963,BULIMIA NERVOSA, SUSCEPTIBILITY TO,false
 C0028753,Oats (Dietary),false
 C0331496,Avena (plant),true
 C0939905,Oats preparation,false
@@ -6173,33 +6562,43 @@ C0302523,Observation in research,true
 C0700325,Patient observation,true
 C1964257,Observation - diagnostic procedure,false
 C3889687,Clinical Observation,false
-C1706255,Packaging Case,false
-C1706256,Clinical Study Case,false
 C1412791,BGLAP gene,false
 C2347392,Oncology Certified Nurse,false
+C1314677,Maintaining (action),false
 C3828732,October,false
+C0556656,Meetings,false
 C0268353,Cutis laxa, x-linked,true
 C1861455,STOMATOCYTOSIS I,true
 C0386393,Olmesartan medoxomil,true
+C0038976,Svalbard,true
+C0043309,Roentgen Rays,true
+C1962945,Radiographic imaging procedure,true
 C0029040,Ontario,true
+C0041740,Universities,true
 C0677612,Surgical action,false
 C0029087,Ophthalmology specialty,true
 C0205481,Ophthalmologic,false
 C1518601,Options,false
 C1550456,option - ActMoodPredicate,false
+C0026538,Morbidity - disease rate,true
+C0220880,morbidity aspects,true
+C0244404,Raloxifene,true
+C1290952,Taking medication (activity),false
 C0001637,Adrenergic Agents,true
 C0747055,organic,false
-C0079946,National origin,false
-C1550512,Participation Type - origin,false
 C0205313,Original,false
 C2347409,Original Regulatory Submission,false
 C2363731,Oropharyngeal pain,false
 C4554669,Oropharyngeal Pain, CTCAE,false
 C0069590,ORALIT,true
 C1963718,Oculorespiratory syndrome,false
+C1504308,Genus Cis,false
+C1742862,CISH protein, human,true
 C0232823,Osmotic diuresis,false
 C0538161,Tumor necrosis factor receptor 11b,true
 C1308614,TNFRSF11B protein, human,true
+C0205216,Decreased,false
+C0442797,Decreasing,false
 C1859330,Cardiac Valvular Defect, Developmental,true
 C0008946,Climate,true
 C0430022,diagnostic procedure,false
@@ -6229,6 +6628,7 @@ C1539794,SMR3B gene,false
 C0441849,Group P (alphabetic group),false
 C1959644,P group,false
 C1518835,P/J Mouse,false
+C2348792,Timepoint,false
 C4086240,Differential Methylation,false
 C1176308,tolvaptan,true
 C0401806,Valuer,false
@@ -6247,14 +6647,22 @@ C0332119,Past history of,false
 C2945691,past treatment,false
 C4698447,Patient age,false
 C0449437,Patient status,false
+C0442696,Waking,false
+C0585034,On waking-temporal period,false
+C0021083,Immunotherapy,true
+C3242339,operate,false
+C1140609,Insulin pump,false
 C0030673,Patient Admission,true
 C0741926,cardiac patient,false
 C2986511,Evaluable Patient,false
+C0011880,Diabetic Ketoacidosis,true
+C1859860,Episodic ketoacidosis,false
 C0870668,hospitalized patients,false
 C0278138,Mild pain,false
 C4522280,Neck Pain Score 2,false
+C0278140,Severe pain,false
+C4521229,Neck Pain Score 6,false
 C0406322,Psoriasis of nail,false
-C0267561,Perianal fistula,false
 C1277626,patient in remission,false
 C0683521,patient condition,false
 C0420176,Vitamin D supplement therapy,false
@@ -6274,9 +6682,9 @@ C0030915,Pepsinogen C,true
 C0523817,Pepsinogen II measurement,false
 C0264956,Atheroma,true
 C3272907,Percent Change From Baseline,false
+C3671888,Creatinine concentration in urine above normal,false
+C0541653,Chart evaluation by healthcare professional,false
 C1273169,Indapamide / Perindopril,true
-C0150936,Peripheral Blood Vessel,false
-C0947487,Peripheral vessels,false
 C0151313,Sensory neuropathy,false
 C4554142,Peripheral Sensory Neuropathy, CTCAE,false
 C0205326,Permeable,false
@@ -6293,6 +6701,10 @@ C1149880,phosphoric monoester hydrolase activity,false
 C4522024,Phosphatase (disposition),false
 C0031765,Phototherapy,true
 C0678812,systemic administration,false
+C0080331,Walking (activity),true
+C4283795,Symptoms Interfered with Walking,false
+C4321241,Usually Need Help from Another Person for Walking,false
+C4321242,Hard to Walk More Than One Block,false
 C0456681,Millimeter Per Second,false
 C0122626,human pancreatic eicosapeptide,true
 C0429863,Pulsatility index, arterial velocity waveform,false
@@ -6320,6 +6732,9 @@ C3854028,Patient activity scale,false
 C4321248,Premorbid Adjustment Scale,false
 C4522126,Platelets Additive Solution,false
 C0006539,Belarus,true
+C0205232,Fine - adjective,false
+C0687757,Legal fine,false
+C0252873,Fuchsin acid stain,true
 C0885378,Glonoine, nitroglycerine, Homeopathic preparation,false
 C1417807,NPPA gene,false
 C4552608,NPPA wt Allele,false
@@ -6327,6 +6742,7 @@ C0032385,Pollen,true
 C0795585,Bee pollen,false
 C1320238,Pollen (allergen),false
 C0162323,Polyarthritis,true
+C0035450,Rheumatoid Nodule,true
 C0337051,Environmental pool,false
 C1260386,Glucocorticoid-remediable aldosteronism,true
 C1509144,Sample pool,false
@@ -6334,8 +6750,6 @@ C1303103,Sample analysis,false
 C0032646,Poor compliance,false
 C3806166,Poor outcome,false
 C3272301,Post-Procedure,false
-C0037949,Vertebral column,true
-C2752558,Neuron spine,false
 C0231957,Slow vital capacity,false
 C0304490,Potassium Sparing Diuretics,true
 C3536751,Potassium-sparing Diuretic [EPC],false
@@ -6368,18 +6782,24 @@ C0042839,Vitamin A,true
 C0087161,All-Trans-Retinol,true
 C2825076,Vitamin A [EPC],false
 C3714656,Vitamin A Drug Class,false
+C0220928,Tokelau,true
 C3841753,Yes, stroke,false
-C0043240,Wound Healing,true
-C0205249,Healed,false
 C0005527,Biological Response Modifier Therapy,true
+C1161310,Niaspan,false
 C4687737,Stratified Randomization,false
+C0231175,failed,false
 C0332155,Did not receive therapy or drug for,false
+C4300468,adjusted for age,false
+C0237529,Self Confidence,true
+C1704725,Statistical Confidence,false
+C1704726,Confidence,false
 C1549995,Primary Reason,false
 C1709665,Primary Key,false
 C1515999,Anti-inflammatory effect,false
 C2267018,Bisphosphonate [EPC],false
 C0542380,Direct current cardioversion,false
 C0085207,Gestational Diabetes,true
+C0039298,Tanzania,true
 C0729829,Urate level - finding,false
 C0935936,Urate,true
 C0033209,Probenecid,true
@@ -6413,7 +6833,6 @@ C4331197,Quick Inventory of Depressive Symptomatology Self-Report Version Questi
 C0426359,Urinary symptoms,false
 C0487742,Width,false
 C1425796,HPS6 gene,false
-C1522634,Question (inquiry),false
 C4553152,Tiredness Visual Analogue Scale,false
 C0004600,Back,true
 C0460009,Back structure, including back of neck,false
@@ -6426,6 +6845,9 @@ C2364135,Discomfort,false
 C0152054,Therapeutic tactile stimulation,true
 C0439815,Tactile,false
 C0702221,Touch sensation,true
+C0332284,Arising in,false
+C4019053,Arising,false
+C4318616,Usually Need Help from Another Person for Arising,false
 C0429091,R wave feature,false
 C0449216,aVL - Lead site,false
 C4287599,CDISC SDTM Collected Race Terminology,false
@@ -6434,34 +6856,23 @@ C0017200,Gated Blood-Pool Imaging,true
 C0034610,Radionuclide Ventriculography,true
 C3538818,Ramus Intermedius Artery,false
 C0681683,temporal distribution,false
-C0021398,Economic Inflation,true
-C1318493,Inflation procedure,false
+C0443290,reversal action,false
 C0451405,Rankin scale,false
 C0015230,Exanthema,true
 C0489879,rate control,false
 C3839460,Nonprogressive,false
 C0033809,Pseudomonas aeruginosa,true
-C0556581,Retinol equivalents,false
-C1999244,Cover - action,false
-C3888055,Cover (physical object),false
-C2986904,Respiratory Domain,false
+C0806481,IgE.total,false
 C0237096,residence,false
 C1527428,Remaining,false
 C0814126,remission by duration,false
 C0194073,Kidney biopsy,false
-C0005005,Benin Republic,true
-C0034700,Rats, Inbred BN,true
-C1706574,GRP wt Allele,false
-C4551963,BULIMIA NERVOSA, SUSCEPTIBILITY TO,false
 C0086907,Renin-Angiotensin-Aldosterone System,true
-C0035096,Renin-angiotensin system,true
-C2984247,Renin-Angiotensin Pathway,false
-C1514873,Requirement,false
 C1708385,Hospitalization Required,false
-C0018896,Helping Behavior,true
 C0022209,isoniazid,true
 C0152172,Angina decubitus,false
 C4697852,Normal Activity,false
+C1427255,ANKK1 gene,false
 C0035455,Rhinitis,true
 C0871269,Rhythm,false
 C1523018,rhythmic process (biological),false
@@ -6486,8 +6897,12 @@ C2346870,Attocurie,false
 C4050575,Acceleration index:Accel:Pt:Aorta:Qn,false
 C0817096,Chest,true
 C1527391,Anterior thoracic region,false
+C0439787,Out (direction),false
+C0849355,Removed,false
 C0035190,Residual volume,true
 C3889272,Randomization Validation,false
+C0459963,Structure of pulmonary blood vessel,false
+C1508661,Pulmonary vessels,false
 C0010139,Cortodoxone,true
 C0043474,Zidovudine,true
 C1517317,French Southern Territories,false
@@ -6497,7 +6912,6 @@ C0036037,Bone structure of sacrum,true
 C0242618,Sample Size,true
 C0037793,Specimen processing (procedure),true
 C2348149,Sample Statistic,false
-C0449719,Part,false
 C0406326,Scalp psoriasis,false
 C1700247,Renal scarring,false
 C0005558,Biopsy,true
@@ -6554,7 +6968,6 @@ C0854572,sinus perforation,false
 C1881710,Medical Device Material Perforation,false
 C0580946,Sitting blood pressure,false
 C3900196,6 Minute Walk Functional Test,false
-C1828170,Mean deviation,false
 C0037313,Sleep,true
 C0700201,Dyssomnias,true
 C2114448,previous Smoking History,false
@@ -6571,17 +6984,17 @@ C0449416,Source,false
 C1705919,Term Source,false
 C4521696,Source (property) (qualifier value),false
 C0037723,Southern Asia,true
+C0238914,Central American,false
 C0037724,Southern Europe,true
 C0037747,Spain,true
 C0205555,Special,false
 C1558916,Adverse Event Associated with Syndromes,false
 C0183441,Spirometer (device),false
-C1114722,ST deviation:Electrical Potential (Voltage):Point in time:Heart:Quantitative:EKG,false
-C1116089,ST deviation,false
+C0429104,Electrocardiogram: T wave (observable entity),false
 C0429066,Segment deviation (ECG),false
-C0429103,T wave feature,false
 C1839341,Abnormal T-wave,false
 C0441766,Stage level 1,false
+C0441777,Stage level 5,false
 C0013274,Patent ductus arteriosus,true
 C0226047,Posterior interventricular branch of right coronary artery,false
 C4282128,PATENT DUCTUS ARTERIOSUS 1,false
@@ -6597,6 +7010,7 @@ C0456178,Microbiology subtype strains,false
 C1518614,Organism Strain,false
 C2987481,Emotional Strain,false
 C1514984,Stratification Factors,false
+C4551881,Mechanism of Action,false
 C0678594,structure,false
 C3481509,SURVEY.GNHLTH,false
 C1568011,Study Characteristics,true
@@ -6604,7 +7018,10 @@ C0021499,Subcutaneous Injections,true
 C0353681,subcutaneous heparin,false
 C0038541,Subdural space,true
 C0232024,Total airway resistance,false
+C2983672,Terminal Body Weight,false
 C1514228,Population Analysis,false
+C0459443,Subscale score,false
+C0175637,Health evaluation,false
 C0085298,Sudden Cardiac Death,true
 C0011071,Sudden death,true
 C1964022,Sudden Death Not Associated with More Specific CTCAE Term, CTCAE,false
@@ -6618,16 +7035,8 @@ C0041942,Urea,true
 C0243072,derivatives,true
 C0038817,Sunlight,true
 C0376223,The Sun,true
-C0039224,Table - furniture,false
-C1706074,Data Table,true
 C0374711,Surgical repair,false
 C0018818,Ventricular Septal Defects,true
-C0332147,Suspected diagnosis,false
-C0750491,Suspected qualifier,false
-C0443318,Sustained,false
-C2732140,Sustain,false
-C0332516,Symmetrical,false
-C0520888,Inverted T wave,false
 C2699744,Symmetric Relationship,false
 C1425041,SARS2 gene,false
 C1706546,LIF wt Allele,false
@@ -6636,6 +7045,7 @@ C0003087,Ankle joint structure,true
 C3854607,T-Score,false
 C0947343,study.total,false
 C1315074,Specimen characteristics,false
+C0039601,Testosterone,true
 C1176316,tadalafil,true
 C0404079,Total abdominal hysterectomy,false
 C0257343,tamsulosin,true
@@ -6651,10 +7061,8 @@ C1705175,Order (document),false
 C1705176,Order (arrangement),false
 C1705177,Order (taxonomic),false
 C1705178,Order (action),false
-C1882348,Permutation,false
 C3889825,Sequence of Planned Assessment Schedule,false
 C4284072,Order (record artifact),false
-C0039601,Testosterone,true
 C0428412,Testosterone level result,false
 C0523912,Testosterone measurement,false
 C0589061,Category test,false
@@ -6662,28 +7070,26 @@ C0399532,Midline deviation of dental arch,false
 C0035452,Rheumatology specialty,true
 C1547647,Patient Outcome,false
 C0871424,statistical analysis,false
-C4048755,Apply,false
+C0270724,Infantile Neuroaxonal Dystrophy,true
 C0040038,Thromboembolism,true
+C1272695,Done (qualifier value),false
 C0040128,Thyroid Diseases,true
 C0040135,Thyroid Hormones,true
 C4522017,Thyroid hormone (disposition),false
+C0596706,hip surgery,false
 C1522314,End Time,false
-C2349186,Fit (action),false
-C4553125,Prosthesis fit,false
 C1611232,Medication Therapy Management,true
 C3665478,chemotherapy administration,false
 C0556970,times/year,false
 C1519428,South Georgia and the South Sandwich Islands,false
 C3539997,Sint Maarten (Dutch Part),true
 C3815196,Testicular Cancer Serum Markers Test Result SX,false
-C2348792,Timepoint,false
+C1711239,Since,false
 C1301931,Time of death,false
-C0026538,Morbidity - disease rate,true
-C0220880,morbidity aspects,true
+C0547043,Up,false
 C3463985,miscellaneous Crenarchaeota group,false
 C4086680,Overall Satisfaction with Treatment Received for Prostate Cancer,false
 C0429784,Maximal urinary flow rate,false
-C0220928,Tokelau,true
 C4050092,Thymidine Kinase Measurement,false
 C3543842,TONICS,false
 C0033080,Prescription procedure,true
@@ -6698,6 +7104,7 @@ C0232100,Exsanguination,true
 C0878805,Screening cholesterol level,false
 C1445957,Serum total cholesterol measurement,false
 C3537453,GBA wt Allele,false
+C0086511,Knee Replacement Arthroplasty (procedure),true
 C2697941,Loomis Unit per Milliliter,false
 C0332574,macular,false
 C1514893,physiologic resolution,false
@@ -6718,9 +7125,18 @@ C0076891,trandolapril,true
 C0002594,Transaminases,true
 C0919834,Transaminase Assay,false
 C0014792,Erythrocytes,true
+C0370231,whole blood,false
+C1546552,Specimen Source Codes - Whole blood,false
+C1608383,whole blood specimen,false
 C3178801,Stroke, Lacunar,true
 C0237403,treatments and procedures,false
+C1149372,cAMP response element binding protein binding activity,false
+C1705981,PAG1 wt Allele,false
+C3539643,EIF4E wt Allele,false
+C3887980,Protanomaly,false
 C0012641,Disease Clustering,true
+C1330119,Caduet,true
+C1552578,Act Class - investigation,false
 C0392938,zoledronate,true
 C1609538,Latent Tuberculosis,true
 C0205275,Latent,false
@@ -6733,11 +7149,11 @@ C4264484,Type C,false
 C0259945,hospital care,false
 C3177060,Hospitalization type,false
 C3274412,Intervention Type,false
+C0559956,Replacement,false
+C0746591,mitral,false
+C1299987,Replaced by,false
 C1420188,SLC35A2 gene,false
 C4284131,UGT1A gene,false
-C3887532,Ulceration,false
-C0001688,aspects of adverse effects,true
-C0879626,Adverse effects,false
 C2987720,Population risk,false
 C0205426,Unclassified general adjectival modifiers,false
 C1546437,No Information Available,false
@@ -6759,18 +7175,25 @@ C0334463,Malignant Fibrous Histiocytoma,true
 C3542434,Urgency Perception Scale Questionnaire,false
 C0042038,Urine albumin tests,false
 C0587185,Urine albumin level,false
-C0042109,Urticaria,true
 C1559188,Urticaria, CTCAE,false
-C0042523,Verapamil,true
+C0589121,Follow-up visit,false
+C0034414,Quinidine,true
 C0042164,Uveitis,true
 C1963266,Uveitis, CTCAE,false
 C0913246,valdecoxib,true
-C1547282,Show,false
+C0376691,Programs - Publication Format,true
+C1709697,Program - framework of goals,false
+C2728259,Program,false
+C3484370,Programs,false
+C3273238,Regulatory Report,false
+C4255046,Report:Finding:Point in time:{Setting}:Document:{Role},false
+C3842522,High blood cholesterol,false
 C2241628,aliskiren / Hydrochlorothiazide,false
+C0003486,Aortic Aneurysm,true
+C0340629,Aortic aneurysm without mention of rupture NOS,false
 C1518340,No Evidence of Disease,false
 C0030688,Patient education (procedure),true
 C0035139,Surgical Replantation,true
-C0559956,Replacement,false
 C1555302,Replacement - supply,false
 C4553149,Trial Subject Replacement,false
 C4319951,Repair,false
@@ -6782,9 +7205,10 @@ C0034044,Puerto Rico,true
 C3539761,Ribonuclease Inhibitor,false
 C3539762,RNH1 wt Allele,false
 C1421428,VASP gene,false
-C1337105,HPR gene,false
 C4267693,OOD,false
 C3641222,Very good,false
+C1548784,Excellent - Specimen Quality,false
+C1961136,Excellent (qualifier value),false
 C0003968,Ascorbic Acid,true
 C2349136,Vitamin C Vitamins,false
 C3714687,Vitamin C Drug Class,false
@@ -6792,27 +7216,21 @@ C4522080,Vitamin C [EPC],false
 C3540032,Vitamin IV solution additives,false
 C3714649,VITAMINS [VA Class],false
 C1552835,Void - TableFrame,false
-C4067975,Voids,false
 C0445383,Volumetric,false
 C0412669,Computerized tomography, bone density study,false
 C0439656,Voluntary,false
 C3543419,Voluntary Report,false
 C4080009,Vonoprazan,true
-C0080331,Walking (activity),true
-C4283795,Symptoms Interfered with Walking,false
-C4321241,Usually Need Help from Another Person for Walking,false
-C4321242,Hard to Walk More Than One Block,false
 C0043027,War,true
-C0018623,Hazards Models,true
+C0237688,Interaction Analysis,false
+C0033489,Proportional Hazards Models,true
 C1704610,Data Value,false
+C0018623,Hazards Models,true
 C4349366,Changea,false
-C0443228,Largest,false
 C1532757,kg/min,false
-C1710677,Withdrawal by Subject,false
-C2349954,Withdraw (activity),false
-C2825032,Withdrawal (dysfunction),false
-C3812880,Withdrawal - birth control,false
-C4049634,Withdrawal Scale (BASC-2),false
+C1511481,Consent,false
+C1554192,ActClass - consent,false
+C2923685,Consent:Finding:Point in time:{Setting}:Document:Patient,false
 C1883559,Wild Type,false
 C2700323,Wild Type Unspecified - zebrafish,false
 C4050013,Howland Island,false
@@ -6823,16 +7241,22 @@ C0010583,Cyclophosphamide,true
 C3886073,lesinurad,true
 C0939233,Hydrochlorothiazide / telmisartan,true
 C2733369,Amlodipine / telmisartan,true
+C0442739,No status change,false
+C2346711,About The Same,false
 C0036974,Shock,true
+C0443304,Silent,false
+C3816734,Absence of Signs or Symptoms,false
 C0333293,Healing ulcer,false
 C0444972,IV/C,false
 C0444967,II/C,false
 C0581126,Severe asthma,false
 C0595265,Monoamine oxidase B inhibitor (product),false
 C2917433,Monoamine Oxidase Type B Inhibitor [EPC],false
+C0745134,hypertension untreated,false
 C3272298,Arterial Access Site,false
 C1428722,CBARP gene,false
 C4304227,CDR (Clinical Dementia Rating) score,false
+C1537007,Diffusion Tensor Imaging,true
 C0003299,Antiepileptic Agents,true
 C3537002,Anti-epileptic Agent [EPC],false
 C0024902,Mastodynia,true
@@ -6840,5 +7264,7 @@ C0699749,disease stage,false
 C0232483,Reflux,false
 C1882919,Reflux within Device Medical Device Problem,false
 C4317146,Acid reflux,false
+C3671772,Change in diet,false
 C1419079,PTLAH gene,false
+C0334094,Proliferation (morphologic abnormality),false
 C0439679,Erosive,false

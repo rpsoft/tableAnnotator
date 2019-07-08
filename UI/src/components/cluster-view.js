@@ -21,7 +21,9 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import Checkbox from 'material-ui/Checkbox';
 
-// import Infinite from 'react-infinite';
+import Loader from 'react-loader-spinner'
+
+import Toggle from 'material-ui/Toggle';
 
 import { FixedSizeList as List } from 'react-window';
 
@@ -40,6 +42,8 @@ class ClusterView extends Component {
     this.state = {
         table: null,
         currentPage : props.location.query && props.location.query.page ? props.location.query.page : 1,
+        goto : props.location.query && props.location.query.page ? props.location.query.page : 1,
+        paging : props.location.query && props.location.query.paging ? props.location.query.paging : 20,
         checkedConcepts : {},
         clusters : {},
         totalClusters : 0,
@@ -47,6 +51,9 @@ class ClusterView extends Component {
         cuis_index: {},
         clusterData: {},
         modifiers: {},
+        open: {},
+        hideCompleted: false,
+        hideUnhelpful: false,
     };
 
   }
@@ -83,7 +90,7 @@ class ClusterView extends Component {
 
     this.loadPageFromProps(this.props)
 
-    this.props.goToUrl("/cluster")
+    this.props.goToUrl("/cluster?page="+this.state.currentPage)
   }
 
   handleModifierChange = (v, c) => {
@@ -150,10 +157,11 @@ class ClusterView extends Component {
   async loadPageFromProps(props){
         let fetch = new fetchData();
 
+        var open = {}
 
         var clusters = await fetch.getAllClusters()
 
-            clusters = clusters.reduce( (acc, item) =>{ var prev = acc[item.cn_override ? item.cn_override : item.cn]; if ( prev ){ prev.push(item); } else { prev = [item] } acc[item.cn_override ? item.cn_override : item.cn] = prev; return acc },{})
+            clusters = clusters.reduce( (acc, item) =>{ var cnumb = item.cn_override ? item.cn_override : item.cn; open[cnumb] = false; var prev = acc[cnumb]; if ( prev ){ prev.push(item); } else { prev = [item] } acc[item.cn_override ? item.cn_override : item.cn] = prev; return acc },{})
 
         var clusterData = await fetch.getClusterData()
 
@@ -171,17 +179,74 @@ class ClusterView extends Component {
                        totalClusters : Object.keys(clusters).length,
                        checkedConcepts:{},
                        cuis_index : cuis_index,
-                       clusterData: clusterData})
+                       clusterData: clusterData,
+                       currentPage : this.state.currentPage ? this.state.currentPage : (props.location.query && props.location.query.page ? props.location.query.page : 1),
+                       goto : this.state.currentPage ? this.state.currentPage : (props.location.query && props.location.query.page ? props.location.query.page : 1),
+                       paging : props.location.query && props.location.query.paging ? props.location.query.paging : 20,
+                       open: open,
+                      })
     }
 
 
    changePage( number ){
+
      this.props.goToUrl("/cluster?page="+number)
+   }
+
+   handleOpen = ( cluster ) => {
+
+     var open = this.state.open
+     open[cluster] = open[cluster] ? false : true
+     this.setState({open : open, openAll: false});
+   }
+
+   handleOpenAllVisible = () => {
+     var open = this.state.open
+
+     var openAll = openAll ? false : true
+
+     Object.keys(open).map( v => {open[v] = openAll })
+
+     // open[cluster] = open[cluster] ? false : true
+     this.setState({open : open, openAll : openAll});
    }
 
 
    searchTerms () {
 
+     var state = this.state;
+
+     var theclusters = {}
+
+     var hide =  this.state.hideCompleted || this.state.hideUnhelpful
+
+
+     var keys = Object.keys(state.clusters)
+
+          keys.map(function (v,i) {
+
+           if ( hide ){
+             var noData = state.clusterData[keys[i]] == undefined
+
+             if ( !noData ){
+               var comp = (state.hideCompleted && (state.clusterData[keys[i]].status == "completedchecked"))
+               var unhelp = (state.hideUnhelpful && (state.clusterData[keys[i]].status == "unhelpful"))
+
+                if (!(comp || unhelp)){
+                    theclusters[keys[i]] = state.clusters[keys[i]]
+                }
+
+             } else {
+               theclusters[keys[i]] = state.clusters[keys[i]]
+             }
+
+           } else {
+             theclusters[keys[i]] = state.clusters[keys[i]]
+           }
+
+         })
+
+     keys = Object.keys(theclusters)
 
 
      if( this.state.searchTerm.length > 3 ){
@@ -191,9 +256,9 @@ class ClusterView extends Component {
 
        var clustersToReturn = {}
 
-       Object.keys(this.state.clusters).map( (c,i) => {
+       Object.keys(theclusters).map( (c,i) => {
 
-          var totalFound = this.state.clusters[c].reduce( (acc, citem) => {
+          var totalFound = theclusters[c].reduce( (acc, citem) => {
 
                   var nfound = 0
 
@@ -202,7 +267,7 @@ class ClusterView extends Component {
                       nfound = nfound+1
                     }
 
-                    if ( citem.cuis.indexOf(searchTerms[t]) > -1 ){
+                    if ( citem.cuis && citem.cuis.indexOf(searchTerms[t]) > -1 ){
                       nfound = nfound+1
                     }
                   }
@@ -212,15 +277,15 @@ class ClusterView extends Component {
 
            if (totalFound > 0 ){
              found.push({cn : c, found: totalFound})
-             clustersToReturn[c] = this.state.clusters[c]
+             clustersToReturn[c] = theclusters[c]
            }
        })
 
-       found = found.sort(function(a, b){return b.found - a.found});
+       found = found.sort(function(a, b){return b.found - a.found})
 
        return found.map( v => v.cn )
      } else {
-       return Object.keys(this.state.clusters)
+       return keys
      }
 
    }
@@ -239,33 +304,126 @@ class ClusterView extends Component {
 
 
 
-     if ( this.state.clusters ){
+     if ( this.state.clusters && Object.keys(this.state.clusters).length > 0 ){
+
+       var maxIndex = Object.keys(this.state.clusters).reduce( (v,max) => { return parseInt(v) > max ? v : max }, -99999)
+
+           maxIndex = this.state.clusters[maxIndex].length == 0 ? maxIndex : parseInt(maxIndex)+1
+
+       var found_clusters = this.searchTerms()
+
+       var currentClusters = found_clusters.map( (v,i) => { return <Cluster key={i} item={this.state.clusters[v]}
+                                                                 clusters={this.state.clusters}
+                                                                 currentCluster={v}
+                                                                 isChecked={ (c) => { return Object.keys(this.state.checkedConcepts).indexOf(c) > -1 }}
+                                                                 clearChecked={ () => {this.setState({checkedConcepts : {}})}}
+                                                                 open = {this.state.open[v]}
+                                                                 handleOpen = { this.handleOpen }
+                                                                 toggleCheck={ this.toggleCheck }
+                                                                 moveAllHere={ this.moveAllHere }
+                                                                 anyChecked={ Object.keys(this.state.checkedConcepts).length > 0  }
+                                                                 cuis_index={ this.state.cuis_index }
+                                                                 handleModifierChange = { this.handleModifierChange }
+                                                                 handleClusterDataChange = { this.handleClusterDataChange }
+                                                                 modifiers={this.state.modifiers}
+                                                                 status={this.state.clusterData[v] ? this.state.clusterData[v].status : "inprogress"}
+                                                                 rep_cuis={this.state.clusterData[v] && this.state.clusterData[v].rep_cuis ? this.state.clusterData[v].rep_cuis : []}
+                                                                 excluded_cuis={this.state.clusterData[v] && this.state.clusterData[v].excluded_cuis ? this.state.clusterData[v].excluded_cuis : []}
+                                                               ></Cluster>})
 
 
-       var currentClusters = this.searchTerms().map( (v,i) => <Cluster key={i} item={this.state.clusters[v]}
-                                                           clusters={this.state.clusters}
-                                                           currentCluster={v}
-                                                           isChecked={ (c) => { return Object.keys(this.state.checkedConcepts).indexOf(c) > -1 }}
-                                                           clearChecked={ () => {this.setState({checkedConcepts : {}})}}
-                                                           toggleCheck={ this.toggleCheck }
-                                                           moveAllHere={ this.moveAllHere }
-                                                           anyChecked={ Object.keys(this.state.checkedConcepts).length > 0  }
-                                                           cuis_index={ this.state.cuis_index }
-                                                           handleModifierChange = { this.handleModifierChange }
-                                                           handleClusterDataChange = { this.handleClusterDataChange }
-                                                           modifiers={this.state.modifiers}
-                                                           status={this.state.clusterData[v] ? this.state.clusterData[v].status : "inprogress"}
-                                                           rep_cuis={this.state.clusterData[v] && this.state.clusterData[v].rep_cuis ? this.state.clusterData[v].rep_cuis : []}
-                                                           excluded_cuis={this.state.clusterData[v] && this.state.clusterData[v].excluded_cuis ? this.state.clusterData[v].excluded_cuis : []}
-                                                         ></Cluster>)
+       var currentPage = this.state.currentPage-1
 
+       var start = currentPage*this.state.paging
+           start = start > (currentClusters.length-1-this.state.paging) ? (currentClusters.length-1-this.state.paging) : start
+           start = start < 0 ? 0 : start
+
+
+       var end = start + this.state.paging
+           end = end > (currentClusters.length) ? currentClusters.length : end
+
+       var total = Math.ceil(currentClusters.length / this.state.paging)
+       currentClusters = currentClusters.slice(start,end+1)
+
+
+       var discard = <Cluster key={"-10"} item={this.state.clusters["-10"]}
+         clusters={this.state.clusters}
+         currentCluster={"-10"}
+         isChecked={ (c) => { return Object.keys(this.state.checkedConcepts).indexOf(c) > -1 }}
+         clearChecked={ () => {this.setState({checkedConcepts : {}})}}
+         open = {this.state.open["-10"]}
+         handleOpen = { this.handleOpen }
+         toggleCheck={ this.toggleCheck }
+         moveAllHere={ this.moveAllHere }
+         anyChecked={ Object.keys(this.state.checkedConcepts).length > 0  }
+         cuis_index={ this.state.cuis_index }
+         handleModifierChange = { this.handleModifierChange }
+         handleClusterDataChange = { this.handleClusterDataChange }
+         modifiers={this.state.modifiers}
+         status={this.state.clusterData["-10"] ? this.state.clusterData["-10"].status : "inprogress"}
+         rep_cuis={this.state.clusterData["-10"] && this.state.clusterData["-10"].rep_cuis ? this.state.clusterData["-10"].rep_cuis : []}
+         excluded_cuis={this.state.clusterData["-10"] && this.state.clusterData["-10"].excluded_cuis ? this.state.clusterData["-10"].excluded_cuis : []}
+       ></Cluster>
+
+
+       // <Infinite containerHeight={1020} elementHeight={60}>
+       //     { currentClusters }
+       // </Infinite>
+
+
+       var page_styler= { cursor: "pointer", color: "blue", textDecoration: "underline" }
 
        return <Card style={{width: "90vw", marginLeft:"5vw", padding: "1vw", minHeight:600}}>
+
+              <div style={{float:"right",display:"inline"}}>
+                  <Toggle label="Hide Completed" toggled={this.state.hideCompleted} onToggle={ (v) => this.setState({hideCompleted: this.state.hideCompleted ? false : true})} />
+                  <Toggle label="Hide Unhelpful" toggled={this.state.hideUnhelpful} onToggle={ (v) => this.setState({hideUnhelpful: this.state.hideUnhelpful ? false : true})} />
+                  <Toggle label="Collapse/Uncollapse All" toggled={this.state.openAll} onToggle={ this.handleOpenAllVisible } />
+               </div>
+                   <Card style={{position:"fixed",top:0, backgroundColor: "white", left: "40%", padding:10, display:"inline"}}>
+                      <div style={{...page_styler, display:"inline", marginRight: 5 }} onClick={ () => {
+                                                                                               this.setState({currentPage : 1, goto: 1})
+                                                                                           }}>First</div>
+                      <div style={{...page_styler, display:"inline", marginLeft:5, marginRight:5 }} onClick={ () => {
+                                                                                                var cpage = parseInt(this.state.currentPage)-1 < 1 ? 1 : parseInt(this.state.currentPage)-1;
+                                                                                                this.setState({currentPage: cpage, goto: cpage})
+                                                                                              }}>Previous</div>
+                      <div style={{...page_styler, display:"inline", marginLeft: 5 }}>
+                      <TextField
+                        value={this.state.goto}
+                        hintText="Go"
+                        onChange={(event,value) => {this.setState({goto: value})}}
+                        style={{width:30,marginLeft:5}}
+                        onKeyDown={(event, index) => {
+
+                            if(event.key === 'Enter'){
+                              if ( this.state.goto ){
+
+                              var newpage = parseInt(this.state.goto) < 1 ? 1 : parseInt(this.state.currentPage)
+                                  newpage = parseInt(this.state.goto) > total ? total : parseInt(this.state.goto)
+
+                              this.setState({currentPage:newpage});
+
+                              }
+                            }
+
+                        }}
+                        />
+                      </div>
+                      <div style={{display:"inline",marginRight:5}}>{" / "+total}</div>
+                      <div style={{...page_styler, display:"inline", marginLeft: 5, marginRight:5 }} onClick={ () => {
+                                                                                                  var cpage = parseInt(this.state.currentPage)+1 > total ? total : parseInt(this.state.currentPage)+1;
+                                                                                                  this.setState({currentPage : cpage, goto: cpage})
+                                                                                              }}>Next</div>
+                      <div style={{...page_styler, display:"inline", marginLeft: 5 }} onClick={ () => {
+                                                                                                  this.setState({currentPage : total, goto: total})
+                                                                                              }}>Last</div>
+                   </Card>
 
                    <TextField
                      value={this.state.searchTerm}
                      hintText="Filter by text here"
-                     onChange={(event,value) => {this.setState({searchTerm: value})}}
+                     onChange={(event,value) => {this.setState({searchTerm: value, currentPage: 1 })}}
                      style={{width:200,marginLeft:20,marginRight:20}}
                      onKeyDown={(event, index) => {
 
@@ -276,8 +434,10 @@ class ClusterView extends Component {
                      {
                       Object.keys(this.state.checkedConcepts).length > 0 ? <Card style={{position:"fixed", top:20, right:20, minWidth: "20vw", minHeight: "20vh",padding:5,paddingTop:15,paddingRight:10}}>
                        <div style={{height:"100%",width:"100%"}}>
+                       <RaisedButton onClick={ () => { this.setState({checkedConcepts:[]}); console.log(this.state.checkedConcepts); } } style={{float:"right"}}> {"Clear"} </RaisedButton>
                        <div style={{fontWeight:"bold",marginLeft:5}}>Selected Items</div>
-                       <hr />
+
+                       <hr style={{marginTop:25}}/>
                         <div style={{minHeight: "20vh", maxWidth:"30vw", maxHeight:"50vh", overflowX: "scroll", overflowY: "scroll", }}>
                          {
                            Object.keys(this.state.checkedConcepts).map( (c,i) => <div key={i} style={{marginLeft:10}}>
@@ -288,26 +448,32 @@ class ClusterView extends Component {
                          }
                          </div>
                          <div style={{height:"20%",marginTop:5 }}>
-                              <RaisedButton onClick={ () => { this.setState({checkedConcepts:[]}); console.log(this.state.checkedConcepts); } } style={{float:"left"}}> {"Clear All"} </RaisedButton>
-                              <RaisedButton onClick={ () => { this.moveAllHere(-10) } } style={{float:"right",marginLeft:5}}> {"Discard All"} </RaisedButton>
+
+
+                              <RaisedButton onClick={ () => { this.moveAllHere(maxIndex) } } style={{float:"left",marginLeft:5, paddingLeft:5, paddingRight:5}}> {"To New Cluster"} </RaisedButton>
+
+                              <RaisedButton onClick={ () => { this.moveAllHere("-10") } } style={{float:"right",marginLeft:5}}> {"Discard All"} </RaisedButton>
 
                          </div>
                        </div>
                      </Card> : ""
                     }
 
-                    <hr />
-                    <div >
-                        { currentClusters }
-                    </div>
+                    <hr style={{marginTop:40}}/>
 
+                    { currentClusters }
+
+                    <hr style={{marginTop:40}}/>
                     <hr />
 
+                    { discard }
+
+                    <div style={{marginTop:40}} > </div>
               </Card>
 
 
      } else {
-       return <div> loading </div>
+       return <Card style={{width: "90vw", marginLeft:"5vw", padding: "1vw", minHeight:600}}> <div> <Loader type="Circles" color="#00aaaa" height={150} width={150}/> </div> </Card>
      }
     }
 }
