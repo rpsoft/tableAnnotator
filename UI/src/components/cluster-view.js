@@ -161,7 +161,7 @@ class ClusterView extends Component {
 
         var clusters = await fetch.getAllClusters()
 
-            clusters = clusters.reduce( (acc, item) =>{ var cnumb = item.cn_override ? item.cn_override : item.cn; open[cnumb] = false; var prev = acc[cnumb]; if ( prev ){ prev.push(item); } else { prev = [item] } acc[item.cn_override ? item.cn_override : item.cn] = prev; return acc },{})
+            clusters = clusters.reduce( (acc, item) =>{ var cnumb = item.cn_override ? item.cn_override : item.cn; open[cnumb] = this.state.open[cnumb] ? this.state.open[cnumb] : false; var prev = acc[cnumb]; if ( prev ){ prev.push(item); } else { prev = [item] } acc[item.cn_override ? item.cn_override : item.cn] = prev; return acc },{})
 
         var clusterData = await fetch.getClusterData()
 
@@ -203,7 +203,7 @@ class ClusterView extends Component {
    handleOpenAllVisible = () => {
      var open = this.state.open
 
-     var openAll = openAll ? false : true
+     var openAll = this.state.openAll ? false : true
 
      Object.keys(open).map( v => {open[v] = openAll })
 

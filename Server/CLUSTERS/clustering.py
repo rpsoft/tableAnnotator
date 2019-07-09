@@ -201,7 +201,7 @@ def doClustering(tval):
     df_counts = pd.DataFrame(counts)
     single_clusters = df_counts[df_counts["concept"] == 1].index
 
-    csvRes["cluster"] = csvRes.apply(lambda x: -1 if x["cluster"] in single_clusters else x["cluster"] , axis=1 )
+    csvRes["cluster"] = csvRes.apply(lambda x: -10 if x["cluster"] in single_clusters else x["cluster"] , axis=1 )
 
     
     stats = counts.describe(include='all')

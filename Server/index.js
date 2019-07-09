@@ -631,7 +631,7 @@ function () {
                       case 2:
                         client = _context.sent;
                         _context.next = 5;
-                        return client.query("select * from clusterData order by cn asc");
+                        return client.query("select COALESCE(clusters.cn_override, clusters.cn) as cn,concept,rep_cuis,excluded_cuis,status from clusters,clusterdata where clusters.cn = clusterdata.cn ORDER BY cn asc,concept asc");
 
                       case 5:
                         result = _context.sent;

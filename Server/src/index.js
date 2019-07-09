@@ -372,7 +372,7 @@ app.get('/api/allClusterAnnotations', async function(req,res){
 
   var allClusterAnnotations = async () => {
     var client = await pool.connect()
-    var result = await client.query(`select * from clusterData order by cn asc`)
+    var result = await client.query(`select COALESCE(clusters.cn_override, clusters.cn) as cn,concept,rep_cuis,excluded_cuis,status from clusters,clusterdata where clusters.cn = clusterdata.cn ORDER BY cn asc,concept asc`)
           client.release()
     return result
   }

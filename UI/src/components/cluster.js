@@ -49,6 +49,7 @@ class Cluster extends Component {
         excluded_cuis : props.excluded_cuis,
         rep_cuis : props.rep_cuis,
         cluster_status : props.status,
+        highlighted_cui : "",
       };
 
     }
@@ -86,7 +87,6 @@ class Cluster extends Component {
 
     this.loadPageFromProps(next)
   }
-
 
  summary(cluster) {
 
@@ -184,7 +184,23 @@ class Cluster extends Component {
                                            checked={this.props.isChecked(citem.concept)}
                                            onClick={ () => this.props.toggleCheck(citem.concept, citem.cn_override ? citem.cn_override : citem.cn) } />
                                            <div style={{display:"inline"}}>{citem.concept}</div>
-                                           <div style={{display:"inline", marginLeft: 5, fontSize: 12}}>{"[ "+citem.cuis+" ]"}</div>
+                                           <div style={{display:"inline", marginLeft: 5, fontSize: 12}}>
+
+                                           <div style={{display:"inline"}}>[</div>{
+
+                                             citem.cuis ? citem.cuis.split(";").map(
+                                               (cui,i) => <div style={{display:"inline", color: this.state.highlighted_cui == cui ? "blue" : "black", cursor:"pointer", fontWeight : this.state.highlighted_cui == cui ? "bolder" : "normal"}}
+                                                               key={i}
+                                                               onMouseEnter={ () => this.setState({highlighted_cui : cui})}
+                                                               onMouseLeave={ () => this.setState({highlighted_cui : this.state.highlighted_cui == cui ? "" : this.state.highlighted_cui})}
+                                               > {cui} </div>
+                                             ) : ""
+
+                                           }<div style={{display:"inline"}}>]</div>
+
+                                           </div>
+
+
                                  </div>
                         })
                     }</td>
@@ -210,7 +226,9 @@ class Cluster extends Component {
                                     <td><input type="checkbox" checked={this.props.rep_cuis.indexOf(c) > -1 ? true : false} onClick={() => this.props.handleClusterDataChange(c, currentCluster, "rep") } /></td>
                                     <td><input type="checkbox" checked={this.props.excluded_cuis.indexOf(c) > -1 ? true : false } onClick={() => this.props.handleClusterDataChange(c, currentCluster, "exclude")  } /></td>
                                     <td>{cuis[c]}</td>
-                                    <td>{c}</td>
+                                    <td style={{cursor:"pointer", color: this.state.highlighted_cui == c ? "blue" : "black", fontWeight : this.state.highlighted_cui == c ? "bolder" : "normal"}}
+                                        onMouseEnter={ () => this.setState({highlighted_cui : c})}
+                                        onMouseLeave={ () => this.setState({highlighted_cui : this.state.highlighted_cui == c ? "" : this.state.highlighted_cui})} >{c}</td>
                                     <td style={{textAlign:"center"}}>{ this.props.cuis_index[c].hasMSH == "true" ? " * " : ""}</td>
                                     <td>{this.props.cuis_index[c].preferred}</td>
                                 </tr> )

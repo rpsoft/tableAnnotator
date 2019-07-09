@@ -1,172 +1,172 @@
 cluster,concept,cuis
--1,> $nmbr$  < = $nmbr$,
--1,< = $nmbr$ . $nmbr$ %,
--1,< = $nmbr$ %,
--1,< = $nmbr$,
--1,> - $nmbr$ . $nmbr$,
--1,< - $nmbr$ . $nmbr$,
--1,x $nmbr$ = $nmbr$  p = $nmbr$ - $nmbr$,
--1,x $nmbr$ = $nmbr$ - l  p = $nmbr$ - $nmbr$,
--1,x $nmbr$ = $nmbr$ - $nmbr$  p = $nmbr$ - $nmbr$,
--1,x $nmbr$  n ( % ),
--1,x ? = l - $nmbr$  p = $nmbr$ - $nmbr$,
--1,x ? = $nmbr$ - l  p = $nmbr$ - $nmbr$,
--1,x ? = $nmbr$ - $nmbr$  p = $nmbr$ - $nmbr$,
--1,v $nmbr$ ( n = $nmbr$,
--1,t ( n = $nmbr$  $nmbr$ ),C2986835
--1,q $nmbr$ w ( n = $nmbr$ ),
--1,q $nmbr$ w ( n $nmbr$ $nmbr$ ),
--1,q $nmbr$ ( n   = $nmbr$ ),
--1,q $nmbr$ - q $nmbr$,
--1,q ( q $nmbr$ \,
--1,e $nmbr$ / s $nmbr$ ( n = $nmbr$ ),C3846405
--1,e $nmbr$ ( n = $nmbr$ ),
--1,e $nmbr$ + a $nmbr$,
--1,b + a ( n = $nmbr$ ),
--1,a $nmbr$ . $nmbr$ ± $nmbr$ a . $nmbr$,
--1,a $nmbr$ c > s . $nmbr$ - s . $nmbr$ %,
--1,a $nmbr$ c > $nmbr$ . $nmbr$ %,
--1,a $nmbr$ c > $nmbr$ . $nmbr$ - $nmbr$ . $nmbr$ %,
--1,a $nmbr$ c  %,
--1,a $nmbr$ c < $nmbr$ . $nmbr$ %,
--1,a / c,
--1,a,
--1,$nmbr$ ( $nmbr$ j ) z $nmbr$ ( $nmbr$ . e,
--1,$nmbr$ - $nmbr$ y  n ( % ),
--1,$nmbr$ . $nmbr$ ± b . b,
--1,$nmbr$ q $nmbr$ w ( n = $nmbr$ ),
--1,$nmbr$ c . t,
--1,$nmbr$ - $nmbr$ ( s $nmbr$ - $nmbr$ ) t,C0718146
--1,> $nmbr$ y ( n = $nmbr$  $nmbr$ . $nmbr$ % ),
--1,< $nmbr$ y ( n = $nmbr$  $nmbr$ . $nmbr$ % ),
--1,- $nmbr$ . $nmbr$ ( - $nmbr$ . $nmbr$  - c ) . $nmbr$ r,C0722969
--1,< $nmbr$ . $nmbr$ ( % ),
--1,> $nmbr$ . $nmbr$ ( % ),
--1,$nmbr$ . $nmbr$ ( $nmbr$ . $nmbr$ . $nmbr$ . $nmbr$ ),
--1,$nmbr$ . $nmbr$ ( $nmbr$ . $nmbr$ - $nmbr$ . $nmbr$ ),
--1,$nmbr$ . $nmbr$ ( $nmbr$ . $nmbr$ – $nmbr$ . $nmbr$ ),
--1,( % ) ( $nmbr$ - $nmbr$ ),
--1,( % ) ( $nmbr$ . $nmbr$ ),
--1,$nmbr$ . $nmbr$ % - $nmbr$ . $nmbr$ %,
--1,$nmbr$ . $nmbr$ ( $nmbr$ . $nmbr$ ),
--1,$nmbr$ / $nmbr$ ( $nmbr$ . $nmbr$ ),
--1,$nmbr$  $nmbr$ - < $nmbr$ . $nmbr$,
--1,$nmbr$  $nmbr$ ( $nmbr$ . $nmbr$ ),
--1,$nmbr$ . $nmbr$ - < $nmbr$ . $nmbr$ %,
--1,$nmbr$ $nmbr$ ( $nmbr$ . $nmbr$ ),
--1,$nmbr$ . $nmbr$ + $nmbr$ . $nmbr$,
--1,$nmbr$ . $nmbr$ - $nmbr$ . $nmbr$,
--1,> $nmbr$ . $nmbr$ - < $nmbr$ . $nmbr$,
--1,$nmbr$ - $nmbr$ - $nmbr$ - $nmbr$,
--1,> $nmbr$ - $nmbr$ - $nmbr$ - $nmbr$,
--1,$nmbr$ . $nmbr$ - < $nmbr$ . $nmbr$,
--1,> $nmbr$ y . n ( % ),
--1,> $nmbr$ y  n ( % ),
--1,> = $nmbr$ ( % ),
--1,> = $nmbr$ * ( % ),
--1,< $nmbr$ ( % ),
--1,^ $nmbr$ y  n ( % ),
--1,< $nmbr$ y  n ( % ),
--1,< $nmbr$ { % ),
--1,a $nmbr$ c ( % ),
--1,> $nmbr$ ( % ),
--1,$nmbr$ - < $nmbr$ . $nmbr$,
--1,$nmbr$ . $nmbr$ % ( $nmbr$ ),
--1,$nmbr$ ( $nmbr$ . $nmbr$ ),
--1,$nmbr$ - $nmbr$ . $nmbr$,
--1,> $nmbr$ - $nmbr$ - $nmbr$,
--1,$nmbr$ ( $nmbr$ e < $nmbr$ % ),
--1,$nmbr$ ( $nmbr$ . $nmbr$ % ),
--1,$nmbr$ ( $nmbr$  $nmbr$ ),
--1,$nmbr$ / $nmbr$ ( $nmbr$ ),
--1,$nmbr$ e < $nmbr$ %,
--1,> $nmbr$  < $nmbr$,
--1,^ $nmbr$,
--1,£ $nmbr$,
--1,« = $nmbr$,
--1,> $nmbr$ - $nmbr$,
--1,y $nmbr$,
--1,> = $nmbr$,
--1,< $nmbr$ . $nmbr$,
--1,b,
--1,x / n *,
--1,> $nmbr$ . $nmbr$,
--1,$nmbr$ . $nmbr$ %,
--1,> $nmbr$ . $nmbr$ %,
--1,> = $nmbr$ y,
--1,> $nmbr$ - < $nmbr$,
--1,$nmbr$ - < $nmbr$ ( % ),
--1,£ $nmbr$ %,
--1,c,
--1,≥ $nmbr$,
--1,%,
--1,> $nmbr$ y ( n = $nmbr$ ),
--1,$nmbr$ — < $nmbr$,
--1,> = $nmbr$ . $nmbr$,
--1,$ $nmbr$ %,
--1,e,
--1,$nmbr$ y,
--1,< $nmbr$ y,
--1,m / f,C1306057
--1,$nmbr$ - $nmbr$,
--1,\ $nmbr$,
--1,$nmbr$ e $nmbr$,
--1,> $nmbr$ < $nmbr$,
--1,» $nmbr$ y,
--1,$nmbr$ . $nmbr$,
--1,< $nmbr$ - $nmbr$,
--1,$nmbr$ - < $nmbr$ y,
--1,< $nmbr$ %,
--1,« $nmbr$ - $nmbr$,
--1,= $nmbr$,
--1,v ( n = $nmbr$ ),
--1,$nmbr$ ( $nmbr$ % ),
--1,< $nmbr$ y ( n = $nmbr$ ),
--1,$nmbr$ / $nmbr$,
--1,$nmbr$ ( < $nmbr$ % ),
--1,$nmbr$ §,
--1,$nmbr$ - < $nmbr$,
--1,> $nmbr$,
--1,w,
--1,. $nmbr$,
--1,a $nmbr$,
--1,$ $nmbr$,
--1,$nmbr$ - < $nmbr$ %,
--1,a $nmbr$ c,
--1,≤ $nmbr$ . $nmbr$ %,
--1,$nmbr$ < - $nmbr$,
--1,> $nmbr$ y,
--1,≥ $nmbr$ %,
--1,^ $nmbr$ - $nmbr$,
--1,$nmbr$ % - $nmbr$ %,
--1,< $nmbr$ . $nmbr$ %,
--1,\ $nmbr$ %,
--1,≤ $nmbr$ %,
--1,$nmbr$,
--1,> $nmbr$ $nmbr$,
--1,x / n,
--1,$nmbr$ +,
--1,< $nmbr$ » < $nmbr$ y,
--1,$nmbr$ % $nmbr$,
--1,< $nmbr$,
--1,> $nmbr$ %,
--1,$nmbr$ $nmbr$,
--1,> $nmbr$ % $nmbr$,
--1,$nmbr$ ( > $nmbr$ % ),
--1,≤ $nmbr$,
--1,% $nmbr$ - $nmbr$,
--1,之 $nmbr$,
--1,$nmbr$ . $nmbr$ - < $nmbr$,
--1,$nmbr$ % c . i .,C1547546
--1,= $nmbr$ ’ ),
--1,£ $nmbr$ . $nmbr$ % * *,
--1,a a ( $nmbr$ ( % ),
--1,$nmbr$ e < $nmbr$ %  n ( % ),
--1,$nmbr$ / $nmbr$  $nmbr$ ( $nmbr$ . $nmbr$ ),
--1,$nmbr$ . $nmbr$ ( $nmbr$ $nmbr$ . $nmbr$ ),
--1,e $nmbr$ + a $nmbr$ -,
--1,$nmbr$  $nmbr$ / $nmbr$  $nmbr$ ( $nmbr$ . $nmbr$ ),
--1,( % ) $nmbr$ - $nmbr$,
+-10,> $nmbr$  < = $nmbr$,
+-10,< = $nmbr$ . $nmbr$ %,
+-10,< = $nmbr$ %,
+-10,< = $nmbr$,
+-10,> - $nmbr$ . $nmbr$,
+-10,< - $nmbr$ . $nmbr$,
+-10,x $nmbr$ = $nmbr$  p = $nmbr$ - $nmbr$,
+-10,x $nmbr$ = $nmbr$ - l  p = $nmbr$ - $nmbr$,
+-10,x $nmbr$ = $nmbr$ - $nmbr$  p = $nmbr$ - $nmbr$,
+-10,x $nmbr$  n ( % ),
+-10,x ? = l - $nmbr$  p = $nmbr$ - $nmbr$,
+-10,x ? = $nmbr$ - l  p = $nmbr$ - $nmbr$,
+-10,x ? = $nmbr$ - $nmbr$  p = $nmbr$ - $nmbr$,
+-10,v $nmbr$ ( n = $nmbr$,
+-10,t ( n = $nmbr$  $nmbr$ ),C2986835
+-10,q $nmbr$ w ( n = $nmbr$ ),
+-10,q $nmbr$ w ( n $nmbr$ $nmbr$ ),
+-10,q $nmbr$ ( n   = $nmbr$ ),
+-10,q $nmbr$ - q $nmbr$,
+-10,q ( q $nmbr$ \,
+-10,e $nmbr$ / s $nmbr$ ( n = $nmbr$ ),C3846405
+-10,e $nmbr$ ( n = $nmbr$ ),
+-10,e $nmbr$ + a $nmbr$,
+-10,b + a ( n = $nmbr$ ),
+-10,a $nmbr$ . $nmbr$ ± $nmbr$ a . $nmbr$,
+-10,a $nmbr$ c > s . $nmbr$ - s . $nmbr$ %,
+-10,a $nmbr$ c > $nmbr$ . $nmbr$ %,
+-10,a $nmbr$ c > $nmbr$ . $nmbr$ - $nmbr$ . $nmbr$ %,
+-10,a $nmbr$ c  %,
+-10,a $nmbr$ c < $nmbr$ . $nmbr$ %,
+-10,a / c,
+-10,a,
+-10,$nmbr$ ( $nmbr$ j ) z $nmbr$ ( $nmbr$ . e,
+-10,$nmbr$ - $nmbr$ y  n ( % ),
+-10,$nmbr$ . $nmbr$ ± b . b,
+-10,$nmbr$ q $nmbr$ w ( n = $nmbr$ ),
+-10,$nmbr$ c . t,
+-10,$nmbr$ - $nmbr$ ( s $nmbr$ - $nmbr$ ) t,C0718146
+-10,> $nmbr$ y ( n = $nmbr$  $nmbr$ . $nmbr$ % ),
+-10,< $nmbr$ y ( n = $nmbr$  $nmbr$ . $nmbr$ % ),
+-10,- $nmbr$ . $nmbr$ ( - $nmbr$ . $nmbr$  - c ) . $nmbr$ r,C0722969
+-10,< $nmbr$ . $nmbr$ ( % ),
+-10,> $nmbr$ . $nmbr$ ( % ),
+-10,$nmbr$ . $nmbr$ ( $nmbr$ . $nmbr$ . $nmbr$ . $nmbr$ ),
+-10,$nmbr$ . $nmbr$ ( $nmbr$ . $nmbr$ - $nmbr$ . $nmbr$ ),
+-10,$nmbr$ . $nmbr$ ( $nmbr$ . $nmbr$ – $nmbr$ . $nmbr$ ),
+-10,( % ) ( $nmbr$ - $nmbr$ ),
+-10,( % ) ( $nmbr$ . $nmbr$ ),
+-10,$nmbr$ . $nmbr$ % - $nmbr$ . $nmbr$ %,
+-10,$nmbr$ . $nmbr$ ( $nmbr$ . $nmbr$ ),
+-10,$nmbr$ / $nmbr$ ( $nmbr$ . $nmbr$ ),
+-10,$nmbr$  $nmbr$ - < $nmbr$ . $nmbr$,
+-10,$nmbr$  $nmbr$ ( $nmbr$ . $nmbr$ ),
+-10,$nmbr$ . $nmbr$ - < $nmbr$ . $nmbr$ %,
+-10,$nmbr$ $nmbr$ ( $nmbr$ . $nmbr$ ),
+-10,$nmbr$ . $nmbr$ + $nmbr$ . $nmbr$,
+-10,$nmbr$ . $nmbr$ - $nmbr$ . $nmbr$,
+-10,> $nmbr$ . $nmbr$ - < $nmbr$ . $nmbr$,
+-10,$nmbr$ - $nmbr$ - $nmbr$ - $nmbr$,
+-10,> $nmbr$ - $nmbr$ - $nmbr$ - $nmbr$,
+-10,$nmbr$ . $nmbr$ - < $nmbr$ . $nmbr$,
+-10,> $nmbr$ y . n ( % ),
+-10,> $nmbr$ y  n ( % ),
+-10,> = $nmbr$ ( % ),
+-10,> = $nmbr$ * ( % ),
+-10,< $nmbr$ ( % ),
+-10,^ $nmbr$ y  n ( % ),
+-10,< $nmbr$ y  n ( % ),
+-10,< $nmbr$ { % ),
+-10,a $nmbr$ c ( % ),
+-10,> $nmbr$ ( % ),
+-10,$nmbr$ - < $nmbr$ . $nmbr$,
+-10,$nmbr$ . $nmbr$ % ( $nmbr$ ),
+-10,$nmbr$ ( $nmbr$ . $nmbr$ ),
+-10,$nmbr$ - $nmbr$ . $nmbr$,
+-10,> $nmbr$ - $nmbr$ - $nmbr$,
+-10,$nmbr$ ( $nmbr$ e < $nmbr$ % ),
+-10,$nmbr$ ( $nmbr$ . $nmbr$ % ),
+-10,$nmbr$ ( $nmbr$  $nmbr$ ),
+-10,$nmbr$ / $nmbr$ ( $nmbr$ ),
+-10,$nmbr$ e < $nmbr$ %,
+-10,> $nmbr$  < $nmbr$,
+-10,^ $nmbr$,
+-10,£ $nmbr$,
+-10,« = $nmbr$,
+-10,> $nmbr$ - $nmbr$,
+-10,y $nmbr$,
+-10,> = $nmbr$,
+-10,< $nmbr$ . $nmbr$,
+-10,b,
+-10,x / n *,
+-10,> $nmbr$ . $nmbr$,
+-10,$nmbr$ . $nmbr$ %,
+-10,> $nmbr$ . $nmbr$ %,
+-10,> = $nmbr$ y,
+-10,> $nmbr$ - < $nmbr$,
+-10,$nmbr$ - < $nmbr$ ( % ),
+-10,£ $nmbr$ %,
+-10,c,
+-10,≥ $nmbr$,
+-10,%,
+-10,> $nmbr$ y ( n = $nmbr$ ),
+-10,$nmbr$ — < $nmbr$,
+-10,> = $nmbr$ . $nmbr$,
+-10,$ $nmbr$ %,
+-10,e,
+-10,$nmbr$ y,
+-10,< $nmbr$ y,
+-10,m / f,C1306057
+-10,$nmbr$ - $nmbr$,
+-10,\ $nmbr$,
+-10,$nmbr$ e $nmbr$,
+-10,> $nmbr$ < $nmbr$,
+-10,» $nmbr$ y,
+-10,$nmbr$ . $nmbr$,
+-10,< $nmbr$ - $nmbr$,
+-10,$nmbr$ - < $nmbr$ y,
+-10,< $nmbr$ %,
+-10,« $nmbr$ - $nmbr$,
+-10,= $nmbr$,
+-10,v ( n = $nmbr$ ),
+-10,$nmbr$ ( $nmbr$ % ),
+-10,< $nmbr$ y ( n = $nmbr$ ),
+-10,$nmbr$ / $nmbr$,
+-10,$nmbr$ ( < $nmbr$ % ),
+-10,$nmbr$ §,
+-10,$nmbr$ - < $nmbr$,
+-10,> $nmbr$,
+-10,w,
+-10,. $nmbr$,
+-10,a $nmbr$,
+-10,$ $nmbr$,
+-10,$nmbr$ - < $nmbr$ %,
+-10,a $nmbr$ c,
+-10,≤ $nmbr$ . $nmbr$ %,
+-10,$nmbr$ < - $nmbr$,
+-10,> $nmbr$ y,
+-10,≥ $nmbr$ %,
+-10,^ $nmbr$ - $nmbr$,
+-10,$nmbr$ % - $nmbr$ %,
+-10,< $nmbr$ . $nmbr$ %,
+-10,\ $nmbr$ %,
+-10,≤ $nmbr$ %,
+-10,$nmbr$,
+-10,> $nmbr$ $nmbr$,
+-10,x / n,
+-10,$nmbr$ +,
+-10,< $nmbr$ » < $nmbr$ y,
+-10,$nmbr$ % $nmbr$,
+-10,< $nmbr$,
+-10,> $nmbr$ %,
+-10,$nmbr$ $nmbr$,
+-10,> $nmbr$ % $nmbr$,
+-10,$nmbr$ ( > $nmbr$ % ),
+-10,≤ $nmbr$,
+-10,% $nmbr$ - $nmbr$,
+-10,之 $nmbr$,
+-10,$nmbr$ . $nmbr$ - < $nmbr$,
+-10,$nmbr$ % c . i .,C1547546
+-10,= $nmbr$ ’ ),
+-10,£ $nmbr$ . $nmbr$ % * *,
+-10,a a ( $nmbr$ ( % ),
+-10,$nmbr$ e < $nmbr$ %  n ( % ),
+-10,$nmbr$ / $nmbr$  $nmbr$ ( $nmbr$ . $nmbr$ ),
+-10,$nmbr$ . $nmbr$ ( $nmbr$ $nmbr$ . $nmbr$ ),
+-10,e $nmbr$ + a $nmbr$ -,
+-10,$nmbr$  $nmbr$ / $nmbr$  $nmbr$ ( $nmbr$ . $nmbr$ ),
+-10,( % ) $nmbr$ - $nmbr$,
 1834,r $nmbr$ + ezio ( n = $nmbr$ ),C0687673
 1834,r $nmbr$ ( n = $nmbr$ ),C0687673
 1833,d / mi / idr / st,C0036056;C0073187;C0332173;C3272372;C3810814;C4484261
@@ -353,7 +353,7 @@ cluster,concept,cuis
 1818,golden - $nmbr$,
 1818,concern,C2699424
 1818,colorectal cancer,C0009402;C0346629;C1527249;C2984278;C3542412
--1,oxcarbazepine,C0069751
+-10,oxcarbazepine,C0069751
 1816,caffeine users  n ( % ),C3532939
 1816,caffeine user  n ( % ),C3532939
 1816,caffeine user,C3532939
@@ -513,7 +513,7 @@ cluster,concept,cuis
 1794,af pattern,C0344434;C0449774;C4049859
 1794,af alone,C0205171;C0344434;C0439044;C0679994;C4049859
 1794,af,C0344434;C4049859
--1,qids - sr $nmbr$,C4331197
+-10,qids - sr $nmbr$,C4331197
 1792,rivaroxaban $nmbr$ . $nmbr$ mg bid + aspirin $nmbr$ mg od,C0004057;C0229089;C0439164;C1319635;C1512019;C1739768;C3273373;C3665488
 1792,idegasp bid,
 1792,bid,
@@ -611,7 +611,7 @@ cluster,concept,cuis
 1781,csii,
 1781,csf cholesterol,C0008377;C3540512;C3889436
 1781,csf,C3540512;C3889436
--1,uvb,C0454530;C0564461
+-10,uvb,C0454530;C0564461
 1779,tvr,
 1779,ischemic tvr,C0475224
 1779,avr,C0449217
@@ -1394,7 +1394,7 @@ cluster,concept,cuis
 1726,chronic obstructive lung disease,C0024117
 1726,augment copd,C0024117;C0205217;C1412502;C3714496
 1726,any copd medication,C0013227;C0024117;C1412502;C3244316;C3714496;C4284232
--1,computed tomographic angiography,C1536105
+-10,computed tomographic angiography,C1536105
 1724,time from randomization to coronary angiography — hr,C0034656;C0040223;C0085532;C1548829;C3541383
 1724,normal coronary angiography,C0853522
 1724,coronary angiography — no . ( % ),C0085532;C1548829
@@ -1423,7 +1423,7 @@ cluster,concept,cuis
 1721,balloon angioplasty — no . ( % ),C0002996;C0002997
 1721,balloon angioplasty plus abciximab,C0002996;C0002997;C0288672;C0332287
 1721,balloon angioplasty,C0002996;C0002997
--1,lymphadenopathy,C0497156;C4282165
+-10,lymphadenopathy,C0497156;C4282165
 1719,retinopathy — no . ( % ),C0035309;C1962966
 1719,retinopathy — %,C0035309;C1962966
 1719,retinopathy,C0035309;C1962966
@@ -1435,7 +1435,7 @@ cluster,concept,cuis
 1718,myopathyt,
 1718,myopathy,C0026848
 1718,autonomic neuropathy,C0259749
--1,radionuclide ventriculography,C0017200;C0034610
+-10,radionuclide ventriculography,C0017200;C0034610
 1716,spiralcomputedtomographyangiography,
 1716,duplex ultrasonography,C3825392
 1715,nice secondary prevention onlyb,C0679699;C4087029
@@ -1802,7 +1802,7 @@ cluster,concept,cuis
 1660,other supraventricular tachycardia,C0039240;C1963244;C3815188
 1660,nutraceuticals  n ( % ),C1518478
 1660,any llt other than nutraceuticals  n ( % ),C1518478;C2347090
--1,cutoffs,C1442160
+-10,cutoffs,C1442160
 1658,other bph - luts therapy,C0005001;C0039798;C0087111;C0574785;C1363945;C1704272
 1658,luts severity,C0439793;C0522510;C0574785
 1658,luts = lower urinary tract symptoms  is =,C0574785
@@ -3205,7 +3205,7 @@ cluster,concept,cuis
 1522,median pasi score { range ) ' i  i ',C0021966;C0221138;C0449820;C0549183;C0876920;C1514721;C2347635;C2348144;C2348147;C2939193;C3542016;C4050231;C4528685
 1522,llpasi $nmbr$,
 1522,baseline pasi score,C0168634;C0449820;C1442488;C4050231;C4528685
--1,erysipelas,C0014733
+-10,erysipelas,C0014733
 1520,physician ' s judgment that vka inappropriate ],C0022423;C0031831;C0804815;C1548788;C3537135;C3542467
 1520,physician ' s judgment that vka inappropriate,C0022423;C0031831;C0804815;C1548788;C3537135;C3542467
 1520,physician ' s judgment that vka,C0022423;C0031831;C0804815
@@ -3655,8 +3655,8 @@ cluster,concept,cuis
 1481,cardiac diseasec,C0018787;C1522601
 1481,cardiac and echocardiography parameters,C0013516;C0018787;C0449381;C1522601
 1481,cardiac,C0018787;C1522601
--1,very good or excellent,C1548784;C1961136;C3641222
--1,large / very large,C0442824;C0549177;C2984081
+-10,very good or excellent,C1548784;C1961136;C3641222
+-10,large / very large,C0442824;C0549177;C2984081
 1478,very high vs . normalb,C0442804;C4321397
 1478,very high ( >   $nmbr$ xuln ) n   =   $nmbr$,C0442804;C4321397
 1478,very high,C0442804;C4321397
@@ -4230,8 +4230,8 @@ cluster,concept,cuis
 1444,pressure,C0033095;C0460139;C1306345;C4284008
 1444,diastoiic biood pressure  mm hg,C0033095;C0439475;C0460139;C1306345;C4284008
 1444,any blood pressure medications ( % ),C0005823;C0013227;C0033095;C0460139;C0802604;C0849164;C1271104;C1272641;C1306345;C2598133;C4284008;C4284232
--1,czech repumc,C0337799
--1,puerperium,C0034042;C0086839;C1879329
+-10,czech repumc,C0337799
+-10,puerperium,C0034042;C0086839;C1879329
 1441,rectum and sigmoid colon only,C0034896;C0205171;C0227391;C1720467
 1441,rectum,C0034896
 1440,rib,C0035561
@@ -4241,7 +4241,7 @@ cluster,concept,cuis
 1439,re - medy,C0556581;C2986904
 1438,time to rx,C0040223;C1425688;C1521941;C2709207;C3541383
 1438,any new anti - hyperglycemic rx,C0205314;C1425688;C1521941;C2709207
--1,qmaxi rn l / s,C2827110;C3540639;C4281819
+-10,qmaxi rn l / s,C2827110;C3540639;C4281819
 1436,> $nmbr$ rd quartile,C0694666;C2828255;C4553350
 1436,> $nmbr$ nd and < $nmbr$ rd quartile,C0694666;C2828255;C4553350
 1436,$nmbr$ rd tertile ( > $nmbr$ mg / dl [ > $nmbr$ . $nmbr$ mmol / l ] ) d,C0439190;C0439269;C0475219;C0567349;C0694666;C2348885;C3642216;C4553350
@@ -4458,7 +4458,7 @@ cluster,concept,cuis
 1417,current,C0521116;C1705970
 1416,current medication — no . ( % ),C0746467
 1416,current medication  n ( % ),C0746467
--1,chest discomfort,C0235710
+-10,chest discomfort,C0235710
 1414,left circumflex coronary artery,C0226037
 1414,left circumflex artery  n ( % ),C0226037
 1414,left circumflex artery,C0226037
@@ -5379,7 +5379,7 @@ cluster,concept,cuis
 1320,model $nmbr$,C3161035;C3274659;C3714583;C3853906
 1320,model  n,C3161035;C3274659;C3714583;C3853906
 1320,crude model hr ( $nmbr$ % ci ),C0008107;C3161035;C3259781;C3274659;C3714583;C3853906
--1,proctosigmoiditis,C0033252
+-10,proctosigmoiditis,C0033252
 1318,seropositivity status  n,C0449438;C0521143
 1318,seropositivity,C0521143
 1317,eligibility stratum,C0013893;C1548635
@@ -6943,7 +6943,7 @@ cluster,concept,cuis
 1159,budesonide - formoterol $nmbr$ ^ g + $nmbr$ . $nmbr$ ^ g ( n = $nmbr$ ),C1276807;C1319635
 1159,budesonide - formoterol $nmbr$ + $nmbr$ . $nmbr$ ^ g ( n = $nmbr$ ),C0439267;C1276807
 1159,budesonide - budesonide / formoterol,C1276807
--1,leflunomide,C0063041
+-10,leflunomide,C0063041
 1157,glinide 一 no . ( % ),C2266929
 1157,glinide,C2266929
 1157,flecainide,C0016229
@@ -7165,12 +7165,12 @@ cluster,concept,cuis
 1127,bdi focal score $nmbr$,C0006448;C0205234;C0449820;C0451022;C3714938;C3889415;C4050231
 1127,bdi focal score,C0006448;C0205234;C0449820;C0451022;C3714938;C3889415;C4050231
 1127,> $nmbr$ % focal seizure frequency responders,C0149775;C0205234;C0376249;C0439603;C0751495;C0871396;C1561548;C1705502;C3898838;C4321352
--1,atypical absence,C0595948
+-10,atypical absence,C0595948
 1125,topical prescription,C0033080;C0332237;C1521941
 1125,topical non - prescription,C0033080;C0332237;C1518422;C1521941
 1125,topical,C0332237
 1125,nitrate ( oral or topical ),C0028125;C0332237;C0442027;C0699857;C3848573;C4521986
--1,puerto rican,C0034043
+-10,puerto rican,C0034043
 1123,rca  n ( % ),
 1123,rca,
 1123,mca,C0149566
@@ -7186,7 +7186,7 @@ cluster,concept,cuis
 1122,efficacy    n   ( % ) a,C1280519;C1707887
 1122,efficacy,C1280519;C1707887
 1122,combined efficacy and safety endpoint,C0036043;C0205195;C1280519;C1705187;C1707887;C2349179;C2826544
--1,colesevelam ( n = $nmbr$ ),C0541155
+-10,colesevelam ( n = $nmbr$ ),C0541155
 1120,the american college of rheumatology ) .,C0035452;C0557806;C0596070
 1120,some college / tech,C0557806;C1826596
 1120,some college,C0557806
@@ -8269,7 +8269,7 @@ cluster,concept,cuis
 1041,female participants who are ≥ $nmbr$ years postmenopausal,C0043210;C0086287;C0232970;C0439234;C0679646;C1705497;C1705498
 1041,female : ≥ $nmbr$ years postmenopausal,C0043210;C0086287;C0232970;C0439234;C1705497;C1705498
 1041,female : perimenopausal or < $nmbr$ years postmenopausal,C0043210;C0086287;C0232970;C0439234;C0849668;C1705497;C1705498;C3839366
--1,personal relationships,C1552027
+-10,personal relationships,C1552027
 1039,perianal or anus,C0003461;C0442158
 1039,perianal gi tract,C0017189;C0442158
 1039,perianal  n ( % ),C0442158
@@ -8399,7 +8399,7 @@ cluster,concept,cuis
 1035,% patients,C0030705
 1035,% of patients $nmbr$ . $nmbr$ $nmbr$ . $nmbr$,C0030705
 1035,$nmbr$ %  n ( % of patients ),C0030705;C0369718;C0441922
--1,philippines,C0031529
+-10,philippines,C0031529
 1033,total no . of events / total no . of participants,C0439175;C0439810;C0441471;C0679646;C3541888
 1033,total no . of events / participants,C0439175;C0439810;C0441471;C0679646;C3541888
 1033,total no . of events ( % of participants ) / total no . of participants,C0439175;C0439810;C0441471;C0679646;C3541888
@@ -9475,7 +9475,7 @@ cluster,concept,cuis
 946,rituximab ( $nmbr$ x $nmbr$ mg ) + mtx,C0024671;C0025677;C0026410;C0393022;C0439269;C1417487;C1960952;C2346927;C4321396;C4521761
 946,rituximab  n = $nmbr$,C0393022
 946,rituximab,C0393022
--1,jejunum,C0022378
+-10,jejunum,C0022378
 944,secukinumab $nmbr$   mg ( n   =   $nmbr$ ),C0024671;C0026410;C0439269;C1960952;C2346927;C3179547;C4321396;C4521761
 944,secukinumab $nmbr$ mg ( n $nmbr$ $nmbr$ ),C0024671;C0026410;C0439269;C1960952;C2346927;C3179547;C4321396;C4521761
 944,secukinumab  $nmbr$ mg ( n = $nmbr$ ),C0024671;C0026410;C0439269;C1960952;C2346927;C3179547;C4321396;C4521761
@@ -9969,7 +9969,7 @@ cluster,concept,cuis
 909,all without diabetes ( n = $nmbr$ ),C0011847;C0011849
 909,all with diabetes ( n = $nmbr$ ),C0011847;C0011849
 909,( scale diabetes ),C0011847;C0011849;C0175659;C0349674;C1947916
--1,dizziness,C0012833;C0042571;C1963093;C4084788;C4085547;C4085548;C4085549;C4553830
+-10,dizziness,C0012833;C0042571;C1963093;C4084788;C4085547;C4085548;C4085549;C4553830
 907,years since diagnosis of type $nmbr$ diabetes  n ( % ),C0011847;C0011849;C0011900;C0439234;C1320657;C1550351;C1704338;C1704656
 907,type $nmbr$ diabetes 一 no . ( % ),C1320657
 907,type $nmbr$ diabetes — no . { % ) §,C1320657
@@ -11052,7 +11052,7 @@ cluster,concept,cuis
 830,hip + $nmbr$ vertebral fractures,C0019552;C0019557;C0022122;C0080179;C0549207;C1505163;C3538851;C4284725
 830,hip  femur,C0015811;C0019552;C0022122;C1505163;C3538851;C4284725
 830,hip,C0019552;C0022122;C1505163;C3538851;C4284725
--1,hub,C0063034;C1414372;C1708389
+-10,hub,C0063034;C1414372;C1708389
 828,aspirin < $nmbr$ hours,C0004057;C0439227
 828,$nmbr$ - hour postload glucose,C0017725;C0439227;C0564385
 828,$nmbr$ - hour masbp  mm hg,C0439227;C0439475;C0564385
@@ -11282,7 +11282,7 @@ cluster,concept,cuis
 820,% hba $nmbr$ c ( mmol / mol ),C0019016;C1825777;C3538758;C3829066
 820,$nmbr$ % < hba $nmbr$ c < = $nmbr$ % ( n $nmbr$ $nmbr$ ),C0019016;C1825777;C3538758
 820,$nmbr$ % < hba $nmbr$ c < = $nmbr$ %,C0019016;C1825777;C3538758
--1,bisphosphonates,C0012544;C3541401
+-10,bisphosphonates,C0012544;C3541401
 818,isolated upper gastrointestinal disease behavior  n ( % ),C0004927;C0205409;C0810300;C1548221;C2707008
 818,isolated pulmonary embolism,C0034065;C0205409;C1548221
 818,isolated impaired glucose tolerance — no .,C0205409;C0271650;C1548221
@@ -11469,7 +11469,7 @@ cluster,concept,cuis
 796,cigarette - smoking status — no . ( % ),C0239059;C0449438;C0677453;C0700219;C1519386;C1704760;C3890423
 796,cigarette - smoking status ( % ),C0239059;C0449438;C0677453;C0700219;C1519386;C1704760;C3890423
 796,baseline smoking status,C0168634;C1442488;C1519386
--1,streptokinase,C0038418
+-10,streptokinase,C0038418
 794,use of compression stockings  no . ( % ),C0038348;C1524063
 794,compression stockings,C0038348
 793,no clinical or lesion rfs for st,C0036056;C0205210;C0221198;C0341703;C1546698;C3272372
@@ -11762,7 +11762,7 @@ cluster,concept,cuis
 762,early invasive strategy ( n = $nmbr$  $nmbr$ ),C0205281;C0679199;C1279919;C1334278
 762,early invasive *,C0205281;C1279919;C1334278
 762,early invasive $nmbr$,C0205281;C1279919;C1334278
--1,oxidative stress,C0242606
+-10,oxidative stress,C0242606
 760,relative wall thickness,C0080103;C0205345;C0677535;C1280412;C1547039
 760,relative decrease > $nmbr$ %,C0080103;C0205345;C0392756;C0547047;C1547039
 759,sustain $nmbr$ : semaglutide vs . exenatide er $nmbr$ . $nmbr$ mg,C0024671;C0026410;C0167117;C0439269;C0443318;C1960952;C2346927;C2732140;C3810541;C3811131;C3885068;C4321396;C4521761
@@ -12166,7 +12166,7 @@ cluster,concept,cuis
 730,ocs reduced / stopped,C0392756;C1272691
 730,% reduction,C0301630;C0392756;C1293152;C4551656
 730,$nmbr$ ‐ point reduction in selena – sledai score  %,C0301630;C0392756;C0449820;C0451528;C1293152;C1552961;C2347617;C3714763;C4050231;C4551656
--1,= cerebrospinal fluid .,C0007806;C0007807
+-10,= cerebrospinal fluid .,C0007806;C0007807
 728,without cerebrovascular disease,C0007820
 728,with cerebrovascular disease,C0007820
 728,stroke or cerebrovascular disease,C0007820;C0038454;C4554100
@@ -13044,7 +13044,7 @@ cluster,concept,cuis
 655,bl alc < $nmbr$ . $nmbr$ %,C0005918;C0006413;C1424945;C1552663;C2827109;C3811058
 655,bl,C0005918;C0006413;C1552663;C2827109
 655,\bl - sc n / n,C0005918;C0006413;C0282380;C1552663;C2827109
--1,caribbean,C0043122;C0206155;C1331005
+-10,caribbean,C0043122;C0206155;C1331005
 653,cardiogenic shock during first $nmbr$ hr after randomization,C0034656;C0036980;C0205435;C1279901
 653,cardiogenic shock,C0036980
 652,nonischemic cardiomyopathy — no . ( % ),C0878544
@@ -13167,7 +13167,7 @@ cluster,concept,cuis
 643,cardiac biomarker  n ( % ),C1271630
 643,arvfac ( per $nmbr$ % ),
 643,aborted cardiac arrest,C0018790;C1550015;C1609614;C4085625;C4318470;C4553105
--1,phenobarbital,C0031412
+-10,phenobarbital,C0031412
 641,reinfarction,
 641,prior myocardial intarction,C0027061;C0332152;C1522564;C2826257
 641,parental history of myocardial infarction before age $nmbr$ y yes,C0001779;C0030551;C1275835;C1549445;C1705108;C1710701
@@ -14124,7 +14124,7 @@ cluster,concept,cuis
 592,baseline egfr,C0168634;C1442488;C1739039;C3811844;C3812682
 592,baseline ckd egfr < $nmbr$ ml / min / $nmbr$ . $nmbr$ m $nmbr$,C0168634;C0369637;C0439445;C0441923;C1442488;C1561643;C1739039;C3811844;C3812682
 592,$nmbr$ — em,
--1,inguinal hernia repair,C0021446
+-10,inguinal hernia repair,C0021446
 590,hiatus hernia,C3489393
 590,hiatal hernia ( yes ) ( n ),C1549445;C1705108;C1710701;C3489393
 590,esophageal hiatal hernia *,C3489393
@@ -14407,7 +14407,7 @@ cluster,concept,cuis
 565,> $nmbr$ y pathogenesis  n ( % ),C0543483;C0699748
 564,osteoporosis drug,C0013227;C0029456;C1254351;C4554622
 564,osteoporosis,C0029456;C4554622
--1,exercise category ( % ),C3669314
+-10,exercise category ( % ),C3669314
 562,t - score categories lumbar spineb,C0024090;C0683312;C3854607
 562,racial category *,C0034510;C0683312;C1706779;C3669213;C3853635;C3889287
 562,racial category,C0034510;C0683312;C1706779;C3669213;C3853635;C3889287
@@ -14704,7 +14704,7 @@ cluster,concept,cuis
 533,european union,C0015179
 533,eu,C0015179;C3665627
 533,eastern eu,C0015179;C1707877;C3665627
--1,environmental stimuli,C0450025
+-10,environmental stimuli,C0450025
 531,timi flow ‡,C3272266
 531,final timi flow grade post - ppci,C0205088;C0441800;C0687676;C0919553;C1546485;C1704687;C3244287;C3272266;C3469826;C3853528
 531,final timi flow grade < $nmbr$,C0205088;C0441800;C0919553;C1546485;C3244287;C3272266;C3853528
@@ -15213,7 +15213,7 @@ cluster,concept,cuis
 499,act total score   ≥   $nmbr$ and / or improvement from baseline   ≥   $nmbr$,C0079613;C0168634;C1442488;C1704930;C1869853;C2964552;C2986411;C3890007;C4048375
 499,act . $nmbr$,C0079613;C1704930;C1869853;C3890007;C4048375
 499,act - $nmbr$,C0079613;C1704930;C1869853;C3890007;C4048375
--1,centrally acting sympathomimetics,C3653511
+-10,centrally acting sympathomimetics,C3653511
 497,sexually active with female,C0043210;C0086287;C0241028;C1705497;C1705498
 497,sexually active $nmbr$ ( % ),C0241028
 497,sexually active,C0241028
@@ -15228,7 +15228,7 @@ cluster,concept,cuis
 496,active a,C0205177;C3853793;C3888249
 496,active ( n = $nmbr$ ),C0205177;C3853793;C3888249
 496,active,C0205177;C3853793;C3888249
--1,any acuity bleeding,C0333276
+-10,any acuity bleeding,C0333276
 494,selena - sledai activity  n ( % ),C0205177;C0439167;C0441655;C0451528;C1561536;C3668946;C4049938;C4049939
 494,activity limitation,C0205177;C0439167;C0441655;C0443288;C0449295;C1561536;C3668946;C4049938;C4049939
 494,activity ( range $nmbr$ - $nmbr$ )  mean ± sd,C0205177;C0439167;C0441655;C0444504;C1514721;C1561536;C2347634;C2348143;C2348147;C2699239;C3542016;C3668946;C4049938;C4049939
@@ -16126,7 +16126,7 @@ cluster,concept,cuis
 431,$nmbr$ $nmbr$ . $nmbr$ ( $nmbr$ . $nmbr$ ) [ $nmbr$ ( $nmbr$ . $nmbr$ ) ] - $nmbr$ . $nmbr$ ( - $nmbr$ . $nmbr$ to - $nmbr$ . $nmbr$ ) [ - $nmbr$ . $nmbr$ ( - $nmbr$ . $nmbr$ to - $nmbr$ . $nmbr$ ) ],C0040363;C0041260;C1883351
 431,$nmbr$ $nmbr$ . $nmbr$ ( $nmbr$ . $nmbr$ ) [ $nmbr$ ( $nmbr$ . $nmbr$ ) ] - $nmbr$ . $nmbr$ ( - $nmbr$ . $nmbr$ to $nmbr$ . $nmbr$ ) [ - $nmbr$ . $nmbr$ ( - $nmbr$ . $nmbr$ to $nmbr$ . $nmbr$ ) ],C0040363;C0041260;C1883351
 431,$nmbr$ $nmbr$ . $nmbr$ ( $nmbr$ . $nmbr$ ) [ $nmbr$ ( $nmbr$ . $nmbr$ ) ] $nmbr$ . $nmbr$ ( - $nmbr$ . $nmbr$ to $nmbr$ . $nmbr$ ) [ $nmbr$ . $nmbr$ ( - $nmbr$ . $nmbr$ to $nmbr$ . $nmbr$ ) ],C0040363;C0041260;C1883351
--1,two - dimensional echocardiography,C0013524
+-10,two - dimensional echocardiography,C0013524
 429,two or more at baseline,C0168634;C0205172;C0205448;C1442488
 429,two or more antihypertensive medications,C0003364;C0205172;C0205448
 429,two or more,C0205172;C0205448
@@ -16436,7 +16436,7 @@ cluster,concept,cuis
 408,epa ( n = $nmbr$ ),
 408,epa,
 408,empa,C2699863
--1,entocort ec ( n = $nmbr$ ),C1170256
+-10,entocort ec ( n = $nmbr$ ),C1170256
 406,lvh on ecg,C0232306
 406,lvh by echo or ecg,C0058928;C0149721;C1623258;C1655045
 406,lvh by ecg or echocardiographyd,C0232306
@@ -17451,7 +17451,7 @@ cluster,concept,cuis
 311,bsa involved  % $nmbr$,C1314939
 311,bsa affected  mean ± sd  %,C0392760;C0444504;C1314939;C2347634;C2348143;C2699239
 311,bsa affected  %,C0392760;C1314939
--1,ttf - fv,C1332112;C1705840;C4087167
+-10,ttf - fv,C1332112;C1705840;C4087167
 309,op  vfx,
 309,op  no vfx,
 309,no op  vfx,
@@ -18115,7 +18115,7 @@ cluster,concept,cuis
 290,coronary angiography and intervention,C0085532;C0184661;C0886296;C1273869;C1548829
 290,carotid artery intervention *,C0007272;C0162859;C0184661;C0397581;C0741968;C0886296;C1273869
 290,baseline procedure  n ( % ),C0168634;C0184661;C1442488;C2700391;C3274430;C3539779
--1,potential predictor,C2698872;C3245505
+-10,potential predictor,C2698872;C3245505
 288,pulmonary function tests  % of predicted,C0024119;C0681842;C1882327;C2598152
 288,predicted normal ) t,C0205307;C0231683;C0439166;C0681842;C1882327;C2347086;C4553972
 288,predicted normal ( % ),C0205307;C0231683;C0439166;C0681842;C1882327;C2347086;C4553972
@@ -20206,8 +20206,8 @@ cluster,concept,cuis
 167,inhaled ^,C0004048
 167,daily dose of inhaled glucocorticoid — no . ( % ) §,C0004048;C0017710;C2348070
 167,a ) those receiving no inhaled pre - treatment maintenance medication,C0004048;C0013227;C0021459;C0024501;C0039798;C0087111;C0332152;C0740175;C1514756;C1522326;C1533734;C1705169;C2257086;C2347660;C3244316;C3469597;C3538994;C3669034;C3887704;C4284232
--1,unhappy,C1688635
--1,nap,C0870935;C1423800;C4283878
+-10,unhappy,C1688635
+-10,nap,C0870935;C1423800;C4283878
 164,enalapril lcz $nmbr$ ( n = $nmbr$ ) ( n = $nmbr$ ),C0014025
 164,enalapril dm = $nmbr$ non - dm = $nmbr$,C0011816;C0014025;C1518422;C3250443
 164,enalapril + aliskiren ( n = $nmbr$ ),C0014025;C1120110
@@ -20349,7 +20349,7 @@ cluster,concept,cuis
 151,heart failure ( nyha ii ‐ iii )  n ( % ),C0018801;C0018802;C0439070;C1275491;C1705160;C1710602;C4082587;C4554158
 151,dyspnea at rest ( nyha iv )  ( % ),C0022326;C0743330;C1275491;C4265176
 151,( nyha grade iii or iv ),C0022326;C0205617;C0450094;C0475271;C0687697;C1275491;C3889290;C4050000;C4265176;C4283820;C4283821;C4283822
--1,has - bledo,C1019275
+-10,has - bledo,C1019275
 149,less than $nmbr$ y ears,C0013443;C0439092;C0521421
 149,< $nmbr$ y ears,C0013443;C0521421
 148,≥ $nmbr$ yearsa,
@@ -20440,7 +20440,7 @@ cluster,concept,cuis
 145,vdhmtss,
 145,mtss cfb mean ± sd,C0009002;C0444504;C1824728;C2347634;C2348143;C2699239
 145,mtss cfb,C0009002;C1824728
--1,( fxs ),C0016667
+-10,( fxs ),C0016667
 143,mean score on das $nmbr$ - $nmbr$ ( crp ) ^,C0051767;C0057671;C3533236;C3890735;C4048285
 143,das - $nmbr$ ( crp ) < $nmbr$ . $nmbr$  n ( % ),C0051767;C0057671;C3890735;C4048285
 143,das - $nmbr$ ( crp )  mean ( sd ),C0051767;C0057671;C0444504;C2347634;C2348143;C2699239;C3890735;C4048285
@@ -20800,7 +20800,7 @@ cluster,concept,cuis
 110,all doses,C0178602
 110,< median prednisone dose  n ( % ),C0032952;C0178602;C0549183;C0869039;C0876920;C1114758;C2347635;C2348144;C2939193
 110,( phase $nmbr$ dose - finding trial ),C0008976;C0037088;C0178602;C0205390;C0243095;C0869039;C1114758;C1710475;C2825141
--1,decreased appetite,C0232462
+-10,decreased appetite,C0232462
 108,connective tissue disease,C0009782
 108,connective - tissue disease,C0009782
 108,associated with connective tissue disease,C0009782;C0332281
@@ -21079,7 +21079,7 @@ cluster,concept,cuis
 77,corticosteroid - azathioprine / $nmbr$ - mercaptopurine,C0000618;C0001617;C0004482;C3536709
 77,$nmbr$ - mercaptopurine / azathioprine,C0000618;C0004482
 77,$nmbr$ - mercaptopurine,C0000618
--1,leukotriene modifier,C0023545;C0205349;C1514623;C1516451;C3542952
+-10,leukotriene modifier,C0023545;C0205349;C1514623;C1516451;C3542952
 75,prior exposure to lamotrigine,C0064636;C0274281;C0332152;C0332157;C0524166;C2826257
 75,lamotrigine,C0064636;C0524166
 74,placebo - famotidine $nmbr$ - famotidine $nmbr$,C0015620;C0032042;C1696465;C1706408

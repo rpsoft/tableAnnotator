@@ -75,13 +75,13 @@ class ClusterResultsView extends Component {
       return <div><Card style={{padding:20}}>
           <div style={{display: "inline"}}>
           {
-            this.state.results.fields.map( (f,i) => <div  style={{display: "inline"}} key={i} > {f.name}</div>)
+            this.state.results.fields.map( (f,i) => <div style={{display: "inline"}} key={i} > {f.name}</div>)
           }
           </div>
 
           <div>
           {
-            this.state.results.rows.map( (f,i) => <div key={i} > {f.cn+","+f.rep_cuis+","+f.excluded_cuis+","+f.status}</div>)
+            this.state.results.rows.map( (f,i) => <div key={i} > {f.cn+","+f.concept+","+f.rep_cuis+","+f.excluded_cuis+","+f.status}</div>)
           }
           </div>
       </Card></div>
