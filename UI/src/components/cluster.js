@@ -205,6 +205,7 @@ class Cluster extends Component {
                         })
                     }</td>
                     <td style={{verticalAlign:"top"}}>
+                      <div style={{overflowY: "scroll", maxHeight:"80vw"}}>
                       <table style={{borderLeft: "4px dotted grey", marginLeft:5}}>
                         <thead>
 
@@ -219,7 +220,7 @@ class Cluster extends Component {
                                 </tr>
 
                         </thead>
-                        <tbody>
+                        <tbody >
 
                               {orderedCUIS.map(
                                 (c,i) => <tr key={i}>
@@ -236,7 +237,7 @@ class Cluster extends Component {
 
                         </tbody>
                       </table>
-
+                      </div>
                     </td>
 
                   </tr>
