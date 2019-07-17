@@ -26,6 +26,7 @@ import Loader from 'react-loader-spinner'
 import Toggle from 'material-ui/Toggle';
 
 import { FixedSizeList as List } from 'react-window';
+import Home from 'material-ui/svg-icons/action/home';
 
 // var ReactDOMServer = require('react-dom/server');
 // var HtmlToReact = require('html-to-react')
@@ -419,6 +420,8 @@ class ClusterView extends Component {
                                                                                                   this.setState({currentPage : total, goto: total})
                                                                                               }}>Last</div>
                    </Card>
+
+                   <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+(this.state.user ? "?user="+this.state.user : "" ))}/>
 
                    <TextField
                      value={this.state.searchTerm}

@@ -121,12 +121,12 @@ class CommonView extends Component {
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
         <Card style={{marginBottom:-10}}>
-        <RaisedButton style={{float:"right",marginTop:5,marginRight:5}} onClick={
-          () => this.props.goToUrl("/cluster?page=0")}
-          > Term Clustering </RaisedButton>
-          <h2 style={{marginTop:0,padding:10}}>Welcome the Subgroup Annotator!</h2>
+
+          <h2 style={{marginTop:0,padding:10}}>Welcome Our Annotator!</h2>
 
         </Card>
+
+
 
         <Card id="userData" style={{padding:15,marginBottom:10}}>
           <TextField
@@ -142,6 +142,18 @@ class CommonView extends Component {
             //   }
             // }}
             />
+
+        </Card>
+
+        <Card style={{padding:15,marginBottom:10}}>
+        <div style={{display:"inline"}}>
+            Looking for the <div style={{fontWeight:"bolder", display:"inline"}}> term annotation tool</div>? Click on the following button --->
+        </div>
+        <div style={{width: 300,display:"inline-block", marginLeft:30}}>
+          <RaisedButton style={{padding:10, fontWeight:"bolder", display:"inline"}} onClick={
+            () => this.props.goToUrl("/cluster?page=0")}
+            > Access Term Annotation Tool Here</RaisedButton>
+        </div>
         </Card>
 
         <Card >
