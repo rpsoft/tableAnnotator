@@ -57,7 +57,8 @@ class AnnotationView extends Component {
         sortBy: {
           key : "row",
           dir : "asc"
-        }
+        },
+        toggeLiveResults: true,
     };
     //debugger
   }
@@ -465,10 +466,10 @@ class AnnotationView extends Component {
                                   </TableBody>
                                 </Table>
                 } else {
-                  preparedPreview = <div>Table could not be produced. Try altering annotations, or move on</div>
+                  preparedPreview = <div style={{marginTop:20}}>Table could not be produced. Try altering annotations, or move on</div>
                 }
               } else {
-                preparedPreview = <div>Table could not be produced. Try altering annotations, or move on</div>
+                preparedPreview = <div style={{marginTop:20}}>Table could not be produced. Try altering annotations, or move on</div>
               }
 
        }
@@ -597,31 +598,35 @@ class AnnotationView extends Component {
         </Card>
 
 
-        <Card style={{padding:5,marginTop:10}}>
+        <Card style={{padding:5,marginTop:10,marginBottom:500}}>
           <RaisedButton onClick={ () => {this.saveAnnotations(); this.loadPageFromProps(this.props); } } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:200,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton>
           <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Reload Changes</RaisedButton>
         </Card>
 
 
 
-        <Card style={{padding:10,minHeight:200,paddingBottom:40,marginTop:10}}>
+        <div style={{marginTop:10, position: "fixed", width: "100vw", bottom: 0, left:0, backgroundColor:"#00000061"}}>
+        <Card style={{padding:10,  paddingBottom:40, maxHeight:600, width: "90%",marginLeft:"5%",marginTop:3}}>
 
         {/* <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,float:"left",fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Show Saved Changes</RaisedButton><br /><br /> */}
 
         {/* <RaisedButton onClick={ () => {this.getPreview()} } backgroundColor={"#99b8f1"} style={{margin:1,height:45,width:150,marginRight:5,fontWeight:"bolder"}}>Update Preview</RaisedButton> */}
+        <RaisedButton onClick={ () => {this.setState({toggeLiveResults : this.state.toggeLiveResults ? false : true })} } style={{padding:5}}> Toggle Live Results </RaisedButton>
 
-        <hr />
-        <div>
+        {
 
-          {
-            this.state.preparingPreview ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> :  (this.state.preview ? preparedPreview : "Save changes to see preview")
-          }
+        this.state.toggeLiveResults ?
+          <div>
 
+            {
+              this.state.preparingPreview ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> :  (this.state.preview ? preparedPreview : "Save changes to see preview")
+            }
 
-        </div>
-
+          </div> : ""
+        }
 
         </Card>
+        </div>
 
       </div>
     }

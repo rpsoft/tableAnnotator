@@ -3,7 +3,23 @@ library(unpivotr)
 library(tidyverse)
 library(htmlTable)
 
-new_obj <- readRDS("C:\\IHW\\tableAnnotator\\Server\\RDS_TO_HTML\\new_obj.rds")
+new_obj_backup <- readRDS("C:\\IHW\\tableAnnotator\\Server\\RDS_TO_HTML\\new_obj.rds")
+
+prevcolnames <- new_obj_backup %>% colnames()
+
+new_obj <- readRDS("C:/IHW/tableAnnotator/Server/newTables/Full_set_of_tables.Rds")
+
+new_obj %>% colnames()
+
+new_obj <- new_obj %>% mutate( pmid_tbl=paste0(pmid,"_",tbl_n))
+
+filenames_lkp <- new_obj %>% select(pmid,search_round,tbl_n,file_name,original_file_stored) %>% distinct %>% mutate(n = 1) %>% group_by(pmid,tbl_n) %>% mutate(ticker = cumsum(n))
+
+new_obj <- new_obj %>% inner_join(filenames_lkp) %>% select(-n) 
+  
+new_obj <- new_obj %>% mutate(pmid_tbl = ifelse(ticker > 1, gsub(" ", "", paste(pmid,"v",ticker,"_",tbl_n), fixed = TRUE), pmid_tbl) )
+
+new_obj <- new_obj %>% mutate( indent_lvl=0)
 
 filenames <- new_obj %>% select(pmid_tbl) %>% distinct
 
@@ -159,14 +175,13 @@ df_to_html <- function (tbl_id, df, destination){
 }
 
 
-for (r in 391:nrow(filenames)){
+for (r in 1:nrow(filenames)){
 
   try({
-   print(filenames[r,]$pmid_tbl)
-   df_to_html(filenames[r,]$pmid_tbl, new_obj, "C:\\IHW\\tableAnnotator\\Server\\RDS_TO_HTML\\tables\\")
+    print(filenames[r,]$pmid_tbl)
+    df_to_html(filenames[r,]$pmid_tbl, new_obj, "C:\\IHW\\tableAnnotator\\Server\\RDS_TO_HTML\\tables\\")
   })
   
 }
-  
-  
-  
+
+new_obj %>% filter(pmid == "pmid") %>% View
