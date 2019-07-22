@@ -185,9 +185,21 @@ function prepare_cell_text(text) {
 }
 
 function prepareAvailableDocuments() {
-  // console.log("preparing filed")
+  var fixVersionOrder = function fixVersionOrder(a) {
+    var i = a.indexOf("v");
+
+    if (i > -1) {
+      return a.slice(0, i) + a.slice(i + 2, a.length) + a.slice(i, i + 2);
+    } else {
+      return a;
+    }
+  }; // console.log("preparing filed")
+
+
   fs.readdir(tables_folder, function (err, items) {
-    DOCS = items;
+    DOCS = items.sort(function (a, b) {
+      return fixVersionOrder(a).localeCompare(fixVersionOrder(b));
+    });
 
     for (var d in DOCS) {
       var docfile = DOCS[d];
@@ -219,6 +231,7 @@ function prepareAvailableDocuments() {
       };
     }
 
+    debugger;
     console.log("DLEN: " + DOCS.length);
   });
 }

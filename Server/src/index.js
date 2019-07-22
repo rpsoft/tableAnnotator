@@ -128,11 +128,25 @@ function prepare_cell_text(text){
     return text.replace(/[0-9]+/g, '$nmbr$').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g," ").trim().toLowerCase()
 }
 
+
+
+
 function prepareAvailableDocuments(){
+
+  var fixVersionOrder = (a) => {
+  	var i = a.indexOf("v");
+  	if ( i > -1 ){
+  		return a.slice(0,i)+a.slice(i+2,a.length)+a.slice(i,i+2)
+      } else {
+  		return a;
+      }
+
+  }
+
   // console.log("preparing filed")
   fs.readdir(tables_folder, function(err, items) {
 
-      DOCS = items
+      DOCS = items.sort(  (a,b) => {return fixVersionOrder(a).localeCompare(fixVersionOrder(b))} );
 
       for ( var d in DOCS ){
 
@@ -155,6 +169,8 @@ function prepareAvailableDocuments(){
         abs_index[abs_index.length] = {docid, page, extension, docfile}
 
       }
+
+      debugger
 
       console.log("DLEN: " +DOCS.length)
   });
