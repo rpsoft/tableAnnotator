@@ -3,29 +3,28 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router'
 import { push } from 'react-router-redux'
 
-import { templateListSet } from '../actions/actions';
 import fetchData from '../network/fetch-data';
 
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import RaisedButton from '@material-ui/core/Button';
+import FlatButton from '@material-ui/core/Button';
+import {RadioButton, RadioButtonGroup} from '@material-ui/core/Radio';
 
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 
-import SelectField from 'material-ui/SelectField';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
+import SelectField from '@material-ui/core/Select';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Card from '@material-ui/core/Card';
 
-import Dialog from 'material-ui/Dialog';
+import Dialog from '@material-ui/core/Dialog';
 
-import Popover from 'material-ui/Popover';
-import Checkbox from 'material-ui/Checkbox';
+import Popover from '@material-ui/core/Popover';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import MultiplePopover from './MultiplePopover'
 
-import RemoveCircle from 'material-ui/svg-icons/content/remove-circle';
+import RemoveCircle from '@material-ui/icons/RemoveCircle';
 
 class ClusterItem extends Component {
   constructor(props) {
@@ -113,8 +112,8 @@ handleOpen = () => {
                 { this.state.hover == true ? (this.state.item.cuis.split(";").map( (el,i) => <div key={i} style={{display:"inline", marginLeft:10}}>{el}</div>)) : "" }
                 {
                   this.state.hover == true ? <div style={{display:"inline", marginLeft:30}}>
-                    <RaisedButton onClick={ this.handleOpen } > {"Move"} </RaisedButton>
-                    <RaisedButton onClick={ () => {} } style={{width:100,marginLeft:5}}> {"Set Default"} </RaisedButton>
+                    <RaisedButton variant={"contained"} onClick={ this.handleOpen } > {"Move"} </RaisedButton>
+                    <RaisedButton variant={"contained"} onClick={ () => {} } style={{width:100,marginLeft:5}}> {"Set Default"} </RaisedButton>
                   </div> : ""
                 }
           </div>
@@ -126,16 +125,13 @@ handleOpen = () => {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  templateList: state.templateList || null,
-  // if route contains params
+
   params: ownProps.params,
   location: ownProps.location
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setTemplateList: (templateList) => {
-    dispatch(templateListSet(templateList))
-  },
+
   goToUrl: (url) => dispatch(push(url))
 })
 

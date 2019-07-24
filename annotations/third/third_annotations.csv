@@ -1,0 +1,434 @@
+"docid";"page";"user";"corrupted";"corrupted_text";"tableType";"location";"number";"jsoncontent";"jsonqualifier";"N"
+"12601075";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";105
+"12601075";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";105
+"12601075";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""indented"":true}";105
+"12601075";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";105
+"13679479";2;"David";"false";"This does not appear to be a treatment effect estimate table. Also table processing fails for some unknown reason.";"other_table";"Row";"1";"{""outcomes"":true}";"{}";106
+"13679479";2;"David";"false";"This does not appear to be a treatment effect estimate table. Also table processing fails for some unknown reason.";"other_table";"Col";"1";"{""other"":true}";"{}";106
+"14724302";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""arms"":true}";"{}";109
+"14724302";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";109
+"15337732";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""outcomes"":true}";"{}";112
+"15337732";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";112
+"15337732";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";112
+"15337732";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";112
+"15381674";1;"David";"false";"undefined";"";"Row";"1";"{""other"":true,""measures"":true}";"{}";113
+"15381674";1;"David";"false";"undefined";"";"Row";"2";"{""arms"":true}";"{}";113
+"15381674";1;"David";"false";"undefined";"";"Col";"1";"{""baseline_level_1"":true}";"{}";113
+"15381674";1;"David";"false";"undefined";"";"Col";"1";"{""baseline_level_2"":true}";"{""indented"":true}";113
+"15451146";2;"David";"false";"Columns 2 and 3, which has one of the arms, has dropped off";"result_table_subgroup";"Row";"1";"{""arms"":true}";"{}";115
+"15451146";2;"David";"false";"Columns 2 and 3, which has one of the arms, has dropped off";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";115
+"15451146";2;"David";"false";"Columns 2 and 3, which has one of the arms, has dropped off";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true,""subgroup_level"":true}";"{}";115
+"15998890";2;"David";"false";"Empty row with p-value should separate the subgroup names and subgroup levels. It does not for some reason";"result_table_subgroup";"Row";"1";"{""measures"":true,""p-interaction"":true}";"{}";117
+"15998890";2;"David";"false";"Empty row with p-value should separate the subgroup names and subgroup levels. It does not for some reason";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";117
+"15998890";2;"David";"false";"Empty row with p-value should separate the subgroup names and subgroup levels. It does not for some reason";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";117
+"15998890";2;"David";"false";"Empty row with p-value should separate the subgroup names and subgroup levels. It does not for some reason";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";117
+"15998891";2;"David";"false";"Unable to separate subgroup anmes and labels becuase of insufficient formatting";"result_table_subgroup";"Row";"1";"{""outcomes"":true}";"{}";124
+"15998891";2;"David";"false";"Unable to separate subgroup anmes and labels becuase of insufficient formatting";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";124
+"15998891";2;"David";"false";"Unable to separate subgroup anmes and labels becuase of insufficient formatting";"result_table_subgroup";"Row";"3";"{""arms"":true,""measures"":true}";"{}";124
+"15998891";2;"David";"false";"Unable to separate subgroup anmes and labels becuase of insufficient formatting";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true,""subgroup_level"":true}";"{}";124
+"16267322";1;"David";"false";"Rows 1 and rows 2 are incorrect. ENACT-2 Trial  should be in row 1";"baseline_table";"Row";"1";"{""other"":true}";"{}";171
+"16267322";1;"David";"false";"Rows 1 and rows 2 are incorrect. ENACT-2 Trial  should be in row 1";"baseline_table";"Row";"2";"{""arms"":true}";"{}";171
+"16267322";1;"David";"false";"Rows 1 and rows 2 are incorrect. ENACT-2 Trial  should be in row 1";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";171
+"16351668";2;"David";"false";"labels only. No data";"";"Col";"1";"{""subgroup_name"":true}";"{}";448
+"16380589";2;"David";"false";"Table not working. Funny rows at the top";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";462
+"16380589";2;"David";"false";"Table not working. Funny rows at the top";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";462
+"16380589";2;"David";"false";"Table not working. Funny rows at the top";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";462
+"16537662";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";211
+"16537662";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{}";211
+"16537662";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{""indented"":true}";211
+"17011942";2;"David";"false";"Note algorithm does not copy down column 1 to populate subgroup name (as it would have had it been in the same column)";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{}";217
+"17011942";2;"David";"false";"Note algorithm does not copy down column 1 to populate subgroup name (as it would have had it been in the same column)";"result_table_subgroup";"Col";"2";"{""subgroup_level"":true}";"{}";217
+"17011942";2;"David";"false";"Note algorithm does not copy down column 1 to populate subgroup name (as it would have had it been in the same column)";"result_table_subgroup";"Row";"1";"{""measures"":true,""p-interaction"":true}";"{}";217
+"17022864";3;"David";"false";"Some of the rows with outcome varaibles are confused, eg HDL";"result_table_without_subgroup";"Row";"1";"{""arms"":true}";"{}";63
+"17022864";3;"David";"false";"Some of the rows with outcome varaibles are confused, eg HDL";"result_table_without_subgroup";"Col";"1";"{""outcomes"":true}";"{}";63
+"17022864";3;"David";"false";"Some of the rows with outcome varaibles are confused, eg HDL";"result_table_without_subgroup";"Col";"1";"{""time/period"":true,""measures"":true}";"{""indented"":true}";63
+"17065671";2;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";534
+"17065671";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true}";534
+"17065671";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true,""measures"":true}";"{}";534
+"17097378";1;"David";"false";"";"subgroup_table";"Row";"1";"{""arms"":true}";"{}";6
+"17097378";1;"David";"false";"";"subgroup_table";"Col";"1";"{""baseline_level_1"":true}";"{}";6
+"17097378";1;"David";"false";"";"subgroup_table";"Col";"1";"{""baseline_level_2"":true}";"{""indented"":true}";6
+"17113426";1;"Lili";"false";"undefined";"baseline_table";"Row";"1";"{""arms"":true}";"{}";532
+"17113426";1;"Lili";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";532
+"17113426";1;"Lili";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{""indented"":true}";532
+"17145742";2;"David";"false";"Doesn't work as incorrect empty rows";"";"Row";"1";"{""other"":true}";"{}";142
+"17145742";2;"David";"false";"Doesn't work as incorrect empty rows";"";"Row";"2";"{""p-interaction"":true}";"{}";142
+"17145742";2;"David";"false";"Doesn't work as incorrect empty rows";"";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";142
+"17145742";2;"David";"false";"Doesn't work as incorrect empty rows";"";"Col";"1";"{""subgroup_level"":true}";"{}";142
+"17292766";3;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true}";"{}";540
+"17292766";3;"Lili";"false";"undefined";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";540
+"17292766";3;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""bold"":true}";540
+"17292766";3;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";540
+"17470434";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true,""subgroup_level"":true}";"{}";140
+"17470434";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""outcomes"":true}";"{}";140
+"17470434";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";140
+"17470824";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true}";"{}";450
+"17470824";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";450
+"17470824";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{""indented"":true}";450
+"17804843";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""measures"":true,""p-interaction"":true}";"{}";296
+"17804843";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";296
+"17804843";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";296
+"17965424";2;"David";"false";"No row of any kind. Need to re-write code to accomodate this";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";526
+"17965424";2;"David";"false";"No row of any kind. Need to re-write code to accomodate this";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";526
+"18094675";4;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true}";"{}";151
+"18094675";4;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";151
+"18172039";3;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";184
+"18172039";3;"Lili";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";184
+"18172039";3;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true}";184
+"18172039";3;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";184
+"18326958";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true}";"{}";476
+"18326958";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""outcomes"":true}";"{}";476
+"18326958";2;"David";"false";"undefined";"result_table_subgroup";"Row";"3";"{""measures"":true}";"{}";476
+"18326958";2;"David";"false";"undefined";"result_table_subgroup";"Row";"4";"{""measures"":true}";"{}";476
+"18326958";2;"David";"false";"undefined";"result_table_subgroup";"Row";"5";"{""measures"":true}";"{}";476
+"18326958";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""time/period"":true}";"{""empty_row"":true}";476
+"18326958";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";476
+"18499565";1;"David";"false";"Table malformed will need to fix manually";"baseline_table";"Row";"1";"{""arms"":true}";"{}";219
+"18499565";1;"David";"false";"Table malformed will need to fix manually";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";219
+"18499565";1;"David";"false";"Table malformed will need to fix manually";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{""indented"":true}";219
+"18537526";2;"David";"false";"";"";"Row";"1";"{""arms"":true,""measures"":true}";"{}";223
+"18537526";2;"David";"false";"";"";"Row";"2";"{""measures"":true}";"{}";223
+"18537526";2;"David";"false";"";"";"Col";"1";"{""subgroup_name"":true}";"{}";223
+"18537526";2;"David";"false";"";"";"Col";"2";"{""subgroup_level"":true}";"{}";223
+"18539916";1;"David";"false";"This table includes end of follow-up data, but not by subgroup";"result_table_without_subgroup";"Row";"1";"{""time/period"":true}";"{}";7
+"18539916";1;"David";"false";"This table includes end of follow-up data, but not by subgroup";"result_table_without_subgroup";"Row";"2";"{""arms"":true}";"{}";7
+"18539916";1;"David";"false";"This table includes end of follow-up data, but not by subgroup";"result_table_without_subgroup";"Row";"3";"{""measures"":true}";"{}";7
+"18539916";1;"David";"false";"This table includes end of follow-up data, but not by subgroup";"result_table_without_subgroup";"Col";"1";"{""baseline_level_1"":true,""outcomes"":true}";"{""empty_row"":true}";7
+"18539916";1;"David";"false";"This table includes end of follow-up data, but not by subgroup";"result_table_without_subgroup";"Col";"1";"{""measures"":true}";"{}";7
+"18667204";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""arms"":true,""measures"":true}";"{}";456
+"18667204";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{""empty_row"":true}";456
+"18667204";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{}";456
+"18674411";2;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""subgroup_level"":true}";"{}";190
+"18674411";2;"Lili";"false";"undefined";"result_table_subgroup";"Row";"2";"{""outcomes"":true}";"{}";190
+"18674411";2;"Lili";"false";"undefined";"result_table_subgroup";"Row";"3";"{""arms"":true}";"{}";190
+"18674411";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true}";190
+"18674411";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""measures"":true}";"{}";190
+"18753639";3;"David";"false";"I dont know why this fails";"result_table_subgroup";"Row";"1";"{""arms"":true,""p-interaction"":true}";"{}";468
+"18753639";3;"David";"false";"I dont know why this fails";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""indented"":true}";468
+"18753639";3;"David";"false";"I dont know why this fails";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";468
+"18823986";2;"Lili";"false";"Unable to pull in subgroup name fopr age. Not needed for other subgroups";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true}";"{}";236
+"18823986";2;"Lili";"false";"Unable to pull in subgroup name fopr age. Not needed for other subgroups";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";236
+"18836213";3;"David";"false";"Fails dont know why";"";"Row";"1";"{""arms"":true,""p-interaction"":true}";"{}";146
+"18836213";3;"David";"false";"Fails dont know why";"";"Row";"2";"{""measures"":true}";"{}";146
+"18836213";3;"David";"false";"Fails dont know why";"";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";146
+"18836213";3;"David";"false";"Fails dont know why";"";"Col";"1";"{""subgroup_level"":true}";"{}";146
+"19104004";3;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";250
+"19104004";3;"Lili";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";250
+"19104004";3;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";250
+"19104004";3;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";250
+"19125778";2;"David";"false";"undefined";"result_table_subgroup";"Row";"3";"{""arms"":true}";"{}";478
+"19125778";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";478
+"19125778";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";478
+"19125778";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""other"":true}";"{}";478
+"19125778";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";478
+"19332467";2;"Lili";"false";"Big problem here! subgroup name and level are mismatched.";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";257
+"19332467";2;"Lili";"false";"Big problem here! subgroup name and level are mismatched.";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";257
+"19332467";2;"Lili";"false";"Big problem here! subgroup name and level are mismatched.";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";257
+"19332467";2;"Lili";"false";"Big problem here! subgroup name and level are mismatched.";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";257
+"19336502";4;"Lili";"false";"didn't produce the table";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";275
+"19336502";4;"Lili";"false";"didn't produce the table";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";275
+"19336502";4;"Lili";"false";"didn't produce the table";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";275
+"19349325";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""subgroup_level"":true}";"{}";454
+"19349325";1;"David";"false";"undefined";"baseline_table";"Row";"2";"{""arms"":true}";"{}";454
+"19349325";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";454
+"19371824";2;"Lili";"false";"This table reports an interaction for ECG changes and baseline-characteristics, not a treatment effect";"other_table";"Row";"1";"{""outcomes"":true}";"{}";295
+"19371824";2;"Lili";"false";"This table reports an interaction for ECG changes and baseline-characteristics, not a treatment effect";"other_table";"Row";"2";"{""measures"":true,""p-interaction"":true}";"{}";295
+"19371824";2;"Lili";"false";"This table reports an interaction for ECG changes and baseline-characteristics, not a treatment effect";"other_table";"Col";"1";"{""baseline_level_1"":true,""baseline_level_2"":true}";"{}";295
+"19389561";3;"Lili";"false";"undefined";"result_table_without_subgroup";"Row";"1";"{""outcomes"":true}";"{}";311
+"19389561";3;"Lili";"false";"undefined";"result_table_without_subgroup";"Col";"1";"{""measures"":true}";"{}";311
+"19423108";2;"Elaine";"false";"Total mortality and CHD CI outcome lines not empty row whilst others are. Therefore annotator not matching all outcomes with appropriate sublevel.";"result_table_subgroup";"Row";"1";"{""measures"":true,""p-interaction"":true,""arms"":true}";"{}";583
+"19423108";2;"Elaine";"false";"Total mortality and CHD CI outcome lines not empty row whilst others are. Therefore annotator not matching all outcomes with appropriate sublevel.";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true}";583
+"19423108";2;"Elaine";"false";"Total mortality and CHD CI outcome lines not empty row whilst others are. Therefore annotator not matching all outcomes with appropriate sublevel.";"result_table_subgroup";"Col";"2";"{""subgroup_level"":true}";"{}";583
+"19443528";2;"David";"false";"I checked paper the ICS versus non-ics IS a randomised comparison. The hazard ratio is for ICS versus non-ICS but is under the ICS heading";"result_table_subgroup";"Row";"1";"{""subgroup_name"":true}";"{}";153
+"19443528";2;"David";"false";"I checked paper the ICS versus non-ics IS a randomised comparison. The hazard ratio is for ICS versus non-ICS but is under the ICS heading";"result_table_subgroup";"Row";"2";"{""subgroup_level"":true}";"{}";153
+"19443528";2;"David";"false";"I checked paper the ICS versus non-ics IS a randomised comparison. The hazard ratio is for ICS versus non-ICS but is under the ICS heading";"result_table_subgroup";"Col";"1";"{""arms"":true}";"{""empty_row"":true}";153
+"19443528";2;"David";"false";"I checked paper the ICS versus non-ics IS a randomised comparison. The hazard ratio is for ICS versus non-ICS but is under the ICS heading";"result_table_subgroup";"Col";"1";"{""measures"":true}";"{}";153
+"19660610";2;"David";"false";"Insufficient formatting to distinguish subgroup names and subgroup levels";"result_table_subgroup";"Row";"1";"{""arms"":true}";"{}";158
+"19660610";2;"David";"false";"Insufficient formatting to distinguish subgroup names and subgroup levels";"result_table_subgroup";"Row";"2";"{""time/period"":true,""measures"":true}";"{}";158
+"19660610";2;"David";"false";"Insufficient formatting to distinguish subgroup names and subgroup levels";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true,""subgroup_level"":true}";"{}";158
+"19776408";2;"Lili";"false";"undefined";"result_table_without_subgroup";"Row";"1";"{""measures"":true}";"{}";316
+"19776408";2;"Lili";"false";"undefined";"result_table_without_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true,""bold"":true}";316
+"19776408";2;"Lili";"false";"undefined";"result_table_without_subgroup";"Col";"1";"{""arms"":true}";"{}";316
+"19917888";2;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";332
+"19917888";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row_with_p_value"":true}";332
+"19917888";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";332
+"20385930";3;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""measures"":true,""p-interaction"":true}";"{}";346
+"20385930";3;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";346
+"20385930";3;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{""indented"":true}";346
+"20393175 & Supplementary Append";4;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""outcomes"":true}";"{}";489
+"20393175 & Supplementary Append";4;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true,""measures"":true}";"{}";489
+"20393175 & Supplementary Append";4;"David";"false";"undefined";"result_table_subgroup";"Col";"3";"{""measures"":true}";"{}";489
+"20393175 & Supplementary Append";4;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";489
+"20393175 & Supplementary Append";4;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";489
+"20469975";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""arms"":true}";"{}";160
+"20469975";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""subgroup_level"":true}";"{}";160
+"20582594";2;"Lili";"false";"again, 1 row mismatch in each subgroup";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";358
+"20582594";2;"Lili";"false";"again, 1 row mismatch in each subgroup";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";358
+"20582594";2;"Lili";"false";"again, 1 row mismatch in each subgroup";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";358
+"20678878";2;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true}";"{}";365
+"20678878";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true}";365
+"20678878";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";365
+"20883926";2;"Lili";"false";"hard to differentiate the outcome with subgroup level";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";368
+"20883926";2;"Lili";"false";"hard to differentiate the outcome with subgroup level";"result_table_subgroup";"Col";"1";"{""outcomes"":true,""subgroup_level"":true}";"{}";368
+"20937671";2;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""subgroup_level"":true}";"{}";375
+"20937671";2;"Lili";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";375
+"20937671";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""time/period"":true}";"{""empty_row"":true}";375
+"20937671";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true,""measures"":true}";"{}";375
+"20979470";3;"Lili";"false";"has problem with producing and it is in the same paper with the last page while the last page can be produced perfectly.";"result_table_subgroup";"Row";"1";"{""arms"":true,""p-interaction"":true}";"{}";379
+"20979470";3;"Lili";"false";"has problem with producing and it is in the same paper with the last page while the last page can be produced perfectly.";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true}";379
+"20979470";3;"Lili";"false";"has problem with producing and it is in the same paper with the last page while the last page can be produced perfectly.";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";379
+"21216833";2;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";384
+"21216833";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row_with_p_value"":true}";384
+"21216833";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";384
+"21428766";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true}";"{}";315
+"21428766";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";315
+"21428766";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";315
+"21454723";2;"Katherine";"false";"undefined";"other_table";"Row";"1";"{""arms"":true,""measures"":true}";"{}";552
+"21454723";2;"Katherine";"false";"undefined";"other_table";"Col";"1";"{""outcomes"":true,""measures"":true}";"{}";552
+"21464051";2;"Katherine";"false";"undefined";"baseline_table";"Row";"1";"{""measures"":true,""p-interaction"":true}";"{}";557
+"21464051";2;"Katherine";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";557
+"21502549";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true}";"{}";320
+"21502549";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";320
+"21502549";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";320
+"21545947";2;"David";"false";"Table unrelated to preview";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";324
+"21545947";2;"David";"false";"Table unrelated to preview";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true}";"{}";324
+"21815708";2;"David";"false";"subgroup_level is sex, subgroup_level.y is age group";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";334
+"21815708";2;"David";"false";"subgroup_level is sex, subgroup_level.y is age group";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";334
+"21815708";2;"David";"false";"subgroup_level is sex, subgroup_level.y is age group";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{""empty_row"":true}";334
+"21815708";2;"David";"false";"subgroup_level is sex, subgroup_level.y is age group";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";334
+"22248871";2;"Dagm";"false";"undefined";"result_table_subgroup";"Row";"1";"{""subgroup_level"":true}";"{}";511
+"22248871";2;"Dagm";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";511
+"22248871";2;"Dagm";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true}";511
+"22248871";2;"Dagm";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";511
+"22259009";2;"Dagm";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true}";"{}";521
+"22259009";2;"Dagm";"false";"undefined";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";521
+"22259009";2;"Dagm";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";521
+"22305835";1;"Dagm";"false";"undefined";"baseline_table";"Row";"1";"{""arms"":true}";"{}";541
+"22305835";1;"Dagm";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{""empty_row"":true}";541
+"22544891";2;"David";"false";"""Severe or very severe"" and  ""Smoking status"" should be on separate rows. the table will not convert properly";"result_table_subgroup";"Row";"1";"{""outcomes"":true}";"{}";281
+"22544891";2;"David";"false";"""Severe or very severe"" and  ""Smoking status"" should be on separate rows. the table will not convert properly";"result_table_subgroup";"Row";"2";"{""other"":true}";"{}";281
+"22544891";2;"David";"false";"""Severe or very severe"" and  ""Smoking status"" should be on separate rows. the table will not convert properly";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";281
+"22573644";2;"David";"false";"";"result_table_subgroup";"Row";"2";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";347
+"22573644";2;"David";"false";"";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""bold"":true}";347
+"22573644";2;"David";"false";"";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";347
+"22573644";2;"David";"false";"";"result_table_subgroup";"Row";"1";"{""other"":true}";"{}";347
+"22686416";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""measures"":true,""p-interaction"":true,""arms"":true}";"{}";72
+"22686416";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true,""subgroup_level"":true}";"{}";72
+"22799613";1;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true}";"{}";162
+"22799613";1;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""subgroup_level"":true}";"{}";162
+"22799613";1;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true}";162
+"22799613";1;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";162
+"22913891";6;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""subgroup_name"":true}";"{}";361
+"22913891";6;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""subgroup_level"":true}";"{}";361
+"22913891";6;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""bold"":true}";361
+"22913891";6;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true,""time/period"":true,""measures"":true}";"{}";361
+"23110471";2;"jesus";"false";"undefined";"";"Row";"1";"{""subgroup_name"":true}";"{}";25
+"23110471";2;"jesus";"false";"undefined";"";"Col";"1";"{""time/period"":true}";"{""empty_row"":true}";25
+"23110471";2;"jesus";"false";"undefined";"";"Col";"1";"{""arms"":true,""measures"":true}";"{}";25
+"23465037";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""subgroup_level"":true}";"{}";390
+"23465037";2;"David";"false";"undefined";"result_table_subgroup";"Row";"3";"{""arms"":true}";"{}";390
+"23465037";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";390
+"23471469";2;"David";"false";"Poorly rendered. Lots of blank rows in displayed table. Wont convert";"result_table_subgroup";"Row";"5";"{""subgroup_level"":true}";"{}";392
+"23471469";2;"David";"false";"Poorly rendered. Lots of blank rows in displayed table. Wont convert";"result_table_subgroup";"Col";"1";"{""arms"":true}";"{}";392
+"23471469";2;"David";"false";"Poorly rendered. Lots of blank rows in displayed table. Wont convert";"result_table_subgroup";"Row";"1";"{}";"{}";392
+"23471469";2;"David";"false";"Poorly rendered. Lots of blank rows in displayed table. Wont convert";"result_table_subgroup";"Row";"2";"{}";"{}";392
+"23471469";2;"David";"false";"Poorly rendered. Lots of blank rows in displayed table. Wont convert";"result_table_subgroup";"Row";"3";"{}";"{}";392
+"23471469";2;"David";"false";"Poorly rendered. Lots of blank rows in displayed table. Wont convert";"result_table_subgroup";"Row";"4";"{}";"{}";392
+"23473369";2;"Peter";"false";"Not working well. Unclear if some columns have merged. Table will not render";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";499
+"23473369";2;"Peter";"false";"Not working well. Unclear if some columns have merged. Table will not render";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";499
+"23473369";2;"Peter";"false";"Not working well. Unclear if some columns have merged. Table will not render";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";499
+"23810874";2;"David";"false";"undefined";"result_table_without_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""time/period"":true}";"{}";427
+"23810874";2;"David";"false";"undefined";"result_table_without_subgroup";"Col";"1";"{""outcomes"":true}";"{}";427
+"24063830";2;"Katherine";"false";"Broken image part 2/2. See last table";"baseline_table";"Row";"1";"{""time/period"":true}";"{}";549
+"24063830";2;"Katherine";"false";"Broken image part 2/2. See last table";"baseline_table";"Row";"2";"{""arms"":true}";"{}";549
+"24184169";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""arms"":true,""measures"":true}";"{}";44
+"24184169";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{""empty_row_with_p_value"":true}";44
+"24184169";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{}";44
+"24206457";2;"David";"false";"Looks like N and hazard ratio are mashed together in column 2, but they are not";"result_table_subgroup";"Row";"1";"{""measures"":true,""arms"":true,""p-interaction"":true}";"{}";27
+"24206457";2;"David";"false";"Looks like N and hazard ratio are mashed together in column 2, but they are not";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";27
+"24206457";2;"David";"false";"Looks like N and hazard ratio are mashed together in column 2, but they are not";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";27
+"24245566";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""p-interaction"":true}";"{}";164
+"24245566";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";164
+"24245566";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";164
+"24245566";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";164
+"24253831 & Supplementary Append";3;"David";"false";"Cannot separate subgroup name from subgroup level because of error in row 2. THe P-value is in column one instead of in the last column";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";32
+"24253831 & Supplementary Append";3;"David";"false";"Cannot separate subgroup name from subgroup level because of error in row 2. THe P-value is in column one instead of in the last column";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true,""subgroup_level"":true}";"{}";32
+"24281137";3;"David";"false";"Does not include treatment effects";"result_table_without_subgroup";"Row";"1";"{""subgroup_level"":true}";"{}";437
+"24281137";3;"David";"false";"Does not include treatment effects";"result_table_without_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";437
+"24716680";3;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""measures"":true,""p-interaction"":true}";"{}";441
+"24716680";3;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";441
+"24716680";3;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";441
+"25175921 & Supplementary Append";3;"David";"false";"Table fails despite appearing well specified";"result_table_subgroup";"Row";"1";"{""outcomes"":true}";"{}";490
+"25175921 & Supplementary Append";3;"David";"false";"Table fails despite appearing well specified";"result_table_subgroup";"Row";"2";"{""measures"":true,""p-interaction"":true}";"{}";490
+"25175921 & Supplementary Append";3;"David";"false";"Table fails despite appearing well specified";"result_table_subgroup";"Row";"3";"{""arms"":true}";"{}";490
+"25175921 & Supplementary Append";3;"David";"false";"Table fails despite appearing well specified";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";490
+"25175921 & Supplementary Append";3;"David";"false";"Table fails despite appearing well specified";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";490
+"25189213";1;"jesus";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true,""subgroup_level"":true}";"{}";126
+"25189213";1;"jesus";"false";"undefined";"result_table_subgroup";"Row";"1";"{""p-interaction"":true,""subgroup_name"":true}";"{}";126
+"25248764";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";467
+"25248764";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";467
+"25248764";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""measures"":true}";"{}";467
+"25406305";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""subgroup_level"":true,""measures"":true}";"{}";61
+"25406305";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";61
+"25406305";2;"David";"false";"undefined";"result_table_subgroup";"Row";"3";"{""arms"":true,""measures"":true}";"{}";61
+"25406305";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";61
+"25465416";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""measures"":true,""arms"":true,""p-interaction"":true}";"{}";165
+"25465416";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";165
+"25465417";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""arms"":true,""measures"":true}";"{}";166
+"25465417";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{""empty_row"":true}";166
+"25465417";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{}";166
+"25552421";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""subgroup_level"":true,""measures"":true}";"{}";167
+"25552421";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{""empty_row"":true}";167
+"25552421";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{}";167
+"25637937";2;"David";"false";"Row 1 and row 2 wrongly separated";"result_table_subgroup";"Row";"1";"{""measures"":true,""p-interaction"":true}";"{}";168
+"25637937";2;"David";"false";"Row 1 and row 2 wrongly separated";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";168
+"25637937";2;"David";"false";"Row 1 and row 2 wrongly separated";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{}";168
+"25637937";2;"David";"false";"Row 1 and row 2 wrongly separated";"result_table_subgroup";"Col";"2";"{""subgroup_level"":true}";"{}";168
+"25657183";2;"Lili";"false";"TACI is lost";"result_table_subgroup";"Row";"1";"{""outcomes"":true}";"{""bold"":true}";506
+"25657183";2;"Lili";"false";"TACI is lost";"result_table_subgroup";"Row";"2";"{""arms"":true,""measures"":true}";"{}";506
+"25657183";2;"Lili";"false";"TACI is lost";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";506
+"25670362";3;"David";"false";"Consistently fails. Rows 2-4 should be a single row.";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";45
+"25670362";3;"David";"false";"Consistently fails. Rows 2-4 should be a single row.";"result_table_subgroup";"Row";"3";"{""measures"":true}";"{}";45
+"25670362";3;"David";"false";"Consistently fails. Rows 2-4 should be a single row.";"result_table_subgroup";"Row";"4";"{""measures"":true,""arms"":true}";"{}";45
+"25670362";3;"David";"false";"Consistently fails. Rows 2-4 should be a single row.";"result_table_subgroup";"Row";"2";"{""other"":true}";"{}";45
+"25670362";3;"David";"false";"Consistently fails. Rows 2-4 should be a single row.";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{}";45
+"25852208";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""subgroup_level"":true}";"{}";474
+"25852208";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";474
+"25852208";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true,""time/period"":true}";"{""empty_row"":true}";474
+"25852208";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""measures"":true}";"{}";474
+"26059896";1;"David";"false";"All of the first data-row values have been pulled into the header row";"result_table_subgroup";"Row";"1";"{""arms"":true}";"{}";50
+"26059896";1;"David";"false";"All of the first data-row values have been pulled into the header row";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";50
+"26059896";1;"David";"false";"All of the first data-row values have been pulled into the header row";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";50
+"26059896";1;"David";"false";"All of the first data-row values have been pulled into the header row";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";50
+"26271059";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""arms"":true,""measures"":true}";"{}";130
+"26271059";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";130
+"26271059";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{""indented"":true}";130
+"26400827";3;"David";"false";"Fails and strange as regards rows at top of table.";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";400
+"26400827";3;"David";"false";"Fails and strange as regards rows at top of table.";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";400
+"26400827";3;"David";"false";"Fails and strange as regards rows at top of table.";"result_table_subgroup";"Col";"2";"{""subgroup_level"":true}";"{}";400
+"26681720";1;"David";"false";"Missing header row";"baseline_table";"Row";"1";"{""other"":true}";"{}";287
+"26681720";1;"David";"false";"Missing header row";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";287
+"26699168";2;"David";"false";"P-value for interaction in unusual place. Means cannot separate subgroup name and subgroup level";"result_table_subgroup";"Row";"1";"{""p-interaction"":true,""arms"":true}";"{}";16
+"26699168";2;"David";"false";"P-value for interaction in unusual place. Means cannot separate subgroup name and subgroup level";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";16
+"26699168";2;"David";"false";"P-value for interaction in unusual place. Means cannot separate subgroup name and subgroup level";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true,""subgroup_level"":true}";"{}";16
+"26762481";2;"Elaine";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true}";"{}";580
+"26762481";2;"Elaine";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true,""p-interaction"":true}";"{}";580
+"26762481";2;"Elaine";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";580
+"26762525";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""subgroup_level"":true,""p-interaction"":true}";"{}";169
+"26762525";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true,""measures"":true}";"{}";169
+"26762525";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";169
+"26774608";3;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""measures"":true,""p-interaction"":true}";"{}";513
+"26774608";3;"Lili";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";513
+"26774608";3;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";513
+"26774608";3;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";513
+"26792812 & Supplementary Append";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""time/period"":true}";"{}";461
+"26792812 & Supplementary Append";2;"David";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";461
+"26792812 & Supplementary Append";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";461
+"26792812 & Supplementary Append";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";461
+"26886418";2;"David";"false";"Not clear why failing seems described perfectly";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";403
+"26886418";2;"David";"false";"Not clear why failing seems described perfectly";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";403
+"26886418";2;"David";"false";"Not clear why failing seems described perfectly";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";403
+"26886418";2;"David";"false";"Not clear why failing seems described perfectly";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";403
+"26994121";1;"Peter";"false";"Note. This table loses P-values and some baseline characteristics information because the central column has P-values";"baseline_table";"Row";"1";"{""subgroup_level"":true,""measures"":true}";"{}";175
+"26994121";1;"Peter";"false";"Note. This table loses P-values and some baseline characteristics information because the central column has P-values";"baseline_table";"Row";"2";"{""arms"":true,""measures"":true}";"{}";175
+"26994121";1;"Peter";"false";"Note. This table loses P-values and some baseline characteristics information because the central column has P-values";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{""empty_row"":true}";175
+"26994121";1;"Peter";"false";"Note. This table loses P-values and some baseline characteristics information because the central column has P-values";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{}";175
+"27033025";2;"Peter";"false";"Rows 11, 20 and 29, which contain the p-value for interaction are lost. However, there is sufficient data to estimate the subgroups without these.";"result_table_subgroup";"Row";"1";"{""subgroup_level"":true}";"{}";176
+"27033025";2;"Peter";"false";"Rows 11, 20 and 29, which contain the p-value for interaction are lost. However, there is sufficient data to estimate the subgroups without these.";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";176
+"27033025";2;"Peter";"false";"Rows 11, 20 and 29, which contain the p-value for interaction are lost. However, there is sufficient data to estimate the subgroups without these.";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true}";176
+"27033025";2;"Peter";"false";"Rows 11, 20 and 29, which contain the p-value for interaction are lost. However, there is sufficient data to estimate the subgroups without these.";"result_table_subgroup";"Col";"1";"{""measures"":true,""time/period"":true}";"{}";176
+"27046159 & Supplementary Append";2;"Jo";"false";"undefined";"result_table_without_subgroup";"Row";"1";"{""arms"":true,""measures"":true}";"{}";563
+"27046159 & Supplementary Append";2;"Jo";"false";"undefined";"result_table_without_subgroup";"Row";"2";"{""measures"":true}";"{}";563
+"27046159 & Supplementary Append";2;"Jo";"false";"undefined";"result_table_without_subgroup";"Col";"1";"{""outcomes"":true}";"{}";563
+"27046159 & Supplementary Append";2;"Jo";"false";"undefined";"result_table_without_subgroup";"Col";"2";"{""measures"":true}";"{}";563
+"27144849";2;"David";"false";"Rows 1-3 should be a single row. Cant separate subgroup names and levels becuase it gives a statistic in the second last column";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";38
+"27144849";2;"David";"false";"Rows 1-3 should be a single row. Cant separate subgroup names and levels becuase it gives a statistic in the second last column";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";38
+"27144849";2;"David";"false";"Rows 1-3 should be a single row. Cant separate subgroup names and levels becuase it gives a statistic in the second last column";"result_table_subgroup";"Row";"3";"{""measures"":true}";"{}";38
+"27144849";2;"David";"false";"Rows 1-3 should be a single row. Cant separate subgroup names and levels becuase it gives a statistic in the second last column";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true,""subgroup_level"":true}";"{}";38
+"27418597 & Supplementary Append";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""arms"":true,""measures"":true}";"{}";131
+"27418597 & Supplementary Append";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";131
+"27418597 & Supplementary Append";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{""indented"":true}";131
+"27448534";2;"David";"false";"undefined";"baseline_table";"Row";"1";"{""subgroup_level"":true}";"{}";524
+"27448534";2;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{""empty_row"":true}";524
+"27448534";2;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{}";524
+"27484756";2;"David";"false";"Needed to use bold text, not empty row to distinguish subgroup names and subgroup levels. This worked,";"result_table_subgroup";"Row";"1";"{""other"":true}";"{}";39
+"27484756";2;"David";"false";"Needed to use bold text, not empty row to distinguish subgroup names and subgroup levels. This worked,";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""bold"":true}";39
+"27484756";2;"David";"false";"Needed to use bold text, not empty row to distinguish subgroup names and subgroup levels. This worked,";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";39
+"27576774";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""subgroup_level"":true,""measures"":true}";"{}";129
+"27576774";1;"David";"false";"undefined";"baseline_table";"Row";"2";"{""arms"":true}";"{}";129
+"27576774";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";129
+"27576774";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{""indented"":true}";129
+"27689735 & Supplementary Append";4;"Katherine";"false";"undefined";"baseline_table";"Row";"1";"{""measures"":true}";"{}";561
+"27689735 & Supplementary Append";4;"Katherine";"false";"undefined";"baseline_table";"Row";"2";"{""p-interaction"":true,""arms"":true}";"{}";561
+"27689735 & Supplementary Append";4;"Katherine";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{""empty_row"":true,""bold"":true}";561
+"27689735 & Supplementary Append";4;"Katherine";"false";"undefined";"baseline_table";"Col";"2";"{""baseline_level_2"":true}";"{}";561
+"28231942";2;"David";"false";"Outcomes not being pulled across to label data. Outcome spread between two rows. Not sure why this is not happening";"result_table_subgroup";"Row";"1";"{""subgroup_level"":true}";"{}";407
+"28231942";2;"David";"false";"Outcomes not being pulled across to label data. Outcome spread between two rows. Not sure why this is not happening";"result_table_subgroup";"Row";"2";"{""arms"":true,""measures"":true}";"{}";407
+"28231942";2;"David";"false";"Outcomes not being pulled across to label data. Outcome spread between two rows. Not sure why this is not happening";"result_table_subgroup";"Row";"3";"{""measures"":true}";"{}";407
+"28231942";2;"David";"false";"Outcomes not being pulled across to label data. Outcome spread between two rows. Not sure why this is not happening";"result_table_subgroup";"Row";"4";"{""measures"":true}";"{}";407
+"28231942";2;"David";"false";"Outcomes not being pulled across to label data. Outcome spread between two rows. Not sure why this is not happening";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";407
+"28237263";3;"David";"false";"Fails and funny rows at top of table";"result_table_subgroup";"";"";"";"";416
+"28278391";2;"Lili";"false";"problem with producing";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";542
+"28278391";2;"Lili";"false";"problem with producing";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";542
+"28278391";2;"Lili";"false";"problem with producing";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";542
+"28386035";2;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""other"":true}";"{}";545
+"28386035";2;"Lili";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true,""p-interaction"":true}";"{}";545
+"28386035";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";545
+"28386035";2;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";545
+"28386990";1;"Lili";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true}";"{}";546
+"28386990";1;"Lili";"false";"undefined";"result_table_subgroup";"Row";"2";"{""subgroup_level"":true}";"{}";546
+"28386990";1;"Lili";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";546
+"28386990";1;"Lili";"false";"undefined";"result_table_subgroup";"Col";"2";"{""measures"":true}";"{}";546
+"28467869 & Supplementary Append";3;"Katherine";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";559
+"28467869 & Supplementary Append";3;"Katherine";"false";"undefined";"baseline_table";"Row";"1";"{""measures"":true,""arms"":true}";"{}";559
+"28573499";3;"Dagm";"false";"undefined";"result_table_subgroup";"Row";"1";"{""subgroup_level"":true}";"{}";522
+"28573499";3;"Dagm";"false";"undefined";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";522
+"28573499";3;"Dagm";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";522
+"28605608";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""arms"":true,""measures"":true}";"{}";132
+"28605608";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";132
+"28605608";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{""indented"":true}";132
+"28666775";2;"David";"false";"Fails and funny rows at top of tables";"result_table_subgroup";"Row";"1";"{""other"":true}";"{}";418
+"28666775";2;"David";"false";"Fails and funny rows at top of tables";"result_table_subgroup";"Row";"2";"{""subgroup_level"":true}";"{}";418
+"28666775";2;"David";"false";"Fails and funny rows at top of tables";"result_table_subgroup";"Row";"3";"{""arms"":true}";"{}";418
+"28666775";2;"David";"false";"Fails and funny rows at top of tables";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{}";418
+"28801539";1;"David";"false";"undefined";"baseline_table";"Row";"1";"{""subgroup_level"":true,""measures"":true}";"{}";133
+"28801539";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{}";133
+"28801539";1;"David";"false";"undefined";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{""indented"":true}";133
+"28854085";2;"Peter";"false";"undefined";"result_table_subgroup";"Row";"1";"{""measures"":true,""p-interaction"":true}";"{}";245
+"28854085";2;"Peter";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";245
+"28854085";2;"Peter";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";245
+"28877027 & Supplementary Append";1;"David";"false";"Appends baseline level 1 incorrectly to some baseline level 2s";"baseline_table";"Row";"1";"{""arms"":true,""measures"":true}";"{}";135
+"28877027 & Supplementary Append";1;"David";"false";"Appends baseline level 1 incorrectly to some baseline level 2s";"baseline_table";"Col";"1";"{""baseline_level_1"":true}";"{""empty_row_with_p_value"":true}";135
+"28877027 & Supplementary Append";1;"David";"false";"Appends baseline level 1 incorrectly to some baseline level 2s";"baseline_table";"Col";"1";"{""baseline_level_2"":true}";"{}";135
+"28902593 & Supplementary Append";2;"Peter";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";246
+"28902593 & Supplementary Append";2;"Peter";"false";"undefined";"result_table_subgroup";"Row";"2";"{""measures"":true}";"{}";246
+"28902593 & Supplementary Append";2;"Peter";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";246
+"28902593 & Supplementary Append";2;"Peter";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";246
+"28910237";2;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""arms"":true,""measures"":true,""p-interaction"":true}";"{}";457
+"28910237";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row_with_p_value"":true}";457
+"28910237";2;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";457
+"28948656";3;"David";"false";"undefined";"";"Row";"1";"{""arms"":true,""measures"":true}";"{}";74
+"28948656";3;"David";"false";"undefined";"";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true}";74
+"28948656";3;"David";"false";"undefined";"";"Col";"1";"{""subgroup_level"":true}";"{}";74
+"29103664";2;"Peter";"false";"The table has not rendered properly";"result_table_subgroup";"Row";"1";"{""measures"":true}";"{}";495
+"29103664";2;"Peter";"false";"The table has not rendered properly";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{""empty_row"":true}";495
+"29103664";2;"Peter";"false";"The table has not rendered properly";"result_table_subgroup";"Col";"1";"{""arms"":true}";"{}";495
+"29145215";1;"Peter";"false";"This table has not worked, as there is a different subgroup below row 13. Output does not differentiate between these";"baseline_table";"Row";"1";"{""baseline_level_1"":true}";"{}";501
+"29145215";1;"Peter";"false";"This table has not worked, as there is a different subgroup below row 13. Output does not differentiate between these";"baseline_table";"Row";"2";"{""baseline_level_2"":true}";"{}";501
+"29145215";1;"Peter";"false";"This table has not worked, as there is a different subgroup below row 13. Output does not differentiate between these";"baseline_table";"Row";"3";"{""arms"":true}";"{}";501
+"29145215";1;"Peter";"false";"This table has not worked, as there is a different subgroup below row 13. Output does not differentiate between these";"baseline_table";"Row";"13";"{""baseline_level_1"":true}";"{}";501
+"29145215";1;"Peter";"false";"This table has not worked, as there is a different subgroup below row 13. Output does not differentiate between these";"baseline_table";"Row";"14";"{""baseline_level_2"":true}";"{}";501
+"29145215";1;"Peter";"false";"This table has not worked, as there is a different subgroup below row 13. Output does not differentiate between these";"baseline_table";"Row";"15";"{""arms"":true}";"{}";501
+"29145215";1;"Peter";"false";"This table has not worked, as there is a different subgroup below row 13. Output does not differentiate between these";"baseline_table";"Col";"1";"{""measures"":true}";"{}";501
+"29151034";3;"David";"false";"undefined";"result_table_subgroup";"Row";"1";"{""p-interaction"":true}";"{}";134
+"29151034";3;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""itallic"":true}";134
+"29151034";3;"David";"false";"undefined";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{}";134
+"29307087";2;"David";"false";"Not clear why fails need to review";"result_table_subgroup";"Row";"1";"{""p-interaction"":true,""measures"":true}";"{}";423
+"29307087";2;"David";"false";"Not clear why fails need to review";"result_table_subgroup";"Row";"2";"{""arms"":true}";"{}";423
+"29307087";2;"David";"false";"Not clear why fails need to review";"result_table_subgroup";"Col";"1";"{""outcomes"":true}";"{""empty_row"":true}";423
+"29307087";2;"David";"false";"Not clear why fails need to review";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";423
+"8121459";2;"David";"false";"Need to merge rows 2 and 3";"result_table_subgroup";"Row";"1";"{""outcomes"":true}";"{}";81
+"8121459";2;"David";"false";"Need to merge rows 2 and 3";"result_table_subgroup";"Row";"3";"{""arms"":true,""measures"":true}";"{}";81
+"8121459";2;"David";"false";"Need to merge rows 2 and 3";"result_table_subgroup";"Col";"1";"{""subgroup_name"":true}";"{""empty_row"":true}";81
+"8121459";2;"David";"false";"Need to merge rows 2 and 3";"result_table_subgroup";"Col";"1";"{""subgroup_level"":true}";"{}";81
+"8121459";2;"David";"false";"Need to merge rows 2 and 3";"result_table_subgroup";"Row";"2";"{""other"":true}";"{}";81

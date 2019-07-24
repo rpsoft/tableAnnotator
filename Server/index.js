@@ -76,8 +76,14 @@ function sleep(ms) {
   return new Promise(function (resolve) {
     setTimeout(resolve, ms);
   });
-} // import {PythonShell} from 'python-shell';
+}
 
+var cors = require('cors'); // use it before all route definitions
+
+
+app.use(cors({
+  origin: '*'
+})); // import {PythonShell} from 'python-shell';
 
 app.use(express.static(__dirname + '/domainParserviews')); //Store all HTML files in view folder.
 

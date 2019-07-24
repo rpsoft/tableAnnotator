@@ -1,11 +1,11 @@
 import {
   cyan700,
-  grey600,
+  grey,
   pinkA100, pinkA200, pinkA400,
   fullWhite,
-} from 'material-ui/styles/colors';
-import {fade} from 'material-ui/utils/colorManipulator';
-import spacing from 'material-ui/utils/colorManipulator';
+} from '@material-ui/core/colors';
+import {fade} from '@material-ui/core/styles/colorManipulator';
+import spacing from '@material-ui/core/styles/colorManipulator';
 
 export default {
   spacing: spacing,
@@ -13,7 +13,7 @@ export default {
   palette: {
     primary1Color: '#3F51B5',
     primary2Color: 'white',
-    primary3Color: grey600,
+    primary3Color: grey,
     // accent1Color: pinkA200,
     // accent2Color: pinkA400,
     // accent3Color: pinkA100,

@@ -2,25 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
 
-import { templateListSet } from '../actions/actions';
+import RaisedButton from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
+import SelectField from '@material-ui/core/Select';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
+import Card from '@material-ui/core/Card';
 
 
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-
-import SelectField from 'material-ui/SelectField';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
-
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-
-
-import Popover from 'material-ui/Popover';
-import Checkbox from 'material-ui/Checkbox';
+import Popover from '@material-ui/core/Popover';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import MultiplePopover from './MultiplePopover'
-
-// import ContentLinkIcon from 'material-ui/svg-icons/content/link';
 
 class Annotation extends Component {
   constructor(props) {
@@ -89,7 +84,7 @@ class Annotation extends Component {
 
             <TextField
                   value={this.state.number}
-                  hintText="N"
+                  placeholder="N"
                   onChange={(event,value) => {this.handleChange(event,"",value,"number")}}
                   style={{width:20,marginLeft:20}}
                 />
@@ -116,16 +111,13 @@ class Annotation extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  templateList: state.templateList || null,
   // if route contains params
   params: ownProps.params,
   location: ownProps.location
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setTemplateList: (templateList) => {
-    dispatch(templateListSet(templateList))
-  },
+
   goToUrl: (url) => dispatch(push(url))
 })
 

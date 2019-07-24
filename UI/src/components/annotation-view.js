@@ -1,41 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router'
+import { BrowserRouter, Link, Route } from 'react-router-dom';
 
-import { templateListSet } from '../actions/actions';
+// import { templateListSet } from '../actions/actions';
+import QString from 'query-string';
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Card from '@material-ui/core/Card';
 import {URL_BASE} from '../links'
 import fetchData from '../network/fetch-data';
 
 import Bootstrap from '../../assets/bootstrap.css';
-import RaisedButton from 'material-ui/RaisedButton';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import Popover from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import Divider from 'material-ui/Divider';
-import DownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import Refresh from 'material-ui/svg-icons/navigation/refresh';
-import Home from 'material-ui/svg-icons/action/home';
-import TextField from 'material-ui/TextField';
+import RaisedButton from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
+import Popover from '@material-ui/core/Popover';
+import Menu from '@material-ui/core/Menu';
+import Divider from '@material-ui/core/Divider';
 
-import SortIcon from 'material-ui/svg-icons/content/sort';
-import SelectField from 'material-ui/SelectField';
+import DownArrow from '@material-ui/icons/ArrowDropDown';
+import Refresh from '@material-ui/icons/Refresh';
+import Home from '@material-ui/icons/Home';
+import TextField from '@material-ui/core/Input';
+// import Input from '@material-ui/core/Input';
+import SortIcon from '@material-ui/icons/Sort';
+import SelectField from '@material-ui/core/Select';
 import Loader from 'react-loader-spinner'
 import { push } from 'react-router-redux'
-import Checkbox from 'material-ui/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import Annotation from './annotation'
+
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import {
   Table,
   TableBody,
-  TableHeader,
-  TableHeaderColumn,
+  TableHead,
+  TableCell,
   TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
+} from '@material-ui/core';
 
 var ReactDOMServer = require('react-dom/server');
 var HtmlToReact = require('html-to-react')
@@ -46,8 +49,10 @@ class AnnotationView extends Component {
   constructor(props) {
     super()
 
+    var parsed = QString.parse(props.location.search);
+
     this.state = {
-        user: props.location.query.user ? props.location.query.user : "",
+        user: parsed.user ? parsed.user : "",
         table: null,
         annotations:[],
         corrupted: false,
@@ -64,8 +69,10 @@ class AnnotationView extends Component {
   }
 
   async componentDidMount () {
+    var parsed = QString.parse(this.props.location.search);
+
     let fetch = new fetchData();
-    var annotation = JSON.parse(await fetch.getAnnotationByID(this.props.location.query.docid,this.props.location.query.page,this.state.user))
+    var annotation = JSON.parse(await fetch.getAnnotationByID(parsed.docid,parsed.page,this.state.user))
 
     var all_annotations = JSON.parse(await fetch.getAllAnnotations())
 
@@ -84,8 +91,8 @@ class AnnotationView extends Component {
       //user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
       corrupted : annotation.corrupted === 'true',
       corrupted_text : annotation.corrupted_text,
-      docid : (annotation || annotation.docid) || this.props.location.query.docid,
-      page: annotation.page || this.props.location.query.page,
+      docid : (annotation || annotation.docid) || parsed.docid,
+      page: annotation.page || parsed.page,
       tableType : annotation.tableType ? annotation.tableType : "",
       annotations : annotation.annotation ? annotation.annotation.annotations : [],
       allAnnotations: annotations_formatted
@@ -106,8 +113,11 @@ class AnnotationView extends Component {
 
   async loadPageFromProps(props){
 
-    if ( Object.keys(props.location.query).length > 0 &&
-        props.location.query.docid && props.location.query.page) {
+    var parsed = QString.parse(props.location.search);
+
+
+    if ( Object.keys(parsed).length > 0 &&
+        parsed.docid && parsed.page) {
 
           this.setState({
             table: null
@@ -127,16 +137,16 @@ class AnnotationView extends Component {
               }
             })
 
-        var data = await fetch.getTable(props.location.query.docid,props.location.query.page)
+        var data = await fetch.getTable(parsed.docid,parsed.page)
         var allInfo = JSON.parse(await fetch.getAllInfo())
 
-        var documentData = allInfo.available_documents[props.location.query.docid]
-        var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(props.location.query.page)]
+        var documentData = allInfo.available_documents[parsed.docid]
+        var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(parsed.page)]
         this.getPreview()
 
         var annotation
         if( this.state.user && this.state.user.length > 0){
-          annotation = JSON.parse(await fetch.getAnnotationByID(this.props.location.query.docid,this.props.location.query.page,this.state.user))
+          annotation = JSON.parse(await fetch.getAnnotationByID(parsed.docid,parsed.page,this.state.user))
         }
 
         //var user = this.state.user != props.location.query.user ? this.state.user
@@ -145,11 +155,11 @@ class AnnotationView extends Component {
         if ( annotation ){
           this.setState({
             table: JSON.parse(data),
-            docid : annotation.docid || this.props.location.query.docid,
-            page: annotation.page || this.props.location.query.page,
+            docid : annotation.docid || parsed.docid,
+            page: annotation.page || parsed.page,
             allInfo,
             gindex: current_table_g_index,
-            user : props.location.query.user ? props.location.query.user : "",
+            user : parsed.user ? parsed.user : "",
             corrupted : annotation.corrupted === 'true',
             corrupted_text : annotation.corrupted_text,
             tableType : annotation.tableType ? annotation.tableType : "",
@@ -159,11 +169,11 @@ class AnnotationView extends Component {
         } else {
           this.setState({
             table: JSON.parse(data),
-            docid : this.props.location.query.docid,
-            page: this.props.location.query.page,
+            docid : parsed.docid,
+            page: parsed.page,
             allInfo,
             gindex: current_table_g_index,
-            user : props.location.query.user ? props.location.query.user : "",
+            user : parsed.user ? parsed.user : "",
             allAnnotations: annotations_formatted
           })
         }
@@ -173,8 +183,11 @@ class AnnotationView extends Component {
    // Retrieve the table given general index and number N.
    shiftTables(n){
 
+    var parsed = QString.parse(this.props.location.search);
+
+
      var documentData = this.state.allInfo.available_documents[this.state.docid]
-     var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf( (this.state.page || this.props.location.query.page) +"")]
+     var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf( (this.state.page || parsed.page) +"")]
 
      var new_index = current_table_g_index+n
 
@@ -217,7 +230,7 @@ class AnnotationView extends Component {
           if ( current.unique_modifier.indexOf("indent") > -1 ){ qualifiers["indented"] = true }
           if ( current.unique_modifier.indexOf("bold") > -1 ){ qualifiers["bold"] = true }
           if ( current.unique_modifier.indexOf("empty_row") > -1 ){ qualifiers["empty_row"] = true }
-          if ( current.unique_modifier.indexOf("empty_row_with_p_value") > -1 ){ qualifiers["empty_row_with_p_value"] = true }
+          if ( current.unique_modifier.indexOf("emptyTextField_row_with_p_value") > -1 ){ qualifiers["empty_row_with_p_value"] = true }
           if ( current.unique_modifier.indexOf("ital") > -1 ){ qualifiers["italic"] = true }
 
 
@@ -304,8 +317,12 @@ class AnnotationView extends Component {
         return
     }
 
+    var parsed = QString.parse(this.props.location.search);
+
+
+
     let fetch = new fetchData();
-    await fetch.saveAnnotation(this.props.location.query.docid,this.props.location.query.page,this.state.user,this.state.annotations,this.state.corrupted, this.state.tableType,this.state.corrupted_text)
+    await fetch.saveAnnotation(parsed.docid,parsed.page,this.state.user,this.state.annotations,this.state.corrupted, this.state.tableType,this.state.corrupted_text)
     //alert("Annotations Saved!")
 
     var all_annotations = JSON.parse(await fetch.getAllAnnotations())
@@ -322,7 +339,7 @@ class AnnotationView extends Component {
 
     this.setState({preview,allAnnotations: {}})
 
-    var preview = await fetch.getAnnotationPreview(this.props.location.query.docid,this.props.location.query.page, this.state.user)
+    var preview = await fetch.getAnnotationPreview(parsed.docid,parsed.page, this.state.user)
     this.setState({preview,allAnnotations: annotations_formatted})
 
    }
@@ -336,11 +353,14 @@ class AnnotationView extends Component {
          return
      }
 
+     var parsed = QString.parse(this.props.location.search);
+
+
 
      this.setState({preparingPreview : true})
 
      let fetch = new fetchData();
-     var preview = JSON.parse(await fetch.getAnnotationPreview(this.props.location.query.docid,this.props.location.query.page, this.state.user))
+     var preview = JSON.parse(await fetch.getAnnotationPreview(parsed.docid,parsed.page, this.state.user))
 
      this.setState({preview, preparingPreview: false})
 
@@ -353,16 +373,20 @@ class AnnotationView extends Component {
 
        var previousAnnotations = <div></div>
 
-        if( this.state.allAnnotations && this.state.allAnnotations[this.props.location.query.docid+"_"+this.props.location.query.page] ){
+       var parsed = QString.parse(this.props.location.search);
+
+
+
+        if( this.state.allAnnotations && this.state.allAnnotations[parsed.docid+"_"+parsed.page] ){
 
           previousAnnotations = <div style={{color:"red",display:"inline"}}>
                       <div style={{display:"inline"}} >Already Annotated by: </div>
                       {
-                        this.state.allAnnotations[this.props.location.query.docid+"_"+this.props.location.query.page].map(
+                        this.state.allAnnotations[parsed.docid+"_"+parsed.page].map(
                            (us,j) => <div
                              style={{display:"inline",cursor: "pointer", textDecoration: "underline"}}
                              key={j}
-                             onClick={ () => this.props.goToUrl("/table/?docid="+encodeURIComponent(this.props.location.query.docid)+"&page="+this.props.location.query.page+"&user="+us)}
+                             onClick={ () => this.props.goToUrl("/table/?docid="+encodeURIComponent(parsed.docid)+"&page="+parsed.page+"&user="+us)}
                              >{us+", "}</div>
                         )
                       }
@@ -445,12 +469,12 @@ class AnnotationView extends Component {
                                     adjustForCheckbox={false}
                                     >
                                     <TableRow>
-                                      {columns.map( (v,i) => <TableHeaderColumn
+                                      {columns.map( (v,i) => <TableCell
                                                                     key={i}
                                                                     style={{fontWeight:"bolder",color:"black",fontSize:15}}
                                                                     >
                                                                     <div onClick={ (event) => { this.doSort(v) } } > {v}<SortIcon style={{marginLeft:5,cursor:"pointer"}}></SortIcon> </div>
-                                                            </TableHeaderColumn>) }
+                                                            </TableCell>) }
                                     </TableRow>
                                   </TableHeader>
                                   <TableBody
@@ -459,7 +483,7 @@ class AnnotationView extends Component {
                                     {
                                       data ? data.map( (v,i) => <TableRow key={i}>
                                         {
-                                          columns.map( (key,j) => <TableRowColumn key={j}>{v[key]}</TableRowColumn>)
+                                          columns.map( (key,j) => <TableCell key={j}>{v[key]}</TableCell>)
                                         }
                                       </TableRow>) : null
                                     }
@@ -481,7 +505,7 @@ class AnnotationView extends Component {
 
           <TextField
             value={this.state.user}
-            hintText="Set your username here"
+            placeholder="Set your username here"
             onChange={(event,value) => {this.setState({user: value})}}
             style={{width:200,marginLeft:20,marginRight:20,float:"left"}}
             onKeyDown={(event, index) => {
@@ -496,7 +520,7 @@ class AnnotationView extends Component {
           <div>{this.state.gindex+" / "+ (this.state.allInfo ? this.state.allInfo.total-1 : "")}
           <TextField
             value={this.state.currentGPage}
-            hintText="Go to page"
+            placeholder="Go to page"
             onChange={(event,value) => {
                                   this.setState({currentGPage: value})
                                 }}
@@ -510,16 +534,16 @@ class AnnotationView extends Component {
             style={{width:100,marginLeft:20}}
 
             />
-            <RaisedButton style={{marginLeft:20}} onClick={ () => { this.goToGIndex(this.state.currentGPage) } }>Go!</RaisedButton>
+            <RaisedButton variant={"contained"} style={{marginLeft:20}} onClick={ () => { this.goToGIndex(this.state.currentGPage) } }>Go!</RaisedButton>
           </div>
 
           <div>{previousAnnotations}</div>
 
           <div style={{float:"right", position: "relative", top: -45}}>
 
-                      <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Show Saved Changes</RaisedButton>
-                      <RaisedButton onClick={ () => {this.shiftTables(-1)} } style={{padding:5,marginRight:5}}>Previous Table</RaisedButton>
-                      <RaisedButton onClick={ () => {this.shiftTables(1)} } style={{padding:5,marginRight:5}}>Next Table</RaisedButton>
+                      <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Show Saved Changes</RaisedButton>
+                      <RaisedButton variant={"contained"} onClick={ () => {this.shiftTables(-1)} } style={{padding:5,marginRight:5}}>Previous Table</RaisedButton>
+                      <RaisedButton variant={"contained"} onClick={ () => {this.shiftTables(1)} } style={{padding:5,marginRight:5}}>Next Table</RaisedButton>
 
 
           </div>
@@ -535,21 +559,41 @@ class AnnotationView extends Component {
         </Card>
 
         <Card id="tableHolder" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center"}}>
-            { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : <div dangerouslySetInnerHTML={{__html:this.state.table.formattedPage}}></div> }
+              { this.state.table ? <CKEditor
+                    editor={ ClassicEditor }
+                    data={this.state.table.formattedPage || ""}
+                    onInit={ editor => {
+                        // You can store the "editor" and use when it is needed.
+                        console.log( 'Editor is ready to use!', editor );
+                    } }
+                    onChange={ ( event, editor ) => {
+                        const data = editor.getData();
+                        console.log( { event, editor, data } );
+                    } }
+                    onBlur={ editor => {
+                        console.log( 'Blur.', editor );
+                    } }
+                    onFocus={ editor => {
+                        console.log( 'Focus.', editor );
+                    } }
+                /> : ""}
+            { //!this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : <div dangerouslySetInnerHTML={{__html:this.state.table.formattedPage}}></div>
+          }
         </Card>
 
         <Card style={{padding:8,marginTop:10,fontWeight:"bold"}}>
             <div style={{width:"100%"}}>
 
                 <table>
+              <tbody>
                   <tr>
                     <td style={{padding:"0px 0px 0px 0px", verticalAlign: "top", paddingRight:50}}>
                       <div style={{fontWeight:"bold"}}>Any comments errors or issues?</div> <TextField
                             value={this.state.corrupted_text && this.state.corrupted_text != 'undefined' ? this.state.corrupted_text : ""}
-                            hintText="Please specify here"
+                            placeholder="Please specify here"
                             onChange={(event,value) => {this.setState({corrupted_text: value})}}
                             style={{width:500,marginLeft:20,fontWeight:"normal"}}
-                            multiLine={true}
+                            multiline={true}
                             rows={1}
                             rowsMax={5}
                           />
@@ -572,6 +616,7 @@ class AnnotationView extends Component {
                       </SelectField>
                     </td>
                   </tr>
+                  </tbody>
                 </table>
             </div>
         </Card>
@@ -579,8 +624,8 @@ class AnnotationView extends Component {
         <Card id="annotations" style={{padding:10,minHeight:200,paddingBottom:40,marginTop:10}}>
 
           <h3 style={{marginBottom:0,marginTop:0}}>Annotations
-              <RaisedButton backgroundColor={"#aade94"} style={{marginLeft:10}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
-              <RaisedButton backgroundColor={"#58cbff"} style={{marginLeft:10,float:"right"}} onClick={ () => {this.autoAdd()} }>Auto Add</RaisedButton>
+              <RaisedButton variant={"contained"} backgroundColor={"#aade94"} style={{marginLeft:10}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
+              <RaisedButton variant={"contained"} backgroundColor={"#58cbff"} style={{marginLeft:10,float:"right"}} onClick={ () => {this.autoAdd()} }>Auto Add</RaisedButton>
           </h3>
           <hr />
           {
@@ -599,8 +644,8 @@ class AnnotationView extends Component {
 
 
         <Card style={{padding:5,marginTop:10,marginBottom:500}}>
-          <RaisedButton onClick={ () => {this.saveAnnotations(); this.loadPageFromProps(this.props); } } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:200,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton>
-          <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Reload Changes</RaisedButton>
+          <RaisedButton variant={"contained"} onClick={ () => {this.saveAnnotations(); this.loadPageFromProps(this.props); } } backgroundColor={"#ffadad"} style={{margin:1,height:45,width:200,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton>
+          <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Reload Changes</RaisedButton>
         </Card>
 
 
@@ -608,10 +653,10 @@ class AnnotationView extends Component {
         <div style={{marginTop:10, position: "fixed", width: "100vw", bottom: 0, left:0, backgroundColor:"#00000061"}}>
         <Card style={{padding:10,  paddingBottom:40, maxHeight:600, width: "90%",marginLeft:"5%",marginTop:3}}>
 
-        {/* <RaisedButton onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,float:"left",fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Show Saved Changes</RaisedButton><br /><br /> */}
+        {/* <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,float:"left",fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Show Saved Changes</RaisedButton><br /><br /> */}
 
-        {/* <RaisedButton onClick={ () => {this.getPreview()} } backgroundColor={"#99b8f1"} style={{margin:1,height:45,width:150,marginRight:5,fontWeight:"bolder"}}>Update Preview</RaisedButton> */}
-        <RaisedButton onClick={ () => {this.setState({toggeLiveResults : this.state.toggeLiveResults ? false : true })} } style={{padding:5}}> Toggle Live Results </RaisedButton>
+        {/* <RaisedButton variant={"contained"} onClick={ () => {this.getPreview()} } backgroundColor={"#99b8f1"} style={{margin:1,height:45,width:150,marginRight:5,fontWeight:"bolder"}}>Update Preview</RaisedButton> */}
+        <RaisedButton variant={"contained"} onClick={ () => {this.setState({toggeLiveResults : this.state.toggeLiveResults ? false : true })} } style={{padding:5}}> Toggle Live Results </RaisedButton>
 
         {
 
@@ -640,9 +685,9 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setTemplateList: (templateList) => {
-    dispatch(templateListSet(templateList))
-  },
+  // setTemplateList: (templateList) => {
+  //   dispatch(templateListSet(templateList))
+  // },
   goToUrl: (url) => dispatch(push(url))
 })
 

@@ -1,34 +1,65 @@
-var path = require('path');
-var webpack = require('webpack');
+const webpack = require('webpack');
+const path = require('path');
 
-module.exports = {
-  devtool: 'eval',
-  entry: [
-    'babel-polyfill',
-    'webpack-dev-server/client?http://localhost:7531',
-    'webpack/hot/only-dev-server',
-    './src/client'
-  ],
+const urlBase = '/'
+const targetUrl = "http://localhost:6541"
+
+
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const config = {
+  entry: './src/index.js',
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[hash].js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+        options: {
+          presets: ["@babel/preset-env", "@babel/preset-react"]
+        },
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      }
+    ]
+  },
+  resolve: {
+    extensions: [
+      '.js',
+      '.jsx'
+    ]
+  },
+  devServer: {
+    contentBase: './dist'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new HtmlWebpackPlugin({
+        template: require('html-webpack-template'),
+        inject: false,
+        appMountId: 'app',
+      })
   ],
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loaders: [
-          'react-hot',
-           'babel'
-         ],
-        include: path.join(__dirname, 'src')
-      },
-      { test: /\.css$/, loader: "style-loader!css-loader" },
-      { test: /\.json$/, loader: "json-loader" }
-    ]
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\\/]node_modules[\\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
   }
-};
+}
+
+module.exports = config;

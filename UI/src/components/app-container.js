@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+// import createPalette from '@material-ui/styles/createPalette';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { createMuiTheme } from '@material-ui/core/styles';
+
+
 import muiLMSTheme from '../muiLMSTheme';
 
-// This replaces the textColor value on the palette
-// and then update the keys for each component that depends on it.
-// More on Colors: http://www.material-ui.com/#/customization/colors
-const muiTheme = getMuiTheme(muiLMSTheme);
+const muiTheme = createMuiTheme(muiLMSTheme)
 
-injectTapEventPlugin();
+
 /**
  * Component that handles default App layout.
  *
@@ -32,7 +31,7 @@ export default class AppContainer extends Component {
   render() {
     return (
      <div id="maincontainer" style={{ backgroundSize: "52%",backgroundAttachment:"fixed", paddingTop:10,paddingBottom:10, height:"100%"}}>
-       <MuiThemeProvider muiTheme={ muiTheme }>
+       <MuiThemeProvider theme={ muiTheme }>
          <CommonView {...this.props} />
        </MuiThemeProvider>
      </div>

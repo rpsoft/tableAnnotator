@@ -5,28 +5,25 @@ import { push } from 'react-router-redux'
 
 import fetchData from '../network/fetch-data';
 
-import { templateListSet } from '../actions/actions';
-
 import {URL_BASE} from '../links'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Card from '@material-ui/core/Card';
 import Bootstrap from '../../assets/bootstrap.css';
-import RaisedButton from 'material-ui/RaisedButton';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import Popover from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import Divider from 'material-ui/Divider';
-import DownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
-import Checkbox from 'material-ui/Checkbox';
+import RaisedButton from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
+import Popover from '@material-ui/core/Popover';
+import Menu from '@material-ui/core/Menu';
+import Divider from '@material-ui/core/Divider';
+import DownArrow from '@material-ui/icons/ArrowDropDown';
+import TextField from '@material-ui/core/TextField';
+import SelectField from '@material-ui/core/Select';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import Loader from 'react-loader-spinner'
 
-import Toggle from 'material-ui/Toggle';
+import Toggle from '@material-ui/core/Switch'
 
 import { FixedSizeList as List } from 'react-window';
-import Home from 'material-ui/svg-icons/action/home';
+import Home from '@material-ui/icons/Home';
 
 // var ReactDOMServer = require('react-dom/server');
 // var HtmlToReact = require('html-to-react')
@@ -299,9 +296,9 @@ class ClusterView extends Component {
 
      //
      // <div style={{float:"right "}}>
-     //  <RaisedButton onClick={ () => {this.changePage(parseInt(this.state.currentPage) - 1)} } style={{float:"left"}}> {"<<"} </RaisedButton>
+     //  <RaisedButton variant={"contained"} onClick={ () => {this.changePage(parseInt(this.state.currentPage) - 1)} } style={{float:"left"}}> {"<<"} </RaisedButton>
      //  <div style={{float:"left",padding:15,fontWeight:"bold"}}>{"Cluster : "+this.state.currentPage +" / "+ this.state.totalClusters }</div>
-     //  <RaisedButton onClick={ () => {this.changePage(parseInt(this.state.currentPage) + 1)} } style={{float:"left"}}> {">>"} </RaisedButton></div>
+     //  <RaisedButton variant={"contained"} onClick={ () => {this.changePage(parseInt(this.state.currentPage) + 1)} } style={{float:"left"}}> {">>"} </RaisedButton></div>
 
 
 
@@ -392,7 +389,7 @@ class ClusterView extends Component {
                       <div style={{...page_styler, display:"inline", marginLeft: 5 }}>
                       <TextField
                         value={this.state.goto}
-                        hintText="Go"
+                        placeholder="Go"
                         onChange={(event,value) => {this.setState({goto: value})}}
                         style={{width:30,marginLeft:5}}
                         onKeyDown={(event, index) => {
@@ -425,7 +422,7 @@ class ClusterView extends Component {
 
                    <TextField
                      value={this.state.searchTerm}
-                     hintText="Filter by text here"
+                     placeholder="Filter by text here"
                      onChange={(event,value) => {this.setState({searchTerm: value, currentPage: 1 })}}
                      style={{width:200,marginLeft:20,marginRight:20}}
                      onKeyDown={(event, index) => {
@@ -437,7 +434,7 @@ class ClusterView extends Component {
                      {
                       Object.keys(this.state.checkedConcepts).length > 0 ? <Card style={{position:"fixed", top:20, right:20, minWidth: "20vw", minHeight: "20vh",padding:5,paddingTop:15,paddingRight:10}}>
                        <div style={{height:"100%",width:"100%"}}>
-                       <RaisedButton onClick={ () => { this.setState({checkedConcepts:[]}); console.log(this.state.checkedConcepts); } } style={{float:"right"}}> {"Clear"} </RaisedButton>
+                       <RaisedButton variant={"contained"} onClick={ () => { this.setState({checkedConcepts:[]}); console.log(this.state.checkedConcepts); } } style={{float:"right"}}> {"Clear"} </RaisedButton>
                        <div style={{fontWeight:"bold",marginLeft:5}}>Selected Items</div>
 
                        <hr style={{marginTop:25}}/>
@@ -453,9 +450,9 @@ class ClusterView extends Component {
                          <div style={{height:"20%",marginTop:5 }}>
 
 
-                              <RaisedButton onClick={ () => { this.moveAllHere(maxIndex) } } style={{float:"left",marginLeft:5, paddingLeft:5, paddingRight:5}}> {"To New Cluster"} </RaisedButton>
+                              <RaisedButton variant={"contained"} onClick={ () => { this.moveAllHere(maxIndex) } } style={{float:"left",marginLeft:5, paddingLeft:5, paddingRight:5}}> {"To New Cluster"} </RaisedButton>
 
-                              <RaisedButton onClick={ () => { this.moveAllHere("-10") } } style={{float:"right",marginLeft:5}}> {"Discard All"} </RaisedButton>
+                              <RaisedButton variant={"contained"} onClick={ () => { this.moveAllHere("-10") } } style={{float:"right",marginLeft:5}}> {"Discard All"} </RaisedButton>
 
                          </div>
                        </div>
@@ -482,16 +479,13 @@ class ClusterView extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  templateList: state.templateList || null,
-  // if route contains params
+
   params: ownProps.params,
   location: ownProps.location
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setTemplateList: (templateList) => {
-    dispatch(templateListSet(templateList))
-  },
+
   goToUrl: (url) => dispatch(push(url))
 })
 

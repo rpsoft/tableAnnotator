@@ -2,36 +2,33 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
 
-import { templateListSet } from '../actions/actions';
-
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Card from '@material-ui/core/Card';
 
 import {URL_BASE} from '../links'
 
 import fetchData from '../network/fetch-data';
 
 import Bootstrap from '../../assets/bootstrap.css';
-import RaisedButton from 'material-ui/RaisedButton';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import Popover from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import Divider from 'material-ui/Divider';
-import DownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import Refresh from 'material-ui/svg-icons/navigation/refresh';
-import TextField from 'material-ui/TextField';
+import RaisedButton from '@material-ui/core/Button';
 
-import SortIcon from 'material-ui/svg-icons/content/sort';
+import MenuItem from '@material-ui/core/MenuItem';
+import Popover from '@material-ui/core/Popover';
+import Menu from '@material-ui/core/Menu';
+import Divider from '@material-ui/core/Divider';
+import DownArrow from '@material-ui/icons/ArrowDropDown';
+import Refresh from '@material-ui/icons/Refresh';
+import TextField from '@material-ui/core/TextField';
 
-import WarningIcon from 'material-ui/svg-icons/alert/warning';
+import SortIcon from '@material-ui/icons/Sort';
+import WarningIcon from '@material-ui/icons/Warning';
 
-import SelectField from 'material-ui/SelectField';
+import SelectField from '@material-ui/core/Select';
 
  import Loader from 'react-loader-spinner'
 
 import { push } from 'react-router-redux'
 
-import Checkbox from 'material-ui/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import Annotation from './annotation'
 
@@ -42,7 +39,7 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
-} from 'material-ui/Table';
+} from '@material-ui/core/Table';
 
 // import style from './table.css'
 
@@ -61,7 +58,7 @@ class CommonView extends Component {
     this.state = {
       annotations:null,
       tables:null,
-      user:props.location.query ? props.location.query.user : null,
+      user:props.location.query ? props.location.query.user : "",
     };
 
   }
@@ -131,7 +128,7 @@ class CommonView extends Component {
         <Card id="userData" style={{padding:15,marginBottom:10}}>
           <TextField
             value={this.state.user}
-            hintText="Set your username here"
+            placeholder="Set your username here"
             onChange={(event,value) => {this.props.goToUrl("/?user="+value)}}
             style={{width:200,marginLeft:20,marginRight:20}}
             // onKeyDown={(event, index) => {
@@ -150,7 +147,7 @@ class CommonView extends Component {
             Looking for the <div style={{fontWeight:"bolder", display:"inline"}}> term annotation tool</div>? Click on the following button --->
         </div>
         <div style={{width: 300,display:"inline-block", marginLeft:30}}>
-          <RaisedButton style={{padding:10, fontWeight:"bolder", display:"inline"}} onClick={
+          <RaisedButton variant={"contained"} style={{padding:10, fontWeight:"bolder", display:"inline"}} onClick={
             () => this.props.goToUrl("/cluster?page=0")}
             > Access Term Annotation Tool Here</RaisedButton>
         </div>
@@ -167,15 +164,15 @@ class CommonView extends Component {
                             {
                               (annotations_formatted[v.docid+"_"+v.page]
                               ? annotations_formatted[v.docid+"_"+v.page].map( (u,l) => {
-                                return <a style={{cursor: "pointer", marginLeft:10, fontStyle: "italic", marginLeft: 10, textDecoration: "underline", color: "blue"}}
+                                return <a key={u+"-"+l} style={{cursor: "pointer", marginLeft:10, fontStyle: "italic", marginLeft: 10, textDecoration: "underline", color: "blue"}}
                                   onClick={
-                                    () => this.props.goToUrl("table/?docid="+encodeURIComponent(v.docid)+"&page="+v.page+"&user="+u)}
+                                    () => this.props.goToUrl("table?docid="+encodeURIComponent(v.docid)+"&page="+v.page+"&user="+u)}
                                         >{u+","}</a>})
                               : "")
                             }
                             <a style={{cursor: "pointer", marginLeft:10, fontStyle: "italic", marginLeft: 10, textDecoration: "underline", color: "blue"}}
                               onClick={
-                                () => this.props.goToUrl("table/?docid="+encodeURIComponent(v.docid)+"&page="+v.page+(this.state.user ? "&user="+this.state.user : ""))}
+                                () => this.props.goToUrl("table?docid="+encodeURIComponent(v.docid)+"&page="+v.page+(this.state.user ? "&user="+this.state.user : ""))}
                                 >
                               [New]
                             </a>
@@ -192,16 +189,11 @@ class CommonView extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  templateList: state.templateList || null,
-  // if route contains params
   params: ownProps.params,
   location: ownProps.location
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setTemplateList: (templateList) => {
-    dispatch(templateListSet(templateList))
-  },
   goToUrl: (url) => dispatch(push(url))
 })
 

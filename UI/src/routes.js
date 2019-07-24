@@ -1,6 +1,5 @@
 import React from 'react'
-import { Router, Route, IndexRoute, IndexRedirect } from 'react-router'
-
+import { Switch,Router, Route  } from 'react-router-dom';
 /**
  * React-router components.
  *
@@ -28,41 +27,22 @@ import {
   ClusterResultsContainer,
 } from './components/'
 
-import App from './App'
-
 import {
   URL_BASE,
 } from './links'
 
+console.log(URL_BASE)
 const urlBase = URL_BASE
 
 var routes = (history) => (
   <Router history={history}>
-      <Route path={"/"} component={AppContainer} >
-        <IndexRoute component={CommonView} />
-      </Route>
-
-      <Route path="allresults" component={ResultsContainer}>
-            <Route path={urlBase + "allresults"} component={ResultsView} ></Route>
-      </Route>
-
-
-      <Route path="table" component={TableContainer}>
-            <Route path={urlBase + "table"} component={AnnotationView} ></Route>
-      </Route>
-
-      <Route path="clusterindex" component={ClusterContainer}>
-            <Route path={urlBase + "clusterindex"} component={ClusterIndex} ></Route>
-      </Route>
-
-      <Route path="cluster" component={ClusterContainer}>
-            <Route path={urlBase + "cluster"} component={ClusterView} ></Route>
-      </Route>
-
-      <Route path="clusterresults" component={ClusterResultsContainer}>
-            <Route path={urlBase + "clusterresults"} component={ClusterResultsView} ></Route>
-      </Route>
-
+    <Switch>
+      <Route exact path={urlBase} component={AppContainer} ></Route>
+      <Route path={urlBase + "table"} component={TableContainer}></Route>
+      <Route path={urlBase + "allresults"} component={ResultsContainer}></Route>
+      <Route path={urlBase + "cluster"} component={ClusterContainer}></Route>
+      <Route path={urlBase + "clusterresults"} component={ClusterResultsContainer}></Route>
+    </Switch>
   </Router>
 )
 

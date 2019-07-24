@@ -1,7 +1,6 @@
 import HttpClient from './http-client';
 import { URL_BASE } from '../links'
 
-
 const urlBase = URL_BASE + 'api/'
 
 export default class fetchData {

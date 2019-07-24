@@ -3,37 +3,34 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router'
 import { push } from 'react-router-redux'
 
-import { templateListSet } from '../actions/actions';
 import fetchData from '../network/fetch-data';
 
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import {RadioButton, RadioButtonGroup} from '@material-ui/core/Radio';
 
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 
-import SelectField from 'material-ui/SelectField';
+import SelectField from '@material-ui/core/Select';
 
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Card from '@material-ui/core/Card';
 
-import Dialog from 'material-ui/Dialog';
+import Dialog from '@material-ui/core/Dialog';
 
-import Popover from 'material-ui/Popover';
-import Checkbox from 'material-ui/Checkbox';
+import Popover from '@material-ui/core/Popover';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import MultiplePopover from './MultiplePopover'
 
-import RemoveCircle from 'material-ui/svg-icons/content/remove-circle';
+import RemoveCircle from '@material-ui/icons/RemoveCircle';
 
 
-import Tick from 'material-ui/svg-icons/action/done';
-import DoubleTick from 'material-ui/svg-icons/action/done-all';
-import Alert from 'material-ui/svg-icons/alert/error';
+import Tick from '@material-ui/icons/Done';
+import DoubleTick from '@material-ui/icons/DoneAll';
+import Alert from '@material-ui/icons/Error';
 
-import DetaultIcon from 'material-ui/svg-icons/action/check-circle';
+import DetaultIcon from '@material-ui/icons/CheckCircle';
 
 class Cluster extends Component {
   constructor(props) {
@@ -132,7 +129,7 @@ class Cluster extends Component {
         var status = <SelectField
                         value={this.state.cluster_status}
                         onChange={(v,i,newStatus) => {this.props.handleClusterDataChange(newStatus, currentCluster, "status")}}
-                        hintText="Status"
+                        placeholder="Status"
                         style={{width:60,top:30, marginRight: -10}}
                         underlineStyle={{display:"none"}}
                       >
@@ -254,16 +251,12 @@ class Cluster extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  templateList: state.templateList || null,
-  // if route contains params
   params: ownProps.params,
   location: ownProps.location
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setTemplateList: (templateList) => {
-    dispatch(templateListSet(templateList))
-  },
+
   goToUrl: (url) => dispatch(push(url))
 })
 

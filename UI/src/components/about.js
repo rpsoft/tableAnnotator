@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Card from '@material-ui/core/Card';
 
 import { Link } from 'react-router'
-import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton from '@material-ui/core/Button';
 
 export default class About extends Component {
 

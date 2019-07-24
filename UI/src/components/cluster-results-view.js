@@ -2,30 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
 
-import { templateListSet } from '../actions/actions';
-
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Card from '@material-ui/core/Card';
 
 import {URL_BASE} from '../links'
 
 import fetchData from '../network/fetch-data';
 
 import Bootstrap from '../../assets/bootstrap.css';
-import RaisedButton from 'material-ui/RaisedButton';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import Popover from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import Divider from 'material-ui/Divider';
-import DownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import TextField from 'material-ui/TextField';
+import RaisedButton from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
+import Popover from '@material-ui/core/Popover';
+import Menu from '@material-ui/core/Menu';
+import Divider from '@material-ui/core/Divider';
+import DownArrow from '@material-ui/icons/ArrowDropDown';
+import TextField from '@material-ui/core/TextField';
 
-import SelectField from 'material-ui/SelectField';
+import SelectField from '@material-ui/core/Select';
 
 
 import { push } from 'react-router-redux'
 
-import Checkbox from 'material-ui/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import Annotation from './annotation'
 
@@ -92,16 +89,13 @@ class ClusterResultsView extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  templateList: state.templateList || null,
-  // if route contains params
+
   params: ownProps.params,
   location: ownProps.location
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setTemplateList: (templateList) => {
-    dispatch(templateListSet(templateList))
-  },
+
   goToUrl: (url) => dispatch(push(url))
 })
 
