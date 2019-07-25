@@ -74,7 +74,6 @@
     "pg": "^7.7.1",
     "python-bridge": "^1.1.0",
     "r-script": "0.0.3",
-    "sqlite3": "^4.0.4",
     "xml-js": "^1.6.8",
     "xml-query": "^1.5.0",
     "xml-reader": "^2.4.3",

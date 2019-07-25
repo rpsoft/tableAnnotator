@@ -21,17 +21,16 @@ third_annotations_good <- third_annotations %>% mutate (corrupted_text = ifelse(
 
 all_good_annotations <- rbind(first_annotations_good, second_annotations_good, third_annotations_good) %>% distinct() %>% mutate(compname = paste0(docid,"_",page))
 
-dirfiles <- dir("/home/suso/ihw/tableAnnotator/Server/HTML_TABLES") %>% data_frame()
+dirfiles <- dir("ihw/tableAnnotator/Server/HTML_TABLES") %>% data_frame()
 colnames(dirfiles)[1] <- "filenames"
 
 dir_files_df <- dirfiles %>% mutate(compname = str_replace(filenames, ".html", ""))  %>% mutate(compname= sub('v[0-9]','',compname) )
-
 
 all_completed_annotations <- dir_files_df %>% left_join(all_good_annotations) %>% filter( !is.na(docid))
 
 # dir_files_df %>% left_join(all_good_annotations) %>% filter( is.na(docid) ) %>% View
 
 for ( f in all_completed_annotations$filenames){
-  file.move(paste0("/home/suso/ihw/tableAnnotator/Server/HTML_TABLES/",f) , paste0("/home/suso/ihw/tableAnnotator/Server/HTML_TABLES_COMPLETED/",f))
+  file.move(paste0("ihw/tableAnnotator/Server/HTML_TABLES/",f) , paste0("ihw/tableAnnotator/Server/HTML_TABLES_COMPLETED/"))
 }
 
