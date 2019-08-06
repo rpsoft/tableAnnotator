@@ -3,6 +3,7 @@ library(readr)
 library(tidyxl)
 library(unpivotr)
 library(tidyverse)
+library(filesstrings)
 #
 # needs(readr,tidyxl,unpivotr,tidyverse)
 
@@ -16,13 +17,13 @@ tablesDirectory <- "~/ihw/tableAnnotator/annotations/Single_table_sheets/"
 #
 new_obj <- readRDS("~/ihw/tableAnnotator/Server/src/new_obj.rds") ## This one holds styles for tables for which we do not have the xlsx
 
-anns1 <- read_csv("~/ihw/tableAnnotator/annotations/first/first_batch_results.csv")
-anns1 <- anns1 %>% mutate(corrupted_text=ifelse(corrupted, "corrupted", NA))
 
-anns2 <- read_csv("~/ihw/tableAnnotator/annotations/second/second_annotations.csv")
-anns2 <- anns2 %>% mutate(corrupted = if_else(str_length(corrupted_text) < 1 | is.na(corrupted_text), FALSE, TRUE ) )
+# anns1 <- read_csv("~/ihw/tableAnnotator/annotations/first/first_batch_results.csv")
+# anns1 <- anns1 %>% mutate(corrupted_text=ifelse(corrupted, "corrupted", NA))
+# 
+# anns2 <- read_csv("~/ihw/tableAnnotator/annotations/second/second_annotations.csv")
+# anns2 <- anns2 %>% mutate(corrupted = if_else(str_length(corrupted_text) < 1 | is.na(corrupted_text), FALSE, TRUE ) )
 
- 
 formatAnnotations <- function(anns){
     anns <- anns %>% select(user,docid,page,corrupted,tableType,location,number,content,qualifiers) %>%
       mutate(page = as.double(page)) %>%
@@ -33,7 +34,7 @@ formatAnnotations <- function(anns){
 }
 
  
-annotations <- formatAnnotations(anns1) %>% rbind( formatAnnotations(anns2) )
+annotations <- formatAnnotations(read_csv("~/ihw/tableAnnotator/annotations/all_annotations_jul_2019.csv") %>% mutate(corrupted = if_else(str_length(corrupted_text) < 1 | is.na(corrupted_text), FALSE, TRUE ) ) )
 
 
 
@@ -595,66 +596,107 @@ runAll <- function(annotations){
 
 }
 
-ann <- annotations %>% filter(docid == "9892586" & page == 2 & user == "Hebe")
+# ann <- annotations %>% filter(docid == "9892586" & page == 2 & user == "Hebe")
 
-ann <- ann %>% mutate (qualifiers = ifelse( content=="subgroup_name", NA, qualifiers) ) 
+# annotations %>% filter(docid == "13679479" & page == 2 & user == "David")
+
+
+#ann <- ann %>% mutate (qualifiers = ifelse( content=="subgroup_name", NA, qualifiers) ) 
 
 #ann <- ann %>% filter(! (content == "subgroup_level"))
-
-res <- runAll(ann)
-res
+# 
+# res <- runAll(ann)
+# res %>% View
 
 # 
-# docsIndex <- annotations %>% select( user, docid, page) %>% distinct
+docsIndex <- annotations %>% select( user, docid, page) %>% distinct
 # docsIndex <- docsIndex %>% head(1)
-# 
-# err <- c()
+
+err <- c()
 # l <- vector("list", docsIndex %>% nrow())
-# 
-# i <- 1
-# while(i <= docsIndex %>% nrow()) {
-#   ann <- annotations %>% filter(docid == docsIndex[i,]$docid & page == docsIndex[i,]$page & user == docsIndex[i,]$user)
-#   er <- tryCatch({
-#         res <- runAll(ann)
-#         print (res$result[[1]] %>% nrow())
-#         
-#         ident <- paste0(docsIndex[i,]$user," ",docsIndex[i,]$docid," ",docsIndex[i,]$page)
-#         doc <- paste0(docsIndex[i,]$docid,"_",docsIndex[i,]$page)
-#         
-#         if (res$result[[doc]] %>% nrow() > 0 ){
-#           l[[i]] <- res  
-#           ret <- c("success", ident)
-#         } else {
-#           ret <- c("empty", ident)
-#         }
-#         
-#         ret
-#   
-#     }, warning = function(w) {
-#       print(w)
-#     }, error = function(e) {
-#       
-#       ident <- paste0(docsIndex[i,]$user," ",docsIndex[i,]$docid," ",docsIndex[i,]$page)
-#       
-#       print(e)
-#       print(paste0("Failed: ",ident))
-#       c("failed", ident)
-#     }, finally = {
-#       print(paste0("Done: ",docsIndex[i,]$docid, " ", i, "/", docsIndex %>% nrow()))
-#     });
-#     
-#   print(er)
-#     
-#   if ( !(er[1] == "success") ){ ## This is when an error occurs
-#     err <- c(err,er[2])
-#   }
-#   
-#   i <- i + 1
-# }
-# 
+
+l = list()
+
+i <- 1
+while(i <= docsIndex %>% nrow()) {
+  ann <- annotations %>% filter(docid == docsIndex[i,]$docid & page == docsIndex[i,]$page & user == docsIndex[i,]$user)
+  er <- tryCatch({
+        res <- runAll(ann)
+        print (res$result[[1]] %>% nrow())
+
+        ident <- paste0(docsIndex[i,]$user," ",docsIndex[i,]$docid," ",docsIndex[i,]$page)
+        doc <- paste0(docsIndex[i,]$docid,"_",docsIndex[i,]$page)
+
+        if (res$result[[doc]] %>% nrow() > 0 ){
+          l[i] = res[[1]]
+          ret <- c("success", ident)
+        } else {
+          ret <- c("empty", ident)
+        }
+
+        ret
+
+    }, warning = function(w) {
+      print(w)
+    }, error = function(e) {
+
+      ident <- paste0(docsIndex[i,]$user," ",docsIndex[i,]$docid," ",docsIndex[i,]$page)
+
+      print(e)
+      print(paste0("Failed: ",ident))
+      c("failed", ident)
+    }, finally = {
+      print(paste0("Done: ",docsIndex[i,]$docid, " ", i, "/", docsIndex %>% nrow()))
+    });
+
+  print(er)
+
+  if ( !(er[1] == "success") ){ ## This is when an error occurs
+    err <- c(err,er[2])
+  }
+
+  i <- i + 1
+}
+
 # l %>% View
-# 
-# write_rds(l, "~/ihw/tableAnnotator/annotations/result.rds")
-# write_rds(err, "~/ihw/tableAnnotator/annotations/errors.rds")
+
+write_rds(l, "~/ihw/tableAnnotator/annotations/result.rds")
+write_rds(err, "~/ihw/tableAnnotator/annotations/errors.rds")
+
+docsIndex$ID <- seq.int(nrow(docsIndex))
+
+selected = c()
+i = 1;
+while(i <= docsIndex %>% nrow()) {
+  choice <- !is.null(l[[i]])
+  selected[length(selected)+1] = choice 
+  i <- i + 1
+}
+
+docsIndex$working  = selected
+
+docsIndex %>% order_by(c(docid,page,user))
+docsIndex[order(docsIndex$docid, docsIndex$page, docsIndex$user),] %>% View
+
+totalDistinct <- docsIndex %>% select(docid,page) %>% distinct %>% nrow()
+working_docs <- docsIndex %>% filter( working == TRUE) %>% select(docid,page) %>% distinct
+
+####
+
+all_good_annotations <- working_docs %>% mutate(compname = paste0(docid,"_",page))
+
+dirfiles <- dir("ihw/tableAnnotator/Server/HTML_TABLES") %>% data_frame()
+colnames(dirfiles)[1] <- "filenames"
+
+dir_files_df <- dirfiles %>% mutate(compname = str_replace(filenames, ".html", ""))  %>% mutate(compname= sub('v[0-9]','',compname) )
+
+all_completed_annotations <- dir_files_df %>% left_join(all_good_annotations) %>% filter( !is.na(docid))
+
+# dir_files_df %>% left_join(all_good_annotations) %>% filter( is.na(docid) ) %>% View
+
+for ( f in all_completed_annotations$filenames){
+  file.move(paste0("ihw/tableAnnotator/Server/HTML_TABLES/",f) , paste0("ihw/tableAnnotator/Server/HTML_TABLES_COMPLETED/"))
+}
+
 
 

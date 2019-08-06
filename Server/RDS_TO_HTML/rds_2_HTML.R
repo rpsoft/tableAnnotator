@@ -3,11 +3,11 @@ library(unpivotr)
 library(tidyverse)
 library(htmlTable)
 
-new_obj_backup <- readRDS("C:\\IHW\\tableAnnotator\\Server\\RDS_TO_HTML\\new_obj.rds")
+new_obj_backup <- readRDS("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/new_obj.rds")
 
 prevcolnames <- new_obj_backup %>% colnames()
 
-new_obj <- readRDS("C:/IHW/tableAnnotator/Server/newTables/Full_set_of_tables.Rds")
+new_obj <- readRDS("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/newTables/Full_set_of_tables.Rds")
 
 new_obj %>% colnames()
 
@@ -24,9 +24,22 @@ new_obj <- new_obj %>% mutate( indent_lvl=0)
 filenames <- new_obj %>% select(pmid_tbl) %>% distinct
 
 
+new_obj %>% write_rds("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/newTables/full_tables_rds_jul_2019.rds")
+
+final_clean_version = new_obj %>% filter(FALSE)
+
 df_to_html <- function (tbl_id, df, destination){
       
       atable <- new_obj %>% filter ( pmid_tbl == tbl_id)
+      
+      atable <- atable %>% arrange(row,col)
+      
+      if ( str_detect(atable[1,]$character, "NCT") ){
+        atable <- atable %>% tail(-2)
+      }
+      
+      final_clean_version <<- final_clean_version %>% rbind (atable)
+      
       
       atable %<>%  select(sheet, address, row, col, is_blank, character, bold, italic, indent, data_type,indent_lvl) %>%
         mutate(is_empty   = is_blank | (!str_detect(character %>% str_to_lower(), "[:alnum:]")),
@@ -165,9 +178,11 @@ df_to_html <- function (tbl_id, df, destination){
         )
       
       
-      
-      html_res <- htmlTable::htmlTable(rectify( ex ),
-                                       align = paste(rep('l',ncol(ex)),collapse=''))
+      rectify( ex ) -> tab
+      tab$"row/col" <- NULL
+      unname(tab) -> tab
+      html_res <- htmlTable::htmlTable(tab,
+                                       align = paste(rep('l',ncol(ex)),collapse=''),rnames=FALSE)
       
       html_res = paste0(headers, html_res)
       
@@ -175,13 +190,20 @@ df_to_html <- function (tbl_id, df, destination){
 }
 
 
+
 for (r in 1:nrow(filenames)){
 
   try({
     print(filenames[r,]$pmid_tbl)
-    df_to_html(filenames[r,]$pmid_tbl, new_obj, "C:\\IHW\\tableAnnotator\\Server\\RDS_TO_HTML\\tables\\")
+    df_to_html(filenames[r,]$pmid_tbl, new_obj, "/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/tables/")
   })
   
 }
 
-new_obj %>% filter(pmid == "pmid") %>% View
+final_clean_version %>% write_rds("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/newTables/clean_full_tables_rds_jul_2019.rds")
+
+
+df_to_html("10789664_1", new_obj, "/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/tables/")
+
+
+new_obj %>% filter(pmid_tbl == "10789664_1") %>% View
