@@ -26,7 +26,7 @@ new_obj <- readRDS("~/ihw/tableAnnotator/Server/src/clean_full_tables_rds_jul_20
 
 # input <- `test-july`
 
-input <- readRDS("~/remoteTA/Server/src/test-title.rds")
+# input <- readRDS("~/remoteTA/Server/src/test-title.rds")
 # input
 
 
@@ -180,7 +180,7 @@ runAll <- function(){
       }
 
 
-      metadata <- prepareAnnotations(annotations )
+      metadata <- prepareAnnotations( annotations )
 
 
       TidyTable <- function(docid_page_selected){
@@ -219,13 +219,9 @@ runAll <- function(){
           all_cells <- xlsx_cells(paste0(tablesDirectory, filename, ".xlsx"))
         } else {
           all_cells <- new_obj %>% filter( pmid_tbl == filename) 
-          # %>% select("sheet", "address", "row", "col", "is_blank", "data_type",
-          #                                                      "error", "logical", "numeric", "date", "character", "character_formatted",
-          #                                                      "formula", "is_array", "formula_ref", "formula_group", "comment",
-          #                                                      "height", "width", "style_format", "local_format_id")
         }
 
-        # browser()
+ 
         #all_cells2 <- new_obj
         #all_cells2 %>% select(colnames(all_cells)) -> all_cells
 
@@ -480,9 +476,13 @@ runAll <- function(){
         ## With a twist. P-interaction columns contain data, so should not be excluded. There may be other cases. so watch out. #####!!!!#####
         meta_for_tdata <- meta %>% filter( ! ( location == "Col" & content == 'p-interaction' & number > 1))
 
+        table_body <- table_body %>% mutate( col = col - (min(table_body$col ) -1)) %>% mutate( row = row - (min(table_body$row ) -1)) ## Correction of tables making sure we start in col and row 1.
+        
+        
         table_data <- table_body %>%
           filter(! row %in% meta_for_tdata$number[meta_for_tdata$location == "Row"],
                  ! col %in% meta_for_tdata$number[meta_for_tdata$location == "Col"])
+        
         # rectify(table_data)
 
         ## Arrange the metadata so that the most rich row and column qualifying descriptions precede the simplest
@@ -507,8 +507,7 @@ runAll <- function(){
           mutate(i = seq_along(location)) %>%
           rename(row = number)
         
-        table_body <- table_body %>% mutate( col = col - (min(table_body$col ) -1)) %>% mutate( row = row - (min(table_body$row ) -1)) ## Correction of tables making sure we start in col and row 1.
-
+       
         col_lbls <- table_body %>%
           filter(col %in% col_lbls_meta$col,
                  !row %in% row_lbls_meta$row)
