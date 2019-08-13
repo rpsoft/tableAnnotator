@@ -50,6 +50,7 @@ class Cluster extends Component {
         rep_cuis : props.rep_cuis,
         cluster_status : props.status,
         highlighted_cui : "",
+        clusterTitle : props.clusterTitle ? props.clusterTitle : props.item[0].concept,
       };
 
     }
@@ -68,6 +69,15 @@ class Cluster extends Component {
       });
   }
 
+  handleChange = async (event,value) => {
+
+      this.setState({clusterTitle : value})
+      let fetch = new fetchData();
+      var previousData = {cn : this.props.currentCluster, rep_cuis: this.state.rep_cuis, excluded_cuis: this.state.excluded_cuis, status: this.state.cluster_status, proposed_name: value} //
+
+      await fetch.setClusterData(previousData)
+  }
+
   loadPageFromProps = async (props) => {
 
         this.setState({ item: props.item,
@@ -75,7 +85,8 @@ class Cluster extends Component {
           cluster_status : props.status,
           excluded_cuis : props.excluded_cuis,
           rep_cuis : props.rep_cuis,
-          open : props.open})
+          open : props.open,
+          clusterTitle : props.clusterTitle ? props.clusterTitle : props.item[0].concept})
     }
 
 
@@ -127,7 +138,7 @@ class Cluster extends Component {
 
         var currentCluster = this.props.currentCluster
 
-
+this.state.clusterTitle ? this.state.clusterTitle : this.state.item[0].concept
 
         var status = <SelectField
                         value={this.state.cluster_status}
@@ -149,12 +160,25 @@ class Cluster extends Component {
         var headerStyle = {textAlign:"center",fontWeight:"bold"}
 
 
+        var cluster_title =  <TextField
+                id={"cluster_title_"+currentCluster}
+                value={ this.state.clusterTitle  }
+                onChange={(event,value) => {this.handleChange(event,value)}}
+                onKeyPress={(ev) => {
+                      
+                      if (ev.key === 'Enter') {
+                        this.props.goToUrl("/cluster?page="+this.state.currentPage)
+                        ev.preventDefault();
+                      }
+                    }}
+              />
+
         return (
           <div style={{marginLeft:0, marginBottom: this.state.open ? 10 : 0, marginTop: 0}}
                 onMouseEnter={this.onMouseEnterHandler}
                 onMouseLeave={this.onMouseLeaveHandler}>
 
-              <div> <div style={{display:"inline", cursor:"pointer", fontWeight:"bold"}}> { status } </div> { (currentCluster == -10 ? "discard" : currentCluster) +" : "+ "n = "+this.state.item.length+" : "+ this.state.item[0].concept }
+              <div> <div style={{display:"inline", cursor:"pointer", fontWeight:"bold"}}> { status } </div> { (currentCluster == -10 ? "discard" : currentCluster) +" : "+ "n = "+this.state.item.length+" : " } {cluster_title}
                 <div style={{display:"inline", cursor:"pointer", fontWeight:"bold"}} onClick={ () => this.props.handleOpen(currentCluster) }> { this.state.open ? "[-]" : "[+]" } </div>
 
 

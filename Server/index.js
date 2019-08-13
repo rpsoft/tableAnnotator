@@ -497,7 +497,7 @@ function _attempt_predictions() {
                 }, _callee29, this, [[0, 21]]);
               }));
 
-              return function (_x64, _x65) {
+              return function (_x66, _x67) {
                 return _ref25.apply(this, arguments);
               };
             }());
@@ -574,14 +574,14 @@ app.get('/api/allMetaData', function (req, res) {
   });
 });
 
-function updateClusterAnnotation(_x14, _x15, _x16, _x17, _x18) {
+function updateClusterAnnotation(_x14, _x15, _x16, _x17, _x18, _x19) {
   return _updateClusterAnnotation.apply(this, arguments);
 }
 
 function _updateClusterAnnotation() {
   _updateClusterAnnotation = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee32(cn, concept, cuis, isdefault, cn_override) {
+  _regenerator.default.mark(function _callee32(cn, concept, cuis, isdefault, cn_override, proposed_name) {
     var client, done;
     return _regenerator.default.wrap(function _callee32$(_context32) {
       while (1) {
@@ -593,7 +593,7 @@ function _updateClusterAnnotation() {
           case 2:
             client = _context32.sent;
             _context32.next = 5;
-            return client.query('INSERT INTO clusters VALUES($1,$2,$3,$4,$5) ON CONFLICT (concept) DO UPDATE SET isdefault = $4, cn_override = $5;', [cn, concept, cuis, isdefault.toLowerCase() == 'true', cn_override]).then(function (result) {
+            return client.query('INSERT INTO clusters VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT (concept) DO UPDATE SET isdefault = $4, cn_override = $5, proposed_name = $6;', [cn, concept, cuis, isdefault.toLowerCase() == 'true', cn_override, proposed_name]).then(function (result) {
               return console.log("insert: " + result);
             }).catch(function (e) {
               return console.error(e.stack);
@@ -644,7 +644,7 @@ function () {
                       case 2:
                         client = _context.sent;
                         _context.next = 5;
-                        return client.query("select COALESCE(clusters.cn_override, clusters.cn) as cn,concept,rep_cuis,excluded_cuis,status from clusters,clusterdata where clusters.cn = clusterdata.cn ORDER BY cn asc,concept asc");
+                        return client.query("select COALESCE(clusters.cn_override, clusters.cn) as cn,concept,rep_cuis,excluded_cuis,status,proposed_name from clusters,clusterdata where clusters.cn = clusterdata.cn ORDER BY cn asc,concept asc");
 
                       case 5:
                         result = _context.sent;
@@ -681,7 +681,7 @@ function () {
     }, _callee2, this);
   }));
 
-  return function (_x19, _x20) {
+  return function (_x20, _x21) {
     return _ref.apply(this, arguments);
   };
 }());
@@ -750,7 +750,7 @@ function () {
     }, _callee4, this);
   }));
 
-  return function (_x21, _x22) {
+  return function (_x22, _x23) {
     return _ref3.apply(this, arguments);
   };
 }());
@@ -819,7 +819,7 @@ function () {
     }, _callee6, this);
   }));
 
-  return function (_x23, _x24) {
+  return function (_x24, _x25) {
     return _ref5.apply(this, arguments);
   };
 }());
@@ -870,7 +870,7 @@ function () {
                 }, _callee7, this);
               }));
 
-              return function setCUIMod(_x27, _x28) {
+              return function setCUIMod(_x28, _x29) {
                 return _ref8.apply(this, arguments);
               };
             }();
@@ -891,7 +891,7 @@ function () {
     }, _callee8, this);
   }));
 
-  return function (_x25, _x26) {
+  return function (_x26, _x27) {
     return _ref7.apply(this, arguments);
   };
 }());
@@ -960,7 +960,7 @@ function () {
     }, _callee10, this);
   }));
 
-  return function (_x29, _x30) {
+  return function (_x30, _x31) {
     return _ref9.apply(this, arguments);
   };
 }());
@@ -980,7 +980,7 @@ function () {
             function () {
               var _ref12 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee11(cn, rep_cuis, excluded_cuis, status) {
+              _regenerator.default.mark(function _callee11(cn, rep_cuis, excluded_cuis, status, proposed_name) {
                 var client, done;
                 return _regenerator.default.wrap(function _callee11$(_context11) {
                   while (1) {
@@ -992,7 +992,7 @@ function () {
                       case 2:
                         client = _context11.sent;
                         _context11.next = 5;
-                        return client.query('INSERT INTO clusterdata VALUES($1,$2,$3,$4) ON CONFLICT (cn) DO UPDATE SET rep_cuis = $2, excluded_cuis = $3, status = $4 ;', [cn, rep_cuis, excluded_cuis, status]).then(function (result) {
+                        return client.query('INSERT INTO clusterdata VALUES($1,$2,$3,$4) ON CONFLICT (cn) DO UPDATE SET rep_cuis = $2, excluded_cuis = $3, status = $4, proposed_name = $5 ;', [cn, rep_cuis, excluded_cuis, status, proposed_name]).then(function (result) {
                           return console.log("insert: " + result);
                         }).catch(function (e) {
                           return console.error(e.stack);
@@ -1011,18 +1011,18 @@ function () {
                 }, _callee11, this);
               }));
 
-              return function setClusterData(_x33, _x34, _x35, _x36) {
+              return function setClusterData(_x34, _x35, _x36, _x37, _x38) {
                 return _ref12.apply(this, arguments);
               };
             }();
 
-            if (!(req.query && req.query.cn && req.query.status)) {
+            if (!(req.query && req.query.cn && req.query.status && req.query.proposed_name)) {
               _context12.next = 4;
               break;
             }
 
             _context12.next = 4;
-            return setClusterData(req.query.cn, req.query.rep_cuis || "", req.query.excluded_cuis || "", req.query.status);
+            return setClusterData(req.query.cn, req.query.rep_cuis || "", req.query.excluded_cuis || "", req.query.status, req.query.proposed_name);
 
           case 4:
             res.send("updated");
@@ -1035,7 +1035,7 @@ function () {
     }, _callee12, this);
   }));
 
-  return function (_x31, _x32) {
+  return function (_x32, _x33) {
     return _ref11.apply(this, arguments);
   };
 }());
@@ -1051,13 +1051,13 @@ function () {
           case 0:
             console.log(JSON.stringify(req.query));
 
-            if (!(req.query && req.query.cn.length > 0 && req.query.concept.length > 0 && req.query.cuis.length > 0 && req.query.isdefault.length > 0 && req.query.cn_override.length > 0)) {
+            if (!(req.query && req.query.cn.length > 0 && req.query.concept.length > 0 && req.query.cuis.length > 0 && req.query.isdefault.length > 0 && req.query.cn_override.length > 0 && req.query.proposed_name.length > 0)) {
               _context13.next = 4;
               break;
             }
 
             _context13.next = 4;
-            return updateClusterAnnotation(req.query.cn, req.query.concept, req.query.cuis, req.query.isdefault, req.query.cn_override);
+            return updateClusterAnnotation(req.query.cn, req.query.concept, req.query.cuis, req.query.isdefault, req.query.cn_override, req.query.proposed_name);
 
           case 4:
             res.send("saved cluster annotation: " + JSON.stringify(req.query));
@@ -1070,7 +1070,7 @@ function () {
     }, _callee13, this);
   }));
 
-  return function (_x37, _x38) {
+  return function (_x39, _x40) {
     return _ref13.apply(this, arguments);
   };
 }());
@@ -1109,7 +1109,7 @@ function () {
                 }, _callee14, this);
               }));
 
-              return function (_x41) {
+              return function (_x43) {
                 return _ref15.apply(this, arguments);
               };
             }()).on('end', function () {
@@ -1124,7 +1124,7 @@ function () {
     }, _callee15, this);
   }));
 
-  return function (_x39, _x40) {
+  return function (_x41, _x42) {
     return _ref14.apply(this, arguments);
   };
 }());
@@ -1196,7 +1196,7 @@ function () {
     }, _callee16, this);
   }));
 
-  return function (_x42, _x43) {
+  return function (_x44, _x45) {
     return _ref16.apply(this, arguments);
   };
 }());
@@ -1227,7 +1227,7 @@ function () {
     }, _callee17, this);
   }));
 
-  return function (_x44, _x45) {
+  return function (_x46, _x47) {
     return _ref17.apply(this, arguments);
   };
 }());
@@ -1338,7 +1338,7 @@ function () {
     }, _callee18, this, [[0, 18]]);
   }));
 
-  return function (_x46, _x47) {
+  return function (_x48, _x49) {
     return _ref18.apply(this, arguments);
   };
 }());
@@ -1357,7 +1357,7 @@ app.get('/api/totalTables', function (req, res) {
   });
 });
 
-function getMMatch(_x48) {
+function getMMatch(_x50) {
   return _getMMatch.apply(this, arguments);
 }
 
@@ -1451,7 +1451,7 @@ function () {
     }, _callee19, this, [[0, 11]]);
   }));
 
-  return function (_x49, _x50) {
+  return function (_x51, _x52) {
     return _ref19.apply(this, arguments);
   };
 }());
@@ -1491,12 +1491,12 @@ function () {
     }, _callee20, this);
   }));
 
-  return function (_x51, _x52) {
+  return function (_x53, _x54) {
     return _ref20.apply(this, arguments);
   };
 }());
 
-function readyTableData(_x53, _x54, _x55) {
+function readyTableData(_x55, _x56, _x57) {
   return _readyTableData.apply(this, arguments);
 }
 
@@ -1950,7 +1950,7 @@ function _readyTableData() {
                       }, _callee34, this, [[0, 7]]);
                     }));
 
-                    return function (_x66, _x67) {
+                    return function (_x68, _x69) {
                       return _ref26.apply(this, arguments);
                     };
                   }());
@@ -2025,7 +2025,7 @@ function () {
     }, _callee21, this, [[0, 11]]);
   }));
 
-  return function (_x56, _x57) {
+  return function (_x58, _x59) {
     return _ref21.apply(this, arguments);
   };
 }());
@@ -2059,7 +2059,7 @@ function () {
     }, _callee22, this);
   }));
 
-  return function (_x58, _x59) {
+  return function (_x60, _x61) {
     return _ref22.apply(this, arguments);
   };
 }());
@@ -2138,7 +2138,7 @@ function () {
     }, _callee23, this);
   }));
 
-  return function (_x60, _x61) {
+  return function (_x62, _x63) {
     return _ref23.apply(this, arguments);
   };
 }());
@@ -2176,7 +2176,7 @@ function () {
     }, _callee24, this);
   }));
 
-  return function (_x62, _x63) {
+  return function (_x64, _x65) {
     return _ref24.apply(this, arguments);
   };
 }());

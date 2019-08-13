@@ -100,14 +100,12 @@ class ClusterView extends Component {
 
   handleClusterDataChange = async ( clusterData, clusterNumber, operation ) => {
 
-//    alert(JSON.stringify(clusterData)+" "+clusterNumber+" "+operation);
-
     let fetch = new fetchData();
 
     var previousData = this.state.clusterData[clusterNumber]
 
     if ( !previousData ){
-       previousData = {cn : clusterNumber, rep_cuis: [], excluded_cuis: [], status: "inprogress"} //inprogress, completed, completedchecked
+       previousData = {cn : clusterNumber, rep_cuis: [], excluded_cuis: [], status: "inprogress", proposed_name: ""} //inprogress, completed, completedchecked
     }
 
     switch (operation) {
@@ -134,13 +132,14 @@ class ClusterView extends Component {
         }
 
         break;
+      case "proposed_name":
+          previousData.proposed_name = clusterData
+        break;
       default:
 
     }
 
     await fetch.setClusterData(previousData)
-
-
 
     await this.loadPageFromProps(this.props)
 
@@ -312,7 +311,7 @@ class ClusterView extends Component {
            maxIndex = this.state.clusters[maxIndex].length == 0 ? maxIndex : parseInt(maxIndex)+1
 
        var found_clusters = this.searchTerms()
-
+       //debugger
        var currentClusters = found_clusters.map( (v,i) => { return <Cluster key={i} item={this.state.clusters[v]}
                                                                  clusters={this.state.clusters}
                                                                  currentCluster={v}
@@ -330,6 +329,7 @@ class ClusterView extends Component {
                                                                  status={this.state.clusterData[v] ? this.state.clusterData[v].status : "inprogress"}
                                                                  rep_cuis={this.state.clusterData[v] && this.state.clusterData[v].rep_cuis ? this.state.clusterData[v].rep_cuis : []}
                                                                  excluded_cuis={this.state.clusterData[v] && this.state.clusterData[v].excluded_cuis ? this.state.clusterData[v].excluded_cuis : []}
+                                                                 clusterTitle= {this.state.clusterData[v] ? this.state.clusterData[v].proposed_name : ""}
                                                                ></Cluster>})
 
 

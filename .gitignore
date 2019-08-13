@@ -42,3 +42,6 @@ Server/src/test-title.rds
 Server/transfer.zip
 
 .Trash-1000/
+
+Server/package-lock.json
+UI/package-lock.json

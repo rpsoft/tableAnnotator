@@ -114,6 +114,7 @@ export default class fetchData {
                                       + "&rep_cuis="+cdata.rep_cuis.join(";")
                                       + "&excluded_cuis="+cdata.excluded_cuis.join(";")
                                       + "&status="+cdata.status
+                                      + "&proposed_name="+cdata.proposed_name
 
         console.log(urlQueryRequest)
         var r = await this.getGeneric( urlQueryRequest )
