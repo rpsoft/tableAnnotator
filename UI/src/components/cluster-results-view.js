@@ -81,7 +81,7 @@ class ClusterResultsView extends Component {
 
           <div>
           {
-            this.state.results.rows.map( (f,i) => <div key={i} > {f.cn+","+f.concept+","+f.rep_cuis+","+f.excluded_cuis+","+f.status}</div>)
+            this.state.results.rows.map( (f,i) => <div key={i} > {f.cn+","+f.concept+","+f.rep_cuis+","+f.excluded_cuis+","+f.status+ "," + (f.proposed_name ? f.proposed_name : "")}</div>)
           }
           </div>
       </Card></div>
