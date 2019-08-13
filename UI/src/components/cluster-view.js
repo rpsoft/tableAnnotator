@@ -302,7 +302,7 @@ class ClusterView extends Component {
      //  <div style={{float:"left",padding:15,fontWeight:"bold"}}>{"Cluster : "+this.state.currentPage +" / "+ this.state.totalClusters }</div>
      //  <RaisedButton onClick={ () => {this.changePage(parseInt(this.state.currentPage) + 1)} } style={{float:"left"}}> {">>"} </RaisedButton></div>
 
-
+currentPage
 
      if ( this.state.clusters && Object.keys(this.state.clusters).length > 0 ){
 
@@ -311,8 +311,9 @@ class ClusterView extends Component {
            maxIndex = this.state.clusters[maxIndex].length == 0 ? maxIndex : parseInt(maxIndex)+1
 
        var found_clusters = this.searchTerms()
-       //debugger
+
        var currentClusters = found_clusters.map( (v,i) => { return <Cluster key={i} item={this.state.clusters[v]}
+                                                                 currentPage={this.state.currentPage}
                                                                  clusters={this.state.clusters}
                                                                  currentCluster={v}
                                                                  isChecked={ (c) => { return Object.keys(this.state.checkedConcepts).indexOf(c) > -1 }}
@@ -384,10 +385,12 @@ class ClusterView extends Component {
                    <Card style={{position:"fixed",top:0, backgroundColor: "white", left: "40%", padding:10, display:"inline"}}>
                       <div style={{...page_styler, display:"inline", marginRight: 5 }} onClick={ () => {
                                                                                                this.setState({currentPage : 1, goto: 1})
+                                                                                               this.props.goToUrl("/cluster?page="+currentPage)
                                                                                            }}>First</div>
                       <div style={{...page_styler, display:"inline", marginLeft:5, marginRight:5 }} onClick={ () => {
                                                                                                 var cpage = parseInt(this.state.currentPage)-1 < 1 ? 1 : parseInt(this.state.currentPage)-1;
                                                                                                 this.setState({currentPage: cpage, goto: cpage})
+                                                                                                this.props.goToUrl("/cluster?page="+cpage)
                                                                                               }}>Previous</div>
                       <div style={{...page_styler, display:"inline", marginLeft: 5 }}>
                       <TextField
@@ -404,7 +407,7 @@ class ClusterView extends Component {
                                   newpage = parseInt(this.state.goto) > total ? total : parseInt(this.state.goto)
 
                               this.setState({currentPage:newpage});
-
+                              this.props.goToUrl("/cluster?page="+newpage)
                               }
                             }
 
@@ -415,9 +418,11 @@ class ClusterView extends Component {
                       <div style={{...page_styler, display:"inline", marginLeft: 5, marginRight:5 }} onClick={ () => {
                                                                                                   var cpage = parseInt(this.state.currentPage)+1 > total ? total : parseInt(this.state.currentPage)+1;
                                                                                                   this.setState({currentPage : cpage, goto: cpage})
+                                                                                                  this.props.goToUrl("/cluster?page="+cpage)
                                                                                               }}>Next</div>
                       <div style={{...page_styler, display:"inline", marginLeft: 5 }} onClick={ () => {
                                                                                                   this.setState({currentPage : total, goto: total})
+                                                                                                  this.props.goToUrl("/cluster?page="+cpage)
                                                                                               }}>Last</div>
                    </Card>
 

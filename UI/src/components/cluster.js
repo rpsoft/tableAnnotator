@@ -79,7 +79,6 @@ class Cluster extends Component {
   }
 
   loadPageFromProps = async (props) => {
-
         this.setState({ item: props.item,
           currentPage: props.currentPage,
           cluster_status : props.status,
@@ -165,7 +164,7 @@ this.state.clusterTitle ? this.state.clusterTitle : this.state.item[0].concept
                 value={ this.state.clusterTitle  }
                 onChange={(event,value) => {this.handleChange(event,value)}}
                 onKeyPress={(ev) => {
-                      
+
                       if (ev.key === 'Enter') {
                         this.props.goToUrl("/cluster?page="+this.state.currentPage)
                         ev.preventDefault();
