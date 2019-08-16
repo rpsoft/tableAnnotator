@@ -108,6 +108,8 @@ class ClusterView extends Component {
        previousData = {cn : clusterNumber, rep_cuis: [], excluded_cuis: [], status: "inprogress", proposed_name: ""} //inprogress, completed, completedchecked
     }
 
+
+
     switch (operation) {
       case "status":
         previousData.status = clusterData
@@ -312,7 +314,7 @@ currentPage
 
        var found_clusters = this.searchTerms()
 
-       var currentClusters = found_clusters.map( (v,i) => { return <Cluster key={i} item={this.state.clusters[v]}
+       var currentClusters = found_clusters.map( (v,i) => { if( v != -10) {return <Cluster key={i} item={this.state.clusters[v]}
                                                                  currentPage={this.state.currentPage}
                                                                  clusters={this.state.clusters}
                                                                  currentCluster={v}
@@ -331,7 +333,7 @@ currentPage
                                                                  rep_cuis={this.state.clusterData[v] && this.state.clusterData[v].rep_cuis ? this.state.clusterData[v].rep_cuis : []}
                                                                  excluded_cuis={this.state.clusterData[v] && this.state.clusterData[v].excluded_cuis ? this.state.clusterData[v].excluded_cuis : []}
                                                                  clusterTitle= {this.state.clusterData[v] ? this.state.clusterData[v].proposed_name : ""}
-                                                               ></Cluster>})
+                                                               ></Cluster>}})
 
 
        var currentPage = this.state.currentPage-1
@@ -346,7 +348,6 @@ currentPage
 
        var total = Math.ceil(currentClusters.length / this.state.paging)
        currentClusters = currentClusters.slice(start,end+1)
-
 
        var discard = <Cluster key={"-10"} item={this.state.clusters["-10"]}
          clusters={this.state.clusters}
@@ -366,11 +367,6 @@ currentPage
          rep_cuis={this.state.clusterData["-10"] && this.state.clusterData["-10"].rep_cuis ? this.state.clusterData["-10"].rep_cuis : []}
          excluded_cuis={this.state.clusterData["-10"] && this.state.clusterData["-10"].excluded_cuis ? this.state.clusterData["-10"].excluded_cuis : []}
        ></Cluster>
-
-
-       // <Infinite containerHeight={1020} elementHeight={60}>
-       //     { currentClusters }
-       // </Infinite>
 
 
        var page_styler= { cursor: "pointer", color: "blue", textDecoration: "underline" }
@@ -422,7 +418,7 @@ currentPage
                                                                                               }}>Next</div>
                       <div style={{...page_styler, display:"inline", marginLeft: 5 }} onClick={ () => {
                                                                                                   this.setState({currentPage : total, goto: total})
-                                                                                                  this.props.goToUrl("/cluster?page="+cpage)
+                                                                                                  this.props.goToUrl("/cluster?page="+total)
                                                                                               }}>Last</div>
                    </Card>
 

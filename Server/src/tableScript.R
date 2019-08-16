@@ -15,9 +15,12 @@ tablesDirectory <- "~/ihw/tableAnnotator/Single_table_sheets/"
 
 ################# PREPARING THE INPUT VARIABLE annotations.
 #
-#write_rds(x = input, path = "test-title.rds")
+write_rds(x = input, path = "testing_more.rds")
 
 new_obj <- readRDS("~/ihw/tableAnnotator/Server/src/clean_full_tables_rds_jul_2019.rds")
+
+write_rds(new_obj, path = "omg.rds")
+
 # new_obj <- readRDS("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/newTables/clean_full_tables_rds_jul_2019.rds")
 
 # new_obj %>% filter(pmid_tbl =="10438259_1")
@@ -545,8 +548,10 @@ runAll <- function(){
           #   filter(!is.na(character))
           names(h)[3] <- col_lbls_meta$content[col_lbls_meta$i == i_choose] %>%  unique()
           # print(h)
-          data_cells <- data_cells %>%
-            enhead(header_cells = h, direction = "WNW", drop = FALSE)
+          if ( h %>% nrow > 0 ){
+            data_cells <- data_cells %>%
+              enhead(header_cells = h, direction = "WNW", drop = FALSE)
+          }
         }
 
         ## Do the same now for rows, except dont worry about indentation

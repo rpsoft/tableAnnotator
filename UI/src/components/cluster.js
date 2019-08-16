@@ -72,10 +72,10 @@ class Cluster extends Component {
   handleChange = async (event,value) => {
 
       this.setState({clusterTitle : value})
-      let fetch = new fetchData();
-      var previousData = {cn : this.props.currentCluster, rep_cuis: this.state.rep_cuis, excluded_cuis: this.state.excluded_cuis, status: this.state.cluster_status, proposed_name: value} //
-
-      await fetch.setClusterData(previousData)
+      // let fetch = new fetchData();
+      // var previousData = {cn : this.props.currentCluster, rep_cuis: this.state.rep_cuis, excluded_cuis: this.state.excluded_cuis, status: this.state.cluster_status, proposed_name: value} //
+      //
+      // await fetch.setClusterData(previousData)
   }
 
   loadPageFromProps = async (props) => {
@@ -163,9 +163,10 @@ this.state.clusterTitle ? this.state.clusterTitle : this.state.item[0].concept
                 id={"cluster_title_"+currentCluster}
                 value={ this.state.clusterTitle  }
                 onChange={(event,value) => {this.handleChange(event,value)}}
-                onKeyPress={(ev) => {
+                onKeyPress={(ev,value) => {
 
                       if (ev.key === 'Enter') {
+                        this.props.handleClusterDataChange(this.state.clusterTitle, currentCluster, "proposed_name")
                         this.props.goToUrl("/cluster?page="+this.state.currentPage)
                         ev.preventDefault();
                       }
