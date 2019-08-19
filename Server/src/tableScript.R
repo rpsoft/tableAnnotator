@@ -15,11 +15,11 @@ tablesDirectory <- "~/ihw/tableAnnotator/Single_table_sheets/"
 
 ################# PREPARING THE INPUT VARIABLE annotations.
 #
-write_rds(x = input, path = "testing_more.rds")
+# write_rds(x = input, path = "testing_more.rds")
 
 new_obj <- readRDS("~/ihw/tableAnnotator/Server/src/clean_full_tables_rds_jul_2019.rds")
 
-write_rds(new_obj, path = "omg.rds")
+# write_rds(new_obj %>% filter(pmid_tbl == "12466506_1"), path = "omg.rds")
 
 # new_obj <- readRDS("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/newTables/clean_full_tables_rds_jul_2019.rds")
 
