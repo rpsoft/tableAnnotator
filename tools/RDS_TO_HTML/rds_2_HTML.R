@@ -3,11 +3,11 @@ library(unpivotr)
 library(tidyverse)
 library(htmlTable)
 
-new_obj_backup <- readRDS("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/new_obj.rds")
+new_obj_backup <- readRDS("/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/new_obj.rds")
 
 prevcolnames <- new_obj_backup %>% colnames()
 
-new_obj <- readRDS("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/newTables/Full_set_of_tables.Rds")
+new_obj <- readRDS("/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/newTables/Full_set_of_tables.Rds")
 
 new_obj %>% colnames()
 
@@ -24,7 +24,7 @@ new_obj <- new_obj %>% mutate( indent_lvl=0)
 filenames <- new_obj %>% select(pmid_tbl) %>% distinct
 
 
-new_obj %>% write_rds("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/newTables/full_tables_rds_jul_2019.rds")
+new_obj %>% write_rds("/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/newTables/full_tables_rds_jul_2019.rds")
 
 final_clean_version = new_obj %>% filter(FALSE)
 
@@ -195,15 +195,15 @@ for (r in 1:nrow(filenames)){
 
   try({
     print(filenames[r,]$pmid_tbl)
-    df_to_html(filenames[r,]$pmid_tbl, new_obj, "/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/tables/")
+    df_to_html(filenames[r,]$pmid_tbl, new_obj, "/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/tables/")
   })
   
 }
 
-final_clean_version %>% write_rds("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/newTables/clean_full_tables_rds_jul_2019.rds")
+final_clean_version %>% write_rds("/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/newTables/clean_full_tables_rds_jul_2019.rds")
 
-
-df_to_html("10789664_1", new_obj, "/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/tables/")
-
-
-new_obj %>% filter(pmid_tbl == "10789664_1") %>% View
+# 
+# df_to_html("10789664_1", new_obj, "/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/tables/")
+# 
+# 
+# new_obj %>% filter(pmid_tbl == "10789664_1") %>% View
