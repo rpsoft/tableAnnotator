@@ -13,7 +13,12 @@ setwd("~/ihw/tableAnnotator/Server/src")
 tablesDirectory <- "~/ihw/tableAnnotator/Server/XLSX_TABLES/"
 
 ################# PREPARING THE INPUT VARIABLE annotations.
-new_obj <- readRDS("full_tables_rds_jul_2019.rds")
+# new_obj_back <- readRDS("full_tables_rds_jul_2019.rds")
+
+new_obj <- readRDS("Full_set_of_tables.Rds")
+new_obj <- new_obj %>% mutate( pmid_tbl=paste0(pmid,"_",tbl_n) ) %>% mutate( indent_lvl = ifelse(indent,1,0) )
+
+# new_obj_guide <- readRDS("/home/suso/Downloads/tbl_fig_titles_size.Rds")
 
 anns <- input[[1]]$annotation %>% as.data.frame() %>% 
   mutate( docid = input[[1]]$docid ) %>% 
