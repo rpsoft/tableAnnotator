@@ -10,52 +10,30 @@ needs(readr,tidyxl,unpivotr,tidyverse)
 setwd("~/ihw/tableAnnotator/Server/src")
 
 # folder with the single sheets in XLSX format
-tablesDirectory <- "~/ihw/tableAnnotator/Single_table_sheets/"
-
+tablesDirectory <- "~/ihw/tableAnnotator/Server/XLSX_TABLES/"
 
 ################# PREPARING THE INPUT VARIABLE annotations.
-#
-# write_rds(x = input, path = "testing_more.rds")
+new_obj <- readRDS("full_tables_rds_jul_2019.rds")
 
-new_obj <- readRDS("~/ihw/tableAnnotator/Server/src/clean_full_tables_rds_jul_2019.rds")
-
-# write_rds(new_obj %>% filter(pmid_tbl == "12466506_1"), path = "omg.rds")
-
-# new_obj <- readRDS("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/newTables/clean_full_tables_rds_jul_2019.rds")
-
-# new_obj %>% filter(pmid_tbl =="10438259_1")
-# `test-july` <- readRDS("~/ihw/tableAnnotator/livebug/test-july.rds")
+anns <- input[[1]]$annotation %>% as.data.frame() %>% 
+  mutate( docid = input[[1]]$docid ) %>% 
+  mutate( page = input[[1]]$page ) %>% 
+  mutate( user = input[[1]]$user ) %>% 
+  mutate( corrupted = input[[1]]$corrupted ) %>% 
+  mutate( tableType = input[[1]]$tableType )
 
 
-# input <- `test-july`
-
-# input <- readRDS("~/remoteTA/Server/src/test-title.rds")
-# input
-
-
-anns <- input[[1]]$annotation %>% as.data.frame()
-
-anns <- anns %>% mutate( docid = input[[1]]$docid )
-anns <- anns %>% mutate( page = input[[1]]$page )
-anns <- anns %>% mutate( user = input[[1]]$user )
-anns <- anns %>% mutate( corrupted = input[[1]]$corrupted )
-anns <- anns %>% mutate( tableType = input[[1]]$tableType )
-
-# anns
 annotations <- anns %>% select(user,docid,page,corrupted,tableType,location,number,content,qualifiers) %>%
   mutate(page = as.double(page)) %>%
   mutate(corrupted = ifelse(corrupted == "false",FALSE,TRUE)) %>%
   mutate(qualifiers = ifelse( qualifiers == "",NA, qualifiers)) %>%
   mutate(content = ifelse( content == "",NA, content)) %>%
   as.tibble()
+  
 
-#
-# saveRDS(anns, "~/ihw/tableAnnotator/Server/src/annotations2.rds")
-#
-# saveRDS(input, "~/ihw/tableAnnotator/Server/src/input2.rds")
-
+# saveRDS(input, "testing-input.rds")
+# saveRDS(annotations, "testing-annotations.rds")
 ##################
-
 
 
 runAll <- function(){
@@ -97,16 +75,13 @@ runAll <- function(){
         # We want to match the descriptions of the rows and columns based on formatting , asymmetrically
         # For example if "bold" is informative it should be included in the matching, but not otherwise
         # IF a characteristics is nto alisted among the qualifiers, then it is not informative
-        # mydf <- mydf %>%
-        #   mutate_all(function(x) if_else(is.na(x), FALSE, x))
-        #
+
         mydf_i <- mydf %>%
           filter(i == i_choose)
         a <- (map_lgl(mydf_i, ~ !any(.x == FALSE)))
 
-        # browser()
         for ( n in 1:length(a) ){
-          # print(n)
+          
           if( is.na(a[n]) ){
             a[n] = FALSE
           } else {
@@ -154,8 +129,6 @@ runAll <- function(){
           filter(is.na(qualifiers)) %>%
           select(-qualifiers)
 
-        # browser()
-
         metadata_noqual[, c("bold","itallic", "plain",
                             "empty_row", "empty_row_with_p_value",
                             "indented")] <- FALSE
@@ -187,7 +160,6 @@ runAll <- function(){
 
 
       TidyTable <- function(docid_page_selected){
-           # browser()
         meta <- metadata %>%
           filter(docid_page == docid_page_selected)
 
@@ -224,12 +196,6 @@ runAll <- function(){
           all_cells <- new_obj %>% filter( pmid_tbl == filename) 
         }
 
- 
-        #all_cells2 <- new_obj
-        #all_cells2 %>% select(colnames(all_cells)) -> all_cells
-
-        # rectify(all_cells)
-
         ##  Simplify table by making all values character
         # If no numeric or no character columns, create
         if(!"numeric"   %in% names(all_cells)) all_cells <- all_cells %>% mutate(numeric = NA)
@@ -259,38 +225,14 @@ runAll <- function(){
 
           formats <- new_obj %>% filter( pmid_tbl == filename) %>% select(bold, italic,"indent","indent_lvl")
 
-          # totalRows <- all_cells$character_formatted %>% length
-
           bold <- formats$bold
           italic <- formats$italic
           bold_ital <- cbind(bold,italic) %>% as_tibble
           indt <- formats %>% select("indent","indent_lvl")
-
-          # all_cells <- all_cells %>% mutate(local_format_id = seq_along(local_format_id))
+          
           all_cells <- all_cells %>% mutate(local_format_id = seq_along(all_cells$row))
-          #
-          # for ( r in 1:totalRows ) {
-          #
-          #   obj <- all_cells$character_formatted[[r]]
-          #   bold <- c(bold, obj$bold)
-          #   ital <- c(ital, obj$italic)
-          #
-          # }
-          #
-          # browser()
-          #
-          #
-          # indt <- bind_cols(formats$local$alignment) %>%
-          #   mutate(indent = indent - min(indent),
-          #          indent_lvl = indent,
-          #          indent = horizontal %in% c("center", "right") |
-          #            (indent >=1)) %>%
-          #   select(indent, indent_lvl)
 
         }
-
-
-
 
         ## Append to main dataset
         formats <- bind_cols(bold_ital, indt) %>%
@@ -305,41 +247,6 @@ runAll <- function(){
 
         all_cells <- all_cells %>%
           select(-indent_lvl)
-
-
-        ## Extract character formatting (can vary within cells) and aggregate to cell level, take any formatting
-        # all_cells <- all_cells %>%
-        #   mutate(char_format_id = seq_along(row))
-        # characters <- all_cells$character_formatted
-        # names(characters) <- all_cells$char_format_id
-        # characters <- bind_rows(characters, .id = "char_format_id")
-        # characters <- characters %>%
-        #   select(char_format_id, bold, italic, character) %>%
-        #   mutate(char_format_id = as.integer(char_format_id)) %>%
-        #   mutate_at(vars(bold, italic), function(x) if_else(is.na(x), FALSE, x)) %>%
-        #   group_by(char_format_id) %>%
-        #   summarise(character = paste(character, collapse = "_|_"),
-        #             bold = any(bold),
-        #             italic = any(italic)) %>%
-        #   ungroup()
-        # 
-        # 
-        # suppressWarnings(suppressMessages(characters <- all_cells %>%
-        #   select(char_format_id) %>%
-        #   left_join(characters) %>%
-        #   mutate(bold = if_else(is.na(bold), FALSE, bold),
-        #          italic = if_else(is.na(italic), FALSE, italic)) %>%
-        #   rename(bold_char = bold,
-        #          italic_char = italic)))
-        # 
-        # suppressWarnings(suppressMessages(all_cells <- all_cells %>%
-        #   left_join(characters) %>%
-        #   mutate(bold = bold|bold_char,
-        #          italic = italic|italic_char) %>%
-        #   select(sheet, address, row, col, is_blank:character, bold, italic, indent)))
-
-        # browser()
-        # all_cells <- all_cells %>% select(sheet, address, row, col, is_blank:character, bold, italic, indent, data_type)
         
         ## Identify different types of empty row form completely empty of numbers
         # to ones where the first columns alone are not empty
@@ -422,7 +329,7 @@ runAll <- function(){
           ungroup() %>%
           filter(!col %in% 1:2, col != col_max) %>%
           BlankRow()
-        first_last_col  <- intersect(first_last_col, first_col_1_spill)
+        first_last_col  <- intersect(first_last_col,  first_col_1_spill)
 
         # Those which have only one cell containing information, after removing the first and last column,
         # and which are long rows (>= 4 blank cells)
@@ -468,8 +375,7 @@ runAll <- function(){
           filter(row > split_header) %>%
           mutate(row = row - split_header)
         # table_header
-        # rectify(table_body)
-
+  
         ########### Above this point common to all tables, provided extracted correctly
         ########### hereafter will depend upon metadata
         if(any(meta$location == "Col" & meta$number ==2)) print("Note two columns here, this is unusual")
@@ -481,12 +387,9 @@ runAll <- function(){
 
         table_body <- table_body %>% mutate( col = col - (min(table_body$col ) -1)) %>% mutate( row = row - (min(table_body$row ) -1)) ## Correction of tables making sure we start in col and row 1.
         
-        
         table_data <- table_body %>%
           filter(! row %in% meta_for_tdata$number[meta_for_tdata$location == "Row"],
                  ! col %in% meta_for_tdata$number[meta_for_tdata$location == "Col"])
-        
-        # rectify(table_data)
 
         ## Arrange the metadata so that the most rich row and column qualifying descriptions precede the simplest
         ## tg from bold and itallics, take out itallics (for example) leaving only bold, then bold out leaving only plain, etc
@@ -496,15 +399,7 @@ runAll <- function(){
           filter(location == "Col") %>%
           mutate(i = seq_along(location)) %>%
           rename(col = number)
-
-        ## remove uninformative metadata, where all formatting is consistent in an entire row/column label
-        # col_lbls_meta2 <- col_lbls_meta %>%
-        #   group_by(col) %>%
-        #   summarise_at(vars(bold, first_col, first_last_col, indent, italic, plain), all) %>%
-        #   ungroup()
-        #
-        # col_lbls_meta2 <- map2(col_lbls_meta, col)
-
+        
         row_lbls_meta <- meta %>%
           filter(location == "Row") %>%
           mutate(i = seq_along(location)) %>%
@@ -518,8 +413,6 @@ runAll <- function(){
         row_col_cross <- table_body %>%
           filter(col %in% col_lbls_meta$col,
                  row %in% row_lbls_meta$row)
-
-        # rectify(col_lbls)
 
         ## If all of column labels are indented, attempt to resolve by comparing levels of indentation
         if(all(col_lbls$indent) & any(col_lbls_meta$indent)) {
@@ -544,10 +437,9 @@ runAll <- function(){
             anti_join(h) ))
           ## remove cells without information to allow population across rows and columns, ignore, only use where
           ## the cell has actually been merged
-          # h <- h %>%
-          #   filter(!is.na(character))
+   
           names(h)[3] <- col_lbls_meta$content[col_lbls_meta$i == i_choose] %>%  unique()
-          # print(h)
+     
           if ( h %>% nrow > 0 ){
             data_cells <- data_cells %>%
               enhead(header_cells = h, direction = "WNW", drop = FALSE)
@@ -558,7 +450,6 @@ runAll <- function(){
         row_lbls <- table_body %>%
           filter(row %in% row_lbls_meta$row,
                  !col %in% col_lbls_meta$col)
-        # rectify(row_lbls)
 
         for(i_choose in unique(row_lbls_meta$i)){
           ## Select each richest column description in turn, removing that from the dataset
@@ -569,14 +460,7 @@ runAll <- function(){
 
           suppressWarnings(suppressMessages( row_lbls <- row_lbls %>%
             anti_join(h) ))
-          ## remove cells without information to allow population across rows and columns
-          # h <- h %>%
-          #   filter(!is.na(character))
-          # names(h)[3] <- row_lbls_meta$content[row_lbls_meta$i == i_choose] %>%  unique()
-          # print(h)
-          # data_cells <- data_cells %>%
-          #   enhead(header_cells = h, direction = "NNW", drop = FALSE)
-
+   
           data_cells <- NNW(data_cells, h)
           new_name <- row_lbls_meta$content[row_lbls_meta$i == i_choose] %>%  unique()
           while(new_name %in% names(data_cells)) new_name <- paste0(new_name, "_")
@@ -589,42 +473,22 @@ runAll <- function(){
       }
       TidyTableSafe <- safely(TidyTable)
 
-      #a <- TidyTable(docid_page_selected = "28246237_2")
-      ## Here can select trials for specific user
-      # metadata <- metadata %>%
-      #   filter(user == "Hebe")
-      
       outputs <- map(metadata$docid_page %>% unique, ~ TidyTableSafe(.x))
-      # saveRDS(outputs, "Output_data/app_extracted_data.Rds")
-
 
       names(outputs) <- metadata$docid_page %>% unique()
       outputs <- transpose(outputs)
-      # errors <- outputs$error
-      # errors <- map_lgl(errors, is.null)
-      # errors[] <- !errors
-      # mean(errors) # 8% errors, will need to review
-      # errors[errors]
-      # saveRDS(errors, "Scratch_data/errors.Rds")
 
 
       result <- outputs$result
       result_success <- result[map_lgl(result, is.tibble)]
       result_success <- bind_rows(result_success, .id = "docid_page")
-      # result_fail    <- result[!map_lgl(result, is.tibble)]
-      # write_csv(result_success, "temp_hebe.csv")
 
       return(result_success)
 
 }
-# sink()
-# invisible(capture.output(y <- ))
-# y
 
-# suppressWarnings(suppressMessages(runAll()))
+result <- runAll()
 
-#  testing <- runAll()
-# testing
+write.csv2(result, "result.csv")
 
-runAll()
-
+result
