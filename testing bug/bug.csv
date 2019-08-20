@@ -1,0 +1,4 @@
+"user","docid","page","corrupted_text","tableType","location","number","content","qualifiers"
+"David","12456232","3","Jesus please take a look at this one.Characteristic name is not populating down. Also value and characteristic level are switched.","result_table_subgroup","Col","1","characteristic_name",""
+"David","12456232","3","Jesus please take a look at this one.Characteristic name is not populating down. Also value and characteristic level are switched.","result_table_subgroup","Row","1","measures",""
+"David","12456232","3","Jesus please take a look at this one.Characteristic name is not populating down. Also value and characteristic level are switched.","result_table_subgroup","Col","2","characteristic_level",""
