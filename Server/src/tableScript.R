@@ -16,7 +16,7 @@ tablesDirectory <- "~/ihw/tableAnnotator/Server/XLSX_TABLES/"
 # new_obj_back <- readRDS("full_tables_rds_jul_2019.rds")
 
 new_obj <- readRDS("Full_set_of_tables.Rds")
-new_obj <- new_obj %>% mutate( pmid_tbl=paste0(pmid,"_",tbl_n) ) %>% mutate( indent_lvl = ifelse(indent,1,0) )
+new_obj <- new_obj %>% mutate( pmid_tbl=paste0(pmid,"_",tbl_n) )
 
 # new_obj_guide <- readRDS("/home/suso/Downloads/tbl_fig_titles_size.Rds")
 
@@ -34,10 +34,11 @@ annotations <- anns %>% select(user,docid,page,corrupted,tableType,location,numb
   mutate(qualifiers = ifelse( qualifiers == "",NA, qualifiers)) %>%
   mutate(content = ifelse( content == "",NA, content)) %>%
   as.tibble()
-  
-
+   
 # saveRDS(input, "testing-input.rds")
 # saveRDS(annotations, "testing-annotations.rds")
+
+annotations <- readRDS("testing-annotations.rds")
 ##################
 
 
@@ -105,6 +106,8 @@ runAll <- function(){
       # suppressWarnings(suppressMessages(annotations <- read_csv("extracted_app.txt")))
 
       prepareAnnotations <- function( annotations ){
+        
+        browser()
         metadata <- annotations
         metadata %>% distinct(docid, page)
 
@@ -140,6 +143,8 @@ runAll <- function(){
 
         metadata <- bind_rows(metadata_qual, metadata_noqual) %>%
           arrange(docid, page, location, number, desc(richness))
+        
+        metadata <- metadata %>% replace_na(list(empty_row = FALSE, bold = FALSE, itallic = FALSE, plain = FALSE, empty_row_with_p_value = FALSE, indented = FALSE))
         rm(metadata_noqual, metadata_qual)
 
         ## Rename metadata to match all_cells
@@ -163,7 +168,8 @@ runAll <- function(){
 
       metadata <- prepareAnnotations( annotations )
 
-
+      
+      
       TidyTable <- function(docid_page_selected){
         meta <- metadata %>%
           filter(docid_page == docid_page_selected)
@@ -200,7 +206,8 @@ runAll <- function(){
         } else {
           all_cells <- new_obj %>% filter( pmid_tbl == filename) 
         }
-
+  
+        
         ##  Simplify table by making all values character
         # If no numeric or no character columns, create
         if(!"numeric"   %in% names(all_cells)) all_cells <- all_cells %>% mutate(numeric = NA)
@@ -239,6 +246,9 @@ runAll <- function(){
 
         }
 
+        
+        browser()
+        
         ## Append to main dataset
         formats <- bind_cols(bold_ital, indt) %>%
           mutate(local_format_id = seq_along(bold))
