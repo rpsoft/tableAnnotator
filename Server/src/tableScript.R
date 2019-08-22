@@ -35,8 +35,8 @@ annotations <- anns %>% select(user,docid,page,corrupted,tableType,location,numb
   mutate(content = ifelse( content == "",NA, content)) %>%
   as.tibble()
    
-# saveRDS(input, "testing-input.rds")
-# saveRDS(annotations, "testing-annotations.rds")
+saveRDS(input, "testing-input.rds")
+saveRDS(annotations, "testing-annotations.rds")
 
 annotations <- readRDS("testing-annotations.rds")
 ##################
