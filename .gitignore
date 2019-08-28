@@ -31,9 +31,6 @@ node_modules
 Server/ALLTABLES/
 frankenstein/
 
-Server/HTML_TABLES.zip
-Server/HTML_TABLES_BACKUP/
-Server/TABLES_BACKUP/
 Server/src/clean_full_tables_rds_jul_2019.rds
 Server/src/full_tables_rds_jul_2019.rds
 Server/src/tableScript-bak.R
