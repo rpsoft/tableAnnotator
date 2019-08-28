@@ -19,10 +19,11 @@ new_obj <- new_obj %>% inner_join(filenames_lkp) %>% select(-n)
   
 new_obj <- new_obj %>% mutate(pmid_tbl = ifelse(ticker > 1, gsub(" ", "", paste(pmid,"v",ticker,"_",tbl_n), fixed = TRUE), pmid_tbl) )
 
-new_obj <- new_obj %>% mutate( indent_lvl=0)
-
 filenames <- new_obj %>% select(pmid_tbl) %>% distinct
 
+new_obj <- new_obj %>% mutate(indent_lvl = indent_lvl_cum) %>% select(-indent_lvl_cum,-indent_lvl_norm)
+
+new_obj %>% saveRDS("~/ihw/tableAnnotator/Server/src/Full_set_of_tables_Prepared.Rds")
 
 df_to_html <- function (tbl_id, df, destination){
       

@@ -15,8 +15,7 @@ tablesDirectory <- "~/ihw/tableAnnotator/Server/XLSX_TABLES/"
 ################# PREPARING THE INPUT VARIABLE annotations.
 # new_obj_back <- readRDS("full_tables_rds_jul_2019.rds")
 
-new_obj <- readRDS("Full_set_of_tables.Rds")
-new_obj <- new_obj %>% mutate( pmid_tbl=paste0(pmid,"_",tbl_n) )
+new_obj <- readRDS("Full_set_of_tables_Prepared.Rds")
 
 # new_obj_guide <- readRDS("/home/suso/Downloads/tbl_fig_titles_size.Rds")
 
@@ -35,8 +34,8 @@ annotations <- anns %>% select(user,docid,page,corrupted,tableType,location,numb
   mutate(content = ifelse( content == "",NA, content)) %>%
   as.tibble()
    
-saveRDS(input, "testing-input.rds")
-saveRDS(annotations, "testing-annotations.rds")
+# saveRDS(input, "testing-input.rds")
+# saveRDS(annotations, "testing-annotations.rds")
 
 annotations <- readRDS("testing-annotations.rds")
 ##################
@@ -116,8 +115,8 @@ runAll <- function(){
         other <- metadata %>%
           filter(tableType == "other_table")
 
-        metadata <- metadata %>%
-          filter(tableType != "other_table")
+        # metadata <- metadata %>%
+        #   filter(tableType != "other_table")
 
         ## Separate metadata to wide, only 6 possible values
         metadata <- metadata %>%
@@ -487,9 +486,11 @@ runAll <- function(){
         # data_cells
       }
       TidyTableSafe <- safely(TidyTable)
-
+      
       outputs <- map(metadata$docid_page %>% unique, ~ TidyTableSafe(.x))
 
+      browser()
+      
       names(outputs) <- metadata$docid_page %>% unique()
       outputs <- transpose(outputs)
 
