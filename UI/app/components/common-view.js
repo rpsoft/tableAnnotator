@@ -41,8 +41,6 @@ import {
   TableRowColumn,
 } from '@material-ui/core/Table';
 
-// import style from './table.css'
-
 var ReactDOMServer = require('react-dom/server');
 
 var HtmlToReact = require('html-to-react')
@@ -54,11 +52,12 @@ class CommonView extends Component {
   constructor(props) {
     super()
 
+    var urlparams = new URLSearchParams(props.location.search);
 
     this.state = {
       annotations:null,
       tables:null,
-      user:props.location.query ? props.location.query.user : "",
+      user: urlparams.get("user") ? urlparams.get("user") : "",
     };
 
   }
@@ -81,18 +80,6 @@ class CommonView extends Component {
    }
 
   }
-  //
-  // async componentWillMount() {
-  //
-  //
-  // }
-  //
-  // async loadPageFromProps(props){
-  //
-  //
-  //  }
-
-
 
    render() {
       var annotations = this.state.annotations ? this.state.annotations.rows : []
@@ -117,7 +104,7 @@ class CommonView extends Component {
       }
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
-        <Card style={{marginBottom:-10}}>
+        <Card style={{marginBottom:10}}>
 
           <h2 style={{marginTop:0,padding:10}}>Welcome Our Annotator!</h2>
 
@@ -129,15 +116,8 @@ class CommonView extends Component {
           <TextField
             value={this.state.user}
             placeholder="Set your username here"
-            onChange={(event,value) => {this.props.goToUrl("/?user="+value)}}
+            onChange={(event) => {this.props.goToUrl("/?user="+event.currentTarget.value)}}
             style={{width:200,marginLeft:20,marginRight:20}}
-            // onKeyDown={(event, index) => {
-            //
-            //   if (event.key === 'Enter') {
-            //       this.loadPageFromProps(this.props)
-            //       event.preventDefault();
-            //   }
-            // }}
             />
 
         </Card>
@@ -154,7 +134,7 @@ class CommonView extends Component {
         </Card>
 
         <Card >
-            <Card><div style={{padding:10,fontWeight:"bold",fontSize:20}}>All tables, and annotations</div></Card>
+            <Card><div style={{padding:10,fontWeight:"bold",fontSize:20}}>{"All tables, and annotations (Total: "+ (this.state.allInfo ? this.state.allInfo.abs_index.length : 0)+" )"}</div></Card>
 
             <div style={{height:"70vh",overflowY:"scroll", marginTop:10, padding:20,paddingTop:5}}>{this.state.tables && this.state.allInfo ?
                 (

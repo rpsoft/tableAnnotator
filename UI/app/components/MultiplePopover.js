@@ -85,22 +85,11 @@ export default class MultiplePopover extends React.Component {
         <Typography style={{margin:5}}>
         {
           options ? options.map( (v,o) => {
-            return <div>{v}<Checkbox
+            return <div key={o}>{v}<Checkbox
                       value={v}
                       checked={ this.state.checked[v] }
                       onChange={ () => {this.updateCheck(v)}} /></div>  } ) : ""
                     }
-
-
-        {
-          // <Menu>
-          //   { options ? options.map( (v,o) => {
-          //     return <MenuItem key={o}> <Checkbox
-          //               value={v}
-          //               checked={ this.state.checked[v] }
-          //               onCheck={ () => {this.updateCheck(v)}} /> </MenuItem> } ) : <div></div> }
-          // </Menu>
-        }
           </Typography>
         </Popover>
       </div>

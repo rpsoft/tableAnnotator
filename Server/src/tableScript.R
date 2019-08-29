@@ -1,8 +1,8 @@
 #10_unpivot_tables
-
-# library(tidyxl)
-# library(unpivotr)
-# library(tidyverse)
+# 
+#  library(tidyxl)
+#  library(unpivotr)
+#  library(tidyverse)
 
 needs(readr,tidyxl,unpivotr,tidyverse)
 
@@ -17,7 +17,12 @@ tablesDirectory <- "~/ihw/tableAnnotator/Server/XLSX_TABLES/"
 
 new_obj <- readRDS("Full_set_of_tables_Prepared.Rds")
 
+# saveRDS(input, "testing-input.rds")
+# new_obj <- new_obj %>% mutate( pmid_tbl=paste0(pmid,"_",tbl_n) )
+
 # new_obj_guide <- readRDS("/home/suso/Downloads/tbl_fig_titles_size.Rds")
+
+# input <- readRDS("testing-input.rds")
 
 anns <- input[[1]]$annotation %>% as.data.frame() %>% 
   mutate( docid = input[[1]]$docid ) %>% 
@@ -26,7 +31,6 @@ anns <- input[[1]]$annotation %>% as.data.frame() %>%
   mutate( corrupted = input[[1]]$corrupted ) %>% 
   mutate( tableType = input[[1]]$tableType )
 
-
 annotations <- anns %>% select(user,docid,page,corrupted,tableType,location,number,content,qualifiers) %>%
   mutate(page = as.double(page)) %>%
   mutate(corrupted = ifelse(corrupted == "false",FALSE,TRUE)) %>%
@@ -34,10 +38,10 @@ annotations <- anns %>% select(user,docid,page,corrupted,tableType,location,numb
   mutate(content = ifelse( content == "",NA, content)) %>%
   as.tibble()
    
-# saveRDS(input, "testing-input.rds")
-# saveRDS(annotations, "testing-annotations.rds")
 
-annotations <- readRDS("testing-annotations.rds")
+saveRDS(annotations, "testing-annotations.rds")
+
+ # annotations <- readRDS("testing-annotations.rds")
 ##################
 
 
@@ -106,7 +110,7 @@ runAll <- function(){
 
       prepareAnnotations <- function( annotations ){
         
-        browser()
+        # browser()
         metadata <- annotations
         metadata %>% distinct(docid, page)
 
@@ -246,7 +250,7 @@ runAll <- function(){
         }
 
         
-        browser()
+        # browser()
         
         ## Append to main dataset
         formats <- bind_cols(bold_ital, indt) %>%
@@ -486,11 +490,9 @@ runAll <- function(){
         # data_cells
       }
       TidyTableSafe <- safely(TidyTable)
-      
+
       outputs <- map(metadata$docid_page %>% unique, ~ TidyTableSafe(.x))
 
-      browser()
-      
       names(outputs) <- metadata$docid_page %>% unique()
       outputs <- transpose(outputs)
 

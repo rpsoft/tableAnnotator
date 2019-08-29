@@ -503,13 +503,8 @@ function _attempt_predictions() {
                 }, _callee30, this, [[0, 21]]);
               }));
 
-<<<<<<< HEAD
-              return function (_x65, _x66) {
-                return _ref25.apply(this, arguments);
-=======
-              return function (_x66, _x67) {
+              return function (_x67, _x68) {
                 return _ref26.apply(this, arguments);
->>>>>>> master
               };
             }());
             return _context31.abrupt("return", result);
@@ -1426,7 +1421,7 @@ function () {
     }, _callee19, this);
   }));
 
-  return function (_x48, _x49) {
+  return function (_x49, _x50) {
     return _ref19.apply(this, arguments);
   };
 }());
@@ -1445,11 +1440,7 @@ app.get('/api/totalTables', function (req, res) {
   });
 });
 
-<<<<<<< HEAD
-function getMMatch(_x49) {
-=======
-function getMMatch(_x50) {
->>>>>>> master
+function getMMatch(_x51) {
   return _getMMatch.apply(this, arguments);
 }
 
@@ -1543,13 +1534,8 @@ function () {
     }, _callee20, this, [[0, 11]]);
   }));
 
-<<<<<<< HEAD
-  return function (_x50, _x51) {
-    return _ref19.apply(this, arguments);
-=======
-  return function (_x51, _x52) {
+  return function (_x52, _x53) {
     return _ref20.apply(this, arguments);
->>>>>>> master
   };
 }());
 app.get('/api/classify',
@@ -1588,21 +1574,12 @@ function () {
     }, _callee21, this);
   }));
 
-<<<<<<< HEAD
-  return function (_x52, _x53) {
-    return _ref20.apply(this, arguments);
-  };
-}());
-
-function readyTableData(_x54, _x55, _x56) {
-=======
-  return function (_x53, _x54) {
+  return function (_x54, _x55) {
     return _ref21.apply(this, arguments);
   };
 }());
 
-function readyTableData(_x55, _x56, _x57) {
->>>>>>> master
+function readyTableData(_x56, _x57, _x58) {
   return _readyTableData.apply(this, arguments);
 }
 
@@ -2056,13 +2033,8 @@ function _readyTableData() {
                       }, _callee35, this, [[0, 7]]);
                     }));
 
-<<<<<<< HEAD
-                    return function (_x67, _x68) {
-                      return _ref26.apply(this, arguments);
-=======
-                    return function (_x68, _x69) {
+                    return function (_x69, _x70) {
                       return _ref27.apply(this, arguments);
->>>>>>> master
                     };
                   }());
                 });
@@ -2136,13 +2108,8 @@ function () {
     }, _callee22, this, [[0, 11]]);
   }));
 
-<<<<<<< HEAD
-  return function (_x57, _x58) {
-    return _ref21.apply(this, arguments);
-=======
-  return function (_x58, _x59) {
+  return function (_x59, _x60) {
     return _ref22.apply(this, arguments);
->>>>>>> master
   };
 }());
 app.get('/api/getAvailableTables', function (req, res) {
@@ -2175,13 +2142,8 @@ function () {
     }, _callee23, this);
   }));
 
-<<<<<<< HEAD
-  return function (_x59, _x60) {
-    return _ref22.apply(this, arguments);
-=======
-  return function (_x60, _x61) {
+  return function (_x61, _x62) {
     return _ref23.apply(this, arguments);
->>>>>>> master
   };
 }());
 app.get('/api/getAnnotationByID',
@@ -2259,13 +2221,8 @@ function () {
     }, _callee24, this);
   }));
 
-<<<<<<< HEAD
-  return function (_x61, _x62) {
-    return _ref23.apply(this, arguments);
-=======
-  return function (_x62, _x63) {
+  return function (_x63, _x64) {
     return _ref24.apply(this, arguments);
->>>>>>> master
   };
 }());
 app.get('/api/recordAnnotation',
@@ -2302,13 +2259,8 @@ function () {
     }, _callee25, this);
   }));
 
-<<<<<<< HEAD
-  return function (_x63, _x64) {
-    return _ref24.apply(this, arguments);
-=======
-  return function (_x64, _x65) {
+  return function (_x65, _x66) {
     return _ref25.apply(this, arguments);
->>>>>>> master
   };
 }());
 app.listen(_config.PORT, function () {

@@ -1,0 +1,109 @@
+
+heart failure ( class l - lll ),C0018801;C0456387;C1261077;C1518526;C1705943;C0018802;C4554158,true;false;false;false;false;true;false,0/10465
+heart failure criteria met,C0018801;C0243161;C0018802;C4554158,true;true;true;false,380/10465
+rheumatic heart disease,C0035439,true,384/10465
+third heart sound  n ( % ),C0232237;C0232278,false;false,410/10465
+baseline heart rate,C0168634;C0018810;C1442488,true;true;false,439/10465
+heart failure nyha ii - iii,C0018801;C1275491;C1710602;C0439070;C1705160;C4082587;C0018802;C4554158,true;false;false;false;false;false;true;false,534/10465
+heart disease risk factors,C0741920,false,634/10465
+ischemic heart disease  %,C0010054;C0151744,true;true,809/10465
+baseline heart failure severity nyha class i,C0168634;C0018801;C0439793;C1882084;C0522510;C0018802;C4554158;C1442488,true;true;false;false;false;true;false;false,819/10465
+heart rate ( b . p . m . )  mean ± sd,C0018810;C0369637;C0444504;C2699239;C2347634;C2348143;C0441923,true;false;false;false;false;false;false,827/10465
+prior congestive heart failure,C0332152;C0018802;C2826257,false;true;false,842/10465
+preoperative heart rate ( beats per minute ),C0445204;C0018810,false;true,884/10465
+congestive heart failure  n ( % ),C0018802,true,899/10465
+previous heart failure,C0205156;C0018801;C0018802;C4554158;C1552607,false;true;true;false;false,913/10465
+heart failure — no . ( % ),C0018801;C0018802;C4554158,true;true;false,920/10465
+cause of heart failure,C0015127;C0018801;C0018802;C4554158;C1524003,true;true;true;false;false,1118/10465
+class l / ll heart failure,C0456387;C1518526;C1705943,false;false;false,1269/10465
+history of congestive heart failure,C0455531;C0742742,false;false,1377/10465
+coronary heart disease ( % ),C0010054;C0010068;C1956346,true;true;true,1420/10465
+congestive heart failure — no . ( % ) | |,C0018802,true,1481/10465
+coronary heart disease,C0010054;C0010068;C1956346,true;true;true,1515/10465
+cause of heart failure — no . ( % ),C0015127;C0018801;C0018802;C4554158;C1524003,true;true;true;false;false,1600/10465
+hospitalized for heart failure during that time period,C0701159;C0018801;C0018802;C4554158,false;true;true;false,1810/10465
+chronic heart failure,C0018802;C0264716,true;false,1847/10465
+heart rate  mean ± sd ( b . p . m . ),C0018810;C0444504;C2699239;C0369637;C0441923;C2347634;C2348143,true;false;false;false;false;false;false,2030/10465
+recurrent heart failure,C1455761;C0018801;C0018802;C4554158;C2945760,false;true;true;false;false,2044/10465
+congestive heart failure ( < nmbr wk ),C0018802;C0053917;C0332174;C0439230;C1334884,true;true;false;false;false,2070/10465
+other ischaemic heart disease ( non - infarction ),C0010054;C1518422;C0021308;C0151744,true;false;true;true,2121/10465
+heart failure or lvef < nmbr % associated with index acs event,C0018801;C0018802;C4554158,true;true;false,2138/10465
+congestive heart failure ( chf ) ( in past nmbr weeks ),C0018802;C2987125;C0053917;C1334884,true;false;true;false,2232/10465
+heart failure ( hf )  ( % ),C0018801;C0018488;C1313497;C1538440;C3273279;C0018802;C4554158,true;true;true;false;false;true;false,2411/10465
+history of heart failure — no . ( % ),C0455531,false,2585/10465
+hospitalization for heart failure within nmbr mo,C3898876,false,2617/10465
+< nmbr mm hg heart rate,C0053917;C0439475;C0018810;C1334884,true;false;true;false,2695/10465
+heart rate  beats / min  mean ± sd,C0018810,true,2972/10465
+heart failure cause,C0018801;C0015127;C1524003;C0018802;C4554158,true;true;false;true;false,3011/10465
+heart rate,C0018810,true,3044/10465
+devices for heart failure at screening visit,C0025078;C0018787;C2024216;C0231174;C0680095;C0025080;C0018801;C0018802;C4554158;C0220819;C0699733,true;true;false;false;false;true;true;true;false;true;true,3082/10465
+congenital heart disease,C0152021,false,3118/10465
+history of heart failure,C0455531,false,3175/10465
+history of heart failure  n ( % ),C0455531,false,3189/10465
+hospitalization for heart failure within previous nmbr mo — no . ( % ),C3898876,false,3280/10465
+congestive heart failure,C0018802,true,3285/10465
+heart rate  mean ( sd )  beats / min,C0018810;C0444504;C2699239;C2347634;C2348143,true;false;false;false;false,3409/10465
+congestive heart failure — %,C0018802,true,3501/10465
+heart failure  lvef < nmbr %  or both,C0018801;C0428772;C0053917;C1334884;C0488728;C0018802;C4554158,true;false;true;false;false;true;false,3551/10465
+score on the minnesota living with heart failure scaled,C0449820;C0026183;C0595998;C4520849;C4551704;C4050231,false;true;false;false;false;false,3558/10465
+third heart sound,C0232237;C0232278,false;false,3609/10465
+previous episode of heart failure,C0205156;C0332189;C0018801;C0018802;C4554158;C1552607,false;false;true;true;false;false,3635/10465
+heart rates ( beats / minutes ),C0018810,true,3824/10465
+coronary heart disease death,C0010054;C0011065;C1306577;C4082313;C4552775;C0010068;C1956346,true;true;false;false;false;true;true,3861/10465
+heart rate  b . p . m . mean ± sd,C0018810;C0369637;C0444504;C2699239;C2347634;C2348143;C0441923,true;false;false;false;false;false;false,3902/10465
+new york heart association congestive heart failure class,C1882083;C0018802,false;true,3923/10465
+congestive heart failure ( definite ),C0018802,true,3995/10465
+congestive heart failure — no . ( % ),C0018802,true,4005/10465
+previous congestive heart failure,C0205156;C0018802;C1552607,false;true;false,4250/10465
+nmbr - lead ecg heart rate  beats / min,C0053917;C0179504;C0018810;C1334884,true;false;true;false,4275/10465
+not hospitalized for heart failure in the year prior to study enrollment,C1518422,false,4308/10465
+heart rate at rest in the supine position ( beats / min ),C0018810;C0035253;C1622890,true;true;false,4347/10465
+worsening heart failure,C0332271;C0018801;C0018802;C4554158;C1457868;C1546960,false;true;true;false;false;false,4367/10465
+heart rate  mean ( sd ) [range]  beats / min,C0018810;C0444504;C2699239;C1514721;C2348147;C3542016;C2347634;C2348143,true;false;false;false;false;false;false;false,4746/10465
+medical history duration of heart failure ( years ) primary cause of heart failure,C0199168;C0455531;C0449238;C0439234;C0205225;C0015127;C1524003;C0439612;C0439631;C2926735;C0205476,false;false;false;false;false;true;false;false;false;false;false,5047/10465
+ischemic heart disease indicator no ( n = nmbrl ),C0010054;C0021212;C1235732;C1522602;C0151744,true;true;false;false;true,5100/10465
+history of ischemic heart disease — no . ( % ),C0683519;C0475224;C0018787;C0730226;C0850708;C0944983,false;false;true;false;false;false,5129/10465
+baseline heart failure severity amongthose with priorheartfailure  %,C0168634;C0018801;C0439793;C0522510;C0018802;C4554158;C1442488,true;true;false;false;true;false;false,5331/10465
+nmbr - yr risk of coronary heart disease ( % ) ^ |,C0053917;C0439234;C1277690;C1334884,true;false;false;false,5344/10465
+hospitalization for heart failure,C3898876,false,5375/10465
+any history of congestive heart failure,C0455531;C0742742,false;false,5376/10465
+heart failure ( class i — iii ),C0018801;C0441887;C0021966;C0221138;C2698969;C0441885;C0439070;C1705160;C1319793;C2698967;C0018802;C4554158,true;false;true;false;false;false;false;false;false;false;true;false,5378/10465
+prior heart failure  n ( % ),C0332152;C0018801;C0018802;C4554158;C2826257,false;true;true;false;false,5423/10465
+prior congestive heart failure yes,C0332152;C0018802;C1549445;C1705108;C1710701;C2826257,false;true;false;false;false;false,5478/10465
+coronary heart disease risk equivalents  n ( % ) c,C1277690;C0439185;C4049980,false;false;false,5664/10465
+heart rate ( b . p . m . ),C0018810;C0369637;C0441923,true;false;false,5852/10465
+time since diagnosis of heart failure,C0040223;C3541383,true;false,5907/10465
+no prior heart failure,C0332152;C0018801;C0018802;C4554158;C2826257,false;true;true;false;false,7434/10465
+prior heart failure,C0332152;C0018801;C0018802;C4554158;C2826257,false;true;true;false;false,7435/10465
+heart rate ( beats per min ),C0018810,true,7650/10465
+heart rate  beats / min,C0018810,true,7651/10465
+heart rate  beats per min,C0018810,true,7652/10465
+heart rate — beats / min,C0018810,true,7653/10465
+heart rate ( beats / min ),C0018810,true,7654/10465
+heart rate ( beats per minute ),C0018810,true,7655/10465
+no prior heart failure ( n = nmbr  nmbr ),C0332152;C0018801;C0053917;C1334884;C0018802;C4554158;C2826257,false;true;true;false;true;false;false,7704/10465
+prior heart failure ( n = nmbr  nmbr ),C0332152;C0018801;C0053917;C1334884;C0018802;C4554158;C2826257,false;true;true;false;true;false;false,7705/10465
+heart failure nmbr mo before admission,C0018801;C0053917;C0026544;C0184666;C0809949;C0332177;C1334884;C0018802;C4554158,true;true;true;false;false;false;false;true;false,8515/10465
+heart failure nmbr month before admission,C0018801;C0053917;C0332177;C0184666;C0809949;C0439231;C1334884;C0018802;C4554158,true;true;false;false;false;false;false;true;false,8516/10465
+priorheartfailure  %,,,8920/10465
+prior heart failure yes,C0332152;C0018801;C1549445;C1705108;C1710701;C0018802;C4554158;C2826257,false;true;false;false;false;true;false;false,8921/10465
+prior heart failure  %,C0332152;C0018801;C0018802;C4554158;C2826257,false;true;true;false;false,8922/10465
+baseline heart rate ( beat / min ),C0168634;C0425583;C0871208;C0702093;C1524029;C3813700;C1521828;C1442488,true;false;false;false;false;false;false;false,9138/10465
+baseline heart rate ( beats / min ),C0168634;C0018810;C1442488,true;true;false,9139/10465
+coronary heart disease  n ( % ) b,C0010054;C0010068;C1956346,true;true;true,9218/10465
+coronary heart disease  n ( % ) t,C0010054;C0010068;C1956346,true;true;true,9219/10465
+ischaemic heart disease,C0010054;C0151744,true;true,9598/10465
+ischemic heart disease,C0010054;C0151744,true;true,9599/10465
+heart rate > nmbr bpm,C0018810;C0053917;C1334884,true;true;false,9714/10465
+heart rate < nmbr bpm,C0018810;C0053917;C1334884,true;true;false,9715/10465
+ischemic heart disease  ( % ),C0010054;C0151744,true;true,9770/10465
+ischemic heart disease  n ( % ),C0010054;C0151744,true;true,9771/10465
+ischaemic heart disease  n ( % ),C0010054;C0151744,true;true,9772/10465
+heart rate  bpm,C0018810,true,10239/10465
+heart rate — bpm,C0018810,true,10240/10465
+heart rate ( bpm ),C0018810,true,10241/10465
+structural heart disease §,C1290384,false,10346/10465
+structural heart disease,C1290384,false,10347/10465
+heart failure *,C0018801;C0018802;C4554158,true;true;false,10394/10465
+heart failure,C0018801;C0018802;C4554158,true;true;false,10395/10465
+heart failurea,C0018787,true,10396/10465

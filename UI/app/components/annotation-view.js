@@ -32,6 +32,8 @@ import Annotation from './annotation'
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+import TableCSS from './table.css';
+
 import {
   Table,
   TableBody,
@@ -39,6 +41,10 @@ import {
   TableCell,
   TableRow,
 } from '@material-ui/core';
+
+import ReactTable from 'react-table'
+import 'react-table/react-table.css'
+
 
 var ReactDOMServer = require('react-dom/server');
 var HtmlToReact = require('html-to-react')
@@ -49,10 +55,11 @@ class AnnotationView extends Component {
   constructor(props) {
     super()
 
-    var parsed = QString.parse(props.location.search);
+    var urlparams = new URLSearchParams(props.location.search);
+
 
     this.state = {
-        user: parsed.user ? parsed.user : "",
+        user: urlparams.get("user") ? urlparams.get("user") : "",
         table: null,
         annotations:[],
         corrupted: false,
@@ -461,34 +468,23 @@ class AnnotationView extends Component {
                               })
 
 
+                data = data.map( (v,i) => { v.col = parseInt(v.col); v.row = parseInt(v.row); return v})
+
+                var cols = columns.map( (v,i) => { var col = {Header: v, accessor : v}; if( v == "col" || v == "row"){ col.width = 10 }; return {Header: v, accessor : v} } )
 
 
-              preparedPreview =  <Table height={"300px"}>
-                                  <TableHeader
-                                    displaySelectAll={false}
-                                    adjustForCheckbox={false}
-                                    >
-                                    <TableRow>
-                                      {columns.map( (v,i) => <TableCell
-                                                                    key={i}
-                                                                    style={{fontWeight:"bolder",color:"black",fontSize:15}}
-                                                                    >
-                                                                    <div onClick={ (event) => { this.doSort(v) } } > {v}<SortIcon style={{marginLeft:5,cursor:"pointer"}}></SortIcon> </div>
-                                                            </TableCell>) }
-                                    </TableRow>
-                                  </TableHeader>
-                                  <TableBody
-                                    displayRowCheckbox={false}
-                                    >
-                                    {
-                                      data ? data.map( (v,i) => <TableRow key={i}>
-                                        {
-                                          columns.map( (key,j) => <TableCell key={j}>{v[key]}</TableCell>)
-                                        }
-                                      </TableRow>) : null
-                                    }
-                                  </TableBody>
-                                </Table>
+                preparedPreview = <ReactTable
+                                    data={data}
+                                    columns={cols}
+                                    style={{
+                                      height: "580px",
+                                      marginBottom: 10
+
+                                    }}
+                                    defaultPageSize={data.length}
+                                  />
+
+
                 } else {
                   preparedPreview = <div style={{marginTop:20}}>Table could not be produced. Try altering annotations, or move on</div>
                 }
@@ -497,6 +493,28 @@ class AnnotationView extends Component {
               }
 
        }
+
+       var editor_ref = this.state.editor
+
+       var table_editor = this.state.table ? <CKEditor
+            editor={ ClassicEditor }
+            data={this.state.table.formattedPage || ""}
+            onInit={ editor => {
+                // You can store the "editor" and use when it is needed.
+                console.log( 'Editor is ready to use!', editor );
+                this.setState({editor : editor})
+            } }
+            onChange={ ( event, editor ) => {
+                const data = editor.getData();
+                console.log( { event, editor, data } );
+            } }
+            onBlur={ editor => {
+                console.log( 'Blur.', editor );
+            } }
+            onFocus={ editor => {
+                console.log( 'Focus.', editor );
+            } }
+        /> : ""
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
@@ -541,7 +559,7 @@ class AnnotationView extends Component {
 
           <div style={{float:"right", position: "relative", top: -45}}>
 
-                      <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,marginRight:5,fontWeight:"bolder"}}><Refresh />Show Saved Changes</RaisedButton>
+                      <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} } style={{margin:1,marginRight:5,fontWeight:"bolder"}}><Refresh />Show Saved Changes</RaisedButton>
                       <RaisedButton variant={"contained"} onClick={ () => {this.shiftTables(-1)} } style={{padding:5,marginRight:5}}>Previous Table</RaisedButton>
                       <RaisedButton variant={"contained"} onClick={ () => {this.shiftTables(1)} } style={{padding:5,marginRight:5}}>Next Table</RaisedButton>
 
@@ -559,28 +577,10 @@ class AnnotationView extends Component {
         </Card>
 
         <Card id="tableHolder" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center"}}>
-              {
-                this.state.table ? <CKEditor
-                    editor={ ClassicEditor }
-                    data={this.state.table.formattedPage || ""}
-                    onInit={ editor => {
-                        // You can store the "editor" and use when it is needed.
-                        console.log( 'Editor is ready to use!', editor );
-                    } }
-                    onChange={ ( event, editor ) => {
-                        const data = editor.getData();
-                        console.log( { event, editor, data } );
-                    } }
-                    onBlur={ editor => {
-                        console.log( 'Blur.', editor );
-                    } }
-                    onFocus={ editor => {
-                        console.log( 'Focus.', editor );
-                    } }
-                /> : ""
-              }
-            { //!this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : <div dangerouslySetInnerHTML={{__html:this.state.table.formattedPage}}></div>
-          }
+          <RaisedButton variant={"contained"} style={{marginBottom:20}} onClick={ () => { this.setState({editor_enabled : this.state.editor_enabled ? false : true}) } }>Edit Table</RaisedButton>
+
+          { !this.state.table ? <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : ( this.state.editor_enabled ? table_editor : <div dangerouslySetInnerHTML={{__html:this.state.table.formattedPage}}></div> ) }
+
         </Card>
 
         <Card style={{padding:8,marginTop:10,fontWeight:"bold"}}>
@@ -623,8 +623,8 @@ class AnnotationView extends Component {
         <Card id="annotations" style={{padding:10,minHeight:200,paddingBottom:40,marginTop:10}}>
 
           <h3 style={{marginBottom:0,marginTop:0}}>Annotations
-              <RaisedButton variant={"contained"} backgroundColor={"#aade94"} style={{marginLeft:10}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
-              <RaisedButton variant={"contained"} backgroundColor={"#58cbff"} style={{marginLeft:10,float:"right"}} onClick={ () => {this.autoAdd()} }>Auto Add</RaisedButton>
+              <RaisedButton variant={"contained"} style={{marginLeft:10}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
+              <RaisedButton variant={"contained"}  style={{marginLeft:10,float:"right"}} onClick={ () => {this.autoAdd()} }>Auto Add</RaisedButton>
           </h3>
           <hr />
           {
@@ -642,9 +642,9 @@ class AnnotationView extends Component {
         </Card>
 
 
-        <Card style={{padding:5,marginTop:10,marginBottom:500}}>
-          <RaisedButton variant={"contained"} onClick={ () => {this.saveAnnotations(); this.loadPageFromProps(this.props); } } backgroundColor={"#ffadad"} style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton>
-          <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}><Refresh/>Reload Changes</RaisedButton>
+        <Card style={{padding:5,marginTop:10,marginBottom:600}}>
+          <RaisedButton variant={"contained"} onClick={ () => {this.saveAnnotations(); this.loadPageFromProps(this.props); } }  style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton>
+          <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} }  style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}><Refresh/>Reload Changes</RaisedButton>
         </Card>
 
 
@@ -652,10 +652,8 @@ class AnnotationView extends Component {
         <div style={{marginTop:10, position: "fixed", width: "100vw", bottom: 0, left:0, backgroundColor:"#00000061"}}>
         <Card style={{padding:10,  paddingBottom:40, maxHeight:600, width: "90%",marginLeft:"5%",marginTop:3}}>
 
-        {/* <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} } backgroundColor={"#79b5fe"} style={{margin:1,height:45,width:210,marginRight:5,float:"left",fontWeight:"bolder"}}><Refresh style={{float:"left", marginTop:10, marginLeft:10, marginRight:-12}} />Show Saved Changes</RaisedButton><br /><br /> */}
+        <RaisedButton variant={"contained"} onClick={ () => {this.setState({toggeLiveResults : this.state.toggeLiveResults ? false : true })} } style={{padding:5,marginBottom:10}}> Toggle Live Results </RaisedButton>
 
-        {/* <RaisedButton variant={"contained"} onClick={ () => {this.getPreview()} } backgroundColor={"#99b8f1"} style={{margin:1,height:45,width:150,marginRight:5,fontWeight:"bolder"}}>Update Preview</RaisedButton> */}
-        <RaisedButton variant={"contained"} onClick={ () => {this.setState({toggeLiveResults : this.state.toggeLiveResults ? false : true })} } style={{padding:5}}> Toggle Live Results </RaisedButton>
 
         {
 

@@ -84,9 +84,9 @@ for (r in 1:nrow(filenames)){
 
   try({
     print(filenames[r,]$pmid_tbl)
-    df_to_html(filenames[r,]$pmid_tbl, new_obj, "/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/tables/")
+    df_to_html(filenames[r,]$pmid_tbl, new_obj, "/home/suso/ihw/tableAnnotator/Server/HTML_TABLES/")
   })
   
 }
 
-new_obj %>% filter(pmid == "pmid") %>% View
+# new_obj %>% filter(pmid == "pmid") %>% View
