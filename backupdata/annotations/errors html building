@@ -1,0 +1,15 @@
+[1] "30425095_1"
+Error : Row and column numbers must be distinct.
+  Perhaps you meant to use a single sheet.
+[1] "30425095_2"
+[1] "30566006v2_1"
+[1] "30566006_2"
+[1] "29941478v2_1"
+
+
+[1] "26578849_2"
+Error in rep(tmp_lrc, times = no_cols - i) : invalid 'times' argument
+In addition: Warning message:
+In htmlTable.data.frame(tab, align = paste(rep("l", ncol(ex)), collapse = ""),  :
+  tab is an empty object
+[1] "26579834_1"

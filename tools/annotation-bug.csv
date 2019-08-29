@@ -1,0 +1,4 @@
+"user","docid","page","corrupted_text","tableType","location","number","content","qualifiers"
+"David","12466506","1","Table fails, don't know why","baseline_table","Col","1","characteristic_level;characteristic_name",""
+"David","12466506","1","Table fails, don't know why","baseline_table","Row","1","arms;measures",""
+"David","12466506","1","Table fails, don't know why","baseline_table","Col","1","p-interaction","empty_row_with_p_value"
