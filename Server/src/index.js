@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+
+var bodyParser = require('body-parser');
+
 var html = require("html");
 var fs = require('fs');
 var request = require("request");
@@ -32,8 +35,6 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 import {PORT} from "./config"
-// import {DOCS} from "./docList"
-
 import {TITLES} from "./titles"
 
 var titles_obj = {}
@@ -46,20 +47,13 @@ Object.defineProperty(Array.prototype, 'flat', {
     }
 });
 
-
 for ( var t in TITLES) {
   titles_obj[TITLES[t].pmid.split(" ")[0]] = { title: TITLES[t].title, abstract: TITLES[t].abstract }
 }
 
-// const XmlReader = require('xml-reader');
-// const xmlQuery = require('xml-query');
-
 var ops_counter = 0;
-
 var available_documents = {}
 var abs_index = []
-
-
 var tables_folder = "HTML_TABLES"
 var cssFolder = "HTML_STYLES"
 var DOCS = [];
@@ -92,28 +86,7 @@ function extractMMData (r) {
   }
 }
 
-//
-// fs.createReadStream('./CLUSTERS/testing_terms_canada.csv')
-//   .pipe(csv())
-//   .on('data', async (row) => {
-//
-//     var terms = row.terms
-//
-//     clusterTerms[terms] = true
-//
-//   })
-//   .on('end', () => {
-//     clusterTerms = Object.keys(clusterTerms)
-//
-//     console.log('read '+clusterTerms.length+' terms');
-//
-//   });
-
-
-
-// options: frequency ; grouped_predictor ;
 var METHOD = "grouped_predictor"
-
 
 // Postgres configuration.
 const pool = new Pool({
@@ -132,9 +105,6 @@ function prepare_cell_text(text){
     return text.replace(/[0-9]+/g, '$nmbr$').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g," ").trim().toLowerCase()
 }
 
-
-
-
 function prepareAvailableDocuments(){
 
   var fixVersionOrder = (a) => {
@@ -147,7 +117,6 @@ function prepareAvailableDocuments(){
 
   }
 
-  // console.log("preparing filed")
   fs.readdir(tables_folder, function(err, items) {
 
       DOCS = items.sort(  (a,b) => {return fixVersionOrder(a).localeCompare(fixVersionOrder(b))} );
@@ -174,7 +143,6 @@ function prepareAvailableDocuments(){
 
       }
 
-      debugger
 
       console.log("DLEN: " +DOCS.length)
   });
@@ -246,7 +214,6 @@ async function classify(terms){
     var cleanTerms = []
 
     for( t in terms ){
-      //var term = terms[t].replace(/[/(){}\[\]\|@,;]/g, " ").replace(/[^a-z #+_]/g,"").trim().toLowerCase()
 
       var term = prepare_cell_text(terms[t])
 
@@ -258,8 +225,7 @@ async function classify(terms){
     }
 
     if ( cleanTerms.length > 0 ){
-      //console.log(cleanTerms)
-    //  debugger
+
       python`
         classify(${cleanTerms})
       `.then( x => resolve(x))
@@ -285,7 +251,6 @@ async function grouped_predictor(terms){
     }
   });
 
-  //debugger
   return result
 }
 
@@ -316,7 +281,7 @@ async function attempt_predictions(actual_table){
 
             cellClasses[cellClasses.length] = cellClass
           }
-          // debugger
+
           var pred_class = await classify(terms)
 
           predictions[l] = {pred_class,terms,cellClasses}
@@ -342,10 +307,6 @@ async function insertAnnotation(docid, page, user, annotation, corrupted, tableT
     .catch(e => console.error(e.stack))
     .then(() => client.release())
 
-
-  console.log("Awaiting done: "+(ops_counter++))
-  // await client.end()
-  console.log("DONE: "+(ops_counter++))
 }
 
 // preinitialisation of components if needed.
@@ -369,8 +330,6 @@ app.get('/api/allMetaData',function(req,res){
     available_documents
   })
 });
-
-
 
 async function updateClusterAnnotation(cn,concept,cuis,isdefault,cn_override){
 
@@ -674,7 +633,6 @@ app.get('/api/formattedResults', async function (req,res){
           finalResults_array.map( (value, i) => {
             value.annotation.annotations.map( (ann , j ) => {
               try {
-                // debugger;
                 formattedRes = formattedRes+ '"'+value.user
                                           +'","'+value.docid
                                           +'","'+value.page
@@ -764,6 +722,17 @@ app.get('/api/getMMatch',async function(req,res){
 });
 
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(function (req, res, next) {  
+  next()
+})
+
+// POST method route
+app.post('/saveTableOverride', function (req, res) {
+  res.send(JSON.stringify(req.body));
+})
 
 app.get('/api/classify', async function(req,res){
 
@@ -859,7 +828,9 @@ async function readyTableData(docid,page,method){
                                       actual_table = actual_table.html();
 
                                   // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
-                                  var formattedPage = "<div><style>"+data_ss+"</style>"+actual_table+"</div>"
+                                  // var formattedPage = "<div><style>"+data_ss+"</style>"+actual_table+"</div>"
+
+                                  var formattedPage = "<div>"+actual_table+"</div>"
 
 
                                   var predictions = await attempt_predictions(actual_table)
@@ -1090,10 +1061,7 @@ async function readyTableData(docid,page,method){
 
 
 app.get('/api/getTable',async function(req,res){
-  //debugger
    try{
-
-
     if(req.query && req.query.docid
       && req.query.page && available_documents[req.query.docid]
       && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1){
@@ -1104,7 +1072,6 @@ app.get('/api/getTable',async function(req,res){
     } else {
       res.send({status: "wrong parameters", query : req.query})
     }
-
 } catch (e){
   console.log(e)
   res.send({status: "probably page out of bounds, or document does not exist", query : req.query})

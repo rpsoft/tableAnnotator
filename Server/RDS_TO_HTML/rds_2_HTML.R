@@ -64,11 +64,17 @@ df_to_html <- function (tbl_id, df, destination){
           
           # character = if_else(bold, paste0('<p style="font-weight: bold;" > ',character, "</p>"), character)
           character = paste0('">',character,"</p>"),
+          character = if_else(bold, paste0('bold ', character), character),
           character = if_else(indent, paste0('indent',indent_lvl,' ', character), character),
           character = if_else(italic, paste0('italic ', character), character),
           character = if_else(first_col, paste0('firstCol ', character), character),
           character = if_else(first_last_col, paste0('firstLastCol ', character), character),
-          character = paste0('<p class="',character)
+          character = paste0('" class="',character),
+          
+          character = if_else(indent, paste0('padding-left:',indent_lvl*20,'px; ', character), character),
+          character = if_else(bold, paste0('font-weight: bold; ', character), character),
+          character = if_else(italic, paste0('font-style: italic; ', character), character),
+          character = paste0('<p style="',character)
         )
       
       html_res <- htmlTable::htmlTable(rectify( ex ),

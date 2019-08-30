@@ -4,3 +4,14 @@ width:150pt
 
 
 }
+
+
+.cke_contents {
+    min-height: 750px;
+}
+
+
+.cke_toolbar_break {
+    display: initial;
+    clear: none;
+}

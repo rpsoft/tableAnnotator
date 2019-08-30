@@ -56,6 +56,8 @@ var express = require('express');
 
 var app = express();
 
+var bodyParser = require('body-parser');
+
 var html = require("html");
 
 var fs = require('fs');
@@ -108,9 +110,7 @@ for (var t in _titles.TITLES) {
     title: _titles.TITLES[t].title,
     abstract: _titles.TITLES[t].abstract
   };
-} // const XmlReader = require('xml-reader');
-// const xmlQuery = require('xml-query');
-
+}
 
 var ops_counter = 0;
 var available_documents = {};
@@ -154,24 +154,7 @@ function extractMMData(r) {
   } catch (e) {
     return [];
   }
-} //
-// fs.createReadStream('./CLUSTERS/testing_terms_canada.csv')
-//   .pipe(csv())
-//   .on('data', async (row) => {
-//
-//     var terms = row.terms
-//
-//     clusterTerms[terms] = true
-//
-//   })
-//   .on('end', () => {
-//     clusterTerms = Object.keys(clusterTerms)
-//
-//     console.log('read '+clusterTerms.length+' terms');
-//
-//   });
-// options: frequency ; grouped_predictor ;
-
+}
 
 var METHOD = "grouped_predictor"; // Postgres configuration.
 
@@ -199,8 +182,7 @@ function prepareAvailableDocuments() {
     } else {
       return a;
     }
-  }; // console.log("preparing filed")
-
+  };
 
   fs.readdir(tables_folder, function (err, items) {
     DOCS = items.sort(function (a, b) {
@@ -237,7 +219,6 @@ function prepareAvailableDocuments() {
       };
     }
 
-    debugger;
     console.log("DLEN: " + DOCS.length);
   });
 }
@@ -344,7 +325,6 @@ function _classify() {
               var cleanTerms = [];
 
               for (t in terms) {
-                //var term = terms[t].replace(/[/(){}\[\]\|@,;]/g, " ").replace(/[^a-z #+_]/g,"").trim().toLowerCase()
                 var term = prepare_cell_text(terms[t]);
 
                 if (term.length > 0) {
@@ -356,8 +336,6 @@ function _classify() {
               }
 
               if (cleanTerms.length > 0) {
-                //console.log(cleanTerms)
-                //  debugger
                 python(_templateObject3(), cleanTerms).then(function (x) {
                   return resolve(x);
                 }).catch(python.Exception, function (e) {
@@ -402,8 +380,7 @@ function _grouped_predictor() {
               } else {
                 resolve({});
               }
-            }); //debugger
-
+            });
             return _context29.abrupt("return", result);
 
           case 2:
@@ -466,8 +443,7 @@ function _attempt_predictions() {
                           }
 
                           cellClasses[cellClasses.length] = cellClass;
-                        } // debugger
-
+                        }
 
                         _context30.next = 13;
                         return classify(terms);
@@ -549,11 +525,8 @@ function _insertAnnotation() {
 
           case 5:
             done = _context32.sent;
-            console.log("Awaiting done: " + ops_counter++); // await client.end()
 
-            console.log("DONE: " + ops_counter++);
-
-          case 8:
+          case 6:
           case "end":
             return _context32.stop();
         }
@@ -1402,7 +1375,6 @@ function () {
               finalResults_array.map(function (value, i) {
                 value.annotation.annotations.map(function (ann, j) {
                   try {
-                    // debugger;
                     formattedRes = formattedRes + '"' + value.user + '","' + value.docid + '","' + value.page // +'","'+value.corrupted
                     + '","' + (value.corrupted_text == "undefined" ? "" : value.corrupted_text).replace(/\"/g, "'") + '","' + value.tableType + '","' + ann.location + '","' + ann.number + '","' + Object.keys(ann.content).join(';') + '","' + Object.keys(ann.qualifiers).join(';') + '"' + "\n";
                   } catch (e) {
@@ -1538,6 +1510,17 @@ function () {
     return _ref20.apply(this, arguments);
   };
 }());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(function (req, res, next) {
+  next();
+}); // POST method route
+
+app.post('/saveTableOverride', function (req, res) {
+  res.send(JSON.stringify(req.body));
+});
 app.get('/api/classify',
 /*#__PURE__*/
 function () {
@@ -1703,8 +1686,9 @@ function _readyTableData() {
 
 
                               actual_table = actual_table.html(); // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
+                              // var formattedPage = "<div><style>"+data_ss+"</style>"+actual_table+"</div>"
 
-                              formattedPage = "<div><style>" + data_ss + "</style>" + actual_table + "</div>";
+                              formattedPage = "<div>" + actual_table + "</div>";
                               _context35.next = 33;
                               return attempt_predictions(actual_table);
 

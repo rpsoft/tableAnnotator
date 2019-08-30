@@ -27,7 +27,7 @@ export default class fetchData {
     console.log(urlQueryRequest)
 
     var r = await this.getGeneric( urlQueryRequest  )
-    // debugger
+
     return r
 
   }
@@ -37,9 +37,8 @@ export default class fetchData {
         var urlQueryRequest = urlBase+ "getTable?docid="+encodeURIComponent(docid)+"&page="+page
 
         var r = await this.getGeneric( urlQueryRequest  )
-        // debugger
-        return r
 
+        return r
   }
 
   async getAnnotationPreview(docid,page,user) {
@@ -47,9 +46,8 @@ export default class fetchData {
         var urlQueryRequest = urlBase+ "annotationPreview?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user
 
         var r = await this.getGeneric( urlQueryRequest  )
-        // debugger
-        return r
 
+        return r
   }
 
   async getAnnotationByID(docid,page,user) {
@@ -57,9 +55,8 @@ export default class fetchData {
         var urlQueryRequest = urlBase+ "getAnnotationByID?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user
 
         var r = await this.getGeneric( urlQueryRequest  )
-        // debugger
-        return r
 
+        return r
   }
 
   async getAllInfo() {

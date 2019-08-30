@@ -29,8 +29,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import Annotation from './annotation'
 
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import CKEditor from 'ckeditor4-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import TableCSS from './table.css';
 
@@ -145,6 +145,9 @@ class AnnotationView extends Component {
             })
 
         var data = await fetch.getTable(parsed.docid,parsed.page)
+
+        // debugger
+
         var allInfo = JSON.parse(await fetch.getAllInfo())
 
         var documentData = allInfo.available_documents[parsed.docid]
@@ -477,7 +480,7 @@ class AnnotationView extends Component {
                                     data={data}
                                     columns={cols}
                                     style={{
-                                      height: "580px",
+                                      height: "750px",
                                       marginBottom: 10
 
                                     }}
@@ -497,15 +500,46 @@ class AnnotationView extends Component {
        var editor_ref = this.state.editor
 
        var table_editor = this.state.table ? <CKEditor
-            editor={ ClassicEditor }
+
+            type="classic"
+
+            config={ {
+                allowedContent : true,
+                toolbar : [
+                          	{ name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
+                          	{ name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+                          	{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+                          	{ name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+
+                          	{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
+                          	{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+                          	{ name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+                          	{ name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+
+                          	{ name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+                          	{ name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+                          	{ name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+                          	{ name: 'others', items: [ '-' ] },
+                          	{ name: 'about', items: [ 'About' ] }
+                          ],
+
+            } }
+
+
+
             data={this.state.table.formattedPage || ""}
+
             onInit={ editor => {
                 // You can store the "editor" and use when it is needed.
+
                 console.log( 'Editor is ready to use!', editor );
                 this.setState({editor : editor})
             } }
             onChange={ ( event, editor ) => {
-                const data = editor.getData();
+
+                var realData = this.state.table.formattedPage
+
+                const data = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].getData();
                 console.log( { event, editor, data } );
             } }
             onBlur={ editor => {
@@ -576,9 +610,9 @@ class AnnotationView extends Component {
                                                                                                         </div> }
         </Card>
 
-        <Card id="tableHolder" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center"}}>
+        <Card id="tableHolder" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center", minHeight: 580}}>
           <RaisedButton variant={"contained"} style={{marginBottom:20}} onClick={ () => { this.setState({editor_enabled : this.state.editor_enabled ? false : true}) } }>Edit Table</RaisedButton>
-
+          { this.state.editor_enabled ? <RaisedButton variant={"contained"} style={{marginBottom:20,float:"right"}} onClick={ () => { this.setState({editor_enabled : this.state.editor_enabled ? false : true}) } }>Save Table Changes</RaisedButton> : ""}
           { !this.state.table ? <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : ( this.state.editor_enabled ? table_editor : <div dangerouslySetInnerHTML={{__html:this.state.table.formattedPage}}></div> ) }
 
         </Card>
