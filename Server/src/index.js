@@ -725,7 +725,7 @@ app.get('/api/getMMatch',async function(req,res){
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(function (req, res, next) {  
+app.use(function (req, res, next) {
   next()
 })
 
@@ -828,9 +828,9 @@ async function readyTableData(docid,page,method){
                                       actual_table = actual_table.html();
 
                                   // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
-                                  // var formattedPage = "<div><style>"+data_ss+"</style>"+actual_table+"</div>"
+                                   var formattedPage = "<div><style>"+data_ss+"</style>"+actual_table+"</div>"
 
-                                  var formattedPage = "<div>"+actual_table+"</div>"
+                                  // var formattedPage = "<div>"+actual_table+"</div>"
 
 
                                   var predictions = await attempt_predictions(actual_table)

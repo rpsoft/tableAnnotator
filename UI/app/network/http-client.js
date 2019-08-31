@@ -53,4 +53,41 @@ export default class HttpClient {
       }
     );
   }
+
+  sendPost(messageBody='', options={}) {
+    return new Promise(
+      (resolve, reject) => {
+        var options = {
+          host: (typeof location != "undefined") ? location.hostname : '',
+          port: (typeof location != "undefined") ? 6541 : 0,
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          }
+        };
+
+        var req = http.request(options, function(res) {
+          console.log('Status: ' + res.statusCode);
+          console.log('Headers: ' + JSON.stringify(res.headers));
+          res.setEncoding('utf8');
+          res.on('data', function (body) {
+            console.log('Body: ' + body);
+          });
+        });
+
+        req.on('error', function(e) {
+          console.log('problem with request: ' + e.message);
+        });
+
+        // write data to request body
+        req.write('{"string": "Hello, World"}');
+
+        req.end();
+      }
+    );
+  }
+
+
+
+
 }

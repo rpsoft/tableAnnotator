@@ -1686,9 +1686,9 @@ function _readyTableData() {
 
 
                               actual_table = actual_table.html(); // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
-                              // var formattedPage = "<div><style>"+data_ss+"</style>"+actual_table+"</div>"
 
-                              formattedPage = "<div>" + actual_table + "</div>";
+                              formattedPage = "<div><style>" + data_ss + "</style>" + actual_table + "</div>"; // var formattedPage = "<div>"+actual_table+"</div>"
+
                               _context35.next = 33;
                               return attempt_predictions(actual_table);
 

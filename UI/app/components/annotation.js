@@ -68,7 +68,7 @@ class Annotation extends Component {
       <div style={{marginLeft:0, height: 40}}>
             <RaisedButton
                 variant={"contained"}
-                style={{marginRight:35}}
+                style={{marginRight:35, backgroundColor:"#ffa3a3"}}
                 onClick={() => {this.props.deleteAnnotation()}}
 
               >Delete</RaisedButton>

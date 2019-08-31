@@ -23,6 +23,9 @@ import TextField from '@material-ui/core/Input';
 // import Input from '@material-ui/core/Input';
 import SortIcon from '@material-ui/icons/Sort';
 import SelectField from '@material-ui/core/Select';
+import PowerIcon from '@material-ui/icons/Power';
+
+
 import Loader from 'react-loader-spinner'
 import { push } from 'connected-react-router'
 import Checkbox from '@material-ui/core/Checkbox';
@@ -50,7 +53,10 @@ var ReactDOMServer = require('react-dom/server');
 var HtmlToReact = require('html-to-react')
 var HtmlToReactParser = require('html-to-react').Parser;
 
+
+
 class AnnotationView extends Component {
+
 
   constructor(props) {
     super()
@@ -72,8 +78,9 @@ class AnnotationView extends Component {
         },
         toggeLiveResults: true,
     };
-    //debugger
+
   }
+
 
   async componentDidMount () {
     var parsed = QString.parse(this.props.location.search);
@@ -248,14 +255,12 @@ class AnnotationView extends Component {
        } )
      }
 
-     // debugger
      var col_annotations = process_auto_annotations (this.state.table.predicted.cols,"Col")
      var row_annotations = process_auto_annotations (this.state.table.predicted.rows,"Row")
 
     this.setState({annotations : col_annotations.concat(row_annotations)})
 
    }
-
 
 
    removeFalseKeys(obj){
@@ -386,8 +391,7 @@ class AnnotationView extends Component {
        var parsed = QString.parse(this.props.location.search);
 
 
-
-        if( this.state.allAnnotations && this.state.allAnnotations[parsed.docid+"_"+parsed.page] ){
+       if( this.state.allAnnotations && this.state.allAnnotations[parsed.docid+"_"+parsed.page] ){
 
           previousAnnotations = <div style={{color:"red",display:"inline"}}>
                       <div style={{display:"inline"}} >Already Annotated by: </div>
@@ -480,7 +484,7 @@ class AnnotationView extends Component {
                                     data={data}
                                     columns={cols}
                                     style={{
-                                      height: "750px",
+                                      height: "540px",
                                       marginBottom: 10
 
                                     }}
@@ -499,56 +503,53 @@ class AnnotationView extends Component {
 
        var editor_ref = this.state.editor
 
-       var table_editor = this.state.table ? <CKEditor
+       var table_editor;
 
-            type="classic"
+       if ( this.state.table ) {
+          table_editor = <CKEditor
 
-            config={ {
-                allowedContent : true,
-                toolbar : [
-                          	{ name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
-                          	{ name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
-                          	{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
-                          	{ name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+              type="classic"
 
-                          	{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
-                          	{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
-                          	{ name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
-                          	{ name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+              config={ {
+                  allowedContent : true,
+                  toolbar : [
+                            	{ name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
+                            	{ name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+                            	{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+                            	{ name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+                            	{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
+                            	{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+                            	{ name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+                            	{ name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+                            	{ name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+                            	{ name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+                            	{ name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+                            	{ name: 'others', items: [ '-' ] },
+                            	// { name: 'about', items: [ 'About' ] }
+                            ],
 
-                          	{ name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
-                          	{ name: 'colors', items: [ 'TextColor', 'BGColor' ] },
-                          	{ name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
-                          	{ name: 'others', items: [ '-' ] },
-                          	{ name: 'about', items: [ 'About' ] }
-                          ],
+              } }
 
-            } }
+              data={this.state.table.formattedPage || ""}
 
+              onInit={ editor => {
+                  // You can store the "editor" and use when it is needed.
+                  console.log( 'Editor is ready to use!', editor );
+                  this.setState({editor : editor})
+              } }
 
+              onChange={ ( event, editor ) => {
+                  var realData = this.state.table.formattedPage
+                  const data = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].getData();
+                  console.log( { event, editor, data } );
+              } }
 
-            data={this.state.table.formattedPage || ""}
+        />
 
-            onInit={ editor => {
-                // You can store the "editor" and use when it is needed.
+      } else {
+          table_editor = "";
+      }
 
-                console.log( 'Editor is ready to use!', editor );
-                this.setState({editor : editor})
-            } }
-            onChange={ ( event, editor ) => {
-
-                var realData = this.state.table.formattedPage
-
-                const data = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].getData();
-                console.log( { event, editor, data } );
-            } }
-            onBlur={ editor => {
-                console.log( 'Blur.', editor );
-            } }
-            onFocus={ editor => {
-                console.log( 'Focus.', editor );
-            } }
-        /> : ""
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
@@ -657,8 +658,8 @@ class AnnotationView extends Component {
         <Card id="annotations" style={{padding:10,minHeight:200,paddingBottom:40,marginTop:10}}>
 
           <h3 style={{marginBottom:0,marginTop:0}}>Annotations
-              <RaisedButton variant={"contained"} style={{marginLeft:10}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
-              <RaisedButton variant={"contained"}  style={{marginLeft:10,float:"right"}} onClick={ () => {this.autoAdd()} }>Auto Add</RaisedButton>
+              <RaisedButton variant={"contained"}  className={"redbutton"} style={{marginLeft:10, backgroundColor:"#b8efaf"}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
+              <RaisedButton variant={"contained"}  style={{marginLeft:10,float:"right", backgroundColor:"#b8c0ff"}} onClick={ () => {this.autoAdd()} }><PowerIcon /> Auto Add </RaisedButton>
           </h3>
           <hr />
           {
@@ -684,7 +685,7 @@ class AnnotationView extends Component {
 
 
         <div style={{marginTop:10, position: "fixed", width: "100vw", bottom: 0, left:0, backgroundColor:"#00000061"}}>
-        <Card style={{padding:10,  paddingBottom:40, maxHeight:600, width: "90%",marginLeft:"5%",marginTop:3}}>
+        <Card style={{padding:10,  paddingBottom:10, maxHeight:600, width: "90%",marginLeft:"5%",marginTop:3}}>
 
         <RaisedButton variant={"contained"} onClick={ () => {this.setState({toggeLiveResults : this.state.toggeLiveResults ? false : true })} } style={{padding:5,marginBottom:10}}> Toggle Live Results </RaisedButton>
 

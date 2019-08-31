@@ -20,6 +20,21 @@ export default class fetchData {
     return result
   }
 
+
+  async saveTableEdit(docid,page,content) {
+    let result
+
+    var options = {path : "", messageBody : ""}
+
+    try {
+      result = await this.httpClient.sendPost('', options )
+    } catch(error) {
+      console.error('Table Edit POST failed: ' + error)
+    }
+
+    return result
+  }
+
   async saveAnnotation(docid,page,user,annotation,corrupted, tableType, corrupted_text) {
 
     var urlQueryRequest = urlBase+ "recordAnnotation?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user+"&annotation="+encodeURIComponent(JSON.stringify(annotation))+"&corrupted="+ (corrupted == undefined ? false : corrupted)+"&tableType="+tableType + "&corrupted_text=" + corrupted_text
