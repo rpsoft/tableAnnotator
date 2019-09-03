@@ -18,7 +18,7 @@ const muiTheme = createMuiTheme(muiLMSTheme);
 export default class ResultsContainer extends Component {
   render() {
     return (
-     <div id="maincontainer" style={{height:"calc(100%)",  backgroundSize: "52%",backgroundAttachment:"fixed"}}>
+     <div id="maincontainer" style={{height:"calc(100%)",  backgroundSize: "52%",backgroundAttachment:"fixed", minWidth:1200}}>
        <MuiThemeProvider theme={ muiTheme }>
          <ResultsView {...this.props} />
        </MuiThemeProvider>

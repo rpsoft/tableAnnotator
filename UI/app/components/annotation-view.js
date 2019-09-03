@@ -37,6 +37,8 @@ import CKEditor from 'ckeditor4-react';
 
 import TableCSS from './table.css';
 
+import MetaAnnotator from './meta-annotator';
+
 import {
   Table,
   TableBody,
@@ -63,7 +65,6 @@ class AnnotationView extends Component {
 
     var urlparams = new URLSearchParams(props.location.search);
 
-
     this.state = {
         user: urlparams.get("user") ? urlparams.get("user") : "",
         table: null,
@@ -77,6 +78,7 @@ class AnnotationView extends Component {
           dir : "asc"
         },
         toggeLiveResults: true,
+        cuis_data : null,
     };
 
   }
@@ -86,6 +88,9 @@ class AnnotationView extends Component {
     var parsed = QString.parse(this.props.location.search);
 
     let fetch = new fetchData();
+
+    var cuis_data = await fetch.getCUISIndex();
+
     var annotation = JSON.parse(await fetch.getAnnotationByID(parsed.docid,parsed.page,this.state.user))
 
     var all_annotations = JSON.parse(await fetch.getAllAnnotations())
@@ -106,10 +111,11 @@ class AnnotationView extends Component {
       corrupted : annotation.corrupted === 'true',
       corrupted_text : annotation.corrupted_text,
       docid : (annotation || annotation.docid) || parsed.docid,
-      page: annotation.page || parsed.page,
+      page : annotation.page || parsed.page,
       tableType : annotation.tableType ? annotation.tableType : "",
       annotations : annotation.annotation ? annotation.annotation.annotations : [],
-      allAnnotations: annotations_formatted
+      allAnnotations : annotations_formatted,
+      cuis_data : cuis_data,
     })
 
     if( !this.state.preview ){
@@ -152,8 +158,6 @@ class AnnotationView extends Component {
             })
 
         var data = await fetch.getTable(parsed.docid,parsed.page)
-
-        // debugger
 
         var allInfo = JSON.parse(await fetch.getAllInfo())
 
@@ -553,6 +557,8 @@ class AnnotationView extends Component {
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
+        <MetaAnnotator annotationData={data} cuis_data={this.state.cuis_data}/>
+
         <Card id="userData" style={{padding:15}}>
           <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+(this.state.user ? "?user="+this.state.user : "" ))}/>
 
@@ -703,7 +709,11 @@ class AnnotationView extends Component {
         }
 
         </Card>
+
+
         </div>
+
+
 
       </div>
     }

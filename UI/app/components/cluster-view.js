@@ -292,16 +292,6 @@ class ClusterView extends Component {
 
    render() {
 
-     //var CUIs = ["28 : C0043210 : female (Woman) [Population Group] ","28 : C0043210 : female (Woman) [Population Group] ","15 : C0043210 : female (Woman) [Population Group] ","28 : C0043210 : female (Woman) [Population Group] ","10 : C0043210 : female (Woman) [Population Group] "]
-
-     //
-     // <div style={{float:"right "}}>
-     //  <RaisedButton variant={"contained"} onClick={ () => {this.changePage(parseInt(this.state.currentPage) - 1)} } style={{float:"left"}}> {"<<"} </RaisedButton>
-     //  <div style={{float:"left",padding:15,fontWeight:"bold"}}>{"Cluster : "+this.state.currentPage +" / "+ this.state.totalClusters }</div>
-     //  <RaisedButton variant={"contained"} onClick={ () => {this.changePage(parseInt(this.state.currentPage) + 1)} } style={{float:"left"}}> {">>"} </RaisedButton></div>
-
-
-
      if ( this.state.clusters && Object.keys(this.state.clusters).length > 0 ){
 
        var maxIndex = Object.keys(this.state.clusters).reduce( (v,max) => { return parseInt(v) > max ? v : max }, -99999)
@@ -327,7 +317,7 @@ class ClusterView extends Component {
                                                                  status={this.state.clusterData[v] ? this.state.clusterData[v].status : "inprogress"}
                                                                  rep_cuis={this.state.clusterData[v] && this.state.clusterData[v].rep_cuis ? this.state.clusterData[v].rep_cuis : []}
                                                                  excluded_cuis={this.state.clusterData[v] && this.state.clusterData[v].excluded_cuis ? this.state.clusterData[v].excluded_cuis : []}
-                                                               ></Cluster>})
+                                                               />})
 
 
        var currentPage = this.state.currentPage-1
@@ -361,15 +351,9 @@ class ClusterView extends Component {
          status={this.state.clusterData["-10"] ? this.state.clusterData["-10"].status : "inprogress"}
          rep_cuis={this.state.clusterData["-10"] && this.state.clusterData["-10"].rep_cuis ? this.state.clusterData["-10"].rep_cuis : []}
          excluded_cuis={this.state.clusterData["-10"] && this.state.clusterData["-10"].excluded_cuis ? this.state.clusterData["-10"].excluded_cuis : []}
-       ></Cluster>
+       />
 
-
-       // <Infinite containerHeight={1020} elementHeight={60}>
-       //     { currentClusters }
-       // </Infinite>
-
-
-       var page_styler= { cursor: "pointer", color: "blue", textDecoration: "underline" }
+       var page_styler = { cursor: "pointer", color: "blue", textDecoration: "underline" }
 
        return <Card style={{width: "90vw", marginLeft:"5vw", padding: "1vw", minHeight:600}}>
 
@@ -401,10 +385,8 @@ class ClusterView extends Component {
                                   newpage = parseInt(this.state.goto) > total ? total : parseInt(this.state.goto)
 
                               this.setState({currentPage:newpage});
-
                               }
                             }
-
                         }}
                         />
                       </div>
@@ -425,11 +407,8 @@ class ClusterView extends Component {
                      placeholder="Filter by text here"
                      onChange={(event,value) => {this.setState({searchTerm: value, currentPage: 1 })}}
                      style={{width:200,marginLeft:20,marginRight:20}}
-                     onKeyDown={(event, index) => {
-
-                     }}
-                     />
-
+                     onKeyDown={(event, index) => {}}
+                   />
 
                      {
                       Object.keys(this.state.checkedConcepts).length > 0 ? <Card style={{position:"fixed", top:20, right:20, minWidth: "20vw", minHeight: "20vh",padding:5,paddingTop:15,paddingRight:10}}>
@@ -448,12 +427,8 @@ class ClusterView extends Component {
                          }
                          </div>
                          <div style={{height:"20%",marginTop:5 }}>
-
-
                               <RaisedButton variant={"contained"} onClick={ () => { this.moveAllHere(maxIndex) } } style={{float:"left",marginLeft:5, paddingLeft:5, paddingRight:5}}> {"To New Cluster"} </RaisedButton>
-
                               <RaisedButton variant={"contained"} onClick={ () => { this.moveAllHere("-10") } } style={{float:"right",marginLeft:5}}> {"Discard All"} </RaisedButton>
-
                          </div>
                        </div>
                      </Card> : ""

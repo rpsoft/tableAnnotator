@@ -30,7 +30,7 @@ import CommonView from './common-view';
 export default class AppContainer extends Component {
   render() {
     return (
-     <div id="maincontainer" style={{ backgroundSize: "52%",backgroundAttachment:"fixed", paddingTop:10,paddingBottom:10, height:"100%"}}>
+     <div id="maincontainer" style={{ backgroundSize: "52%",backgroundAttachment:"fixed", paddingTop:10,paddingBottom:10, height:"100%", minWidth:1200}}>
        <MuiThemeProvider theme={ muiTheme }>
          <CommonView {...this.props} />
        </MuiThemeProvider>
