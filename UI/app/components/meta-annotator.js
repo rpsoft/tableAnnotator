@@ -17,13 +17,26 @@ import MetaItem from './meta-item'
 
 import Eye from '@material-ui/icons/RemoveRedEye';
 
+import fetchData from '../network/fetch-data';
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
 
 class MetaAnnotator extends Component {
   constructor(props) {
       super()
+
+      var urlparams = new URLSearchParams(window.location.search);
+
       this.state = {
+        user: urlparams.get("user") ? urlparams.get("user") : "",
+        page: urlparams.get("page") ? urlparams.get("page") : "",
+        docid: urlparams.get("docid") ? urlparams.get("docid") : "",
         opened: true,
         cuis_data : props.cuis_data,
+        concept_metadata: {}
       };
 
     }
@@ -37,13 +50,31 @@ class MetaAnnotator extends Component {
   };
 
   async componentDidMount() {
+
+      let fetch = new fetchData();
+
+      var data = await fetch.getTableMetadata(this.state.docid, this.state.page, this.state.user)
+
+      var concept_metadata = {}
+
+      data ? data.rows.map ( item => { concept_metadata[item.concept] = {cuis: item.cuis.split(";"), qualifiers: item.qualifiers.split(";")} }) : ""
+
+      this.setState({concept_metadata : concept_metadata })
+
   }
 
   async componentWillReceiveProps(next) {
 
-    // debugger
-    this.setState({cuis_data: next.cuis_data})
+    this.setState({cuis_data: next.cuis_data, cuis_data : next.cuis_data})
 
+  }
+
+  prepareTermForMatching = (term) => {
+    term = term.replaceAll(/[^A-z0-9\^ ]/," ")
+    term = term.replaceAll('[0-9]+',"$nmbr$")
+    term = term.replaceAll(/\^/g, '');
+    term = term.replaceAll(' +'," ").trim().toLowerCase()
+    return term
   }
 
   render() {
@@ -79,15 +110,20 @@ class MetaAnnotator extends Component {
                   <div style={{margin:10}}>
                   {
                     Object.keys(concepts).map(
-                      v => ["row","col","value"].indexOf(v) > -1 ? ""
-                      : <div>
-                            <h4>{v}</h4>
-                            <div>{concepts[v].map( (concept,i) => {
+                      (v,j) => ["row","col","value"].indexOf(v) > -1 ? ""
+                      : <div key = {"concept_"+j} >
+                            <h3 style={{fontVariantCaps: "small-caps", fontSize: 30, marginBottom: 3}}>{v}</h3>
+                            <div style={{marginLeft:10}}>{concepts[v].map( (concept,i) => {
 
                               return concepts[v].indexOf(concept) < i ? ""
-                                    : <MetaItem term = {concept} cuis_data = {this.state.cuis_data}/>
-
-
+                                    : <MetaItem
+                                                key = {"concept_item_"+concept}
+                                                term = {concept}
+                                                matching_term = {this.prepareTermForMatching(concept)}
+                                                cuis_data = {this.state.cuis_data}
+                                                assigned_cuis = { (this.state.concept_metadata[concept] && this.state.concept_metadata[concept].cuis) || []}
+                                                assigned_qualifiers = { (this.state.concept_metadata[concept] && this.state.concept_metadata[concept].qualifiers) || []}
+                                      />
                             })}</div>
                       </div>)
                   }

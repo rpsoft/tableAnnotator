@@ -17,7 +17,7 @@ multiple_ws_pattern = re.compile(' +')
 
 
 def cleanTerm (term):
-    term = number_pattern.sub("nmbr",term)  # This one changes numbers by the string "nmbr" to preserve information such as number ranges. (age ranges, etc)
+    term = number_pattern.sub("$nmbr$",term)  # This one changes numbers by the string "nmbr" to preserve information such as number ranges. (age ranges, etc)
     # term = pattern.sub(' ', term).lower().strip()
     term = symbol_pattern.sub(" \\1 ",term)
     term = multiple_ws_pattern.sub(" ",term)

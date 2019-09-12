@@ -56,7 +56,6 @@ var HtmlToReact = require('html-to-react')
 var HtmlToReactParser = require('html-to-react').Parser;
 
 
-
 class AnnotationView extends Component {
 
 
@@ -82,6 +81,7 @@ class AnnotationView extends Component {
     };
 
   }
+
 
 
   async componentDidMount () {
@@ -557,7 +557,7 @@ class AnnotationView extends Component {
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
-        <MetaAnnotator annotationData={data} cuis_data={this.state.cuis_data}/>
+        <MetaAnnotator annotationData={data} cuis_data={this.state.cuis_data} />
 
         <Card id="userData" style={{padding:15}}>
           <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+(this.state.user ? "?user="+this.state.user : "" ))}/>

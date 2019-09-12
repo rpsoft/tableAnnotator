@@ -56,6 +56,49 @@ export default class fetchData {
         return r
   }
 
+  async getConceptAssignments() {
+
+        var urlQueryRequest = urlBase+ "conceptAssignments"
+
+        var r = await this.getGeneric( urlQueryRequest  )
+
+        return JSON.parse(r).rows
+  }
+
+conceptAssignments
+  async getTableMetadata(docid,page) {
+
+        var urlQueryRequest = urlBase+ "getMetadata?docid="+encodeURIComponent(docid)+"&page="+page
+
+        var r = await this.getGeneric( urlQueryRequest  )
+
+        return r
+  }
+
+  async setTableMetadata(docid, page, concept, cuis, qualifiers, user) {
+
+        var urlQueryRequest = urlBase+ "setMetadata?docid="+encodeURIComponent(docid)
+                                                +"&page="+page
+                                                +"&concept="+encodeURIComponent(concept)
+                                                +"&cuis="+encodeURIComponent(cuis)
+                                                +"&qualifiers="+encodeURIComponent(qualifiers)
+                                                +"&user="+encodeURIComponent(user)
+
+        var r = await this.getGeneric( urlQueryRequest  )
+
+        return r
+  }
+
+  async getTableMetadata(docid, page, user) {
+
+        var urlQueryRequest = urlBase+ "getMetadata?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+encodeURIComponent(user)
+
+        var r = await this.getGeneric( urlQueryRequest  )
+
+        return JSON.parse(r)
+  }
+
+
   async getAnnotationPreview(docid,page,user) {
 
         var urlQueryRequest = urlBase+ "annotationPreview?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user

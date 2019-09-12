@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import functools 
+import functools
 from sklearn.preprocessing import OneHotEncoder, normalize
 from sklearn.cluster import dbscan
 from sklearn.metrics.pairwise import cosine_similarity
@@ -22,7 +22,7 @@ import re
 
 import functools
 
-import random 
+import random
 
 import pickle
 
@@ -84,17 +84,17 @@ for c in cui_freqs["CUI"]:
 # def similarity(x, y):
 
 #     max_len = min(4,max(len(x[np.where( x > 0 )]),len(y[np.where( y > 0 )])))
-#     totals = np.add(x, y) 
+#     totals = np.add(x, y)
 #     total_incommon = min(4,len(totals[np.where( totals > 1 )]))
-    
-#     result = 1-(total_incommon/max(max_len,0.000001)) # max ensures no division by 0. 
-      
+
+#     result = 1-(total_incommon/max(max_len,0.000001)) # max ensures no division by 0.
+
 #     return result
 
 
 
 def min_leven(x_terms,y_terms):
-    
+
     if len(y_terms) > len(x_terms):
         temp = y_terms
         y_terms = x_terms
@@ -118,7 +118,7 @@ def min_leven(x_terms,y_terms):
         # print(x_terms)
         # print(y_terms)
         return 1
-    
+
 
 def string_distance(x, y):
 
@@ -170,7 +170,7 @@ Z = complete(pdist(data, string_distance))
 
 
 # with open('similarity_matrix.obj', 'wb') as similarity_matrix_file:
- 
+
 #   # Step 3
 #   pickle.dump(Z, similarity_matrix_file)
 
@@ -178,7 +178,7 @@ Z = complete(pdist(data, string_distance))
 # with open('similarity_matrix.obj', 'rb') as similarity_matrix_file:
 #      Z = pickle.load(similarity_matrix_file)
 
- 
+
 #     # After config_dictionary is read from file
 #     print(config_dictionary)
 
@@ -197,13 +197,13 @@ def doClustering(tval):
     # csvRes = pd.merge(csvRes, cuis, on='concept')
     # csvRes = csvRes[['cluster','concept','cuis']]
     counts = csvRes[['cluster','concept']].groupby('cluster').agg('count').sort_values(by=['concept'], ascending=False)["concept"]
-    
+
     df_counts = pd.DataFrame(counts)
     single_clusters = df_counts[df_counts["concept"] == 1].index
 
     csvRes["cluster"] = csvRes.apply(lambda x: -10 if x["cluster"] in single_clusters else x["cluster"] , axis=1 )
 
-    
+
     stats = counts.describe(include='all')
     print(str(tval)+" :: \n"+str(stats['mean'])+" :: "+str(stats['max'])+" :: "+str(stats['count']))
     return csvRes
@@ -226,14 +226,14 @@ res[['cluster','concept','cuis']].to_csv(rootDir+'clusters-assign-fvc.csv', sep=
 #result = dbscan(testing, metric=similarity, min_samples=2, n_jobs=10, eps=0.50) # previously manhattan
 
 
-# 
+#
 
 # similarity(np.array([1,0,0,0,0,0,0,0,0]),np.array([1,0,0,0,0,0,0,0,0]))
 
 x = "≥ $nmbr$ . $nmbr$ \% and < $nmbr$ . $nmbr$ %,".split(" ")
 y = "type diabetes 一 no . ( % )".split(" ")
 
-    
+
 min_leven(x,y)
 min_leven(y,x)
 

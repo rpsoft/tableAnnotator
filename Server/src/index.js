@@ -318,6 +318,47 @@ function main(){
 
 main();
 
+
+app.get('/api/setMetadata', async function(req,res){
+
+  var setMetadata = async (docid, page, concept, cuis, qualifiers, user) => {
+      var client = await pool.connect()
+      var done = await client.query('INSERT INTO metadata(docid, page, concept, cuis, qualifiers, "user") VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT (docid, page, concept, "user") DO UPDATE SET cuis = $4, qualifiers = $5', [docid, page, concept, cuis, qualifiers, user])
+        .then(result => console.log("insert: "+ result))
+        .catch(e => console.error(e.stack))
+        .then(() => client.release())
+
+  }
+
+  if ( req.query && req.query.docid && req.query.page && req.query.concept && req.query.user){
+    await setMetadata(req.query.docid , req.query.page , req.query.concept , req.query.cuis || "", req.query.qualifiers || "", req.query.user)
+    res.send("done")
+  } else {
+    res.send("insert failed");
+  }
+
+});
+
+
+app.get('/api/getMetadata', async function(req,res){
+
+  var getMetadata = async ( docid,page) => {
+    var client = await pool.connect()
+    var result = await client.query(`SELECT docid, page, concept, cuis, qualifiers, user FROM metadata WHERE docid = $1 AND page = $2`,[docid,page])
+          client.release()
+    return result
+  }
+
+  if ( req.query && req.query.docid && req.query.page && req.query.user ){
+    res.send( await getMetadata(req.query.docid , req.query.page , req.query.user) )
+  } else {
+    res.send( { error : "getMetadata_badquery" } )
+  }
+
+});
+
+
+
 app.get('/',function(req,res){
   res.send("this is home")
 });
@@ -343,6 +384,21 @@ async function updateClusterAnnotation(cn,concept,cuis,isdefault,cn_override){
   console.log("Awaiting done: "+(ops_counter++))
   console.log("DONE: "+(ops_counter++))
 }
+
+
+app.get('/api/conceptAssignments', async function(req,res){
+
+  var conceptAssignments = async () => {
+    var client = await pool.connect()
+    var result = await client.query(`select * from (select concept , cuis, COALESCE(cn_override,cn) as cc from clusters where cuis != '' ) as mydata WHERE  cc > -10 ORDER BY cc asc`)
+          client.release()
+    return result
+  }
+
+  res.send( await conceptAssignments() )
+
+});
+
 
 
 
