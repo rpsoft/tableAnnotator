@@ -324,7 +324,7 @@ app.get('/api/setMetadata', async function(req,res){
   var setMetadata = async (docid, page, concept, cuis, qualifiers, user) => {
       var client = await pool.connect()
       var done = await client.query('INSERT INTO metadata(docid, page, concept, cuis, qualifiers, "user") VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT (docid, page, concept, "user") DO UPDATE SET cuis = $4, qualifiers = $5', [docid, page, concept, cuis, qualifiers, user])
-        .then(result => console.log("insert: "+ result))
+        .then(result => console.log("insert: "+ new Date()))
         .catch(e => console.error(e.stack))
         .then(() => client.release())
 
@@ -386,21 +386,53 @@ async function updateClusterAnnotation(cn,concept,cuis,isdefault,cn_override){
 }
 
 
-app.get('/api/conceptAssignments', async function(req,res){
+app.get('/api/cuiRecommend', async function(req,res){
 
-  var conceptAssignments = async () => {
+  var cuiRecommend = async () => {
     var client = await pool.connect()
-    var result = await client.query(`select * from (select concept , cuis, COALESCE(cn_override,cn) as cc from clusters where cuis != '' ) as mydata WHERE  cc > -10 ORDER BY cc asc`)
+    var result = await client.query(`select * from cuis_recommend`)
           client.release()
     return result
   }
 
-  res.send( await conceptAssignments() )
+  var recommend_cuis = {}
+
+  var rec_cuis = (await cuiRecommend()).rows
+
+  var splitConcepts = ( c ) => {
+
+      if ( c == null ){
+        return []
+      }
+
+      var ret = c[0] == ";" ? c.slice(1) : c // remove trailing ;
+
+      return ret.length > 0 ? ret.split(";") : []
+  }
+
+  rec_cuis ? rec_cuis.map ( item => {
+
+    var cuis = splitConcepts(item.cuis)
+    var rep_cuis = splitConcepts(item.rep_cuis)
+    var excluded_cuis = splitConcepts(item.excluded_cuis)
+
+    var rec_cuis = []
+
+    cuis.forEach(function(cui) {
+    	if ( excluded_cuis.indexOf(cui) < 0 ){
+        if ( rep_cuis.indexOf(cui) < 0 ){
+            rec_cuis.push(cui)
+        }
+      }
+    });
+
+    recommend_cuis[item.concept] = { cuis: rep_cuis.concat(rec_cuis), cc: item.cc }
+
+  }) : ""
+
+  res.send( recommend_cuis )
 
 });
-
-
-
 
 
 app.get('/api/allClusterAnnotations', async function(req,res){
@@ -448,7 +480,7 @@ app.get('/api/setCUIMod', async function(req,res){
   var setCUIMod = async (cui,type) => {
       var client = await pool.connect()
       var done = await client.query('INSERT INTO modifiers VALUES($1,$2) ON CONFLICT (cui) DO UPDATE SET type = $2;', [cui,type])
-        .then(result => console.log("insert: "+ result))
+        .then(result => console.log("insert: "+ new Date()))
         .catch(e => console.error(e.stack))
         .then(() => client.release())
 

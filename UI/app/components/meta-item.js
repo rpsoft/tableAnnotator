@@ -23,6 +23,9 @@ import fetchData from '../network/fetch-data';
 
 
 class MetaItem extends Component {
+
+  static displayName = ''; // Esto funciona ! igual que en JAVA.
+
   constructor(props) {
       super()
 
@@ -191,6 +194,7 @@ class MetaItem extends Component {
 
 
     //+" / "+this.state.matching_term
+
 
     return (
       <div style={{marginBottom:5}}>

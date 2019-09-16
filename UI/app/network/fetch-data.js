@@ -56,16 +56,16 @@ export default class fetchData {
         return r
   }
 
-  async getConceptAssignments() {
+  async getConceptRecommend() {
 
-        var urlQueryRequest = urlBase+ "conceptAssignments"
-
+        var urlQueryRequest = urlBase+ "cuiRecommend"
+// getConceptAssignment
         var r = await this.getGeneric( urlQueryRequest  )
 
-        return JSON.parse(r).rows
+        return JSON.parse(r)
   }
 
-conceptAssignments
+
   async getTableMetadata(docid,page) {
 
         var urlQueryRequest = urlBase+ "getMetadata?docid="+encodeURIComponent(docid)+"&page="+page

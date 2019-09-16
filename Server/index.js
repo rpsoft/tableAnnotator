@@ -571,7 +571,7 @@ function () {
                         client = _context.sent;
                         _context.next = 5;
                         return client.query('INSERT INTO metadata(docid, page, concept, cuis, qualifiers, "user") VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT (docid, page, concept, "user") DO UPDATE SET cuis = $4, qualifiers = $5', [docid, page, concept, cuis, qualifiers, user]).then(function (result) {
-                          return console.log("insert: " + result);
+                          return console.log("insert: " + new Date());
                         }).catch(function (e) {
                           return console.error(e.stack);
                         }).then(function () {
@@ -757,18 +757,18 @@ function _updateClusterAnnotation() {
   return _updateClusterAnnotation.apply(this, arguments);
 }
 
-app.get('/api/conceptAssignments',
+app.get('/api/cuiRecommend',
 /*#__PURE__*/
 function () {
   var _ref5 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee6(req, res) {
-    var conceptAssignments;
+    var cuiRecommend, recommend_cuis, rec_cuis, splitConcepts;
     return _regenerator.default.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
-            conceptAssignments =
+            cuiRecommend =
             /*#__PURE__*/
             function () {
               var _ref6 = (0, _asyncToGenerator2.default)(
@@ -785,7 +785,7 @@ function () {
                       case 2:
                         client = _context5.sent;
                         _context5.next = 5;
-                        return client.query("select * from (select concept , cuis, COALESCE(cn_override,cn) as cc from clusters where cuis != '' ) as mydata WHERE  cc > -10 ORDER BY cc asc");
+                        return client.query("select * from cuis_recommend");
 
                       case 5:
                         result = _context5.sent;
@@ -800,21 +800,48 @@ function () {
                 }, _callee5, this);
               }));
 
-              return function conceptAssignments() {
+              return function cuiRecommend() {
                 return _ref6.apply(this, arguments);
               };
             }();
 
-            _context6.t0 = res;
+            recommend_cuis = {};
             _context6.next = 4;
-            return conceptAssignments();
+            return cuiRecommend();
 
           case 4:
-            _context6.t1 = _context6.sent;
+            rec_cuis = _context6.sent.rows;
 
-            _context6.t0.send.call(_context6.t0, _context6.t1);
+            splitConcepts = function splitConcepts(c) {
+              if (c == null) {
+                return [];
+              }
 
-          case 6:
+              var ret = c[0] == ";" ? c.slice(1) : c; // remove trailing ;
+
+              return ret.length > 0 ? ret.split(";") : [];
+            };
+
+            rec_cuis ? rec_cuis.map(function (item) {
+              var cuis = splitConcepts(item.cuis);
+              var rep_cuis = splitConcepts(item.rep_cuis);
+              var excluded_cuis = splitConcepts(item.excluded_cuis);
+              var rec_cuis = [];
+              cuis.forEach(function (cui) {
+                if (excluded_cuis.indexOf(cui) < 0) {
+                  if (rep_cuis.indexOf(cui) < 0) {
+                    rec_cuis.push(cui);
+                  }
+                }
+              });
+              recommend_cuis[item.concept] = {
+                cuis: rep_cuis.concat(rec_cuis),
+                cc: item.cc
+              };
+            }) : "";
+            res.send(recommend_cuis);
+
+          case 8:
           case "end":
             return _context6.stop();
         }
@@ -1062,7 +1089,7 @@ function () {
                         client = _context13.sent;
                         _context13.next = 5;
                         return client.query('INSERT INTO modifiers VALUES($1,$2) ON CONFLICT (cui) DO UPDATE SET type = $2;', [cui, type]).then(function (result) {
-                          return console.log("insert: " + result);
+                          return console.log("insert: " + new Date());
                         }).catch(function (e) {
                           return console.error(e.stack);
                         }).then(function () {

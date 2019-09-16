@@ -36,7 +36,8 @@ class MetaAnnotator extends Component {
         docid: urlparams.get("docid") ? urlparams.get("docid") : "",
         opened: true,
         cuis_data : props.cuis_data,
-        concept_metadata: {}
+        concept_metadata: {},
+        recommend_cuis: {}
       };
 
     }
@@ -57,15 +58,25 @@ class MetaAnnotator extends Component {
 
       var concept_metadata = {}
 
-      data ? data.rows.map ( item => { concept_metadata[item.concept] = {cuis: item.cuis.split(";"), qualifiers: item.qualifiers.split(";")} }) : ""
+          data ? data.rows.map ( item => { concept_metadata[item.concept] = {cuis: item.cuis.split(";"), qualifiers: item.qualifiers.split(";")} }) : ""
 
-      this.setState({concept_metadata : concept_metadata })
+
+      var rec_cuis = await fetch.getConceptRecommend();
+
+      this.setState({concept_metadata : concept_metadata, recommend_cuis : rec_cuis })
 
   }
 
   async componentWillReceiveProps(next) {
 
-    this.setState({cuis_data: next.cuis_data, cuis_data : next.cuis_data})
+    var urlparams = new URLSearchParams(window.location.search);
+
+    this.setState({
+      user: urlparams.get("user") ? urlparams.get("user") : "",
+      page: urlparams.get("page") ? urlparams.get("page") : "",
+      docid: urlparams.get("docid") ? urlparams.get("docid") : "",
+      cuis_data: next.cuis_data, cuis_data : next.cuis_data
+    })
 
   }
 
@@ -97,6 +108,8 @@ class MetaAnnotator extends Component {
 
     }
 
+    let fetch = new fetchData();
+
     return (
       <Card style={{ width: this.state.opened ? "50%" : 85, minHeight: 600, height: "100%", float: "right", position: "fixed",  top: 0, right: 0, zIndex: 1,overflowY:"scroll"}}>
             <RaisedButton variant={"contained"}
@@ -115,13 +128,28 @@ class MetaAnnotator extends Component {
                             <h3 style={{fontVariantCaps: "small-caps", fontSize: 30, marginBottom: 3}}>{v}</h3>
                             <div style={{marginLeft:10}}>{concepts[v].map( (concept,i) => {
 
+                              var matching_term = this.prepareTermForMatching(concept)
+
+                              var concept_exists = this.state.concept_metadata[concept] ? true : false
+
+                              if ( !concept_exists ){
+
+                                //initialise DB with new element, using recommended_cuis or empty if its not there.
+                                fetch.setTableMetadata(this.state.docid,
+                                                      this.state.page,
+                                                      concept,
+                                                      this.state.recommend_cuis[matching_term] ? this.state.recommend_cuis[matching_term].cuis.join(";") : "",
+                                                      "",
+                                                      this.state.user )
+                              }
+
                               return concepts[v].indexOf(concept) < i ? ""
                                     : <MetaItem
                                                 key = {"concept_item_"+concept}
                                                 term = {concept}
-                                                matching_term = {this.prepareTermForMatching(concept)}
+                                                matching_term = {matching_term}
                                                 cuis_data = {this.state.cuis_data}
-                                                assigned_cuis = { (this.state.concept_metadata[concept] && this.state.concept_metadata[concept].cuis) || []}
+                                                assigned_cuis = { this.state.concept_metadata[concept] ? this.state.concept_metadata[concept].cuis : (this.state.recommend_cuis[matching_term] ? this.state.recommend_cuis[matching_term].cuis : []) }
                                                 assigned_qualifiers = { (this.state.concept_metadata[concept] && this.state.concept_metadata[concept].qualifiers) || []}
                                       />
                             })}</div>
