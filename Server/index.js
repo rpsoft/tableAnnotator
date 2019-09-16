@@ -479,7 +479,7 @@ function _attempt_predictions() {
                 }, _callee36, this, [[0, 21]]);
               }));
 
-              return function (_x81, _x82) {
+              return function (_x80, _x81) {
                 return _ref32.apply(this, arguments);
               };
             }());
@@ -1320,28 +1320,43 @@ function () {
   var _ref20 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee21(req, res) {
-    var cuis;
+    var getCUISIndex;
     return _regenerator.default.wrap(function _callee21$(_context21) {
       while (1) {
         switch (_context21.prev = _context21.next) {
           case 0:
-            cuis = {};
-            fs.createReadStream('./CLUSTERS/cuis-index.csv').pipe(csv()).on('data',
+            getCUISIndex =
             /*#__PURE__*/
             function () {
               var _ref21 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee20(row) {
+              _regenerator.default.mark(function _callee20() {
+                var cuis, client, result;
                 return _regenerator.default.wrap(function _callee20$(_context20) {
                   while (1) {
                     switch (_context20.prev = _context20.next) {
                       case 0:
-                        cuis[row.CUI] = {
-                          preferred: row.preferred,
-                          hasMSH: row.hasMSH
-                        };
+                        cuis = {};
+                        _context20.next = 3;
+                        return pool.connect();
 
-                      case 1:
+                      case 3:
+                        client = _context20.sent;
+                        _context20.next = 6;
+                        return client.query("select * from cuis_index");
+
+                      case 6:
+                        result = _context20.sent;
+                        client.release();
+                        result.rows.map(function (row) {
+                          cuis[row.cui] = {
+                            preferred: row.preferred,
+                            hasMSH: row.hasMSH
+                          };
+                        });
+                        return _context20.abrupt("return", cuis);
+
+                      case 10:
                       case "end":
                         return _context20.stop();
                     }
@@ -1349,14 +1364,21 @@ function () {
                 }, _callee20, this);
               }));
 
-              return function (_x56) {
+              return function getCUISIndex() {
                 return _ref21.apply(this, arguments);
               };
-            }()).on('end', function () {
-              res.send(cuis);
-            });
+            }();
 
-          case 2:
+            _context21.t0 = res;
+            _context21.next = 4;
+            return getCUISIndex();
+
+          case 4:
+            _context21.t1 = _context21.sent;
+
+            _context21.t0.send.call(_context21.t0, _context21.t1);
+
+          case 6:
           case "end":
             return _context21.stop();
         }
@@ -1436,7 +1458,7 @@ function () {
     }, _callee22, this);
   }));
 
-  return function (_x57, _x58) {
+  return function (_x56, _x57) {
     return _ref22.apply(this, arguments);
   };
 }());
@@ -1467,7 +1489,7 @@ function () {
     }, _callee23, this);
   }));
 
-  return function (_x59, _x60) {
+  return function (_x58, _x59) {
     return _ref23.apply(this, arguments);
   };
 }());
@@ -1578,7 +1600,7 @@ function () {
     }, _callee24, this, [[0, 18]]);
   }));
 
-  return function (_x61, _x62) {
+  return function (_x60, _x61) {
     return _ref24.apply(this, arguments);
   };
 }());
@@ -1651,7 +1673,7 @@ function () {
     }, _callee25, this);
   }));
 
-  return function (_x63, _x64) {
+  return function (_x62, _x63) {
     return _ref25.apply(this, arguments);
   };
 }());
@@ -1670,7 +1692,7 @@ app.get('/api/totalTables', function (req, res) {
   });
 });
 
-function getMMatch(_x65) {
+function getMMatch(_x64) {
   return _getMMatch.apply(this, arguments);
 }
 
@@ -1764,7 +1786,7 @@ function () {
     }, _callee26, this, [[0, 11]]);
   }));
 
-  return function (_x66, _x67) {
+  return function (_x65, _x66) {
     return _ref26.apply(this, arguments);
   };
 }());
@@ -1815,12 +1837,12 @@ function () {
     }, _callee27, this);
   }));
 
-  return function (_x68, _x69) {
+  return function (_x67, _x68) {
     return _ref27.apply(this, arguments);
   };
 }());
 
-function readyTableData(_x70, _x71, _x72) {
+function readyTableData(_x69, _x70, _x71) {
   return _readyTableData.apply(this, arguments);
 }
 
@@ -2275,7 +2297,7 @@ function _readyTableData() {
                       }, _callee41, this, [[0, 7]]);
                     }));
 
-                    return function (_x83, _x84) {
+                    return function (_x82, _x83) {
                       return _ref33.apply(this, arguments);
                     };
                   }());
@@ -2350,7 +2372,7 @@ function () {
     }, _callee28, this, [[0, 11]]);
   }));
 
-  return function (_x73, _x74) {
+  return function (_x72, _x73) {
     return _ref28.apply(this, arguments);
   };
 }());
@@ -2384,7 +2406,7 @@ function () {
     }, _callee29, this);
   }));
 
-  return function (_x75, _x76) {
+  return function (_x74, _x75) {
     return _ref29.apply(this, arguments);
   };
 }());
@@ -2463,7 +2485,7 @@ function () {
     }, _callee30, this);
   }));
 
-  return function (_x77, _x78) {
+  return function (_x76, _x77) {
     return _ref30.apply(this, arguments);
   };
 }());
@@ -2501,7 +2523,7 @@ function () {
     }, _callee31, this);
   }));
 
-  return function (_x79, _x80) {
+  return function (_x78, _x79) {
     return _ref31.apply(this, arguments);
   };
 }());

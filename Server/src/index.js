@@ -548,16 +548,22 @@ app.get('/api/recordClusterAnnotation',async function(req,res){
 
 app.get('/api/cuisIndex',async function(req,res){
 
-      var cuis = {}
+      var getCUISIndex = async () => {
 
-      fs.createReadStream('./CLUSTERS/cuis-index.csv')
-        .pipe(csv())
-        .on('data', async (row) => {
-          cuis[row.CUI] = {preferred : row.preferred, hasMSH: row.hasMSH}
+        var cuis = {}
+
+        var client = await pool.connect()
+        var result = await client.query(`select * from cuis_index`)
+              client.release()
+
+        result.rows.map( row => {
+          cuis[row.cui] = {preferred : row.preferred, hasMSH: row.hasMSH}
         })
-        .on('end', () => {
-          res.send(cuis)
-        });
+
+        return cuis
+      }
+
+      res.send( await getCUISIndex() )
 
 });
 
