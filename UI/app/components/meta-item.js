@@ -47,7 +47,7 @@ class MetaItem extends Component {
         adder_cui : "",
         adder_text : "",
         dialogType : "cuiAdder",
-        deleters : {},
+        selected_cuis : [],
       }
 
     }
@@ -57,51 +57,34 @@ class MetaItem extends Component {
 
   }
 
-  toggleCUI = async (cui) => {
-
-      var assigned_cuis = this.state.assigned_cuis
-      var ispresent = assigned_cuis.indexOf(cui)
-
-      if ( ispresent > -1){
-        assigned_cuis.splice(ispresent,1)
-      } else {
-        assigned_cuis.push(cui)
-      }
-
+  toggleElement = async (code, ev, type) => {
 
       var state = this.state
 
-      let fetch = new fetchData();
-      fetch.setTableMetadata(state.docid, state.page, state.term, assigned_cuis.join(";"), state.assigned_qualifiers.join(";"), state.user )
-
-      this.setState({assigned_cuis})
-  }
-
-  toggleQualifier = async (qualifier) => {
-      var assigned_qualifiers = this.state.assigned_qualifiers
-      var ispresent = assigned_qualifiers.indexOf(qualifier)
+      var assigned_element = state["assigned_"+type]
+      var ispresent = assigned_element.indexOf(code)
 
       if ( ispresent > -1){
-        assigned_qualifiers.splice(ispresent,1)
+        assigned_element.splice(ispresent,1)
       } else {
-        assigned_qualifiers.push(qualifier)
+        assigned_element.push(code)
       }
 
-
-      var state = this.state
+      state["assigned_"+type] = assigned_element
 
       let fetch = new fetchData();
-      await fetch.setTableMetadata(state.docid, state.page, state.term, state.assigned_cuis.join(";"), assigned_qualifiers.join(";"), state.user )
+      await fetch.setTableMetadata(state.docid, state.page, state.term, state.assigned_cuis.join(";"), state.assigned_qualifiers.join(";"), state.user )
 
-      this.setState({assigned_qualifiers})
+      this.setState(state)
+
   }
 
   // Deletes the cui, it causes a toggle when it exists. so delete.
-  handleCUIClick = (event, cui) => {
+  handleCUIClick = (ev, cui) => {
       if ( this.state.dialogType === "cuiAdder"){
-        this.toggleCUI(cui)
+        this.toggleElement(cui, ev, "cuis")
       } else {
-        this.toggleQualifier(cui)
+        this.toggleElement(cui, ev, "qualifiers")
       }
   }
 
@@ -119,8 +102,6 @@ class MetaItem extends Component {
       this.handleClose()
 
   }
-
-
 
   isAddedCui = (cui) =>{
     return (this.state.assigned_cuis.indexOf(cui) > -1)
@@ -161,14 +142,6 @@ class MetaItem extends Component {
 
   }
 
-  toggleDeleter = (concept) =>{
-
-    var deleters = this.state.deleters
-    deleters[concept] = deleters[concept] ? false : true
-    this.setState({deleters})
-
-  }
-
   handleClick = (event, dialogType) => {
     this.setState({anchorEl : event.currentTarget, dialogType : dialogType });
   }
@@ -199,8 +172,6 @@ class MetaItem extends Component {
                                  Ever : "C3887636",
                                  Previous : "Previous",
                                 }
-
-
 
     var cuis_search_results;
 
@@ -243,9 +214,8 @@ class MetaItem extends Component {
             <div style={{display:"inline-block", fontWeight:"bolder"}}>{this.state.term+" : "}</div>
 
             { this.state.assigned_cuis ? this.state.assigned_cuis.map (
-              cui => <div className={"cui_selected"} style={{display:"inline-block", marginLeft:15, cursor:"pointer"}} onClick={ () => {this.toggleDeleter(cui)}}>
+              cui => <div className={"cui_selected"} style={{display:"inline-block", marginLeft:15, cursor:"pointer"}} onClick={ (ev) => {this.toggleElement(cui, ev, "cuis")}}>
                           {cui+" [ "+ (this.state.cuis_data[cui] ? this.state.cuis_data[cui].preferred : "") +" ] "}
-                          {this.state.deleters[cui] ? <div style={{display:"inline-block",color:"red", fontWeight:"bold"}}  onClick={ () => {this.toggleCUI(cui)}} > delete? </div> : ""}
                     </div>
             ) : ""}
 
@@ -256,9 +226,8 @@ class MetaItem extends Component {
             <div style={{display:"inline-block", fontWeight:"bolder"}}>{" / "}</div>
 
             { this.state.assigned_qualifiers ? this.state.assigned_qualifiers.map (
-              cui => <div className={"cui_selected"} style={{display:"inline-block", marginLeft:15, cursor:"pointer"}} onClick={ () => {this.toggleDeleter(cui)}}>
+              cui => <div className={"cui_selected"} style={{display:"inline-block", marginLeft:15, cursor:"pointer"}} onClick={ (ev) => {this.toggleElement(cui, ev, "qualifiers")}}>
                           {cui+" [ "+ (concept_CUI_modifiers[cui] ? concept_CUI_modifiers[cui] : "") +" ] "}
-                          {this.state.deleters[cui] ? <div style={{display:"inline-block",color:"red", fontWeight:"bold"}}  onClick={ () => {this.toggleQualifier(cui)}} > delete? </div> : ""}
               </div>
             ) : ""}
 
@@ -306,7 +275,7 @@ class MetaItem extends Component {
 
               {
                 this.state.dialogType === "cuiAdder" ? "" : Object.keys(concept_CUI_modifiers).map(
-                  (v,i ) => <MenuItem key={v+"_item_"+i } style={{color: this.isAddedCui(v) ? "red" : "black"}} onClick={ (ev) => {this.handleCUIClick(ev,v)} } >
+                  (v,i ) => <MenuItem key={v+"_item_"+i } style={{color: this.state.assigned_qualifiers.indexOf(v) > -1 ? "red" : "black"}} onClick={ (ev) => {this.handleCUIClick(ev,v)} } >
                                 {v}
                             </MenuItem>
                 )

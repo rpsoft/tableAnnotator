@@ -16,6 +16,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import MetaItem from './meta-item'
 
 import Eye from '@material-ui/icons/RemoveRedEye';
+import Disk from '@material-ui/icons/Save';
 
 import fetchData from '../network/fetch-data';
 
@@ -86,6 +87,10 @@ class MetaAnnotator extends Component {
     return term
   }
 
+  async saveAll() {
+        alert("Metadata Changes Saved!")
+  }
+
   render() {
 
 
@@ -110,9 +115,18 @@ class MetaAnnotator extends Component {
 
     return (
       <Card style={{ width: this.state.opened ? "50%" : 85, minHeight: 600, height: "100%", float: "right", position: "fixed",  top: 0, right: 0, zIndex: 1,overflowY:"scroll"}}>
+
+
             <RaisedButton variant={"contained"}
                       style={{width:50,float:"right",margin:2}}
                       onClick={ () => { this.setState({opened: this.state.opened ? false : true}) } }><Eye style={{color : Object.keys(concepts).length > 0 ? "red": "inherit"}}/></RaisedButton>
+
+            {
+              this.state.opened ? <RaisedButton variant={"contained"}
+                      style={{width:50,float:"left",margin:2,marginLeft:4}}
+                      onClick={ () => { this.saveAll() } }><Disk/></RaisedButton> : ""
+            }
+
             <hr style={{marginTop:45,marginLeft:5,marginRight:5}}/>
 
 
@@ -130,11 +144,7 @@ class MetaAnnotator extends Component {
 
                               var concept_exists = this.state.concept_metadata[concept] ? true : false
 
-
                               if ( !concept_exists ){
-                                // if ( concept == "Demographic and clinical characteristics"){
-                                //   debugger
-                                // }
 
                                 //initialise DB with new element, using recommended_cuis or empty if its not there.
                                 fetch.setTableMetadata(this.state.docid,
