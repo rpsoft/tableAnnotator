@@ -154,6 +154,16 @@ export default class fetchData {
         return JSON.parse(r)
   }
 
+  async addCustomCUI(cui,description) {
+
+    var urlQueryRequest = urlBase + "cuisIndexAdd?cui="+encodeURIComponent(cui)+"&preferred="+encodeURIComponent(description)+"&hasMSH=true"
+
+    var r = await this.getGeneric( urlQueryRequest  )
+
+    return r
+
+  }
+
 
   async getClusterData() {
 

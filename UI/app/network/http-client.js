@@ -9,7 +9,10 @@ export default class HttpClient {
       port: (typeof location != "undefined") ? 6541 : 0,
       method: 'GET',
       // path: '/graphql?query=' + escape( query ),
-      // headers: {'http-client-custom': 'v1; client version'}
+    //   headers: {'Access-Control-Allow-Origin' : '*',
+		// 'Access-Control-Allow-Headers' : 'content-type',
+		// 'Access-Control-Allow-Methods' : 'GET, POST, PUT, DELETE, PATCH, OPTIONS'},
+    //   crossorigin:"anonymous",
     };
 
 

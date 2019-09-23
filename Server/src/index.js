@@ -19,8 +19,26 @@ function sleep(ms){
 }
 var cors = require('cors');
 
+var whitelist = ['http://sephirhome.ddns.net:7532', 'http://sephirhome.ddns.net:7531','http://localhost:7531']
+
+app.options('*', cors())
+
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
+//
+//
+//
+// app.options('*', cors(corsOptions))
+
 // use it before all route definitions
-app.use(cors({origin: '*'}));
+app.use(cors("*"));
 
 // import {PythonShell} from 'python-shell';
 app.use(express.static(__dirname + '/domainParserviews'));
@@ -565,6 +583,27 @@ app.get('/api/cuisIndex',async function(req,res){
 
       res.send( await getCUISIndex() )
 
+});
+
+app.get('/api/cuisIndexAdd',async function(req,res){
+
+  console.log(JSON.stringify(req.query))
+
+  var insertCUI = async (cui,preferred,hasMSH) => {
+      var client = await pool.connect()
+      var done = await client.query('INSERT INTO cuis_index(cui,preferred,"hasMSH") VALUES ($1, $2, $3) ON CONFLICT (cui) DO UPDATE SET preferred = $2, "hasMSH" = $3', [cui,preferred,hasMSH])
+        .then(result => console.log("insert: "+ new Date()))
+        .catch(e => console.error(e.stack))
+        .then(() => client.release())
+  }
+
+  if(req.query && req.query.cui.length > 0
+              && req.query.preferred.length > 0
+              && req.query.hasMSH.length > 0
+              ){
+              await insertCUI( req.query.cui , req.query.preferred, req.query.hasMSH );
+  }
+  res.send("saved annotation: "+JSON.stringify(req.query))
 });
 
 

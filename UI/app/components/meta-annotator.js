@@ -35,7 +35,6 @@ class MetaAnnotator extends Component {
         page: urlparams.get("page") ? urlparams.get("page") : "",
         docid: urlparams.get("docid") ? urlparams.get("docid") : "",
         opened: true,
-        cuis_data : props.cuis_data,
         concept_metadata: {},
         recommend_cuis: {}
       };
@@ -58,7 +57,7 @@ class MetaAnnotator extends Component {
 
       var concept_metadata = {}
 
-          data ? data.rows.map ( item => { concept_metadata[item.concept] = {cuis: item.cuis.split(";"), qualifiers: item.qualifiers.split(";")} }) : ""
+          data ? data.rows.map ( item => { concept_metadata[item.concept] = {cuis: item.cuis.length > 0 ? item.cuis.split(";") : [], qualifiers: item.qualifiers.length > 0 ? item.qualifiers.split(";") : []} }) : ""
 
 
       var rec_cuis = await fetch.getConceptRecommend();
@@ -75,7 +74,6 @@ class MetaAnnotator extends Component {
       user: urlparams.get("user") ? urlparams.get("user") : "",
       page: urlparams.get("page") ? urlparams.get("page") : "",
       docid: urlparams.get("docid") ? urlparams.get("docid") : "",
-      cuis_data: next.cuis_data, cuis_data : next.cuis_data
     })
 
   }
@@ -132,14 +130,18 @@ class MetaAnnotator extends Component {
 
                               var concept_exists = this.state.concept_metadata[concept] ? true : false
 
+
                               if ( !concept_exists ){
+                                // if ( concept == "Demographic and clinical characteristics"){
+                                //   debugger
+                                // }
 
                                 //initialise DB with new element, using recommended_cuis or empty if its not there.
                                 fetch.setTableMetadata(this.state.docid,
                                                       this.state.page,
                                                       concept,
                                                       this.state.recommend_cuis[matching_term] ? this.state.recommend_cuis[matching_term].cuis.join(";") : "",
-                                                      "",
+                                                      "Presence",
                                                       this.state.user )
                               }
 
@@ -148,7 +150,6 @@ class MetaAnnotator extends Component {
                                                 key = {"concept_item_"+concept}
                                                 term = {concept}
                                                 matching_term = {matching_term}
-                                                cuis_data = {this.state.cuis_data}
                                                 assigned_cuis = { this.state.concept_metadata[concept] ? this.state.concept_metadata[concept].cuis : (this.state.recommend_cuis[matching_term] ? this.state.recommend_cuis[matching_term].cuis : []) }
                                                 assigned_qualifiers = { (this.state.concept_metadata[concept] && this.state.concept_metadata[concept].qualifiers) || []}
                                       />

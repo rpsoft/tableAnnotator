@@ -77,7 +77,6 @@ class AnnotationView extends Component {
           dir : "asc"
         },
         toggeLiveResults: true,
-        cuis_data : null,
     };
 
   }
@@ -88,8 +87,6 @@ class AnnotationView extends Component {
     var parsed = QString.parse(this.props.location.search);
 
     let fetch = new fetchData();
-
-    var cuis_data = await fetch.getCUISIndex();
 
     var annotation = JSON.parse(await fetch.getAnnotationByID(parsed.docid,parsed.page,this.state.user))
 
@@ -115,7 +112,6 @@ class AnnotationView extends Component {
       tableType : annotation.tableType ? annotation.tableType : "",
       annotations : annotation.annotation ? annotation.annotation.annotations : [],
       allAnnotations : annotations_formatted,
-      cuis_data : cuis_data,
     })
 
     if( !this.state.preview ){
@@ -220,6 +216,7 @@ class AnnotationView extends Component {
      var newDocument = this.state.allInfo.abs_index[new_index]
 
      this.setState({annotations:[],gindex: current_table_g_index})
+
 
      this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user)
 
@@ -483,7 +480,6 @@ class AnnotationView extends Component {
 
                 var cols = columns.map( (v,i) => { var col = {Header: v, accessor : v}; if( v == "col" || v == "row"){ col.width = 10 }; return {Header: v, accessor : v} } )
 
-
                 preparedPreview = <ReactTable
                                     data={data}
                                     columns={cols}
@@ -510,6 +506,7 @@ class AnnotationView extends Component {
        var table_editor;
 
        if ( this.state.table ) {
+
           table_editor = <CKEditor
 
               type="classic"
@@ -557,7 +554,7 @@ class AnnotationView extends Component {
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
-        <MetaAnnotator annotationData={data} cuis_data={this.state.cuis_data} />
+        <MetaAnnotator annotationData={data} />
 
         <Card id="userData" style={{padding:15}}>
           <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+(this.state.user ? "?user="+this.state.user : "" ))}/>
@@ -565,7 +562,7 @@ class AnnotationView extends Component {
           <TextField
             value={this.state.user}
             placeholder="Set your username here"
-            onChange={(event,value) => {this.setState({user: value})}}
+            onChange={(event,value) => {this.setState({user: event.currentTarget.value})}}
             style={{width:200,marginLeft:20,marginRight:20,float:"left"}}
             onKeyDown={(event, index) => {
 
@@ -580,8 +577,8 @@ class AnnotationView extends Component {
           <TextField
             value={this.state.currentGPage}
             placeholder="Go to page"
-            onChange={(event,value) => {
-                                  this.setState({currentGPage: value})
+            onChange={(event) => {
+                                  this.setState({currentGPage: event.currentTarget.value})
                                 }}
             onKeyDown={(event, index) => {
               if (event.key === 'Enter') {
@@ -627,35 +624,35 @@ class AnnotationView extends Component {
         <Card style={{padding:8,marginTop:10,fontWeight:"bold"}}>
             <div style={{width:"100%"}}>
 
-                <table>
-              <tbody>
-                  <tr>
-                    <td style={{padding:"0px 0px 0px 0px", verticalAlign: "top", paddingRight:50}}>
-                      <div style={{fontWeight:"bold"}}>Any comments errors or issues?</div> <TextField
-                            value={this.state.corrupted_text && this.state.corrupted_text != 'undefined' ? this.state.corrupted_text : ""}
-                            placeholder="Please specify here"
-                            onChange={(event) => {this.setState({corrupted_text: event.target.value})}}
-                            style={{width:500,marginLeft:20,fontWeight:"normal"}}
-                            multiline={true}
-                            rows={1}
-                            rowsMax={5}
-                          />
-                    </td>
-                    <td style={{padding:"0px 0px 0px 0px", verticalAlign: "top", paddingLeft:50}}>
-                      <div style={{fontWeight:"bold"}}>Specify Table type</div>
-                      <SelectField
-                           value={this.state.tableType}
-                           onChange={(event,data) => {this.setState({tableType : data.props.value})} }
-                           style={{fontWeight:"normal"}}
-                         >
-                           <MenuItem value={"baseline_table"} key={1}>baseline characteristic table</MenuItem>
-                           <MenuItem value={"other_table"} key={2}> other table </MenuItem>
-                           <MenuItem value={"result_table_subgroup"} key={3}> results table with subgroups </MenuItem>
-                           <MenuItem value={"result_table_without_subgroup"} key={4}> results table without subgroups </MenuItem>
+              <table>
+                <tbody>
+                    <tr>
+                      <td style={{padding:"0px 0px 0px 0px", verticalAlign: "top", paddingRight:50}}>
+                        <div style={{fontWeight:"bold"}}>Any comments errors or issues?</div> <TextField
+                              value={this.state.corrupted_text && this.state.corrupted_text != 'undefined' ? this.state.corrupted_text : ""}
+                              placeholder="Please specify here"
+                              onChange={(event) => {this.setState({corrupted_text: event.target.value})}}
+                              style={{width:500,marginLeft:20,fontWeight:"normal"}}
+                              multiline={true}
+                              rows={1}
+                              rowsMax={5}
+                            />
+                      </td>
+                      <td style={{padding:"0px 0px 0px 0px", verticalAlign: "top", paddingLeft:50}}>
+                        <div style={{fontWeight:"bold"}}>Specify Table type</div>
+                        <SelectField
+                             value={this.state.tableType}
+                             onChange={(event,data) => {this.setState({tableType : data.props.value})} }
+                             style={{fontWeight:"normal"}}
+                           >
+                             <MenuItem value={"baseline_table"} key={1}>baseline characteristic table</MenuItem>
+                             <MenuItem value={"other_table"} key={2}> other table </MenuItem>
+                             <MenuItem value={"result_table_subgroup"} key={3}> results table with subgroups </MenuItem>
+                             <MenuItem value={"result_table_without_subgroup"} key={4}> results table without subgroups </MenuItem>
 
-                      </SelectField>
-                    </td>
-                  </tr>
+                        </SelectField>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
             </div>
