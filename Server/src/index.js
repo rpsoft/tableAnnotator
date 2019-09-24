@@ -360,9 +360,9 @@ app.get('/api/setMetadata', async function(req,res){
 
 app.get('/api/getMetadata', async function(req,res){
 
-  var getMetadata = async ( docid,page) => {
+  var getMetadata = async ( docid,page, user) => {
     var client = await pool.connect()
-    var result = await client.query(`SELECT docid, page, concept, cuis, qualifiers, user FROM metadata WHERE docid = $1 AND page = $2`,[docid,page])
+    var result = await client.query(`SELECT docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, user FROM metadata WHERE docid = $1 AND page = $2 AND user = $3`,[docid,page,user])
           client.release()
     return result
   }

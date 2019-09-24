@@ -66,15 +66,6 @@ export default class fetchData {
   }
 
 
-  async getTableMetadata(docid,page) {
-
-        var urlQueryRequest = urlBase+ "getMetadata?docid="+encodeURIComponent(docid)+"&page="+page
-
-        var r = await this.getGeneric( urlQueryRequest  )
-
-        return r
-  }
-
   async setTableMetadata(docid, page, concept, cuis, qualifiers, user) {
 
         var urlQueryRequest = urlBase+ "setMetadata?docid="+encodeURIComponent(docid)

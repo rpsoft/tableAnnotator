@@ -38,8 +38,14 @@ class MetaItem extends Component {
         term : props.term,
         matching_term : props.matching_term, // This is the term after processing/cleaning to match it with our knowledge base.
         anchorEl : null,
+        searchTextInput : React.createRef(),
+
         assigned_cuis : props.assigned_cuis,
         assigned_qualifiers : props.assigned_qualifiers,
+
+        cuis_selected : props.cuis_selected,
+        qualifiers_selected : props.qualifiers_selected,
+
         cuis_data : {},
         cuisearch : "",
         cuisearch_msh_only : true,
@@ -47,7 +53,6 @@ class MetaItem extends Component {
         adder_cui : "",
         adder_text : "",
         dialogType : "cuiAdder",
-        selected_cuis : [],
       }
 
     }
@@ -61,7 +66,7 @@ class MetaItem extends Component {
 
       var state = this.state
 
-      var assigned_element = state["assigned_"+type]
+      var assigned_element = state[type]
       var ispresent = assigned_element.indexOf(code)
 
       if ( ispresent > -1){
@@ -70,10 +75,21 @@ class MetaItem extends Component {
         assigned_element.push(code)
       }
 
-      state["assigned_"+type] = assigned_element
+      state[type] = assigned_element
 
-      let fetch = new fetchData();
-      await fetch.setTableMetadata(state.docid, state.page, state.term, state.assigned_cuis.join(";"), state.assigned_qualifiers.join(";"), state.user )
+      // let fetch = new fetchData();
+      // await fetch.setTableMetadata(state.docid, state.page, state.term, state.assigned_cuis.join(";"), state.assigned_qualifiers.join(";"), state.user )
+
+      var data = {
+          term: state.term,
+          assigned_cuis: state.assigned_cuis,
+          assigned_qualifiers: state.assigned_qualifiers,
+          cuis_selected: state.cuis_selected,
+          qualifiers_selected: state.qualifiers_selected,
+          matching_term : state.matching_term,
+      }
+
+      this.props.updateConceptData( state.term, data )
 
       this.setState(state)
 
@@ -82,9 +98,9 @@ class MetaItem extends Component {
   // Deletes the cui, it causes a toggle when it exists. so delete.
   handleCUIClick = (ev, cui) => {
       if ( this.state.dialogType === "cuiAdder"){
-        this.toggleElement(cui, ev, "cuis")
+        this.toggleElement(cui, ev, "assigned_cuis")
       } else {
-        this.toggleElement(cui, ev, "qualifiers")
+        this.toggleElement(cui, ev, "assigned_qualifiers")
       }
   }
 
@@ -97,27 +113,18 @@ class MetaItem extends Component {
       var newIndex = await fetch.getCUISIndex()
       this.setState({cuis_data: newIndex})
 
-      await this.toggleCUI(cui)
+      await this.toggleElement(cui, null, "assigned_cuis")
 
       this.handleClose()
-
   }
 
-  isAddedCui = (cui) =>{
-    return (this.state.assigned_cuis.indexOf(cui) > -1)
-  }
-
+  // CUI Adder section open/close function
   toggleAdder = () => {
-
     var isopened = this.state.adder_opened ? false : true
-
     if ( isopened ){
         this.setState({adder_cui: "", adder_text: ""})
     }
-
     this.setState({adder_opened: isopened})
-
-
   }
 
   async componentDidMount() {
@@ -144,6 +151,8 @@ class MetaItem extends Component {
 
   handleClick = (event, dialogType) => {
     this.setState({anchorEl : event.currentTarget, dialogType : dialogType });
+    //
+    // this.state.searchTextInput.current.focus();
   }
 
   handleClose = () => {
@@ -157,6 +166,16 @@ class MetaItem extends Component {
     this.setState(newState);
 
   }
+
+  // componentDidUpdate(prevProps, prevState){
+  //
+  //   if ( this.state.anchorEl ){
+  //     debugger
+  //      this.state.searchTextInput.current.focus();
+  //
+  //   }
+  //
+  // }
 
   render() {
 
@@ -185,11 +204,11 @@ class MetaItem extends Component {
 
                     var matches = 0;
 
-                    if ( cui.indexOf(this.state.cuisearch.trim()) > -1 ){
+                    if ( cui.toLowerCase().indexOf(this.state.cuisearch.toLowerCase().trim()) > -1 ){
                       matches++
                     }
 
-                    if ( this.state.cuis_data[cui].preferred.indexOf(this.state.cuisearch.trim()) > -1 ){
+                    if ( this.state.cuis_data[cui].preferred.toLowerCase().indexOf(this.state.cuisearch.toLowerCase().trim()) > -1 ){
                       matches++
                     }
 
@@ -214,7 +233,9 @@ class MetaItem extends Component {
             <div style={{display:"inline-block", fontWeight:"bolder"}}>{this.state.term+" : "}</div>
 
             { this.state.assigned_cuis ? this.state.assigned_cuis.map (
-              cui => <div className={"cui_selected"} style={{display:"inline-block", marginLeft:15, cursor:"pointer"}} onClick={ (ev) => {this.toggleElement(cui, ev, "cuis")}}>
+              cui => <div key={cui} className={"cui_selected"}
+                          style={{display:"inline-block", marginLeft:15, cursor:"pointer", color: this.state.cuis_selected.indexOf(cui) > -1 ? "red" : "black"}}
+                          onClick={ (ev) => {this.toggleElement(cui, ev, "cuis_selected")}}>
                           {cui+" [ "+ (this.state.cuis_data[cui] ? this.state.cuis_data[cui].preferred : "") +" ] "}
                     </div>
             ) : ""}
@@ -226,7 +247,10 @@ class MetaItem extends Component {
             <div style={{display:"inline-block", fontWeight:"bolder"}}>{" / "}</div>
 
             { this.state.assigned_qualifiers ? this.state.assigned_qualifiers.map (
-              cui => <div className={"cui_selected"} style={{display:"inline-block", marginLeft:15, cursor:"pointer"}} onClick={ (ev) => {this.toggleElement(cui, ev, "qualifiers")}}>
+              cui => <div key={cui}
+                          className={"cui_selected"}
+                          style={{display:"inline-block", marginLeft:15, cursor:"pointer", color: this.state.qualifiers_selected.indexOf(cui) > -1 ? "red" : "black"}}
+                          onClick={ (ev) => {this.toggleElement(cui, ev, "qualifiers_selected")}}>
                           {cui+" [ "+ (concept_CUI_modifiers[cui] ? concept_CUI_modifiers[cui] : "") +" ] "}
               </div>
             ) : ""}
@@ -245,6 +269,7 @@ class MetaItem extends Component {
             >
               {
               this.state.dialogType === "cuiAdder" ? <TextField
+                inputRef={this.state.searchTextInput}
                 value={this.state.cuisearch}
                 placeholder="search concepts here"
                 onChange={(event) => {this.setState({cuisearch : event.currentTarget.value})}}
@@ -283,7 +308,7 @@ class MetaItem extends Component {
 
               {
                 this.state.dialogType === "cuiAdder" && cuis_search_results && Object.keys(cuis_search_results).length > 0 ? Object.keys(cuis_search_results).map(
-                  (v,i ) => <MenuItem key={v+"_item_"+i} style={{color: this.isAddedCui(v) ? "red" : "black"}} onClick={ (ev) => {this.handleCUIClick(ev,v)} }>
+                  (v,i ) => <MenuItem key={v+"_item_"+i} style={{color: this.state.assigned_cuis.indexOf(v) > -1 ? "red" : "black"}} onClick={ (ev) => {this.handleCUIClick(ev,v)} }>
                                   {v+" -- "+cuis_search_results[v].preferred}
                             </MenuItem>
                   ) : ""

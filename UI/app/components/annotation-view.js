@@ -168,7 +168,6 @@ class AnnotationView extends Component {
 
         //var user = this.state.user != props.location.query.user ? this.state.user
 
-
         if ( annotation ){
           this.setState({
             table: JSON.parse(data),
@@ -323,7 +322,7 @@ class AnnotationView extends Component {
 
    goToGIndex(index){
      var newDocument = this.state.allInfo.abs_index[index]
-     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page)
+     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user)
    }
 
    async saveAnnotations(){
