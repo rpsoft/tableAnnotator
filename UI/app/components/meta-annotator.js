@@ -38,7 +38,9 @@ class MetaAnnotator extends Component {
         opened: true,
         annotationData: props.annotationData,
         concept_metadata: {}, // The actual data in the database, that will hold the data from the interaction with the annotator.
-        recommend_cuis: {} // This are the proposed cuis for concepts as per classfier and Peter's manual annotations.
+        recommend_cuis: {}, // This are the proposed cuis for concepts as per classfier and Peter's manual annotations.
+        isSaved : false,
+        titleSubgroups : props.titleSubgroups,
       };
 
     }
@@ -55,44 +57,7 @@ class MetaAnnotator extends Component {
 
 
   }
-  //
-  //
-  // prepareConceptData = async () => {
-  //
-  //         let fetch = new fetchData();
-  //
-  //
-  //
-  //
-  //
-  //         var data = this.props.annotationData
-  //
-  //         data.map( (annotated_record) =>
-  //                     Object.keys(annotated_record).map( (qualifier) => {
-  //                               var concept = annotated_record[qualifier];
-  //                               var stored_qualifier = concepts[qualifier];
-  //                               console.log(concept)
-  //                               concepts[qualifier] = stored_qualifier ? [...stored_qualifier,concept] : [concept]
-  //                 }))
-  //
-  //
-  //             data ? data.rows.map (
-  //               item => {
-  //                 var matching_term = this.prepareTermForMatching(concept)
-  //
-  //                 concept_metadata[item.concept] = {
-  //                   cuis: item.cuis.length > 0 ? item.cuis.split(";") : ( recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis.split(";") : [] ),
-  //                   cuis_selected: item.cuis_selected.length > 0 ? item.cuis_selected.split(";") : [],
-  //                   qualifiers: item.qualifiers.length > 0 ? item.qualifiers.split(";") : [],
-  //                   qualifiers_selected: item.qualifiers_selected.length > 0 ? item.qualifiers_selected.split(";") : [],
-  //                   matching_term : matching_term,
-  //                 }
-  //
-  //               }) : ""
-  //
-  //         this.setState({})
-  //
-  // }
+
 
   async componentWillReceiveProps(next) {
 
@@ -105,9 +70,13 @@ class MetaAnnotator extends Component {
 
 
     var concept_metadata = {}
-        metadadata ? metadadata.rows.map ( item => { concept_metadata[item.concept] = {
-                    cuis: item.cuis.length > 0 ? item.cuis.split(";") : ( recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : [] ),
-                    cuis_selected : item.cuis_selected.length > 0 ? item.cuis_selected.split(";") : [],
+        metadadata ? metadadata.rows.map ( item => {
+
+                  var cuis = item.cuis.length > 0 ? item.cuis.split(";") : ( recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : [] )
+
+                  concept_metadata[item.concept] = {
+                    cuis: cuis,
+                    cuis_selected : item.cuis_selected.length > 0 ? item.cuis_selected.split(";") : ( cuis.length > 0 ? [cuis[0]] : [] ),
                     qualifiers: item.qualifiers.length > 0 ? item.qualifiers.split(";") : [],
                     qualifiers_selected : item.qualifiers_selected.length > 0 ? item.qualifiers_selected.split(";") : [],
                     matching_term : this.prepareTermForMatching(item.concept),
@@ -117,32 +86,74 @@ class MetaAnnotator extends Component {
 
     var concepts = {}
 
-    next.annotationData.map( (annotated_record) => Object.keys(annotated_record).map(
-                                (category) => {
-                                  var concept = annotated_record[category];
-                                  var stored_qualifier = concepts[category];
-                                  // console.log(concept+"  , "+stored_qualifier)
-                                  concepts[category] = Array.from( new Set( stored_qualifier ? [...stored_qualifier,concept] : [concept] ))
-                                }
-                              )
+    var concepts_indexing = {}
+
+    next.annotationData.map( (annotated_record) => {
+                                var cs = Object.keys(annotated_record).map(
+                                   (category) => {
+                                    var concept = annotated_record[category];
+
+                                    var stored_qualifier = concepts[category];
+                                    concepts[category] = Array.from( new Set( stored_qualifier ? [...stored_qualifier,concept] : [concept] ))
+
+                                    if ( ["value","col","row"].indexOf(category) < 0 ){
+                                      concepts_indexing[concept] = {index: this.props.annotationText.indexOf(concept), category : category}
+                                    }
+
+                                    return concept
+                                  }
+                                )
+
+                              }
                             )
+
+
 
 
     // adding the placeholder for concepts that have not been assigned yet into concept_metadata.
     Object.keys(concepts).map( category => {
-          concepts[category].map( concept => {
-                  if ( !concept_metadata[concept] ){
-                      var matching_term = this.prepareTermForMatching(concept)
-                      concept_metadata[concept] = {
-                        cuis: recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : [],
-                        cuis_selected : [],
-                        qualifiers: [],
-                        qualifiers_selected : [],
-                        matching_term : matching_term,
-                      }
-                  }
-          })
+
+          if ( ["value","col","row"].indexOf(category) < 0){
+            concepts[category].map( concept => {
+                    if ( !concept_metadata[concept] ){
+                        var matching_term = this.prepareTermForMatching(concept)
+                        var cuis = recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : []
+
+                        concept_metadata[concept] = {
+                          cuis: cuis,
+                          cuis_selected :  cuis.length > 0 ? [cuis[0]] : [] ,
+                          qualifiers: ["Presence-absense"],
+                          qualifiers_selected : ["Presence-absense"],
+                          matching_term : matching_term,
+                        }
+                    }
+            })
+          }
     });
+
+    this.state.titleSubgroups ? this.state.titleSubgroups.map ( titleSG => {
+        var matching_term = this.prepareTermForMatching(titleSG);
+        var cuis = recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : []
+
+        concept_metadata[titleSG] = {
+              cuis: cuis,
+              cuis_selected: cuis.length > 0 ? [cuis[0]] : [],
+              matching_term: matching_term,
+              qualifiers: ["Presence-absense"],
+              qualifiers_selected: ["Presence-absense"],
+            }
+
+        concepts_indexing[titleSG] = {
+          category: "title_subgroup",
+          index: -10,
+        }
+
+
+
+    }) : "";
+
+
+    var ordered_concepts = Object.keys(concepts_indexing).sort(function(a, b){return concepts_indexing[a].index-concepts_indexing[b].index});
 
     this.setState({
       user: urlparams.get("user") ? urlparams.get("user") : "",
@@ -151,6 +162,10 @@ class MetaAnnotator extends Component {
       annotationData: next.annotationData,
       concept_metadata : concept_metadata,
       recommend_cuis : recommend_cuis,
+      concepts_indexing : concepts_indexing,
+      ordered_concepts : ordered_concepts,
+      isSaved : false,
+      titleSubgroups : next.titleSubgroups,
     })
 
   }
@@ -167,6 +182,22 @@ class MetaAnnotator extends Component {
   }
 
   async saveAll() {
+
+        var current_metadata = this.state.concept_metadata
+
+
+        let fetch = new fetchData();
+
+
+        Object.keys(current_metadata).map( async (concept) => {
+          var current_concept = current_metadata[concept]
+
+          await fetch.setTableMetadata(this.state.docid, this.state.page, concept, current_concept.cuis.join(";"),current_concept.cuis_selected.join(";"), current_concept.qualifiers.join(";"), current_concept.qualifiers_selected.join(";"), this.state.user )
+
+        })
+
+        this.setState({isSaved: true})
+
         alert("Metadata Changes Saved!")
   }
 
@@ -185,22 +216,14 @@ class MetaAnnotator extends Component {
 
       current_metadata[concept] = current_concept_data
 
-      this.setState({concept_metadata : current_metadata})
+      this.setState({concept_metadata : current_metadata, isSaved: false})
 
   }
-
-  // toggleElementSelect = (concept, code, type) => {
-  //
-  //   var current_metadata = this.state.concept_metadata
-  //
-  //   debugger;
-  //
-  // }
 
   render() {
 
 
-    var concepts = {}
+    var concepts_by_category = {}
 
     if ( this.props.annotationData ){
       var data = this.props.annotationData
@@ -208,17 +231,14 @@ class MetaAnnotator extends Component {
       data.map( (annotated_record) =>
                   Object.keys(annotated_record).map( (qualifier) => {
                             var concept = annotated_record[qualifier];
-                            var stored_qualifier = concepts[qualifier];
-                            concepts[qualifier] = stored_qualifier ? [...stored_qualifier,concept] : [concept]
+                            var stored_qualifier = concepts_by_category[qualifier];
+                            concepts_by_category[qualifier] = stored_qualifier ? [...stored_qualifier,concept] : [concept]
               }))
 
 
 
 
     }
-
-    let fetch = new fetchData();
-
 
 
     return (
@@ -227,11 +247,11 @@ class MetaAnnotator extends Component {
 
             <RaisedButton variant={"contained"}
                       style={{width:50,float:"right",margin:2}}
-                      onClick={ () => { this.setState({opened: this.state.opened ? false : true}) } }><Eye style={{color : Object.keys(concepts).length > 0 ? "red": "inherit"}}/></RaisedButton>
+                      onClick={ () => { this.setState({opened: this.state.opened ? false : true}) } }><Eye style={{color : Object.keys(concepts_by_category).length > 0 ? "red": "inherit"}}/></RaisedButton>
 
             {
               this.state.opened ? <RaisedButton variant={"contained"}
-                      style={{width:50,float:"left",margin:2,marginLeft:4}}
+                      style={{width:50,float:"left",margin:2,marginLeft:4, color: this.state.isSaved ? "inherit" : "red" }}
                       onClick={ () => { this.saveAll() } }><Disk/></RaisedButton> : ""
             }
 
@@ -241,34 +261,11 @@ class MetaAnnotator extends Component {
             {
               this.state.opened && Object.keys(this.state.concept_metadata).length > 0 ?
                   <div style={{margin:10}}>
-                  {
-                    Object.keys(concepts).map(
-                      (v,j) => ["row","col","value"].indexOf(v) > -1 ? ""
-                      : <div key = {"concept_"+j} >
-                            <h3 style={{fontVariantCaps: "small-caps", fontSize: 30, marginBottom: 3}}>{v}</h3>
-                            <div style={{marginLeft:10}}>{concepts[v].map( (concept,i) => {
 
+                  {this.state.ordered_concepts.map( (concept,i) => {
 
                               var matching_term = this.prepareTermForMatching(concept)
-
-                              // var concept_exists = this.state.concept_metadata[concept] ? true : false
-
-                              // if ( !concept_exists ){
-                              //
-                              //   //initialise DB with new element, using recommended_cuis or empty if its not there.
-                              //   fetch.setTableMetadata(this.state.docid,
-                              //                         this.state.page,
-                              //                         concept,
-                              //                         this.state.recommend_cuis[matching_term] ? this.state.recommend_cuis[matching_term].cuis.join(";") : "",
-                              //                         "Presence",
-                              //                         this.state.user )
-                              // }
-                              // var state = this.state
-                              //
-                              // debugger
-
-                              return concepts[v].indexOf(concept) < i ? ""
-                                    : <MetaItem
+                              return <MetaItem
                                                 key = {"concept_item_"+concept}
                                                 term = {concept}
                                                 matching_term = { this.state.concept_metadata[concept].matching_term}
@@ -277,10 +274,9 @@ class MetaAnnotator extends Component {
                                                 cuis_selected = { this.state.concept_metadata[concept].cuis_selected }
                                                 qualifiers_selected = {this.state.concept_metadata[concept].qualifiers_selected }
                                                 updateConceptData = {this.updateConceptData}
+                                                isLevel = {this.state.concepts_indexing[concept].category.toLowerCase().indexOf("level") > -1}
                                       />
-                            })}</div>
-                      </div>)
-                  }
+                            })}
                   </div>
                   : ""
 

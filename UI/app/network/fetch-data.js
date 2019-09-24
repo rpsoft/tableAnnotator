@@ -24,10 +24,10 @@ export default class fetchData {
   async saveTableEdit(docid,page,content) {
     let result
 
-    var options = {path : "", messageBody : ""}
+    var options = {path : "/saveTableOverride"}
 
     try {
-      result = await this.httpClient.sendPost('', options )
+      result = await this.httpClient.sendPost(JSON.stringify(content), options )
     } catch(error) {
       console.error('Table Edit POST failed: ' + error)
     }
@@ -66,13 +66,15 @@ export default class fetchData {
   }
 
 
-  async setTableMetadata(docid, page, concept, cuis, qualifiers, user) {
+  async setTableMetadata(docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, user) {
 
         var urlQueryRequest = urlBase+ "setMetadata?docid="+encodeURIComponent(docid)
                                                 +"&page="+page
                                                 +"&concept="+encodeURIComponent(concept)
                                                 +"&cuis="+encodeURIComponent(cuis)
+                                                +"&cuis_selected="+encodeURIComponent(cuis_selected)
                                                 +"&qualifiers="+encodeURIComponent(qualifiers)
+                                                +"&qualifiers_selected="+encodeURIComponent(qualifiers_selected)
                                                 +"&user="+encodeURIComponent(user)
 
         var r = await this.getGeneric( urlQueryRequest  )

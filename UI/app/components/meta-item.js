@@ -53,6 +53,7 @@ class MetaItem extends Component {
         adder_cui : "",
         adder_text : "",
         dialogType : "cuiAdder",
+        isLevel: props.isLevel,
       }
 
     }
@@ -145,6 +146,7 @@ class MetaItem extends Component {
       matching_term : next.matching_term,
       assigned_cuis : next.assigned_cuis,
       assigned_qualifiers : next.assigned_qualifiers,
+      isLevel: next.isLevel,
     });
 
   }
@@ -229,13 +231,13 @@ class MetaItem extends Component {
 
 
     return (
-      <div style={{marginBottom:5}}>
+      <div style={{marginBottom:5, marginLeft: this.state.isLevel ? 20 : 0}}>
             <div style={{display:"inline-block", fontWeight:"bolder"}}>{this.state.term+" : "}</div>
 
             { this.state.assigned_cuis ? this.state.assigned_cuis.map (
               cui => <div key={cui} className={"cui_selected"}
                           style={{display:"inline-block", marginLeft:15, cursor:"pointer", color: this.state.cuis_selected.indexOf(cui) > -1 ? "red" : "black"}}
-                          onClick={ (ev) => {this.toggleElement(cui, ev, "cuis_selected")}}>
+                          onClick={ (ev) => { ev.ctrlKey ? this.toggleElement(cui, ev, "assigned_cuis") : this.toggleElement(cui, ev, "cuis_selected")}}>
                           {cui+" [ "+ (this.state.cuis_data[cui] ? this.state.cuis_data[cui].preferred : "") +" ] "}
                     </div>
             ) : ""}
@@ -244,13 +246,13 @@ class MetaItem extends Component {
               + Concept
             </Button>
 
-            <div style={{display:"inline-block", fontWeight:"bolder"}}>{" / "}</div>
+            <div style={{display:"inline-block", fontWeight:"bolder", marginLeft:5}}>{" || "}</div>
 
             { this.state.assigned_qualifiers ? this.state.assigned_qualifiers.map (
               cui => <div key={cui}
                           className={"cui_selected"}
                           style={{display:"inline-block", marginLeft:15, cursor:"pointer", color: this.state.qualifiers_selected.indexOf(cui) > -1 ? "red" : "black"}}
-                          onClick={ (ev) => {this.toggleElement(cui, ev, "qualifiers_selected")}}>
+                          onClick={ (ev) => { ev.ctrlKey ? this.toggleElement(cui, ev, "assigned_qualifiers") : this.toggleElement(cui, ev, "qualifiers_selected")}}>
                           {cui+" [ "+ (concept_CUI_modifiers[cui] ? concept_CUI_modifiers[cui] : "") +" ] "}
               </div>
             ) : ""}
@@ -319,11 +321,12 @@ class MetaItem extends Component {
                 this.state.dialogType === "cuiAdder" && this.state.adder_opened ?
                 <div style={{margin:10}}>
                     <hr />
+                    <div style={{backgroundColor:"#ececec"}}>
                     <TextField
                       value={this.state.adder_cui}
                       placeholder="concept id here"
                       onChange={ (event) => {this.handleTextChange("adder_cui",event.currentTarget.value)}}
-                    />adder_cui
+                    />
                     <TextField
                       value={this.state.adder_text}
                       placeholder="concept definition"
@@ -332,6 +335,7 @@ class MetaItem extends Component {
                     />
 
                     <Button onClick={ () => { this.customCUIAdd ( this.state.adder_cui, this.state.adder_text)}} style={{fontWeight:"bolder",margin:5}}> Add </Button>
+                    </div>
                  </div>
 
                 : ""

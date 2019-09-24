@@ -336,12 +336,41 @@ function main(){
 
 main();
 
+app.get('/api/clearMetadata', async function(req,res){
+
+  var setMetadata = async (docid, page, user) => {
+      var client = await pool.connect()
+
+      var done = await client.query('DELETE FROM metadata WHERE docid = $1 AND page = $2 AND "user" = $3', [docid, page, user ])
+        .then(result => console.log("deleted: "+ new Date()))
+        .catch(e => console.error(e.stack))
+        .then(() => client.release())
+
+  }
+
+  if ( req.query && req.query.docid && req.query.page && req.query.user){
+    await setMetadata(req.query.docid , req.query.page, req.query.user)
+    res.send("done")
+  } else {
+    res.send("insert failed");
+  }
+
+});
+
 
 app.get('/api/setMetadata', async function(req,res){
 
-  var setMetadata = async (docid, page, concept, cuis, qualifiers, user) => {
+  var setMetadata = async (docid, page, concept, cuis, qualifiers, cuis_selected, qualifiers_selected, user ) => {
       var client = await pool.connect()
-      var done = await client.query('INSERT INTO metadata(docid, page, concept, cuis, qualifiers, "user") VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT (docid, page, concept, "user") DO UPDATE SET cuis = $4, qualifiers = $5', [docid, page, concept, cuis, qualifiers, user])
+
+      // var done = await client.query('DELETE FROM metadata WHERE docid = $1 AND page = $2 AND "user" = $3', [docid, page, user ])
+      //   .then(result => console.log("deleted: "+ new Date()))
+      //   .catch(e => console.error(e.stack))
+      //   .then(() => client.release())
+      //
+      // client = await pool.connect()
+
+      done = await client.query('INSERT INTO metadata(docid, page, concept, cuis, qualifiers, "user", cuis_selected, qualifiers_selected ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT (docid, page, concept, "user") DO UPDATE SET cuis = $4, qualifiers = $5, cuis_selected = $7, qualifiers_selected = $8 ', [docid, page, concept, cuis, qualifiers, user, cuis_selected, qualifiers_selected ])
         .then(result => console.log("insert: "+ new Date()))
         .catch(e => console.error(e.stack))
         .then(() => client.release())
@@ -349,7 +378,7 @@ app.get('/api/setMetadata', async function(req,res){
   }
 
   if ( req.query && req.query.docid && req.query.page && req.query.concept && req.query.user){
-    await setMetadata(req.query.docid , req.query.page , req.query.concept , req.query.cuis || "", req.query.qualifiers || "", req.query.user)
+    await setMetadata(req.query.docid , req.query.page , req.query.concept , req.query.cuis || "", req.query.qualifiers || "", req.query.cuis_selected || "", req.query.qualifiers_selected || "" , req.query.user)
     res.send("done")
   } else {
     res.send("insert failed");
@@ -864,6 +893,7 @@ app.use(function (req, res, next) {
 
 // POST method route
 app.post('/saveTableOverride', function (req, res) {
+  debugger
   res.send(JSON.stringify(req.body));
 })
 

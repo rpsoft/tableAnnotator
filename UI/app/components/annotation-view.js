@@ -381,6 +381,31 @@ class AnnotationView extends Component {
 
    }
 
+   async saveTableChanges (state) {
+
+     let fetch = new fetchData();
+
+    debugger
+     fetch.saveTableEdit(this.state.docid, this.state.page, this.state.overrideTable)
+
+     this.setState({editor_enabled : this.state.editor_enabled ? false : true})
+   }
+
+   addTitleSubgroup = () => {
+     if ( this.state.newTitleSubgroup && this.state.newTitleSubgroup.length > 0){
+       var sgs = this.state.titleSubgroups ? this.state.titleSubgroups : []
+       sgs.push(this.state.newTitleSubgroup)
+       this.setState({newTitleSubgroup: "", titleSubgroups: sgs })
+     }
+   }
+
+   removeTitleSG = (sg) => {
+     var sgs = this.state.titleSubgroups
+     var i = sgs.indexOf(sg)
+     sgs.splice(i,1)
+     this.setState({titleSubgroups: sgs})
+   }
+
 
    render() {
 
@@ -535,12 +560,13 @@ class AnnotationView extends Component {
               onInit={ editor => {
                   // You can store the "editor" and use when it is needed.
                   console.log( 'Editor is ready to use!', editor );
-                  this.setState({editor : editor})
+                  this.setState({editor : editor, overrideTable: CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].getData() })
               } }
 
               onChange={ ( event, editor ) => {
                   var realData = this.state.table.formattedPage
                   const data = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].getData();
+                  this.setState({overrideTable : data});
                   console.log( { event, editor, data } );
               } }
 
@@ -553,7 +579,7 @@ class AnnotationView extends Component {
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
-        <MetaAnnotator annotationData={data} />
+        <MetaAnnotator annotationData={data} annotationText={this.state.table ? this.state.table.formattedPage : ""} titleSubgroups={this.state.titleSubgroups}/>
 
         <Card id="userData" style={{padding:15}}>
           <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+(this.state.user ? "?user="+this.state.user : "" ))}/>
@@ -608,14 +634,29 @@ class AnnotationView extends Component {
 
             { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : <div>
                                                                                                             <div style={{paddingBottom: 10, fontWeight:"bold",marginBottom:10}}><Link to={"https://www.ncbi.nlm.nih.gov/pubmed/?term="+ this.state.docid} target="_blank">{"PMID: " + this.state.docid }</Link> { " | " + (this.state.table.title ? this.state.table.title.title.trim() : "")}</div>
-                                                                                                            {/* <div style={{marginTop:10,}}> {}</div> */}
+
                                                                                                             <div style={{paddingBottom: 10, fontWeight:"bold"}} dangerouslySetInnerHTML={{__html:this.state.table.htmlHeader}}></div>
+                                                                                                            {this.state.titleSubgroups ? this.state.titleSubgroups.map( sg => <div style={{cursor:"pointer"}}onClick= { () => this.removeTitleSG(sg) }> {sg+","} </div> ) : ""}
+                                                                                                            <TextField
+                                                                                                                  value={this.state.newTitleSubgroup}
+                                                                                                                  placeholder="Enter title subgroup here to add"
+                                                                                                                  style={{width:400}}
+                                                                                                                  onChange={(event) => {this.setState({newTitleSubgroup: event.target.value})}}
+                                                                                                                  onKeyDown={(event, index) => {
+                                                                                                                    if (event.key === 'Enter') {
+                                                                                                                        this.addTitleSubgroup()
+                                                                                                                        event.preventDefault();
+                                                                                                                    }
+                                                                                                                  }}
+
+                                                                                                                /><RaisedButton style={{color:"#198413",backgroundColor:"#d4d4d4", marginLeft:10}}
+                                                                                                                                onClick={ (event) => { this.addTitleSubgroup();  event.preventDefault(); } }> ADD Title Subgroup </RaisedButton>
                                                                                                         </div> }
         </Card>
 
         <Card id="tableHolder" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center", minHeight: 580}}>
           <RaisedButton variant={"contained"} style={{marginBottom:20}} onClick={ () => { this.setState({editor_enabled : this.state.editor_enabled ? false : true}) } }>Edit Table</RaisedButton>
-          { this.state.editor_enabled ? <RaisedButton variant={"contained"} style={{marginBottom:20,float:"right"}} onClick={ () => { this.setState({editor_enabled : this.state.editor_enabled ? false : true}) } }>Save Table Changes</RaisedButton> : ""}
+          { this.state.editor_enabled ? <RaisedButton variant={"contained"} style={{marginBottom:20,float:"right"}} onClick={ () => this.saveTableChanges( this.state ) }>Save Table Changes</RaisedButton> : ""}
           { !this.state.table ? <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : ( this.state.editor_enabled ? table_editor : <div dangerouslySetInnerHTML={{__html:this.state.table.formattedPage}}></div> ) }
 
         </Card>

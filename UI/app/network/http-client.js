@@ -60,7 +60,7 @@ export default class HttpClient {
   sendPost(messageBody='', options={}) {
     return new Promise(
       (resolve, reject) => {
-        var options = {
+        var standardOptions = {
           host: (typeof location != "undefined") ? location.hostname : '',
           port: (typeof location != "undefined") ? 6541 : 0,
           method: 'POST',
@@ -69,7 +69,10 @@ export default class HttpClient {
           }
         };
 
-        var req = http.request(options, function(res) {
+        var req = http.request({
+          ...this.standardOptions,
+          ...options
+          }, function(res) {
           console.log('Status: ' + res.statusCode);
           console.log('Headers: ' + JSON.stringify(res.headers));
           res.setEncoding('utf8');
@@ -83,7 +86,7 @@ export default class HttpClient {
         });
 
         // write data to request body
-        req.write('{"string": "Hello, World"}');
+        req.write(messageBody);
 
         req.end();
       }
