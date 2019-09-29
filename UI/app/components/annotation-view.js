@@ -131,7 +131,6 @@ class AnnotationView extends Component {
 
     var parsed = QString.parse(props.location.search);
 
-
     if ( Object.keys(parsed).length > 0 &&
         parsed.docid && parsed.page) {
 
@@ -320,6 +319,18 @@ class AnnotationView extends Component {
      this.setState({annotations})
    }
 
+  removeOverrideTable = async (docid,page) => {
+
+     let fetch = new fetchData();
+     await fetch.removeOverrideTable(docid,page)
+
+     var data = await fetch.getTable(docid,page)
+
+     this.setState({table: JSON.parse(data), editor_enabled : this.state.editor_enabled ? false : true, overrideTable: null})
+     // this.forceUpdate();
+   }
+
+
    goToGIndex(index){
      var newDocument = this.state.allInfo.abs_index[index]
      this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user)
@@ -352,10 +363,11 @@ class AnnotationView extends Component {
           }
         })
 
-    this.setState({preview,allAnnotations: {}})
+    // this.setState({preview,allAnnotations: {}})
 
     var preview = await fetch.getAnnotationPreview(parsed.docid,parsed.page, this.state.user)
-    this.setState({preview,allAnnotations: annotations_formatted})
+
+    this.setState({preview,allAnnotations: annotations_formatted || {}})
 
    }
 
@@ -375,20 +387,21 @@ class AnnotationView extends Component {
      this.setState({preparingPreview : true})
 
      let fetch = new fetchData();
-     var preview = JSON.parse(await fetch.getAnnotationPreview(parsed.docid,parsed.page, this.state.user))
+     var preview = await fetch.getAnnotationPreview(parsed.docid,parsed.page, this.state.user)
 
      this.setState({preview, preparingPreview: false})
 
    }
 
-   async saveTableChanges (state) {
+   async saveTableChanges () {
 
      let fetch = new fetchData();
 
-    debugger
-     fetch.saveTableEdit(this.state.docid, this.state.page, this.state.overrideTable)
+     fetch.saveTableEdit(this.state.docid, this.state.page, this.state.overrideTable ? this.state.overrideTable : this.state.table.formattedPage)
 
      this.setState({editor_enabled : this.state.editor_enabled ? false : true})
+
+     this.getPreview()
    }
 
    addTitleSubgroup = () => {
@@ -408,6 +421,7 @@ class AnnotationView extends Component {
 
 
    render() {
+
 
        var preparedPreview = <div>Preview not available</div>
 
@@ -438,7 +452,7 @@ class AnnotationView extends Component {
             var data;
             var columns = []
 
-            if(this.state.preview.state == "good" && this.state.preview.result.length > 0 ){
+            if(this.state.preview.state == "good" && this.state.preview.result && this.state.preview.result.length > 0 ){
                 data = this.state.preview.result.map(
                   (v,i) => {
 
@@ -469,7 +483,7 @@ class AnnotationView extends Component {
             }
 
 
-            if ( this.state.preview.state == "good" ){
+            if ( this.state.preview.state == "good" && this.state.preview.result ){
 
               if( this.state.preview.result.length > 0){
 
@@ -541,11 +555,11 @@ class AnnotationView extends Component {
                             	{ name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
                             	{ name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
                             	{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
-                            	{ name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+                            	// { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
                             	{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
                             	{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
                             	{ name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
-                            	{ name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+                            	// { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
                             	{ name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
                             	{ name: 'colors', items: [ 'TextColor', 'BGColor' ] },
                             	{ name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
@@ -555,15 +569,15 @@ class AnnotationView extends Component {
 
               } }
 
-              data={this.state.table.formattedPage || ""}
+              data={this.state.overrideTable || this.state.table.formattedPage}
 
               onInit={ editor => {
                   // You can store the "editor" and use when it is needed.
                   console.log( 'Editor is ready to use!', editor );
-                  this.setState({editor : editor, overrideTable: CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].getData() })
               } }
 
               onChange={ ( event, editor ) => {
+                  debugger
                   var realData = this.state.table.formattedPage
                   const data = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].getData();
                   this.setState({overrideTable : data});
@@ -656,8 +670,10 @@ class AnnotationView extends Component {
 
         <Card id="tableHolder" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center", minHeight: 580}}>
           <RaisedButton variant={"contained"} style={{marginBottom:20}} onClick={ () => { this.setState({editor_enabled : this.state.editor_enabled ? false : true}) } }>Edit Table</RaisedButton>
+
+          { this.state.editor_enabled ? <RaisedButton variant={"contained"} style={{marginBottom:20,float:"right"}} onClick={ () => this.removeOverrideTable(this.state.docid, this.state.page) }>Recover Original</RaisedButton> : ""}
           { this.state.editor_enabled ? <RaisedButton variant={"contained"} style={{marginBottom:20,float:"right"}} onClick={ () => this.saveTableChanges( this.state ) }>Save Table Changes</RaisedButton> : ""}
-          { !this.state.table ? <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : ( this.state.editor_enabled ? table_editor : <div dangerouslySetInnerHTML={{__html:this.state.table.formattedPage}}></div> ) }
+          { !this.state.table ? <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : ( this.state.editor_enabled ? table_editor : <div dangerouslySetInnerHTML={{__html:this.state.overrideTable || this.state.table.formattedPage}}></div> ) }
 
         </Card>
 

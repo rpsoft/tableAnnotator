@@ -35,7 +35,7 @@ class MetaAnnotator extends Component {
         user: urlparams.get("user") ? urlparams.get("user") : "",
         page: urlparams.get("page") ? urlparams.get("page") : "",
         docid: urlparams.get("docid") ? urlparams.get("docid") : "",
-        opened: true,
+        opened: false,
         annotationData: props.annotationData,
         concept_metadata: {}, // The actual data in the database, that will hold the data from the interaction with the annotator.
         recommend_cuis: {}, // This are the proposed cuis for concepts as per classfier and Peter's manual annotations.
@@ -88,7 +88,9 @@ class MetaAnnotator extends Component {
 
     var concepts_indexing = {}
 
-    next.annotationData.map( (annotated_record) => {
+    var annotationText = this.prepareTermForMatching(this.props.annotationText).toLowerCase()
+
+      next.annotationData ? next.annotationData.map( (annotated_record) => {
                                 var cs = Object.keys(annotated_record).map(
                                    (category) => {
                                     var concept = annotated_record[category];
@@ -97,7 +99,7 @@ class MetaAnnotator extends Component {
                                     concepts[category] = Array.from( new Set( stored_qualifier ? [...stored_qualifier,concept] : [concept] ))
 
                                     if ( ["value","col","row"].indexOf(category) < 0 ){
-                                      concepts_indexing[concept] = {index: this.props.annotationText.indexOf(concept), category : category}
+                                      concepts_indexing[concept] = {index: annotationText.indexOf(concept.toLowerCase()), category : category}
                                     }
 
                                     return concept
@@ -105,7 +107,7 @@ class MetaAnnotator extends Component {
                                 )
 
                               }
-                            )
+                            ) : ""
 
 
 

@@ -4,13 +4,20 @@
 #  library(unpivotr)
 #  library(tidyverse)
 
-needs(readr,tidyxl,unpivotr,tidyverse)
+needs(readr,tidyxl,unpivotr,tidyverse,XML,rjson)
+# 
+library(readr)
+library(tidyxl)
+library(unpivotr)
+library(tidyverse)
+library(XML)
+library(rjson)
 
 ## Directory holding the script
 setwd("~/ihw/tableAnnotator/Server/src")
 
 # folder with the single sheets in XLSX format
-tablesDirectory <- "~/ihw/tableAnnotator/Server/XLSX_TABLES/"
+tablesDirectory <- "~/ihw/tableAnnotator/Server/HTML_TABLES_OVERRIDE/"
 
 ################# PREPARING THE INPUT VARIABLE annotations.
 # new_obj_back <- readRDS("full_tables_rds_jul_2019.rds")
@@ -41,8 +48,75 @@ annotations <- anns %>% select(user,docid,page,corrupted,tableType,location,numb
 
 saveRDS(annotations, "testing-annotations.rds")
 
- # annotations <- readRDS("testing-annotations.rds")
+   # annotations <- readRDS("testing-annotations.rds")
 ##################
+
+html_2_df <- function (pmid,page){
+  # library(RCurl)
+  
+  url <- paste0("http://localhost:6541/api/getTable?docid=",pmid,"&page=",page)
+  JsonData <- fromJSON(file= url )
+  
+  # doc_string <- read_file(paste0("~/ihw/tableAnnotator/Server/HTML_TABLES_OVERRIDE/",pmid,"_",page,".html"))
+  
+  x <- read_xml(JsonData$formattedPage, as_html = FALSE)
+  ps <- xml_find_all(x, ".//td/p")
+  tds <- xml_find_all(x, ".//td")
+  
+  df_tds <- data.frame("path"=xml_path(tds), "character"=xml_text(tds))
+  df_ps <- data.frame("path" = xml_path(ps), "attr" = xml_attr(ps, "class") )
+  df_ps <- df_ps %>% mutate("path" = gsub("/p", "", path) )
+  
+  possible_cols <- c(letters %>% str_to_upper(), c(outer(letters %>% str_to_upper() , letters %>% str_to_upper() , FUN=paste0)) )
+  
+  newdata <- suppressMessages(suppressWarnings( left_join(df_tds , df_ps) ))
+  
+  newdata <- newdata %>% mutate( character = ifelse(str_squish(character) == "", NA, as.character(character) ) )
+  
+  newdata <- newdata %>% mutate( pos = trimws(gsub("[^0-9]", " ", path), "both")) %>% separate(pos, c("row", "col"), "     ")
+  newdata <- newdata %>% mutate( address = paste0(possible_cols[strtoi(col, base = 0L)],row))
+  
+  newdata <- newdata %>% mutate( row = as.double(row), col = as.double(col))
+  
+  newdata <- newdata %>% mutate( is_empty = character %>% is.na())
+  newdata <- newdata %>% mutate( is_blank = character %>% is.na())
+  
+  newdata <- newdata %>% group_by(row) %>% mutate(blank_row = all(is_empty) ) %>% ungroup()
+  
+  
+  newdata <- newdata %>% mutate( bold = str_detect(attr,"bold"))
+  newdata <- newdata %>% mutate( italic = str_detect(attr,"italic"))
+  newdata <- newdata %>% mutate( first_col = str_detect(attr,"firstCol"))
+  newdata <- newdata %>% mutate( first_last_col = str_detect(attr,"firstLastCol"))
+  newdata <- newdata %>% mutate( indent = str_detect(attr,"indent"))
+  newdata <- newdata %>% mutate( indent_lvl = trimws(gsub("[^0-9]", " ", attr), "both"))
+  
+  newdata[c("is_empty", "blank_row", "italic", "first_col", "first_last_col", "indent")][is.na(newdata[c("is_empty", "blank_row", "italic", "first_col", "first_last_col", "indent")])] <- FALSE
+  newdata[c("attr")][is.na(newdata[c("attr")])] <- ""
+  newdata[c("bold")][is.na(newdata[c("bold")])] <- FALSE
+  newdata[c("indent_lvl")][is.na(newdata[c("indent_lvl")])] <- 0
+  newdata[c("indent_lvl")][!is.numeric(newdata[c("indent_lvl")])] <- 0
+  
+  newdata <- newdata %>% mutate( search_round = "table_override")
+  newdata <- newdata %>% mutate( sheet = "Sheet1")
+  newdata <- newdata %>% mutate( pmid = pmid)
+  newdata <- newdata %>% mutate( pmid_tbl = paste0(pmid,"_",page))
+  newdata <- newdata %>% mutate( data_type = ifelse(is_empty, "blank", "character"))
+  newdata <- newdata %>% mutate( has_no_num = str_length(trimws(gsub("[^0-9]", " ", character))) == 0 )
+  newdata[c("has_no_num")][is.na(newdata[c("has_no_num")])] <- TRUE
+  
+  newdata <- newdata %>% mutate( tbl_n = page)
+  newdata <- newdata %>% mutate( file_name = paste0(pmid,"_",page,".html"))
+  newdata <- newdata %>% mutate( original_file_stored = NA)
+  newdata <- newdata %>% mutate( ticker = 1)
+  
+  newdata <- newdata %>% select(c("search_round", "sheet", "address", "row", "col", "is_blank", 
+                                  "character", "bold", "italic", "indent", "data_type", "is_empty", 
+                                  "has_no_num", "tbl_n", "file_name", "blank_row", "first_col", 
+                                  "first_last_col", "original_file_stored", "pmid", "pmid_tbl", 
+                                  "ticker", "indent_lvl"))
+  return(newdata)       
+}
 
 
 runAll <- function(){
@@ -204,8 +278,9 @@ runAll <- function(){
 
         filename <- paste(meta$docid[1], meta$page[1], sep = "_")
 
-        if(file.exists(paste0(tablesDirectory, filename, ".xlsx"))){
-          all_cells <- xlsx_cells(paste0(tablesDirectory, filename, ".xlsx"))
+        
+        if(file.exists(paste0(tablesDirectory, filename, ".html"))){
+          all_cells <- html_2_df(meta$docid[1], meta$page[1])
         } else {
           all_cells <- new_obj %>% filter( pmid_tbl == filename) 
         }
@@ -220,44 +295,54 @@ runAll <- function(){
           mutate(data_type = if_else(is.na(character) & !is.na(numeric), "character", data_type),
                  character = if_else(is.na(character), as.character(numeric), character))
 
-        ## Extract cell-level formatting
-        if(file.exists(paste0(tablesDirectory, filename, ".xlsx"))){
-          formats <- xlsx_formats(paste0(tablesDirectory, filename, ".xlsx"))
-
-          bold <- formats$local$font$bold
-          ital <- formats$local$font$italic
-          bold_ital <- bind_cols(formats$local$font[c("bold", "italic")])
-          ## Note indentation is relative to minimum indent, problem is that this refers to every cell,
-          ## not just column_type
-          indt <- bind_cols(formats$local$alignment) %>%
-            mutate(indent = indent - min(indent),
-                   indent_lvl = indent,
-                   indent = horizontal %in% c("center", "right") |
-                     (indent >=1)) %>%
-            select(indent, indent_lvl)
-
-        } else {
-
-          formats <- new_obj %>% filter( pmid_tbl == filename) %>% select(bold, italic,"indent","indent_lvl")
-
-          bold <- formats$bold
-          italic <- formats$italic
-          bold_ital <- cbind(bold,italic) %>% as_tibble
-          indt <- formats %>% select("indent","indent_lvl")
-          
-          all_cells <- all_cells %>% mutate(local_format_id = seq_along(all_cells$row))
-
-        }
-
-        
-        # browser()
-        
-        ## Append to main dataset
-        formats <- bind_cols(bold_ital, indt) %>%
-          mutate(local_format_id = seq_along(bold))
-
-        suppressWarnings(suppressMessages(all_cells <- all_cells %>%
-          inner_join(formats)))
+        # ## Extract cell-level formatting
+        # if(file.exists(paste0(tablesDirectory, filename, ".html"))){
+        #   # formats <- xlsx_formats(paste0(tablesDirectory, filename, ".xlsx"))
+        #   # 
+        #   # bold <- formats$local$font$bold
+        #   # ital <- formats$local$font$italic
+        #   # bold_ital <- bind_cols(formats$local$font[c("bold", "italic")])
+        #   # ## Note indentation is relative to minimum indent, problem is that this refers to every cell,
+        #   # ## not just column_type
+        #   # indt <- bind_cols(formats$local$alignment) %>%
+        #   #   mutate(indent = indent - min(indent),
+        #   #          indent_lvl = indent,
+        #   #          indent = horizontal %in% c("center", "right") |
+        #   #            (indent >=1)) %>%
+        #   #   select(indent, indent_lvl)
+        #   
+        #   formats <- new_obj %>% filter( pmid_tbl == filename) %>% select(bold, italic,"indent","indent_lvl")
+        #   
+        #   bold <- formats$bold
+        #   italic <- formats$italic
+        #   bold_ital <- cbind(bold,italic) %>% as_tibble
+        #   indt <- formats %>% select("indent","indent_lvl")
+        #   
+        #   all_cells <- all_cells %>% mutate(local_format_id = seq_along(all_cells$row))
+        #   
+        # 
+        # } else {
+        # 
+        #   formats <- new_obj %>% filter( pmid_tbl == filename) %>% select(bold, italic,"indent","indent_lvl")
+        # 
+        #   bold <- formats$bold
+        #   italic <- formats$italic
+        #   bold_ital <- cbind(bold,italic) %>% as_tibble
+        #   indt <- formats %>% select("indent","indent_lvl")
+        #   
+        all_cells <- all_cells %>% mutate(local_format_id = seq_along(all_cells$row))
+        # 
+        # }
+        # 
+        # 
+        # # browser()
+        # 
+        # ## Append to main dataset
+        # formats <- bind_cols(bold_ital, indt) %>%
+        #   mutate(local_format_id = seq_along(bold))
+        # 
+        # suppressWarnings(suppressMessages(all_cells <- all_cells %>%
+        #   inner_join(formats)))
 
         all_cells_indnt <- all_cells %>%
           filter(indent) %>%
@@ -388,6 +473,12 @@ runAll <- function(){
               filter(row > split_header) %>%
               mutate(row = row - split_header)
           }
+        
+        if ( is.na(split_header) ){
+          table_body <- all_cells
+          split_header <- 0
+        }
+        
         ## Also need to resent indent level
         all_cells_indnt <- all_cells_indnt %>%
           filter(row > split_header) %>%

@@ -652,7 +652,7 @@ function () {
               var _ref4 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
               _regenerator.default.mark(function _callee3(docid, page, concept, cuis, qualifiers, cuis_selected, qualifiers_selected, user) {
-                var client;
+                var client, done;
                 return _regenerator.default.wrap(function _callee3$(_context3) {
                   while (1) {
                     switch (_context3.prev = _context3.next) {
@@ -1631,65 +1631,51 @@ function () {
   return function (_x69, _x70) {
     return _ref26.apply(this, arguments);
   };
-}());
-app.get('/api/rscript',
+}()); //
+// app.get('/api/rscript',async function(req,res){
+//
+//   try{
+//
+//     var result = R("./src/tableScript.R")
+//
+//         result = result.data("hello world", 20)
+//       .callSync()
+//
+//       res.send( JSON.stringify(result) )
+//
+//   } catch (e){
+//
+//     res.send("FAIL: "+ e)
+//   }
+// });
+
+app.get('/api/annotationPreview',
 /*#__PURE__*/
 function () {
   var _ref27 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee27(req, res) {
-    var result;
+    var annotations, page, user, final_annotations, r, ann, existing, final_annotations_array, entry;
     return _regenerator.default.wrap(function _callee27$(_context27) {
       while (1) {
         switch (_context27.prev = _context27.next) {
           case 0:
-            try {
-              result = R("./src/tableScript.R");
-              result = result.data("hello world", 20).callSync();
-              res.send(JSON.stringify(result));
-            } catch (e) {
-              res.send("FAIL: " + e);
-            }
-
-          case 1:
-          case "end":
-            return _context27.stop();
-        }
-      }
-    }, _callee27, this);
-  }));
-
-  return function (_x71, _x72) {
-    return _ref27.apply(this, arguments);
-  };
-}());
-app.get('/api/annotationPreview',
-/*#__PURE__*/
-function () {
-  var _ref28 = (0, _asyncToGenerator2.default)(
-  /*#__PURE__*/
-  _regenerator.default.mark(function _callee28(req, res) {
-    var annotations, page, user, final_annotations, r, ann, existing, final_annotations_array, result, entry, toreturn;
-    return _regenerator.default.wrap(function _callee28$(_context28) {
-      while (1) {
-        switch (_context28.prev = _context28.next) {
-          case 0:
-            _context28.prev = 0;
+            _context27.prev = 0;
 
             if (!(req.query && req.query.docid && req.query.docid.length > 0)) {
-              _context28.next = 10;
+              _context27.next = 10;
               break;
             }
 
             page = req.query.page && req.query.page.length > 0 ? req.query.page : 1;
             user = req.query.user && req.query.user.length > 0 ? req.query.user : "";
             console.log(user + "  -- " + JSON.stringify(req.query));
-            _context28.next = 7;
+            _context27.next = 7;
             return getAnnotationByID(req.query.docid, page, user);
 
           case 7:
-            annotations = _context28.sent;
-            _context28.next = 11;
+            annotations = _context27.sent;
+            _context27.next = 11;
             break;
 
           case 10:
@@ -1730,66 +1716,90 @@ function () {
 
 
             if (final_annotations_array.length > 0) {
-              result = R("./src/tableScript.R");
+              // var result = R("./src/tableScript.R")
               entry = final_annotations_array[0];
               entry.annotation = entry.annotation.annotations.map(function (v, i) {
                 var ann = v;
                 ann.content = Object.keys(ann.content).join(";");
                 ann.qualifiers = Object.keys(ann.qualifiers).join(";");
                 return ann;
-              });
-              console.log("ENTRY:: " + JSON.stringify(entry));
-              result = result.data(entry).callSync(); // console.log(JSON.stringify(result))
+              }); //     console.log("ENTRY:: "+JSON.stringify(entry))
+              //     result = result.data(entry)
+              //   .callSync()
+              //
+              //
+              //   var toreturn = {"state" : "good", result }
+              //
+              //   console.log(JSON.stringify(toreturn))
+              // var request = require('request');
+              // debugger
 
-              toreturn = {
-                "state": "good",
-                result: result
-              };
-              res.send(toreturn);
+              request({
+                url: 'http://localhost:6666/preview',
+                method: "POST",
+                json: {
+                  anns: entry
+                }
+              }, function (error, response, body) {
+                console.log('error:', error); // Print the error if one occurred
+
+                console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+
+                console.log('body:', body); // Print the HTML for the Google homepage.
+                // debugger
+
+                var result = body; // debugger
+
+                res.send({
+                  "state": "good",
+                  result: body.tableResult,
+                  "anns": body.ann
+                });
+              });
             } else {
               res.send({
                 "state": "empty"
               });
             }
 
-            _context28.next = 21;
+            _context27.next = 21;
             break;
 
           case 18:
-            _context28.prev = 18;
-            _context28.t0 = _context28["catch"](0);
+            _context27.prev = 18;
+            _context27.t0 = _context27["catch"](0);
             res.send({
               "state": "failed"
             });
 
           case 21:
           case "end":
-            return _context28.stop();
+            return _context27.stop();
         }
       }
-    }, _callee28, this, [[0, 18]]);
+    }, _callee27, this, [[0, 18]]);
   }));
 
-  return function (_x73, _x74) {
-    return _ref28.apply(this, arguments);
+  return function (_x71, _x72) {
+    return _ref27.apply(this, arguments);
   };
 }());
 app.get('/api/formattedResults',
 /*#__PURE__*/
 function () {
-  var _ref29 = (0, _asyncToGenerator2.default)(
+  var _ref28 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee29(req, res) {
+  _regenerator.default.mark(function _callee28(req, res) {
     var results, finalResults, r, ann, existing, finalResults_array, formattedRes;
-    return _regenerator.default.wrap(function _callee29$(_context29) {
+    return _regenerator.default.wrap(function _callee28$(_context28) {
       while (1) {
-        switch (_context29.prev = _context29.next) {
+        switch (_context28.prev = _context28.next) {
           case 0:
-            _context29.next = 2;
+            _context28.next = 2;
             return getAnnotationResults();
 
           case 2:
-            results = _context29.sent;
+            results = _context28.sent;
 
             if (results) {
               finalResults = {};
@@ -1837,14 +1847,14 @@ function () {
 
           case 4:
           case "end":
-            return _context29.stop();
+            return _context28.stop();
         }
       }
-    }, _callee29, this);
+    }, _callee28, this);
   }));
 
-  return function (_x75, _x76) {
-    return _ref29.apply(this, arguments);
+  return function (_x73, _x74) {
+    return _ref28.apply(this, arguments);
   };
 }());
 app.get('/api/abs_index', function (req, res) {
@@ -1862,7 +1872,7 @@ app.get('/api/totalTables', function (req, res) {
   });
 });
 
-function getMMatch(_x77) {
+function getMMatch(_x75) {
   return _getMMatch.apply(this, arguments);
 }
 
@@ -1909,28 +1919,28 @@ function _getMMatch() {
 app.get('/api/getMMatch',
 /*#__PURE__*/
 function () {
-  var _ref30 = (0, _asyncToGenerator2.default)(
+  var _ref29 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee30(req, res) {
+  _regenerator.default.mark(function _callee29(req, res) {
     var mm_match;
-    return _regenerator.default.wrap(function _callee30$(_context30) {
+    return _regenerator.default.wrap(function _callee29$(_context29) {
       while (1) {
-        switch (_context30.prev = _context30.next) {
+        switch (_context29.prev = _context29.next) {
           case 0:
-            _context30.prev = 0;
+            _context29.prev = 0;
 
             if (!(req.query && req.query.phrase)) {
-              _context30.next = 8;
+              _context29.next = 8;
               break;
             }
 
-            _context30.next = 4;
+            _context29.next = 4;
             return getMMatch(req.query.phrase);
 
           case 4:
-            mm_match = _context30.sent;
+            mm_match = _context29.sent;
             res.send(mm_match);
-            _context30.next = 9;
+            _context29.next = 9;
             break;
 
           case 8:
@@ -1940,24 +1950,24 @@ function () {
             });
 
           case 9:
-            _context30.next = 14;
+            _context29.next = 14;
             break;
 
           case 11:
-            _context30.prev = 11;
-            _context30.t0 = _context30["catch"](0);
-            console.log(_context30.t0);
+            _context29.prev = 11;
+            _context29.t0 = _context29["catch"](0);
+            console.log(_context29.t0);
 
           case 14:
           case "end":
-            return _context30.stop();
+            return _context29.stop();
         }
       }
-    }, _callee30, this, [[0, 11]]);
+    }, _callee29, this, [[0, 11]]);
   }));
 
-  return function (_x78, _x79) {
-    return _ref30.apply(this, arguments);
+  return function (_x76, _x77) {
+    return _ref29.apply(this, arguments);
   };
 }());
 app.use(bodyParser.json());
@@ -1969,9 +1979,64 @@ app.use(function (req, res, next) {
 }); // POST method route
 
 app.post('/saveTableOverride', function (req, res) {
-  debugger;
-  res.send(JSON.stringify(req.body));
+  fs.writeFile("HTML_TABLES_OVERRIDE/" + req.body.docid + "_" + req.body.page + '.html', req.body.table, function (err) {
+    if (err) throw err;
+    console.log('Written replacement for: ' + req.body.docid + "_" + req.body.page + '.html');
+  });
+  res.send("alles gut!");
 });
+app.get('/api/removeOverrideTable',
+/*#__PURE__*/
+function () {
+  var _ref30 = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee30(req, res) {
+    var file_exists;
+    return _regenerator.default.wrap(function _callee30$(_context30) {
+      while (1) {
+        switch (_context30.prev = _context30.next) {
+          case 0:
+            if (!(req.query && req.query.docid && req.query.page)) {
+              _context30.next = 8;
+              break;
+            }
+
+            _context30.next = 3;
+            return fs.existsSync("HTML_TABLES_OVERRIDE/" + req.query.docid + "_" + req.query.page + ".html");
+
+          case 3:
+            file_exists = _context30.sent;
+
+            if (file_exists) {
+              fs.unlink("HTML_TABLES_OVERRIDE/" + req.query.docid + "_" + req.query.page + ".html", function (err) {
+                if (err) throw err;
+                console.log("REMOVED : HTML_TABLES_OVERRIDE/" + req.query.docid + "_" + req.query.page + ".html");
+              });
+            }
+
+            res.send({
+              status: "override removed"
+            });
+            _context30.next = 9;
+            break;
+
+          case 8:
+            res.send({
+              status: "no changes"
+            });
+
+          case 9:
+          case "end":
+            return _context30.stop();
+        }
+      }
+    }, _callee30, this);
+  }));
+
+  return function (_x78, _x79) {
+    return _ref30.apply(this, arguments);
+  };
+}());
 app.get('/api/classify',
 /*#__PURE__*/
 function () {
@@ -2021,14 +2086,26 @@ function _readyTableData() {
   _readyTableData = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee46(docid, page, method) {
-    var htmlFolder, htmlFile, result;
+    var htmlFolder, htmlFile, file_exists, result;
     return _regenerator.default.wrap(function _callee46$(_context46) {
       while (1) {
         switch (_context46.prev = _context46.next) {
           case 0:
             docid = docid + "_" + page + ".html";
             htmlFolder = tables_folder + "/";
-            htmlFile = docid;
+            htmlFile = docid; //If an override file exists then use it!. Overrides are those produced by the editor.
+
+            _context46.next = 5;
+            return fs.existsSync("HTML_TABLES_OVERRIDE/" + docid);
+
+          case 5:
+            file_exists = _context46.sent;
+
+            if (file_exists) {
+              htmlFolder = "HTML_TABLES_OVERRIDE/";
+            }
+
+            console.log("LOADING FROM " + htmlFolder + " " + file_exists + "  " + "HTML_TABLES_OVERRIDE/" + docid);
             result = new Promise(function (resolve, reject) {
               try {
                 fs.readFile(htmlFolder + htmlFile, "utf8", function (err, data) {
@@ -2479,7 +2556,7 @@ function _readyTableData() {
             });
             return _context46.abrupt("return", result);
 
-          case 5:
+          case 10:
           case "end":
             return _context46.stop();
         }

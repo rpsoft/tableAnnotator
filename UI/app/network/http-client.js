@@ -60,35 +60,35 @@ export default class HttpClient {
   sendPost(messageBody='', options={}) {
     return new Promise(
       (resolve, reject) => {
-        var standardOptions = {
-          host: (typeof location != "undefined") ? location.hostname : '',
+
+        var data = JSON.stringify(messageBody)
+
+        options = {
+          hostname: (typeof location != "undefined") ? location.hostname : '',
           port: (typeof location != "undefined") ? 6541 : 0,
+          path: '/saveTableOverride',
           method: 'POST',
           headers: {
-              'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
+            'Content-Length': data.length
           }
-        };
+        }
 
-        var req = http.request({
-          ...this.standardOptions,
-          ...options
-          }, function(res) {
-          console.log('Status: ' + res.statusCode);
-          console.log('Headers: ' + JSON.stringify(res.headers));
-          res.setEncoding('utf8');
-          res.on('data', function (body) {
-            console.log('Body: ' + body);
-          });
-        });
+        const req = http.request(options, res => {
+          console.log(`statusCode: ${res.statusCode}`)
 
-        req.on('error', function(e) {
-          console.log('problem with request: ' + e.message);
-        });
+          res.on('data', d => {
+            console.log(d)
+          })
+        })
 
-        // write data to request body
-        req.write(messageBody);
+        req.on('error', error => {
+          console.error(error)
+        })
 
-        req.end();
+        req.write(data)
+        req.end()
+
       }
     );
   }

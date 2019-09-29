@@ -370,7 +370,7 @@ app.get('/api/setMetadata', async function(req,res){
       //
       // client = await pool.connect()
 
-      done = await client.query('INSERT INTO metadata(docid, page, concept, cuis, qualifiers, "user", cuis_selected, qualifiers_selected ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT (docid, page, concept, "user") DO UPDATE SET cuis = $4, qualifiers = $5, cuis_selected = $7, qualifiers_selected = $8 ', [docid, page, concept, cuis, qualifiers, user, cuis_selected, qualifiers_selected ])
+     var done = await client.query('INSERT INTO metadata(docid, page, concept, cuis, qualifiers, "user", cuis_selected, qualifiers_selected ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT (docid, page, concept, "user") DO UPDATE SET cuis = $4, qualifiers = $5, cuis_selected = $7, qualifiers_selected = $8 ', [docid, page, concept, cuis, qualifiers, user, cuis_selected, qualifiers_selected ])
         .then(result => console.log("insert: "+ new Date()))
         .catch(e => console.error(e.stack))
         .then(() => client.release())
@@ -664,23 +664,23 @@ app.get('/api/allPredictions', async function(req,res){
   res.send(predictions)
 });
 
-
-app.get('/api/rscript',async function(req,res){
-
-  try{
-
-    var result = R("./src/tableScript.R")
-
-        result = result.data("hello world", 20)
-      .callSync()
-
-      res.send( JSON.stringify(result) )
-
-  } catch (e){
-
-    res.send("FAIL: "+ e)
-  }
-});
+//
+// app.get('/api/rscript',async function(req,res){
+//
+//   try{
+//
+//     var result = R("./src/tableScript.R")
+//
+//         result = result.data("hello world", 20)
+//       .callSync()
+//
+//       res.send( JSON.stringify(result) )
+//
+//   } catch (e){
+//
+//     res.send("FAIL: "+ e)
+//   }
+// });
 
 app.get('/api/annotationPreview',async function(req,res){
 
@@ -734,17 +734,40 @@ app.get('/api/annotationPreview',async function(req,res){
 
         if( final_annotations_array.length > 0){
 
-              var result = R("./src/tableScript.R")
-                  var entry = final_annotations_array[0]
-                      entry.annotation = entry.annotation.annotations.map( (v,i) => {var ann = v; ann.content = Object.keys(ann.content).join(";"); ann.qualifiers = Object.keys(ann.qualifiers).join(";"); return ann} )
+              // var result = R("./src/tableScript.R")
+              var entry = final_annotations_array[0]
+                  entry.annotation = entry.annotation.annotations.map( (v,i) => {var ann = v; ann.content = Object.keys(ann.content).join(";"); ann.qualifiers = Object.keys(ann.qualifiers).join(";"); return ann} )
 
-                  console.log("ENTRY:: "+JSON.stringify(entry))
-                  result = result.data(entry)
-                .callSync()
+              //     console.log("ENTRY:: "+JSON.stringify(entry))
+              //     result = result.data(entry)
+              //   .callSync()
+              //
+              //
+              //   var toreturn = {"state" : "good", result }
+              //
+              //   console.log(JSON.stringify(toreturn))
+              // var request = require('request');
+              // debugger
+              request({
+                      url: 'http://localhost:6666/preview',
+                      method: "POST",
+                      json: {
+                        anns: entry
+                      }
+                }, function (error, response, body) {
+                console.log('error:', error); // Print the error if one occurred
+                console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+                console.log('body:', body); // Print the HTML for the Google homepage.
 
-                // console.log(JSON.stringify(result))
-                var toreturn = {"state" : "good", result }
-                res.send( toreturn )
+                // debugger
+                var result = body
+                // debugger
+                res.send( {"state" : "good", result : body.tableResult, "anns": body.ann} )
+              });
+
+
+
+
         } else {
           res.send({"state" : "empty"})
         }
@@ -893,9 +916,42 @@ app.use(function (req, res, next) {
 
 // POST method route
 app.post('/saveTableOverride', function (req, res) {
-  debugger
-  res.send(JSON.stringify(req.body));
+
+
+  fs.writeFile("HTML_TABLES_OVERRIDE/"+req.body.docid+"_"+req.body.page+'.html',  req.body.table, function (err) {
+    if (err) throw err;
+    console.log('Written replacement for: '+req.body.docid+"_"+req.body.page+'.html');
+  });
+
+  res.send("alles gut!");
+
 })
+
+
+
+app.get('/api/removeOverrideTable', async function(req,res){
+
+  if(req.query && req.query.docid && req.query.page ){
+
+    var file_exists = await fs.existsSync("HTML_TABLES_OVERRIDE/"+req.query.docid+"_"+req.query.page+".html")
+    if ( file_exists ) {
+
+      fs.unlink("HTML_TABLES_OVERRIDE/"+req.query.docid+"_"+req.query.page+".html", (err) => {
+        if (err) throw err;
+        console.log("REMOVED : HTML_TABLES_OVERRIDE/"+req.query.docid+"_"+req.query.page+".html");
+      });
+
+    }
+
+    res.send({status: "override removed"})
+  } else {
+    res.send({status: "no changes"})
+  }
+
+
+});
+
+
 
 app.get('/api/classify', async function(req,res){
 
@@ -909,11 +965,22 @@ app.get('/api/classify', async function(req,res){
 });
 
 
+
+
+
 async function readyTableData(docid,page,method){
   var docid = docid+"_"+page+".html"
 
   var htmlFolder = tables_folder+"/"
   var htmlFile = docid
+
+  //If an override file exists then use it!. Overrides are those produced by the editor.
+  var file_exists = await fs.existsSync("HTML_TABLES_OVERRIDE/"+docid)
+  if ( file_exists ) {
+    htmlFolder = "HTML_TABLES_OVERRIDE/"
+  }
+
+  console.log("LOADING FROM "+ htmlFolder+" "+file_exists+"  "+"HTML_TABLES_OVERRIDE/"+docid)
 
   var result = new Promise(function(resolve, reject) {
 

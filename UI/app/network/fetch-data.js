@@ -21,13 +21,22 @@ export default class fetchData {
   }
 
 
+  async removeOverrideTable(docid,page){
+      var urlQueryRequest = urlBase+ "removeOverrideTable?docid="+encodeURIComponent(docid)+"&page="+page
+
+      var r = await this.getGeneric( urlQueryRequest  )
+
+      return r
+  }
+
   async saveTableEdit(docid,page,content) {
+
     let result
 
     var options = {path : "/saveTableOverride"}
 
     try {
-      result = await this.httpClient.sendPost(JSON.stringify(content), options )
+      result = await this.httpClient.sendPost( {docid: docid, page: page, table: content}, options )
     } catch(error) {
       console.error('Table Edit POST failed: ' + error)
     }
@@ -97,8 +106,8 @@ export default class fetchData {
         var urlQueryRequest = urlBase+ "annotationPreview?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user
 
         var r = await this.getGeneric( urlQueryRequest  )
-
-        return r
+        // debugger
+        return JSON.parse(r)
   }
 
   async getAnnotationByID(docid,page,user) {
