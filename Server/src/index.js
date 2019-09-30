@@ -391,7 +391,7 @@ app.get('/api/getMetadata', async function(req,res){
 
   var getMetadata = async ( docid,page, user) => {
     var client = await pool.connect()
-    var result = await client.query(`SELECT docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, user FROM metadata WHERE docid = $1 AND page = $2 AND user = $3`,[docid,page,user])
+    var result = await client.query(`SELECT docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, "user" FROM metadata WHERE docid = $1 AND page = $2 AND "user" = $3`,[docid,page,user])
           client.release()
     return result
   }
@@ -1058,7 +1058,7 @@ async function readyTableData(docid,page,method){
                                       actual_table = actual_table.html();
 
                                   // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
-                                   var formattedPage = "<div><style>"+data_ss+"</style>"+actual_table+"</div>"
+                                   var formattedPage = actual_table.indexOf("tr:hover" < 0) ? "<div><style>"+data_ss+"</style>"+actual_table+"</div>" : actual_table
 
                                   // var formattedPage = "<div>"+actual_table+"</div>"
 

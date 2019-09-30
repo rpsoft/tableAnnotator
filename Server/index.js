@@ -743,7 +743,7 @@ function () {
                       case 2:
                         client = _context5.sent;
                         _context5.next = 5;
-                        return client.query("SELECT docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, user FROM metadata WHERE docid = $1 AND page = $2 AND user = $3", [docid, page, user]);
+                        return client.query("SELECT docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, \"user\" FROM metadata WHERE docid = $1 AND page = $2 AND \"user\" = $3", [docid, page, user]);
 
                       case 5:
                         result = _context5.sent;
@@ -2215,7 +2215,7 @@ function _readyTableData() {
 
                               actual_table = actual_table.html(); // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
 
-                              formattedPage = "<div><style>" + data_ss + "</style>" + actual_table + "</div>"; // var formattedPage = "<div>"+actual_table+"</div>"
+                              formattedPage = actual_table.indexOf("tr:hover" < 0) ? "<div><style>" + data_ss + "</style>" + actual_table + "</div>" : actual_table; // var formattedPage = "<div>"+actual_table+"</div>"
 
                               _context45.next = 33;
                               return attempt_predictions(actual_table);

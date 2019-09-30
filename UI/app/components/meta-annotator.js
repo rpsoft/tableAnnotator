@@ -69,22 +69,29 @@ class MetaAnnotator extends Component {
     var metadadata = await fetch.getTableMetadata(this.state.docid, this.state.page, this.state.user)
 
 
+    var unique_concepts_metadata = []
+
     var concept_metadata = {}
         metadadata ? metadadata.rows.map ( item => {
-
+                  var matching_term = this.prepareTermForMatching(item.concept)
                   var cuis = item.cuis.length > 0 ? item.cuis.split(";") : ( recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : [] )
+
+                  unique_concepts_metadata.push(item.concept)
 
                   concept_metadata[item.concept] = {
                     cuis: cuis,
                     cuis_selected : item.cuis_selected.length > 0 ? item.cuis_selected.split(";") : ( cuis.length > 0 ? [cuis[0]] : [] ),
                     qualifiers: item.qualifiers.length > 0 ? item.qualifiers.split(";") : [],
                     qualifiers_selected : item.qualifiers_selected.length > 0 ? item.qualifiers_selected.split(";") : [],
-                    matching_term : this.prepareTermForMatching(item.concept),
+                    matching_term : matching_term,
                   }
                 }
               ) : ""
 
     var concepts = {}
+
+    var unique_concepts_annotation = []
+
 
     var concepts_indexing = {}
 
@@ -95,11 +102,13 @@ class MetaAnnotator extends Component {
                                    (category) => {
                                     var concept = annotated_record[category];
 
+
                                     var stored_qualifier = concepts[category];
                                     concepts[category] = Array.from( new Set( stored_qualifier ? [...stored_qualifier,concept] : [concept] ))
 
                                     if ( ["value","col","row"].indexOf(category) < 0 ){
                                       concepts_indexing[concept] = {index: annotationText.indexOf(concept.toLowerCase()), category : category}
+                                      unique_concepts_annotation.push(concept)
                                     }
 
                                     return concept
@@ -133,12 +142,19 @@ class MetaAnnotator extends Component {
           }
     });
 
-    this.state.titleSubgroups ? this.state.titleSubgroups.map ( titleSG => {
+    // if ( unique_concepts_annotation.length > 0 ){
+    //   var title_concepts = unique_concepts_metadata.reduce( (total, currentValue, currentIndex, arr) => {if ( unique_concepts_annotation.indexOf(currentValue) < 0){total.push(currentValue);} return total}, [] )
+    //
+    //   if ( next.titleSubgroups )
+    //   this.props.addTitleSGS(title_concepts)
+    // }
+
+    next.titleSubgroups ? next.titleSubgroups.map ( titleSG => {
         var matching_term = this.prepareTermForMatching(titleSG);
         var cuis = recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : []
 
         concept_metadata[titleSG] = {
-              cuis: cuis,
+              cuis: concept_metadata[titleSG] ? concept_metadata[titleSG].cuis : cuis,
               cuis_selected: cuis.length > 0 ? [cuis[0]] : [],
               matching_term: matching_term,
               qualifiers: ["Presence-absense"],
@@ -157,6 +173,7 @@ class MetaAnnotator extends Component {
 
     var ordered_concepts = Object.keys(concepts_indexing).sort(function(a, b){return concepts_indexing[a].index-concepts_indexing[b].index});
 
+    // debugger
     this.setState({
       user: urlparams.get("user") ? urlparams.get("user") : "",
       page: urlparams.get("page") ? urlparams.get("page") : "",
@@ -169,6 +186,9 @@ class MetaAnnotator extends Component {
       isSaved : false,
       titleSubgroups : next.titleSubgroups,
     })
+
+
+
 
   }
 
@@ -190,7 +210,7 @@ class MetaAnnotator extends Component {
 
         let fetch = new fetchData();
 
-
+        // debugger
         Object.keys(current_metadata).map( async (concept) => {
           var current_concept = current_metadata[concept]
 

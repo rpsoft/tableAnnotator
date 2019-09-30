@@ -158,14 +158,11 @@ class AnnotationView extends Component {
 
         var documentData = allInfo.available_documents[parsed.docid]
         var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(parsed.page)]
-        this.getPreview()
 
         var annotation
         if( this.state.user && this.state.user.length > 0){
           annotation = JSON.parse(await fetch.getAnnotationByID(parsed.docid,parsed.page,this.state.user))
         }
-
-        //var user = this.state.user != props.location.query.user ? this.state.user
 
         if ( annotation ){
           this.setState({
@@ -179,7 +176,7 @@ class AnnotationView extends Component {
             corrupted_text : annotation.corrupted_text,
             tableType : annotation.tableType ? annotation.tableType : "",
             annotations : annotation.annotation ? annotation.annotation.annotations : [],
-            allAnnotations: annotations_formatted
+            allAnnotations: annotations_formatted,
           })
         } else {
           this.setState({
@@ -189,17 +186,19 @@ class AnnotationView extends Component {
             allInfo,
             gindex: current_table_g_index,
             user : parsed.user ? parsed.user : "",
-            allAnnotations: annotations_formatted
+            allAnnotations: annotations_formatted,
           })
         }
+
+        this.getPreview()
     }
    }
 
    // Retrieve the table given general index and number N.
-   shiftTables(n){
+   shiftTables = (n) => {
 
-    var parsed = QString.parse(this.props.location.search);
 
+     var parsed = QString.parse(this.props.location.search);
 
      var documentData = this.state.allInfo.available_documents[this.state.docid]
      var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf( (this.state.page || parsed.page) +"")]
@@ -213,10 +212,11 @@ class AnnotationView extends Component {
 
      var newDocument = this.state.allInfo.abs_index[new_index]
 
-     this.setState({annotations:[],gindex: current_table_g_index})
+     this.setState({annotations:[],gindex: current_table_g_index, overrideTable: n != 0 ? null : this.state.overrideTable })
 
 
      this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user)
+
 
    }
 
@@ -393,11 +393,25 @@ class AnnotationView extends Component {
 
    }
 
+   clearEditor = (CKEDITOR) => {
+
+     //debugger
+
+   }
+
    async saveTableChanges () {
 
      let fetch = new fetchData();
 
-     fetch.saveTableEdit(this.state.docid, this.state.page, this.state.overrideTable ? this.state.overrideTable : this.state.table.formattedPage)
+     var tableToSave
+
+     if ( this.state.overrideTable ){
+       tableToSave = this.state.overrideTable.replace("<table", this.state.table.htmlHeader.replace("<table><tr ><td", '<div class="headers"><div').replace("</td></tr></table>","</div></div><table "))
+     } else {
+       tableToSave = this.state.table.formattedPage
+     }
+
+     fetch.saveTableEdit( this.state.docid, this.state.page, tableToSave )
 
      this.setState({editor_enabled : this.state.editor_enabled ? false : true})
 
@@ -419,9 +433,14 @@ class AnnotationView extends Component {
      this.setState({titleSubgroups: sgs})
    }
 
+   addTitleSGS = (newSgs) => {
+     var sgs = this.state.titleSubgroups ? this.state.titleSubgroups : []
+         newSgs.map( sg => sgs.indexOf(sg) < 0 ? sgs.push(sg) : "" )
+     this.setState({newTitleSubgroup: "", titleSubgroups: sgs })
+   }
+
 
    render() {
-
 
        var preparedPreview = <div>Preview not available</div>
 
@@ -439,9 +458,10 @@ class AnnotationView extends Component {
                            (us,j) => <div
                              style={{display:"inline",cursor: "pointer", textDecoration: "underline"}}
                              key={j}
-                             onClick={ () => this.props.goToUrl("/table/?docid="+encodeURIComponent(parsed.docid)+"&page="+parsed.page+"&user="+us)}
+                             onClick={ () => {this.props.goToUrl("/table/?docid="+encodeURIComponent(parsed.docid)+"&page="+parsed.page+"&user="+us)}}
                              >{us+", "}</div>
                         )
+
                       }
                     </div>
 
@@ -539,15 +559,17 @@ class AnnotationView extends Component {
 
        }
 
-       var editor_ref = this.state.editor
-
        var table_editor;
 
        if ( this.state.table ) {
 
-          table_editor = <CKEditor
+          table_editor = this.editor ? this.editor : <CKEditor
 
               type="classic"
+              id = "myeditor"
+              key = "myeditor"
+
+              onBeforeLoad={ ( CKEDITOR ) => {CKEDITOR.disableAutoInline = true; this.clearEditor(CKEDITOR); } }
 
               config={ {
                   allowedContent : true,
@@ -571,20 +593,23 @@ class AnnotationView extends Component {
 
               data={this.state.overrideTable || this.state.table.formattedPage}
 
-              onInit={ editor => {
-                  // You can store the "editor" and use when it is needed.
-                  console.log( 'Editor is ready to use!', editor );
-              } }
-
               onChange={ ( event, editor ) => {
-                  debugger
-                  var realData = this.state.table.formattedPage
+                  //debugger
+                  // var realData = this.state.table.formattedPage
+
                   const data = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].getData();
                   this.setState({overrideTable : data});
                   console.log( { event, editor, data } );
               } }
 
+              onKey={ (event,editor) => {
+                  const data = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].getData();
+                  this.setState({overrideTable : data});
+                }}
+
         />
+
+
 
       } else {
           table_editor = "";
@@ -593,7 +618,7 @@ class AnnotationView extends Component {
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
-        <MetaAnnotator annotationData={data} annotationText={this.state.table ? this.state.table.formattedPage : ""} titleSubgroups={this.state.titleSubgroups}/>
+        <MetaAnnotator annotationData={data} annotationText={this.state.table ? this.state.table.formattedPage : ""} titleSubgroups={this.state.titleSubgroups} addTitleSGS={this.addTitleSGS}/>
 
         <Card id="userData" style={{padding:15}}>
           <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+(this.state.user ? "?user="+this.state.user : "" ))}/>
