@@ -75,8 +75,8 @@ export default class fetchData {
   }
 
 
-  async setTableMetadata(docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, user) {
-
+  async setTableMetadata(docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, user, istitle) {
+        // debugger
         var urlQueryRequest = urlBase+ "setMetadata?docid="+encodeURIComponent(docid)
                                                 +"&page="+page
                                                 +"&concept="+encodeURIComponent(concept)
@@ -85,6 +85,7 @@ export default class fetchData {
                                                 +"&qualifiers="+encodeURIComponent(qualifiers)
                                                 +"&qualifiers_selected="+encodeURIComponent(qualifiers_selected)
                                                 +"&user="+encodeURIComponent(user)
+                                                +"&istitle="+encodeURIComponent(istitle || false)
 
         var r = await this.getGeneric( urlQueryRequest  )
 
@@ -99,6 +100,19 @@ export default class fetchData {
 
         return JSON.parse(r)
   }
+
+
+  async clearTableMetadata(docid, page, user) {
+
+        var urlQueryRequest = urlBase+ "clearMetadata?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+encodeURIComponent(user)
+
+        var r = await this.getGeneric( urlQueryRequest  )
+
+        return r
+  }
+
+
+
 
 
   async getAnnotationPreview(docid,page,user) {

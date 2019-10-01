@@ -54,6 +54,8 @@ class MetaItem extends Component {
         adder_text : "",
         dialogType : "cuiAdder",
         isLevel: props.isLevel,
+
+        istitle: props.istitle,
       }
 
     }
@@ -88,6 +90,7 @@ class MetaItem extends Component {
           cuis_selected: state.cuis_selected,
           qualifiers_selected: state.qualifiers_selected,
           matching_term : state.matching_term,
+          istitle : state.istitle,
       }
 
       this.props.updateConceptData( state.term, data )
@@ -147,6 +150,7 @@ class MetaItem extends Component {
       assigned_cuis : next.assigned_cuis,
       assigned_qualifiers : next.assigned_qualifiers,
       isLevel: next.isLevel,
+      istitle: next.istitle,
     });
 
   }

@@ -81,9 +81,8 @@ class AnnotationView extends Component {
 
   }
 
-
-
   async componentDidMount () {
+
     var parsed = QString.parse(this.props.location.search);
 
     let fetch = new fetchData();
@@ -101,7 +100,11 @@ class AnnotationView extends Component {
           }
         })
 
+    var recommend_cuis = await fetch.getConceptRecommend();
+    var metadata = await fetch.getTableMetadata(parsed.docid, parsed.page, parsed.user)
 
+    var titleSubgroups = []
+        metadata.rows.map ( item => { if ( item.istitle ){ titleSubgroups.push(item.concept) } })
 
     this.setState({
       //user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
@@ -112,6 +115,9 @@ class AnnotationView extends Component {
       tableType : annotation.tableType ? annotation.tableType : "",
       annotations : annotation.annotation ? annotation.annotation.annotations : [],
       allAnnotations : annotations_formatted,
+      recommend_cuis : recommend_cuis,
+      metadata : metadata,
+      titleSubgroups : titleSubgroups,
     })
 
     if( !this.state.preview ){
@@ -164,6 +170,14 @@ class AnnotationView extends Component {
           annotation = JSON.parse(await fetch.getAnnotationByID(parsed.docid,parsed.page,this.state.user))
         }
 
+
+        var recommend_cuis = await fetch.getConceptRecommend();
+        var metadata = await fetch.getTableMetadata(parsed.docid, parsed.page, parsed.user)
+        var titleSubgroups = []
+            metadata.rows.map ( item => { if ( item.istitle ){ titleSubgroups.push(item.concept) } })
+
+
+
         if ( annotation ){
           this.setState({
             table: JSON.parse(data),
@@ -177,6 +191,10 @@ class AnnotationView extends Component {
             tableType : annotation.tableType ? annotation.tableType : "",
             annotations : annotation.annotation ? annotation.annotation.annotations : [],
             allAnnotations: annotations_formatted,
+            recommend_cuis : recommend_cuis,
+            metadata : metadata,
+            titleSubgroups : titleSubgroups,
+
           })
         } else {
           this.setState({
@@ -187,8 +205,15 @@ class AnnotationView extends Component {
             gindex: current_table_g_index,
             user : parsed.user ? parsed.user : "",
             allAnnotations: annotations_formatted,
+            recommend_cuis : recommend_cuis,
+            metadata : metadata,
+            titleSubgroups : titleSubgroups,
           })
         }
+
+
+        // prepare data for MetaAnnotator
+
 
         this.getPreview()
     }
@@ -371,14 +396,8 @@ class AnnotationView extends Component {
 
    }
 
-   async getPreview(disableAlert){
+   async getPreview(disableUpdate){
 
-     if (!this.state.user){
-       if (!disableAlert){
-          //alert("Specify a user before Preview")
-        }
-         return
-     }
 
      var parsed = QString.parse(this.props.location.search);
 
@@ -389,13 +408,36 @@ class AnnotationView extends Component {
      let fetch = new fetchData();
      var preview = await fetch.getAnnotationPreview(parsed.docid,parsed.page, this.state.user)
 
-     this.setState({preview, preparingPreview: false})
+     if ( !disableUpdate ){
+       this.setState({preview, preparingPreview: false})
+     }
 
+     return preview
    }
 
    clearEditor = (CKEDITOR) => {
 
      //debugger
+
+   }
+
+   prepareEditor = (CKEDITOR) => {
+
+
+     if ( CKEDITOR.config.stylesSet != "my_styles"){
+
+       CKEDITOR.stylesSet.add( 'my_styles', [
+          // // Block-level styles
+          // { name: 'Blue Title', element: 'h2', styles: { 'color': 'Blue' } },
+          // { name: 'Red Title' , element: 'h3', styles: { 'color': 'Red' } },
+          //
+          // // Inline styles
+          // { name: 'CSS Style', element: 'span', attributes: { 'class': 'my_style' } },
+          { name: 'Indent', element: 'p',  attributes: { 'class': 'indent1' }}
+        ] );
+
+        CKEDITOR.config.stylesSet = 'my_styles';
+      }
 
    }
 
@@ -569,7 +611,7 @@ class AnnotationView extends Component {
               id = "myeditor"
               key = "myeditor"
 
-              onBeforeLoad={ ( CKEDITOR ) => {CKEDITOR.disableAutoInline = true; this.clearEditor(CKEDITOR); } }
+              onBeforeLoad={ ( CKEDITOR ) => { CKEDITOR.disableAutoInline = true; this.clearEditor(CKEDITOR); this.prepareEditor(CKEDITOR); } }
 
               config={ {
                   allowedContent : true,
@@ -585,7 +627,7 @@ class AnnotationView extends Component {
                             	{ name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
                             	{ name: 'colors', items: [ 'TextColor', 'BGColor' ] },
                             	{ name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
-                            	{ name: 'others', items: [ '-' ] },
+                            	// { name: 'others', items: [ '-' ] },
                             	// { name: 'about', items: [ 'About' ] }
                             ],
 
@@ -616,9 +658,15 @@ class AnnotationView extends Component {
       }
 
 
+
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
-        <MetaAnnotator annotationData={data} annotationText={this.state.table ? this.state.table.formattedPage : ""} titleSubgroups={this.state.titleSubgroups} addTitleSGS={this.addTitleSGS}/>
+        <MetaAnnotator annotationData={data}
+                       annotationText={this.state.table ? this.state.table.formattedPage : ""}
+                       titleSubgroups={this.state.titleSubgroups}
+                       addTitleSGS={this.addTitleSGS}
+                       recommend_cuis={this.state.recommend_cuis}
+                       metadata={this.state.metadata}/>
 
         <Card id="userData" style={{padding:15}}>
           <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+(this.state.user ? "?user="+this.state.user : "" ))}/>

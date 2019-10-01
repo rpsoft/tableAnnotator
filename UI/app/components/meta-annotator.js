@@ -40,7 +40,7 @@ class MetaAnnotator extends Component {
         concept_metadata: {}, // The actual data in the database, that will hold the data from the interaction with the annotator.
         recommend_cuis: {}, // This are the proposed cuis for concepts as per classfier and Peter's manual annotations.
         isSaved : false,
-        titleSubgroups : props.titleSubgroups,
+        titleSubgroups : props.titleSubgroups || [],
       };
 
     }
@@ -65,8 +65,8 @@ class MetaAnnotator extends Component {
     var urlparams = new URLSearchParams(window.location.search);
 
     let fetch = new fetchData();
-    var recommend_cuis = await fetch.getConceptRecommend();
-    var metadadata = await fetch.getTableMetadata(this.state.docid, this.state.page, this.state.user)
+    var recommend_cuis = next.recommend_cuis
+    var metadadata = next.metadata
 
 
     var unique_concepts_metadata = []
@@ -80,10 +80,11 @@ class MetaAnnotator extends Component {
 
                   concept_metadata[item.concept] = {
                     cuis: cuis,
-                    cuis_selected : item.cuis_selected.length > 0 ? item.cuis_selected.split(";") : ( cuis.length > 0 ? [cuis[0]] : [] ),
+                    cuis_selected : item.cuis_selected.length > 0 ? item.cuis_selected.split(";") : [],
                     qualifiers: item.qualifiers.length > 0 ? item.qualifiers.split(";") : [],
                     qualifiers_selected : item.qualifiers_selected.length > 0 ? item.qualifiers_selected.split(";") : [],
                     matching_term : matching_term,
+                    istitle: item.istitle,
                   }
                 }
               ) : ""
@@ -124,7 +125,7 @@ class MetaAnnotator extends Component {
     // adding the placeholder for concepts that have not been assigned yet into concept_metadata.
     Object.keys(concepts).map( category => {
 
-          if ( ["value","col","row"].indexOf(category) < 0){
+          if ( recommend_cuis && ["value","col","row"].indexOf(category) < 0){
             concepts[category].map( concept => {
                     if ( !concept_metadata[concept] ){
                         var matching_term = this.prepareTermForMatching(concept)
@@ -136,29 +137,35 @@ class MetaAnnotator extends Component {
                           qualifiers: ["Presence-absense"],
                           qualifiers_selected : ["Presence-absense"],
                           matching_term : matching_term,
+                          istitle: false,
                         }
                     }
             })
           }
     });
 
-    // if ( unique_concepts_annotation.length > 0 ){
-    //   var title_concepts = unique_concepts_metadata.reduce( (total, currentValue, currentIndex, arr) => {if ( unique_concepts_annotation.indexOf(currentValue) < 0){total.push(currentValue);} return total}, [] )
-    //
-    //   if ( next.titleSubgroups )
-    //   this.props.addTitleSGS(title_concepts)
-    // }
+
+
+    if ( unique_concepts_annotation.length > 0 ){
+      var title_concepts = unique_concepts_metadata.reduce( (total, currentValue, currentIndex, arr) => {if ( unique_concepts_annotation.indexOf(currentValue) < 0){total.push(currentValue);} return total}, [] )
+      // debugger
+      // if ( next.titleSubgroups )
+      // this.props.addTitleSGS(title_concepts)
+    }
 
     next.titleSubgroups ? next.titleSubgroups.map ( titleSG => {
         var matching_term = this.prepareTermForMatching(titleSG);
         var cuis = recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : []
 
+        var alreadyExists = concept_metadata[titleSG] ? true : false
+        // debugger
         concept_metadata[titleSG] = {
-              cuis: concept_metadata[titleSG] ? concept_metadata[titleSG].cuis : cuis,
-              cuis_selected: cuis.length > 0 ? [cuis[0]] : [],
+              cuis: alreadyExists ? concept_metadata[titleSG].cuis : cuis,
+              cuis_selected: alreadyExists ? concept_metadata[titleSG].cuis_selected : cuis.length > 0 ? [cuis[0]] : [],
               matching_term: matching_term,
-              qualifiers: ["Presence-absense"],
-              qualifiers_selected: ["Presence-absense"],
+              qualifiers: alreadyExists ? concept_metadata[titleSG].qualifiers : ["Presence-absense"],
+              qualifiers_selected: alreadyExists ? concept_metadata[titleSG].qualifiers_selected : ["Presence-absense"],
+              istitle: true,
             }
 
         concepts_indexing[titleSG] = {
@@ -173,7 +180,7 @@ class MetaAnnotator extends Component {
 
     var ordered_concepts = Object.keys(concepts_indexing).sort(function(a, b){return concepts_indexing[a].index-concepts_indexing[b].index});
 
-    // debugger
+
     this.setState({
       user: urlparams.get("user") ? urlparams.get("user") : "",
       page: urlparams.get("page") ? urlparams.get("page") : "",
@@ -210,15 +217,35 @@ class MetaAnnotator extends Component {
 
         let fetch = new fetchData();
 
-        // debugger
-        Object.keys(current_metadata).map( async (concept) => {
-          var current_concept = current_metadata[concept]
+        await fetch.clearTableMetadata(this.state.docid, this.state.page, this.state.user)
 
-          await fetch.setTableMetadata(this.state.docid, this.state.page, concept, current_concept.cuis.join(";"),current_concept.cuis_selected.join(";"), current_concept.qualifiers.join(";"), current_concept.qualifiers_selected.join(";"), this.state.user )
+        //debugger
+
+
+
+        // remove titles that are not there anymore.
+        Object.keys(current_metadata).map( (concept) => {
+
+            if ( current_metadata[concept].istitle && this.state.titleSubgroups.indexOf(concept) < 0 ){
+                delete current_metadata[concept]
+            }
+
+            if ( current_metadata[concept] && !current_metadata[concept].istitle && Object.keys(this.state.concepts_indexing).indexOf(concept) < 0 ){
+                delete current_metadata[concept]
+            }
+
 
         })
 
-        this.setState({isSaved: true})
+
+        Object.keys(current_metadata).map( async (concept) => {
+          var current_concept = current_metadata[concept]
+
+          await fetch.setTableMetadata(this.state.docid, this.state.page, concept, current_concept.cuis.join(";"),current_concept.cuis_selected.join(";"), current_concept.qualifiers.join(";"), current_concept.qualifiers_selected.join(";"), this.state.user, current_concept.istitle )
+
+        })
+
+        this.setState({isSaved: true, current_metadata: current_metadata})
 
         alert("Metadata Changes Saved!")
   }
@@ -234,6 +261,7 @@ class MetaAnnotator extends Component {
                   qualifiers: data.assigned_qualifiers,
                   qualifiers_selected: data.qualifiers_selected,
                   matching_term: data.matching_term,
+                  istitle: data.istitle,
               }
 
       current_metadata[concept] = current_concept_data
@@ -297,6 +325,7 @@ class MetaAnnotator extends Component {
                                                 qualifiers_selected = {this.state.concept_metadata[concept].qualifiers_selected }
                                                 updateConceptData = {this.updateConceptData}
                                                 isLevel = {this.state.concepts_indexing[concept].category.toLowerCase().indexOf("level") > -1}
+                                                istitle = {this.state.concept_metadata[concept].istitle}
                                       />
                             })}
                   </div>

@@ -492,7 +492,7 @@ function _attempt_predictions() {
                 }, _callee40, this, [[0, 21]]);
               }));
 
-              return function (_x93, _x94) {
+              return function (_x94, _x95) {
                 return _ref36.apply(this, arguments);
               };
             }());
@@ -621,7 +621,7 @@ function () {
             break;
 
           case 7:
-            res.send("insert failed");
+            res.send("clear failed");
 
           case 8:
           case "end":
@@ -651,7 +651,7 @@ function () {
             function () {
               var _ref4 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee3(docid, page, concept, cuis, qualifiers, cuis_selected, qualifiers_selected, user) {
+              _regenerator.default.mark(function _callee3(docid, page, concept, cuis, qualifiers, cuis_selected, qualifiers_selected, user, istitle) {
                 var client, done;
                 return _regenerator.default.wrap(function _callee3$(_context3) {
                   while (1) {
@@ -663,7 +663,7 @@ function () {
                       case 2:
                         client = _context3.sent;
                         _context3.next = 5;
-                        return client.query('INSERT INTO metadata(docid, page, concept, cuis, qualifiers, "user", cuis_selected, qualifiers_selected ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT (docid, page, concept, "user") DO UPDATE SET cuis = $4, qualifiers = $5, cuis_selected = $7, qualifiers_selected = $8 ', [docid, page, concept, cuis, qualifiers, user, cuis_selected, qualifiers_selected]).then(function (result) {
+                        return client.query('INSERT INTO metadata(docid, page, concept, cuis, qualifiers, "user", cuis_selected, qualifiers_selected, istitle ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) ON CONFLICT (docid, page, concept, "user") DO UPDATE SET cuis = $4, qualifiers = $5, cuis_selected = $7, qualifiers_selected = $8, istitle = $9 ', [docid, page, concept, cuis, qualifiers, user, cuis_selected, qualifiers_selected, istitle]).then(function (result) {
                           return console.log("insert: " + new Date());
                         }).catch(function (e) {
                           return console.error(e.stack);
@@ -682,7 +682,7 @@ function () {
                 }, _callee3, this);
               }));
 
-              return function setMetadata(_x21, _x22, _x23, _x24, _x25, _x26, _x27, _x28) {
+              return function setMetadata(_x21, _x22, _x23, _x24, _x25, _x26, _x27, _x28, _x29) {
                 return _ref4.apply(this, arguments);
               };
             }();
@@ -693,7 +693,7 @@ function () {
             }
 
             _context4.next = 4;
-            return setMetadata(req.query.docid, req.query.page, req.query.concept, req.query.cuis || "", req.query.qualifiers || "", req.query.cuis_selected || "", req.query.qualifiers_selected || "", req.query.user);
+            return setMetadata(req.query.docid, req.query.page, req.query.concept, req.query.cuis || "", req.query.qualifiers || "", req.query.cuis_selected || "", req.query.qualifiers_selected || "", req.query.user, req.query.istitle);
 
           case 4:
             res.send("done");
@@ -743,7 +743,7 @@ function () {
                       case 2:
                         client = _context5.sent;
                         _context5.next = 5;
-                        return client.query("SELECT docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, \"user\" FROM metadata WHERE docid = $1 AND page = $2 AND \"user\" = $3", [docid, page, user]);
+                        return client.query("SELECT docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, \"user\",istitle FROM metadata WHERE docid = $1 AND page = $2 AND \"user\" = $3", [docid, page, user]);
 
                       case 5:
                         result = _context5.sent;
@@ -758,7 +758,7 @@ function () {
                 }, _callee5, this);
               }));
 
-              return function getMetadata(_x31, _x32, _x33) {
+              return function getMetadata(_x32, _x33, _x34) {
                 return _ref6.apply(this, arguments);
               };
             }();
@@ -793,7 +793,7 @@ function () {
     }, _callee6, this);
   }));
 
-  return function (_x29, _x30) {
+  return function (_x30, _x31) {
     return _ref5.apply(this, arguments);
   };
 }());
@@ -808,7 +808,7 @@ app.get('/api/allMetaData', function (req, res) {
   });
 });
 
-function updateClusterAnnotation(_x34, _x35, _x36, _x37, _x38) {
+function updateClusterAnnotation(_x35, _x36, _x37, _x38, _x39) {
   return _updateClusterAnnotation.apply(this, arguments);
 }
 
@@ -942,7 +942,7 @@ function () {
     }, _callee8, this);
   }));
 
-  return function (_x39, _x40) {
+  return function (_x40, _x41) {
     return _ref7.apply(this, arguments);
   };
 }());
@@ -1011,7 +1011,7 @@ function () {
     }, _callee10, this);
   }));
 
-  return function (_x41, _x42) {
+  return function (_x42, _x43) {
     return _ref9.apply(this, arguments);
   };
 }());
@@ -1080,7 +1080,7 @@ function () {
     }, _callee12, this);
   }));
 
-  return function (_x43, _x44) {
+  return function (_x44, _x45) {
     return _ref11.apply(this, arguments);
   };
 }());
@@ -1149,7 +1149,7 @@ function () {
     }, _callee14, this);
   }));
 
-  return function (_x45, _x46) {
+  return function (_x46, _x47) {
     return _ref13.apply(this, arguments);
   };
 }());
@@ -1200,7 +1200,7 @@ function () {
                 }, _callee15, this);
               }));
 
-              return function setCUIMod(_x49, _x50) {
+              return function setCUIMod(_x50, _x51) {
                 return _ref16.apply(this, arguments);
               };
             }();
@@ -1221,7 +1221,7 @@ function () {
     }, _callee16, this);
   }));
 
-  return function (_x47, _x48) {
+  return function (_x48, _x49) {
     return _ref15.apply(this, arguments);
   };
 }());
@@ -1290,7 +1290,7 @@ function () {
     }, _callee18, this);
   }));
 
-  return function (_x51, _x52) {
+  return function (_x52, _x53) {
     return _ref17.apply(this, arguments);
   };
 }());
@@ -1344,7 +1344,7 @@ function () {
                 }, _callee19, this);
               }));
 
-              return function setClusterData(_x55, _x56, _x57, _x58, _x59) {
+              return function setClusterData(_x56, _x57, _x58, _x59, _x60) {
                 return _ref20.apply(this, arguments);
               };
             }();
@@ -1368,7 +1368,7 @@ function () {
     }, _callee20, this);
   }));
 
-  return function (_x53, _x54) {
+  return function (_x54, _x55) {
     return _ref19.apply(this, arguments);
   };
 }());
@@ -1403,7 +1403,7 @@ function () {
     }, _callee21, this);
   }));
 
-  return function (_x60, _x61) {
+  return function (_x61, _x62) {
     return _ref21.apply(this, arguments);
   };
 }());
@@ -1479,7 +1479,7 @@ function () {
     }, _callee23, this);
   }));
 
-  return function (_x62, _x63) {
+  return function (_x63, _x64) {
     return _ref22.apply(this, arguments);
   };
 }());
@@ -1532,7 +1532,7 @@ function () {
                 }, _callee24, this);
               }));
 
-              return function insertCUI(_x66, _x67, _x68) {
+              return function insertCUI(_x67, _x68, _x69) {
                 return _ref25.apply(this, arguments);
               };
             }();
@@ -1556,7 +1556,7 @@ function () {
     }, _callee25, this);
   }));
 
-  return function (_x64, _x65) {
+  return function (_x65, _x66) {
     return _ref24.apply(this, arguments);
   };
 }());
@@ -1628,7 +1628,7 @@ function () {
     }, _callee26, this);
   }));
 
-  return function (_x69, _x70) {
+  return function (_x70, _x71) {
     return _ref26.apply(this, arguments);
   };
 }()); //
@@ -1780,7 +1780,7 @@ function () {
     }, _callee27, this, [[0, 18]]);
   }));
 
-  return function (_x71, _x72) {
+  return function (_x72, _x73) {
     return _ref27.apply(this, arguments);
   };
 }());
@@ -1853,7 +1853,7 @@ function () {
     }, _callee28, this);
   }));
 
-  return function (_x73, _x74) {
+  return function (_x74, _x75) {
     return _ref28.apply(this, arguments);
   };
 }());
@@ -1872,7 +1872,7 @@ app.get('/api/totalTables', function (req, res) {
   });
 });
 
-function getMMatch(_x75) {
+function getMMatch(_x76) {
   return _getMMatch.apply(this, arguments);
 }
 
@@ -1966,7 +1966,7 @@ function () {
     }, _callee29, this, [[0, 11]]);
   }));
 
-  return function (_x76, _x77) {
+  return function (_x77, _x78) {
     return _ref29.apply(this, arguments);
   };
 }());
@@ -2033,7 +2033,7 @@ function () {
     }, _callee30, this);
   }));
 
-  return function (_x78, _x79) {
+  return function (_x79, _x80) {
     return _ref30.apply(this, arguments);
   };
 }());
@@ -2073,12 +2073,12 @@ function () {
     }, _callee31, this);
   }));
 
-  return function (_x80, _x81) {
+  return function (_x81, _x82) {
     return _ref31.apply(this, arguments);
   };
 }());
 
-function readyTableData(_x82, _x83, _x84) {
+function readyTableData(_x83, _x84, _x85) {
   return _readyTableData.apply(this, arguments);
 }
 
@@ -2545,7 +2545,7 @@ function _readyTableData() {
                       }, _callee45, this, [[0, 7]]);
                     }));
 
-                    return function (_x95, _x96) {
+                    return function (_x96, _x97) {
                       return _ref37.apply(this, arguments);
                     };
                   }());
@@ -2620,7 +2620,7 @@ function () {
     }, _callee32, this, [[0, 11]]);
   }));
 
-  return function (_x85, _x86) {
+  return function (_x86, _x87) {
     return _ref32.apply(this, arguments);
   };
 }());
@@ -2654,7 +2654,7 @@ function () {
     }, _callee33, this);
   }));
 
-  return function (_x87, _x88) {
+  return function (_x88, _x89) {
     return _ref33.apply(this, arguments);
   };
 }());
@@ -2733,7 +2733,7 @@ function () {
     }, _callee34, this);
   }));
 
-  return function (_x89, _x90) {
+  return function (_x90, _x91) {
     return _ref34.apply(this, arguments);
   };
 }());
@@ -2771,7 +2771,7 @@ function () {
     }, _callee35, this);
   }));
 
-  return function (_x91, _x92) {
+  return function (_x92, _x93) {
     return _ref35.apply(this, arguments);
   };
 }());
