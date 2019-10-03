@@ -20,6 +20,8 @@ import Disk from '@material-ui/icons/Save';
 
 import fetchData from '../network/fetch-data';
 
+import HtmlEntity from './htmlentity'
+
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
@@ -96,7 +98,15 @@ class MetaAnnotator extends Component {
 
     var concepts_indexing = {}
 
-    var annotationText = this.prepareTermForMatching(this.props.annotationText).toLowerCase()
+    var html = new HtmlEntity;
+
+    var decodeHTML = function (html) {
+    	var txt = document.createElement('textarea');
+    	txt.innerHTML = html;
+    	return txt.value;
+    };
+
+    var annotationText = decodeHTML(this.props.annotationText.replaceAll(/(<([^>]+)>)/ig, ' ')).toLowerCase().replaceAll(' +'," ")
 
       next.annotationData ? next.annotationData.map( (annotated_record) => {
                                 var cs = Object.keys(annotated_record).map(
@@ -108,7 +118,7 @@ class MetaAnnotator extends Component {
                                     concepts[category] = Array.from( new Set( stored_qualifier ? [...stored_qualifier,concept] : [concept] ))
 
                                     if ( ["value","col","row"].indexOf(category) < 0 ){
-                                      concepts_indexing[concept] = {index: annotationText.indexOf(concept.toLowerCase()), category : category}
+                                      concepts_indexing[concept] = {index: annotationText.indexOf( concept.toLowerCase() ) , category : category}
                                       unique_concepts_annotation.push(concept)
                                     }
 
@@ -119,8 +129,13 @@ class MetaAnnotator extends Component {
                               }
                             ) : ""
 
+    var categories_order = []
 
+    Object.keys(concepts_indexing).sort(function(a, b){return concepts_indexing[a].index-concepts_indexing[b].index}).map( el => { categories_order.indexOf(concepts_indexing[el].category) < 0 ? categories_order.push(concepts_indexing[el].category) : ""  })
 
+    next.annotationData.map( (annotated_record) => { return categories_order.reduce( (acc,cat) => {if ( cat.indexOf("characteristic") > -1){acc.push(annotated_record[cat]);} return acc;}, [] ) })
+
+    debugger
 
     // adding the placeholder for concepts that have not been assigned yet into concept_metadata.
     Object.keys(concepts).map( category => {
@@ -146,12 +161,12 @@ class MetaAnnotator extends Component {
 
 
 
-    if ( unique_concepts_annotation.length > 0 ){
-      var title_concepts = unique_concepts_metadata.reduce( (total, currentValue, currentIndex, arr) => {if ( unique_concepts_annotation.indexOf(currentValue) < 0){total.push(currentValue);} return total}, [] )
-      // debugger
-      // if ( next.titleSubgroups )
-      // this.props.addTitleSGS(title_concepts)
-    }
+    // if ( unique_concepts_annotation.length > 0 ){
+    //   var title_concepts = unique_concepts_metadata.reduce( (total, currentValue, currentIndex, arr) => {if ( unique_concepts_annotation.indexOf(currentValue) < 0){total.push(currentValue);} return total}, [] )
+    //   // debugger
+    //   // if ( next.titleSubgroups )
+    //   // this.props.addTitleSGS(title_concepts)
+    // }
 
     next.titleSubgroups ? next.titleSubgroups.map ( titleSG => {
         var matching_term = this.prepareTermForMatching(titleSG);
@@ -180,7 +195,7 @@ class MetaAnnotator extends Component {
 
     var ordered_concepts = Object.keys(concepts_indexing).sort(function(a, b){return concepts_indexing[a].index-concepts_indexing[b].index});
 
-
+debugger
     this.setState({
       user: urlparams.get("user") ? urlparams.get("user") : "",
       page: urlparams.get("page") ? urlparams.get("page") : "",
