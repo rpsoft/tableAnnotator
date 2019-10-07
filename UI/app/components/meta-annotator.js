@@ -19,8 +19,8 @@ import Eye from '@material-ui/icons/RemoveRedEye';
 import Disk from '@material-ui/icons/Save';
 
 import fetchData from '../network/fetch-data';
+import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
 
-import HtmlEntity from './htmlentity'
 
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
@@ -98,7 +98,6 @@ class MetaAnnotator extends Component {
 
     var concepts_indexing = {}
 
-    var html = new HtmlEntity;
 
     var decodeHTML = function (html) {
     	var txt = document.createElement('textarea');
@@ -106,7 +105,9 @@ class MetaAnnotator extends Component {
     	return txt.value;
     };
 
-    var annotationText = decodeHTML(this.props.annotationText.replaceAll(/(<([^>]+)>)/ig, ' ')).toLowerCase().replaceAll(' +'," ")
+    var annotationText = decodeHTML(this.props.annotationText.replaceAll(/(<([^>]+)>)/ig, ' ')).toLowerCase().replaceAll(' +'," ").split("\n").filter(function (el) {
+      return el.trim().length > 0;
+    }).reduce( (acc,e) => {acc.push(e.trim()); return acc},[])
 
       next.annotationData ? next.annotationData.map( (annotated_record) => {
                                 var cs = Object.keys(annotated_record).map(
@@ -131,22 +132,68 @@ class MetaAnnotator extends Component {
 
     var categories_order = []
 
-    Object.keys(concepts_indexing).sort(function(a, b){return concepts_indexing[a].index-concepts_indexing[b].index}).map( el => { categories_order.indexOf(concepts_indexing[el].category) < 0 ? categories_order.push(concepts_indexing[el].category) : ""  })
+    Object.keys(concepts_indexing).sort(function(a, b){return concepts_indexing[a].index-concepts_indexing[b].index})
+                    .map( el => { categories_order.indexOf(concepts_indexing[el].category) < 0 ? categories_order.push(concepts_indexing[el].category) : ""  })
 
-    next.annotationData.map( (annotated_record) => { return categories_order.reduce( (acc,cat) => {if ( cat.indexOf("characteristic") > -1){acc.push(annotated_record[cat]);} return acc;}, [] ) })
+   
+    var allOrdered = next.annotationData ? next.annotationData.map( (annotated_record) => { return categories_order.reduce( (acc,cat) => {if ( cat.indexOf("characteristic") > -1){if ( annotated_record[cat] ) {acc.push(annotated_record[cat]);}} return acc;}, [] ) }) : []
+    var alreadyThere = []
 
-    debugger
+    var allOrderedUnique = []
 
+    allOrdered.map( concept_group => {
+      var concept = concept_group.join(";")
+      if ( alreadyThere.indexOf(concept) < 0 ){
+        alreadyThere.push(concept)
+        allOrderedUnique.push(concept_group)
+      }
+    })
+
+    var lastIndexOfCharName = ( arr, index ) => {
+        var res = -1
+        for( var a in arr){
+          if ( index[arr[a]].category.indexOf("characteristic_name") > -1 ){
+            res = a
+          }
+        }
+        return res
+    }
+
+    alreadyThere = []
+
+    var allCombinationsFinal = {}
+
+    for ( var u in allOrderedUnique ){
+      var concepts_group = allOrderedUnique[u]
+          concepts_group = concepts_group.slice(lastIndexOfCharName(concepts_group, concepts_indexing),concepts_group.length)
+
+      var elems = []
+
+      for ( var v in concepts_group){
+        
+        elems = [...elems, concepts_group[v]]
+        var key = elems.join(";")
+        //console.log(key)
+        if ( alreadyThere.indexOf(key) < 0 ){
+          //console.log(allCombinationsFinal.length+"  -- " +elems)
+          allCombinationsFinal[key] = elems 
+          alreadyThere.push(key)
+        }
+      }
+    }
+
+   
     // adding the placeholder for concepts that have not been assigned yet into concept_metadata.
-    Object.keys(concepts).map( category => {
+    alreadyThere.map( concept_key => {
+                    var concept_group = allCombinationsFinal[concept_key]
+                    var concept = concept_group[concept_group.length-1]
 
-          if ( recommend_cuis && ["value","col","row"].indexOf(category) < 0){
-            concepts[category].map( concept => {
-                    if ( !concept_metadata[concept] ){
+                    if ( !concept_metadata[concept_key] ){
                         var matching_term = this.prepareTermForMatching(concept)
                         var cuis = recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : []
 
-                        concept_metadata[concept] = {
+                        concept_metadata[concept_key] = {
+                          concept: concept_key,
                           cuis: cuis,
                           cuis_selected :  cuis.length > 0 ? [cuis[0]] : [] ,
                           qualifiers: ["Presence-absense"],
@@ -155,11 +202,9 @@ class MetaAnnotator extends Component {
                           istitle: false,
                         }
                     }
-            })
-          }
     });
 
-
+   
 
     // if ( unique_concepts_annotation.length > 0 ){
     //   var title_concepts = unique_concepts_metadata.reduce( (total, currentValue, currentIndex, arr) => {if ( unique_concepts_annotation.indexOf(currentValue) < 0){total.push(currentValue);} return total}, [] )
@@ -193,9 +238,8 @@ class MetaAnnotator extends Component {
     }) : "";
 
 
-    var ordered_concepts = Object.keys(concepts_indexing).sort(function(a, b){return concepts_indexing[a].index-concepts_indexing[b].index});
+    // var ordered_concepts = Object.keys(concepts_indexing).sort(function(a, b){return concepts_indexing[a].index-concepts_indexing[b].index});
 
-debugger
     this.setState({
       user: urlparams.get("user") ? urlparams.get("user") : "",
       page: urlparams.get("page") ? urlparams.get("page") : "",
@@ -204,7 +248,7 @@ debugger
       concept_metadata : concept_metadata,
       recommend_cuis : recommend_cuis,
       concepts_indexing : concepts_indexing,
-      ordered_concepts : ordered_concepts,
+      ordered_concepts : alreadyThere,
       isSaved : false,
       titleSubgroups : next.titleSubgroups,
     })
@@ -327,20 +371,23 @@ debugger
               this.state.opened && Object.keys(this.state.concept_metadata).length > 0 ?
                   <div style={{margin:10}}>
 
-                  {this.state.ordered_concepts.map( (concept,i) => {
+                  {this.state.ordered_concepts.map( (concept_key,i) => {
 
-                              var matching_term = this.prepareTermForMatching(concept)
+                              var currentItem = this.state.concept_metadata[concept_key]
+                              var elems = concept_key.split(";")
+                              var concept = elems[elems.length-1]
+                            
                               return <MetaItem
-                                                key = {"concept_item_"+concept}
+                                                key = {"concept_item_"+concept_key}
                                                 term = {concept}
-                                                matching_term = { this.state.concept_metadata[concept].matching_term}
-                                                assigned_cuis = { this.state.concept_metadata[concept].cuis }
-                                                assigned_qualifiers = { this.state.concept_metadata[concept].qualifiers }
-                                                cuis_selected = { this.state.concept_metadata[concept].cuis_selected }
-                                                qualifiers_selected = {this.state.concept_metadata[concept].qualifiers_selected }
+                                                matching_term = { currentItem.matching_term}
+                                                assigned_cuis = { currentItem.cuis }
+                                                assigned_qualifiers = { currentItem.qualifiers }
+                                                cuis_selected = { currentItem.cuis_selected }
+                                                qualifiers_selected = {currentItem.qualifiers_selected }
                                                 updateConceptData = {this.updateConceptData}
                                                 isLevel = {this.state.concepts_indexing[concept].category.toLowerCase().indexOf("level") > -1}
-                                                istitle = {this.state.concept_metadata[concept].istitle}
+                                                istitle = {currentItem.istitle}
                                       />
                             })}
                   </div>

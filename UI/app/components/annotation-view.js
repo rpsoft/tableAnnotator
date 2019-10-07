@@ -719,26 +719,30 @@ class AnnotationView extends Component {
 
         <Card id="tableHeader" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center"}}>
 
-            { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : <div>
-                                                                                                            <div style={{paddingBottom: 10, fontWeight:"bold",marginBottom:10}}><Link to={"https://www.ncbi.nlm.nih.gov/pubmed/?term="+ this.state.docid} target="_blank">{"PMID: " + this.state.docid }</Link> { " | " + (this.state.table.title ? this.state.table.title.title.trim() : "")}</div>
+            { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> 
+                        : <div>
+                          <div style={{paddingBottom: 10, fontWeight:"bold",marginBottom:10}}>
+                            <a href={"https://www.ncbi.nlm.nih.gov/pubmed/?term="+ this.state.docid.split("v")[0]} target="_blank">{"PMID: " + this.state.docid }</a>
+                              { " | " + (this.state.table.title ? this.state.table.title.title.trim() : "")}
+                          </div>
 
-                                                                                                            <div style={{paddingBottom: 10, fontWeight:"bold"}} dangerouslySetInnerHTML={{__html:this.state.table.htmlHeader}}></div>
-                                                                                                            {this.state.titleSubgroups ? this.state.titleSubgroups.map( sg => <div style={{cursor:"pointer"}}onClick= { () => this.removeTitleSG(sg) }> {sg+","} </div> ) : ""}
-                                                                                                            <TextField
-                                                                                                                  value={this.state.newTitleSubgroup}
-                                                                                                                  placeholder="Enter title subgroup here to add"
-                                                                                                                  style={{width:400}}
-                                                                                                                  onChange={(event) => {this.setState({newTitleSubgroup: event.target.value})}}
-                                                                                                                  onKeyDown={(event, index) => {
-                                                                                                                    if (event.key === 'Enter') {
-                                                                                                                        this.addTitleSubgroup()
-                                                                                                                        event.preventDefault();
-                                                                                                                    }
-                                                                                                                  }}
+                          <div style={{paddingBottom: 10, fontWeight:"bold"}} dangerouslySetInnerHTML={{__html:this.state.table.htmlHeader}}></div>
+                          {this.state.titleSubgroups ? this.state.titleSubgroups.map( sg => <div style={{cursor:"pointer"}}onClick= { () => this.removeTitleSG(sg) }> {sg+","} </div> ) : ""}
+                          <TextField
+                                value={this.state.newTitleSubgroup}
+                                placeholder="Enter title subgroup here to add"
+                                style={{width:400}}
+                                onChange={(event) => {this.setState({newTitleSubgroup: event.target.value})}}
+                                onKeyDown={(event, index) => {
+                                  if (event.key === 'Enter') {
+                                      this.addTitleSubgroup()
+                                      event.preventDefault();
+                                  }
+                                }}
 
-                                                                                                                /><RaisedButton style={{color:"#198413",backgroundColor:"#d4d4d4", marginLeft:10}}
-                                                                                                                                onClick={ (event) => { this.addTitleSubgroup();  event.preventDefault(); } }> ADD Title Subgroup </RaisedButton>
-                                                                                                        </div> }
+                              /><RaisedButton style={{color:"#198413",backgroundColor:"#d4d4d4", marginLeft:10}}
+                                              onClick={ (event) => { this.addTitleSubgroup();  event.preventDefault(); } }> ADD Title Subgroup </RaisedButton>
+                      </div> }
         </Card>
 
         <Card id="tableHolder" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center", minHeight: 580}}>
