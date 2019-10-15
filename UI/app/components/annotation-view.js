@@ -165,6 +165,8 @@ class AnnotationView extends Component {
         var documentData = allInfo.available_documents[parsed.docid]
         var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(parsed.page)]
 
+
+        debugger 
         var annotation
         if( this.state.user && this.state.user.length > 0){
           annotation = JSON.parse(await fetch.getAnnotationByID(parsed.docid,parsed.page,this.state.user))
@@ -461,6 +463,7 @@ class AnnotationView extends Component {
    }
 
    addTitleSubgroup = () => {
+     debugger
      if ( this.state.newTitleSubgroup && this.state.newTitleSubgroup.length > 0){
        var sgs = this.state.titleSubgroups ? this.state.titleSubgroups : []
        sgs.push(this.state.newTitleSubgroup)
@@ -475,11 +478,11 @@ class AnnotationView extends Component {
      this.setState({titleSubgroups: sgs})
    }
 
-   addTitleSGS = (newSgs) => {
-     var sgs = this.state.titleSubgroups ? this.state.titleSubgroups : []
-         newSgs.map( sg => sgs.indexOf(sg) < 0 ? sgs.push(sg) : "" )
-     this.setState({newTitleSubgroup: "", titleSubgroups: sgs })
-   }
+  //  addTitleSGS = (newSgs) => {
+  //    var sgs = this.state.titleSubgroups ? this.state.titleSubgroups : []
+  //        newSgs.map( sg => sgs.indexOf(sg) < 0 ? sgs.push(sg) : "" )
+  //    this.setState({newTitleSubgroup: "", titleSubgroups: sgs })
+  //  }
 
 
    render() {
@@ -664,7 +667,7 @@ class AnnotationView extends Component {
         <MetaAnnotator annotationData={data}
                        annotationText={this.state.table ? this.state.table.formattedPage : ""}
                        titleSubgroups={this.state.titleSubgroups}
-                       addTitleSGS={this.addTitleSGS}
+                
                        recommend_cuis={this.state.recommend_cuis}
                        metadata={this.state.metadata}/>
 

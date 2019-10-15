@@ -37,7 +37,7 @@ class MetaAnnotator extends Component {
         user: urlparams.get("user") ? urlparams.get("user") : "",
         page: urlparams.get("page") ? urlparams.get("page") : "",
         docid: urlparams.get("docid") ? urlparams.get("docid") : "",
-        opened: false,
+        opened: 0,
         annotationData: props.annotationData,
         concept_metadata: {}, // The actual data in the database, that will hold the data from the interaction with the annotator.
         recommend_cuis: {}, // This are the proposed cuis for concepts as per classfier and Peter's manual annotations.
@@ -119,13 +119,13 @@ class MetaAnnotator extends Component {
                                     concepts[category] = Array.from( new Set( stored_qualifier ? [...stored_qualifier,concept] : [concept] ))
 
                                     if ( ["value","col","row"].indexOf(category) < 0 ){
-                                      concepts_indexing[concept] = {index: annotationText.indexOf( concept.toLowerCase() ) , category : category}
+                                      concepts_indexing[concept.toLowerCase()] = {index: annotationText.indexOf( concept.toLowerCase() ) , category : category}
                                       unique_concepts_annotation.push(concept)
                                     }
 
                                     return concept
                                   }
-                                )
+                                ) 
 
                               }
                             ) : ""
@@ -135,57 +135,29 @@ class MetaAnnotator extends Component {
     Object.keys(concepts_indexing).sort(function(a, b){return concepts_indexing[a].index-concepts_indexing[b].index})
                     .map( el => { categories_order.indexOf(concepts_indexing[el].category) < 0 ? categories_order.push(concepts_indexing[el].category) : ""  })
 
-   
-    var allOrdered = next.annotationData ? next.annotationData.map( (annotated_record) => { return categories_order.reduce( (acc,cat) => {if ( cat.indexOf("characteristic") > -1){if ( annotated_record[cat] ) {acc.push(annotated_record[cat]);}} return acc;}, [] ) }) : []
-    var alreadyThere = []
 
-    var allOrderedUnique = []
+    var all_ordered_concepts = annotationText.reduce( (acc,item) => {if ( Object.keys(concepts_indexing).indexOf(item) > -1 ){acc.push(item); }return acc}, [] )
 
-    allOrdered.map( concept_group => {
-      var concept = concept_group.join(";")
-      if ( alreadyThere.indexOf(concept) < 0 ){
-        alreadyThere.push(concept)
-        allOrderedUnique.push(concept_group)
+    var all_concept_variations = []
+
+    var parentName = ""
+    for ( var a = 0; a < all_ordered_concepts.length; a++){
+      var concept = all_ordered_concepts[a]
+      var category = concepts_indexing[concept].category
+
+      if ( category.indexOf("characteristic_name") > -1){
+        all_concept_variations.push(concept);
+        parentName = concept
+      } else if ( category == "characteristic_level" ){
+        all_concept_variations.push(parentName+";"+concept);
       }
-    })
 
-    var lastIndexOfCharName = ( arr, index ) => {
-        var res = -1
-        for( var a in arr){
-          if ( index[arr[a]].category.indexOf("characteristic_name") > -1 ){
-            res = a
-          }
-        }
-        return res
     }
 
-    alreadyThere = []
 
-    var allCombinationsFinal = {}
-
-    for ( var u in allOrderedUnique ){
-      var concepts_group = allOrderedUnique[u]
-          concepts_group = concepts_group.slice(lastIndexOfCharName(concepts_group, concepts_indexing),concepts_group.length)
-
-      var elems = []
-
-      for ( var v in concepts_group){
-        
-        elems = [...elems, concepts_group[v]]
-        var key = elems.join(";")
-        //console.log(key)
-        if ( alreadyThere.indexOf(key) < 0 ){
-          //console.log(allCombinationsFinal.length+"  -- " +elems)
-          allCombinationsFinal[key] = elems 
-          alreadyThere.push(key)
-        }
-      }
-    }
-
-   
     // adding the placeholder for concepts that have not been assigned yet into concept_metadata.
-    alreadyThere.map( concept_key => {
-                    var concept_group = allCombinationsFinal[concept_key]
+    all_concept_variations.map( concept_key => {
+                    var concept_group = concept_key.split(";")
                     var concept = concept_group[concept_group.length-1]
 
                     if ( !concept_metadata[concept_key] ){
@@ -204,21 +176,13 @@ class MetaAnnotator extends Component {
                     }
     });
 
-   
-
-    // if ( unique_concepts_annotation.length > 0 ){
-    //   var title_concepts = unique_concepts_metadata.reduce( (total, currentValue, currentIndex, arr) => {if ( unique_concepts_annotation.indexOf(currentValue) < 0){total.push(currentValue);} return total}, [] )
-    //   // debugger
-    //   // if ( next.titleSubgroups )
-    //   // this.props.addTitleSGS(title_concepts)
-    // }
-
+    
     next.titleSubgroups ? next.titleSubgroups.map ( titleSG => {
         var matching_term = this.prepareTermForMatching(titleSG);
         var cuis = recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : []
 
         var alreadyExists = concept_metadata[titleSG] ? true : false
-        // debugger
+       
         concept_metadata[titleSG] = {
               cuis: alreadyExists ? concept_metadata[titleSG].cuis : cuis,
               cuis_selected: alreadyExists ? concept_metadata[titleSG].cuis_selected : cuis.length > 0 ? [cuis[0]] : [],
@@ -237,9 +201,6 @@ class MetaAnnotator extends Component {
 
     }) : "";
 
-
-    // var ordered_concepts = Object.keys(concepts_indexing).sort(function(a, b){return concepts_indexing[a].index-concepts_indexing[b].index});
-
     this.setState({
       user: urlparams.get("user") ? urlparams.get("user") : "",
       page: urlparams.get("page") ? urlparams.get("page") : "",
@@ -248,13 +209,10 @@ class MetaAnnotator extends Component {
       concept_metadata : concept_metadata,
       recommend_cuis : recommend_cuis,
       concepts_indexing : concepts_indexing,
-      ordered_concepts : alreadyThere,
+      ordered_concepts : [... next.titleSubgroups, ... all_concept_variations],
       isSaved : false,
       titleSubgroups : next.titleSubgroups,
     })
-
-
-
 
   }
 
@@ -271,6 +229,7 @@ class MetaAnnotator extends Component {
 
   async saveAll() {
 
+        
         var current_metadata = this.state.concept_metadata
 
 
@@ -280,23 +239,22 @@ class MetaAnnotator extends Component {
 
         //debugger
 
-
-
         // remove titles that are not there anymore.
+        
         Object.keys(current_metadata).map( (concept) => {
 
             if ( current_metadata[concept].istitle && this.state.titleSubgroups.indexOf(concept) < 0 ){
                 delete current_metadata[concept]
             }
 
-            if ( current_metadata[concept] && !current_metadata[concept].istitle && Object.keys(this.state.concepts_indexing).indexOf(concept) < 0 ){
+            if ( current_metadata[concept] && !current_metadata[concept].istitle && this.state.ordered_concepts.indexOf(concept) < 0 ){
                 delete current_metadata[concept]
             }
 
 
         })
 
-
+        
         Object.keys(current_metadata).map( async (concept) => {
           var current_concept = current_metadata[concept]
 
@@ -329,6 +287,10 @@ class MetaAnnotator extends Component {
 
   }
 
+  openHandler(prev){
+    this.setState({opened : (prev == 2 ? 0 : prev +1)}) 
+  }
+
   render() {
 
 
@@ -349,14 +311,22 @@ class MetaAnnotator extends Component {
 
     }
 
-
+    var opened = 85;
+    if ( this.state.opened == 1){
+      opened = "50%"
+    } else if ( this.state.opened == 2){
+      opened = "80%"
+    }
+    
     return (
-      <Card style={{ width: this.state.opened ? "50%" : 85, minHeight: 600, height: "100%", float: "right", position: "fixed",  top: 0, right: 0, zIndex: 1,overflowY:"scroll"}}>
+      <Card style={{ width: opened, minHeight: 600, height: "100%", float: "right", position: "fixed",  top: 0, right: 0, zIndex: 1,overflowY:"scroll"}}>
 
 
             <RaisedButton variant={"contained"}
                       style={{width:50,float:"right",margin:2}}
-                      onClick={ () => { this.setState({opened: this.state.opened ? false : true}) } }><Eye style={{color : Object.keys(concepts_by_category).length > 0 ? "red": "inherit"}}/></RaisedButton>
+                      onClick={ () => { this.openHandler(this.state.opened) } }>
+                        <Eye style={{color : Object.keys(concepts_by_category).length > 0 ? "red": "inherit"}}/>
+            </RaisedButton>
 
             {
               this.state.opened ? <RaisedButton variant={"contained"}
@@ -386,7 +356,7 @@ class MetaAnnotator extends Component {
                                                 cuis_selected = { currentItem.cuis_selected }
                                                 qualifiers_selected = {currentItem.qualifiers_selected }
                                                 updateConceptData = {this.updateConceptData}
-                                                isLevel = {this.state.concepts_indexing[concept].category.toLowerCase().indexOf("level") > -1}
+                                                isLevel = {this.state.concepts_indexing[concept].category == "characteristic_level"}
                                                 istitle = {currentItem.istitle}
                                       />
                             })}
