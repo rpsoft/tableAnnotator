@@ -12,6 +12,7 @@ byobu-tmux -2 new-session -d -s $SESSION
 # dev window
 byobu-tmux rename-window -t $SESSION:0 'Dev'
 byobu-tmux split-window  -v
+byobu-tmux split-window  -v
 byobu-tmux split-window  -h
 # Select 1st pane cd and venv
 byobu-tmux select-pane -t 0
@@ -24,15 +25,17 @@ byobu-tmux select-pane -t 1
 byobu-tmux send-keys "cd ." C-m
 byobu-tmux send-keys "gulp watch" C-m
 
-# Same with 3nd pane
-# Call for browserify
-#browserify -t [ babelify --optional es7.asyncFunctions --optional runtime ] -g reactify --debug ./src/main.js -o public/lib/bundle.js
 
-# Watch for browserify
-# "watchify -t [ babelify --optional es7.asyncFunctions --optional runtime ] -g reactify --debug ./src/main.js -o public/lib/bundle.js"
-
+# R preview on 3rd pane
 byobu-tmux select-pane -t 2
-byobu-tmux send-keys "cd ." C-m
+byobu-tmux send-keys "cd ./previewer" C-m
+byobu-tmux send-keys "./runPreviewer" C-m
+
+
+# UI on 4th pane
+byobu-tmux select-pane -t 3
+byobu-tmux send-keys "cd ../UI" C-m
+byobu-tmux send-keys "npm start" C-m
 #byobu-tmux send-keys "watchify --debug ./build/gms-client.js -o public/lib/bundle.js" C-m
 
 byobu-tmux select-layout even-vertical

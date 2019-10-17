@@ -78,6 +78,37 @@ var DOCS = [];
 
 var clusterTerms = {}
 
+var msh_categories_csv = [];
+var msh_categories = {}
+
+fs.createReadStream('pmid_msh_label.csv')
+  .pipe(csv({ separator: ';' }))
+  .on('data', (data) => msh_categories_csv.push(data))
+  .on('end', () => {
+    var allcats = []
+
+    var catIndex = msh_categories_csv.reduce(
+          (acc,item) => {
+            var temp = acc[item.pmid]
+
+            if ( temp ){
+              temp.push(item.mesh_broad_label)
+            } else {
+              temp = [item.mesh_broad_label]
+            }
+            acc[item.pmid] = temp;
+
+            if ( allcats.indexOf(item.mesh_broad_label) < 0 ){
+              allcats.push(item.mesh_broad_label)
+            }
+
+            return acc
+          }, {})
+
+        msh_categories = {catIndex: catIndex, allcats: allcats}
+  });
+
+
 function extractMMData (r) {
   try{
     r = JSON.parse(r)
@@ -123,47 +154,123 @@ function prepare_cell_text(text){
     return text.replace(/[0-9]+/g, '$nmbr$').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g," ").trim().toLowerCase()
 }
 
-function prepareAvailableDocuments(){
+async function prepareAvailableDocuments(msh_filter){
 
-  var fixVersionOrder = (a) => {
-  	var i = a.indexOf("v");
-  	if ( i > -1 ){
-  		return a.slice(0,i)+a.slice(i+2,a.length)+a.slice(i,i+2)
-      } else {
-  		return a;
-      }
+  // debugger
+  msh_filter = msh_filter ? msh_filter.split("_") : msh_filter
+  var sg_tables = msh_filter ? ((msh_filter.length > 1) && (msh_filter[1] == "sgt") ? true : false) : false
 
-  }
+  msh_filter = msh_filter ? msh_filter[0] : msh_filter
 
-  fs.readdir(tables_folder, function(err, items) {
+  msh_filter = msh_filter == "nofilter" ? null : msh_filter
 
-      DOCS = items.sort(  (a,b) => {return fixVersionOrder(a).localeCompare(fixVersionOrder(b))} );
+  var wsg_other = null
 
-      for ( var d in DOCS ){
+      if(sg_tables){
 
-        var docfile = DOCS[d]
-        var fileElements = docfile.split("_")
-        var docid = fileElements[0]
-        var page = fileElements[1].split(".")[0]
-        var extension = fileElements[1].split(".")[1]
+          var allAnnotations = await getAnnotationResults()
 
-        if ( available_documents[docid] ){
-          var prev_data = available_documents[docid]
-              prev_data.pages[prev_data.pages.length] = page
-              prev_data.abs_pos[prev_data.abs_pos.length] = abs_index.length
-              prev_data.maxPage = page > prev_data.maxPage ? page : prev_data.maxPage
-              available_documents[docid] = prev_data
-        } else {
-              available_documents[docid] = {abs_pos: [ abs_index.length ], pages : [ page ] , extension, maxPage : page}
-        }
+          wsg_other = allAnnotations.rows.reduce( (acc,ann) => {
+        			var wsg = acc.wsg ? acc.wsg : []
+        			var other = acc.other ? acc.other : []
+        			if ( ann.tableType != "" ){
+        			if ( ann.tableType == "result_table_subgroup" ){
+        				wsg.push(ann.docid+"_"+ann.page);
+        			} else {
+                if ( wsg.indexOf(ann.docid+"_"+ann.page) < 0 ){
+        				      other.push(ann.docid+"_"+ann.page)
+                }
+        			} }
+        			return {wsg,other}
+        		}, {wsg: [], other: []} )
 
-        abs_index[abs_index.length] = {docid, page, extension, docfile}
+            wsg_other.wsg = Array.from(new Set(wsg_other.wsg))
+            wsg_other.other = Array.from(new Set(wsg_other.other))
 
       }
+  //
+  // debugger
 
+  var results = new Promise(function(resolve, reject) {
 
-      console.log("DLEN: " +DOCS.length)
-  });
+          var available_documents = {}
+          var abs_index = []
+          var DOCS = []
+
+          var fixVersionOrder = (a) => {
+          	var i = a.indexOf("v");
+          	if ( i > -1 ){
+          		return a.slice(0,i)+a.slice(i+2,a.length)+a.slice(i,i+2)
+              } else {
+          		return a;
+              }
+
+          }
+
+          fs.readdir(tables_folder, function(err, items) {
+
+              DOCS = items.sort(  (a,b) => {return fixVersionOrder(a).localeCompare(fixVersionOrder(b))} );
+
+              DOCS = DOCS.reduce( (acc,docfile) => {
+                  var docid = docfile.split("_")[0].split("v")[0]
+
+                  var sg_docid = docfile.split(".")[0]
+
+                  if ( wsg_other != null ){ // if the sg table filter is on, then accept only docs that are
+
+                      if ( wsg_other.other.indexOf(sg_docid) > -1 ){
+                        return acc
+                      }
+                  }
+
+                  if ( msh_filter && (Object.keys(msh_categories).length > 0)) {
+                      if ( msh_categories.catIndex[docid] && msh_categories.catIndex[docid].indexOf(msh_filter) > -1 ){
+                        acc.push(docfile)
+                      }
+                  } else {
+                    acc.push(docfile)
+                  }
+
+                  return acc
+
+              },[])
+
+              try{
+                for ( var d in DOCS ){
+
+                  var docfile = DOCS[d]
+                  var fileElements = docfile.split("_")
+                  var docid = fileElements[0]
+                  var page = fileElements[1].split(".")[0]
+                  var extension = fileElements[1].split(".")[1]
+
+                  if ( available_documents[docid] ){
+                    var prev_data = available_documents[docid]
+                        prev_data.pages[prev_data.pages.length] = page
+                        prev_data.abs_pos[prev_data.abs_pos.length] = abs_index.length
+                        prev_data.maxPage = page > prev_data.maxPage ? page : prev_data.maxPage
+                        available_documents[docid] = prev_data
+                  } else {
+                        available_documents[docid] = {abs_pos: [ abs_index.length ], pages : [ page ] , extension, maxPage : page}
+                  }
+
+                  abs_index[abs_index.length] = {docid, page, extension, docfile}
+
+                }
+
+                // console.log("YAY")
+                resolve({available_documents, abs_index, DOCS})
+              } catch (e){
+
+                console.log("FAILED: "+JSON.stringify(e))
+
+                reject(e)
+              }
+          });
+
+    });
+
+    return await results
 }
 
 async function getAnnotationResults(){
@@ -328,13 +435,18 @@ async function insertAnnotation(docid, page, user, annotation, corrupted, tableT
 }
 
 // preinitialisation of components if needed.
-function main(){
+async function main(){
   // prepare available_documents variable
-  prepareAvailableDocuments()
+  var res = await prepareAvailableDocuments()
+
+      available_documents = res.available_documents
+      abs_index = res.abs_index
+      DOCS = res.DOCS
 
 }
 
 main();
+
 
 app.get('/api/clearMetadata', async function(req,res){
 
@@ -404,19 +516,38 @@ app.get('/api/getMetadata', async function(req,res){
 
 });
 
-
-
 app.get('/',function(req,res){
   res.send("this is home")
 });
 
-app.get('/api/allMetaData',function(req,res){
+app.get('/api/allInfo',async function(req,res){
 
-  res.send({
-    abs_index,
-    total : DOCS.length,
-    available_documents
-  })
+  if ( req.query && req.query.filter ){
+
+    var result = await prepareAvailableDocuments(req.query.filter)
+
+    var available_documents_temp = result.available_documents
+    var abs_index_temp = result.abs_index
+    var DOCS_temp = result.DOCS
+
+        res.send({
+          abs_index : abs_index_temp,
+          total : DOCS_temp.length,
+          available_documents: available_documents_temp,
+          msh_categories: msh_categories
+        })
+
+  } else {
+
+        res.send({
+          abs_index,
+          total : DOCS.length,
+          available_documents,
+          msh_categories: msh_categories
+        })
+
+  }
+
 });
 
 async function updateClusterAnnotation(cn,concept,cuis,isdefault,cn_override){
@@ -428,8 +559,8 @@ async function updateClusterAnnotation(cn,concept,cuis,isdefault,cn_override){
     .catch(e => console.error(e.stack))
     .then(() => client.release())
 
-  console.log("Awaiting done: "+(ops_counter++))
-  console.log("DONE: "+(ops_counter++))
+  // console.log("Awaiting done: "+(ops_counter++))
+  // console.log("DONE: "+(ops_counter++))
 }
 
 
@@ -537,7 +668,6 @@ app.get('/api/setCUIMod', async function(req,res){
     await setCUIMod(req.query.cui, req.query.type)
   }
 
-
 });
 
 
@@ -591,6 +721,7 @@ app.get('/api/recordClusterAnnotation',async function(req,res){
   }
 
   res.send("saved cluster annotation: "+JSON.stringify(req.query))
+
 });
 
 app.get('/api/cuisIndex',async function(req,res){
@@ -664,24 +795,8 @@ app.get('/api/allPredictions', async function(req,res){
   res.send(predictions)
 });
 
-//
-// app.get('/api/rscript',async function(req,res){
-//
-//   try{
-//
-//     var result = R("./src/tableScript.R")
-//
-//         result = result.data("hello world", 20)
-//       .callSync()
-//
-//       res.send( JSON.stringify(result) )
-//
-//   } catch (e){
-//
-//     res.send("FAIL: "+ e)
-//   }
-// });
 
+// Generates the results table live preview, connecting to the R API.
 app.get('/api/annotationPreview',async function(req,res){
 
   try{
@@ -698,7 +813,6 @@ app.get('/api/annotationPreview',async function(req,res){
         } else{
           res.send( {state:"badquery: "+JSON.stringify(req.query)} )
         }
-
 
         var final_annotations = {}
 
@@ -721,33 +835,17 @@ app.get('/api/annotationPreview',async function(req,res){
           }
         }
 
-        // console.log("FINAL: " +JSON.stringify(final_annotations))
-
         var final_annotations_array = []
         for (  var r in final_annotations ){
           var ann = final_annotations[r]
           final_annotations_array[final_annotations_array.length] = ann
         }
 
-
-        // console.log("FINAL2: " +JSON.stringify(final_annotations_array))
-
         if( final_annotations_array.length > 0){
 
-              // var result = R("./src/tableScript.R")
               var entry = final_annotations_array[0]
                   entry.annotation = entry.annotation.annotations.map( (v,i) => {var ann = v; ann.content = Object.keys(ann.content).join(";"); ann.qualifiers = Object.keys(ann.qualifiers).join(";"); return ann} )
 
-              //     console.log("ENTRY:: "+JSON.stringify(entry))
-              //     result = result.data(entry)
-              //   .callSync()
-              //
-              //
-              //   var toreturn = {"state" : "good", result }
-              //
-              //   console.log(JSON.stringify(toreturn))
-              // var request = require('request');
-              // debugger
               request({
                       url: 'http://localhost:6666/preview',
                       method: "POST",
@@ -755,18 +853,8 @@ app.get('/api/annotationPreview',async function(req,res){
                         anns: entry
                       }
                 }, function (error, response, body) {
-                console.log('error:', error); // Print the error if one occurred
-                console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-                console.log('body:', body); // Print the HTML for the Google homepage.
-
-                // debugger
-                var result = body
-                // debugger
                 res.send( {"state" : "good", result : body.tableResult, "anns": body.ann} )
               });
-
-
-
 
         } else {
           res.send({"state" : "empty"})
@@ -1041,6 +1129,10 @@ async function readyTableData(docid,page,method){
 
                                   htmlHeader = "<table>"+htmlHeader.htmlHeader+"</table>"
 
+                                  var htmlHeaderText = cheerio(htmlHeader).find("td").text()
+
+
+
                                   var actual_table = tablePage("table").parent().html();
                                       actual_table = cheerio.load(actual_table);
 
@@ -1278,7 +1370,8 @@ async function readyTableData(docid,page,method){
                                                   rows: row_top_descriptors
                                                 }
                                   // res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
-                                  resolve({status: "good", htmlHeader,formattedPage, title:  titles_obj[docid.split(" ")[0]], predicted })
+                                  
+                                  resolve({status: "good", htmlHeader,formattedPage, title:  titles_obj[docid.split("_")[0]], predicted })
                               });
 
                 });
