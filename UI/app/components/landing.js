@@ -99,8 +99,6 @@ class Landing extends Component {
           finalResults_array[finalResults_array.length] = ann
         }
 
-        // debugger
-
       return <div>
 
         <Card id="results" style={{padding:15}}>

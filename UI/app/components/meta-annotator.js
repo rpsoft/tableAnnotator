@@ -63,6 +63,11 @@ class MetaAnnotator extends Component {
 
   async componentWillReceiveProps(next) {
 
+    // debugger
+    // if ( next.titleSubgroups && next.titleSubgroups.length > 0 ){
+    //   debugger
+    // }
+
     var annotationData = next.annotationData
     var urlparams = new URLSearchParams(window.location.search);
 
@@ -74,7 +79,7 @@ class MetaAnnotator extends Component {
     var unique_concepts_metadata = []
 
     var concept_metadata = {}
-        metadadata ? metadadata.rows.map ( item => {
+        metadadata && !metadadata.error ? metadadata.rows.map ( item => {
                   var matching_term = this.prepareTermForMatching(item.concept)
                   var cuis = item.cuis.length > 0 ? item.cuis.split(";") : ( recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : [] )
 
@@ -125,7 +130,7 @@ class MetaAnnotator extends Component {
 
                                     return concept
                                   }
-                                ) 
+                                )
 
                               }
                             ) : ""
@@ -176,13 +181,13 @@ class MetaAnnotator extends Component {
                     }
     });
 
-    
+
     next.titleSubgroups ? next.titleSubgroups.map ( titleSG => {
         var matching_term = this.prepareTermForMatching(titleSG);
         var cuis = recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : []
 
         var alreadyExists = concept_metadata[titleSG] ? true : false
-       
+
         concept_metadata[titleSG] = {
               cuis: alreadyExists ? concept_metadata[titleSG].cuis : cuis,
               cuis_selected: alreadyExists ? concept_metadata[titleSG].cuis_selected : cuis.length > 0 ? [cuis[0]] : [],
@@ -200,6 +205,7 @@ class MetaAnnotator extends Component {
 
 
     }) : "";
+
 
     this.setState({
       user: urlparams.get("user") ? urlparams.get("user") : "",
@@ -229,7 +235,7 @@ class MetaAnnotator extends Component {
 
   async saveAll() {
 
-        
+
         var current_metadata = this.state.concept_metadata
 
 
@@ -240,7 +246,7 @@ class MetaAnnotator extends Component {
         //debugger
 
         // remove titles that are not there anymore.
-        
+
         Object.keys(current_metadata).map( (concept) => {
 
             if ( current_metadata[concept].istitle && this.state.titleSubgroups.indexOf(concept) < 0 ){
@@ -254,7 +260,7 @@ class MetaAnnotator extends Component {
 
         })
 
-        
+
         Object.keys(current_metadata).map( async (concept) => {
           var current_concept = current_metadata[concept]
 
@@ -288,7 +294,7 @@ class MetaAnnotator extends Component {
   }
 
   openHandler(prev){
-    this.setState({opened : (prev == 2 ? 0 : prev +1)}) 
+    this.setState({opened : (prev == 2 ? 0 : prev +1)})
   }
 
   render() {
@@ -317,7 +323,7 @@ class MetaAnnotator extends Component {
     } else if ( this.state.opened == 2){
       opened = "80%"
     }
-    
+
     return (
       <Card style={{ width: opened, minHeight: 600, height: "100%", float: "right", position: "fixed",  top: 0, right: 0, zIndex: 1,overflowY:"scroll"}}>
 
@@ -346,7 +352,7 @@ class MetaAnnotator extends Component {
                               var currentItem = this.state.concept_metadata[concept_key]
                               var elems = concept_key.split(";")
                               var concept = elems[elems.length-1]
-                            
+
                               return <MetaItem
                                                 key = {"concept_item_"+concept_key}
                                                 term = {concept}

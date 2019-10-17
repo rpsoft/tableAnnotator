@@ -110,7 +110,10 @@ class AnnotationView extends Component {
     var metadata = await fetch.getTableMetadata(parsed.docid, parsed.page, parsed.user)
 
     var titleSubgroups = []
+
+    if ( !metadata.error ){
         metadata.rows.map ( item => { if ( item.istitle ){ titleSubgroups.push(item.concept) } })
+    }
 
     this.setState({
       //user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
@@ -166,13 +169,20 @@ class AnnotationView extends Component {
 
         var data = await fetch.getTable(parsed.docid,parsed.page)
 
-        var allInfo = JSON.parse(await fetch.getAllInfo())
+
+
+        var allInfo;
+        if ( parsed.filter){
+          allInfo = JSON.parse(await fetch.getAllInfo(parsed.filter))
+
+        } else {
+          allInfo = JSON.parse(await fetch.getAllInfo())
+
+        }
 
         var documentData = allInfo.available_documents[parsed.docid]
         var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(parsed.page)]
 
-
-        debugger 
         var annotation
         if( this.state.user && this.state.user.length > 0){
           annotation = JSON.parse(await fetch.getAnnotationByID(parsed.docid,parsed.page,this.state.user))
@@ -182,8 +192,10 @@ class AnnotationView extends Component {
         var recommend_cuis = await fetch.getConceptRecommend();
         var metadata = await fetch.getTableMetadata(parsed.docid, parsed.page, parsed.user)
         var titleSubgroups = []
-            metadata.rows.map ( item => { if ( item.istitle ){ titleSubgroups.push(item.concept) } })
 
+        if ( !metadata.error ){
+            metadata.rows.map ( item => { if ( item.istitle ){ titleSubgroups.push(item.concept) } })
+        }
 
 
         if ( annotation ){
@@ -202,6 +214,7 @@ class AnnotationView extends Component {
             recommend_cuis : recommend_cuis,
             metadata : metadata,
             titleSubgroups : titleSubgroups,
+            filter: parsed.filter,
 
           })
         } else {
@@ -216,13 +229,12 @@ class AnnotationView extends Component {
             recommend_cuis : recommend_cuis,
             metadata : metadata,
             titleSubgroups : titleSubgroups,
+            filter: parsed.filter,
           })
         }
 
 
         // prepare data for MetaAnnotator
-
-
         this.getPreview()
     }
    }
@@ -248,7 +260,7 @@ class AnnotationView extends Component {
      this.setState({annotations:[],gindex: current_table_g_index, overrideTable: n != 0 ? null : this.state.overrideTable })
 
 
-     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user)
+     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user+(this.state.filter ? "&filter="+this.state.filter : ""))
 
 
    }
@@ -366,7 +378,7 @@ class AnnotationView extends Component {
 
    goToGIndex(index){
      var newDocument = this.state.allInfo.abs_index[index]
-     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user)
+     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user+(this.state.filter ? "&filter="+this.state.filter : ""))
    }
 
    async saveAnnotations(){
@@ -445,6 +457,7 @@ class AnnotationView extends Component {
         ] );
 
         CKEDITOR.config.stylesSet = 'my_styles';
+        // CKEDITOR.config.justifyClasses = [ 'AlignLeft', 'AlignCenter', 'AlignRight', 'AlignJustify' ];
       }
 
    }
@@ -455,10 +468,11 @@ class AnnotationView extends Component {
 
      var tableToSave
 
+     // debugger
      if ( this.state.overrideTable ){
        tableToSave = this.state.overrideTable.replace("<table", this.state.table.htmlHeader.replace("<table><tr ><td", '<div class="headers"><div').replace("</td></tr></table>","</div></div><table "))
      } else {
-       tableToSave = this.state.table.formattedPage
+       tableToSave = this.state.table.formattedPage.replace("<table", this.state.table.htmlHeader.replace("<table><tr ><td", '<div class="headers"><div').replace("</td></tr></table>","</div></div><table "))
      }
 
      fetch.saveTableEdit( this.state.docid, this.state.page, tableToSave )
@@ -469,7 +483,7 @@ class AnnotationView extends Component {
    }
 
    addTitleSubgroup = () => {
-     debugger
+     // debugger
      if ( this.state.newTitleSubgroup && this.state.newTitleSubgroup.length > 0){
        var sgs = this.state.titleSubgroups ? this.state.titleSubgroups : []
        sgs.push(this.state.newTitleSubgroup)
@@ -509,7 +523,7 @@ class AnnotationView extends Component {
                            (us,j) => <div
                              style={{display:"inline",cursor: "pointer", textDecoration: "underline"}}
                              key={j}
-                             onClick={ () => {this.props.goToUrl("/table/?docid="+encodeURIComponent(parsed.docid)+"&page="+parsed.page+"&user="+us)}}
+                             onClick={ () => {this.props.goToUrl("/table/?docid="+encodeURIComponent(parsed.docid)+"&page="+parsed.page+"&user="+us+(this.state.filter ? "&filter="+this.state.filter : ""))}}
                              >{us+", "}</div>
                         )
 
@@ -660,25 +674,25 @@ class AnnotationView extends Component {
 
         />
 
-
-
       } else {
           table_editor = "";
       }
 
+      var metaAnnotator = <MetaAnnotator annotationData={data}
+                     annotationText={this.state.table ? this.state.table.formattedPage : ""}
+                     titleSubgroups={this.state.titleSubgroups}
+                     recommend_cuis={this.state.recommend_cuis}
+                     metadata={this.state.metadata}
+                     newTitleSubgroup={this.state.newTitleSubgroup}
+                     />
 
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
-        <MetaAnnotator annotationData={data}
-                       annotationText={this.state.table ? this.state.table.formattedPage : ""}
-                       titleSubgroups={this.state.titleSubgroups}
-                
-                       recommend_cuis={this.state.recommend_cuis}
-                       metadata={this.state.metadata}/>
+        {metaAnnotator}
 
         <Card id="userData" style={{padding:15}}>
-          <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+(this.state.user ? "?user="+this.state.user : "" ))}/>
+          <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+(this.state.user ? "?user="+this.state.user : "" )+(this.state.filter ? "&filter="+this.state.filter : ""))}/>
 
           <TextField
             value={this.state.user}
@@ -728,7 +742,7 @@ class AnnotationView extends Component {
 
         <Card id="tableHeader" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center"}}>
 
-            { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/> 
+            { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/>
                         : <div>
                           <div style={{paddingBottom: 10, fontWeight:"bold",marginBottom:10}}>
                             <a href={"https://www.ncbi.nlm.nih.gov/pubmed/?term="+ this.state.docid.split("v")[0]} target="_blank">{"PMID: " + this.state.docid }</a>
@@ -736,7 +750,7 @@ class AnnotationView extends Component {
                           </div>
 
                           <div style={{paddingBottom: 10, fontWeight:"bold"}} dangerouslySetInnerHTML={{__html:this.state.table.htmlHeader}}></div>
-                          {this.state.titleSubgroups ? this.state.titleSubgroups.map( sg => <div style={{cursor:"pointer"}}onClick= { () => this.removeTitleSG(sg) }> {sg+","} </div> ) : ""}
+                          {this.state.titleSubgroups ? this.state.titleSubgroups.map( (sg,i) => <div key={"title_sg_"+i} style={{cursor:"pointer"}} onClick= { () => this.removeTitleSG(sg) }> {sg+","} </div> ) : ""}
                           <TextField
                                 value={this.state.newTitleSubgroup}
                                 placeholder="Enter title subgroup here to add"

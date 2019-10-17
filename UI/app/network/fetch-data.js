@@ -73,6 +73,22 @@ export default class fetchData {
 
         return JSON.parse(r)
   }
+  //
+  // async getMeshCategories() {
+  //
+  //   var urlQueryRequest = urlBase+ "mshcat"
+  //
+  //   var r = await this.getGeneric( urlQueryRequest  )
+  //
+  //       r = JSON.parse(r)
+  //
+  //   var allcats = []
+  //
+  //       r = r.reduce( (acc,item) => {acc[item.pmid] = item.mesh_broad_label; if ( allcats.indexOf(item.mesh_broad_label) < 0 ){allcats.push(item.mesh_broad_label)} return acc}, {})
+  //
+  //   return {catIndex: r, allcats: allcats}
+  //
+  // }
 
 
   async setTableMetadata(docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, user, istitle) {
@@ -133,12 +149,14 @@ export default class fetchData {
         return r
   }
 
-  async getAllInfo() {
+  async getAllInfo(filter) {
 
-        var urlQueryRequest = urlBase+ "allMetaData"
+        // filter = filter == "nofilter" ? null : filter
+
+        var urlQueryRequest = urlBase+ "allInfo" +(filter ? "?filter=" + encodeURIComponent(filter) : "")
 
         var r = await this.getGeneric( urlQueryRequest  )
-        // debugger
+
         return r
 
   }
