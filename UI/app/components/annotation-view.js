@@ -66,8 +66,11 @@ class AnnotationView extends Component {
 
     this.state = {
         user: urlparams.get("user") ? urlparams.get("user") : "",
+        docid: urlparams.get("docid") ? urlparams.get("docid") : "",
+        page: urlparams.get("page") ? urlparams.get("page") : "",
         table: null,
         annotations:[],
+        allAnnotations : null,
         corrupted: false,
         corrupted_text: "",
         tableType : "",
@@ -77,8 +80,11 @@ class AnnotationView extends Component {
           dir : "asc"
         },
         toggeLiveResults: true,
+        newTitleSubgroup: "",
+        titleSubgroups: [],
+        recommend_cuis : null,
+        metadata : null,
     };
-
   }
 
   async componentDidMount () {
