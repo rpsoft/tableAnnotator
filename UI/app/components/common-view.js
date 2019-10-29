@@ -80,31 +80,32 @@ class CommonView extends Component {
 
   async componentWillReceiveProps(next) {
 
-   // var user = next.location.query ? next.location.query.user : null
-   //
-   // if( user != this.state.user ) {
-   //      this.setState({user})
-   // }
      var urlparams = new URLSearchParams(next.location.search);
 
 
-     let fetch = new fetchData();
-     var annotations = JSON.parse(await fetch.getAllAnnotations())
-     var tables = JSON.parse(await fetch.getAllAvailableTables())
+    var filter_var = urlparams.get("filter").split("_")
+    var filter = filter_var[0]
+    var sg_table = (filter_var.length > 1) && (filter_var[1] == "sgt") ? true : false
 
-     var filter_var = urlparams.get("filter").split("_")
-     var filter = filter_var[0]
-     var sg_table = (filter_var.length > 1) && (filter_var[1] == "sgt") ? true : false
 
-     // debugger
-     var allInfo = JSON.parse(await fetch.getAllInfo(filter+(sg_table ? "_sgt" : "")))
+     if ( !this.state.allInfo || this.state.filter != filter || this.state.sg_table != sg_table ){
+       let fetch = new fetchData();
+       var annotations = JSON.parse(await fetch.getAllAnnotations())
+       var tables = JSON.parse(await fetch.getAllAvailableTables())
 
-     this.setState({
-         user: urlparams.get("user") ? urlparams.get("user") : "",
-         filter: filter ? filter : "nofilter",
-         sg_table: sg_table,
-         annotations,tables,allInfo
-     })
+       var allInfo = JSON.parse(await fetch.getAllInfo(filter+(sg_table ? "_sgt" : "")))
+
+       this.setState({
+           user: urlparams.get("user") ? urlparams.get("user") : "",
+           filter: filter ? filter : "nofilter",
+           sg_table: sg_table,
+           annotations,tables,allInfo
+       })
+     } else {
+       this.setState({
+           user: urlparams.get("user") ? urlparams.get("user") : "",
+       })
+     }
   }
 
    render() {
@@ -132,7 +133,7 @@ class CommonView extends Component {
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
         <Card style={{marginBottom:10}}>
 
-          <h2 style={{marginTop:0,padding:10}}>Welcome Our Annotator!</h2>
+          <h2 style={{marginTop:0,padding:20}}>TableTidier Prototype</h2>
 
         </Card>
 
@@ -189,7 +190,7 @@ class CommonView extends Component {
 
             </Card>
 
-            <div style={{height:"80vh",overflowY:"scroll", paddingTop:10, padding:20}}>{this.state.tables && this.state.allInfo ?
+            <div style={{height:"80vh",overflowY:"scroll", paddingTop:10, padding:20, marginTop: 1}}>{this.state.tables && this.state.allInfo ?
                 (
                     this.state.allInfo.abs_index.length > 0 ? this.state.allInfo.abs_index.map(
                       (v,i) => <div key={v.docid+"_"+v.page}>
@@ -209,7 +210,7 @@ class CommonView extends Component {
                                 >
                               [New]
                             </a>
-                            {  corrupted_texts[v.docid+"_"+v.page] ? <div style={{display:"inline",fontWeight:"bold",paddingLeft:20}}><WarningIcon style={{marginRight:5}} />{  corrupted_texts[v.docid+"_"+v.page] }</div> : ""}
+                            {  corrupted_texts[v.docid+"_"+v.page] ? <div style={{display:"inline",fontWeight:"bold",paddingLeft:20}}><WarningIcon style={{marginRight:5}} />{  corrupted_texts[v.docid+"_"+v.page].replace(/(%[A-z0-9]{2})/g," ") }</div> : ""}
                          </div>
 
                     ) : ""

@@ -16,7 +16,9 @@ new_obj <- new_obj %>% mutate( pmid_tbl=paste0(pmid,"_",tbl_n))
 filenames_lkp <- new_obj %>% select(pmid,search_round,tbl_n,file_name,original_file_stored) %>% distinct %>% mutate(n = 1) %>% group_by(pmid,tbl_n) %>% mutate(ticker = cumsum(n))
 
 new_obj <- new_obj %>% inner_join(filenames_lkp) %>% select(-n) 
-  
+
+new_obj <- new_obj %>% mutate (pmid = ifelse(sheet == "30425095b","30425095b",pmid))
+
 new_obj <- new_obj %>% mutate(pmid_tbl = ifelse(ticker > 1, gsub(" ", "", paste(pmid,"v",ticker,"_",tbl_n), fixed = TRUE), pmid_tbl) )
 
 filenames <- new_obj %>% select(pmid_tbl) %>% distinct
@@ -77,8 +79,16 @@ df_to_html <- function (tbl_id, df, destination){
           character = paste0('<p style="',character)
         )
       
-      html_res <- htmlTable::htmlTable(rectify( ex ),
-                                       align = paste(rep('l',ncol(ex)),collapse=''))
+      # html_res <- htmlTable::htmlTable(rectify( ex ),
+      #                                  align = paste(rep('l',ncol(ex)),collapse=''), rnames=FALSE)
+      # 
+      rectify( ex ) -> tab
+      tab$"row/col" <- NULL
+      unname(tab) -> tab
+      
+      html_res <- htmlTable::htmlTable(tab,
+                           align = paste(rep('l',ncol(ex)),collapse=''), rnames=FALSE)
+      
       
       html_res = paste0(headers, html_res)
       
@@ -88,11 +98,13 @@ df_to_html <- function (tbl_id, df, destination){
 
 for (r in 1:nrow(filenames)){
 
-  try({
+  tryCatch({
     print(filenames[r,]$pmid_tbl)
     df_to_html(filenames[r,]$pmid_tbl, new_obj, "/home/suso/ihw/tableAnnotator/Server/HTML_TABLES/")
-  })
+  }, error = function(e) print(paste0("ERROR: ",filenames[r,]$pmid_tbl, e)))
   
 }
 
-# new_obj %>% filter(pmid == "pmid") %>% View
+
+# show missing tables, I.e. not rendered into an HTML file
+filenames %>% mutate(pmid_tbl=paste0(pmid_tbl,".html")) %>% filter(! (pmid_tbl %in% dir("/home/suso/ihw/tableAnnotator/Server/HTML_TABLES/")))  

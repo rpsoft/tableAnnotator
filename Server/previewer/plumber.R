@@ -22,6 +22,7 @@ html_2_df <- function (pmid,page){
   url <- paste0("http://localhost:6541/api/getTable?docid=",pmid,"&page=",page)
   JsonData <- fromJSON(file= url )
   
+  browser()
   # doc_string <- read_file(paste0("~/ihw/tableAnnotator/Server/HTML_TABLES_OVERRIDE/",pmid,"_",page,".html"))
   
   x <- read_xml(JsonData$formattedPage, as_html = FALSE)
@@ -266,13 +267,13 @@ runAll <- function(annotations){
     filename <- paste(meta$docid[1], meta$page[1], sep = "_")
     
     
-    if(file.exists(paste0(tablesDirectory, filename, ".html"))){
+    # if(file.exists(paste0(tablesDirectory, filename, ".html"))){
       all_cells <- html_2_df(meta$docid[1], meta$page[1])
-    } else {
-      all_cells <- new_obj %>% filter( pmid_tbl == filename) 
-    }
+    # } else {
+      # all_cells <- new_obj %>% filter( pmid_tbl == filename) 
+    # }
     
-    browser()
+     browser()
     
     
     ##  Simplify table by making all values character
@@ -547,7 +548,7 @@ runAll <- function(annotations){
     row_lbls <- table_body %>%
       filter(row %in% row_lbls_meta$row,
              !col %in% col_lbls_meta$col)
-    
+    browser()
     for(i_choose in unique(row_lbls_meta$i)){
       ## Select each richest column description in turn, removing that from the dataset
       
@@ -558,6 +559,7 @@ runAll <- function(annotations){
       suppressWarnings(suppressMessages( row_lbls <- row_lbls %>%
                                            anti_join(h) ))
       
+      # h <- h %>% mutate (character = ifelse(is.na(character),"",character)) # Correction for NA's in character
       data_cells <- NNW(data_cells, h)
       new_name <- row_lbls_meta$content[row_lbls_meta$i == i_choose] %>%  unique()
       while(new_name %in% names(data_cells)) new_name <- paste0(new_name, "_")
@@ -592,9 +594,9 @@ function(req, anns = "" ) {
   # url <- paste0("http://localhost:6541/api/getTable?docid=11527638&page=1")
   # JsonData <- fromJSON(file= url )
   # 
- # write_rds(anns, paste0(baseFolder,"annsout.rds"))
+  # write_rds(anns, paste0(baseFolder,"last_out.rds"))
   # 
-   # anns <- read_rds(paste0(baseFolder,"annsout.rds"))
+   #anns <- read_rds(paste0(baseFolder,"annsout.rds"))
   #print(anns)
   
   annotations <- anns$annotation %>% 

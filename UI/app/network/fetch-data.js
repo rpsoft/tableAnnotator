@@ -56,6 +56,18 @@ export default class fetchData {
 
   }
 
+  async deleteAnnotation(docid,page,user,annotation,corrupted, tableType, corrupted_text) {
+
+    var urlQueryRequest = urlBase+ "deleteAnnotation?docid="+encodeURIComponent(docid)+"&page="+page+"&user="+user
+
+    console.log(urlQueryRequest)
+
+    var r = await this.getGeneric( urlQueryRequest  )
+
+    return r
+
+  }
+
   async getTable(docid,page) {
 
         var urlQueryRequest = urlBase+ "getTable?docid="+encodeURIComponent(docid)+"&page="+page

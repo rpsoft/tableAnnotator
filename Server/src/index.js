@@ -1109,7 +1109,7 @@ async function readyTableData(docid,page,method){
                                         var textLimit = 400
                                         var actualText = (headText.length > textLimit ? headText.slice(0,textLimit-1) +" [...] " : headText)
                                             totalTextChars += actualText.length
-                                        htmlHeader = htmlHeader + '<tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">' + actualText + "</td></tr>"
+                                        htmlHeader = htmlHeader + '<tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">' + encodeURI(actualText) + "</td></tr>"
                                     }
 
                                     return {htmlHeader, totalTextChars}
@@ -1370,7 +1370,7 @@ async function readyTableData(docid,page,method){
                                                   rows: row_top_descriptors
                                                 }
                                   // res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
-                                  
+
                                   resolve({status: "good", htmlHeader,formattedPage, title:  titles_obj[docid.split("_")[0]], predicted })
                               });
 
@@ -1409,6 +1409,29 @@ app.get('/api/getAvailableTables',function(req,res){
 app.get('/api/getAnnotations',async function(req,res){
   res.send( await getAnnotationResults() )
 });
+
+
+
+app.get('/api/deleteAnnotation', async function(req,res){
+
+  var deleteAnnotation = async (docid, page, user) => {
+      var client = await pool.connect()
+
+      var done = await client.query('DELETE FROM annotations WHERE docid = $1 AND page = $2 AND "user" = $3', [docid, page, user ])
+        .then(result => console.log("Annotation deleted: "+ new Date()))
+        .catch(e => console.error(e.stack))
+        .then(() => client.release())
+  }
+
+  if ( req.query && req.query.docid && req.query.page && req.query.user){
+    await deleteAnnotation(req.query.docid , req.query.page, req.query.user)
+    res.send("done")
+  } else {
+    res.send("delete failed");
+  }
+
+});
+
 
 app.get('/api/getAnnotationByID',async function(req,res){
 

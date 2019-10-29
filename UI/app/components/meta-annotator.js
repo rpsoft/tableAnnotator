@@ -206,6 +206,7 @@ class MetaAnnotator extends Component {
 
     }) : "";
 
+    // debugger
 
     this.setState({
       user: urlparams.get("user") ? urlparams.get("user") : "",
@@ -354,7 +355,7 @@ class MetaAnnotator extends Component {
                               var concept = elems[elems.length-1]
 
                               return <MetaItem
-                                                key = {"concept_item_"+concept_key}
+                                                key = {"concept_item_"+concept_key+"_"+i}
                                                 term = {concept}
                                                 matching_term = { currentItem.matching_term}
                                                 assigned_cuis = { currentItem.cuis }

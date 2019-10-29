@@ -112,7 +112,7 @@ class ResultsView extends Component {
                                             +'","'+value.docid
                                             +'","'+value.page
                                             // +'","'+value.corrupted
-                                            +'","'+ (value.corrupted_text == "undefined" ? "" : value.corrupted_text  )
+                                            +'","'+ (value.corrupted_text == "undefined" ? "" : value.corrupted_text.replaceAll('"',"'")  )
                                             +'","'+value.tableType
                                             +'","'+ann.location
                                             +'","'+ann.number

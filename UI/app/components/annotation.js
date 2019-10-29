@@ -30,8 +30,9 @@ class Annotation extends Component {
 
 
   handleChange = (event, data, source) => {
+    //debugger
      var prevState = this.state
-     prevState[source] = event.currentTarget.value
+     prevState[source] = event.target.value
      console.log(prevState)
      this.setState(prevState);
      this.props.addAnnotation(this.state)

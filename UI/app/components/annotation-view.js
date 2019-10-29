@@ -84,6 +84,7 @@ class AnnotationView extends Component {
         titleSubgroups: [],
         recommend_cuis : null,
         metadata : null,
+        deleteEnabled: false,
     };
   }
 
@@ -127,6 +128,7 @@ class AnnotationView extends Component {
       recommend_cuis : recommend_cuis,
       metadata : metadata,
       titleSubgroups : titleSubgroups,
+      deleteEnabled: false,
     })
 
     if( !this.state.preview ){
@@ -215,7 +217,7 @@ class AnnotationView extends Component {
             metadata : metadata,
             titleSubgroups : titleSubgroups,
             filter: parsed.filter,
-
+            deleteEnabled: false,
           })
         } else {
           this.setState({
@@ -230,6 +232,7 @@ class AnnotationView extends Component {
             metadata : metadata,
             titleSubgroups : titleSubgroups,
             filter: parsed.filter,
+            deleteEnabled: false,
           })
         }
 
@@ -345,6 +348,9 @@ class AnnotationView extends Component {
    }
 
    addAnnotation(i,data){
+
+
+
      var content = this.removeFalseKeys(data.content)
      var qualifiers = this.removeFalseKeys(data.qualifiers)
 
@@ -425,6 +431,8 @@ class AnnotationView extends Component {
 
      this.setState({preparingPreview : true})
 
+     // debugger
+
      let fetch = new fetchData();
      var preview = await fetch.getAnnotationPreview(parsed.docid,parsed.page, this.state.user)
 
@@ -468,11 +476,11 @@ class AnnotationView extends Component {
 
      var tableToSave
 
-     // debugger
+
      if ( this.state.overrideTable ){
-       tableToSave = this.state.overrideTable.replace("<table", this.state.table.htmlHeader.replace("<table><tr ><td", '<div class="headers"><div').replace("</td></tr></table>","</div></div><table "))
+       tableToSave = this.state.overrideTable.replace("<table", decodeURI(this.state.table.htmlHeader).replace("<table><tr ><td", '<div class="headers"><div').replace("</td></tr></table>","</div></div><table "))
      } else {
-       tableToSave = this.state.table.formattedPage.replace("<table", this.state.table.htmlHeader.replace("<table><tr ><td", '<div class="headers"><div').replace("</td></tr></table>","</div></div><table "))
+       tableToSave = this.state.table.formattedPage.replace("<table", decodeURI(this.state.table.htmlHeader).replace("<table><tr ><td", '<div class="headers"><div').replace("</td></tr></table>","</div></div><table "))
      }
 
      fetch.saveTableEdit( this.state.docid, this.state.page, tableToSave )
@@ -483,7 +491,6 @@ class AnnotationView extends Component {
    }
 
    addTitleSubgroup = () => {
-     // debugger
      if ( this.state.newTitleSubgroup && this.state.newTitleSubgroup.length > 0){
        var sgs = this.state.titleSubgroups ? this.state.titleSubgroups : []
        sgs.push(this.state.newTitleSubgroup)
@@ -498,12 +505,15 @@ class AnnotationView extends Component {
      this.setState({titleSubgroups: sgs})
    }
 
-  //  addTitleSGS = (newSgs) => {
-  //    var sgs = this.state.titleSubgroups ? this.state.titleSubgroups : []
-  //        newSgs.map( sg => sgs.indexOf(sg) < 0 ? sgs.push(sg) : "" )
-  //    this.setState({newTitleSubgroup: "", titleSubgroups: sgs })
-  //  }
+   deleteAnnotation = async () => {
+     if (this.state.deleteEnabled){
+        let fetch = new fetchData();
+        await fetch.deleteAnnotation( this.state.docid, this.state.page, this.state.user )
+        this.setState({deleteEnabled:false})
+        this.shiftTables(0)
 
+     }
+   }
 
    render() {
 
@@ -601,7 +611,7 @@ class AnnotationView extends Component {
 
                 data = data.map( (v,i) => { v.col = parseInt(v.col); v.row = parseInt(v.row); return v})
 
-                var cols = columns.map( (v,i) => { var col = {Header: v, accessor : v}; if( v == "col" || v == "row"){ col.width = 10 }; return {Header: v, accessor : v} } )
+                var cols = columns.map( (v,i) => { var col = {Header: v, accessor : v}; if( v == "col" || v == "row"){ col.width = 70 }; if( v == "value" ){ col.width = 200 }; return col } )
 
                 preparedPreview = <ReactTable
                                     data={data}
@@ -737,7 +747,16 @@ class AnnotationView extends Component {
                       <RaisedButton variant={"contained"} onClick={ () => {this.shiftTables(1)} } style={{padding:5,marginRight:5}}>Next Table</RaisedButton>
 
 
+
+
           </div>
+
+          <div>
+              <Checkbox checked={this.state.deleteEnabled}
+                    onChange={ (event,data) => {this.setState({deleteEnabled : this.state.deleteEnabled ? false : true}) } }> </Checkbox>
+              <RaisedButton variant={"contained"} onClick={ this.deleteAnnotation } style={{padding:5,marginRight:5, backgroundColor : this.state.deleteEnabled ? "red" : "gray"}}>Delete Annotation</RaisedButton>
+          </div>
+
         </Card>
 
         <Card id="tableHeader" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center"}}>
@@ -749,7 +768,7 @@ class AnnotationView extends Component {
                               { " | " + (this.state.table.title ? this.state.table.title.title.trim() : "")}
                           </div>
 
-                          <div style={{paddingBottom: 10, fontWeight:"bold"}} dangerouslySetInnerHTML={{__html:this.state.table.htmlHeader}}></div>
+                          <div style={{paddingBottom: 10, fontWeight:"bold"}} dangerouslySetInnerHTML={{__html:decodeURI(this.state.table.htmlHeader)}}></div>
                           {this.state.titleSubgroups ? this.state.titleSubgroups.map( (sg,i) => <div key={"title_sg_"+i} style={{cursor:"pointer"}} onClick= { () => this.removeTitleSG(sg) }> {sg+","} </div> ) : ""}
                           <TextField
                                 value={this.state.newTitleSubgroup}
@@ -785,7 +804,7 @@ class AnnotationView extends Component {
                     <tr>
                       <td style={{padding:"0px 0px 0px 0px", verticalAlign: "top", paddingRight:50}}>
                         <div style={{fontWeight:"bold"}}>Any comments errors or issues?</div> <TextField
-                              value={this.state.corrupted_text && this.state.corrupted_text != 'undefined' ? this.state.corrupted_text : ""}
+                              value={this.state.corrupted_text && this.state.corrupted_text != 'undefined' ? this.state.corrupted_text.replace(/(%[A-z0-9]{2})/g," ") : ""}
                               placeholder="Please specify here"
                               onChange={(event) => {this.setState({corrupted_text: event.target.value})}}
                               style={{width:500,marginLeft:20,fontWeight:"normal"}}
