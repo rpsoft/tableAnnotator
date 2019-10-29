@@ -764,8 +764,8 @@ class AnnotationView extends Component {
             { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/>
                         : <div>
                           <div style={{paddingBottom: 10, fontWeight:"bold",marginBottom:10}}>
-                            <a href={"https://www.ncbi.nlm.nih.gov/pubmed/?term="+ this.state.docid.split("v")[0]} target="_blank">{"PMID: " + this.state.docid }</a>
-                              { " | " + (this.state.table.title ? this.state.table.title.title.trim() : "")}
+                            <a href={"https://www.ncbi.nlm.nih.gov/pubmed/?term="+ this.state.docid.split("v")[0]} target="_blank">{"PMID: " + this.state.docid}</a>
+                              { "(Page "+this.state.page + ") | " + (this.state.table.title ? this.state.table.title.title.trim() : "")}
                           </div>
 
                           <div style={{paddingBottom: 10, fontWeight:"bold"}} dangerouslySetInnerHTML={{__html:decodeURI(this.state.table.htmlHeader)}}></div>
