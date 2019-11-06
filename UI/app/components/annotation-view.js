@@ -97,7 +97,7 @@ class AnnotationView extends Component {
   async componentDidMount () {
 
 
-    var urlparams = new URLSearchParams(props.location.search);
+    var urlparams = new URLSearchParams(this.props.location.search);
 
     var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
