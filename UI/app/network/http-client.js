@@ -11,7 +11,7 @@ export default class HttpClient {
     };
 
 
-   console.log(this.standardOptions.host+" --- "+this.standardOptions.port)
+    // console.log(this.standardOptions.host+" --- "+this.standardOptions.port)
 
     this.standardOptions = {
       ...this.standardOptions,
