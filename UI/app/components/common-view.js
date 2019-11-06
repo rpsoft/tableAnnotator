@@ -32,6 +32,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import Annotation from './annotation'
 
+import MultiplePopover from './MultiplePopover'
+
 import {
   Table,
   TableBody,
@@ -54,16 +56,15 @@ class CommonView extends Component {
 
     var urlparams = new URLSearchParams(props.location.search);
 
-    var filter_var = urlparams.get("filter") ? urlparams.get("filter").split("_") : ""
-    var filter = filter_var[0]
-    var sg_table = (filter_var.length > 1) && (filter_var[1] == "sgt") ? true :false
+    var filter_topics = urlparams.get("filter_topic") ? urlparams.get("filter_topic").split("_") : []
+    var filter_type = urlparams.get("filter_type") ? urlparams.get("filter_type").split("_") : []
 
     this.state = {
       annotations:null,
       tables:null,
-      user: urlparams.get("user") ? urlparams.get("user") : "",
-      filter: filter ? filter : "nofilter",
-      sg_table: sg_table,
+      user: urlparams.get("user") && urlparams.get("user") != "undefined" ? urlparams.get("user") : "",
+      tableTopic : filter_topics,
+      tableType : filter_type,
     };
 
   }
@@ -73,32 +74,37 @@ class CommonView extends Component {
     var annotations = JSON.parse(await fetch.getAllAnnotations())
     var tables = JSON.parse(await fetch.getAllAvailableTables())
 
-    var allInfo = JSON.parse(await fetch.getAllInfo(this.state.filter+(this.state.sg_table ? "_sgt" : "")))
+    var allInfo = JSON.parse(await fetch.getAllInfo(this.state.tableTopic.join("_"), this.state.tableType.join("_")))
 
     this.setState({annotations,tables,allInfo})
   }
+
+  // componentWillUnmount() {
+  //     this._source.cancel( 'Operation canceled due component being unmounted.' )
+  // }
 
   async componentWillReceiveProps(next) {
 
      var urlparams = new URLSearchParams(next.location.search);
 
+     var filter_topic = urlparams.get("filter_topic") ? urlparams.get("filter_topic").split("_") : []
+     var filter_type = urlparams.get("filter_type") ? urlparams.get("filter_type").split("_") : []
 
-    var filter_var = urlparams.get("filter").split("_")
-    var filter = filter_var[0]
-    var sg_table = (filter_var.length > 1) && (filter_var[1] == "sgt") ? true : false
+     var isNewTopic = urlparams.get("filter_topic") !== this.state.tableTopic.join("_")
+     var isNewType = urlparams.get("filter_type") !== this.state.tableType.join("_")
 
-
-     if ( !this.state.allInfo || this.state.filter != filter || this.state.sg_table != sg_table ){
+     // debugger
+     if ( !this.state.allInfo || isNewTopic || isNewType ){
        let fetch = new fetchData();
        var annotations = JSON.parse(await fetch.getAllAnnotations())
        var tables = JSON.parse(await fetch.getAllAvailableTables())
 
-       var allInfo = JSON.parse(await fetch.getAllInfo(filter+(sg_table ? "_sgt" : "")))
+       var allInfo = JSON.parse(await fetch.getAllInfo(filter_topic.join("_"), filter_type.join("_")))
 
        this.setState({
-           user: urlparams.get("user") ? urlparams.get("user") : "",
-           filter: filter ? filter : "nofilter",
-           sg_table: sg_table,
+           user: urlparams.get("user") && urlparams.get("user") != "undefined" ? urlparams.get("user") : "",
+           tableTopic : filter_topic,
+           tableType : filter_type,
            annotations,tables,allInfo
        })
      } else {
@@ -106,6 +112,24 @@ class CommonView extends Component {
            user: urlparams.get("user") ? urlparams.get("user") : "",
        })
      }
+  }
+
+  async setFilters(tableTopic, tableType){
+
+      var ttop = Object.keys(tableTopic).reduce( (acc, item) => {if ( tableTopic[item] ){acc.push(item)} return acc},[]);
+      var ttype = Object.keys(tableType).reduce( (acc, item) => {if ( tableType[item] ){acc.push(item)} return acc},[]);
+      // debugger
+      this.props.goToUrl("/?user="+event.currentTarget.value +"&filter_topic="+ttop.join("_")+"&filter_type="+ttype.join("_"))
+  }
+
+  formatFiltersForURL(){
+      return ""
+              + (this.state.tableTopic.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.tableTopic.join("_")) : "")
+              + (this.state.tableType.length > 0 ? "&filter_type="+encodeURIComponent(this.state.tableType.join("_")) : "")
+  }
+
+  arrayToObject (arr){
+      return arr.reduce( (acc,item) => {acc[item] = true; return acc}, {})
   }
 
    render() {
@@ -129,7 +153,7 @@ class CommonView extends Component {
                 }
           )
       }
-      // debugger
+
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
         <Card style={{marginBottom:10}}>
 
@@ -143,10 +167,9 @@ class CommonView extends Component {
           <TextField
             value={this.state.user}
             placeholder="Set your username here"
-            onChange={(event) => {this.props.goToUrl("/?user="+event.currentTarget.value +(this.state.filter ? "&filter="+this.state.filter : ""))}}
+            onChange={(event) => {this.setState({user: event.currentTarget.value})}}
             style={{width:200,marginLeft:20,marginRight:20}}
             />
-
         </Card>
 
         {
@@ -163,26 +186,36 @@ class CommonView extends Component {
         }
 
         <Card >
-            <Card><div style={{padding:10,fontWeight:"bold",fontSize:20,display:"inline"}}>{"All tables, and annotations (Total: "+ (this.state.allInfo ? this.state.allInfo.abs_index.length : 0)+" )"}</div>
+            <Card><div style={{padding:10, fontWeight:"bold", fontSize:20}}>{"All tables, and annotations (Total: "+ (this.state.allInfo ? this.state.allInfo.abs_index.length : 0)+" )"}</div>
 
             {
               this.state.allInfo ?
                 <div style={{display:"inline"}}>
-                    <SelectField
-                         value={this.state.filter}
-                         onChange={(event,data) => {this.props.goToUrl("/?user="+this.state.user+"&filter="+data.props.value) } }
-                         style={{fontWeight:"normal"}}
-                       >
-                       <MenuItem value={"nofilter"} >{"Select Filter"}</MenuItem>
-                       {
-                         this.state.allInfo.msh_categories.allcats.sort().map( (cat,i) => <MenuItem value={cat} key={i+"-"+cat}>{cat}</MenuItem>)
-
-                       }
-                    </SelectField>
-                    <div style={{display:"inline", marginLeft:20}}>
-                        Result Tables With Subgroups?
-                        <Checkbox checked={this.state.sg_table}
-                                  onChange={ (event,data) => {this.props.goToUrl("/?user="+this.state.user+"&filter="+this.state.filter+ (data ? "_sgt" : "") )}}> </Checkbox>
+                  {
+                    // <SelectField
+                    //      value={this.state.filter}
+                    //      onChange={(event,data) => {this.props.goToUrl("/?user="+this.state.user+"&filter="+data.props.value) } }
+                    //      style={{fontWeight:"normal"}}
+                    //    >
+                    //    <MenuItem value={"nofilter"} >{"Select Filter"}</MenuItem>
+                    //    {
+                    //      this.state.allInfo.msh_categories.allcats.sort().map( (cat,i) => <MenuItem value={cat} key={i+"-"+cat}>{cat}</MenuItem>)
+                    //    }
+                    // </SelectField>
+                  }
+                    <div style={{margin:15}}>
+                      <MultiplePopover
+                                     value={this.arrayToObject(this.state.tableTopic)}
+                                     variable={"Table Topic"}
+                                     options={this.state.allInfo.msh_categories.allcats.sort()}
+                                     updateAnnotation={ (values) => { this.setFilters(values, this.arrayToObject(this.state.tableType)) } }
+                              />
+                      <MultiplePopover
+                                     value={this.arrayToObject(this.state.tableType)}
+                                     variable={"Table Types"}
+                                     options={["Baseline Characteristics", "Results with subgroups", "Results without subgroups", "Other", "Unassigned"]}
+                                     updateAnnotation={ (values) => { this.setFilters(this.arrayToObject(this.state.tableTopic), values) } }
+                              />
                     </div>
 
                 </div> : ""
@@ -200,13 +233,13 @@ class CommonView extends Component {
                               ? annotations_formatted[v.docid+"_"+v.page].map( (u,l) => {
                                 return <a key={u+"-"+l} style={{cursor: "pointer", marginLeft:10, fontStyle: "italic", marginLeft: 10, textDecoration: "underline", color: "blue"}}
                                   onClick={
-                                    () => this.props.goToUrl("table?docid="+encodeURIComponent(v.docid)+"&page="+v.page+"&user="+u+(this.state.filter ? "&filter="+this.state.filter+(this.state.sg_table ? "_sgt" : "") : ""))}
+                                    () => this.props.goToUrl("table?docid="+encodeURIComponent(v.docid)+"&page="+v.page+"&user="+u+this.formatFiltersForURL())}
                                         >{u+","}</a>})
                               : "")
                             }
                             <a style={{cursor: "pointer", marginLeft:10, fontStyle: "italic", marginLeft: 10, textDecoration: "underline", color: "blue"}}
                               onClick={
-                                () => this.props.goToUrl("table?docid="+encodeURIComponent(v.docid)+"&page="+v.page+(this.state.user ? "&user="+this.state.user : "")+(this.state.filter ? "&filter="+this.state.filter+(this.state.sg_table ? "_sgt" : "") : ""))}
+                                () => this.props.goToUrl("table?docid="+encodeURIComponent(v.docid)+"&page="+v.page+(this.state.user ? "&user="+this.state.user : "")+this.formatFiltersForURL())}
                                 >
                               [New]
                             </a>

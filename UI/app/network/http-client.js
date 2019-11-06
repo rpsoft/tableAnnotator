@@ -5,14 +5,9 @@ export default class HttpClient {
     this.config = config;
 
     this.standardOptions = {
-      host: (typeof location != "undefined") ? location.hostname : '',
+      host: "localhost",
       port: (typeof location != "undefined") ? 6541 : 0,
       method: 'GET',
-      // path: '/graphql?query=' + escape( query ),
-    //   headers: {'Access-Control-Allow-Origin' : '*',
-		// 'Access-Control-Allow-Headers' : 'content-type',
-		// 'Access-Control-Allow-Methods' : 'GET, POST, PUT, DELETE, PATCH, OPTIONS'},
-    //   crossorigin:"anonymous",
     };
 
 
@@ -64,9 +59,9 @@ export default class HttpClient {
         var data = JSON.stringify(messageBody)
 
         options = {
-          hostname: (typeof location != "undefined") ? location.hostname : '',
+          hostname: "localhost",
           port: (typeof location != "undefined") ? 6541 : 0,
-          path: '/saveTableOverride',
+          path: options.path,
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

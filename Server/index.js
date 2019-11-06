@@ -80,10 +80,10 @@ function sleep(ms) {
   });
 }
 
-var cors = require('cors');
+var cors = require('cors'); // var whitelist = ['http://sephirhome.ddns.net:7532', 'http://sephirhome.ddns.net:7531','http://localhost:7531']
 
-var whitelist = ['http://sephirhome.ddns.net:7532', 'http://sephirhome.ddns.net:7531', 'http://localhost:7531'];
-app.options('*', cors()); // var corsOptions = {
+
+app.use(cors()); // var corsOptions = {
 //   origin: function (origin, callback) {
 //     if (whitelist.indexOf(origin) !== -1) {
 //       callback(null, true)
@@ -216,28 +216,45 @@ function prepare_cell_text(text) {
   return text.replace(/[0-9]+/g, '$nmbr$').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g, " ").trim().toLowerCase();
 }
 
-function prepareAvailableDocuments(_x) {
+function prepareAvailableDocuments(_x, _x2) {
   return _prepareAvailableDocuments.apply(this, arguments);
 }
 
 function _prepareAvailableDocuments() {
   _prepareAvailableDocuments = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee39(msh_filter) {
-    var sg_tables, wsg_other, allAnnotations, results;
+  _regenerator.default.mark(function _callee39(filter_topic, filter_type) {
+    var ftop, ftyp, type_lookup, i, filtered_docs_ttype, allAnnotations, results;
     return _regenerator.default.wrap(function _callee39$(_context39) {
       while (1) {
         switch (_context39.prev = _context39.next) {
           case 0:
-            // debugger
-            msh_filter = msh_filter ? msh_filter.split("_") : msh_filter;
-            sg_tables = msh_filter ? msh_filter.length > 1 && msh_filter[1] == "sgt" ? true : false : false;
-            msh_filter = msh_filter ? msh_filter[0] : msh_filter;
-            msh_filter = msh_filter == "nofilter" ? null : msh_filter;
-            wsg_other = null;
+            ftop = filter_topic ? filter_topic : [];
+            ftyp = filter_type ? filter_type : [];
+            type_lookup = {
+              "Baseline Characteristics": "baseline_table",
+              "Results with subgroups": "result_table_subgroup",
+              "Results without subgroups": "result_table_without_subgroup",
+              "Other": "other_table",
+              "Unassigned": "NA"
+            };
 
-            if (!sg_tables) {
-              _context39.next = 12;
+            for (i = 0; i < ftyp.length; i++) {
+              ftyp[i] = type_lookup[ftyp[i]];
+            } // var msh_filter = null
+            // // var sg_tables = msh_filter ? ((msh_filter.length > 1) && (msh_filter[1] == "sgt") ? true : false) : false
+            // //
+            // // msh_filter = msh_filter ? msh_filter[0] : msh_filter
+            // //
+            // // msh_filter = msh_filter == "nofilter" ? null : msh_filter
+            // //
+            // var wsg_other = null
+
+
+            filtered_docs_ttype = null;
+
+            if (!(ftop.length + ftyp.length > 0)) {
+              _context39.next = 11;
               break;
             }
 
@@ -246,33 +263,18 @@ function _prepareAvailableDocuments() {
 
           case 8:
             allAnnotations = _context39.sent;
-            wsg_other = allAnnotations.rows.reduce(function (acc, ann) {
-              var wsg = acc.wsg ? acc.wsg : [];
-              var other = acc.other ? acc.other : [];
+            filtered_docs_ttype = allAnnotations.rows.reduce(function (acc, ann) {
+              acc = acc ? acc : [];
 
-              if (ann.tableType != "") {
-                if (ann.tableType == "result_table_subgroup") {
-                  wsg.push(ann.docid + "_" + ann.page);
-                } else {
-                  if (wsg.indexOf(ann.docid + "_" + ann.page) < 0) {
-                    other.push(ann.docid + "_" + ann.page);
-                  }
-                }
+              if (ann.tableType != "" && ftyp.indexOf(ann.tableType) > -1) {
+                acc.push(ann.docid + "_" + ann.page);
               }
 
-              return {
-                wsg: wsg,
-                other: other
-              };
-            }, {
-              wsg: [],
-              other: []
-            });
-            wsg_other.wsg = Array.from(new Set(wsg_other.wsg));
-            wsg_other.other = Array.from(new Set(wsg_other.other));
+              return acc;
+            }, []);
+            filtered_docs_ttype = Array.from(new Set(filtered_docs_ttype));
 
-          case 12:
-            //
+          case 11:
             // debugger
             results = new Promise(function (resolve, reject) {
               var available_documents = {};
@@ -295,21 +297,32 @@ function _prepareAvailableDocuments() {
                 });
                 DOCS = DOCS.reduce(function (acc, docfile) {
                   var docid = docfile.split("_")[0].split("v")[0];
-                  var sg_docid = docfile.split(".")[0];
+                  var page = docfile.split("_")[1].split(".")[0];
 
-                  if (wsg_other != null) {
-                    // if the sg table filter is on, then accept only docs that are
-                    if (wsg_other.other.indexOf(sg_docid) > -1) {
-                      return acc;
+                  if (ftop.length + ftyp.length > 0 && msh_categories && msh_categories.catIndex && msh_categories.catIndex[docid]) {
+                    var topic_enabled = ftop.length > 0;
+                    var topic_intersection = msh_categories.catIndex[docid].filter(function (value) {
+                      return ftop.includes(value);
+                    });
+                    var type_enabled = ftyp.length > 0;
+                    var type_intersection = type_enabled && filtered_docs_ttype.length > 0 && filtered_docs_ttype.indexOf(docid + "_" + page) > -1;
+
+                    if (topic_enabled && type_enabled) {
+                      if (topic_intersection.length > 0 && type_intersection) {
+                        acc.push(docfile); // return acc
+                      }
                     }
-                  }
 
-                  if (msh_filter && Object.keys(msh_categories).length > 0) {
-                    if (msh_categories.catIndex[docid] && msh_categories.catIndex[docid].indexOf(msh_filter) > -1) {
-                      acc.push(docfile);
+                    if (!type_enabled && topic_enabled && topic_intersection.length > 0) {
+                      acc.push(docfile); // return acc
+                    }
+
+                    if (!topic_enabled && type_enabled && type_intersection) {
+                      acc.push(docfile); // return acc
                     }
                   } else {
-                    acc.push(docfile);
+                    // Default path when no filters are enabled
+                    acc.push(docfile); // return acc
                   }
 
                   return acc;
@@ -358,13 +371,13 @@ function _prepareAvailableDocuments() {
                 }
               });
             });
-            _context39.next = 15;
+            _context39.next = 14;
             return results;
 
-          case 15:
+          case 14:
             return _context39.abrupt("return", _context39.sent);
 
-          case 16:
+          case 15:
           case "end":
             return _context39.stop();
         }
@@ -410,7 +423,7 @@ function _getAnnotationResults() {
   return _getAnnotationResults.apply(this, arguments);
 }
 
-function getAnnotationByID(_x2, _x3, _x4) {
+function getAnnotationByID(_x3, _x4, _x5) {
   return _getAnnotationByID.apply(this, arguments);
 }
 
@@ -459,7 +472,7 @@ console.log(process.cwd()); //   sgd = pickle.load(open("./src/sgd_multiterm.sav
 
 python.ex(_templateObject2());
 
-function classify(_x5) {
+function classify(_x6) {
   return _classify.apply(this, arguments);
 }
 
@@ -508,7 +521,7 @@ function _classify() {
   return _classify.apply(this, arguments);
 }
 
-function grouped_predictor(_x6) {
+function grouped_predictor(_x7) {
   return _grouped_predictor.apply(this, arguments);
 }
 
@@ -544,7 +557,7 @@ function _grouped_predictor() {
   return _grouped_predictor.apply(this, arguments);
 }
 
-function attempt_predictions(_x7) {
+function attempt_predictions(_x8) {
   return _attempt_predictions.apply(this, arguments);
 }
 
@@ -630,7 +643,7 @@ function _attempt_predictions() {
                 }, _callee44, this, [[0, 21]]);
               }));
 
-              return function (_x102, _x103) {
+              return function (_x103, _x104) {
                 return _ref39.apply(this, arguments);
               };
             }());
@@ -646,7 +659,7 @@ function _attempt_predictions() {
   return _attempt_predictions.apply(this, arguments);
 }
 
-function insertAnnotation(_x8, _x9, _x10, _x11, _x12, _x13, _x14) {
+function insertAnnotation(_x9, _x10, _x11, _x12, _x13, _x14, _x15) {
   return _insertAnnotation.apply(this, arguments);
 } // preinitialisation of components if needed.
 
@@ -767,7 +780,7 @@ function () {
                 }, _callee, this);
               }));
 
-              return function setMetadata(_x17, _x18, _x19) {
+              return function setMetadata(_x18, _x19, _x20) {
                 return _ref2.apply(this, arguments);
               };
             }();
@@ -796,7 +809,7 @@ function () {
     }, _callee2, this);
   }));
 
-  return function (_x15, _x16) {
+  return function (_x16, _x17) {
     return _ref.apply(this, arguments);
   };
 }());
@@ -847,7 +860,7 @@ function () {
                 }, _callee3, this);
               }));
 
-              return function setMetadata(_x22, _x23, _x24, _x25, _x26, _x27, _x28, _x29, _x30) {
+              return function setMetadata(_x23, _x24, _x25, _x26, _x27, _x28, _x29, _x30, _x31) {
                 return _ref4.apply(this, arguments);
               };
             }();
@@ -876,7 +889,7 @@ function () {
     }, _callee4, this);
   }));
 
-  return function (_x20, _x21) {
+  return function (_x21, _x22) {
     return _ref3.apply(this, arguments);
   };
 }());
@@ -923,7 +936,7 @@ function () {
                 }, _callee5, this);
               }));
 
-              return function getMetadata(_x33, _x34, _x35) {
+              return function getMetadata(_x34, _x35, _x36) {
                 return _ref6.apply(this, arguments);
               };
             }();
@@ -958,7 +971,7 @@ function () {
     }, _callee6, this);
   }));
 
-  return function (_x31, _x32) {
+  return function (_x32, _x33) {
     return _ref5.apply(this, arguments);
   };
 }());
@@ -976,13 +989,13 @@ function () {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
-            if (!(req.query && req.query.filter)) {
+            if (!(req.query && (req.query.filter_topic || req.query.filter_type))) {
               _context7.next = 10;
               break;
             }
 
             _context7.next = 3;
-            return prepareAvailableDocuments(req.query.filter);
+            return prepareAvailableDocuments(req.query.filter_topic ? req.query.filter_topic.split("_") : [], req.query.filter_type ? req.query.filter_type.split("_") : []);
 
           case 3:
             result = _context7.sent;
@@ -1014,12 +1027,12 @@ function () {
     }, _callee7, this);
   }));
 
-  return function (_x36, _x37) {
+  return function (_x37, _x38) {
     return _ref7.apply(this, arguments);
   };
 }());
 
-function updateClusterAnnotation(_x38, _x39, _x40, _x41, _x42) {
+function updateClusterAnnotation(_x39, _x40, _x41, _x42, _x43) {
   return _updateClusterAnnotation.apply(this, arguments);
 }
 
@@ -1151,7 +1164,7 @@ function () {
     }, _callee9, this);
   }));
 
-  return function (_x43, _x44) {
+  return function (_x44, _x45) {
     return _ref8.apply(this, arguments);
   };
 }());
@@ -1220,7 +1233,7 @@ function () {
     }, _callee11, this);
   }));
 
-  return function (_x45, _x46) {
+  return function (_x46, _x47) {
     return _ref10.apply(this, arguments);
   };
 }());
@@ -1289,7 +1302,7 @@ function () {
     }, _callee13, this);
   }));
 
-  return function (_x47, _x48) {
+  return function (_x48, _x49) {
     return _ref12.apply(this, arguments);
   };
 }());
@@ -1358,7 +1371,7 @@ function () {
     }, _callee15, this);
   }));
 
-  return function (_x49, _x50) {
+  return function (_x50, _x51) {
     return _ref14.apply(this, arguments);
   };
 }());
@@ -1409,7 +1422,7 @@ function () {
                 }, _callee16, this);
               }));
 
-              return function setCUIMod(_x53, _x54) {
+              return function setCUIMod(_x54, _x55) {
                 return _ref17.apply(this, arguments);
               };
             }();
@@ -1430,7 +1443,7 @@ function () {
     }, _callee17, this);
   }));
 
-  return function (_x51, _x52) {
+  return function (_x52, _x53) {
     return _ref16.apply(this, arguments);
   };
 }());
@@ -1499,7 +1512,7 @@ function () {
     }, _callee19, this);
   }));
 
-  return function (_x55, _x56) {
+  return function (_x56, _x57) {
     return _ref18.apply(this, arguments);
   };
 }());
@@ -1553,7 +1566,7 @@ function () {
                 }, _callee20, this);
               }));
 
-              return function setClusterData(_x59, _x60, _x61, _x62, _x63) {
+              return function setClusterData(_x60, _x61, _x62, _x63, _x64) {
                 return _ref21.apply(this, arguments);
               };
             }();
@@ -1577,7 +1590,7 @@ function () {
     }, _callee21, this);
   }));
 
-  return function (_x57, _x58) {
+  return function (_x58, _x59) {
     return _ref20.apply(this, arguments);
   };
 }());
@@ -1612,7 +1625,7 @@ function () {
     }, _callee22, this);
   }));
 
-  return function (_x64, _x65) {
+  return function (_x65, _x66) {
     return _ref22.apply(this, arguments);
   };
 }());
@@ -1688,7 +1701,7 @@ function () {
     }, _callee24, this);
   }));
 
-  return function (_x66, _x67) {
+  return function (_x67, _x68) {
     return _ref23.apply(this, arguments);
   };
 }());
@@ -1741,7 +1754,7 @@ function () {
                 }, _callee25, this);
               }));
 
-              return function insertCUI(_x70, _x71, _x72) {
+              return function insertCUI(_x71, _x72, _x73) {
                 return _ref26.apply(this, arguments);
               };
             }();
@@ -1765,7 +1778,7 @@ function () {
     }, _callee26, this);
   }));
 
-  return function (_x68, _x69) {
+  return function (_x69, _x70) {
     return _ref25.apply(this, arguments);
   };
 }());
@@ -1837,7 +1850,7 @@ function () {
     }, _callee27, this);
   }));
 
-  return function (_x73, _x74) {
+  return function (_x74, _x75) {
     return _ref27.apply(this, arguments);
   };
 }()); // Generates the results table live preview, connecting to the R API.
@@ -1951,7 +1964,7 @@ function () {
     }, _callee28, this, [[0, 18]]);
   }));
 
-  return function (_x75, _x76) {
+  return function (_x76, _x77) {
     return _ref28.apply(this, arguments);
   };
 }());
@@ -2024,7 +2037,7 @@ function () {
     }, _callee29, this);
   }));
 
-  return function (_x77, _x78) {
+  return function (_x78, _x79) {
     return _ref29.apply(this, arguments);
   };
 }());
@@ -2043,7 +2056,7 @@ app.get('/api/totalTables', function (req, res) {
   });
 });
 
-function getMMatch(_x79) {
+function getMMatch(_x80) {
   return _getMMatch.apply(this, arguments);
 }
 
@@ -2137,7 +2150,7 @@ function () {
     }, _callee30, this, [[0, 11]]);
   }));
 
-  return function (_x80, _x81) {
+  return function (_x81, _x82) {
     return _ref30.apply(this, arguments);
   };
 }());
@@ -2204,7 +2217,7 @@ function () {
     }, _callee31, this);
   }));
 
-  return function (_x82, _x83) {
+  return function (_x83, _x84) {
     return _ref31.apply(this, arguments);
   };
 }());
@@ -2244,12 +2257,12 @@ function () {
     }, _callee32, this);
   }));
 
-  return function (_x84, _x85) {
+  return function (_x85, _x86) {
     return _ref32.apply(this, arguments);
   };
 }());
 
-function readyTableData(_x86, _x87, _x88) {
+function readyTableData(_x87, _x88, _x89) {
   return _readyTableData.apply(this, arguments);
 }
 
@@ -2717,7 +2730,7 @@ function _readyTableData() {
                       }, _callee50, this, [[0, 7]]);
                     }));
 
-                    return function (_x104, _x105) {
+                    return function (_x105, _x106) {
                       return _ref40.apply(this, arguments);
                     };
                   }());
@@ -2792,7 +2805,7 @@ function () {
     }, _callee33, this, [[0, 11]]);
   }));
 
-  return function (_x89, _x90) {
+  return function (_x90, _x91) {
     return _ref33.apply(this, arguments);
   };
 }());
@@ -2826,7 +2839,7 @@ function () {
     }, _callee34, this);
   }));
 
-  return function (_x91, _x92) {
+  return function (_x92, _x93) {
     return _ref34.apply(this, arguments);
   };
 }());
@@ -2877,7 +2890,7 @@ function () {
                 }, _callee35, this);
               }));
 
-              return function deleteAnnotation(_x95, _x96, _x97) {
+              return function deleteAnnotation(_x96, _x97, _x98) {
                 return _ref36.apply(this, arguments);
               };
             }();
@@ -2906,7 +2919,7 @@ function () {
     }, _callee36, this);
   }));
 
-  return function (_x93, _x94) {
+  return function (_x94, _x95) {
     return _ref35.apply(this, arguments);
   };
 }());
@@ -2985,7 +2998,7 @@ function () {
     }, _callee37, this);
   }));
 
-  return function (_x98, _x99) {
+  return function (_x99, _x100) {
     return _ref37.apply(this, arguments);
   };
 }());
@@ -3023,7 +3036,7 @@ function () {
     }, _callee38, this);
   }));
 
-  return function (_x100, _x101) {
+  return function (_x101, _x102) {
     return _ref38.apply(this, arguments);
   };
 }());

@@ -14,7 +14,7 @@ export default class MultiplePopover extends React.Component {
 
     this.state = {
       open: false,
-      checked : {}
+      checked : props.value ? props.value : {}
     };
   }
 
@@ -47,8 +47,6 @@ export default class MultiplePopover extends React.Component {
     var checked = this.state.checked
         checked[value] = !checked[value]
         this.setState({checked})
-         //
-         // debugger
 
     this.props.updateAnnotation(this.state.checked)
 
@@ -85,10 +83,10 @@ export default class MultiplePopover extends React.Component {
         <Typography style={{margin:5}}>
         {
           options ? options.map( (v,o) => {
-            return <div key={o}>{v}<Checkbox
+            return <span key={o}>{v}<Checkbox
                       value={v}
                       checked={ this.state.checked[v] }
-                      onChange={ () => {this.updateCheck(v)}} /></div>  } ) : ""
+                      onChange={ () => {this.updateCheck(v)}} /><br/></span>  } ) : ""
                     }
           </Typography>
         </Popover>

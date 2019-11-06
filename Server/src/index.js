@@ -19,9 +19,9 @@ function sleep(ms){
 }
 var cors = require('cors');
 
-var whitelist = ['http://sephirhome.ddns.net:7532', 'http://sephirhome.ddns.net:7531','http://localhost:7531']
+// var whitelist = ['http://sephirhome.ddns.net:7532', 'http://sephirhome.ddns.net:7531','http://localhost:7531']
 
-app.options('*', cors())
+app.use(cors());
 
 // var corsOptions = {
 //   origin: function (origin, callback) {
@@ -154,41 +154,51 @@ function prepare_cell_text(text){
     return text.replace(/[0-9]+/g, '$nmbr$').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g," ").trim().toLowerCase()
 }
 
-async function prepareAvailableDocuments(msh_filter){
+async function prepareAvailableDocuments(filter_topic, filter_type){
 
-  // debugger
-  msh_filter = msh_filter ? msh_filter.split("_") : msh_filter
-  var sg_tables = msh_filter ? ((msh_filter.length > 1) && (msh_filter[1] == "sgt") ? true : false) : false
+  var ftop = filter_topic ? filter_topic : []
+  var ftyp = filter_type ? filter_type : []
 
-  msh_filter = msh_filter ? msh_filter[0] : msh_filter
+  var type_lookup = {
+         "Baseline Characteristics" : "baseline_table",
+         "Results with subgroups" : "result_table_subgroup",
+         "Results without subgroups" : "result_table_without_subgroup",
+         "Other" : "other_table",
+         "Unassigned" : "NA"
+       }
 
-  msh_filter = msh_filter == "nofilter" ? null : msh_filter
+  for ( var i = 0; i < ftyp.length; i++){
+      ftyp[i] = type_lookup[ftyp[i]]
+  }
 
-  var wsg_other = null
+  // var msh_filter = null
+  // // var sg_tables = msh_filter ? ((msh_filter.length > 1) && (msh_filter[1] == "sgt") ? true : false) : false
+  // //
+  // // msh_filter = msh_filter ? msh_filter[0] : msh_filter
+  // //
+  // // msh_filter = msh_filter == "nofilter" ? null : msh_filter
+  // //
+  // var wsg_other = null
 
-      if(sg_tables){
+  var filtered_docs_ttype = null
 
-          var allAnnotations = await getAnnotationResults()
+  if( ftop.length+ftyp.length > 0 ){
 
-          wsg_other = allAnnotations.rows.reduce( (acc,ann) => {
-        			var wsg = acc.wsg ? acc.wsg : []
-        			var other = acc.other ? acc.other : []
-        			if ( ann.tableType != "" ){
-        			if ( ann.tableType == "result_table_subgroup" ){
-        				wsg.push(ann.docid+"_"+ann.page);
-        			} else {
-                if ( wsg.indexOf(ann.docid+"_"+ann.page) < 0 ){
-        				      other.push(ann.docid+"_"+ann.page)
-                }
-        			} }
-        			return {wsg,other}
-        		}, {wsg: [], other: []} )
+      var allAnnotations = await getAnnotationResults()
 
-            wsg_other.wsg = Array.from(new Set(wsg_other.wsg))
-            wsg_other.other = Array.from(new Set(wsg_other.other))
+      filtered_docs_ttype = allAnnotations.rows.reduce( (acc,ann) => {
+    			acc = acc ? acc : []
 
-      }
-  //
+    			if ( ann.tableType != "" && ftyp.indexOf(ann.tableType) > -1 ){
+            	acc.push(ann.docid+"_"+ann.page);
+          }
+
+    			return acc
+    		}, [] )
+
+        filtered_docs_ttype = Array.from(new Set(filtered_docs_ttype));
+  }
+
   // debugger
 
   var results = new Promise(function(resolve, reject) {
@@ -213,27 +223,41 @@ async function prepareAvailableDocuments(msh_filter){
 
               DOCS = DOCS.reduce( (acc,docfile) => {
                   var docid = docfile.split("_")[0].split("v")[0]
+                  var page = docfile.split("_")[1].split(".")[0]
 
-                  var sg_docid = docfile.split(".")[0]
+                  if( (ftop.length+ftyp.length > 0) && msh_categories && msh_categories.catIndex && msh_categories.catIndex[docid] ){
 
-                  if ( wsg_other != null ){ // if the sg table filter is on, then accept only docs that are
+                    var topic_enabled = ftop.length > 0
+                    var topic_intersection = msh_categories.catIndex[docid].filter(value => ftop.includes(value))
 
-                      if ( wsg_other.other.indexOf(sg_docid) > -1 ){
-                        return acc
-                      }
-                  }
+                    var type_enabled = ftyp.length > 0
+                    var type_intersection = (type_enabled && (filtered_docs_ttype.length > 0) && (filtered_docs_ttype.indexOf(docid+"_"+page) > -1))
 
-                  if ( msh_filter && (Object.keys(msh_categories).length > 0)) {
-                      if ( msh_categories.catIndex[docid] && msh_categories.catIndex[docid].indexOf(msh_filter) > -1 ){
+                    if ( topic_enabled && type_enabled){
+                      if ( (topic_intersection.length > 0) && type_intersection){
                         acc.push(docfile)
+                        // return acc
                       }
-                  } else {
+                    }
+
+                    if ( (!type_enabled) && topic_enabled && (topic_intersection.length > 0)){
+                      acc.push(docfile)
+                      // return acc
+                    }
+
+                    if ( (!topic_enabled) && type_enabled && type_intersection){
+                      acc.push(docfile)
+                      // return acc
+                    }
+
+                  } else { // Default path when no filters are enabled
                     acc.push(docfile)
+                    // return acc
                   }
 
                   return acc
-
               },[])
+
 
               try{
                 for ( var d in DOCS ){
@@ -437,6 +461,7 @@ async function insertAnnotation(docid, page, user, annotation, corrupted, tableT
 // preinitialisation of components if needed.
 async function main(){
   // prepare available_documents variable
+  // debugger
   var res = await prepareAvailableDocuments()
 
       available_documents = res.available_documents
@@ -522,9 +547,11 @@ app.get('/',function(req,res){
 
 app.get('/api/allInfo',async function(req,res){
 
-  if ( req.query && req.query.filter ){
+  // debugger
+  if ( req.query && (req.query.filter_topic || req.query.filter_type) ){
 
-    var result = await prepareAvailableDocuments(req.query.filter)
+    var result = await prepareAvailableDocuments( req.query.filter_topic ? req.query.filter_topic.split("_") : [],
+                                                  req.query.filter_type ? req.query.filter_type.split("_") : [])
 
     var available_documents_temp = result.available_documents
     var abs_index_temp = result.abs_index

@@ -161,11 +161,20 @@ export default class fetchData {
         return r
   }
 
-  async getAllInfo(filter) {
-
+  async getAllInfo(filter_topic,filter_type) {
+      // debugger
         // filter = filter == "nofilter" ? null : filter
+        var params = []
 
-        var urlQueryRequest = urlBase+ "allInfo" +(filter ? "?filter=" + encodeURIComponent(filter) : "")
+        if ( filter_topic && filter_topic.length > 0 ){
+          params.push("filter_topic=" + encodeURIComponent(filter_topic))
+        }
+
+        if ( filter_type && filter_type.length > 0 ){
+          params.push("filter_type=" + encodeURIComponent(filter_type))
+        }
+
+        var urlQueryRequest = urlBase+ "allInfo?"+params.join("&")
 
         var r = await this.getGeneric( urlQueryRequest  )
 
