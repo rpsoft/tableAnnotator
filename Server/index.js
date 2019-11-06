@@ -297,32 +297,38 @@ function _prepareAvailableDocuments() {
                 });
                 DOCS = DOCS.reduce(function (acc, docfile) {
                   var docid = docfile.split("_")[0].split("v")[0];
-                  var page = docfile.split("_")[1].split(".")[0];
+                  var docid_V = docfile.split("_")[0];
+                  var page = docfile.split("_")[1].split(".")[0]; // if ( docfile.indexOf("27046159") > -1 ){
+                  //   debugger
+                  // }
 
-                  if (ftop.length + ftyp.length > 0 && msh_categories && msh_categories.catIndex && msh_categories.catIndex[docid]) {
+                  if (ftop.length + ftyp.length > 0 && msh_categories && msh_categories.catIndex) {
                     var topic_enabled = ftop.length > 0;
-                    var topic_intersection = msh_categories.catIndex[docid].filter(function (value) {
+                    var topic_intersection = msh_categories.catIndex[docid] ? msh_categories.catIndex[docid].filter(function (value) {
                       return ftop.includes(value);
-                    });
+                    }) : [];
                     var type_enabled = ftyp.length > 0;
-                    var type_intersection = type_enabled && filtered_docs_ttype.length > 0 && filtered_docs_ttype.indexOf(docid + "_" + page) > -1;
+                    var type_intersection = type_enabled && filtered_docs_ttype.length > 0 && filtered_docs_ttype.indexOf(docid_V + "_" + page) > -1;
 
                     if (topic_enabled && type_enabled) {
                       if (topic_intersection.length > 0 && type_intersection) {
-                        acc.push(docfile); // return acc
+                        // debugger
+                        acc.push(docfile);
                       }
                     }
 
                     if (!type_enabled && topic_enabled && topic_intersection.length > 0) {
-                      acc.push(docfile); // return acc
+                      // debugger
+                      acc.push(docfile);
                     }
 
                     if (!topic_enabled && type_enabled && type_intersection) {
-                      acc.push(docfile); // return acc
+                      // debugger
+                      acc.push(docfile);
                     }
                   } else {
                     // Default path when no filters are enabled
-                    acc.push(docfile); // return acc
+                    acc.push(docfile);
                   }
 
                   return acc;

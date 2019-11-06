@@ -64,6 +64,10 @@ class AnnotationView extends Component {
 
     var urlparams = new URLSearchParams(props.location.search);
 
+    var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
+    var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
+
+
     this.state = {
         user: urlparams.get("user") ? urlparams.get("user") : "",
         docid: urlparams.get("docid") ? urlparams.get("docid") : "",
@@ -85,16 +89,22 @@ class AnnotationView extends Component {
         recommend_cuis : null,
         metadata : null,
         deleteEnabled: false,
+        tableTopic : filter_topics,
+        tableType : filter_type,
     };
   }
 
   async componentDidMount () {
 
-    var parsed = QString.parse(this.props.location.search);
+
+    var urlparams = new URLSearchParams(props.location.search);
+
+    var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
+    var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
 
     let fetch = new fetchData();
 
-    var annotation = JSON.parse(await fetch.getAnnotationByID(parsed.docid,parsed.page,this.state.user))
+    var annotation = JSON.parse(await fetch.getAnnotationByID(urlparams.docid,urlparams.page,this.state.user))
 
     var all_annotations = JSON.parse(await fetch.getAllAnnotations())
 
@@ -108,7 +118,7 @@ class AnnotationView extends Component {
         })
 
     var recommend_cuis = await fetch.getConceptRecommend();
-    var metadata = await fetch.getTableMetadata(parsed.docid, parsed.page, parsed.user)
+    var metadata = await fetch.getTableMetadata(urlparams.docid, urlparams.page, urlparams.user)
 
     var titleSubgroups = []
 
@@ -120,8 +130,8 @@ class AnnotationView extends Component {
       //user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
       corrupted : annotation.corrupted === 'true',
       corrupted_text : annotation.corrupted_text,
-      docid : (annotation || annotation.docid) || parsed.docid,
-      page : annotation.page || parsed.page,
+      docid : (annotation || annotation.docid) || urlparams.docid,
+      page : annotation.page || urlparams.page,
       tableType : annotation.tableType ? annotation.tableType : "",
       annotations : annotation.annotation ? annotation.annotation.annotations : [],
       allAnnotations : annotations_formatted,
@@ -129,6 +139,8 @@ class AnnotationView extends Component {
       metadata : metadata,
       titleSubgroups : titleSubgroups,
       deleteEnabled: false,
+      tableTopic : filter_topics,
+      tableType : filter_type,
     })
 
     if( !this.state.preview ){
@@ -146,10 +158,13 @@ class AnnotationView extends Component {
 
   async loadPageFromProps(props){
 
-    var parsed = QString.parse(props.location.search);
+    var urlparams = QString.parse(props.location.search);
 
-    if ( Object.keys(parsed).length > 0 &&
-        parsed.docid && parsed.page) {
+    var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
+    var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
+
+    if ( Object.keys(urlparams).length > 0 &&
+        urlparams.docid && urlparams.page) {
 
           this.setState({
             table: null
@@ -169,30 +184,30 @@ class AnnotationView extends Component {
               }
             })
 
-        var data = await fetch.getTable(parsed.docid,parsed.page)
+        var data = await fetch.getTable(urlparams.docid,urlparams.page)
 
 
 
         var allInfo;
-        if ( parsed.filter){
-          allInfo = JSON.parse(await fetch.getAllInfo(parsed.filter))
+        if ( (filter_topics.length + filter_type.length) > 0){
+          allInfo = JSON.parse(await fetch.getAllInfo(filter_topics.join("_"), filter_type.join("_")))
 
         } else {
           allInfo = JSON.parse(await fetch.getAllInfo())
 
         }
 
-        var documentData = allInfo.available_documents[parsed.docid]
-        var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(parsed.page)]
+        var documentData = allInfo.available_documents[urlparams.docid]
+        var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(urlparams.page)]
 
         var annotation
         if( this.state.user && this.state.user.length > 0){
-          annotation = JSON.parse(await fetch.getAnnotationByID(parsed.docid,parsed.page,this.state.user))
+          annotation = JSON.parse(await fetch.getAnnotationByID(urlparams.docid,urlparams.page,this.state.user))
         }
 
 
         var recommend_cuis = await fetch.getConceptRecommend();
-        var metadata = await fetch.getTableMetadata(parsed.docid, parsed.page, parsed.user)
+        var metadata = await fetch.getTableMetadata(urlparams.docid, urlparams.page, urlparams.user)
         var titleSubgroups = []
 
         if ( !metadata.error ){
@@ -203,11 +218,11 @@ class AnnotationView extends Component {
         if ( annotation ){
           this.setState({
             table: JSON.parse(data),
-            docid : annotation.docid || parsed.docid,
-            page: annotation.page || parsed.page,
+            docid : annotation.docid || urlparams.docid,
+            page: annotation.page || urlparams.page,
             allInfo,
             gindex: current_table_g_index,
-            user : parsed.user ? parsed.user : "",
+            user : urlparams.user ? urlparams.user : "",
             corrupted : annotation.corrupted === 'true',
             corrupted_text : annotation.corrupted_text,
             tableType : annotation.tableType ? annotation.tableType : "",
@@ -216,23 +231,27 @@ class AnnotationView extends Component {
             recommend_cuis : recommend_cuis,
             metadata : metadata,
             titleSubgroups : titleSubgroups,
-            filter: parsed.filter,
+            filter: urlparams.filter,
             deleteEnabled: false,
+            tableTopic : filter_topics,
+            tableType : filter_type,
           })
         } else {
           this.setState({
             table: JSON.parse(data),
-            docid : parsed.docid,
-            page: parsed.page,
+            docid : urlparams.docid,
+            page: urlparams.page,
             allInfo,
             gindex: current_table_g_index,
-            user : parsed.user ? parsed.user : "",
+            user : urlparams.user ? urlparams.user : "",
             allAnnotations: annotations_formatted,
             recommend_cuis : recommend_cuis,
             metadata : metadata,
             titleSubgroups : titleSubgroups,
-            filter: parsed.filter,
+            filter: urlparams.filter,
             deleteEnabled: false,
+            tableTopic : filter_topics,
+            tableType : filter_type,
           })
         }
 
@@ -245,11 +264,10 @@ class AnnotationView extends Component {
    // Retrieve the table given general index and number N.
    shiftTables = (n) => {
 
-
-     var parsed = QString.parse(this.props.location.search);
+     var urlparams = QString.parse(this.props.location.search);
 
      var documentData = this.state.allInfo.available_documents[this.state.docid]
-     var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf( (this.state.page || parsed.page) +"")]
+     var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf( (this.state.page || urlparams.page) +"")]
 
      var new_index = current_table_g_index+n
 
@@ -262,9 +280,7 @@ class AnnotationView extends Component {
 
      this.setState({annotations:[],gindex: current_table_g_index, overrideTable: n != 0 ? null : this.state.overrideTable })
 
-
-     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user+(this.state.filter ? "&filter="+this.state.filter : ""))
-
+     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user+this.formatFiltersForURL())
 
    }
 
@@ -383,8 +399,18 @@ class AnnotationView extends Component {
 
 
    goToGIndex(index){
+     if ( index > (this.state.allInfo.total-1)  ){
+        alert("Document index out of bounds")
+        return
+     }
+
+     if ( index < 0 ) {
+       alert("Document index out of bounds")
+       return
+     }
+
      var newDocument = this.state.allInfo.abs_index[index]
-     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user+(this.state.filter ? "&filter="+this.state.filter : ""))
+     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user+this.formatFiltersForURL())
    }
 
    async saveAnnotations(){
@@ -394,12 +420,12 @@ class AnnotationView extends Component {
         return
     }
 
-    var parsed = QString.parse(this.props.location.search);
+    var urlparams = QString.parse(this.props.location.search);
 
 
 
     let fetch = new fetchData();
-    await fetch.saveAnnotation(parsed.docid,parsed.page,this.state.user,this.state.annotations,this.state.corrupted, this.state.tableType,this.state.corrupted_text)
+    await fetch.saveAnnotation(urlparams.docid,urlparams.page,this.state.user,this.state.annotations,this.state.corrupted, this.state.tableType,this.state.corrupted_text)
     //alert("Annotations Saved!")
 
     var all_annotations = JSON.parse(await fetch.getAllAnnotations())
@@ -416,7 +442,7 @@ class AnnotationView extends Component {
 
     // this.setState({preview,allAnnotations: {}})
 
-    var preview = await fetch.getAnnotationPreview(parsed.docid,parsed.page, this.state.user)
+    var preview = await fetch.getAnnotationPreview(urlparams.docid,urlparams.page, this.state.user)
 
     this.setState({preview,allAnnotations: annotations_formatted || {}})
 
@@ -425,7 +451,7 @@ class AnnotationView extends Component {
    async getPreview(disableUpdate){
 
 
-     var parsed = QString.parse(this.props.location.search);
+     var urlparams = QString.parse(this.props.location.search);
 
 
 
@@ -434,7 +460,7 @@ class AnnotationView extends Component {
      // debugger
 
      let fetch = new fetchData();
-     var preview = await fetch.getAnnotationPreview(parsed.docid,parsed.page, this.state.user)
+     var preview = await fetch.getAnnotationPreview(urlparams.docid,urlparams.page, this.state.user)
 
      if ( !disableUpdate ){
        this.setState({preview, preparingPreview: false})
@@ -515,25 +541,31 @@ class AnnotationView extends Component {
      }
    }
 
+   formatFiltersForURL(){
+       return ""
+               + (this.state.tableTopic.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.tableTopic.join("_")) : "")
+               + (this.state.tableType.length > 0 ? "&filter_type="+encodeURIComponent(this.state.tableType.join("_")) : "")
+   }
+
    render() {
 
        var preparedPreview = <div>Preview not available</div>
 
        var previousAnnotations = <div></div>
 
-       var parsed = QString.parse(this.props.location.search);
+       var urlparams = QString.parse(this.props.location.search);
 
 
-       if( this.state.allAnnotations && this.state.allAnnotations[parsed.docid+"_"+parsed.page] ){
+       if( this.state.allAnnotations && this.state.allAnnotations[urlparams.docid+"_"+urlparams.page] ){
 
           previousAnnotations = <div style={{color:"red",display:"inline"}}>
                       <div style={{display:"inline"}} >Already Annotated by: </div>
                       {
-                        this.state.allAnnotations[parsed.docid+"_"+parsed.page].map(
+                        this.state.allAnnotations[urlparams.docid+"_"+urlparams.page].map(
                            (us,j) => <div
                              style={{display:"inline",cursor: "pointer", textDecoration: "underline"}}
                              key={j}
-                             onClick={ () => {this.props.goToUrl("/table/?docid="+encodeURIComponent(parsed.docid)+"&page="+parsed.page+"&user="+us+(this.state.filter ? "&filter="+this.state.filter : ""))}}
+                             onClick={ () => {this.props.goToUrl("/table/?docid="+encodeURIComponent(urlparams.docid)+"&page="+urlparams.page+"&user="+us+this.formatFiltersForURL())}}
                              >{us+", "}</div>
                         )
 
@@ -702,7 +734,7 @@ class AnnotationView extends Component {
         {metaAnnotator}
 
         <Card id="userData" style={{padding:15}}>
-          <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+(this.state.user ? "?user="+this.state.user : "" )+(this.state.filter ? "&filter="+this.state.filter : ""))}/>
+          <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+"?user="+(this.state.user ? this.state.user : "" )+this.formatFiltersForURL())}/>
 
           <TextField
             value={this.state.user}
