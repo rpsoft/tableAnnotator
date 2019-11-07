@@ -62,16 +62,16 @@ class AnnotationView extends Component {
   constructor(props) {
     super()
 
-    var urlparams = new URLSearchParams(props.location.search);
+    var urlparams = this.getUrlParams(props);
 
     var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
 
 
     this.state = {
-        user: urlparams.get("user") ? urlparams.get("user") : "",
-        docid: urlparams.get("docid") ? urlparams.get("docid") : "",
-        page: urlparams.get("page") ? urlparams.get("page") : "",
+        user: urlparams["user"] ? urlparams["user"] : "",
+        docid: urlparams["docid"] ? urlparams["docid"] : "",
+        page: urlparams["page"] ? urlparams["page"] : "",
         table: null,
         annotations:[],
         allAnnotations : null,
@@ -94,10 +94,14 @@ class AnnotationView extends Component {
     };
   }
 
+  getUrlParams(props){
+    return props.location.search.replace("?","").split("&").reduce( (acc,item) => {item = item.split("="); acc[item[0]] = item[1]; return acc },{})
+  }
+
   async componentDidMount () {
 
 
-    var urlparams = new URLSearchParams(this.props.location.search);
+    var urlparams = this.getUrlParams(this.props);
 
     var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
@@ -158,7 +162,7 @@ class AnnotationView extends Component {
 
   async loadPageFromProps(props){
 
-    var urlparams = QString.parse(props.location.search);
+    var urlparams = this.getUrlParams(props);
 
     var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
@@ -264,7 +268,7 @@ class AnnotationView extends Component {
    // Retrieve the table given general index and number N.
    shiftTables = (n) => {
 
-     var urlparams = QString.parse(this.props.location.search);
+     var urlparams = this.getUrlParams(this.props);
 
      var documentData = this.state.allInfo.available_documents[this.state.docid]
      var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf( (this.state.page || urlparams.page) +"")]
@@ -420,7 +424,7 @@ class AnnotationView extends Component {
         return
     }
 
-    var urlparams = QString.parse(this.props.location.search);
+    var urlparams = this.getUrlParams(this.props);
 
 
 
@@ -450,14 +454,9 @@ class AnnotationView extends Component {
 
    async getPreview(disableUpdate){
 
-
-     var urlparams = QString.parse(this.props.location.search);
-
-
+     var urlparams = this.getUrlParams(this.props);
 
      this.setState({preparingPreview : true})
-
-     // debugger
 
      let fetch = new fetchData();
      var preview = await fetch.getAnnotationPreview(urlparams.docid,urlparams.page, this.state.user)
@@ -470,8 +469,6 @@ class AnnotationView extends Component {
    }
 
    clearEditor = (CKEDITOR) => {
-
-     //debugger
 
    }
 
@@ -553,7 +550,7 @@ class AnnotationView extends Component {
 
        var previousAnnotations = <div></div>
 
-       var urlparams = QString.parse(this.props.location.search);
+       var urlparams = this.getUrlParams(this.props);
 
 
        if( this.state.allAnnotations && this.state.allAnnotations[urlparams.docid+"_"+urlparams.page] ){
@@ -701,9 +698,6 @@ class AnnotationView extends Component {
               data={this.state.overrideTable || this.state.table.formattedPage}
 
               onChange={ ( event, editor ) => {
-                  //debugger
-                  // var realData = this.state.table.formattedPage
-
                   const data = CKEDITOR.instances[Object.keys(CKEDITOR.instances)[0]].getData();
                   this.setState({overrideTable : data});
                   console.log( { event, editor, data } );
@@ -726,6 +720,8 @@ class AnnotationView extends Component {
                      recommend_cuis={this.state.recommend_cuis}
                      metadata={this.state.metadata}
                      newTitleSubgroup={this.state.newTitleSubgroup}
+                     tableTopic={this.state.tableTopic}
+                     tableType={this.state.tableType}
                      />
 
 

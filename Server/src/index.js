@@ -313,6 +313,15 @@ async function getAnnotationResults(){
   return result
 }
 
+async function getMetadataLabellers(){
+
+  var client = await pool.connect()
+  var result = await client.query(`select distinct docid, page, labeller from metadata`)
+        client.release()
+
+  return result
+}
+
 async function getAnnotationByID(docid,page,user){
 
   var client = await pool.connect()
@@ -505,7 +514,7 @@ app.get('/api/clearMetadata', async function(req,res){
 
 app.get('/api/setMetadata', async function(req,res){
 
-  var setMetadata = async (docid, page, concept, cuis, qualifiers, cuis_selected, qualifiers_selected, user, istitle ) => {
+  var setMetadata = async (docid, page, concept, cuis, qualifiers, cuis_selected, qualifiers_selected, user, istitle, labeller ) => {
       var client = await pool.connect()
 
       // var done = await client.query('DELETE FROM metadata WHERE docid = $1 AND page = $2 AND "user" = $3', [docid, page, user ])
@@ -515,7 +524,7 @@ app.get('/api/setMetadata', async function(req,res){
       //
       // client = await pool.connect()
 
-     var done = await client.query('INSERT INTO metadata(docid, page, concept, cuis, qualifiers, "user", cuis_selected, qualifiers_selected, istitle ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) ON CONFLICT (docid, page, concept, "user") DO UPDATE SET cuis = $4, qualifiers = $5, cuis_selected = $7, qualifiers_selected = $8, istitle = $9 ', [docid, page, concept, cuis, qualifiers, user, cuis_selected, qualifiers_selected, istitle ])
+     var done = await client.query('INSERT INTO metadata(docid, page, concept, cuis, qualifiers, "user", cuis_selected, qualifiers_selected, istitle, labeller ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) ON CONFLICT (docid, page, concept, "user") DO UPDATE SET cuis = $4, qualifiers = $5, cuis_selected = $7, qualifiers_selected = $8, istitle = $9, labeller = $10', [docid, page, concept, cuis, qualifiers, user, cuis_selected, qualifiers_selected, istitle, labeller ])
         .then(result => console.log("insert: "+ new Date()))
         .catch(e => console.error(e.stack))
         .then(() => client.release())
@@ -523,7 +532,7 @@ app.get('/api/setMetadata', async function(req,res){
   }
 
   if ( req.query && req.query.docid && req.query.page && req.query.concept && req.query.user){
-    await setMetadata(req.query.docid , req.query.page , req.query.concept , req.query.cuis || "", req.query.qualifiers || "", req.query.cuis_selected || "", req.query.qualifiers_selected || "" , req.query.user, req.query.istitle)
+    await setMetadata(req.query.docid , req.query.page , req.query.concept , req.query.cuis || "", req.query.qualifiers || "", req.query.cuis_selected || "", req.query.qualifiers_selected || "" , req.query.user, req.query.istitle, req.query.labeller)
     res.send("done")
   } else {
     res.send("insert failed");
@@ -536,7 +545,7 @@ app.get('/api/getMetadata', async function(req,res){
 
   var getMetadata = async ( docid,page, user) => {
     var client = await pool.connect()
-    var result = await client.query(`SELECT docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, "user",istitle FROM metadata WHERE docid = $1 AND page = $2 AND "user" = $3`,[docid,page,user])
+    var result = await client.query(`SELECT docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, "user",istitle, labeller FROM metadata WHERE docid = $1 AND page = $2 AND "user" = $3`,[docid,page,user])
           client.release()
     return result
   }
@@ -555,11 +564,15 @@ app.get('/',function(req,res){
 
 app.get('/api/allInfo',async function(req,res){
 
-  // debugger
+  var labellers = await getMetadataLabellers();
+      labellers = labellers.rows.reduce( (acc,item) => { acc[item.docid+"_"+item.page] = item.labeller; return acc;},{})
+
   if ( req.query && (req.query.filter_topic || req.query.filter_type) ){
 
     var result = await prepareAvailableDocuments( req.query.filter_topic ? req.query.filter_topic.split("_") : [],
                                                   req.query.filter_type ? req.query.filter_type.split("_") : [])
+
+
 
     var available_documents_temp = result.available_documents
     var abs_index_temp = result.abs_index
@@ -569,7 +582,8 @@ app.get('/api/allInfo',async function(req,res){
           abs_index : abs_index_temp,
           total : DOCS_temp.length,
           available_documents: available_documents_temp,
-          msh_categories: msh_categories
+          msh_categories: msh_categories,
+          labellers: labellers
         })
 
   } else {
@@ -578,7 +592,8 @@ app.get('/api/allInfo',async function(req,res){
           abs_index,
           total : DOCS.length,
           available_documents,
-          msh_categories: msh_categories
+          msh_categories: msh_categories,
+          labellers: labellers
         })
 
   }

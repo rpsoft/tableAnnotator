@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
+import { push } from 'connected-react-router'
 
 import RaisedButton from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -37,12 +38,15 @@ class MetaAnnotator extends Component {
         user: urlparams.get("user") ? urlparams.get("user") : "",
         page: urlparams.get("page") ? urlparams.get("page") : "",
         docid: urlparams.get("docid") ? urlparams.get("docid") : "",
+        labeller: urlparams.get("labeller") ? urlparams.get("labeller") : "",
         opened: 0,
         annotationData: props.annotationData,
         concept_metadata: {}, // The actual data in the database, that will hold the data from the interaction with the annotator.
         recommend_cuis: {}, // This are the proposed cuis for concepts as per classfier and Peter's manual annotations.
         isSaved : false,
         titleSubgroups : props.titleSubgroups || [],
+        tableTopic : props.tableTopic,
+        tableType : props.tableType,
       };
 
     }
@@ -60,6 +64,16 @@ class MetaAnnotator extends Component {
 
   }
 
+  formatFiltersForURL(){
+      return ""
+              + (this.state.tableTopic.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.tableTopic.join("_")) : "")
+              + (this.state.tableType.length > 0 ? "&filter_type="+encodeURIComponent(this.state.tableType.join("_")) : "")
+  }
+
+  updateLabeller(labeller){
+      this.props.goToUrl("/table?docid="+encodeURIComponent(this.state.docid)+"&page="+this.state.page+"&user="+this.state.user+"&labeller="+this.state.labeller+this.formatFiltersForURL())
+  }
+
 
   async componentWillReceiveProps(next) {
 
@@ -75,6 +89,7 @@ class MetaAnnotator extends Component {
     var recommend_cuis = next.recommend_cuis
     var metadadata = next.metadata
 
+    var labeller = ""
 
     var unique_concepts_metadata = []
 
@@ -84,6 +99,8 @@ class MetaAnnotator extends Component {
                   var cuis = item.cuis.length > 0 ? item.cuis.split(";") : ( recommend_cuis[matching_term] ? recommend_cuis[matching_term].cuis : [] )
 
                   unique_concepts_metadata.push(item.concept)
+
+                  labeller = item.labeller
 
                   concept_metadata[item.concept] = {
                     cuis: cuis,
@@ -212,6 +229,7 @@ class MetaAnnotator extends Component {
       user: urlparams.get("user") ? urlparams.get("user") : "",
       page: urlparams.get("page") ? urlparams.get("page") : "",
       docid: urlparams.get("docid") ? urlparams.get("docid") : "",
+      labeller: labeller ? labeller : (urlparams.get("labeller") ? urlparams.get("labeller") : ""),
       annotationData: next.annotationData,
       concept_metadata : concept_metadata,
       recommend_cuis : recommend_cuis,
@@ -219,6 +237,8 @@ class MetaAnnotator extends Component {
       ordered_concepts : [... next.titleSubgroups, ... all_concept_variations],
       isSaved : false,
       titleSubgroups : next.titleSubgroups,
+      tableTopic : next.tableTopic,
+      tableType : next.tableType,
     })
 
   }
@@ -265,7 +285,7 @@ class MetaAnnotator extends Component {
         Object.keys(current_metadata).map( async (concept) => {
           var current_concept = current_metadata[concept]
 
-          await fetch.setTableMetadata(this.state.docid, this.state.page, concept, current_concept.cuis.join(";"),current_concept.cuis_selected.join(";"), current_concept.qualifiers.join(";"), current_concept.qualifiers_selected.join(";"), this.state.user, current_concept.istitle )
+          await fetch.setTableMetadata(this.state.docid, this.state.page, concept, current_concept.cuis.join(";"),current_concept.cuis_selected.join(";"), current_concept.qualifiers.join(";"), current_concept.qualifiers_selected.join(";"), this.state.user, current_concept.istitle, this.state.labeller )
 
         })
 
@@ -339,6 +359,21 @@ class MetaAnnotator extends Component {
               this.state.opened ? <RaisedButton variant={"contained"}
                       style={{width:50,float:"left",margin:2,marginLeft:4, color: this.state.isSaved ? "inherit" : "red" }}
                       onClick={ () => { this.saveAll() } }><Disk/></RaisedButton> : ""
+            }
+
+            {
+              this.state.opened ? <TextField
+              value={this.state.labeller}
+              placeholder="Set your labeller name here"
+              onChange={(event,value) => {this.setState({labeller: event.currentTarget.value})}}
+              style={{width:200,marginLeft:20,marginRight:20,float:"left"}}
+              onKeyDown={(event, index) => {
+                if (event.key === 'Enter') {
+                    this.updateLabeller(event.currentTarget.value)
+                    event.preventDefault();
+                }
+              }}
+              /> : ""
             }
 
             <hr style={{marginTop:45,marginLeft:5,marginRight:5}}/>

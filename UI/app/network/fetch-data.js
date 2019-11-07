@@ -103,7 +103,7 @@ export default class fetchData {
   // }
 
 
-  async setTableMetadata(docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, user, istitle) {
+  async setTableMetadata(docid, page, concept, cuis, cuis_selected, qualifiers, qualifiers_selected, user, istitle, labeller) {
         // debugger
         var urlQueryRequest = urlBase+ "setMetadata?docid="+encodeURIComponent(docid)
                                                 +"&page="+page
@@ -114,6 +114,7 @@ export default class fetchData {
                                                 +"&qualifiers_selected="+encodeURIComponent(qualifiers_selected)
                                                 +"&user="+encodeURIComponent(user)
                                                 +"&istitle="+encodeURIComponent(istitle || false)
+                                                +"&labeller="+encodeURIComponent(labeller ? labeller : user) // default to user if no labeller set.
 
         var r = await this.getGeneric( urlQueryRequest  )
 

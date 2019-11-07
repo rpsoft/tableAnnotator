@@ -154,6 +154,8 @@ class CommonView extends Component {
           )
       }
 
+      // debugger
+
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
         <Card style={{marginBottom:10}}>
 
@@ -234,7 +236,7 @@ class CommonView extends Component {
                                 return <a key={u+"-"+l} style={{cursor: "pointer", marginLeft:10, fontStyle: "italic", marginLeft: 10, textDecoration: "underline", color: "blue"}}
                                   onClick={
                                     () => this.props.goToUrl("table?docid="+encodeURIComponent(v.docid)+"&page="+v.page+"&user="+u+this.formatFiltersForURL())}
-                                        >{u+","}</a>})
+                                        >{u+(this.state.allInfo.labellers[v.docid+"_"+v.page] ? " ("+this.state.allInfo.labellers[v.docid+"_"+v.page]+")" : "")+", "}</a>})
                               : "")
                             }
                             <a style={{cursor: "pointer", marginLeft:10, fontStyle: "italic", marginLeft: 10, textDecoration: "underline", color: "blue"}}
