@@ -95,7 +95,7 @@ class AnnotationView extends Component {
   }
 
   getUrlParams(props){
-    return props.location.search.replace("?","").split("&").reduce( (acc,item) => {item = item.split("="); acc[item[0]] = item[1]; return acc },{})
+    return decodeURIComponent(props.location.search).replace("?","").split("&").reduce( (acc,item) => {item = item.split("="); acc[item[0]] = item[1]; return acc },{})
   }
 
   async componentDidMount () {
@@ -368,8 +368,6 @@ class AnnotationView extends Component {
    }
 
    addAnnotation(i,data){
-
-
 
      var content = this.removeFalseKeys(data.content)
      var qualifiers = this.removeFalseKeys(data.qualifiers)
