@@ -23,8 +23,8 @@ import {
   // Core components
   AppContainer,
   CommonView,
-  ResultsView,
   ResultsContainer,
+  MetaContainer,
   TableContainer,
   AnnotationView,
   ClusterContainer,
@@ -43,6 +43,7 @@ export default function App() {
         <Route exact path={urlBase} component={AppContainer} ></Route>
         <Route path={urlBase + "table"} component={TableContainer}></Route>
         <Route path={urlBase + "allresults"} component={ResultsContainer}></Route>
+        <Route path={urlBase + "metaresults"} component={MetaContainer}></Route>
         <Route path={urlBase + "cluster"} component={ClusterContainer}></Route>
         <Route path={urlBase + "clusterresults"} component={ClusterResultsContainer}></Route>
       </Switch>

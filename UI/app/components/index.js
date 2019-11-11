@@ -15,6 +15,9 @@ export TableContainer from './table-container'
 export ResultsView from './results-view'
 export ResultsContainer from './results-container'
 
+export MetaContainer from './meta-container'
+
+
 export ClusterIndex from './cluster-index'
 export ClusterView from './cluster-view'
 export ClusterContainer from './cluster-container'

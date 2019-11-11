@@ -676,6 +676,21 @@ app.get('/api/allClusterAnnotations', async function(req,res){
 
 });
 
+
+app.get('/api/allMetadata', async function(req,res){
+
+  var allMetadataAnnotations = async () => {
+    var client = await pool.connect()
+    var result = await client.query(`select * from metadata`)
+          client.release()
+    return result
+  }
+
+  res.send( await allMetadataAnnotations() )
+
+});
+
+
 app.get('/api/allClusters', async function(req,res){
 
   var getAllClusters = async () => {
