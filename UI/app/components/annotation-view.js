@@ -508,7 +508,8 @@ class AnnotationView extends Component {
 
      this.setState({editor_enabled : this.state.editor_enabled ? false : true})
 
-     this.getPreview()
+     // this.getPreview()
+     this.props.goToUrl("/table/?docid="+this.state.docid+"&page="+this.state.page+"&user="+this.state.user+this.formatFiltersForURL())
    }
 
    addTitleSubgroup = () => {
