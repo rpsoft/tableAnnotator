@@ -145,7 +145,7 @@ export default class fetchData {
         return r
   }
 
-  async getAllInfo(filter_topic,filter_type) {
+  async getAllInfo(filter_topic, filter_type, hua) {
       // debugger
         // filter = filter == "nofilter" ? null : filter
         var params = []
@@ -156,6 +156,10 @@ export default class fetchData {
 
         if ( filter_type && filter_type.length > 0 ){
           params.push("filter_type=" + encodeURIComponent(filter_type))
+        }
+
+        if (hua) {
+          params.push("hua=true")
         }
 
         var urlQueryRequest = urlBase+ "allInfo?"+params.join("&")

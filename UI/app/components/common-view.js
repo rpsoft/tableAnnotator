@@ -59,12 +59,14 @@ class CommonView extends Component {
     var filter_topics = urlparams.get("filter_topic") ? urlparams.get("filter_topic").split("_") : []
     var filter_type = urlparams.get("filter_type") ? urlparams.get("filter_type").split("_") : []
 
+
     this.state = {
       annotations:null,
       tables:null,
       user: urlparams.get("user") && urlparams.get("user") != "undefined" ? urlparams.get("user") : "",
       tableTopic : filter_topics,
       tableType : filter_type,
+      hideUnannotated : urlparams.get("hua") ? urlparams.get("hua") == "true" : false
     };
 
   }
@@ -74,7 +76,7 @@ class CommonView extends Component {
     var annotations = JSON.parse(await fetch.getAllAnnotations())
     var tables = JSON.parse(await fetch.getAllAvailableTables())
 
-    var allInfo = JSON.parse(await fetch.getAllInfo(this.state.tableTopic.join("_"), this.state.tableType.join("_")))
+    var allInfo = JSON.parse(await fetch.getAllInfo(this.state.tableTopic.join("_"), this.state.tableType.join("_"), this.state.hideUnannotated))
 
     this.setState({annotations,tables,allInfo})
   }
@@ -93,19 +95,22 @@ class CommonView extends Component {
      var isNewTopic = urlparams.get("filter_topic") !== this.state.tableTopic.join("_")
      var isNewType = urlparams.get("filter_type") !== this.state.tableType.join("_")
 
+     var hua = urlparams.get("hua") ? urlparams.get("hua") == "true" : false
+     var changed_hua = this.state.hideUnannotated != hua
      // debugger
-     if ( !this.state.allInfo || isNewTopic || isNewType ){
+     if ( !this.state.allInfo || isNewTopic || isNewType || changed_hua){
        let fetch = new fetchData();
        var annotations = JSON.parse(await fetch.getAllAnnotations())
        var tables = JSON.parse(await fetch.getAllAvailableTables())
 
-       var allInfo = JSON.parse(await fetch.getAllInfo(filter_topic.join("_"), filter_type.join("_")))
+       var allInfo = JSON.parse(await fetch.getAllInfo(filter_topic.join("_"), filter_type.join("_"), hua ))
 
        this.setState({
            user: urlparams.get("user") && urlparams.get("user") != "undefined" ? urlparams.get("user") : "",
            tableTopic : filter_topic,
            tableType : filter_type,
-           annotations,tables,allInfo
+           annotations,tables,allInfo,
+           hideUnannotated : hua,
        })
      } else {
        this.setState({
@@ -119,7 +124,13 @@ class CommonView extends Component {
       var ttop = Object.keys(tableTopic).reduce( (acc, item) => {if ( tableTopic[item] ){acc.push(item)} return acc},[]);
       var ttype = Object.keys(tableType).reduce( (acc, item) => {if ( tableType[item] ){acc.push(item)} return acc},[]);
       // debugger
-      this.props.goToUrl("/?user="+event.currentTarget.value +"&filter_topic="+ttop.join("_")+"&filter_type="+ttype.join("_"))
+      this.props.goToUrl("/?user="+event.currentTarget.value +"&filter_topic="+ttop.join("_")+"&filter_type="+ttype.join("_")+(this.state.hideUnannotated ? "&hua=true" : ""))
+  }
+
+  toggleHideAnnotated(){
+    // debugger
+      var hua = this.state.hideUnannotated ? false : true
+      this.props.goToUrl("/?user="+event.currentTarget.value + this.formatFiltersForURL()+ (hua ? "&hua=true" : ""))
   }
 
   formatFiltersForURL(){
@@ -218,6 +229,13 @@ class CommonView extends Component {
                                      options={["Baseline Characteristics", "Results with subgroups", "Results without subgroups", "Other", "Unassigned"]}
                                      updateAnnotation={ (values) => { this.setFilters(this.arrayToObject(this.state.tableTopic), values) } }
                               />
+                      <div>
+                           Hide Unnanotated
+                           <Checkbox
+                             value={"hideUnannotated"}
+                             checked={ this.state.hideUnannotated }
+                             onChange={ () => {this.toggleHideAnnotated()}}/>
+                      </div>
                     </div>
 
                 </div> : ""
@@ -235,13 +253,13 @@ class CommonView extends Component {
                               ? annotations_formatted[v.docid+"_"+v.page].map( (u,l) => {
                                 return <a key={u+"-"+l} style={{cursor: "pointer", marginLeft:10, fontStyle: "italic", marginLeft: 10, textDecoration: "underline", color: "blue"}}
                                   onClick={
-                                    () => this.props.goToUrl("table?docid="+encodeURIComponent(v.docid)+"&page="+v.page+"&user="+u+this.formatFiltersForURL())}
+                                    () => this.props.goToUrl("table?docid="+encodeURIComponent(v.docid)+"&page="+v.page+"&user="+u+this.formatFiltersForURL()+(this.state.hideUnannotated ? "&hua=true" : ""))}
                                         >{u+(this.state.allInfo.labellers[v.docid+"_"+v.page] ? " ("+this.state.allInfo.labellers[v.docid+"_"+v.page]+")" : "")+", "}</a>})
                               : "")
                             }
                             <a style={{cursor: "pointer", marginLeft:10, fontStyle: "italic", marginLeft: 10, textDecoration: "underline", color: "blue"}}
                               onClick={
-                                () => this.props.goToUrl("table?docid="+encodeURIComponent(v.docid)+"&page="+v.page+(this.state.user ? "&user="+this.state.user : "")+this.formatFiltersForURL())}
+                                () => this.props.goToUrl("table?docid="+encodeURIComponent(v.docid)+"&page="+v.page+(this.state.user ? "&user="+this.state.user : "")+this.formatFiltersForURL()+(this.state.hideUnannotated ? "&hua=true" : ""))}
                                 >
                               [New]
                             </a>

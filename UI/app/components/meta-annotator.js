@@ -12,7 +12,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import Card from '@material-ui/core/Card';
 import Popover from '@material-ui/core/Popover';
-import Checkbox from '@material-ui/core/Checkbox';
 
 import MetaItem from './meta-item'
 
@@ -45,7 +44,7 @@ class MetaAnnotator extends Component {
         recommend_cuis: {}, // This are the proposed cuis for concepts as per classfier and Peter's manual annotations.
         isSaved : false,
         titleSubgroups : props.titleSubgroups || [],
-        filter_topic : props.filterTopic,
+        filter_topics : props.filterTopic,
         filter_type : props.filterType,
       };
 
@@ -66,7 +65,7 @@ class MetaAnnotator extends Component {
 
   formatFiltersForURL(){
       return ""
-              + (this.state.filter_topic.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.filter_topic.join("_")) : "")
+              + (this.state.filter_topics.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.filter_topics.join("_")) : "")
               + (this.state.filter_type.length > 0 ? "&filter_type="+encodeURIComponent(this.state.filter_type.join("_")) : "")
   }
 
@@ -237,7 +236,7 @@ class MetaAnnotator extends Component {
       ordered_concepts : [... next.titleSubgroups, ... all_concept_variations],
       isSaved : false,
       titleSubgroups : next.titleSubgroups,
-      filter_topic : next.filterTopic,
+      filter_topics : next.filterTopic,
       filter_type : next.filterType,
     })
 

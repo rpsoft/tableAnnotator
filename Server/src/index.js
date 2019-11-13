@@ -154,10 +154,14 @@ function prepare_cell_text(text){
     return text.replace(/[0-9]+/g, '$nmbr$').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g," ").trim().toLowerCase()
 }
 
-async function prepareAvailableDocuments(filter_topic, filter_type){
+async function prepareAvailableDocuments(filter_topic, filter_type, hua){
+
+  //debugger
 
   var ftop = filter_topic ? filter_topic : []
   var ftyp = filter_type ? filter_type : []
+
+  var hua = hua
 
   var type_lookup = {
          "Baseline Characteristics" : "baseline_table",
@@ -182,9 +186,19 @@ async function prepareAvailableDocuments(filter_topic, filter_type){
 
   var filtered_docs_ttype = null
 
+  var all_annotated_docids = null
+
   if( ftop.length+ftyp.length > 0 ){
 
       var allAnnotations = await getAnnotationResults()
+
+      all_annotated_docids = Array.from(new Set(allAnnotations.rows.reduce( (acc,ann) => {
+    			acc = acc ? acc : []
+
+          acc.push(ann.docid+"_"+ann.page);
+
+    			return acc
+    		}, [] )))
 
       filtered_docs_ttype = allAnnotations.rows.reduce( (acc,ann) => {
     			acc = acc ? acc : []
@@ -199,7 +213,7 @@ async function prepareAvailableDocuments(filter_topic, filter_type){
         filtered_docs_ttype = Array.from(new Set(filtered_docs_ttype));
   }
 
-  // debugger
+
 
   var results = new Promise(function(resolve, reject) {
 
@@ -240,8 +254,6 @@ async function prepareAvailableDocuments(filter_topic, filter_type){
                     var type_enabled = ftyp.length > 0
                     var type_intersection = (type_enabled && (filtered_docs_ttype.length > 0) && (filtered_docs_ttype.indexOf(docid_V+"_"+page) > -1))
 
-
-
                     if ( topic_enabled && type_enabled){
                       if ( (topic_intersection.length > 0) && type_intersection){
                         // debugger
@@ -256,6 +268,10 @@ async function prepareAvailableDocuments(filter_topic, filter_type){
 
                     if ( (!topic_enabled) && type_enabled && type_intersection){
                       // debugger
+                      acc.push(docfile)
+                    }
+
+                    if ( (!hua) && all_annotated_docids.indexOf(docid_V+"_"+page) < 0 ){ // The document is not annotated, so always add.
                       acc.push(docfile)
                     }
 
@@ -568,9 +584,9 @@ app.get('/api/allInfo',async function(req,res){
       labellers = labellers.rows.reduce( (acc,item) => { acc[item.docid+"_"+item.page] = item.labeller; return acc;},{})
 
   if ( req.query && (req.query.filter_topic || req.query.filter_type) ){
-
     var result = await prepareAvailableDocuments( req.query.filter_topic ? req.query.filter_topic.split("_") : [],
-                                                  req.query.filter_type ? req.query.filter_type.split("_") : [])
+                                                  req.query.filter_type ? req.query.filter_type.split("_") : [],
+                                                  req.query.hua ? req.query.hua == "true" : false)
 
 
 

@@ -216,21 +216,23 @@ function prepare_cell_text(text) {
   return text.replace(/[0-9]+/g, '$nmbr$').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g, " ").trim().toLowerCase();
 }
 
-function prepareAvailableDocuments(_x, _x2) {
+function prepareAvailableDocuments(_x, _x2, _x3) {
   return _prepareAvailableDocuments.apply(this, arguments);
 }
 
 function _prepareAvailableDocuments() {
   _prepareAvailableDocuments = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee41(filter_topic, filter_type) {
-    var ftop, ftyp, type_lookup, i, filtered_docs_ttype, allAnnotations, results;
+  _regenerator.default.mark(function _callee41(filter_topic, filter_type, hua) {
+    var ftop, ftyp, type_lookup, i, filtered_docs_ttype, all_annotated_docids, allAnnotations, results;
     return _regenerator.default.wrap(function _callee41$(_context41) {
       while (1) {
         switch (_context41.prev = _context41.next) {
           case 0:
+            //debugger
             ftop = filter_topic ? filter_topic : [];
             ftyp = filter_type ? filter_type : [];
+            hua = hua;
             type_lookup = {
               "Baseline Characteristics": "baseline_table",
               "Results with subgroups": "result_table_subgroup",
@@ -252,17 +254,23 @@ function _prepareAvailableDocuments() {
 
 
             filtered_docs_ttype = null;
+            all_annotated_docids = null;
 
             if (!(ftop.length + ftyp.length > 0)) {
-              _context41.next = 11;
+              _context41.next = 14;
               break;
             }
 
-            _context41.next = 8;
+            _context41.next = 10;
             return getAnnotationResults();
 
-          case 8:
+          case 10:
             allAnnotations = _context41.sent;
+            all_annotated_docids = Array.from(new Set(allAnnotations.rows.reduce(function (acc, ann) {
+              acc = acc ? acc : [];
+              acc.push(ann.docid + "_" + ann.page);
+              return acc;
+            }, [])));
             filtered_docs_ttype = allAnnotations.rows.reduce(function (acc, ann) {
               acc = acc ? acc : [];
 
@@ -274,8 +282,7 @@ function _prepareAvailableDocuments() {
             }, []);
             filtered_docs_ttype = Array.from(new Set(filtered_docs_ttype));
 
-          case 11:
-            // debugger
+          case 14:
             results = new Promise(function (resolve, reject) {
               var available_documents = {};
               var abs_index = [];
@@ -324,6 +331,11 @@ function _prepareAvailableDocuments() {
 
                     if (!topic_enabled && type_enabled && type_intersection) {
                       // debugger
+                      acc.push(docfile);
+                    }
+
+                    if (!hua && all_annotated_docids.indexOf(docid_V + "_" + page) < 0) {
+                      // The document is not annotated, so always add.
                       acc.push(docfile);
                     }
                   } else {
@@ -377,13 +389,13 @@ function _prepareAvailableDocuments() {
                 }
               });
             });
-            _context41.next = 14;
+            _context41.next = 17;
             return results;
 
-          case 14:
+          case 17:
             return _context41.abrupt("return", _context41.sent);
 
-          case 15:
+          case 18:
           case "end":
             return _context41.stop();
         }
@@ -465,7 +477,7 @@ function _getMetadataLabellers() {
   return _getMetadataLabellers.apply(this, arguments);
 }
 
-function getAnnotationByID(_x3, _x4, _x5) {
+function getAnnotationByID(_x4, _x5, _x6) {
   return _getAnnotationByID.apply(this, arguments);
 }
 
@@ -514,7 +526,7 @@ console.log(process.cwd()); //   sgd = pickle.load(open("./src/sgd_multiterm.sav
 
 python.ex(_templateObject2());
 
-function classify(_x6) {
+function classify(_x7) {
   return _classify.apply(this, arguments);
 }
 
@@ -563,7 +575,7 @@ function _classify() {
   return _classify.apply(this, arguments);
 }
 
-function grouped_predictor(_x7) {
+function grouped_predictor(_x8) {
   return _grouped_predictor.apply(this, arguments);
 }
 
@@ -599,7 +611,7 @@ function _grouped_predictor() {
   return _grouped_predictor.apply(this, arguments);
 }
 
-function attempt_predictions(_x8) {
+function attempt_predictions(_x9) {
   return _attempt_predictions.apply(this, arguments);
 }
 
@@ -685,7 +697,7 @@ function _attempt_predictions() {
                 }, _callee47, this, [[0, 21]]);
               }));
 
-              return function (_x106, _x107) {
+              return function (_x107, _x108) {
                 return _ref41.apply(this, arguments);
               };
             }());
@@ -701,7 +713,7 @@ function _attempt_predictions() {
   return _attempt_predictions.apply(this, arguments);
 }
 
-function insertAnnotation(_x9, _x10, _x11, _x12, _x13, _x14, _x15) {
+function insertAnnotation(_x10, _x11, _x12, _x13, _x14, _x15, _x16) {
   return _insertAnnotation.apply(this, arguments);
 } // preinitialisation of components if needed.
 
@@ -822,7 +834,7 @@ function () {
                 }, _callee, this);
               }));
 
-              return function setMetadata(_x18, _x19, _x20) {
+              return function setMetadata(_x19, _x20, _x21) {
                 return _ref2.apply(this, arguments);
               };
             }();
@@ -851,7 +863,7 @@ function () {
     }, _callee2, this);
   }));
 
-  return function (_x16, _x17) {
+  return function (_x17, _x18) {
     return _ref.apply(this, arguments);
   };
 }());
@@ -902,7 +914,7 @@ function () {
                 }, _callee3, this);
               }));
 
-              return function setMetadata(_x23, _x24, _x25, _x26, _x27, _x28, _x29, _x30, _x31, _x32) {
+              return function setMetadata(_x24, _x25, _x26, _x27, _x28, _x29, _x30, _x31, _x32, _x33) {
                 return _ref4.apply(this, arguments);
               };
             }();
@@ -931,7 +943,7 @@ function () {
     }, _callee4, this);
   }));
 
-  return function (_x21, _x22) {
+  return function (_x22, _x23) {
     return _ref3.apply(this, arguments);
   };
 }());
@@ -978,7 +990,7 @@ function () {
                 }, _callee5, this);
               }));
 
-              return function getMetadata(_x35, _x36, _x37) {
+              return function getMetadata(_x36, _x37, _x38) {
                 return _ref6.apply(this, arguments);
               };
             }();
@@ -1013,7 +1025,7 @@ function () {
     }, _callee6, this);
   }));
 
-  return function (_x33, _x34) {
+  return function (_x34, _x35) {
     return _ref5.apply(this, arguments);
   };
 }());
@@ -1047,7 +1059,7 @@ function () {
             }
 
             _context7.next = 7;
-            return prepareAvailableDocuments(req.query.filter_topic ? req.query.filter_topic.split("_") : [], req.query.filter_type ? req.query.filter_type.split("_") : []);
+            return prepareAvailableDocuments(req.query.filter_topic ? req.query.filter_topic.split("_") : [], req.query.filter_type ? req.query.filter_type.split("_") : [], req.query.hua ? req.query.hua == "true" : false);
 
           case 7:
             result = _context7.sent;
@@ -1081,12 +1093,12 @@ function () {
     }, _callee7, this);
   }));
 
-  return function (_x38, _x39) {
+  return function (_x39, _x40) {
     return _ref7.apply(this, arguments);
   };
 }());
 
-function updateClusterAnnotation(_x40, _x41, _x42, _x43, _x44) {
+function updateClusterAnnotation(_x41, _x42, _x43, _x44, _x45) {
   return _updateClusterAnnotation.apply(this, arguments);
 }
 
@@ -1218,7 +1230,7 @@ function () {
     }, _callee9, this);
   }));
 
-  return function (_x45, _x46) {
+  return function (_x46, _x47) {
     return _ref8.apply(this, arguments);
   };
 }());
@@ -1287,7 +1299,7 @@ function () {
     }, _callee11, this);
   }));
 
-  return function (_x47, _x48) {
+  return function (_x48, _x49) {
     return _ref10.apply(this, arguments);
   };
 }());
@@ -1356,7 +1368,7 @@ function () {
     }, _callee13, this);
   }));
 
-  return function (_x49, _x50) {
+  return function (_x50, _x51) {
     return _ref12.apply(this, arguments);
   };
 }());
@@ -1425,7 +1437,7 @@ function () {
     }, _callee15, this);
   }));
 
-  return function (_x51, _x52) {
+  return function (_x52, _x53) {
     return _ref14.apply(this, arguments);
   };
 }());
@@ -1494,7 +1506,7 @@ function () {
     }, _callee17, this);
   }));
 
-  return function (_x53, _x54) {
+  return function (_x54, _x55) {
     return _ref16.apply(this, arguments);
   };
 }());
@@ -1545,7 +1557,7 @@ function () {
                 }, _callee18, this);
               }));
 
-              return function setCUIMod(_x57, _x58) {
+              return function setCUIMod(_x58, _x59) {
                 return _ref19.apply(this, arguments);
               };
             }();
@@ -1566,7 +1578,7 @@ function () {
     }, _callee19, this);
   }));
 
-  return function (_x55, _x56) {
+  return function (_x56, _x57) {
     return _ref18.apply(this, arguments);
   };
 }());
@@ -1635,7 +1647,7 @@ function () {
     }, _callee21, this);
   }));
 
-  return function (_x59, _x60) {
+  return function (_x60, _x61) {
     return _ref20.apply(this, arguments);
   };
 }());
@@ -1689,7 +1701,7 @@ function () {
                 }, _callee22, this);
               }));
 
-              return function setClusterData(_x63, _x64, _x65, _x66, _x67) {
+              return function setClusterData(_x64, _x65, _x66, _x67, _x68) {
                 return _ref23.apply(this, arguments);
               };
             }();
@@ -1713,7 +1725,7 @@ function () {
     }, _callee23, this);
   }));
 
-  return function (_x61, _x62) {
+  return function (_x62, _x63) {
     return _ref22.apply(this, arguments);
   };
 }());
@@ -1748,7 +1760,7 @@ function () {
     }, _callee24, this);
   }));
 
-  return function (_x68, _x69) {
+  return function (_x69, _x70) {
     return _ref24.apply(this, arguments);
   };
 }());
@@ -1824,7 +1836,7 @@ function () {
     }, _callee26, this);
   }));
 
-  return function (_x70, _x71) {
+  return function (_x71, _x72) {
     return _ref25.apply(this, arguments);
   };
 }());
@@ -1877,7 +1889,7 @@ function () {
                 }, _callee27, this);
               }));
 
-              return function insertCUI(_x74, _x75, _x76) {
+              return function insertCUI(_x75, _x76, _x77) {
                 return _ref28.apply(this, arguments);
               };
             }();
@@ -1901,7 +1913,7 @@ function () {
     }, _callee28, this);
   }));
 
-  return function (_x72, _x73) {
+  return function (_x73, _x74) {
     return _ref27.apply(this, arguments);
   };
 }());
@@ -1973,7 +1985,7 @@ function () {
     }, _callee29, this);
   }));
 
-  return function (_x77, _x78) {
+  return function (_x78, _x79) {
     return _ref29.apply(this, arguments);
   };
 }()); // Generates the results table live preview, connecting to the R API.
@@ -2087,7 +2099,7 @@ function () {
     }, _callee30, this, [[0, 18]]);
   }));
 
-  return function (_x79, _x80) {
+  return function (_x80, _x81) {
     return _ref30.apply(this, arguments);
   };
 }());
@@ -2160,7 +2172,7 @@ function () {
     }, _callee31, this);
   }));
 
-  return function (_x81, _x82) {
+  return function (_x82, _x83) {
     return _ref31.apply(this, arguments);
   };
 }());
@@ -2179,7 +2191,7 @@ app.get('/api/totalTables', function (req, res) {
   });
 });
 
-function getMMatch(_x83) {
+function getMMatch(_x84) {
   return _getMMatch.apply(this, arguments);
 }
 
@@ -2273,7 +2285,7 @@ function () {
     }, _callee32, this, [[0, 11]]);
   }));
 
-  return function (_x84, _x85) {
+  return function (_x85, _x86) {
     return _ref32.apply(this, arguments);
   };
 }());
@@ -2340,7 +2352,7 @@ function () {
     }, _callee33, this);
   }));
 
-  return function (_x86, _x87) {
+  return function (_x87, _x88) {
     return _ref33.apply(this, arguments);
   };
 }());
@@ -2380,12 +2392,12 @@ function () {
     }, _callee34, this);
   }));
 
-  return function (_x88, _x89) {
+  return function (_x89, _x90) {
     return _ref34.apply(this, arguments);
   };
 }());
 
-function readyTableData(_x90, _x91, _x92) {
+function readyTableData(_x91, _x92, _x93) {
   return _readyTableData.apply(this, arguments);
 }
 
@@ -2853,7 +2865,7 @@ function _readyTableData() {
                       }, _callee53, this, [[0, 7]]);
                     }));
 
-                    return function (_x108, _x109) {
+                    return function (_x109, _x110) {
                       return _ref42.apply(this, arguments);
                     };
                   }());
@@ -2928,7 +2940,7 @@ function () {
     }, _callee35, this, [[0, 11]]);
   }));
 
-  return function (_x93, _x94) {
+  return function (_x94, _x95) {
     return _ref35.apply(this, arguments);
   };
 }());
@@ -2962,7 +2974,7 @@ function () {
     }, _callee36, this);
   }));
 
-  return function (_x95, _x96) {
+  return function (_x96, _x97) {
     return _ref36.apply(this, arguments);
   };
 }());
@@ -3013,7 +3025,7 @@ function () {
                 }, _callee37, this);
               }));
 
-              return function deleteAnnotation(_x99, _x100, _x101) {
+              return function deleteAnnotation(_x100, _x101, _x102) {
                 return _ref38.apply(this, arguments);
               };
             }();
@@ -3042,7 +3054,7 @@ function () {
     }, _callee38, this);
   }));
 
-  return function (_x97, _x98) {
+  return function (_x98, _x99) {
     return _ref37.apply(this, arguments);
   };
 }());
@@ -3121,7 +3133,7 @@ function () {
     }, _callee39, this);
   }));
 
-  return function (_x102, _x103) {
+  return function (_x103, _x104) {
     return _ref39.apply(this, arguments);
   };
 }());
@@ -3159,7 +3171,7 @@ function () {
     }, _callee40, this);
   }));
 
-  return function (_x104, _x105) {
+  return function (_x105, _x106) {
     return _ref40.apply(this, arguments);
   };
 }());

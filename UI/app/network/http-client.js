@@ -5,7 +5,7 @@ export default class HttpClient {
     this.config = config;
 
     this.standardOptions = {
-      host: "sephirhome.ddns.net",
+      host: "sephirhome.ddns.net", //sephirhome.ddns.net
       port: (typeof location != "undefined") ? 6541 : 0,
       method: 'GET',
     };

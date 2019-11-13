@@ -68,6 +68,7 @@ class AnnotationView extends Component {
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
 
 
+
     this.state = {
         user: urlparams["user"] ? urlparams["user"] : "",
         docid: urlparams["docid"] ? urlparams["docid"] : "",
@@ -91,6 +92,7 @@ class AnnotationView extends Component {
         deleteEnabled: false,
         filter_topics : filter_topics,
         filter_type : filter_type,
+        hideUnannotated : urlparams["hua"] ? urlparams["hua"] == "true" : false
     };
   }
 
@@ -129,7 +131,7 @@ class AnnotationView extends Component {
     if ( !metadata.error ){
         metadata.rows.map ( item => { if ( item.istitle ){ titleSubgroups.push(item.concept) } })
     }
-    debugger
+
     this.setState({
       //user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
       corrupted : annotation.corrupted === 'true',
@@ -145,6 +147,7 @@ class AnnotationView extends Component {
       deleteEnabled: false,
       filter_topics : filter_topics,
       filter_type : filter_type,
+      hideUnannotated : urlparams["hua"] ? urlparams["hua"] == "true" : false
     })
 
     if( !this.state.preview ){
@@ -166,6 +169,8 @@ class AnnotationView extends Component {
 
     var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
+
+    var hua = urlparams["hua"] ? urlparams["hua"] == "true" : false
 
     if ( Object.keys(urlparams).length > 0 &&
         urlparams.docid && urlparams.page) {
@@ -194,7 +199,7 @@ class AnnotationView extends Component {
 
         var allInfo;
         if ( (filter_topics.length + filter_type.length) > 0){
-          allInfo = JSON.parse(await fetch.getAllInfo(filter_topics.join("_"), filter_type.join("_")))
+          allInfo = JSON.parse(await fetch.getAllInfo(filter_topics.join("_"), filter_type.join("_"), hua))
 
         } else {
           allInfo = JSON.parse(await fetch.getAllInfo())
@@ -239,6 +244,7 @@ class AnnotationView extends Component {
             deleteEnabled: false,
             filter_topics : filter_topics,
             filter_type : filter_type,
+            hideUnannotated : hua
           })
         } else {
           this.setState({
@@ -256,6 +262,7 @@ class AnnotationView extends Component {
             deleteEnabled: false,
             filter_topics : filter_topics,
             filter_type : filter_type,
+            hideUnannotated : hua
           })
         }
 
@@ -284,7 +291,7 @@ class AnnotationView extends Component {
 
      this.setState({annotations:[],gindex: current_table_g_index, overrideTable: n != 0 ? null : this.state.overrideTable })
 
-     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user+this.formatFiltersForURL())
+     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user+this.formatFiltersForURL()+(this.state.hideUnannotated ? "&hua=true" : ""))
 
    }
 
@@ -412,7 +419,7 @@ class AnnotationView extends Component {
      }
 
      var newDocument = this.state.allInfo.abs_index[index]
-     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user+this.formatFiltersForURL())
+     this.props.goToUrl("/table?docid="+encodeURIComponent(newDocument.docid)+"&page="+newDocument.page+"&user="+this.state.user+this.formatFiltersForURL()+(this.state.hideUnannotated ? "&hua=true" : ""))
    }
 
    async saveAnnotations(){
@@ -509,7 +516,7 @@ class AnnotationView extends Component {
      this.setState({editor_enabled : this.state.editor_enabled ? false : true})
 
      // this.getPreview()
-     this.props.goToUrl("/table/?docid="+this.state.docid+"&page="+this.state.page+"&user="+this.state.user+this.formatFiltersForURL())
+     this.props.goToUrl("/table/?docid="+this.state.docid+"&page="+this.state.page+"&user="+this.state.user+this.formatFiltersForURL()+(this.state.hideUnannotated ? "&hua=true" : ""))
    }
 
    addTitleSubgroup = () => {
@@ -539,7 +546,7 @@ class AnnotationView extends Component {
 
    formatFiltersForURL(){
        return ""
-               + (this.state.filter_topic.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.filter_topic.join("_")) : "")
+               + (this.state.filter_topics.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.filter_topics.join("_")) : "")
                + (this.state.filter_type.length > 0 ? "&filter_type="+encodeURIComponent(this.state.filter_type.join("_")) : "")
    }
 
@@ -561,7 +568,7 @@ class AnnotationView extends Component {
                            (us,j) => <div
                              style={{display:"inline",cursor: "pointer", textDecoration: "underline"}}
                              key={j}
-                             onClick={ () => {this.props.goToUrl("/table/?docid="+encodeURIComponent(urlparams.docid)+"&page="+urlparams.page+"&user="+us+this.formatFiltersForURL())}}
+                             onClick={ () => {this.props.goToUrl("/table/?docid="+encodeURIComponent(urlparams.docid)+"&page="+urlparams.page+"&user="+us+this.formatFiltersForURL()+(this.state.hideUnannotated ? "&hua=true" : ""))}}
                              >{us+", "}</div>
                         )
 
@@ -729,7 +736,7 @@ class AnnotationView extends Component {
         {metaAnnotator}
 
         <Card id="userData" style={{padding:15}}>
-          <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+"?user="+(this.state.user ? this.state.user : "" )+this.formatFiltersForURL())}/>
+          <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+"?user="+(this.state.user ? this.state.user : "" )+this.formatFiltersForURL()+(this.state.hideUnannotated ? "&hua=true" : ""))}/>
 
           <TextField
             value={this.state.user}
