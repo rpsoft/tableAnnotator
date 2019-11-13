@@ -89,8 +89,8 @@ class AnnotationView extends Component {
         recommend_cuis : null,
         metadata : null,
         deleteEnabled: false,
-        tableTopic : filter_topics,
-        tableType : filter_type,
+        filter_topics : filter_topics,
+        filter_type : filter_type,
     };
   }
 
@@ -129,7 +129,7 @@ class AnnotationView extends Component {
     if ( !metadata.error ){
         metadata.rows.map ( item => { if ( item.istitle ){ titleSubgroups.push(item.concept) } })
     }
-
+    debugger
     this.setState({
       //user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
       corrupted : annotation.corrupted === 'true',
@@ -143,8 +143,8 @@ class AnnotationView extends Component {
       metadata : metadata,
       titleSubgroups : titleSubgroups,
       deleteEnabled: false,
-      tableTopic : filter_topics,
-      tableType : filter_type,
+      filter_topics : filter_topics,
+      filter_type : filter_type,
     })
 
     if( !this.state.preview ){
@@ -237,8 +237,8 @@ class AnnotationView extends Component {
             titleSubgroups : titleSubgroups,
             filter: urlparams.filter,
             deleteEnabled: false,
-            tableTopic : filter_topics,
-            tableType : filter_type,
+            filter_topics : filter_topics,
+            filter_type : filter_type,
           })
         } else {
           this.setState({
@@ -254,8 +254,8 @@ class AnnotationView extends Component {
             titleSubgroups : titleSubgroups,
             filter: urlparams.filter,
             deleteEnabled: false,
-            tableTopic : filter_topics,
-            tableType : filter_type,
+            filter_topics : filter_topics,
+            filter_type : filter_type,
           })
         }
 
@@ -539,8 +539,8 @@ class AnnotationView extends Component {
 
    formatFiltersForURL(){
        return ""
-               + (this.state.tableTopic.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.tableTopic.join("_")) : "")
-               + (this.state.tableType.length > 0 ? "&filter_type="+encodeURIComponent(this.state.tableType.join("_")) : "")
+               + (this.state.filter_topic.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.filter_topic.join("_")) : "")
+               + (this.state.filter_type.length > 0 ? "&filter_type="+encodeURIComponent(this.state.filter_type.join("_")) : "")
    }
 
    render() {
@@ -719,8 +719,8 @@ class AnnotationView extends Component {
                      recommend_cuis={this.state.recommend_cuis}
                      metadata={this.state.metadata}
                      newTitleSubgroup={this.state.newTitleSubgroup}
-                     tableTopic={this.state.tableTopic}
-                     tableType={this.state.tableType}
+                     filterTopic={this.state.filter_topic}
+                     filterType={this.state.filter_type}
                      />
 
 

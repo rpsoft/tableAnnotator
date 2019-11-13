@@ -31,8 +31,8 @@ node_modules
 Server/ALLTABLES/
 frankenstein/
 
-Server/HTML_TABLES
-Server/HTML_TABLES_OVERRIDE
+Server/HTML_TABLES/
+Server/HTML_TABLES_OVERRIDE/
 Server/SCRATCH
 Server/src/clean_full_tables_rds_jul_2019.rds
 Server/src/full_tables_rds_jul_2019.rds

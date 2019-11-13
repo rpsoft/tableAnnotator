@@ -45,8 +45,8 @@ class MetaAnnotator extends Component {
         recommend_cuis: {}, // This are the proposed cuis for concepts as per classfier and Peter's manual annotations.
         isSaved : false,
         titleSubgroups : props.titleSubgroups || [],
-        tableTopic : props.tableTopic,
-        tableType : props.tableType,
+        filter_topic : props.filterTopic,
+        filter_type : props.filterType,
       };
 
     }
@@ -66,8 +66,8 @@ class MetaAnnotator extends Component {
 
   formatFiltersForURL(){
       return ""
-              + (this.state.tableTopic.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.tableTopic.join("_")) : "")
-              + (this.state.tableType.length > 0 ? "&filter_type="+encodeURIComponent(this.state.tableType.join("_")) : "")
+              + (this.state.filter_topic.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.filter_topic.join("_")) : "")
+              + (this.state.filter_type.length > 0 ? "&filter_type="+encodeURIComponent(this.state.filter_type.join("_")) : "")
   }
 
   updateLabeller(labeller){
@@ -237,8 +237,8 @@ class MetaAnnotator extends Component {
       ordered_concepts : [... next.titleSubgroups, ... all_concept_variations],
       isSaved : false,
       titleSubgroups : next.titleSubgroups,
-      tableTopic : next.tableTopic,
-      tableType : next.tableType,
+      filter_topic : next.filterTopic,
+      filter_type : next.filterType,
     })
 
   }
