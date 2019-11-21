@@ -139,24 +139,12 @@ fs.createReadStream('pmid_msh_label.csv').pipe(csv({
 })).on('data', function (data) {
   return msh_categories_csv.push(data);
 }).on('end', function () {
-  var allcats = [];
   var catIndex = msh_categories_csv.reduce(function (acc, item) {
-    var temp = acc[item.pmid];
-
-    if (temp) {
-      temp.push(item.mesh_broad_label);
-    } else {
-      temp = [item.mesh_broad_label];
-    }
-
-    acc[item.pmid] = temp;
-
-    if (allcats.indexOf(item.mesh_broad_label) < 0) {
-      allcats.push(item.mesh_broad_label);
-    }
-
+    acc[item.mesh_broad_label] = item.pmid.split("&");
     return acc;
   }, {});
+  var allcats = Object.keys(catIndex); // debugger
+
   msh_categories = {
     catIndex: catIndex,
     allcats: allcats
@@ -311,31 +299,35 @@ function _prepareAvailableDocuments() {
 
                   if (ftop.length + ftyp.length > 0 && msh_categories && msh_categories.catIndex) {
                     var topic_enabled = ftop.length > 0;
-                    var topic_intersection = msh_categories.catIndex[docid] ? msh_categories.catIndex[docid].filter(function (value) {
-                      return ftop.includes(value);
-                    }) : [];
+                    var topic_intersection = ftop.reduce(function (acc, cat) {
+                      return acc || msh_categories.catIndex[cat].indexOf(docid) > -1;
+                    }, false);
                     var type_enabled = ftyp.length > 0;
                     var type_intersection = type_enabled && filtered_docs_ttype.length > 0 && filtered_docs_ttype.indexOf(docid_V + "_" + page) > -1;
+                    var accept_docid = false; // if ( (docid_V+"_"+page) == "10789664_1"){
+                    //   debugger
+                    // }
 
                     if (topic_enabled && type_enabled) {
-                      if (topic_intersection.length > 0 && type_intersection) {
-                        // debugger
-                        acc.push(docfile);
+                      if (topic_intersection && type_intersection) {
+                        accept_docid = true;
                       }
                     }
 
-                    if (!type_enabled && topic_enabled && topic_intersection.length > 0) {
-                      // debugger
-                      acc.push(docfile);
+                    if (!type_enabled && topic_enabled && topic_intersection) {
+                      accept_docid = true;
                     }
 
                     if (!topic_enabled && type_enabled && type_intersection) {
-                      // debugger
-                      acc.push(docfile);
+                      accept_docid = true;
                     }
 
-                    if (!hua && all_annotated_docids.indexOf(docid_V + "_" + page) < 0) {
+                    if (hua && all_annotated_docids.indexOf(docid_V + "_" + page) < 0) {
                       // The document is not annotated, so always add.
+                      accept_docid = false;
+                    }
+
+                    if (accept_docid) {
                       acc.push(docfile);
                     }
                   } else {
@@ -345,6 +337,7 @@ function _prepareAvailableDocuments() {
 
                   return acc;
                 }, []);
+                DOCS = Array.from(new Set(DOCS));
 
                 try {
                   for (var d in DOCS) {
