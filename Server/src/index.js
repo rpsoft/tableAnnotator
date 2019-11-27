@@ -73,6 +73,7 @@ var ops_counter = 0;
 var available_documents = {}
 var abs_index = []
 var tables_folder = "HTML_TABLES"
+var tables_folder_deleted = "HTML_TABLES_DELETED"
 var cssFolder = "HTML_STYLES"
 var DOCS = [];
 
@@ -488,19 +489,74 @@ async function insertAnnotation(docid, page, user, annotation, corrupted, tableT
 
 }
 
+async function refreshDocuments(){
+  var res = await prepareAvailableDocuments()
+  available_documents = res.available_documents
+  abs_index = res.abs_index
+  DOCS = res.DOCS
+}
+
 // preinitialisation of components if needed.
 async function main(){
-  // prepare available_documents variable
-  // debugger
-  var res = await prepareAvailableDocuments()
-
-      available_documents = res.available_documents
-      abs_index = res.abs_index
-      DOCS = res.DOCS
-
+  await refreshDocuments()
 }
 
 main();
+
+
+app.get('/api/deleteTable', async function(req,res){
+
+  if ( req.query && req.query.docid && req.query.page ){
+
+    var filename = req.query.docid+"_"+req.query.page+".html"
+
+    var delprom = new Promise(function(resolve, reject) {
+        fs.rename( tables_folder+'/'+ filename , tables_folder_deleted+'/'+ filename , (err) => {
+          if (err) { reject("failed")} ;
+          console.log('Move complete : '+filename);
+          resolve("done");
+        });
+    });
+
+    await delprom;
+    await refreshDocuments();
+
+    res.send("table deleted")
+  } else {
+    res.send("table not deleted")
+  }
+
+});
+
+app.get('/api/recoverTable', async function(req,res){
+    if ( req.query && req.query.docid && req.query.page ){
+
+      var filename = req.query.docid+"_"+req.query.page+".html"
+
+      fs.rename( tables_folder_deleted+'/'+ filename , tables_folder+'/'+ filename , (err) => {
+        if (err) throw err;
+          console.log('Move complete : '+filename);
+      });
+    }
+
+    res.send("table recovered")
+});
+
+
+
+app.get('/api/listDeletedTables', async function(req,res){
+
+  fs.readdir( tables_folder_deleted, function(err, items) {
+
+    if (err) {
+      res.send("failed listing "+err)
+    } else {
+      res.send(items)
+    }
+
+  });
+
+});
 
 
 app.get('/api/clearMetadata', async function(req,res){

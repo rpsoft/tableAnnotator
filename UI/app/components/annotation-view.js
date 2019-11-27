@@ -195,7 +195,10 @@ class AnnotationView extends Component {
 
         var data = await fetch.getTable(urlparams.docid,urlparams.page)
 
-
+        if ( JSON.parse(data).status == "wrong parameters"){
+          alert("table not valid, maybe it was removed by another user")
+          this.props.goToUrl("/?user="+this.state.user+this.formatFiltersForURL()+(this.state.hideUnannotated ? "&hua=true" : ""));
+        }
 
         var allInfo;
         if ( (filter_topics.length + filter_type.length) > 0){

@@ -17,7 +17,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import MultiplePopover from './MultiplePopover'
 
-import CommonStyles from './commom-styles.css';
+import CommonStyles from './common-styles.css';
 
 import fetchData from '../network/fetch-data';
 

@@ -77,6 +77,17 @@ export default class fetchData {
         return r
   }
 
+
+  async deleteTable(docid,page) {
+
+        var urlQueryRequest = urlBase+ "deleteTable?docid="+encodeURIComponent(docid)+"&page="+page
+
+        var r = await this.getGeneric( urlQueryRequest  )
+
+        return r
+  }
+
+
   async getConceptRecommend() {
 
         var urlQueryRequest = urlBase+ "cuiRecommend"

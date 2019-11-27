@@ -18,6 +18,7 @@ import Divider from '@material-ui/core/Divider';
 import DownArrow from '@material-ui/icons/ArrowDropDown';
 import Refresh from '@material-ui/icons/Refresh';
 import TextField from '@material-ui/core/TextField';
+import Delete from '@material-ui/icons/HighlightOff';
 
 import SortIcon from '@material-ui/icons/Sort';
 import WarningIcon from '@material-ui/icons/Warning';
@@ -33,6 +34,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Annotation from './annotation'
 
 import MultiplePopover from './MultiplePopover'
+
+import CommonStyles from './common-styles.css';
 
 import {
   Table,
@@ -66,7 +69,9 @@ class CommonView extends Component {
       user: urlparams.get("user") && urlparams.get("user") != "undefined" ? urlparams.get("user") : "",
       tableTopic : filter_topics,
       tableType : filter_type,
-      hideUnannotated : urlparams.get("hua") ? urlparams.get("hua") == "true" : false
+      hideUnannotated : urlparams.get("hua") ? urlparams.get("hua") == "true" : false,
+      activeDelete : "",
+
     };
 
   }
@@ -139,6 +144,18 @@ class CommonView extends Component {
               + (this.state.tableType.length > 0 ? "&filter_type="+encodeURIComponent(this.state.tableType.join("_")) : "")
   }
 
+  async deleteTable( docid, page ){
+
+    let fetch = new fetchData();
+    var delTable = await fetch.deleteTable(docid,page)
+
+    var annotations = JSON.parse(await fetch.getAllAnnotations())
+    var tables = JSON.parse(await fetch.getAllAvailableTables())
+    var allInfo = JSON.parse(await fetch.getAllInfo(this.state.tableTopic.join("_"), this.state.tableType.join("_"), this.state.hideUnannotated))
+
+    this.setState({annotations,tables,allInfo})
+  }
+
   arrayToObject (arr){
       return arr.reduce( (acc,item) => {acc[item] = true; return acc}, {})
   }
@@ -165,16 +182,11 @@ class CommonView extends Component {
           )
       }
 
-      // debugger
-
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
+
         <Card style={{marginBottom:10}}>
-
           <h2 style={{marginTop:0,padding:20}}>TableTidier Prototype</h2>
-
         </Card>
-
-
 
         <Card id="userData" style={{padding:15,marginBottom:10}}>
           <TextField
@@ -185,38 +197,13 @@ class CommonView extends Component {
             />
         </Card>
 
-        {
-        // <Card style={{padding:15,marginBottom:10}}>
-        // <div style={{display:"inline"}}>
-        //     Looking for the <div style={{fontWeight:"bolder", display:"inline"}}> term annotation tool</div>? Click on the following button --->
-        // </div>
-        // <div style={{width: 300,display:"inline-block", marginLeft:30}}>
-        //   <RaisedButton variant={"contained"} style={{padding:10, fontWeight:"bolder", display:"inline"}} onClick={
-        //     () => this.props.goToUrl("/cluster?page=0")}
-        //     > Access Term Annotation Tool Here</RaisedButton>
-        // </div>
-        // </Card>
-        }
-
         <Card >
             <Card><div style={{padding:10, fontWeight:"bold", fontSize:20}}>{"All tables, and annotations (Total: "+ (this.state.allInfo ? this.state.allInfo.abs_index.length : 0)+" )"}</div>
 
             {
               this.state.allInfo ?
                 <div style={{display:"inline"}}>
-                  {
-                    // <SelectField
-                    //      value={this.state.filter}
-                    //      onChange={(event,data) => {this.props.goToUrl("/?user="+this.state.user+"&filter="+data.props.value) } }
-                    //      style={{fontWeight:"normal"}}
-                    //    >
-                    //    <MenuItem value={"nofilter"} >{"Select Filter"}</MenuItem>
-                    //    {
-                    //      this.state.allInfo.msh_categories.allcats.sort().map( (cat,i) => <MenuItem value={cat} key={i+"-"+cat}>{cat}</MenuItem>)
-                    //    }
-                    // </SelectField>
-                  }
-                    <div style={{margin:15}}>
+                    <div style={{margin:15, marginBottom:5}}>
                       <MultiplePopover
                                      value={this.arrayToObject(this.state.tableTopic)}
                                      variable={"Table Topic"}
@@ -229,24 +216,25 @@ class CommonView extends Component {
                                      options={["Baseline Characteristics", "Results with subgroups", "Results without subgroups", "Other", "Unassigned"]}
                                      updateAnnotation={ (values) => { this.setFilters(this.arrayToObject(this.state.tableTopic), values) } }
                               />
-                      <div>
+                      <div style={{marginTop:10, marginBottom:0}}>
                            Hide Unnanotated
                            <Checkbox
                              value={"hideUnannotated"}
                              checked={ this.state.hideUnannotated }
-                             onChange={ () => {this.toggleHideAnnotated()}}/>
+                             onChange={ () => {this.toggleHideAnnotated()} }/>
                       </div>
                     </div>
-
                 </div> : ""
             }
 
             </Card>
 
-            <div style={{height:"80vh",overflowY:"scroll", paddingTop:10, padding:20, marginTop: 1}}>{this.state.tables && this.state.allInfo ?
+            <div style={{height:"72vh",overflowY:"scroll", paddingTop:10, padding:20, marginTop: 1}}>{this.state.tables && this.state.allInfo ?
                 (
                     this.state.allInfo.abs_index.length > 0 ? this.state.allInfo.abs_index.map(
                       (v,i) => <div key={v.docid+"_"+v.page}>
+                            <Delete className={"deleteButton"} onClick={ () => { this.setState({activeDelete: v.docid+"_"+v.page == this.state.activeDelete ? "" : v.docid+"_"+v.page })  }}></Delete>
+                            { this.state.activeDelete == (v.docid+"_"+v.page) ? <div className={"delete"} style={{display:"inline"}} onClick={ () => { this.deleteTable( v.docid, v.page );} }> Delete </div> : "" }
                             <div style={{display:"inline",fontWeight:"bold"}}>{v.docid+"_"+v.page +" : "}</div>
                             {
                               (annotations_formatted[v.docid+"_"+v.page]
