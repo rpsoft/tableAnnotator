@@ -20,7 +20,10 @@ mytable <- conditions_lkp %>% select(nct_id,mesh_broad_label) %>% left_join(elig
 
 #
 
-mytable <- mytable %>% select(-nct_id) %>% filter(! is.na(pmid)) %>% distinct %>% group_by(mesh_broad_label) %>% mutate(pmid = paste0(pmid, collapse = "&"))   %>% ungroup() %>% distinct()
+mytable <- mytable %>% select(-nct_id) %>% 
+          filter(! is.na(pmid)) %>% distinct %>% 
+          group_by(mesh_broad_label) %>% mutate(pmid = paste0(pmid, collapse = "&")) %>% 
+          ungroup() %>% distinct()
 
 #mytable <- mytable %>% select(-nct_id) %>% distinct %>% group_by(pmid) %>% mutate(mesh_broad_label = paste0(mesh_broad_label, collapse = "&"))  %>% ungroup() %>% distinct()
 
