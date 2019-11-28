@@ -43,15 +43,29 @@ annotated %>% inner_join(topic_groups) %>% select(tableType) %>% distinct
 allfiles <- list.files("../../Server/HTML_TABLES") %>% as.data.frame()
 colnames(allfiles) = c("filename")
 
-all_docid_with_html <- allfiles %>% mutate ( filename =  str_replace(filename, ".html", "")) %>% mutate ( filename =  str_replace(filename, "v[0-9]", "")) %>% distinct()
+all_docid_with_html <- allfiles %>%  mutate ( filename_orig = filename) %>% mutate ( filename =  str_replace(filename, ".html", "")) %>% mutate ( filename =  str_replace(filename, "v[0-9]", "")) %>% distinct()
 
-colnames(all_docid_with_html) = c("docid")
+all_docid_with_html %>% separate(filename, c("pmid", "page"), "_") %>% left_join(topic_groups) %>% View
 
-files_n_annotations <- all_docid_with_html %>% left_join( annotated %>% inner_join(topic_groups) %>% mutate( docid = paste0(pmid,"_",page)) )
+annots <- annotated %>% separate(pmid, c("pmid") ) %>% distinct
 
-files_n_annotations %>% select(tableType) %>% distinct
+all_docid_with_html %>% separate(filename, c("pmid", "page"), "_") %>% 
+  mutate(page = as.integer(page)) %>% 
+  left_join(topic_groups) %>% 
+  left_join(annots) %>% filter( tableType %in% c("baseline_table","other_table") )  %>% 
+  select(mesh_broad_label) %>% group_by(mesh_broad_label) %>% tally %>% View
 
-topic_counts <- files_n_annotations %>% filter( ! tableType %in% c("baseline_table","other_table") ) %>% separate(docid, c("pmid", "page"), "_") %>% select(-mesh_broad_label) %>% left_join(topic_groups) %>% distinct %>% select(mesh_broad_label) %>% group_by(mesh_broad_label) %>% tally
+
+# 
+# colnames(all_docid_with_html) = c("docid")
+# 
+# files_n_annotations <- all_docid_with_html %>% left_join( annotated %>% inner_join(topic_groups) %>% mutate( docid = paste0(pmid,"_",page)) )
+# 
+# files_n_annotations %>% select(tableType) %>% distinct
+# 
+# allNAs <- files_n_annotations %>% filter( ! tableType %in% c("baseline_table","other_table") ) %>% separate(docid, c("pmid", "page"), "_") %>% select(-mesh_broad_label) %>% left_join(topic_groups) %>% distinct %>% filter(is.na(mesh_broad_label))
+# 
+# topic_counts <- files_n_annotations %>% filter( ! tableType %in% c("baseline_table","other_table") ) %>% separate(docid, c("pmid", "page"), "_") %>% select(-mesh_broad_label) %>% left_join(topic_groups) %>% distinct %>% select(mesh_broad_label) %>% group_by(mesh_broad_label) %>% tally
 
 write_csv2(topic_counts, "topic_counts.csv") 
 ###############################

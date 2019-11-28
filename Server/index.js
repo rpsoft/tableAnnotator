@@ -305,7 +305,7 @@ function _prepareAvailableDocuments() {
                     }, false);
                     var type_enabled = ftyp.length > 0;
                     var type_intersection = type_enabled && filtered_docs_ttype.length > 0 && filtered_docs_ttype.indexOf(docid_V + "_" + page) > -1;
-                    var accept_docid = false; // if ( (docid_V+"_"+page) == "10789664_1"){
+                    var accept_docid = false; // if ( (docid_V+"_"+page) == "17392541_1"){
                     //   debugger
                     // }
 
@@ -323,9 +323,9 @@ function _prepareAvailableDocuments() {
                       accept_docid = true;
                     }
 
-                    if (hua && all_annotated_docids.indexOf(docid_V + "_" + page) < 0) {
+                    if (!hua && all_annotated_docids.indexOf(docid_V + "_" + page) < 0 && topic_enabled && topic_intersection) {
                       // The document is not annotated, so always add.
-                      accept_docid = false;
+                      accept_docid = true;
                     }
 
                     if (accept_docid) {

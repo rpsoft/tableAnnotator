@@ -246,7 +246,7 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua){
 
                     var accept_docid = false
 
-                    // if ( (docid_V+"_"+page) == "10789664_1"){
+                    // if ( (docid_V+"_"+page) == "17392541_1"){
                     //   debugger
                     // }
 
@@ -264,8 +264,8 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua){
                       accept_docid = true
                     }
 
-                    if ( hua && all_annotated_docids.indexOf(docid_V+"_"+page) < 0 ){ // The document is not annotated, so always add.
-                        accept_docid = false
+                    if ( (!hua) && all_annotated_docids.indexOf(docid_V+"_"+page) < 0 && topic_enabled && topic_intersection ){ // The document is not annotated, so always add.
+                        accept_docid = true
                     }
 
                     if ( accept_docid ) {
