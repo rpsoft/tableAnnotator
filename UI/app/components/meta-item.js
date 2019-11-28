@@ -287,16 +287,6 @@ class MetaItem extends Component {
                 }}
                 /> : ""
               }
-              {
-                              // <div style={{display:"inline-block"}}> MSH only? </div>
-                              // <Checkbox
-                              //   checked={this.state.cuisearch_msh_only}
-                              //   onChange={() =>{ this.setState({cuisearch_msh_only : this.state.cuisearch_msh_only ? false : true})}}
-                              //   inputProps={{
-                              //     'aria-label': 'indeterminate checkbox',
-                              //   }}
-                              // />
-              }
 
               {
               this.state.dialogType === "cuiAdder" ? <Button onClick={ this.toggleAdder } style={{fontWeight:"bolder",margin:5}}>

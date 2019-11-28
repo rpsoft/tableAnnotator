@@ -1,5 +1,6 @@
 library(tidyverse)
-
+library(readr)
+library(dplyr)
 
 setwd("~/ihw/tableAnnotator/tools/SortingTables")
 
@@ -20,6 +21,9 @@ mytable <- conditions_lkp %>% select(nct_id,mesh_broad_label) %>% left_join(elig
 
 #
 
+topic_groups <- mytable %>% select( -nct_id ) %>% distinct()
+topic_groups %>% View
+
 mytable <- mytable %>% select(-nct_id) %>% 
           filter(! is.na(pmid)) %>% distinct %>% 
           group_by(mesh_broad_label) %>% mutate(pmid = paste0(pmid, collapse = "&")) %>% 
@@ -29,3 +33,25 @@ mytable <- mytable %>% select(-nct_id) %>%
 
 write_csv2(mytable, "pmid_msh_label.csv") # just to remember where this comes from.
 write_csv2(mytable, "~/ihw/tableAnnotator/Server/pmid_msh_label.csv")
+
+############### table counts by topic which are either tables with/out subgroup or unnassigned ( which I believe meant unnannotated )
+annotated <- read_csv("annotated.csv")
+colnames(annotated) = c("pmid","page","tableType")
+
+annotated %>% inner_join(topic_groups) %>% select(tableType) %>% distinct
+
+allfiles <- list.files("../../Server/HTML_TABLES") %>% as.data.frame()
+colnames(allfiles) = c("filename")
+
+all_docid_with_html <- allfiles %>% mutate ( filename =  str_replace(filename, ".html", "")) %>% mutate ( filename =  str_replace(filename, "v[0-9]", "")) %>% distinct()
+
+colnames(all_docid_with_html) = c("docid")
+
+files_n_annotations <- all_docid_with_html %>% left_join( annotated %>% inner_join(topic_groups) %>% mutate( docid = paste0(pmid,"_",page)) )
+
+files_n_annotations %>% select(tableType) %>% distinct
+
+topic_counts <- files_n_annotations %>% filter( ! tableType %in% c("baseline_table","other_table") ) %>% separate(docid, c("pmid", "page"), "_") %>% select(-mesh_broad_label) %>% left_join(topic_groups) %>% distinct %>% select(mesh_broad_label) %>% group_by(mesh_broad_label) %>% tally
+
+write_csv2(topic_counts, "topic_counts.csv") 
+###############################

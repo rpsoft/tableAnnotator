@@ -86,10 +86,6 @@ class CommonView extends Component {
     this.setState({annotations,tables,allInfo})
   }
 
-  // componentWillUnmount() {
-  //     this._source.cancel( 'Operation canceled due component being unmounted.' )
-  // }
-
   async componentWillReceiveProps(next) {
 
      var urlparams = new URLSearchParams(next.location.search);

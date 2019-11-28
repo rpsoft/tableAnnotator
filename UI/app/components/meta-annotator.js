@@ -387,7 +387,7 @@ class MetaAnnotator extends Component {
                               var currentItem = this.state.concept_metadata[concept_key]
                               var elems = concept_key.split(";")
                               var concept = elems[elems.length-1]
-
+                              
                               return <MetaItem
                                                 key = {"concept_item_"+concept_key+"_"+i}
                                                 term = {concept}

@@ -722,7 +722,7 @@ class AnnotationView extends Component {
       } else {
           table_editor = "";
       }
-
+      
       var metaAnnotator = <MetaAnnotator annotationData={data}
                      annotationText={this.state.table ? this.state.table.formattedPage : ""}
                      titleSubgroups={this.state.titleSubgroups}
@@ -782,9 +782,6 @@ class AnnotationView extends Component {
                       <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} } style={{margin:1,marginRight:5,fontWeight:"bolder"}}><Refresh />Show Saved Changes</RaisedButton>
                       <RaisedButton variant={"contained"} onClick={ () => {this.shiftTables(-1)} } style={{padding:5,marginRight:5}}>Previous Table</RaisedButton>
                       <RaisedButton variant={"contained"} onClick={ () => {this.shiftTables(1)} } style={{padding:5,marginRight:5}}>Next Table</RaisedButton>
-
-
-
 
           </div>
 
