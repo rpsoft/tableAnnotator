@@ -8,6 +8,8 @@ var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
 var _config = require("./config");
 
 var _titles = require("./titles");
@@ -144,11 +146,18 @@ fs.createReadStream('pmid_msh_label.csv').pipe(csv({
     acc[item.mesh_broad_label] = item.pmid.split("&");
     return acc;
   }, {});
-  var allcats = Object.keys(catIndex); // debugger
-
+  var pmids_w_cat = msh_categories_csv.reduce(function (acc, item) {
+    var pmids = item.pmid.split("&");
+    acc = (0, _toConsumableArray2.default)(acc).concat([pmids]);
+    return acc;
+  }, []).flat();
+  var allcats = Object.keys(catIndex);
+  allcats.push("NA");
+  catIndex["NA"] = [];
   msh_categories = {
     catIndex: catIndex,
-    allcats: allcats
+    allcats: allcats,
+    pmids_w_cat: pmids_w_cat
   };
 });
 
@@ -213,7 +222,7 @@ function _prepareAvailableDocuments() {
   _prepareAvailableDocuments = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee44(filter_topic, filter_type, hua) {
-    var ftop, ftyp, type_lookup, i, filtered_docs_ttype, all_annotated_docids, allAnnotations, results;
+    var ftop, ftyp, type_lookup, i, filtered_docs_ttype, allAnnotations, all_annotated_docids, results;
     return _regenerator.default.wrap(function _callee44$(_context44) {
       while (1) {
         switch (_context44.prev = _context44.next) {
@@ -232,46 +241,33 @@ function _prepareAvailableDocuments() {
 
             for (i = 0; i < ftyp.length; i++) {
               ftyp[i] = type_lookup[ftyp[i]];
-            } // var msh_filter = null
-            // // var sg_tables = msh_filter ? ((msh_filter.length > 1) && (msh_filter[1] == "sgt") ? true : false) : false
-            // //
-            // // msh_filter = msh_filter ? msh_filter[0] : msh_filter
-            // //
-            // // msh_filter = msh_filter == "nofilter" ? null : msh_filter
-            // //
-            // var wsg_other = null
-
-
-            filtered_docs_ttype = null;
-            all_annotated_docids = null;
-
-            if (!(ftop.length + ftyp.length > 0)) {
-              _context44.next = 14;
-              break;
             }
 
-            _context44.next = 10;
+            filtered_docs_ttype = [];
+            _context44.next = 8;
             return getAnnotationResults();
 
-          case 10:
+          case 8:
             allAnnotations = _context44.sent;
             all_annotated_docids = Array.from(new Set(allAnnotations.rows.reduce(function (acc, ann) {
               acc = acc ? acc : [];
               acc.push(ann.docid + "_" + ann.page);
               return acc;
             }, [])));
-            filtered_docs_ttype = allAnnotations.rows.reduce(function (acc, ann) {
-              acc = acc ? acc : [];
 
-              if (ann.tableType != "" && ftyp.indexOf(ann.tableType) > -1) {
-                acc.push(ann.docid + "_" + ann.page);
-              }
+            if (ftop.length + ftyp.length > 0) {
+              filtered_docs_ttype = allAnnotations.rows.reduce(function (acc, ann) {
+                acc = acc ? acc : [];
 
-              return acc;
-            }, []);
-            filtered_docs_ttype = Array.from(new Set(filtered_docs_ttype));
+                if (ann.tableType != "" && ftyp.indexOf(ann.tableType) > -1) {
+                  acc.push(ann.docid + "_" + ann.page);
+                }
 
-          case 14:
+                return acc;
+              }, []);
+              filtered_docs_ttype = Array.from(new Set(filtered_docs_ttype));
+            }
+
             results = new Promise(function (resolve, reject) {
               var available_documents = {};
               var abs_index = [];
@@ -303,11 +299,16 @@ function _prepareAvailableDocuments() {
                     var topic_intersection = ftop.reduce(function (acc, cat) {
                       return acc || msh_categories.catIndex[cat].indexOf(docid) > -1;
                     }, false);
+
+                    if (ftop.indexOf("NA") > -1) {
+                      if (msh_categories.pmids_w_cat.indexOf(docid) < 0) {
+                        topic_intersection = true;
+                      }
+                    }
+
                     var type_enabled = ftyp.length > 0;
                     var type_intersection = type_enabled && filtered_docs_ttype.length > 0 && filtered_docs_ttype.indexOf(docid_V + "_" + page) > -1;
-                    var accept_docid = false; // if ( (docid_V+"_"+page) == "17392541_1"){
-                    //   debugger
-                    // }
+                    var accept_docid = false;
 
                     if (topic_enabled && type_enabled) {
                       if (topic_intersection && type_intersection) {
@@ -323,7 +324,7 @@ function _prepareAvailableDocuments() {
                       accept_docid = true;
                     }
 
-                    if (!hua && all_annotated_docids.indexOf(docid_V + "_" + page) < 0 && topic_enabled && topic_intersection) {
+                    if (!hua && all_annotated_docids.indexOf(docid_V + "_" + page) < 0) {
                       // The document is not annotated, so always add.
                       accept_docid = true;
                     }
@@ -333,7 +334,14 @@ function _prepareAvailableDocuments() {
                     }
                   } else {
                     // Default path when no filters are enabled
-                    acc.push(docfile);
+                    if (!hua) {
+                      // The document is not annotated, so always add.
+                      acc.push(docfile);
+                    } else {
+                      if (all_annotated_docids.indexOf(docid_V + "_" + page) > -1) {
+                        acc.push(docfile);
+                      }
+                    }
                   }
 
                   return acc;
@@ -383,13 +391,13 @@ function _prepareAvailableDocuments() {
                 }
               });
             });
-            _context44.next = 17;
+            _context44.next = 14;
             return results;
 
-          case 17:
+          case 14:
             return _context44.abrupt("return", _context44.sent);
 
-          case 18:
+          case 15:
           case "end":
             return _context44.stop();
         }
@@ -1190,7 +1198,7 @@ function () {
               return acc;
             }, {});
 
-            if (!(req.query && (req.query.filter_topic || req.query.filter_type))) {
+            if (!(req.query && (req.query.filter_topic || req.query.filter_type || req.query.hua))) {
               _context10.next = 14;
               break;
             }

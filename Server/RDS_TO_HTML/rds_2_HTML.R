@@ -3,27 +3,37 @@ library(unpivotr)
 library(tidyverse)
 library(htmlTable)
 
-new_obj_backup <- readRDS("/home/suso/ihw/tableAnnotator/Server/RDS_TO_HTML/new_obj.rds")
+new_obj_backup <- readRDS("/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/new_obj.rds")
 
 prevcolnames <- new_obj_backup %>% colnames()
 
-new_obj <- readRDS("/home/suso/ihw/tableAnnotator/Server/src/Full_set_of_tables.Rds")
+new_obj <- readRDS("/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/newTables/Full_set_of_tables.Rds")
 
-new_obj %>% colnames()
+
+## Prepare the missing table on the fly
+# readxl::read_excel("/home/suso/ihw/tableAnnotator/tools/SortingTables/26578849_2.xlsx")
+x <- xlsx_cells("/home/suso/ihw/tableAnnotator/tools/SortingTables/26578849_2.xlsx")
+x <- x %>% mutate( sheet = "26578849_2")
+x <- x %>% mutate ( search_round = "jesus_fix", bold = NA, italic = NA, indent = FALSE, is_empty = is_blank, has_no_num = NA, tbl_n  = 2, file_name = "26578849_2.xlsx",  blank_row = NA, first_col = NA, first_last_col = NA, original_file_stored = "26578849_2.xlsx",  pmid = 26578849, pmid_tbl = "26578849_2", ticker = 1, indent_lvl = 0  )
+
+new_obj <- new_obj %>% filter (!(pmid == "26578849" & tbl_n == 2) )
+new_obj <- new_obj %>% rbind(x %>% select(new_obj %>% colnames))
+new_obj <- new_obj %>% mutate ( pmid = ifelse( sheet == "30425095b", "30425095b", pmid  ))
 
 new_obj <- new_obj %>% mutate( pmid_tbl=paste0(pmid,"_",tbl_n))
+
+new_obj <- new_obj %>% filter (!(pmid == "pmid"))
 
 filenames_lkp <- new_obj %>% select(pmid,search_round,tbl_n,file_name,original_file_stored) %>% distinct %>% mutate(n = 1) %>% group_by(pmid,tbl_n) %>% mutate(ticker = cumsum(n))
 
 new_obj <- new_obj %>% inner_join(filenames_lkp) %>% select(-n) 
 
-new_obj <- new_obj %>% mutate (pmid = ifelse(sheet == "30425095b","30425095b",pmid))
-
 new_obj <- new_obj %>% mutate(pmid_tbl = ifelse(ticker > 1, gsub(" ", "", paste(pmid,"v",ticker,"_",tbl_n), fixed = TRUE), pmid_tbl) )
 
 filenames <- new_obj %>% select(pmid_tbl) %>% distinct
+new_obj <- new_obj %>% mutate(indent_lvl = ifelse(indent, 1, 0))
 
-new_obj <- new_obj %>% mutate(indent_lvl = indent_lvl_cum) %>% select(-indent_lvl_cum,-indent_lvl_norm)
+new_obj <- new_obj %>% distinct()
 
 new_obj %>% saveRDS("~/ihw/tableAnnotator/Server/src/Full_set_of_tables_Prepared.Rds")
 
@@ -82,7 +92,7 @@ df_to_html <- function (tbl_id, df, destination){
       # html_res <- htmlTable::htmlTable(rectify( ex ),
       #                                  align = paste(rep('l',ncol(ex)),collapse=''), rnames=FALSE)
       # 
-      rectify( ex ) -> tab
+      rectify( ex %>% distinct ) -> tab
       tab$"row/col" <- NULL
       unname(tab) -> tab
       

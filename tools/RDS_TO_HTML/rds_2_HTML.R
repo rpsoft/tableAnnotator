@@ -9,9 +9,22 @@ prevcolnames <- new_obj_backup %>% colnames()
 
 new_obj <- readRDS("/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/newTables/Full_set_of_tables.Rds")
 
-new_obj %>% colnames()
+
+## Prepare the missing table on the fly
+# readxl::read_excel("/home/suso/ihw/tableAnnotator/tools/SortingTables/26578849_2.xlsx")
+x <- xlsx_cells("/home/suso/ihw/tableAnnotator/tools/SortingTables/26578849_2.xlsx")
+x <- x %>% mutate( sheet = "26578849_2")
+x <- x %>% mutate ( search_round = "jesus_fix", bold = NA, italic = NA, indent = FALSE, is_empty = is_blank, has_no_num = NA, tbl_n  = 2, file_name = "26578849_2.xlsx",  blank_row = NA, first_col = NA, first_last_col = NA, original_file_stored = "26578849_2.xlsx",  pmid = 26578849, pmid_tbl = "26578849_2", ticker = 1, indent_lvl = 0  )
+
+new_obj <- new_obj %>% filter (!(pmid == "26578849" & tbl_n == 2) )
+
+new_obj <- new_obj %>% rbind(x %>% select(new_obj %>% colnames))
+
+new_obj <- new_obj %>% mutate ( pmid = ifelse( sheet == "30425095b", "30425095b", pmid  ))
 
 new_obj <- new_obj %>% mutate( pmid_tbl=paste0(pmid,"_",tbl_n))
+
+new_obj <- new_obj %>% filter (!(pmid == "pmid"))
 
 filenames_lkp <- new_obj %>% select(pmid,search_round,tbl_n,file_name,original_file_stored) %>% distinct %>% mutate(n = 1) %>% group_by(pmid,tbl_n) %>% mutate(ticker = cumsum(n))
 
@@ -19,9 +32,14 @@ new_obj <- new_obj %>% inner_join(filenames_lkp) %>% select(-n)
   
 new_obj <- new_obj %>% mutate(pmid_tbl = ifelse(ticker > 1, gsub(" ", "", paste(pmid,"v",ticker,"_",tbl_n), fixed = TRUE), pmid_tbl) )
 
-new_obj <- new_obj %>% mutate( indent_lvl=0)
+new_obj %>% select(pmid, tbl_n) %>% distinct %>% nrow
+new_obj %>% select(pmid_tbl) %>% distinct %>% nrow
 
-filenames <- new_obj %>% select(pmid_tbl) %>% distinct
+new_obj <- new_obj %>% mutate( indent_lvl = ifelse(indent, 1, 0) )
+
+new_obj %>% select(indent_lvl) %>% group_by (indent_lvl) %>%  tally
+
+# filenames <- new_obj %>% select(pmid_tbl) %>% distinct
 
 
 new_obj %>% write_rds("/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/newTables/full_tables_rds_jul_2019.rds")
@@ -177,8 +195,9 @@ df_to_html <- function (tbl_id, df, destination){
           character = paste0('<p class="',character)
         )
       
-      
-      rectify( ex ) -> tab
+     
+      # browser()
+      rectify( ex %>% distinct ) -> tab
       tab$"row/col" <- NULL
       unname(tab) -> tab
       html_res <- htmlTable::htmlTable(tab,
@@ -190,18 +209,35 @@ df_to_html <- function (tbl_id, df, destination){
 }
 
 
+errors = c()
+warnings = c()
 
 for (r in 1:nrow(filenames)){
 
-  try({
+  result = tryCatch({
     print(filenames[r,]$pmid_tbl)
     df_to_html(filenames[r,]$pmid_tbl, new_obj, "/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/tables/")
+  }, warning = function(w) {
+    print(paste0("Warning: ",filenames[r,]$pmid_tbl))
+    warnings <<- append(warnings,c(filenames[r,]$pmid_tbl))
+  }, error = function(e) {
+    print(paste0("Failed: ",filenames[r,]$pmid_tbl))
+    errors <<- append(errors,c(filenames[r,]$pmid_tbl))
+  }, finally = {
+    
   })
   
 }
 
 final_clean_version %>% write_rds("/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/newTables/clean_full_tables_rds_jul_2019.rds")
 
+# final_clean_version %>% mutate( pmid_tbl=paste0(pmid,"_",tbl_n)) %>% filter(pmid_tbl %in% (errors %>% dput) ) %>% View()
+# 
+# df_to_html("26578849_2", new_obj, "/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/tables/")
+# 
+# new_obj %>% filter(pmid_tbl == "26578849_2") %>% View()
+# 
+# new_obj %>% distinct()
 # 
 # df_to_html("10789664_1", new_obj, "/home/suso/ihw/tableAnnotator/tools/RDS_TO_HTML/tables/")
 # 

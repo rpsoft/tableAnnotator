@@ -1,0 +1,1622 @@
+pmid;page;filename_orig;mesh_broad_label;tableType
+10438259;2;10438259_2.html;Myocardial Ischemia;result_table_subgroup
+10789664;1;10789664_1.html;Heart Failure;NA
+10789664;1;10789664_1.html;Myocardial Ischemia, acute;NA
+10789664;1;10789664_1.html;Hypertension;NA
+10789664;1;10789664_1.html;Hyperlipidemias;NA
+10789664;1;10789664_1.html;Diabetes Mellitus;NA
+10789664;1;10789664_1.html;Myocardial Ischemia;NA
+11419425;2;11419425_2.html;Myocardial Ischemia, chronic;NA
+11419425;2;11419425_2.html;Myocardial Ischemia;NA
+11442551;2;11442551_2.html;Myocardial Ischemia, acute;result_table_subgroup
+11442551;2;11442551_2.html;Myocardial Ischemia;result_table_subgroup
+11527638;1;11527638_1.html;Heart Failure;NA
+12205648;2;12205648_2.html;Dementia;result_table_subgroup
+12456232;2;12456232_2.html;Myocardial Ischemia;result_table_subgroup
+12456232;3;12456232_3.html;Myocardial Ischemia;result_table_subgroup
+12456232;2;12456232v2_2.html;Myocardial Ischemia;result_table_subgroup
+12456232;3;12456232v2_3.html;Myocardial Ischemia;result_table_subgroup
+12601075;2;12601075_2.html;Embolism and Thrombosis;result_table_subgroup
+12601075;2;12601075_2.html;Peripheral Vascular Diseases;result_table_subgroup
+12601075;2;12601075v2_2.html;Embolism and Thrombosis;result_table_subgroup
+12601075;2;12601075v2_2.html;Peripheral Vascular Diseases;result_table_subgroup
+12601075;2;12601075v3_2.html;Embolism and Thrombosis;result_table_subgroup
+12601075;2;12601075v3_2.html;Peripheral Vascular Diseases;result_table_subgroup
+12803733;2;12803733_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+12803733;3;12803733_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+12803733;4;12803733_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+12803733;5;12803733_5.html;Diabetes Mellitus, Type 2;result_table_subgroup
+12899584;2;12899584_2.html;Hypertension;result_table_subgroup
+14657064;2;14657064_2.html;Myocardial Ischemia;result_table_subgroup
+14657064;2;14657064_2.html;Hypertension;result_table_subgroup
+14724302;2;14724302_2.html;Myocardial Ischemia, acute;result_table_subgroup
+14724302;2;14724302_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+14724302;2;14724302_2.html;Myocardial Ischemia;result_table_subgroup
+14724302;2;14724302v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+14724302;2;14724302v2_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+14724302;2;14724302v2_2.html;Myocardial Ischemia;result_table_subgroup
+14724302;2;14724302v3_2.html;Myocardial Ischemia, acute;result_table_subgroup
+14724302;2;14724302v3_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+14724302;2;14724302v3_2.html;Myocardial Ischemia;result_table_subgroup
+14996776;1;14996776_1.html;Atherosclerosis;NA
+15028365;1;15028365_1.html;Hypertension;result_table_subgroup
+15028365;2;15028365_2.html;Hypertension;NA
+15049402;2;15049402_2.html;Rhinitis;result_table_subgroup
+15337732;2;15337732_2.html;Myocardial Ischemia, acute;result_table_subgroup
+15337732;2;15337732v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+15381674;1;15381674_1.html;Myocardial Ischemia;NA
+15381674;1;15381674_1.html;Hypertension;NA
+15381674;2;15381674_2.html;Myocardial Ischemia;result_table_subgroup
+15381674;2;15381674_2.html;Hypertension;result_table_subgroup
+15451146;2;15451146_2.html;Myocardial Ischemia, acute;result_table_subgroup
+15451146;2;15451146v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+15537681;1;15537681_1.html;Atherosclerosis;NA
+15537681;2;15537681_2.html;Atherosclerosis;NA
+15590586;2;15590586_2.html;Myocardial Ischemia, acute;result_table_subgroup
+15590586;2;15590586_2.html;Myocardial Ischemia;result_table_subgroup
+15590586;3;15590586_3.html;Myocardial Ischemia, acute;result_table_subgroup
+15590586;3;15590586_3.html;Myocardial Ischemia;result_table_subgroup
+15590586;4;15590586_4.html;Myocardial Ischemia, acute;result_table_subgroup
+15590586;4;15590586_4.html;Myocardial Ischemia;result_table_subgroup
+15639688;2;15639688_2.html;Hyperlipidemias;NA
+15659722;1;15659722_1.html;Heart Failure;result_table_subgroup
+15659722;2;15659722_2.html;Heart Failure;result_table_subgroup
+15753114;2;15753114_2.html;Myocardial Ischemia, acute;result_table_subgroup
+15753114;2;15753114_2.html;Myocardial Ischemia;result_table_subgroup
+15758000;2;15758000_2.html;Myocardial Ischemia, acute;result_table_subgroup
+15781429;2;15781429_2.html;Hyperlipidemias;result_table_subgroup
+15851647;2;15851647_2.html;Heart Failure;result_table_subgroup
+15851647;2;15851647_2.html;Myocardial Ischemia, acute;result_table_subgroup
+15851647;2;15851647_2.html;Hypertension;result_table_subgroup
+15851647;2;15851647_2.html;Hyperlipidemias;result_table_subgroup
+15851647;2;15851647_2.html;Diabetes Mellitus;result_table_subgroup
+15851647;2;15851647_2.html;Myocardial Ischemia;result_table_subgroup
+15851647;3;15851647_3.html;Heart Failure;result_table_subgroup
+15851647;3;15851647_3.html;Myocardial Ischemia, acute;result_table_subgroup
+15851647;3;15851647_3.html;Hypertension;result_table_subgroup
+15851647;3;15851647_3.html;Hyperlipidemias;result_table_subgroup
+15851647;3;15851647_3.html;Diabetes Mellitus;result_table_subgroup
+15851647;3;15851647_3.html;Myocardial Ischemia;result_table_subgroup
+15883637;1;15883637_1.html;Osteoporosis;result_table_subgroup
+15883637;2;15883637_2.html;Osteoporosis;result_table_subgroup
+15924587;2;15924587_2.html;Hyperlipidemias;result_table_subgroup
+15924587;2;15924587_2.html;Myocardial Ischemia;result_table_subgroup
+15998890;2;15998890_2.html;Myocardial Ischemia, acute;result_table_subgroup
+15998890;2;15998890_2.html;Myocardial Ischemia;result_table_subgroup
+15998891;2;15998891_2.html;Myocardial Ischemia, acute;result_table_subgroup
+15998891;2;15998891_2.html;Parkinson Disease;result_table_subgroup
+15998891;2;15998891_2.html;Myocardial Ischemia;result_table_subgroup
+16116047;3;16116047_3.html;Hypertension;NA
+16116047;4;16116047_4.html;Hypertension;result_table_without_subgroup
+16116047;5;16116047_5.html;Hypertension;result_table_without_subgroup
+16139123;3;16139123_3.html;Hypertension;result_table_without_subgroup
+16139123;4;16139123_4.html;Hypertension;result_table_without_subgroup
+16214597;2;16214597_2.html;Myocardial Ischemia, acute;result_table_subgroup
+16214597;3;16214597_3.html;Myocardial Ischemia, acute;result_table_subgroup
+16267322;2;16267322_2.html;Inflammatory Bowel Diseases;NA
+16351668;2;16351668_2.html;Hyperlipidemias;NA
+16351668;2;16351668_2.html;Myocardial Ischemia;NA
+16380589;2;16380589_2.html;Arrhythmias, Cardiac;result_table_subgroup
+16495392;2;16495392_2.html;Arthritis;NA
+16495392;2;16495392v2_2.html;Arthritis;NA
+16508926;3;16508926_3.html;Arthritis;result_table_subgroup
+16508926;4;16508926_4.html;Arthritis;NA
+16508926;5;16508926_5.html;Arthritis;NA
+16508926;6;16508926_6.html;Arthritis;NA
+16533938;2;16533938_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+16533938;2;16533938_2.html;Myocardial Ischemia;result_table_subgroup
+16537662;2;16537662_2.html;Hypertension;result_table_subgroup
+16537662;2;16537662v2_2.html;Hypertension;result_table_subgroup
+16537663;2;16537663_2.html;NA;result_table_subgroup
+16572114;2;16572114_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+16651474;1;16651474_1.html;Heart Failure;result_table_subgroup
+16651474;1;16651474_1.html;Myocardial Ischemia, acute;result_table_subgroup
+16651474;1;16651474_1.html;Hypertension;result_table_subgroup
+16651474;1;16651474_1.html;Hyperlipidemias;result_table_subgroup
+16651474;1;16651474_1.html;Diabetes Mellitus;result_table_subgroup
+16651474;1;16651474_1.html;Myocardial Ischemia;result_table_subgroup
+16709304;2;16709304_2.html;Hyperlipidemias;result_table_subgroup
+16709304;3;16709304_3.html;Hyperlipidemias;result_table_subgroup
+16709304;4;16709304_4.html;Hyperlipidemias;result_table_subgroup
+16714187;2;16714187_2.html;Brain Ischemia;NA
+16801465;2;16801465_2.html;Myocardial Ischemia, acute;result_table_subgroup
+16801465;2;16801465_2.html;Myocardial Ischemia;result_table_subgroup
+16905022;2;16905022_2.html;Myocardial Ischemia, acute;result_table_subgroup
+17011942;2;17011942_2.html;Hyperlipidemias;result_table_subgroup
+17011942;2;17011942v2_2.html;Hyperlipidemias;result_table_subgroup
+17011942;2;17011942v3_2.html;Hyperlipidemias;result_table_subgroup
+17022864;3;17022864_3.html;Hyperlipidemias;result_table_without_subgroup
+17058629;2;17058629_2.html;Hyperlipidemias;result_table_subgroup
+17060377;2;17060377_2.html;Myocardial Ischemia, chronic;NA
+17060377;2;17060377_2.html;Myocardial Ischemia;NA
+17060377;3;17060377_3.html;Myocardial Ischemia, chronic;result_table_subgroup
+17060377;3;17060377_3.html;Myocardial Ischemia;result_table_subgroup
+17065671;2;17065671_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+17065671;2;17065671_2.html;Stroke;result_table_subgroup
+17065671;2;17065671_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+17065671;2;17065671v2_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+17065671;2;17065671v2_2.html;Stroke;result_table_subgroup
+17065671;2;17065671v2_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+17097378;1;17097378_1.html;Parapsoriasis;result_table_subgroup
+17097378;1;17097378_1.html;Psoriasis;result_table_subgroup
+17097378;2;17097378_2.html;Parapsoriasis;result_table_subgroup
+17097378;2;17097378_2.html;Psoriasis;result_table_subgroup
+17113426;2;17113426_2.html;Arthritis;result_table_subgroup
+17113426;2;17113426v2_2.html;Arthritis;result_table_subgroup
+17113426;2;17113426v3_2.html;Arthritis;result_table_subgroup
+17145742;2;17145742_2.html;Diabetes Mellitus, Type 2;NA
+17244641;2;17244641_2.html;Myocardial Ischemia, acute;NA
+17259484;2;17259484_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+17292766;2;17292766_2.html;Arthritis;NA
+17292766;3;17292766_3.html;Arthritis;result_table_subgroup
+17292766;4;17292766_4.html;Arthritis;NA
+17292766;2;17292766v2_2.html;Arthritis;NA
+17292766;3;17292766v2_3.html;Arthritis;result_table_subgroup
+17292766;4;17292766v2_4.html;Arthritis;NA
+17292766;2;17292766v3_2.html;Arthritis;NA
+17304660;2;17304660_2.html;Arthritis;result_table_subgroup
+17392541;1;17392541_1.html;Diabetes Mellitus, Type 1;NA
+17398308;2;17398308_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+17398308;2;17398308_2.html;Death, Sudden, Cardiac;result_table_subgroup
+17398308;2;17398308_2.html;Myocardial Ischemia, acute;result_table_subgroup
+17398308;2;17398308_2.html;Peripheral Vascular Diseases;result_table_subgroup
+17398308;2;17398308_2.html;Stroke;result_table_subgroup
+17456819;2;17456819_2.html;Myocardial Ischemia, acute;result_table_subgroup
+17456819;2;17456819_2.html;Myocardial Ischemia;result_table_subgroup
+17456819;2;17456819v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+17456819;2;17456819v2_2.html;Myocardial Ischemia;result_table_subgroup
+17456819;2;17456819v3_2.html;Myocardial Ischemia, acute;result_table_subgroup
+17456819;2;17456819v3_2.html;Myocardial Ischemia;result_table_subgroup
+17456819;2;17456819v4_2.html;Myocardial Ischemia, acute;result_table_subgroup
+17456819;2;17456819v4_2.html;Myocardial Ischemia;result_table_subgroup
+17470434;2;17470434_2.html;Arthritis;result_table_subgroup
+17470824;2;17470824_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+17560879;1;17560879_1.html;Hyperlipidemias;result_table_subgroup
+17560879;2;17560879_2.html;Hyperlipidemias;NA
+17605774;2;17605774_2.html;Lung Diseases, Obstructive;result_table_subgroup
+17605774;3;17605774_3.html;Lung Diseases, Obstructive;result_table_subgroup
+17634458;1;17634458_1.html;Inflammatory Bowel Diseases;NA
+17634458;2;17634458_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+17634459;2;17634459_2.html;Inflammatory Bowel Diseases;NA
+17765963;2;17765963_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+17804843;2;17804843_2.html;Arrhythmias, Cardiac;result_table_subgroup
+17804843;2;17804843v2_2.html;Arrhythmias, Cardiac;result_table_subgroup
+17846352;2;17846352_2.html;Heart Failure;result_table_subgroup
+17846352;2;17846352_2.html;Myocardial Ischemia, acute;result_table_subgroup
+17846352;2;17846352_2.html;Hypertension;result_table_subgroup
+17846352;2;17846352_2.html;Hyperlipidemias;result_table_subgroup
+17846352;2;17846352_2.html;Diabetes Mellitus;result_table_subgroup
+17846352;2;17846352_2.html;Myocardial Ischemia;result_table_subgroup
+17846352;3;17846352_3.html;Heart Failure;NA
+17846352;3;17846352_3.html;Myocardial Ischemia, acute;NA
+17846352;3;17846352_3.html;Hypertension;NA
+17846352;3;17846352_3.html;Hyperlipidemias;NA
+17846352;3;17846352_3.html;Diabetes Mellitus;NA
+17846352;3;17846352_3.html;Myocardial Ischemia;NA
+17878242;1;17878242_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+17965424;1;17965424_1.html;Arthritis;NA
+17965424;2;17965424_2.html;Arthritis;result_table_subgroup
+17965424;1;17965424v2_1.html;Arthritis;NA
+17965424;2;17965424v2_2.html;Arthritis;result_table_subgroup
+17980928;3;17980928_3.html;Diabetes Mellitus, Type 2;result_table_without_subgroup
+17984166;2;17984166_2.html;Heart Failure;result_table_subgroup
+17984166;2;17984166v2_2.html;Heart Failure;result_table_subgroup
+18000186;2;18000186_2.html;Heart Failure;result_table_subgroup
+18000186;2;18000186_2.html;Myocardial Ischemia, acute;result_table_subgroup
+18000186;2;18000186_2.html;Hypertension;result_table_subgroup
+18000186;2;18000186_2.html;Hyperlipidemias;result_table_subgroup
+18000186;2;18000186_2.html;Diabetes Mellitus;result_table_subgroup
+18000186;2;18000186_2.html;Myocardial Ischemia;result_table_subgroup
+18032739;2;18032739_2.html;Brain Ischemia;NA
+18032739;2;18032739_2.html;Stroke;NA
+18032739;2;18032739v2_2.html;Brain Ischemia;NA
+18032739;2;18032739v2_2.html;Stroke;NA
+18094675;2;18094675_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+18094675;3;18094675_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+18094675;4;18094675_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+18172039;2;18172039_2.html;Hyperlipidemias;result_table_subgroup
+18172039;3;18172039_3.html;Hyperlipidemias;result_table_subgroup
+18172039;2;18172039v2_2.html;Hyperlipidemias;result_table_subgroup
+18172039;3;18172039v2_3.html;Hyperlipidemias;result_table_subgroup
+18172039;2;18172039v3_2.html;Hyperlipidemias;result_table_subgroup
+18172039;3;18172039v3_3.html;Hyperlipidemias;result_table_subgroup
+18199798;2;18199798_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+18223031;2;18223031_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+18223031;3;18223031_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+18227370;2;18227370_2.html;Heart Failure;result_table_subgroup
+18227370;2;18227370_2.html;Myocardial Ischemia, acute;result_table_subgroup
+18227370;2;18227370_2.html;Hypertension;result_table_subgroup
+18227370;2;18227370_2.html;Hyperlipidemias;result_table_subgroup
+18227370;2;18227370_2.html;Diabetes Mellitus;result_table_subgroup
+18227370;2;18227370_2.html;Myocardial Ischemia;result_table_subgroup
+18227370;3;18227370_3.html;Heart Failure;result_table_subgroup
+18227370;3;18227370_3.html;Myocardial Ischemia, acute;result_table_subgroup
+18227370;3;18227370_3.html;Hypertension;result_table_subgroup
+18227370;3;18227370_3.html;Hyperlipidemias;result_table_subgroup
+18227370;3;18227370_3.html;Diabetes Mellitus;result_table_subgroup
+18227370;3;18227370_3.html;Myocardial Ischemia;result_table_subgroup
+18227370;4;18227370_4.html;Heart Failure;result_table_subgroup
+18227370;4;18227370_4.html;Myocardial Ischemia, acute;result_table_subgroup
+18227370;4;18227370_4.html;Hypertension;result_table_subgroup
+18227370;4;18227370_4.html;Hyperlipidemias;result_table_subgroup
+18227370;4;18227370_4.html;Diabetes Mellitus;result_table_subgroup
+18227370;4;18227370_4.html;Myocardial Ischemia;result_table_subgroup
+18227370;5;18227370_5.html;Heart Failure;NA
+18227370;5;18227370_5.html;Myocardial Ischemia, acute;NA
+18227370;5;18227370_5.html;Hypertension;NA
+18227370;5;18227370_5.html;Hyperlipidemias;NA
+18227370;5;18227370_5.html;Diabetes Mellitus;NA
+18227370;5;18227370_5.html;Myocardial Ischemia;NA
+18259029;2;18259029_2.html;Hypertension;result_table_subgroup
+18284434;2;18284434_2.html;Diabetes Mellitus, Type 2;NA
+18326958;2;18326958_2.html;Hypertension;result_table_subgroup
+18339679;2;18339679_2.html;Myocardial Ischemia, acute;result_table_subgroup
+18339679;2;18339679_2.html;Myocardial Ischemia;result_table_subgroup
+18371559;1;18371559_1.html;Heart Failure;NA
+18375982;2;18375982_2.html;Myocardial Ischemia;result_table_subgroup
+18375982;2;18375982_2.html;Hypertension;result_table_subgroup
+18398080;2;18398080_2.html;Hypertension;result_table_subgroup
+18398080;2;18398080_2.html;Diabetes Mellitus;result_table_subgroup
+18398080;2;18398080_2.html;Atherosclerosis;result_table_subgroup
+18451347;2;18451347_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+18451347;2;18451347_2.html;Death, Sudden, Cardiac;result_table_subgroup
+18451347;2;18451347_2.html;Myocardial Ischemia, acute;result_table_subgroup
+18451347;2;18451347_2.html;Peripheral Vascular Diseases;result_table_subgroup
+18451347;2;18451347_2.html;Stroke;result_table_subgroup
+18479744;2;18479744_2.html;Myocardial Ischemia, acute;NA
+18479744;2;18479744_2.html;Peripheral Vascular Diseases;NA
+18498915;2;18498915_2.html;Hypertension;result_table_subgroup
+18498915;3;18498915_3.html;Hypertension;result_table_subgroup
+18499565;2;18499565_2.html;Myocardial Ischemia, acute;result_table_subgroup
+18511702;2;18511702_2.html;Lung Diseases, Obstructive;NA
+18537526;2;18537526_2.html;Hyperlipidemias;NA
+18537526;2;18537526_2.html;Atherosclerosis;NA
+18539916;1;18539916_1.html;Diabetes Mellitus, Type 2;result_table_without_subgroup
+18539916;2;18539916_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+18615004;2;18615004_2.html;Myocardial Ischemia;result_table_subgroup
+18615004;2;18615004_2.html;Hypertension;result_table_subgroup
+18657652;2;18657652_2.html;Myocardial Ischemia;result_table_subgroup
+18657652;2;18657652_2.html;Hypertension;result_table_subgroup
+18667204;2;18667204_2.html;Myocardial Ischemia, chronic;NA
+18667204;2;18667204_2.html;Death, Sudden, Cardiac;NA
+18667204;2;18667204_2.html;Myocardial Ischemia, acute;NA
+18667204;2;18667204_2.html;Peripheral Vascular Diseases;NA
+18667204;2;18667204_2.html;Stroke;NA
+18674411;2;18674411_2.html;Dementia;result_table_subgroup
+18674411;2;18674411v2_2.html;Dementia;result_table_subgroup
+18676075;2;18676075_2.html;Heart Failure;result_table_subgroup
+18676075;2;18676075_2.html;Myocardial Ischemia, acute;result_table_subgroup
+18676075;2;18676075_2.html;Hypertension;result_table_subgroup
+18676075;2;18676075_2.html;Hyperlipidemias;result_table_subgroup
+18676075;2;18676075_2.html;Diabetes Mellitus;result_table_subgroup
+18676075;2;18676075_2.html;Myocardial Ischemia;result_table_subgroup
+18753638;2;18753638_2.html;Stroke;result_table_subgroup
+18753639;2;18753639_2.html;Stroke;result_table_subgroup
+18753639;3;18753639_3.html;Stroke;result_table_subgroup
+18757089;2;18757089_2.html;Heart Failure;result_table_subgroup
+18757090;2;18757090_2.html;Heart Failure;result_table_subgroup
+18821708;2;18821708_2.html;Arthritis;NA
+18821708;3;18821708_3.html;Arthritis;NA
+18823986;2;18823986_2.html;Arthritis;result_table_subgroup
+18823986;2;18823986v2_2.html;Arthritis;result_table_subgroup
+18823986;2;18823986v3_2.html;Arthritis;result_table_subgroup
+18835953;2;18835953_2.html;Myocardial Ischemia, acute;result_table_subgroup
+18835953;2;18835953_2.html;Myocardial Ischemia;result_table_subgroup
+18836213;2;18836213_2.html;Lung Diseases, Obstructive;result_table_subgroup
+18836213;3;18836213_3.html;Lung Diseases, Obstructive;NA
+18972097;1;18972097_1.html;Myocardial Ischemia, chronic;result_table_subgroup
+18972097;1;18972097_1.html;Stroke;result_table_subgroup
+18972097;1;18972097_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+19001024;1;19001024_1.html;Heart Failure;result_table_without_subgroup
+19001024;1;19001024_1.html;Myocardial Ischemia, acute;result_table_without_subgroup
+19001024;1;19001024_1.html;Hypertension;result_table_without_subgroup
+19001024;1;19001024_1.html;Hyperlipidemias;result_table_without_subgroup
+19001024;1;19001024_1.html;Diabetes Mellitus;result_table_without_subgroup
+19001024;1;19001024_1.html;Myocardial Ischemia;result_table_without_subgroup
+19001508;2;19001508_2.html;Heart Failure;result_table_subgroup
+19097665;2;19097665_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+19097665;3;19097665_3.html;Diabetes Mellitus, Type 2;result_table_without_subgroup
+19104004;3;19104004_3.html;Hyperlipidemias;result_table_subgroup
+19104004;3;19104004v2_3.html;Hyperlipidemias;result_table_subgroup
+19125778;2;19125778_2.html;Diabetes Mellitus;result_table_subgroup
+19139391;2;19139391_2.html;Hypertension;result_table_subgroup
+19166691;2;19166691_2.html;Hyperlipidemias;NA
+19190658;2;19190658_2.html;Hypertension;NA
+19201775;2;19201775_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+19210140;2;19210140_2.html;Diabetes Mellitus, Type 2;NA
+19210140;2;19210140v2_2.html;Diabetes Mellitus, Type 2;NA
+19332455;2;19332455_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19332455;2;19332455_2.html;Myocardial Ischemia;result_table_subgroup
+19332467;2;19332467_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19332467;2;19332467v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19332467;2;19332467v3_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19336502;3;19336502_3.html;Arrhythmias, Cardiac;result_table_subgroup
+19336502;4;19336502_4.html;Arrhythmias, Cardiac;result_table_subgroup
+19336502;3;19336502v2_3.html;Arrhythmias, Cardiac;result_table_subgroup
+19336502;3;19336502v3_3.html;Arrhythmias, Cardiac;result_table_subgroup
+19349325;2;19349325_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19349325;2;19349325_2.html;Myocardial Ischemia;result_table_subgroup
+19369667;2;19369667_2.html;Arrhythmias, Cardiac;result_table_subgroup
+19389561;2;19389561_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19389561;2;19389561_2.html;Myocardial Ischemia;result_table_subgroup
+19389561;3;19389561_3.html;Myocardial Ischemia, acute;result_table_without_subgroup
+19389561;3;19389561_3.html;Myocardial Ischemia;result_table_without_subgroup
+19389561;2;19389561v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19389561;2;19389561v2_2.html;Myocardial Ischemia;result_table_subgroup
+19389561;2;19389561v3_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19389561;2;19389561v3_2.html;Myocardial Ischemia;result_table_subgroup
+19389561;2;19389561v4_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19389561;2;19389561v4_2.html;Myocardial Ischemia;result_table_subgroup
+19409693;2;19409693_2.html;Prostatic Hyperplasia;result_table_subgroup
+19423108;2;19423108_2.html;Hyperlipidemias;result_table_subgroup
+19443528;2;19443528_2.html;Lung Diseases, Obstructive;result_table_subgroup
+19447387;2;19447387_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+19447387;2;19447387_2.html;Death, Sudden, Cardiac;result_table_subgroup
+19447387;2;19447387_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19447387;2;19447387_2.html;Peripheral Vascular Diseases;result_table_subgroup
+19447387;2;19447387_2.html;Stroke;result_table_subgroup
+19447387;3;19447387_3.html;Myocardial Ischemia, chronic;result_table_subgroup
+19447387;3;19447387_3.html;Death, Sudden, Cardiac;result_table_subgroup
+19447387;3;19447387_3.html;Myocardial Ischemia, acute;result_table_subgroup
+19447387;3;19447387_3.html;Peripheral Vascular Diseases;result_table_subgroup
+19447387;3;19447387_3.html;Stroke;result_table_subgroup
+19470885;2;19470885_2.html;Hypertension, Pulmonary;result_table_subgroup
+19470885;2;19470885_2.html;Hypertension;result_table_subgroup
+19508464;1;19508464_1.html;Hyperlipidemias;NA
+19508464;1;19508464_1.html;Diabetes Mellitus, Type 2;NA
+19508464;2;19508464_2.html;Hyperlipidemias;NA
+19508464;2;19508464_2.html;Diabetes Mellitus, Type 2;NA
+19515181;2;19515181_2.html;Diabetes Mellitus;NA
+19560810;1;19560810_1.html;Arthritis;NA
+19567517;2;19567517_2.html;Osteoporosis;result_table_subgroup
+19596014;2;19596014_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+19596014;3;19596014_3.html;Inflammatory Bowel Diseases;result_table_subgroup
+19614946;2;19614946_2.html;Diabetes Mellitus, Type 2;NA
+19614946;3;19614946_3.html;Diabetes Mellitus, Type 2;NA
+19614946;2;19614946v2_2.html;Diabetes Mellitus, Type 2;NA
+19650752;2;19650752_2.html;Diabetes Mellitus, Type 2;NA
+19660610;2;19660610_2.html;Hyperlipidemias;result_table_subgroup
+19683639;2;19683639_2.html;Stroke;NA
+19683639;2;19683639_2.html;Arrhythmias, Cardiac;NA
+19688336;2;19688336_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+19704100;2;19704100_2.html;Heart Failure;result_table_subgroup
+19716598;2;19716598_2.html;Lung Diseases, Obstructive;result_table_subgroup
+19717844;2;19717844_2.html;NA;result_table_subgroup
+19717850;2;19717850_2.html;Heart Failure;result_table_subgroup
+19726772;2;19726772_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19726772;2;19726772_2.html;Peripheral Vascular Diseases;result_table_subgroup
+19751115;2;19751115_2.html;Hypertension;result_table_subgroup
+19776408;2;19776408_2.html;Parkinson Disease;result_table_without_subgroup
+19776408;2;19776408v2_2.html;Parkinson Disease;result_table_without_subgroup
+19847908;2;19847908_2.html;Multiple Sclerosis;result_table_subgroup
+19847908;2;19847908v2_2.html;Multiple Sclerosis;result_table_subgroup
+19850248;2;19850248_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19850248;3;19850248_3.html;Myocardial Ischemia, acute;result_table_subgroup
+19850249;1;19850249_1.html;Myocardial Ischemia, acute;result_table_subgroup
+19850249;2;19850249_2.html;Myocardial Ischemia, acute;result_table_subgroup
+19850525;2;19850525_2.html;Stroke;result_table_subgroup
+19915221;2;19915221_2.html;Myocardial Ischemia, acute;NA
+19917888;2;19917888_2.html;Heart Failure;result_table_subgroup
+19917888;3;19917888_3.html;Heart Failure;result_table_subgroup
+19917888;2;19917888v2_2.html;Heart Failure;result_table_subgroup
+19917888;2;19917888v3_2.html;Heart Failure;result_table_subgroup
+19966341;2;19966341_2.html;NA;result_table_subgroup
+20136164;1;20136164_1.html;Myocardial Ischemia;result_table_subgroup
+20136164;2;20136164_2.html;Myocardial Ischemia;result_table_without_subgroup
+20136164;3;20136164_3.html;Myocardial Ischemia;result_table_without_subgroup
+20136164;4;20136164_4.html;Myocardial Ischemia;result_table_without_subgroup
+20136164;5;20136164_5.html;Myocardial Ischemia;result_table_without_subgroup
+20151997;2;20151997_2.html;Hyperlipidemias;result_table_subgroup
+20163842;2;20163842_2.html;Prostatic Hyperplasia;result_table_subgroup
+20185426;2;20185426_2.html;Lung Diseases, Obstructive;result_table_without_subgroup
+20194881;2;20194881_2.html;NA;result_table_subgroup
+20200926;2;20200926_2.html;Osteoporosis;result_table_subgroup
+20228402;2;20228402_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+20228402;3;20228402_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+20228402;4;20228402_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+20228403;2;20228403_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+20228403;3;20228403_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+20228403;4;20228403_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+20357382;2;20357382_2.html;Myocardial Ischemia, acute;result_table_subgroup
+20357382;2;20357382_2.html;Myocardial Ischemia;result_table_subgroup
+20357382;3;20357382_3.html;Myocardial Ischemia, acute;result_table_subgroup
+20357382;3;20357382_3.html;Myocardial Ischemia;result_table_subgroup
+20370912;2;20370912_2.html;NA;result_table_subgroup
+20385930;2;20385930_2.html;Myocardial Ischemia, acute;result_table_subgroup
+20385930;2;20385930_2.html;Myocardial Ischemia;result_table_subgroup
+20385930;3;20385930_3.html;Myocardial Ischemia, acute;result_table_subgroup
+20385930;3;20385930_3.html;Myocardial Ischemia;result_table_subgroup
+20385930;2;20385930v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+20385930;2;20385930v2_2.html;Myocardial Ischemia;result_table_subgroup
+20385930;3;20385930v2_3.html;Myocardial Ischemia, acute;result_table_subgroup
+20385930;3;20385930v2_3.html;Myocardial Ischemia;result_table_subgroup
+20385930;2;20385930v3_2.html;Myocardial Ischemia, acute;result_table_subgroup
+20385930;2;20385930v3_2.html;Myocardial Ischemia;result_table_subgroup
+20393175;2;20393175_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+20393175;3;20393175_3.html;Inflammatory Bowel Diseases;result_table_subgroup
+20393175;4;20393175_4.html;Inflammatory Bowel Diseases;result_table_subgroup
+20400762;1;20400762_1.html;Myocardial Ischemia, acute;NA
+20409909;1;20409909_1.html;Hypertension;NA
+20418083;2;20418083_2.html;Lung Diseases, Obstructive;result_table_subgroup
+20429821;2;20429821_2.html;Lung Diseases, Obstructive;NA
+20429821;3;20429821_3.html;Lung Diseases, Obstructive;NA
+20429821;4;20429821_4.html;Lung Diseases, Obstructive;NA
+20436046;2;20436046_2.html;Arrhythmias, Cardiac;NA
+20436046;3;20436046_3.html;Arrhythmias, Cardiac;NA
+20463178;2;20463178_2.html;Lung Diseases, Obstructive;NA
+20469975;2;20469975_2.html;Hypertension;result_table_subgroup
+20484828;1;20484828_1.html;Myocardial Ischemia, chronic;NA
+20484828;1;20484828_1.html;Death, Sudden, Cardiac;NA
+20484828;1;20484828_1.html;Myocardial Ischemia, acute;NA
+20484828;1;20484828_1.html;Peripheral Vascular Diseases;NA
+20484828;1;20484828_1.html;Stroke;NA
+20487050;2;20487050_2.html;Hyperlipidemias;result_table_subgroup
+20491747;2;20491747_2.html;Inflammatory Bowel Diseases;NA
+20582594;2;20582594_2.html;Myocardial Ischemia, acute;result_table_subgroup
+20582594;2;20582594v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+20582594;2;20582594v3_2.html;Myocardial Ischemia, acute;result_table_subgroup
+20582594;2;20582594v4_2.html;Myocardial Ischemia, acute;result_table_subgroup
+20621900;2;20621900_2.html;Embolism and Thrombosis;result_table_subgroup
+20670726;2;20670726_2.html;Myocardial Ischemia;NA
+20670726;2;20670726_2.html;Hypertension;NA
+20678674;2;20678674_2.html;Hypertension;result_table_subgroup
+20678878;2;20678878_2.html;Peripheral Vascular Diseases;result_table_subgroup
+20678878;2;20678878v2_2.html;Peripheral Vascular Diseases;result_table_subgroup
+20685748;2;20685748_2.html;Lung Diseases, Obstructive;result_table_subgroup
+20801495;2;20801495_2.html;Heart Failure;result_table_subgroup
+20801495;3;20801495_3.html;Heart Failure;NA
+20801500;2;20801500_2.html;Heart Failure;result_table_subgroup
+20801500;2;20801500v2_2.html;Heart Failure;result_table_subgroup
+20883926;2;20883926_2.html;Heart Failure;result_table_subgroup
+20883926;3;20883926_3.html;Heart Failure;NA
+20883926;2;20883926v2_2.html;Heart Failure;result_table_subgroup
+20883926;2;20883926v3_2.html;Heart Failure;result_table_subgroup
+20925534;2;20925534_2.html;Myocardial Ischemia;NA
+20925534;2;20925534_2.html;Myocardial Ischemia, acute;NA
+20925534;3;20925534_3.html;Myocardial Ischemia;NA
+20925534;3;20925534_3.html;Myocardial Ischemia, acute;NA
+20925534;2;20925534v2_2.html;Myocardial Ischemia;NA
+20925534;2;20925534v2_2.html;Myocardial Ischemia, acute;NA
+20925534;3;20925534v2_3.html;Myocardial Ischemia;NA
+20925534;3;20925534v2_3.html;Myocardial Ischemia, acute;NA
+20925544;2;20925544_2.html;Heart Failure;NA
+20925544;3;20925544_3.html;Heart Failure;NA
+20937671;2;20937671_2.html;Arthritis;result_table_subgroup
+20937671;2;20937671v2_2.html;Arthritis;result_table_subgroup
+20953684;2;20953684_2.html;Hyperlipidemias;result_table_subgroup
+20979470;2;20979470_2.html;Arrhythmias, Cardiac;result_table_subgroup
+20979470;3;20979470_3.html;Arrhythmias, Cardiac;result_table_subgroup
+20979470;2;20979470v2_2.html;Arrhythmias, Cardiac;result_table_subgroup
+20979470;3;20979470v2_3.html;Arrhythmias, Cardiac;result_table_subgroup
+21059484;2;21059484_2.html;NA;result_table_subgroup
+21060071;2;21060071_2.html;Myocardial Ischemia, acute;result_table_subgroup
+21128814;2;21128814_2.html;Embolism and Thrombosis;result_table_subgroup
+21128814;3;21128814_3.html;Embolism and Thrombosis;result_table_subgroup
+21147728;2;21147728_2.html;NA;result_table_subgroup
+21174145;2;21174145_2.html;Hyperlipidemias;result_table_subgroup
+21174145;2;21174145_2.html;Myocardial Ischemia;result_table_subgroup
+21209123;2;21209123_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+21216833;2;21216833_2.html;Heart Failure;result_table_subgroup
+21216833;2;21216833v2_2.html;Heart Failure;result_table_subgroup
+21227674;2;21227674_2.html;Lung Diseases, Obstructive;NA
+21332627;2;21332627_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+21332627;3;21332627_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+21332630;2;21332630_2.html;Prostatic Hyperplasia;result_table_subgroup
+21428765;2;21428765_2.html;Lung Diseases, Obstructive;result_table_subgroup
+21428766;2;21428766_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+21428766;2;21428766v2_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+21454723;1;21454723_1.html;Diabetes Mellitus, Type 2;NA
+21502549;2;21502549_2.html;Embolism and Thrombosis;result_table_subgroup
+21502549;2;21502549v2_2.html;Embolism and Thrombosis;result_table_subgroup
+21545942;2;21545942_2.html;Myocardial Ischemia, acute;result_table_subgroup
+21545947;2;21545947_2.html;Heart Failure;result_table_subgroup
+21545947;3;21545947_3.html;Heart Failure;NA
+21545947;2;21545947v2_2.html;Heart Failure;result_table_subgroup
+21545947;2;21545947v3_2.html;Heart Failure;result_table_subgroup
+21545947;2;21545947v4_2.html;Heart Failure;result_table_subgroup
+21576658;2;21576658_2.html;NA;result_table_subgroup
+21576658;3;21576658_3.html;NA;result_table_subgroup
+21586508;2;21586508_2.html;Lung Diseases, Obstructive;NA
+21586508;2;21586508v2_2.html;Lung Diseases, Obstructive;NA
+21627828;2;21627828_2.html;Lung Diseases, Obstructive;NA
+21627828;3;21627828_3.html;Lung Diseases, Obstructive;NA
+21642014;3;21642014_3.html;Inflammatory Bowel Diseases;result_table_subgroup
+21645018;2;21645018_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+21673005;2;21673005_2.html;Myocardial Ischemia, acute;result_table_subgroup
+21673005;2;21673005_2.html;Myocardial Ischemia;result_table_subgroup
+21682834;2;21682834_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+21723220;1;21723220_1.html;Inflammatory Bowel Diseases;NA
+21723220;2;21723220_2.html;Inflammatory Bowel Diseases;NA
+21723220;3;21723220_3.html;Inflammatory Bowel Diseases;NA
+21780946;2;21780946_2.html;Myocardial Ischemia, acute;result_table_subgroup
+21815708;1;21815708_1.html;Hyperlipidemias;result_table_subgroup
+21815708;2;21815708_2.html;Hyperlipidemias;result_table_subgroup
+21815708;1;21815708v2_1.html;Hyperlipidemias;result_table_subgroup
+21815708;2;21815708v2_2.html;Hyperlipidemias;result_table_subgroup
+21816478;2;21816478_2.html;Myocardial Ischemia;NA
+21871706;2;21871706_2.html;Prostatic Hyperplasia;result_table_subgroup
+21875546;2;21875546_2.html;Lung Diseases, Obstructive;NA
+21925996;2;21925996_2.html;Hypertension;NA
+21925996;3;21925996_3.html;Hypertension;NA
+21925996;4;21925996_4.html;Hypertension;NA
+21933100;2;21933100_2.html;Lung Diseases, Obstructive;result_table_subgroup
+22052584;2;22052584_2.html;Arthritis;result_table_subgroup
+22084332;2;22084332_2.html;NA;result_table_subgroup
+22085343;1;22085343_1.html;Myocardial Ischemia, acute;result_table_subgroup
+22085343;1;22085343_1.html;Atherosclerosis;result_table_subgroup
+22085343;1;22085343_1.html;Myocardial Ischemia;result_table_subgroup
+22085343;1;22085343_1.html;Stroke;result_table_subgroup
+22177371;2;22177371_2.html;Lung Diseases, Obstructive;result_table_subgroup
+22193143;2;22193143_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22234149;2;22234149_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22235820;2;22235820_2.html;Heart Failure;result_table_subgroup
+22235820;2;22235820_2.html;Myocardial Ischemia, acute;result_table_subgroup
+22235820;2;22235820_2.html;Hypertension;result_table_subgroup
+22235820;2;22235820_2.html;Hyperlipidemias;result_table_subgroup
+22235820;2;22235820_2.html;Diabetes Mellitus;result_table_subgroup
+22235820;2;22235820_2.html;Myocardial Ischemia;result_table_subgroup
+22235820;3;22235820_3.html;Heart Failure;result_table_subgroup
+22235820;3;22235820_3.html;Myocardial Ischemia, acute;result_table_subgroup
+22235820;3;22235820_3.html;Hypertension;result_table_subgroup
+22235820;3;22235820_3.html;Hyperlipidemias;result_table_subgroup
+22235820;3;22235820_3.html;Diabetes Mellitus;result_table_subgroup
+22235820;3;22235820_3.html;Myocardial Ischemia;result_table_subgroup
+22248871;2;22248871_2.html;Hypertension;result_table_subgroup
+22259009;2;22259009_2.html;Myocardial Ischemia;result_table_subgroup
+22305835;2;22305835_2.html;Myocardial Ischemia, acute;result_table_subgroup
+22305835;2;22305835_2.html;Atherosclerosis;result_table_subgroup
+22316106;2;22316106_2.html;NA;NA
+22335737;1;22335737_1.html;Embolism and Thrombosis;result_table_subgroup
+22337213;2;22337213_2.html;Lupus Erythematosus, Systemic;NA
+22369287;2;22369287_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22378566;2;22378566_2.html;Arthritis;result_table_subgroup
+22396585;2;22396585_2.html;Heart Failure;result_table_subgroup
+22396585;2;22396585_2.html;Myocardial Ischemia, acute;result_table_subgroup
+22396585;2;22396585_2.html;Hypertension;result_table_subgroup
+22396585;2;22396585_2.html;Hyperlipidemias;result_table_subgroup
+22396585;2;22396585_2.html;Diabetes Mellitus;result_table_subgroup
+22396585;2;22396585_2.html;Myocardial Ischemia;result_table_subgroup
+22436129;2;22436129_2.html;NA;NA
+22443427;2;22443427_2.html;Peripheral Vascular Diseases;result_table_subgroup
+22443427;2;22443427_2.html;Myocardial Ischemia, acute;result_table_subgroup
+22443427;2;22443427_2.html;Atherosclerosis;result_table_subgroup
+22443427;2;22443427_2.html;Stroke;result_table_subgroup
+22443427;3;22443427_3.html;Peripheral Vascular Diseases;result_table_subgroup
+22443427;3;22443427_3.html;Myocardial Ischemia, acute;result_table_subgroup
+22443427;3;22443427_3.html;Atherosclerosis;result_table_subgroup
+22443427;3;22443427_3.html;Stroke;result_table_subgroup
+22470539;2;22470539_2.html;Heart Failure;result_table_subgroup
+22470539;2;22470539_2.html;Myocardial Ischemia, acute;result_table_subgroup
+22470539;2;22470539_2.html;Hypertension;result_table_subgroup
+22470539;2;22470539_2.html;Hyperlipidemias;result_table_subgroup
+22470539;2;22470539_2.html;Diabetes Mellitus;result_table_subgroup
+22470539;2;22470539_2.html;Myocardial Ischemia;result_table_subgroup
+22490878;1;22490878_1.html;Heart Failure;result_table_subgroup
+22490878;1;22490878_1.html;Myocardial Ischemia, acute;result_table_subgroup
+22490878;1;22490878_1.html;Hypertension;result_table_subgroup
+22490878;1;22490878_1.html;Hyperlipidemias;result_table_subgroup
+22490878;1;22490878_1.html;Diabetes Mellitus;result_table_subgroup
+22490878;1;22490878_1.html;Myocardial Ischemia;result_table_subgroup
+22490878;2;22490878_2.html;Heart Failure;result_table_subgroup
+22490878;2;22490878_2.html;Myocardial Ischemia, acute;result_table_subgroup
+22490878;2;22490878_2.html;Hypertension;result_table_subgroup
+22490878;2;22490878_2.html;Hyperlipidemias;result_table_subgroup
+22490878;2;22490878_2.html;Diabetes Mellitus;result_table_subgroup
+22490878;2;22490878_2.html;Myocardial Ischemia;result_table_subgroup
+22490878;3;22490878_3.html;Heart Failure;result_table_subgroup
+22490878;3;22490878_3.html;Myocardial Ischemia, acute;result_table_subgroup
+22490878;3;22490878_3.html;Hypertension;result_table_subgroup
+22490878;3;22490878_3.html;Hyperlipidemias;result_table_subgroup
+22490878;3;22490878_3.html;Diabetes Mellitus;result_table_subgroup
+22490878;3;22490878_3.html;Myocardial Ischemia;result_table_subgroup
+22504093;2;22504093_2.html;Inflammatory Bowel Diseases;NA
+22509859;1;22509859_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22544891;2;22544891_2.html;Lung Diseases, Obstructive;result_table_subgroup
+22573644;2;22573644_2.html;Hyperlipidemias;result_table_subgroup
+22573644;2;22573644v2_2.html;Hyperlipidemias;result_table_subgroup
+22573644;2;22573644v3_2.html;Hyperlipidemias;result_table_subgroup
+22576673;2;22576673_2.html;Myocardial Ischemia;result_table_subgroup
+22576673;2;22576673_2.html;Stroke;result_table_subgroup
+22672586;2;22672586_2.html;Diabetes Mellitus, Type 2;NA
+22686416;2;22686416_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22700854;2;22700854_2.html;NA;result_table_subgroup
+22704916;2;22704916_2.html;Inflammatory Bowel Diseases;NA
+22709460;2;22709460_2.html;NA;NA
+22740508;2;22740508_2.html;Heart Failure;NA
+22747613;2;22747613_2.html;Hypertension;NA
+22747613;3;22747613_3.html;Hypertension;NA
+22799613;1;22799613_1.html;Hypertension;result_table_subgroup
+22799613;2;22799613_2.html;Hypertension;result_table_subgroup
+22873530;2;22873530_2.html;Arthritis;result_table_subgroup
+22913891;3;22913891_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22913891;4;22913891_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22913891;5;22913891_5.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22913891;6;22913891_6.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22913891;3;22913891v2_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22913891;4;22913891v2_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22913891;5;22913891v2_5.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22913891;6;22913891v2_6.html;Diabetes Mellitus, Type 2;result_table_subgroup
+22913893;2;22913893_2.html;Hyperlipidemias;result_table_subgroup
+22913893;2;22913893_2.html;Hypertension;result_table_subgroup
+22932716;2;22932716_2.html;Peripheral Vascular Diseases;result_table_subgroup
+22932716;2;22932716_2.html;Myocardial Ischemia, acute;result_table_subgroup
+22932716;2;22932716_2.html;Atherosclerosis;result_table_subgroup
+22932716;2;22932716_2.html;Stroke;result_table_subgroup
+23020650;2;23020650_2.html;Lung Diseases, Obstructive;result_table_subgroup
+23040786;1;23040786_1.html;Lung Diseases, Obstructive;result_table_subgroup
+23040786;2;23040786_2.html;Lung Diseases, Obstructive;NA
+23040830;2;23040830_2.html;Hyperlipidemias;result_table_subgroup
+23110471;1;23110471_1.html;Hypertension;result_table_subgroup
+23110471;2;23110471_2.html;Hypertension;NA
+23128104;2;23128104_2.html;Arrhythmias, Cardiac;result_table_subgroup
+23129601;2;23129601_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+23216615;2;23216615_2.html;Embolism and Thrombosis;result_table_subgroup
+23238658;1;23238658_1.html;Diabetes Mellitus, Type 2;NA
+23238658;1;23238658_1.html;Hypertension;NA
+23238658;1;23238658_1.html;Hyperlipidemias;NA
+23238658;1;23238658_1.html;Atherosclerosis;NA
+23238658;1;23238658_1.html;Myocardial Ischemia;NA
+23271794;2;23271794_2.html;NA;result_table_subgroup
+23271794;3;23271794_3.html;NA;result_table_subgroup
+23307827;2;23307827_2.html;Hypertension, Pulmonary;NA
+23307827;2;23307827_2.html;Hypertension;NA
+23325525;1;23325525_1.html;Stroke;result_table_subgroup
+23325525;1;23325525_1.html;Arrhythmias, Cardiac;result_table_subgroup
+23339726;2;23339726_2.html;Hypertension;result_table_subgroup
+23339726;2;23339726_2.html;Diabetes Mellitus;result_table_subgroup
+23396280;2;23396280_2.html;Peripheral Vascular Diseases;result_table_without_subgroup
+23396280;2;23396280_2.html;Myocardial Ischemia, acute;result_table_without_subgroup
+23396280;2;23396280_2.html;Atherosclerosis;result_table_without_subgroup
+23396280;2;23396280_2.html;Stroke;result_table_without_subgroup
+23425163;2;23425163_2.html;Embolism and Thrombosis;result_table_subgroup
+23425163;3;23425163_3.html;Embolism and Thrombosis;result_table_subgroup
+23451835;2;23451835_2.html;Esophageal Diseases;NA
+23471469;2;23471469_2.html;Lung Diseases, Obstructive;result_table_subgroup
+23473369;2;23473369_2.html;Myocardial Ischemia, acute;result_table_subgroup
+23473369;2;23473369_2.html;Atherosclerosis;result_table_subgroup
+23473369;2;23473369v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+23473369;2;23473369v2_2.html;Atherosclerosis;result_table_subgroup
+23473396;2;23473396_2.html;Myocardial Ischemia, acute;result_table_subgroup
+23500237;2;23500237_2.html;Diabetes Mellitus, Type 2;NA
+23500237;2;23500237_2.html;Myocardial Ischemia;NA
+23500237;2;23500237_2.html;Myocardial Ischemia, chronic;NA
+23501976;2;23501976_2.html;Peripheral Vascular Diseases;result_table_subgroup
+23501976;2;23501976_2.html;Myocardial Ischemia, acute;result_table_subgroup
+23501976;2;23501976_2.html;Atherosclerosis;result_table_subgroup
+23501976;2;23501976_2.html;Stroke;result_table_subgroup
+23529173;2;23529173_2.html;Heart Failure;result_table_without_subgroup
+23529173;2;23529173_2.html;Myocardial Ischemia, acute;result_table_without_subgroup
+23529173;2;23529173_2.html;Hypertension;result_table_without_subgroup
+23529173;2;23529173_2.html;Hyperlipidemias;result_table_without_subgroup
+23529173;2;23529173_2.html;Diabetes Mellitus;result_table_without_subgroup
+23529173;2;23529173_2.html;Myocardial Ischemia;result_table_without_subgroup
+23529173;3;23529173_3.html;Heart Failure;result_table_without_subgroup
+23529173;3;23529173_3.html;Myocardial Ischemia, acute;result_table_without_subgroup
+23529173;3;23529173_3.html;Hypertension;result_table_without_subgroup
+23529173;3;23529173_3.html;Hyperlipidemias;result_table_without_subgroup
+23529173;3;23529173_3.html;Diabetes Mellitus;result_table_without_subgroup
+23529173;3;23529173_3.html;Myocardial Ischemia;result_table_without_subgroup
+23564916;2;23564916_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+23564916;3;23564916_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+23564916;4;23564916_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+23564919;2;23564919_2.html;NA;NA
+23656980;2;23656980_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+23683134;2;23683134_2.html;NA;NA
+23706759;2;23706759_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+23726159;2;23726159_2.html;Hypertension;result_table_subgroup
+23726159;2;23726159_2.html;Stroke;result_table_subgroup
+23733198;2;23733198_2.html;Hypertension;result_table_subgroup
+23735746;2;23735746_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+23743976;2;23743976_2.html;NA;result_table_subgroup
+23770182;1;23770182_1.html;NA;result_table_subgroup
+23770182;2;23770182_2.html;NA;result_table_subgroup
+23770182;3;23770182_3.html;NA;result_table_subgroup
+23810874;2;23810874_2.html;Myocardial Ischemia;result_table_without_subgroup
+23810874;2;23810874_2.html;Heart Failure;result_table_without_subgroup
+23810874;2;23810874_2.html;Diabetes Mellitus;result_table_without_subgroup
+23810874;2;23810874v2_2.html;Myocardial Ischemia;result_table_without_subgroup
+23810874;2;23810874v2_2.html;Heart Failure;result_table_without_subgroup
+23810874;2;23810874v2_2.html;Diabetes Mellitus;result_table_without_subgroup
+23812596;2;23812596_2.html;Osteoporosis;result_table_subgroup
+23909985;2;23909985_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+23963895;2;23963895_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+23964932;2;23964932_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+23991658;2;23991658_2.html;NA;result_table_subgroup
+23991658;3;23991658_3.html;NA;result_table_subgroup
+23992601;2;23992601_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+23992601;3;23992601_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+23992602;2;23992602_2.html;Myocardial Ischemia, acute;result_table_subgroup
+23992602;2;23992602_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+24001888;2;24001888_2.html;Arthritis;result_table_subgroup
+24067431;2;24067431_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+24067881;2;24067881_2.html;Inflammatory Bowel Diseases;NA
+24076283;2;24076283_2.html;Myocardial Ischemia, acute;result_table_subgroup
+24076283;2;24076283v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+24097439;2;24097439_2.html;Myocardial Ischemia;result_table_subgroup
+24119319;2;24119319_2.html;Prostatic Hyperplasia;result_table_subgroup
+24120253;2;24120253_2.html;Lung Diseases, Obstructive;NA
+24120253;3;24120253_3.html;Lung Diseases, Obstructive;result_table_subgroup
+24120253;4;24120253_4.html;Lung Diseases, Obstructive;NA
+24120253;2;24120253v2_2.html;Lung Diseases, Obstructive;NA
+24120253;3;24120253v2_3.html;Lung Diseases, Obstructive;result_table_subgroup
+24120253;2;24120253v3_2.html;Lung Diseases, Obstructive;NA
+24120253;3;24120253v3_3.html;Lung Diseases, Obstructive;result_table_subgroup
+24120253;2;24120253v4_2.html;Lung Diseases, Obstructive;NA
+24120253;3;24120253v4_3.html;Lung Diseases, Obstructive;result_table_subgroup
+24156566;2;24156566_2.html;Lung Diseases, Obstructive;result_table_subgroup
+24184169;2;24184169_2.html;Myocardial Ischemia, acute;result_table_subgroup
+24184169;2;24184169_2.html;Atherosclerosis;result_table_subgroup
+24206457;2;24206457_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+24245566;2;24245566_2.html;Hypertension;result_table_subgroup
+24245566;2;24245566_2.html;Atherosclerosis;result_table_subgroup
+24247616;2;24247616_2.html;Myocardial Ischemia, acute;result_table_subgroup
+24247616;3;24247616_3.html;Myocardial Ischemia, acute;result_table_subgroup
+24251359;2;24251359_2.html;NA;result_table_subgroup
+24251359;3;24251359_3.html;NA;NA
+24253831;3;24253831_3.html;Lung Diseases, Obstructive;result_table_subgroup
+24281137;3;24281137_3.html;Heart Failure;result_table_without_subgroup
+24281137;3;24281137v2_3.html;Heart Failure;result_table_without_subgroup
+24283598;2;24283598_2.html;Heart Failure;result_table_subgroup
+24283598;2;24283598_2.html;Myocardial Ischemia, acute;result_table_subgroup
+24283598;2;24283598_2.html;Hypertension;result_table_subgroup
+24283598;2;24283598_2.html;Hyperlipidemias;result_table_subgroup
+24283598;2;24283598_2.html;Diabetes Mellitus;result_table_subgroup
+24283598;2;24283598_2.html;Myocardial Ischemia;result_table_subgroup
+24321804;2;24321804_2.html;Lung Diseases, Obstructive;result_table_subgroup
+24323795;1;24323795_1.html;NA;NA
+24323795;2;24323795_2.html;NA;result_table_subgroup
+24339179;2;24339179_2.html;Arthritis;result_table_subgroup
+24383720;2;24383720_2.html;Lung Diseases, Obstructive;result_table_subgroup
+24411003;1;24411003_1.html;Hyperlipidemias;NA
+24596459;2;24596459_2.html;Lung Diseases, Obstructive;result_table_subgroup
+24621834;2;24621834_2.html;Heart Failure;NA
+24664227;2;24664227_2.html;Parkinson Disease;result_table_subgroup
+24716680;3;24716680_3.html;Heart Failure;result_table_subgroup
+24727254;2;24727254_2.html;Myocardial Ischemia, acute;NA
+24727254;2;24727254_2.html;Myocardial Ischemia;NA
+24727254;3;24727254_3.html;Myocardial Ischemia, acute;result_table_subgroup
+24727254;3;24727254_3.html;Myocardial Ischemia;result_table_subgroup
+24727258;2;24727258_2.html;Heart Failure;result_table_subgroup
+24780614;2;24780614_2.html;Myocardial Ischemia, acute;result_table_subgroup
+24780614;3;24780614_3.html;Myocardial Ischemia, acute;NA
+24839241;2;24839241_2.html;Osteoporosis;result_table_subgroup
+24842697;2;24842697_2.html;Heart Failure;result_table_subgroup
+24842697;2;24842697_2.html;Myocardial Ischemia, acute;result_table_subgroup
+24842697;2;24842697_2.html;Hypertension;result_table_subgroup
+24842697;2;24842697_2.html;Hyperlipidemias;result_table_subgroup
+24842697;2;24842697_2.html;Diabetes Mellitus;result_table_subgroup
+24842697;2;24842697_2.html;Myocardial Ischemia;result_table_subgroup
+24842697;3;24842697_3.html;Heart Failure;result_table_subgroup
+24842697;3;24842697_3.html;Myocardial Ischemia, acute;result_table_subgroup
+24842697;3;24842697_3.html;Hypertension;result_table_subgroup
+24842697;3;24842697_3.html;Hyperlipidemias;result_table_subgroup
+24842697;3;24842697_3.html;Diabetes Mellitus;result_table_subgroup
+24842697;3;24842697_3.html;Myocardial Ischemia;result_table_subgroup
+24842985;2;24842985_2.html;NA;result_table_subgroup
+24898834;2;24898834_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+24898834;3;24898834_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+24907147;2;24907147_2.html;Arthritis;NA
+24907147;3;24907147_3.html;Arthritis;NA
+24907147;4;24907147_4.html;Arthritis;NA
+24907147;5;24907147_5.html;Arthritis;NA
+24907147;2;24907147v2_2.html;Arthritis;NA
+24907147;3;24907147v2_3.html;Arthritis;NA
+24907147;4;24907147v2_4.html;Arthritis;NA
+24907147;5;24907147v2_5.html;Arthritis;NA
+24918789;2;24918789_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+24966672;2;24966672_2.html;Lung Diseases, Obstructive;result_table_subgroup
+24966672;3;24966672_3.html;Lung Diseases, Obstructive;NA
+25002161;2;25002161_2.html;Heart Failure;result_table_subgroup
+25002161;2;25002161_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25002161;2;25002161_2.html;Hypertension;result_table_subgroup
+25002161;2;25002161_2.html;Hyperlipidemias;result_table_subgroup
+25002161;2;25002161_2.html;Diabetes Mellitus;result_table_subgroup
+25002161;2;25002161_2.html;Myocardial Ischemia;result_table_subgroup
+25031188;2;25031188_2.html;Hypertension;result_table_subgroup
+25037988;2;25037988_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25037988;2;25037988_2.html;Myocardial Ischemia;result_table_subgroup
+25037988;3;25037988_3.html;Myocardial Ischemia, acute;result_table_subgroup
+25037988;3;25037988_3.html;Myocardial Ischemia;result_table_subgroup
+25045258;2;25045258_2.html;Lung Diseases, Obstructive;result_table_subgroup
+25046337;2;25046337_2.html;Urticaria;result_table_subgroup
+25047021;1;25047021_1.html;Arthritis;NA
+25135178;2;25135178_2.html;Hyperlipidemias;NA
+25135178;2;25135178v2_2.html;Hyperlipidemias;NA
+25161043;2;25161043_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25175921;2;25175921_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25175921;3;25175921_3.html;Myocardial Ischemia, acute;result_table_subgroup
+25176136;2;25176136_2.html;Myocardial Ischemia;result_table_subgroup
+25176136;2;25176136_2.html;Heart Failure;result_table_subgroup
+25176136;2;25176136v2_2.html;Myocardial Ischemia;result_table_subgroup
+25176136;2;25176136v2_2.html;Heart Failure;result_table_subgroup
+25182247;2;25182247_2.html;Arrhythmias, Cardiac;result_table_subgroup
+25189213;1;25189213_1.html;Diabetes Mellitus, Type 2;NA
+25189213;2;25189213_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+25248764;2;25248764_2.html;Lung Diseases, Obstructive;result_table_subgroup
+25271206;2;25271206_2.html;Hypertension;result_table_subgroup
+25271206;2;25271206_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+25277614;2;25277614_2.html;Arrhythmias, Cardiac;NA
+25282519;2;25282519_2.html;Hyperlipidemias;NA
+25352655;2;25352655_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+25352655;3;25352655_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+25354738;2;25354738_2.html;Psoriasis;result_table_subgroup
+25399274;2;25399274_2.html;Stroke;result_table_subgroup
+25399274;2;25399274_2.html;Arrhythmias, Cardiac;result_table_subgroup
+25406305;2;25406305_2.html;Heart Failure;result_table_subgroup
+25406305;2;25406305v2_2.html;Heart Failure;result_table_subgroup
+25414932;1;25414932_1.html;Diabetes Mellitus;NA
+25414932;1;25414932_1.html;Diabetes Mellitus, Type 2;NA
+25455006;2;25455006_2.html;Heart Failure;result_table_subgroup
+25455006;2;25455006_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25455006;2;25455006_2.html;Hypertension;result_table_subgroup
+25455006;2;25455006_2.html;Hyperlipidemias;result_table_subgroup
+25455006;2;25455006_2.html;Diabetes Mellitus;result_table_subgroup
+25455006;2;25455006_2.html;Myocardial Ischemia;result_table_subgroup
+25465416;2;25465416_2.html;Peripheral Vascular Diseases;result_table_subgroup
+25465416;2;25465416_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25465416;2;25465416_2.html;Atherosclerosis;result_table_subgroup
+25465416;2;25465416_2.html;Stroke;result_table_subgroup
+25465417;2;25465417_2.html;Peripheral Vascular Diseases;result_table_subgroup
+25465417;2;25465417_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25465417;2;25465417_2.html;Atherosclerosis;result_table_subgroup
+25465417;2;25465417_2.html;Stroke;result_table_subgroup
+25468945;2;25468945_2.html;Diabetes Mellitus, Type 2;NA
+25475110;2;25475110_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25475110;2;25475110_2.html;Myocardial Ischemia;result_table_subgroup
+25490706;2;25490706_2.html;Lung Diseases, Obstructive;result_table_subgroup
+25523533;2;25523533_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25552421;2;25552421_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+25552421;3;25552421_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+25573406;2;25573406_2.html;Lung Diseases, Obstructive;result_table_subgroup
+25592197;2;25592197_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+25629790;2;25629790_2.html;Diabetes Mellitus, Type 2;NA
+25637937;2;25637937_2.html;Heart Failure;result_table_subgroup
+25657183;2;25657183_2.html;Stroke;result_table_subgroup
+25657183;2;25657183v2_2.html;Stroke;result_table_subgroup
+25670362;2;25670362_2.html;Myocardial Ischemia;result_table_subgroup
+25670362;3;25670362_3.html;Myocardial Ischemia;result_table_subgroup
+25681464;2;25681464_2.html;Peripheral Vascular Diseases;result_table_subgroup
+25681464;2;25681464_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25681464;2;25681464_2.html;Atherosclerosis;result_table_subgroup
+25681464;2;25681464_2.html;Stroke;result_table_subgroup
+25698905;2;25698905_2.html;Embolism and Thrombosis;result_table_subgroup
+25698905;3;25698905_3.html;Embolism and Thrombosis;result_table_subgroup
+25728587;2;25728587_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+25728587;3;25728587_3.html;Inflammatory Bowel Diseases;result_table_subgroup
+25736990;2;25736990_2.html;Lung Diseases, Obstructive;result_table_subgroup
+25743173;2;25743173_2.html;Hyperlipidemias;NA
+25743173;3;25743173_3.html;Hyperlipidemias;NA
+25743173;2;25743173v2_2.html;Hyperlipidemias;NA
+25758769;2;25758769_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+25765696;2;25765696_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25765696;2;25765696_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+25765696;3;25765696_3.html;Myocardial Ischemia, acute;result_table_subgroup
+25765696;3;25765696_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+25769357;2;25769357_2.html;NA;result_table_subgroup
+25769357;3;25769357_3.html;NA;result_table_subgroup
+25772548;2;25772548_2.html;Diabetes Mellitus, Type 2;NA
+25773268;2;25773268_2.html;Stroke;result_table_subgroup
+25773268;2;25773268_2.html;Embolism and Thrombosis;result_table_subgroup
+25773268;2;25773268_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25775052;2;25775052_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25775052;3;25775052_3.html;Myocardial Ischemia, acute;result_table_subgroup
+25775052;4;25775052_4.html;Myocardial Ischemia, acute;result_table_subgroup
+25775052;5;25775052_5.html;Myocardial Ischemia, acute;result_table_subgroup
+25779603;2;25779603_2.html;Arthritis;result_table_subgroup
+25787199;2;25787199_2.html;Myocardial Ischemia;NA
+25792124;2;25792124_2.html;Peripheral Vascular Diseases;result_table_subgroup
+25792124;2;25792124_2.html;Myocardial Ischemia, acute;result_table_subgroup
+25792124;2;25792124_2.html;Atherosclerosis;result_table_subgroup
+25792124;2;25792124_2.html;Stroke;result_table_subgroup
+25795432;2;25795432_2.html;Diabetes Mellitus, Type 2;result_table_without_subgroup
+25795432;3;25795432_3.html;Diabetes Mellitus, Type 2;result_table_without_subgroup
+25852208;2;25852208_2.html;Hypertension;result_table_subgroup
+25852208;2;25852208_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+25881510;2;25881510_2.html;Diabetes Mellitus, Type 2;NA
+26027630;2;26027630_2.html;Hyperlipidemias;result_table_subgroup
+26052984;2;26052984_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26054553;2;26054553_2.html;Urticaria;result_table_without_subgroup
+26059896;1;26059896_1.html;Myocardial Ischemia, acute;result_table_subgroup
+26059896;1;26059896_1.html;Myocardial Ischemia;result_table_subgroup
+26059896;2;26059896_2.html;Myocardial Ischemia, acute;result_table_subgroup
+26059896;2;26059896_2.html;Myocardial Ischemia;result_table_subgroup
+26059896;3;26059896_3.html;Myocardial Ischemia, acute;result_table_subgroup
+26059896;3;26059896_3.html;Myocardial Ischemia;result_table_subgroup
+26059896;4;26059896_4.html;Myocardial Ischemia, acute;result_table_subgroup
+26059896;4;26059896_4.html;Myocardial Ischemia;result_table_subgroup
+26059896;1;26059896v2_1.html;Myocardial Ischemia, acute;result_table_subgroup
+26059896;1;26059896v2_1.html;Myocardial Ischemia;result_table_subgroup
+26059896;2;26059896v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+26059896;2;26059896v2_2.html;Myocardial Ischemia;result_table_subgroup
+26065986;2;26065986_2.html;NA;result_table_subgroup
+26066644;1;26066644_1.html;Hypertension;result_table_subgroup
+26093161;1;26093161_1.html;NA;NA
+26093161;2;26093161_2.html;NA;result_table_subgroup
+26097039;2;26097039_2.html;Arthritis;result_table_subgroup
+26097039;3;26097039_3.html;Arthritis;result_table_subgroup
+26100349;2;26100349_2.html;Lung Diseases, Obstructive;result_table_subgroup
+26100349;3;26100349_3.html;Lung Diseases, Obstructive;result_table_subgroup
+26112656;3;26112656_3.html;Lung Diseases, Obstructive;result_table_subgroup
+26121561;2;26121561_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26132939;2;26132939_2.html;Diabetes Mellitus;result_table_subgroup
+26132939;3;26132939_3.html;Diabetes Mellitus;result_table_subgroup
+26132939;4;26132939_4.html;Diabetes Mellitus;result_table_subgroup
+26135703;2;26135703_2.html;Psoriasis;result_table_subgroup
+26135703;2;26135703_2.html;Arthritis;result_table_subgroup
+26139005;2;26139005_2.html;Arthritis;result_table_subgroup
+26151264;2;26151264_2.html;Embolism and Thrombosis;result_table_subgroup
+26179619;2;26179619_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26179767;2;26179767_2.html;NA;result_table_subgroup
+26233481;2;26233481_2.html;Lung Diseases, Obstructive;result_table_subgroup
+26233481;3;26233481_3.html;Lung Diseases, Obstructive;result_table_subgroup
+26233481;4;26233481_4.html;Lung Diseases, Obstructive;result_table_subgroup
+26238672;1;26238672_1.html;Arthritis;result_table_subgroup
+26238672;2;26238672_2.html;Arthritis;result_table_subgroup
+26238672;1;26238672v2_1.html;Arthritis;result_table_subgroup
+26271059;2;26271059_2.html;Myocardial Ischemia, acute;result_table_subgroup
+26275429;2;26275429_2.html;Arthritis;result_table_subgroup
+26299520;1;26299520_1.html;Prostatic Hyperplasia;NA
+26304934;2;26304934_2.html;Myocardial Ischemia, acute;NA
+26321103;2;26321103_2.html;Myocardial Ischemia, acute;result_table_subgroup
+26330422;2;26330422_2.html;Hyperlipidemias;result_table_subgroup
+26338971;2;26338971_2.html;Peripheral Vascular Diseases;result_table_subgroup
+26338971;2;26338971_2.html;Myocardial Ischemia, acute;result_table_subgroup
+26338971;2;26338971_2.html;Atherosclerosis;result_table_subgroup
+26338971;2;26338971_2.html;Stroke;result_table_subgroup
+26358285;2;26358285_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26373629;2;26373629_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26373629;3;26373629_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26374849;2;26374849_2.html;Heart Failure;result_table_subgroup
+26378978;2;26378978_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26378978;3;26378978_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26400827;3;26400827_3.html;Myocardial Ischemia, acute;result_table_subgroup
+26400827;3;26400827_3.html;Atherosclerosis;result_table_subgroup
+26446706;1;26446706_1.html;Embolism and Thrombosis;result_table_subgroup
+26471380;2;26471380_2.html;Epilepsy;NA
+26475142;2;26475142_2.html;Heart Failure;result_table_subgroup
+26475142;3;26475142_3.html;Heart Failure;result_table_subgroup
+26486868;2;26486868_2.html;Stroke;result_table_without_subgroup
+26491109;2;26491109_2.html;Stroke;NA
+26491109;2;26491109_2.html;Embolism and Thrombosis;NA
+26491109;2;26491109_2.html;Myocardial Ischemia, acute;NA
+26523993;2;26523993_2.html;Atherosclerosis;result_table_subgroup
+26523993;2;26523993_2.html;Myocardial Ischemia;result_table_subgroup
+26523993;3;26523993_3.html;Atherosclerosis;result_table_subgroup
+26523993;3;26523993_3.html;Myocardial Ischemia;result_table_subgroup
+26524706;2;26524706_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26524706;3;26524706_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26541915;2;26541915_2.html;Heart Failure;result_table_subgroup
+26541915;3;26541915_3.html;Heart Failure;result_table_subgroup
+26541915;5;26541915_5.html;Heart Failure;result_table_subgroup
+26541915;2;26541915v2_2.html;Heart Failure;result_table_subgroup
+26547918;2;26547918_2.html;Psoriasis;NA
+26563670;2;26563670_2.html;Lung Diseases, Obstructive;result_table_subgroup
+26579834;1;26579834_1.html;Diabetes Mellitus, Type 2;NA
+26579834;5;26579834_5.html;Diabetes Mellitus, Type 2;NA
+26580237;2;26580237_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26580237;2;26580237v2_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26586780;2;26586780_2.html;Myocardial Ischemia;result_table_subgroup
+26589819;1;26589819_1.html;Heart Failure;NA
+26589819;1;26589819_1.html;Myocardial Ischemia, acute;NA
+26589819;1;26589819_1.html;Hypertension;NA
+26589819;1;26589819_1.html;Hyperlipidemias;NA
+26589819;1;26589819_1.html;Diabetes Mellitus;NA
+26589819;1;26589819_1.html;Myocardial Ischemia;NA
+26620248;2;26620248_2.html;Hypertension;result_table_subgroup
+26620248;2;26620248_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26627989;2;26627989_2.html;Stroke;result_table_subgroup
+26627989;2;26627989_2.html;Arrhythmias, Cardiac;result_table_subgroup
+26627989;2;26627989v2_2.html;Stroke;result_table_subgroup
+26627989;2;26627989v2_2.html;Arrhythmias, Cardiac;result_table_subgroup
+26630143;2;26630143_2.html;Myocardial Ischemia, acute;NA
+26653621;2;26653621_2.html;Hypertension;result_table_subgroup
+26653621;2;26653621_2.html;Atherosclerosis;result_table_subgroup
+26681720;2;26681720_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26699168;2;26699168_2.html;Hypertension, Pulmonary;result_table_subgroup
+26699168;2;26699168_2.html;Hypertension;result_table_subgroup
+26704701;2;26704701_2.html;Lung Diseases, Obstructive;result_table_subgroup
+26744025;2;26744025_2.html;Diabetes Mellitus;result_table_subgroup
+26754626;2;26754626_2.html;Heart Failure;result_table_subgroup
+26754626;3;26754626_3.html;Heart Failure;result_table_subgroup
+26762481;2;26762481_2.html;Myocardial Ischemia, acute;result_table_subgroup
+26762525;2;26762525_2.html;Myocardial Ischemia, acute;result_table_subgroup
+26762525;2;26762525_2.html;Atherosclerosis;result_table_subgroup
+26762525;2;26762525v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+26762525;2;26762525v2_2.html;Atherosclerosis;result_table_subgroup
+26774608;2;26774608_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26774608;3;26774608_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26774608;2;26774608v2_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26774608;3;26774608v2_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+26786577;2;26786577_2.html;Diabetes Mellitus, Type 2;NA
+26792812;2;26792812_2.html;Psoriasis;result_table_subgroup
+26792812;2;26792812_2.html;Arthritis;result_table_subgroup
+26833744;2;26833744_2.html;Diabetes Mellitus;NA
+26833744;3;26833744_3.html;Diabetes Mellitus;NA
+26886418;2;26886418_2.html;Myocardial Ischemia, acute;result_table_subgroup
+26886418;2;26886418_2.html;Stroke;result_table_subgroup
+26915374;2;26915374_2.html;Heart Failure;result_table_without_subgroup
+26934128;2;26934128_2.html;Diabetes Mellitus, Type 2;NA
+26994121;2;26994121_2.html;Myocardial Ischemia;NA
+27028914;2;27028914_2.html;Arthritis;result_table_subgroup
+27033025;2;27033025_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27033025;2;27033025_2.html;Diabetes Mellitus;result_table_subgroup
+27039236;2;27039236_2.html;Lung Diseases, Obstructive;NA
+27043082;2;27043082_2.html;Myocardial Ischemia, acute;result_table_subgroup
+27046159;2;27046159_2.html;Myocardial Ischemia;result_table_without_subgroup
+27046159;2;27046159_2.html;Myocardial Ischemia;result_table_subgroup
+27046160;2;27046160_2.html;Stroke;NA
+27046160;2;27046160_2.html;Embolism and Thrombosis;NA
+27046160;2;27046160_2.html;Myocardial Ischemia, acute;NA
+27046162;2;27046162_2.html;Stroke;NA
+27046162;2;27046162_2.html;Embolism and Thrombosis;NA
+27046162;2;27046162_2.html;Myocardial Ischemia, acute;NA
+27056586;2;27056586_2.html;Lung Diseases, Obstructive;result_table_subgroup
+27087007;1;27087007_1.html;Lung Diseases, Obstructive;NA
+27098404;1;27098404_1.html;Arthritis;NA
+27103795;1;27103795_1.html;NA;NA
+27144849;1;27144849_1.html;Arrhythmias, Cardiac;result_table_subgroup
+27144849;2;27144849_2.html;Arrhythmias, Cardiac;result_table_subgroup
+27144849;3;27144849_3.html;Arrhythmias, Cardiac;result_table_subgroup
+27144849;4;27144849_4.html;Arrhythmias, Cardiac;result_table_subgroup
+27161178;2;27161178_2.html;Diabetes Mellitus, Type 2;NA
+27165179;2;27165179_2.html;Arthritis;NA
+27181606;2;27181606_2.html;Lung Diseases, Obstructive;result_table_subgroup
+27190009;2;27190009_2.html;Parkinson Disease;result_table_subgroup
+27207971;1;27207971_1.html;NA;NA
+27215502;2;27215502_2.html;Lung Diseases, Obstructive;result_table_subgroup
+27215749;3;27215749_3.html;Lung Diseases, Obstructive;NA
+27252787;2;27252787_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27289121;2;27289121_2.html;Myocardial Ischemia, acute;result_table_subgroup
+27289121;2;27289121_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27295427;2;27295427_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27299675;1;27299675_1.html;Diabetes Mellitus, Type 2;NA
+27299675;2;27299675_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27313282;2;27313282_2.html;Myocardial Ischemia, acute;result_table_subgroup
+27313282;2;27313282_2.html;Atherosclerosis;result_table_subgroup
+27313282;2;27313282v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+27313282;2;27313282v2_2.html;Atherosclerosis;result_table_subgroup
+27316465;2;27316465_2.html;Lung Diseases, Obstructive;NA
+27316465;3;27316465_3.html;Lung Diseases, Obstructive;NA
+27316465;4;27316465_4.html;Lung Diseases, Obstructive;NA
+27316465;5;27316465_5.html;Lung Diseases, Obstructive;NA
+27335114;2;27335114_2.html;Epilepsy;NA
+27335114;2;27335114v2_2.html;Epilepsy;NA
+27335114;2;27335114v3_2.html;Epilepsy;NA
+27354044;2;27354044_2.html;Heart Failure;result_table_subgroup
+27354044;2;27354044v2_2.html;Heart Failure;result_table_subgroup
+27358434;2;27358434_2.html;NA;result_table_subgroup
+27387994;1;27387994_1.html;NA;NA
+27395349;2;27395349_2.html;Heart Failure;NA
+27395349;3;27395349_3.html;Heart Failure;result_table_subgroup
+27395349;2;27395349v2_2.html;Heart Failure;NA
+27395349;3;27395349v2_3.html;Heart Failure;result_table_subgroup
+27406394;2;27406394_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27418597;2;27418597_2.html;Stroke;result_table_subgroup
+27437883;2;27437883_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27465265;2;27465265_2.html;Myocardial Ischemia, acute;result_table_subgroup
+27465265;2;27465265_2.html;Stroke;result_table_subgroup
+27484756;2;27484756_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27493790;2;27493790_2.html;Arthritis;NA
+27496855;1;27496855_1.html;NA;NA
+27502307;2;27502307_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27502582;2;27502582_2.html;Arthritis;NA
+27502866;1;27502866_1.html;Myocardial Ischemia, acute;NA
+27502866;1;27502866_1.html;Atherosclerosis;NA
+27502866;1;27502866_1.html;Myocardial Ischemia;NA
+27576559;2;27576559_2.html;Psoriasis;result_table_subgroup
+27576774;2;27576774_2.html;Myocardial Ischemia;result_table_subgroup
+27576775;2;27576775_2.html;Stroke;result_table_subgroup
+27576775;2;27576775_2.html;Embolism and Thrombosis;result_table_subgroup
+27576775;2;27576775_2.html;Myocardial Ischemia, acute;result_table_subgroup
+27581531;2;27581531_2.html;Myocardial Ischemia, acute;result_table_subgroup
+27589414;2;27589414_2.html;Epilepsy;result_table_without_subgroup
+27609406;2;27609406_2.html;Lung Diseases, Obstructive;NA
+27609406;2;27609406v2_2.html;Lung Diseases, Obstructive;NA
+27609408;2;27609408_2.html;Lung Diseases, Obstructive;NA
+27609678;2;27609678_2.html;NA;result_table_subgroup
+27612281;2;27612281_2.html;Osteoporosis;result_table_subgroup
+27612281;3;27612281_3.html;Osteoporosis;result_table_subgroup
+27612281;4;27612281_4.html;Osteoporosis;result_table_subgroup
+27612281;5;27612281_5.html;Osteoporosis;result_table_subgroup
+27612281;6;27612281_6.html;Osteoporosis;result_table_subgroup
+27616196;2;27616196_2.html;Lung Diseases, Obstructive;result_table_subgroup
+27616196;3;27616196_3.html;Lung Diseases, Obstructive;result_table_subgroup
+27616196;4;27616196_4.html;Lung Diseases, Obstructive;result_table_subgroup
+27616196;5;27616196_5.html;Lung Diseases, Obstructive;result_table_subgroup
+27619750;2;27619750_2.html;Hyperlipidemias;result_table_subgroup
+27619750;3;27619750_3.html;Hyperlipidemias;NA
+27619750;2;27619750v2_2.html;Hyperlipidemias;result_table_subgroup
+27639327;2;27639327_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+27639753;2;27639753_2.html;Hyperlipidemias;result_table_subgroup
+27639753;3;27639753_3.html;Hyperlipidemias;result_table_subgroup
+27639753;4;27639753_4.html;Hyperlipidemias;result_table_subgroup
+27647847;2;27647847_2.html;Hypertension;result_table_subgroup
+27647847;2;27647847_2.html;Atherosclerosis;result_table_subgroup
+27659566;2;27659566_2.html;Myocardial Ischemia, acute;result_table_subgroup
+27659566;2;27659566_2.html;Atherosclerosis;result_table_subgroup
+27659566;3;27659566_3.html;Myocardial Ischemia, acute;result_table_subgroup
+27659566;3;27659566_3.html;Atherosclerosis;result_table_subgroup
+27659566;2;27659566v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+27659566;2;27659566v2_2.html;Atherosclerosis;result_table_subgroup
+27672117;2;27672117_2.html;Idiopathic Interstitial Pneumonias;result_table_subgroup
+27684308;2;27684308_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27708114;2;27708114_2.html;Idiopathic Interstitial Pneumonias;result_table_subgroup
+27715335;2;27715335_2.html;Lung Diseases, Obstructive;NA
+27742728;2;27742728_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27744141;2;27744141_2.html;Arthritis;NA
+27765312;2;27765312_2.html;Peripheral Vascular Diseases;NA
+27765312;2;27765312_2.html;Myocardial Ischemia, acute;NA
+27765312;2;27765312_2.html;Atherosclerosis;NA
+27765312;2;27765312_2.html;Stroke;NA
+27767328;1;27767328_1.html;Lung Diseases, Obstructive;result_table_subgroup
+27767328;2;27767328_2.html;Lung Diseases, Obstructive;result_table_subgroup
+27767328;3;27767328_3.html;Lung Diseases, Obstructive;result_table_subgroup
+27767328;4;27767328_4.html;Lung Diseases, Obstructive;result_table_subgroup
+27796912;2;27796912_2.html;Lung Diseases, Obstructive;result_table_subgroup
+27807306;2;27807306_2.html;NA;result_table_subgroup
+27842179;2;27842179_2.html;Heart Failure;result_table_subgroup
+27842179;2;27842179v2_2.html;Heart Failure;result_table_subgroup
+27893045;2;27893045_2.html;Heart Failure;result_table_subgroup
+27893045;2;27893045_2.html;Myocardial Ischemia, acute;result_table_subgroup
+27893045;2;27893045_2.html;Hypertension;result_table_subgroup
+27893045;2;27893045_2.html;Hyperlipidemias;result_table_subgroup
+27893045;2;27893045_2.html;Diabetes Mellitus;result_table_subgroup
+27893045;2;27893045_2.html;Myocardial Ischemia;result_table_subgroup
+27912982;2;27912982_2.html;Lung Diseases, Obstructive;result_table_subgroup
+27912982;3;27912982_3.html;Lung Diseases, Obstructive;result_table_subgroup
+27912982;4;27912982_4.html;Lung Diseases, Obstructive;result_table_subgroup
+27935736;2;27935736_2.html;Myocardial Ischemia, acute;result_table_subgroup
+27935736;2;27935736_2.html;Stroke;result_table_subgroup
+27956003;2;27956003_2.html;Hyperlipidemias;NA
+27959607;2;27959607_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+27965257;2;27965257_2.html;Arthritis;result_table_subgroup
+27977392;2;27977392_2.html;Hypertension;result_table_subgroup
+27977392;2;27977392_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27977392;3;27977392_3.html;Hypertension;result_table_subgroup
+27977392;3;27977392_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27977934;2;27977934_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+27993292;2;27993292_2.html;Lung Diseases, Obstructive;result_table_subgroup
+27993292;3;27993292_3.html;Lung Diseases, Obstructive;result_table_subgroup
+28035868;2;28035868_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28118533;2;28118533_2.html;Lupus Erythematosus, Systemic;result_table_subgroup
+28153828;2;28153828_2.html;Arthritis;result_table_subgroup
+28159511;2;28159511_2.html;Lung Diseases, Obstructive;result_table_subgroup
+28189475;2;28189475_2.html;Peripheral Vascular Diseases;result_table_subgroup
+28197834;2;28197834_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28213368;2;28213368_2.html;NA;result_table_subgroup
+28215362;2;28215362_2.html;Arthritis;result_table_subgroup
+28231942;2;28231942_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28231942;2;28231942_2.html;Hyperlipidemias;result_table_subgroup
+28237263;2;28237263_2.html;Diabetes Mellitus;result_table_subgroup
+28237263;3;28237263_3.html;Diabetes Mellitus;result_table_subgroup
+28246236;2;28246236_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28246236;2;28246236_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28246237;2;28246237_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28246237;2;28246237_2.html;Stroke;result_table_subgroup
+28278391;2;28278391_2.html;Lung Diseases, Obstructive;result_table_subgroup
+28279891;2;28279891_2.html;Epilepsy;NA
+28279891;2;28279891v2_2.html;Epilepsy;NA
+28279891;2;28279891v3_2.html;Epilepsy;NA
+28300867;2;28300867_2.html;Stroke;result_table_subgroup
+28300867;2;28300867_2.html;Embolism and Thrombosis;result_table_subgroup
+28300867;2;28300867_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28302288;2;28302288_2.html;NA;result_table_subgroup
+28316279;2;28316279_2.html;Embolism and Thrombosis;result_table_subgroup
+28316279;2;28316279v2_2.html;Embolism and Thrombosis;result_table_subgroup
+28327140;2;28327140_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28359411;2;28359411_2.html;Heart Failure;result_table_subgroup
+28382371;2;28382371_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28382371;2;28382371_2.html;Atherosclerosis;result_table_subgroup
+28382371;3;28382371_3.html;Myocardial Ischemia, acute;result_table_subgroup
+28382371;3;28382371_3.html;Atherosclerosis;result_table_subgroup
+28385353;2;28385353_2.html;Lung Diseases, Obstructive;result_table_subgroup
+28385353;3;28385353_3.html;Lung Diseases, Obstructive;result_table_subgroup
+28385353;4;28385353_4.html;Lung Diseases, Obstructive;result_table_subgroup
+28385353;5;28385353_5.html;Lung Diseases, Obstructive;result_table_subgroup
+28385353;6;28385353_6.html;Lung Diseases, Obstructive;result_table_subgroup
+28385353;7;28385353_7.html;Lung Diseases, Obstructive;result_table_subgroup
+28385353;2;28385353v2_2.html;Lung Diseases, Obstructive;result_table_subgroup
+28385353;3;28385353v2_3.html;Lung Diseases, Obstructive;result_table_subgroup
+28385353;4;28385353v2_4.html;Lung Diseases, Obstructive;result_table_subgroup
+28386035;1;28386035_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28386035;2;28386035_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28386990;1;28386990_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28386990;2;28386990_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28386990;3;28386990_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28391886;2;28391886_2.html;Hyperlipidemias;result_table_subgroup
+28395936;2;28395936_2.html;Lung Diseases, Obstructive;result_table_subgroup
+28402745;2;28402745_2.html;Heart Failure;result_table_subgroup
+28402745;2;28402745v2_2.html;Heart Failure;result_table_subgroup
+28405473;2;28405473_2.html;Arthritis;result_table_subgroup
+28416587;2;28416587_2.html;Lung Diseases, Obstructive;result_table_subgroup
+28432746;1;28432746_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28432746;2;28432746_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28467869;2;28467869_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+28467869;3;28467869_3.html;Inflammatory Bowel Diseases;result_table_subgroup
+28473423;2;28473423_2.html;Psoriasis;result_table_subgroup
+28473423;2;28473423_2.html;Arthritis;result_table_subgroup
+28520924;2;28520924_2.html;NA;result_table_subgroup
+28520924;3;28520924_3.html;NA;result_table_subgroup
+28531241;2;28531241_2.html;Heart Failure;result_table_subgroup
+28531241;2;28531241_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28531241;2;28531241_2.html;Hypertension;result_table_subgroup
+28531241;2;28531241_2.html;Hyperlipidemias;result_table_subgroup
+28531241;2;28531241_2.html;Diabetes Mellitus;result_table_subgroup
+28531241;2;28531241_2.html;Myocardial Ischemia;result_table_subgroup
+28544533;2;28544533_2.html;Arthritis;result_table_subgroup
+28544533;3;28544533_3.html;Arthritis;result_table_subgroup
+28558833;2;28558833_2.html;Lung Diseases, Obstructive;NA
+28558833;3;28558833_3.html;Lung Diseases, Obstructive;NA
+28573499;2;28573499_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+28573499;2;28573499_2.html;Stroke;result_table_subgroup
+28573499;2;28573499_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28573499;2;28573499_2.html;Myocardial Ischemia;result_table_subgroup
+28573499;3;28573499_3.html;Myocardial Ischemia, chronic;result_table_subgroup
+28573499;3;28573499_3.html;Stroke;result_table_subgroup
+28573499;3;28573499_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28573499;3;28573499_3.html;Myocardial Ischemia;result_table_subgroup
+28573499;4;28573499_4.html;Myocardial Ischemia, chronic;result_table_subgroup
+28573499;4;28573499_4.html;Stroke;result_table_subgroup
+28573499;4;28573499_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28573499;4;28573499_4.html;Myocardial Ischemia;result_table_subgroup
+28573499;2;28573499v2_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+28573499;2;28573499v2_2.html;Stroke;result_table_subgroup
+28573499;2;28573499v2_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28573499;2;28573499v2_2.html;Myocardial Ischemia;result_table_subgroup
+28605608;2;28605608_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28666775;2;28666775_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28666775;3;28666775_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28666993;2;28666993_2.html;NA;result_table_subgroup
+28689179;2;28689179_2.html;NA;result_table_without_subgroup
+28720132;2;28720132_2.html;Lung Diseases, Obstructive;result_table_subgroup
+28720132;3;28720132_3.html;Lung Diseases, Obstructive;result_table_subgroup
+28720336;2;28720336_2.html;Lung Diseases, Obstructive;result_table_subgroup
+28753486;2;28753486_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28753486;3;28753486_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28801539;2;28801539_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28801539;2;28801539_2.html;Atherosclerosis;result_table_subgroup
+28801539;3;28801539_3.html;Myocardial Ischemia, acute;result_table_subgroup
+28801539;3;28801539_3.html;Atherosclerosis;result_table_subgroup
+28801539;4;28801539_4.html;Myocardial Ischemia, acute;result_table_subgroup
+28801539;4;28801539_4.html;Atherosclerosis;result_table_subgroup
+28801539;5;28801539_5.html;Myocardial Ischemia, acute;result_table_subgroup
+28801539;5;28801539_5.html;Atherosclerosis;result_table_subgroup
+28801539;2;28801539v2_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28801539;2;28801539v2_2.html;Atherosclerosis;result_table_subgroup
+28818881;2;28818881_2.html;Hypertension, Pulmonary;result_table_subgroup
+28818881;2;28818881_2.html;Hypertension;result_table_subgroup
+28827011;2;28827011_2.html;Parkinson Disease;result_table_without_subgroup
+28842165;2;28842165_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28842165;3;28842165_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28844192;2;28844192_2.html;Peripheral Vascular Diseases;result_table_subgroup
+28844192;2;28844192v2_2.html;Peripheral Vascular Diseases;result_table_subgroup
+28844508;2;28844508_2.html;Hyperlipidemias;result_table_subgroup
+28844508;3;28844508_3.html;Hyperlipidemias;result_table_subgroup
+28844990;2;28844990_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28847206;2;28847206_2.html;Atherosclerosis;result_table_subgroup
+28847206;2;28847206v2_2.html;Atherosclerosis;result_table_subgroup
+28848879;2;28848879_2.html;Lung Diseases, Obstructive;result_table_subgroup
+28854085;2;28854085_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28877027;2;28877027_2.html;Lung Diseases, Obstructive;result_table_subgroup
+28882235;2;28882235_2.html;Stroke;result_table_without_subgroup
+28882235;2;28882235_2.html;Embolism and Thrombosis;result_table_without_subgroup
+28882235;2;28882235_2.html;Myocardial Ischemia, acute;result_table_without_subgroup
+28882235;3;28882235_3.html;Stroke;result_table_subgroup
+28882235;3;28882235_3.html;Embolism and Thrombosis;result_table_subgroup
+28882235;3;28882235_3.html;Myocardial Ischemia, acute;result_table_subgroup
+28899222;2;28899222_2.html;Diabetes Mellitus, Type 1;result_table_subgroup
+28902593;2;28902593_2.html;Stroke;result_table_subgroup
+28902593;2;28902593_2.html;Migraine Disorders;result_table_subgroup
+28903864;2;28903864_2.html;Lung Diseases, Obstructive;NA
+28904068;2;28904068_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28905478;1;28905478_1.html;Hyperlipidemias;result_table_subgroup
+28905478;2;28905478_2.html;Hyperlipidemias;result_table_subgroup
+28905478;3;28905478_3.html;Hyperlipidemias;result_table_subgroup
+28910237;2;28910237_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28921862;3;28921862_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+28924103;2;28924103_2.html;Stroke;result_table_subgroup
+28939567;2;28939567_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28948656;2;28948656_2.html;Heart Failure;result_table_subgroup
+28968735;2;28968735_2.html;Psoriasis;NA
+28968735;2;28968735_2.html;Arthritis;NA
+28968735;3;28968735_3.html;Psoriasis;NA
+28968735;3;28968735_3.html;Arthritis;NA
+28972004;1;28972004_1.html;Myocardial Ischemia, acute;result_table_subgroup
+28972004;1;28972004_1.html;Hyperlipidemias;result_table_subgroup
+28972004;2;28972004_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28972004;2;28972004_2.html;Hyperlipidemias;result_table_subgroup
+28972004;3;28972004_3.html;Myocardial Ischemia, acute;result_table_subgroup
+28972004;3;28972004_3.html;Hyperlipidemias;result_table_subgroup
+28975241;2;28975241_2.html;Myocardial Ischemia, acute;result_table_subgroup
+28975241;2;28975241_2.html;Stroke;result_table_subgroup
+29028981;2;29028981_2.html;Inflammatory Bowel Diseases;result_table_subgroup
+29028981;3;29028981_3.html;Inflammatory Bowel Diseases;result_table_subgroup
+29045207;2;29045207_2.html;Psoriasis;NA
+29045207;2;29045207_2.html;Arthritis;NA
+29064626;2;29064626_2.html;Myocardial Ischemia, acute;result_table_subgroup
+29064626;2;29064626_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29073947;2;29073947_2.html;Myocardial Ischemia;NA
+29084736;2;29084736_2.html;Myocardial Ischemia, acute;result_table_subgroup
+29084736;2;29084736_2.html;Stroke;result_table_subgroup
+29103664;2;29103664_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29128192;3;29128192_3.html;Lung Diseases, Obstructive;result_table_subgroup
+29132879;2;29132879_2.html;Peripheral Vascular Diseases;result_table_subgroup
+29132879;3;29132879_3.html;Peripheral Vascular Diseases;result_table_subgroup
+29132879;4;29132879_4.html;Peripheral Vascular Diseases;result_table_subgroup
+29132879;2;29132879v2_2.html;Peripheral Vascular Diseases;result_table_subgroup
+29132880;2;29132880_2.html;Peripheral Vascular Diseases;result_table_subgroup
+29145215;2;29145215_2.html;Diabetes Mellitus;result_table_subgroup
+29145215;3;29145215_3.html;Diabetes Mellitus;result_table_subgroup
+29146124;2;29146124_2.html;Atherosclerosis;result_table_subgroup
+29146124;2;29146124_2.html;Myocardial Ischemia, acute;result_table_subgroup
+29146124;3;29146124_3.html;Atherosclerosis;NA
+29146124;3;29146124_3.html;Myocardial Ischemia, acute;NA
+29148144;2;29148144_2.html;Heart Failure;result_table_subgroup
+29151034;2;29151034_2.html;Myocardial Ischemia, acute;result_table_subgroup
+29151034;2;29151034_2.html;Hyperlipidemias;result_table_subgroup
+29151034;3;29151034_3.html;Myocardial Ischemia, acute;result_table_subgroup
+29151034;3;29151034_3.html;Hyperlipidemias;result_table_subgroup
+29151034;4;29151034_4.html;Myocardial Ischemia, acute;result_table_subgroup
+29151034;4;29151034_4.html;Hyperlipidemias;result_table_subgroup
+29151034;5;29151034_5.html;Myocardial Ischemia, acute;result_table_subgroup
+29151034;5;29151034_5.html;Hyperlipidemias;result_table_subgroup
+29159457;2;29159457_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29228101;2;29228101_2.html;Heart Failure;result_table_subgroup
+29248859;2;29248859_2.html;NA;result_table_subgroup
+29263150;2;29263150_2.html;Myocardial Ischemia, acute;result_table_subgroup
+29263150;2;29263150_2.html;Hyperlipidemias;result_table_subgroup
+29263150;3;29263150_3.html;Myocardial Ischemia, acute;result_table_subgroup
+29263150;3;29263150_3.html;Hyperlipidemias;result_table_subgroup
+29279300;2;29279300_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29299340;2;29299340_2.html;Psoriasis;NA
+29299340;2;29299340_2.html;Arthritis;NA
+29307087;2;29307087_2.html;Hypertension, Pulmonary;result_table_subgroup
+29307087;2;29307087_2.html;Hypertension;result_table_subgroup
+29338762;2;29338762_2.html;Arthritis;NA
+29406853;2;29406853_2.html;Stroke;NA
+29406853;2;29406853_2.html;Embolism and Thrombosis;NA
+29406853;2;29406853_2.html;Myocardial Ischemia, acute;NA
+29409133;1;29409133_1.html;Psoriasis;NA
+29409133;1;29409133_1.html;Arthritis;NA
+29409951;2;29409951_2.html;Lung Diseases, Obstructive;result_table_subgroup
+29409951;3;29409951_3.html;Lung Diseases, Obstructive;result_table_subgroup
+29413502;2;29413502_2.html;Lung Diseases, Obstructive;NA
+29414542;1;29414542_1.html;Epilepsy;result_table_subgroup
+29415145;1;29415145_1.html;Arthritis;result_table_subgroup
+29415145;2;29415145_2.html;Arthritis;result_table_subgroup
+29429593;2;29429593_2.html;Lung Diseases, Obstructive;result_table_subgroup
+29429593;2;29429593v2_2.html;Lung Diseases, Obstructive;result_table_subgroup
+29431256;2;29431256_2.html;Heart Failure;result_table_subgroup
+29447769;2;29447769_2.html;Myocardial Ischemia, acute;result_table_subgroup
+29463520;2;29463520_2.html;Arthritis;result_table_subgroup
+29490509;2;29490509_2.html;Prostatic Hyperplasia;result_table_subgroup
+29526832;2;29526832_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29544870;2;29544870_2.html;Atherosclerosis;result_table_subgroup
+29544870;2;29544870_2.html;Myocardial Ischemia, acute;result_table_subgroup
+29544870;3;29544870_3.html;Atherosclerosis;result_table_subgroup
+29544870;3;29544870_3.html;Myocardial Ischemia, acute;result_table_subgroup
+29544870;4;29544870_4.html;Atherosclerosis;result_table_subgroup
+29544870;4;29544870_4.html;Myocardial Ischemia, acute;result_table_subgroup
+29556416;2;29556416_2.html;Arthritis;result_table_subgroup
+29556416;3;29556416_3.html;Arthritis;result_table_subgroup
+29661699;2;29661699_2.html;Heart Failure;result_table_subgroup
+29664406;2;29664406_2.html;Heart Failure;result_table_subgroup
+29671280;2;29671280_2.html;Lupus Erythematosus, Systemic;result_table_subgroup
+29685860;1;29685860_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29685860;1;29685860_1.html;Hypertension;result_table_subgroup
+29685860;1;29685860_1.html;Hyperlipidemias;result_table_subgroup
+29685860;1;29685860_1.html;Atherosclerosis;result_table_subgroup
+29685860;1;29685860_1.html;Myocardial Ischemia;result_table_subgroup
+29685860;2;29685860_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29685860;2;29685860_2.html;Hypertension;result_table_subgroup
+29685860;2;29685860_2.html;Hyperlipidemias;result_table_subgroup
+29685860;2;29685860_2.html;Atherosclerosis;result_table_subgroup
+29685860;2;29685860_2.html;Myocardial Ischemia;result_table_subgroup
+29685860;1;29685860v2_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29685860;1;29685860v2_1.html;Hypertension;result_table_subgroup
+29685860;1;29685860v2_1.html;Hyperlipidemias;result_table_subgroup
+29685860;1;29685860v2_1.html;Atherosclerosis;result_table_subgroup
+29685860;1;29685860v2_1.html;Myocardial Ischemia;result_table_subgroup
+29713156;2;29713156_2.html;Lung Diseases, Obstructive;result_table_subgroup
+29748996;1;29748996_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29766634;2;29766634_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29777264;1;29777264_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29777264;1;29777264v2_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29782217;2;29782217_2.html;Lung Diseases, Obstructive;result_table_subgroup
+29782217;3;29782217_3.html;Lung Diseases, Obstructive;result_table_subgroup
+29790415;1;29790415_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29790415;2;29790415_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29793629;2;29793629_2.html;Atherosclerosis;result_table_subgroup
+29793629;2;29793629_2.html;Myocardial Ischemia, acute;result_table_subgroup
+29797519;1;29797519_1.html;Inflammatory Bowel Diseases;NA
+29857145;3;29857145_3.html;Inflammatory Bowel Diseases;NA
+29857145;4;29857145_4.html;Inflammatory Bowel Diseases;NA
+29857145;5;29857145_5.html;Inflammatory Bowel Diseases;NA
+29857145;6;29857145_6.html;Inflammatory Bowel Diseases;NA
+29857145;7;29857145_7.html;Inflammatory Bowel Diseases;NA
+29880010;1;29880010_1.html;Psoriasis;result_table_subgroup
+29880010;1;29880010_1.html;Arthritis;result_table_subgroup
+29903515;2;29903515_2.html;Myocardial Ischemia, acute;result_table_subgroup
+29903515;2;29903515_2.html;Hyperlipidemias;result_table_subgroup
+29903515;3;29903515_3.html;Myocardial Ischemia, acute;result_table_subgroup
+29903515;3;29903515_3.html;Hyperlipidemias;result_table_subgroup
+29903515;4;29903515_4.html;Myocardial Ischemia, acute;result_table_subgroup
+29903515;4;29903515_4.html;Hyperlipidemias;result_table_subgroup
+29908670;1;29908670_1.html;Arthritis;result_table_subgroup
+29909019;2;29909019_2.html;Inflammatory Bowel Diseases;NA
+29925383;2;29925383_2.html;Lung Diseases, Obstructive;result_table_subgroup
+29937267;2;29937267_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29937431;2;29937431_2.html;Diabetes Mellitus, Type 1;NA
+29941478;1;29941478_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29941478;2;29941478_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+29941478;1;29941478v2_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30012318;3;30012318_3.html;NA;result_table_subgroup
+30026335;2;30026335_2.html;Diabetes Mellitus, Type 1;result_table_subgroup
+30026335;3;30026335_3.html;Diabetes Mellitus, Type 1;result_table_subgroup
+30053967;1;30053967_1.html;Lung Diseases, Obstructive;result_table_subgroup
+30053967;2;30053967_2.html;Lung Diseases, Obstructive;result_table_subgroup
+30053967;1;30053967v2_1.html;Lung Diseases, Obstructive;result_table_subgroup
+30121827;3;30121827_3.html;Arthritis;result_table_subgroup
+30139780;2;30139780_2.html;Lung Diseases, Obstructive;result_table_subgroup
+30146931;2;30146931_2.html;Diabetes Mellitus;result_table_subgroup
+30146931;3;30146931_3.html;Diabetes Mellitus;result_table_subgroup
+30146932;2;30146932_2.html;Diabetes Mellitus;result_table_subgroup
+30165610;3;30165610_3.html;Atherosclerosis;result_table_subgroup
+30165610;3;30165610_3.html;Myocardial Ischemia, acute;result_table_subgroup
+30166073;3;30166073_3.html;Myocardial Ischemia;result_table_subgroup
+30175930;2;30175930_2.html;Hypertension;result_table_subgroup
+30183102;1;30183102_1.html;Hyperlipidemias;result_table_subgroup
+30183102;2;30183102_2.html;Hyperlipidemias;result_table_subgroup
+30183102;1;30183102v2_1.html;Hyperlipidemias;result_table_subgroup
+30191421;2;30191421_2.html;Arthritis;result_table_subgroup
+30203005;2;30203005_2.html;Inflammatory Bowel Diseases;NA
+30203580;2;30203580_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30218434;1;30218434_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30248105;2;30248105_2.html;Dementia;result_table_subgroup
+30248105;3;30248105_3.html;Dementia;result_table_subgroup
+30248105;4;30248105_4.html;Dementia;result_table_subgroup
+30287422;2;30287422_2.html;Diabetes Mellitus, Type 1;NA
+30290801;2;30290801_2.html;Lung Diseases, Obstructive;result_table_without_subgroup
+30290801;3;30290801_3.html;Lung Diseases, Obstructive;result_table_without_subgroup
+30291013;2;30291013_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30302940;4;30302940_4.html;Myocardial Ischemia, acute;result_table_subgroup
+30336824;2;30336824_2.html;Hyperlipidemias;result_table_without_subgroup
+30336824;3;30336824_3.html;Hyperlipidemias;result_table_without_subgroup
+30341453;1;30341453_1.html;Arthritis;NA
+30341453;2;30341453_2.html;Arthritis;NA
+30352894;1;30352894_1.html;Diabetes Mellitus, Type 1;result_table_subgroup
+30352894;2;30352894_2.html;Diabetes Mellitus, Type 1;result_table_subgroup
+30354517;1;30354517_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30354781;2;30354781_2.html;Myocardial Ischemia;result_table_subgroup
+30371334;6;30371334_6.html;Myocardial Ischemia, acute;result_table_subgroup
+30371334;6;30371334_6.html;Atherosclerosis;result_table_subgroup
+30371334;6;30371334_6.html;Myocardial Ischemia;result_table_subgroup
+30371334;6;30371334_6.html;Stroke;result_table_subgroup
+30392095;2;30392095_2.html;Diabetes Mellitus, Type 2;NA
+30393950;2;30393950_2.html;Diabetes Mellitus, Type 2;NA
+30415602;2;30415602_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30415628;1;30415628_1.html;Hyperlipidemias;result_table_subgroup
+30418475;2;30418475_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30425095;1;30425095_1.html;Diabetes Mellitus, Type 2;NA
+30425095b;1;30425095b_1.html;NA;NA
+30465321;2;30465321_2.html;Psoriasis;NA
+30465321;3;30465321_3.html;Psoriasis;NA
+30465321;4;30465321_4.html;Psoriasis;NA
+30465321;5;30465321_5.html;Psoriasis;NA
+30465321;6;30465321_6.html;Psoriasis;NA
+30473179;3;30473179_3.html;Arthritis;NA
+30474818;2;30474818_2.html;Diabetes Mellitus, Type 2;result_table_without_subgroup
+30522501;1;30522501_1.html;Psoriasis;result_table_subgroup
+30522501;1;30522501_1.html;Arthritis;result_table_subgroup
+30525116;2;30525116_2.html;Epilepsy;result_table_subgroup
+30525116;3;30525116_3.html;Epilepsy;NA
+30525116;4;30525116_4.html;Epilepsy;NA
+30547388;2;30547388_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30547388;3;30547388_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30547388;4;30547388_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30564451;2;30564451_2.html;Arthritis;result_table_subgroup
+30566004;1;30566004_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30566004;1;30566004v2_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30566006;1;30566006_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30566006;2;30566006_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30566006;1;30566006v2_1.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30571562;2;30571562_2.html;Diabetes Mellitus, Type 2;NA
+30571562;3;30571562_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30584583;2;30584583_2.html;Lung Diseases, Obstructive;result_table_subgroup
+30584583;3;30584583_3.html;Lung Diseases, Obstructive;result_table_subgroup
+30586723;2;30586723_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30586723;3;30586723_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30586757;3;30586757_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30586757;4;30586757_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30586757;5;30586757_5.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30586757;6;30586757_6.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30587959;3;30587959_3.html;Lung Diseases, Obstructive;result_table_subgroup
+30587959;4;30587959_4.html;Lung Diseases, Obstructive;result_table_subgroup
+30587959;5;30587959_5.html;Lung Diseases, Obstructive;result_table_subgroup
+30587959;6;30587959_6.html;Lung Diseases, Obstructive;result_table_subgroup
+30590387;2;30590387_2.html;Heart Failure;result_table_subgroup
+30590387;2;30590387_2.html;Myocardial Ischemia, acute;result_table_subgroup
+30590387;2;30590387_2.html;Hypertension;result_table_subgroup
+30590387;2;30590387_2.html;Hyperlipidemias;result_table_subgroup
+30590387;2;30590387_2.html;Diabetes Mellitus;result_table_subgroup
+30590387;2;30590387_2.html;Myocardial Ischemia;result_table_subgroup
+30590387;3;30590387_3.html;Heart Failure;result_table_subgroup
+30590387;3;30590387_3.html;Myocardial Ischemia, acute;result_table_subgroup
+30590387;3;30590387_3.html;Hypertension;result_table_subgroup
+30590387;3;30590387_3.html;Hyperlipidemias;result_table_subgroup
+30590387;3;30590387_3.html;Diabetes Mellitus;result_table_subgroup
+30590387;3;30590387_3.html;Myocardial Ischemia;result_table_subgroup
+30591006;2;30591006_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30591006;3;30591006_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30609212;1;30609212_1.html;Diabetes Mellitus, Type 2;NA
+30609212;2;30609212_2.html;Diabetes Mellitus, Type 2;NA
+30609212;3;30609212_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30614616;1;30614616_1.html;Diabetes Mellitus, Type 2;NA
+30614616;2;30614616_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30654882;1;30654882_1.html;Peripheral Vascular Diseases;NA
+30659410;1;30659410_1.html;Osteoporosis;NA
+30659410;2;30659410_2.html;Osteoporosis;NA
+30659410;3;30659410_3.html;Osteoporosis;NA
+30667279;1;30667279_1.html;Peripheral Vascular Diseases;NA
+30696483;1;30696483_1.html;Psoriasis;NA
+30696483;1;30696483_1.html;Arthritis;NA
+30696483;2;30696483_2.html;Psoriasis;NA
+30696483;2;30696483_2.html;Arthritis;NA
+30729456;1;30729456_1.html;Idiopathic Interstitial Pneumonias;NA
+30729456;2;30729456_2.html;Idiopathic Interstitial Pneumonias;NA
+30734043;1;30734043_1.html;Myocardial Ischemia, acute;NA
+30734043;1;30734043_1.html;Stroke;NA
+30734043;2;30734043_2.html;Myocardial Ischemia, acute;NA
+30734043;2;30734043_2.html;Stroke;NA
+30815468;1;30815468_1.html;Lung Diseases, Obstructive;NA
+30815468;2;30815468_2.html;Lung Diseases, Obstructive;NA
+30815468;3;30815468_3.html;Lung Diseases, Obstructive;NA
+30830724;1;30830724_1.html;Diabetes Mellitus, Type 2;NA
+30830724;2;30830724_2.html;Diabetes Mellitus, Type 2;NA
+30830724;3;30830724_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30830724;4;30830724_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30830724;5;30830724_5.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30830724;6;30830724_6.html;Diabetes Mellitus, Type 2;result_table_without_subgroup
+30851070;1;30851070_1.html;Diabetes Mellitus, Type 2;NA
+30851070;2;30851070_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30851070;3;30851070_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30865796;1;30865796_1.html;Hyperlipidemias;NA
+30865796;1;30865796_1.html;Atherosclerosis;NA
+30865796;2;30865796_2.html;Hyperlipidemias;NA
+30865796;2;30865796_2.html;Atherosclerosis;NA
+30871355;1;30871355_1.html;Myocardial Ischemia, acute;NA
+30871355;1;30871355_1.html;Atherosclerosis;NA
+30871355;2;30871355_2.html;Myocardial Ischemia, acute;NA
+30871355;2;30871355_2.html;Atherosclerosis;NA
+30871355;3;30871355_3.html;Myocardial Ischemia, acute;NA
+30871355;3;30871355_3.html;Atherosclerosis;NA
+30871355;4;30871355_4.html;Myocardial Ischemia, acute;NA
+30871355;4;30871355_4.html;Atherosclerosis;NA
+30882238;1;30882238_1.html;Diabetes Mellitus, Type 2;NA
+30882238;2;30882238_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30882239;2;30882239_2.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30882239;3;30882239_3.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30882239;4;30882239_4.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30882239;5;30882239_5.html;Diabetes Mellitus, Type 2;result_table_subgroup
+30936738;1;30936738_1.html;Arthritis;NA
+30936738;2;30936738_2.html;Arthritis;NA
+30936738;3;30936738_3.html;Arthritis;NA
+30936738;4;30936738_4.html;Arthritis;NA
+30936738;5;30936738_5.html;Arthritis;NA
+30953107;1;30953107_1.html;Hyperlipidemias;NA
+30953107;1;30953107_1.html;Diabetes Mellitus, Type 2;NA
+30953107;2;30953107_2.html;Hyperlipidemias;NA
+30953107;2;30953107_2.html;Diabetes Mellitus, Type 2;NA
+7997016;1;7997016_1.html;Myocardial Ischemia;NA
+8121459;1;8121459_1.html;Myocardial Ischemia, chronic;NA
+8121459;2;8121459_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+8121459;1;8121459v2_1.html;Myocardial Ischemia, chronic;NA
+8121459;2;8121459v2_2.html;Myocardial Ischemia, chronic;result_table_subgroup
+8596317;1;8596317_1.html;Stroke;NA
+8596317;1;8596317_1.html;Embolism and Thrombosis;NA
+8950879;1;8950879_1.html;Osteoporosis;NA
+9036306;1;9036306_1.html;Heart Failure;NA
+9603532;1;9603532_1.html;Myocardial Ischemia;NA
+9841303;2;9841303_2.html;Myocardial Ischemia;result_table_subgroup
+9848888;2;9848888_2.html;Myocardial Ischemia;NA
+9892586;3;9892586_3.html;Myocardial Ischemia;result_table_subgroup

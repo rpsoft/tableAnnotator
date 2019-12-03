@@ -21,8 +21,9 @@ mytable <- conditions_lkp %>% select(nct_id,mesh_broad_label) %>% left_join(elig
 
 #
 
-topic_groups <- mytable %>% select( -nct_id ) %>% distinct()
-topic_groups %>% View
+topic_groups <- mytable %>% select( -nct_id ) %>% distinct() %>% filter( !is.na(pmid))
+topic_groups %>% distinct(pmid) %>% nrow
+
 
 mytable <- mytable %>% select(-nct_id) %>% 
           filter(! is.na(pmid)) %>% distinct %>% 
@@ -49,12 +50,33 @@ all_docid_with_html %>% separate(filename, c("pmid", "page"), "_") %>% left_join
 
 annots <- annotated %>% separate(pmid, c("pmid") ) %>% distinct
 
-all_docid_with_html %>% separate(filename, c("pmid", "page"), "_") %>% 
+annots %>% group_by(pmid,page) %>% select(-tableType) %>% tally %>% arrange(desc(n))
+
+topic_counts <- all_docid_with_html %>% separate(filename, c("pmid", "page"), "_") %>% 
   mutate(page = as.integer(page)) %>% 
   left_join(topic_groups) %>% 
-  left_join(annots) %>% filter( tableType %in% c("baseline_table","other_table") )  %>% 
-  select(mesh_broad_label) %>% group_by(mesh_broad_label) %>% tally %>% View
+  left_join(annots) %>% filter( ! (tableType %in% c("baseline_table","other_table")) ) %>% select(mesh_broad_label) %>% group_by(mesh_broad_label) %>% tally
 
+
+topic_html_pmids <- all_docid_with_html %>% separate(filename, c("pmid", "page"), "_") %>% 
+  mutate(page = as.integer(page)) %>% 
+  left_join(topic_groups) %>% 
+  left_join(annots) %>% filter( ! (tableType %in% c("baseline_table","other_table")) )
+
+topic_html_pmids_other <- all_docid_with_html %>% separate(filename, c("pmid", "page"), "_") %>% 
+  mutate(page = as.integer(page)) %>% 
+  left_join(topic_groups) %>% 
+  left_join(annots) %>% filter( (tableType %in% c("baseline_table","other_table")) )
+
+
+
+topic_html_pmids %>% distinct(filename_orig) %>% nrow
+topic_html_pmids_other %>% distinct(filename_orig) %>% nrow
+
+(topic_html_pmids %>% distinct(filename_orig) %>% nrow)+ (topic_html_pmids_other %>% distinct(filename_orig) %>% nrow)
+
+
+write_csv2(topic_html_pmids, "topic_html_pmids.csv") 
 
 # 
 # colnames(all_docid_with_html) = c("docid")
@@ -69,3 +91,7 @@ all_docid_with_html %>% separate(filename, c("pmid", "page"), "_") %>%
 
 write_csv2(topic_counts, "topic_counts.csv") 
 ###############################
+
+
+
+

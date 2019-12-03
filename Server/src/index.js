@@ -91,10 +91,18 @@ fs.createReadStream('pmid_msh_label.csv')
                     acc[item.mesh_broad_label] = item.pmid.split("&");
                     return acc;
                   }, {});
+
+    var pmids_w_cat = msh_categories_csv.reduce(function (acc, item) {
+                   var pmids = item.pmid.split("&")
+                   acc = [...acc,pmids]
+                   return acc;
+                 }, []).flat();
+
      var allcats = Object.keys(catIndex)
 
-     // debugger
-     msh_categories = {catIndex: catIndex, allcats: allcats}
+         allcats.push("NA")
+         catIndex["NA"] = []
+     msh_categories = {catIndex: catIndex, allcats: allcats, pmids_w_cat}
   });
 
 
@@ -164,30 +172,22 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua){
       ftyp[i] = type_lookup[ftyp[i]]
   }
 
-  // var msh_filter = null
-  // // var sg_tables = msh_filter ? ((msh_filter.length > 1) && (msh_filter[1] == "sgt") ? true : false) : false
-  // //
-  // // msh_filter = msh_filter ? msh_filter[0] : msh_filter
-  // //
-  // // msh_filter = msh_filter == "nofilter" ? null : msh_filter
-  // //
-  // var wsg_other = null
+  var filtered_docs_ttype = []
 
-  var filtered_docs_ttype = null
+  var allAnnotations = await getAnnotationResults()
 
-  var all_annotated_docids = null
+  var all_annotated_docids = Array.from(new Set(allAnnotations.rows.reduce( (acc,ann) => {
+      acc = acc ? acc : []
+
+      acc.push(ann.docid+"_"+ann.page);
+
+      return acc
+    }, [] )))
+
 
   if( ftop.length+ftyp.length > 0 ){
 
-      var allAnnotations = await getAnnotationResults()
 
-      all_annotated_docids = Array.from(new Set(allAnnotations.rows.reduce( (acc,ann) => {
-    			acc = acc ? acc : []
-
-          acc.push(ann.docid+"_"+ann.page);
-
-    			return acc
-    		}, [] )))
 
       filtered_docs_ttype = allAnnotations.rows.reduce( (acc,ann) => {
     			acc = acc ? acc : []
@@ -240,15 +240,16 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua){
 
                     var topic_intersection = ftop.reduce( (acc, cat) => { return acc || (msh_categories.catIndex[cat].indexOf(docid) > -1) }, false );
 
+                    if ( ftop.indexOf("NA") > -1 ){
+                      if ( msh_categories.pmids_w_cat.indexOf(docid) < 0 ){
+                          topic_intersection = true
+                      }
+                    }
 
                     var type_enabled = ftyp.length > 0
                     var type_intersection = (type_enabled && (filtered_docs_ttype.length > 0) && (filtered_docs_ttype.indexOf(docid_V+"_"+page) > -1))
 
                     var accept_docid = false
-
-                    // if ( (docid_V+"_"+page) == "17392541_1"){
-                    //   debugger
-                    // }
 
                     if ( topic_enabled && type_enabled){
                       if ( topic_intersection && type_intersection){
@@ -264,8 +265,8 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua){
                       accept_docid = true
                     }
 
-                    if ( (!hua) && all_annotated_docids.indexOf(docid_V+"_"+page) < 0 && topic_enabled && topic_intersection ){ // The document is not annotated, so always add.
-                        accept_docid = true
+                    if ( (!hua) && all_annotated_docids.indexOf(docid_V+"_"+page) < 0 ){ // The document is not annotated, so always add.
+                      accept_docid = true
                     }
 
                     if ( accept_docid ) {
@@ -273,7 +274,14 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua){
                     }
 
                   } else { // Default path when no filters are enabled
-                    acc.push(docfile)
+
+                    if ( !hua ){ // The document is not annotated, so always add.
+                      acc.push(docfile)
+                    } else {
+                      if ( all_annotated_docids.indexOf(docid_V+"_"+page) > -1 ){
+                        acc.push(docfile)
+                      }
+                    }
                   }
 
                   return acc
@@ -636,7 +644,7 @@ app.get('/api/allInfo',async function(req,res){
   var labellers = await getMetadataLabellers();
       labellers = labellers.rows.reduce( (acc,item) => { acc[item.docid+"_"+item.page] = item.labeller; return acc;},{})
 
-  if ( req.query && (req.query.filter_topic || req.query.filter_type) ){
+  if ( req.query && (req.query.filter_topic || req.query.filter_type || req.query.hua) ){
     var result = await prepareAvailableDocuments( req.query.filter_topic ? req.query.filter_topic.split("_") : [],
                                                   req.query.filter_type ? req.query.filter_type.split("_") : [],
                                                   req.query.hua ? req.query.hua == "true" : false)
