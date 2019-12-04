@@ -10,17 +10,6 @@ eligible_nct_ids_pmids <- readRDS("~/ihw/tableAnnotator/tools/SortingTables/elig
 
 mytable <- conditions_lkp %>% select(nct_id,mesh_broad_label) %>% left_join(eligible_nct_ids_pmids %>% filter(!is.na(pmid)))
 
-# mytable %>% View()
-# 
-# new_obj <- readRDS("~/ihw/tableAnnotator/tools/RDS_TO_HTML/new_obj.rds")
-# new_obj %>% select(pmid_tbl) %>% separate(pmid_tbl, c("pmid", "table"), "_") %>% select(pmid) %>% distinct() -> study_pmids
-# 
-# tables_with_mesh_broad_labels <- mytable %>% filter( pmid %in% study_pmids$pmid )
-# 
-# tables_with_mesh_broad_labels %>% arrange(pmid) %>% View
-
-#
-
 topic_groups <- mytable %>% select( -nct_id ) %>% distinct() %>% filter( !is.na(pmid))
 topic_groups %>% distinct(pmid) %>% nrow
 
@@ -48,6 +37,8 @@ all_docid_with_html <- allfiles %>%  mutate ( filename_orig = filename) %>% muta
 
 all_docid_with_html %>% separate(filename, c("pmid", "page"), "_") %>% left_join(topic_groups) %>% View
 
+all_docid_with_html %>% separate(filename, c("pmid", "page"), "_")
+
 annots <- annotated %>% separate(pmid, c("pmid") ) %>% distinct
 
 annots %>% group_by(pmid,page) %>% select(-tableType) %>% tally %>% arrange(desc(n))
@@ -62,6 +53,8 @@ topic_html_pmids <- all_docid_with_html %>% separate(filename, c("pmid", "page")
   mutate(page = as.integer(page)) %>% 
   left_join(topic_groups) %>% 
   left_join(annots) %>% filter( ! (tableType %in% c("baseline_table","other_table")) )
+
+topic_html_pmids %>% View()
 
 topic_html_pmids_other <- all_docid_with_html %>% separate(filename, c("pmid", "page"), "_") %>% 
   mutate(page = as.integer(page)) %>% 
@@ -93,5 +86,19 @@ write_csv2(topic_counts, "topic_counts.csv")
 ###############################
 
 
+all_docid_with_html %>% View()
 
+annott <- annotated %>% separate(pmid, c("pmid") ) %>% mutate(filename = paste0(pmid,"_",page)) 
+
+
+all_docid_with_html %>% nrow
+all_docid_with_html %>% distinct(filename) %>% nrow
+all_docid_with_html %>% distinct(filename) %>% inner_join (annott %>% distinct(filename) ) %>% nrow
+
+annott %>% distinct(filename) %>% anti_join( all_docid_with_html %>% distinct(filename) ) 
+
+annott %>% nrow
+annott %>% distinct(filename)
+
+annott %>% distinct(pmid,page) %>% nrow
 

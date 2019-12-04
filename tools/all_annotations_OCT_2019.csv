@@ -23,9 +23,6 @@ Avi;29431256;2;NA;subgroup_table;Row;1;"subgroup_name;p-interaction";NA
 Avi;29431256;2;NA;subgroup_table;Row;2;arms;NA
 Avi;29431256;2;NA;subgroup_table;Col;1;outcomes;empty_row
 Avi;29431256;2;NA;subgroup_table;Col;1;measures;NA
-Avi;29429593 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-Avi;29429593 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Avi;29429593 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Avi;29415145;1;NA;subgroup_table;Row;1;"measures;p-interaction";NA
 Avi;29415145;1;NA;subgroup_table;Row;2;arms;NA
 Avi;29415145;1;NA;subgroup_table;Col;1;subgroup_name;empty_row
@@ -112,19 +109,6 @@ Avi;29084736;2;NA;subgroup_table;Col;1;subgroup_level;NA
 Avi;29073947;1;Corrupted older annotation;baseline_table;Row;1;"arms;other";NA
 Avi;29073947;1;Corrupted older annotation;baseline_table;Col;1;baseline_level_1;NA
 Avi;29073947;1;Corrupted older annotation;baseline_table;Col;1;baseline_level_2;indented
-Avi;29028981 & Supplementary Append;1;NA;baseline_table;Row;1;other;NA
-Avi;29028981 & Supplementary Append;1;NA;baseline_table;Row;2;arms;NA
-Avi;29028981 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Avi;29028981 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Avi;29028981 & Supplementary Append;2;NA;subgroup_table;Row;1;other;NA
-Avi;29028981 & Supplementary Append;2;NA;subgroup_table;Row;2;arms;NA
-Avi;29028981 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;empty_row
-Avi;29028981 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;indented
-Avi;29028981 & Supplementary Append;3;NA;subgroup_table;Row;1;other;NA
-Avi;29028981 & Supplementary Append;3;NA;subgroup_table;Row;2;arms;NA
-Avi;29028981 & Supplementary Append;3;NA;subgroup_table;Row;3;outcomes;NA
-Avi;29028981 & Supplementary Append;3;NA;subgroup_table;Col;1;baseline_level_1;empty_row
-Avi;29028981 & Supplementary Append;3;NA;subgroup_table;Col;1;baseline_level_2;indented
 Avi;28975241;1;NA;baseline_table;Row;1;measures;NA
 Avi;28975241;1;NA;baseline_table;Row;2;arms;NA
 Avi;28975241;1;NA;baseline_table;Col;1;subgroup_name;empty_row
@@ -177,24 +161,12 @@ Lili;28904068;2;NA;subgroup_table;Row;1;subgroup_level;bold
 Lili;28904068;2;NA;subgroup_table;Row;2;arms;bold
 Lili;28904068;2;NA;subgroup_table;Col;1;outcomes;bold
 Lili;28904068;2;NA;subgroup_table;Col;1;measures;NA
-Katherine;28903864 & Supplementary Append;1;NA;baseline_table;Row;1;arms;bold
-Katherine;28903864 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Katherine;28903864 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;indented
-Lili;28902593 & Supplementary Append;1;NA;baseline_table;Row;1;other;NA
-Lili;28902593 & Supplementary Append;1;NA;baseline_table;Row;2;subgroup_level;NA
-Lili;28902593 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;28902593 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;28893134;1;NA;baseline_table;Row;1;other;NA
 Lili;28893134;1;NA;baseline_table;Row;2;arms;NA
 Lili;28893134;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;28893134;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Katherine;28893134;2;NA;baseline_table;Row;1;"measures;arms";bold
 Katherine;28893134;2;NA;baseline_table;Col;1;baseline_level_1;NA
-Lili;28877027 & Supplementary Append;2;NA;subgroup_table;Row;1;subgroup_level;NA
-Lili;28877027 & Supplementary Append;2;NA;subgroup_table;Row;2;"arms;measures";NA
-Lili;28877027 & Supplementary Append;2;NA;subgroup_table;Row;3;measures;NA
-Lili;28877027 & Supplementary Append;2;NA;subgroup_table;Col;1;outcomes;empty_row
-Lili;28877027 & Supplementary Append;2;NA;subgroup_table;Col;1;"measures;other";NA
 Katherine;28854085;1;Corrupted older annotation;baseline_table;Row;1;arms;bold
 Katherine;28854085;1;Corrupted older annotation;baseline_table;Col;1;baseline_level_1;empty_row
 Katherine;28854085;1;Corrupted older annotation;baseline_table;Col;1;baseline_level_2;NA
@@ -221,17 +193,6 @@ David;28844192;2;NA;subgroup_table;Col;1;subgroup_name;empty_row_with_p_value
 David;28801539;2;NA;subgroup_table;Row;1;subgroup_level;NA
 David;28801539;2;NA;subgroup_table;Row;2;"arms;measures;p-interaction";NA
 David;28801539;2;NA;subgroup_table;Col;1;outcomes;NA
-David;28720132 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-David;28720132 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-David;28720132 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;indented
-David;28720132 & Supplementary Append;2;NA;subgroup_table;Row;1;measures;NA
-David;28720132 & Supplementary Append;2;NA;subgroup_table;Row;2;arms;NA
-David;28720132 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;NA
-David;28720132 & Supplementary Append;2;NA;subgroup_table;Col;2;subgroup_level;NA
-David;28720132 & Supplementary Append;3;NA;subgroup_table;Row;1;measures;NA
-David;28720132 & Supplementary Append;3;NA;subgroup_table;Row;2;arms;NA
-David;28720132 & Supplementary Append;3;NA;subgroup_table;Col;1;subgroup_name;NA
-David;28720132 & Supplementary Append;3;NA;subgroup_table;Col;2;subgroup_level;NA
 David;28666775;1;NA;baseline_table;Row;1;subgroup_level;NA
 David;28666775;1;NA;baseline_table;Row;2;arms;NA
 David;28666775;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
@@ -260,10 +221,6 @@ Hebe;28473423;2;NA;subgroup_table;Row;1;other;bold
 Hebe;28473423;2;NA;subgroup_table;Row;2;"arms;measures";bold
 Hebe;28473423;2;NA;subgroup_table;Col;1;subgroup_level;bold
 Hebe;28473423;2;NA;subgroup_table;Col;1;measures;NA
-Hebe;28467869 & Supplementary Append;1;NA;baseline_table;Row;1;other;bold
-Hebe;28467869 & Supplementary Append;1;NA;baseline_table;Row;2;arms;NA
-Hebe;28467869 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Hebe;28467869 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Hebe;28432746;2;NA;subgroup_table;Row;4;arms;NA
 Hebe;28432746;2;NA;subgroup_table;Row;5;subgroup_level;NA
 Hebe;28432746;2;NA;subgroup_table;Row;29;arms;NA
@@ -278,9 +235,6 @@ Hebe;28416587;1;NA;baseline_table;Col;1;subgroup_level;indented
 Hebe;28416587;2;NA;subgroup_table;Row;1;measures;NA
 Hebe;28416587;2;NA;subgroup_table;Col;1;subgroup_name;NA
 Hebe;28416587;2;NA;subgroup_table;Col;2;subgroup_level;NA
-Hebe;28405473 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-Hebe;28405473 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Hebe;28405473 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;indented
 Hebe;28402745;1;NA;baseline_table;Row;1;arms;bold
 Hebe;28402745;1;NA;baseline_table;Col;1;subgroup_name;empty_row
 Hebe;28402745;1;NA;baseline_table;Col;1;subgroup_level;NA
@@ -291,15 +245,6 @@ David;28386990;2;NA;subgroup_table;Row;1;arms;NA
 David;28386990;2;NA;subgroup_table;Row;2;subgroup_level;NA
 David;28386990;2;NA;subgroup_table;Col;1;outcomes;NA
 David;28386990;2;NA;subgroup_table;Col;2;measures;NA
-Katherine;28385353 & Supplementary Append;1;Corrupted older annotation;baseline_table;Row;1;arms;bold
-Katherine;28385353 & Supplementary Append;1;Corrupted older annotation;baseline_table;Col;1;baseline_level_1;empty_row
-Katherine;28385353 & Supplementary Append;1;Corrupted older annotation;baseline_table;Col;1;baseline_level_2;NA
-Katherine;28316279 & Supplamentary Append;1;Corrupted older annotation;baseline_table;Row;1;arms;bold
-Katherine;28316279 & Supplamentary Append;1;Corrupted older annotation;baseline_table;Col;1;baseline_level_1;empty_row
-Katherine;28316279 & Supplamentary Append;1;Corrupted older annotation;baseline_table;Col;1;baseline_level_2;NA
-Katherine;28316279 & Supplamentary Append;2;Corrupted older annotation;baseline_table;Row;1;arms;NA
-Katherine;28316279 & Supplamentary Append;2;Corrupted older annotation;baseline_table;Col;1;baseline_level_1;empty_row
-Katherine;28316279 & Supplamentary Append;2;Corrupted older annotation;baseline_table;Col;1;baseline_level_2;NA
 Katherine;28278391;3;NA;baseline_table;Row;1;measures;NA
 Katherine;28278391;3;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Katherine;28278391;3;NA;baseline_table;Col;1;baseline_level_2;indented
@@ -330,22 +275,6 @@ Lili;28231942;3;NA;baseline_table;Row;2;measures;NA
 Lili;28231942;3;NA;baseline_table;Row;3;arms;NA
 Lili;28231942;3;NA;baseline_table;Row;4;measures;NA
 Lili;28231942;3;NA;baseline_table;Col;1;baseline_level_1;NA
-Lili;28215362 & Supplementary Append;1;NA;baseline_table;Row;1;"arms;measures";bold
-Lili;28215362 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;28215362 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Lili;28215362 & Supplementary Append;2;NA;subgroup_table;Row;1;arms;bold
-Lili;28215362 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;"bold;empty_row"
-Lili;28215362 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;NA
-Lili;28215362 & Supplementary Append;2;NA;subgroup_table;Col;1;measures;indented
-Lili;28153828 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-Lili;28153828 & Supplementary Append;1;NA;baseline_table;Row;2;measures;NA
-Lili;28153828 & Supplementary Append;1;NA;baseline_table;Row;3;measures;NA
-Lili;28153828 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;NA
-Lili;28153828 & Supplementary Append;2;NA;subgroup_table;Row;1;arms;NA
-Lili;28153828 & Supplementary Append;2;NA;subgroup_table;Row;2;other;NA
-Lili;28153828 & Supplementary Append;2;NA;subgroup_table;Row;3;measures;NA
-Lili;28153828 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;NA
-Lili;28153828 & Supplementary Append;2;NA;subgroup_table;Col;2;subgroup_level;NA
 Lili;28118533;1;NA;baseline_table;Row;1;arms;NA
 Lili;28118533;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;28118533;1;NA;baseline_table;Col;1;baseline_level_2;NA
@@ -360,22 +289,6 @@ Lili;28035868;2;NA;subgroup_table;Row;1;subgroup_level;NA
 Lili;28035868;2;NA;subgroup_table;Row;2;arms;NA
 Lili;28035868;2;NA;subgroup_table;Col;1;outcomes;empty_row
 Lili;28035868;2;NA;subgroup_table;Col;1;measures;NA
-Lili;27993292 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-Lili;27993292 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;27993292 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Lili;27993292 & Supplementary Append;2;NA;subgroup_table;Row;1;subgroup_level;bold
-Lili;27993292 & Supplementary Append;2;NA;subgroup_table;Row;2;arms;NA
-Lili;27993292 & Supplementary Append;2;NA;subgroup_table;Col;1;outcomes;NA
-Lili;27993292 & Supplementary Append;3;NA;subgroup_table;Row;1;arms;NA
-Lili;27993292 & Supplementary Append;3;NA;subgroup_table;Row;2;measures;NA
-Lili;27993292 & Supplementary Append;3;NA;subgroup_table;Col;1;subgroup_name;empty_row
-Lili;27993292 & Supplementary Append;3;NA;subgroup_table;Col;1;subgroup_level;indented
-Lili;27965257 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-Lili;27965257 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;27965257 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Lili;27965257 & Supplementary Append;2;NA;subgroup_table;Row;1;arms;NA
-Lili;27965257 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;"bold;empty_row"
-Lili;27965257 & Supplementary Append;2;NA;subgroup_table;Col;1;measures;NA
 Lili;27956003;1;NA;baseline_table;Row;1;arms;NA
 Lili;27956003;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;27956003;1;NA;baseline_table;Col;1;baseline_level_2;NA
@@ -416,8 +329,6 @@ Lili;27708114;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;27708114;2;NA;subgroup_table;Row;1;measures;NA
 Lili;27708114;2;NA;subgroup_table;Row;2;"arms;measures";NA
 Lili;27708114;2;NA;subgroup_table;Col;1;outcomes;NA
-Lili;27689735 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-Lili;27689735 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;NA
 Lili;27684308;1;NA;baseline_table;Row;1;arms;NA
 Lili;27684308;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;27684308;1;NA;baseline_table;Col;1;baseline_level_2;NA
@@ -443,25 +354,6 @@ Lili;27619750;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;27619750;2;NA;subgroup_table;Row;1;subgroup_level;NA
 Lili;27619750;2;NA;subgroup_table;Row;2;arms;NA
 Lili;27619750;2;NA;subgroup_table;Col;1;outcomes;NA
-Lili;27609408 & Supplementary Append;1;NA;baseline_table;Row;1;subgroup_level;NA
-Lili;27609408 & Supplementary Append;1;NA;baseline_table;Row;2;arms;NA
-Lili;27609408 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;27609408 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Lili;27609406 & Supplementary Append;1;NA;baseline_table;Row;1;subgroup_level;NA
-Lili;27609406 & Supplementary Append;1;NA;baseline_table;Row;2;arms;NA
-Lili;27609406 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;27609406 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Lili;27581531 & Supplementary Append;1;NA;baseline_table;Row;1;arms;bold
-Lili;27581531 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;27581531 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Lili;27581531 & Supplementary Append;2;NA;subgroup_table;Row;1;"arms;p-interaction;measures";NA
-Lili;27581531 & Supplementary Append;2;NA;subgroup_table;Row;2;measures;NA
-Lili;27581531 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;NA
-Lili;27576775 & Supplementary Append;1;NA;baseline_table;Row;1;subgroup_level;NA
-Lili;27576775 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;27576775 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Lili;27576775 & Supplementary Append;2;NA;subgroup_table;Row;1;"arms;measures;p-interaction";NA
-Lili;27576775 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;NA
 Lili and David;27576774;2;NA;subgroup_table;Row;1;"measures;arms;p-interaction";NA
 Lili and David;27576774;2;NA;subgroup_table;Col;1;outcomes;bold
 Lili and David;27576774;2;NA;subgroup_table;Col;2;subgroup_level;NA
@@ -493,10 +385,6 @@ Lili;27437883;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;27437883;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;27437883;2;NA;subgroup_table;Row;1;"arms;measures;p-interaction";bold
 Lili;27437883;2;NA;subgroup_table;Col;1;"subgroup_name;subgroup_level";NA
-Lili;27418597 & Supplementary Append;2;NA;subgroup_table;Row;1;"measures;p-interaction";NA
-Lili;27418597 & Supplementary Append;2;NA;subgroup_table;Row;2;arms;NA
-Lili;27418597 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;empty_row_with_p_value
-Lili;27418597 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;NA
 Lili;27395349;1;NA;baseline_table;Row;1;"subgroup_level;measures";NA
 Lili;27395349;1;NA;baseline_table;Col;1;baseline_level_1;NA
 Lili;27395349;3;NA;subgroup_table;Row;1;outcomes;bold
@@ -507,10 +395,6 @@ Lili;27354044;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;27354044;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;27354044;2;NA;subgroup_table;Row;1;"measures;subgroup_level;p-interaction";bold
 Lili;27354044;2;NA;subgroup_table;Col;1;outcomes;NA
-Lili;27335114 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-Lili;27335114 & Supplementary Append;1;NA;baseline_table;Row;2;arms;NA
-Lili;27335114 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;27335114 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;27316465;1;NA;baseline_table;Row;1;subgroup_level;NA
 Lili;27316465;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;27316465;1;NA;baseline_table;Col;1;baseline_level_2;NA
@@ -525,21 +409,12 @@ Lili;27295427;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;27295427;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;27295427;2;NA;subgroup_table;Row;1;"arms;measures";NA
 Lili;27295427;2;NA;subgroup_table;Col;1;subgroup_level;NA
-Lili;27215502 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-Lili;27215502 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;27215502 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Lili;27215502 & Supplementary Append;2;NA;subgroup_table;Row;1;arms;NA
-Lili;27215502 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;"empty_row;bold"
-Lili;27215502 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;NA
 Lili;27181606;1;NA;baseline_table;Row;1;arms;NA
 Lili;27181606;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;27181606;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;27181606;2;NA;subgroup_table;Row;1;"measures;arms";NA
 Lili;27181606;2;NA;subgroup_table;Col;1;subgroup_name;empty_row
 Lili;27181606;2;NA;subgroup_table;Col;1;subgroup_level;NA
-Lili;27165179 & Supplementary Append;1;NA;baseline_table;Row;1;"arms;measures";NA
-Lili;27165179 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;27165179 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;27144849;3;NA;subgroup_table;Row;1;"arms;measures";NA
 Lili;27144849;3;NA;subgroup_table;Col;1;subgroup_name;empty_row
 Lili;27144849;3;NA;subgroup_table;Col;1;subgroup_level;NA
@@ -554,9 +429,6 @@ Lili;27046162;1;NA;baseline_table;Col;1;baseline_level_1;empty_row_with_p_value
 Lili;27046162;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;27046160;1;NA;baseline_table;Row;1;"subgroup_level;measures";NA
 Lili;27046160;1;NA;baseline_table;Col;1;baseline_level_1;NA
-Lili;27046159 & Supplementary Append;1;NA;baseline_table;Row;1;"subgroup_level;measures";NA
-Lili;27046159 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;27046159 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;27043082;1;NA;baseline_table;Row;1;arms;NA
 Lili;27043082;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;27043082;1;NA;baseline_table;Col;1;baseline_level_2;NA
@@ -567,13 +439,6 @@ Lili;27043082;2;NA;subgroup_table;Col;1;subgroup_level;NA
 Lili;27033025;1;NA;baseline_table;Row;1;subgroup_level;NA
 Lili;27033025;1;NA;baseline_table;Row;2;arms;NA
 Lili;27033025;1;NA;baseline_table;Col;1;baseline_level_1;NA
-Lili;27028914 & Supplementary Append;1;NA;baseline_table;Row;1;arms;bold
-Lili;27028914 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;27028914 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Lili;27028914 & Supplementary Append;2;NA;subgroup_table;Row;1;"arms;measures;p-interaction";NA
-Lili;27028914 & Supplementary Append;2;NA;subgroup_table;Row;2;arms;NA
-Lili;27028914 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;empty_row
-Lili;27028914 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;NA
 Lili;26886418;1;NA;baseline_table;Row;1;arms;NA
 Lili;26886418;1;NA;baseline_table;Row;2;measures;NA
 Lili;26886418;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
@@ -936,13 +801,6 @@ David;25176136;2;NA;subgroup_table;Row;1;other;NA
 David;25176136;2;NA;subgroup_table;Row;2;"measures;arms;p-interaction";NA
 David;25176136;2;NA;subgroup_table;Col;1;subgroup_name;empty_row_with_p_value
 David;25176136;2;NA;subgroup_table;Col;1;subgroup_level;NA
-David;25175921 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-David;25175921 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;NA
-David;25175921 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;indented
-David;25175921 & Supplementary Append;2;NA;subgroup_table;Row;1;"measures;p-interaction";NA
-David;25175921 & Supplementary Append;2;NA;subgroup_table;Row;2;arms;NA
-David;25175921 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;empty_row
-David;25175921 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;NA
 David;25161043;1;NA;baseline_table;Row;1;arms;NA
 David;25161043;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 David;25161043;1;NA;baseline_table;Col;1;baseline_level_2;indented
@@ -991,9 +849,6 @@ David;24383720;2;NA;subgroup_table;Col;1;subgroup_level;indented
 David;24314123;1;NA;baseline_table;Row;1;subgroup_level;NA
 David;24314123;1;NA;baseline_table;Col;1;baseline_level_1;NA
 David;24314123;1;NA;baseline_table;Col;1;baseline_level_2;indented
-David;24253831 & Supplementary Append;2;Corrupted older annotation;baseline_table;Row;1;"arms;measures";NA
-David;24253831 & Supplementary Append;2;Corrupted older annotation;baseline_table;Col;1;baseline_level_1;bold
-David;24253831 & Supplementary Append;2;Corrupted older annotation;baseline_table;Col;1;baseline_level_2;indented
 David;24247616;1;NA;baseline_table;Row;1;arms;NA
 David;24247616;1;NA;baseline_table;Col;1;baseline_level_1;NA
 David;24247616;1;NA;baseline_table;Col;1;baseline_level_2;indented
@@ -1048,13 +903,6 @@ Avi;24067431;2;NA;subgroup_table;Row;1;outcomes;NA
 Avi;24067431;2;NA;subgroup_table;Row;2;measures;NA
 Avi;24067431;2;NA;subgroup_table;Col;1;subgroup_name;empty_row
 Avi;24067431;2;NA;subgroup_table;Col;1;arms;indented
-Avi;23964932 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-Avi;23964932 & Supplementary Append;1;NA;baseline_table;Row;2;other;NA
-Avi;23964932 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Avi;23964932 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Avi;23964932 & Supplementary Append;2;NA;subgroup_table;Row;1;"arms;measures";NA
-Avi;23964932 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;empty_row
-Avi;23964932 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;NA
 Avi;23963895;1;NA;baseline_table;Row;1;arms;NA
 Avi;23963895;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Avi;23963895;1;NA;baseline_table;Col;1;baseline_level_2;NA
@@ -1139,14 +987,6 @@ Avi;23216615;2;NA;subgroup_table;Row;2;measures;NA
 Avi;23216615;2;NA;subgroup_table;Col;1;baseline_level_1;empty_row
 Avi;23216615;2;NA;subgroup_table;Col;1;baseline_level_2;"empty_row;indented"
 Avi;23216615;2;NA;subgroup_table;Col;1;arms;indented
-Avi;23129601 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-Avi;23129601 & Supplementary Append;1;NA;baseline_table;Row;2;arms;NA
-Avi;23129601 & Supplementary Append;1;NA;baseline_table;Col;1;subgroup_name;empty_row
-Avi;23129601 & Supplementary Append;1;NA;baseline_table;Col;1;subgroup_level;NA
-Avi;23129601 & Supplementary Append;2;NA;subgroup_table;Row;1;arms;NA
-Avi;23129601 & Supplementary Append;2;NA;subgroup_table;Row;2;arms;NA
-Avi;23129601 & Supplementary Append;2;NA;subgroup_table;Col;1;outcomes;bold
-Avi;23129601 & Supplementary Append;2;NA;subgroup_table;Col;1;"subgroup_name;measures";NA
 Avi;23128104;1;NA;baseline_table;Row;1;"arms;other";NA
 Avi;23128104;1;NA;baseline_table;Col;1;subgroup_name;NA
 Avi;23128104;1;NA;baseline_table;Col;1;subgroup_level;indented
@@ -1154,14 +994,14 @@ Avi;23128104;2;NA;subgroup_table;Row;1;measures;NA
 Avi;23128104;2;NA;subgroup_table;Row;2;"arms;p-interaction";NA
 Avi;23128104;2;NA;subgroup_table;Col;1;"subgroup_name;subgroup_level";NA
 Avi;23128104;2;NA;subgroup_table;Col;1;subgroup_level;indented
-Avi;23121439 & Summplementary Appen;1;NA;baseline_table;Row;1;arms;NA
-Avi;23121439 & Summplementary Appen;1;NA;baseline_table;Col;1;baseline_level_1;NA
-Avi;23121439 & Summplementary Appen;1;NA;baseline_table;Col;1;baseline_level_2;indented
-Avi;23121439 & Summplementary Appen;2;NA;subgroup_table;Row;1;"arms;p-interaction;other";NA
-Avi;23121439 & Summplementary Appen;2;NA;subgroup_table;Col;1;subgroup_name;NA
-Avi;23121439 & Summplementary Appen;3;NA;subgroup_table;Row;1;"arms;other;p-interaction";NA
-Avi;23121439 & Summplementary Appen;3;NA;subgroup_table;Row;2;other;NA
-Avi;23121439 & Summplementary Appen;3;NA;subgroup_table;Col;1;subgroup_name;NA
+Avi;23121439;1;NA;baseline_table;Row;1;arms;NA
+Avi;23121439;1;NA;baseline_table;Col;1;baseline_level_1;NA
+Avi;23121439;1;NA;baseline_table;Col;1;baseline_level_2;indented
+Avi;23121439;2;NA;subgroup_table;Row;1;"arms;p-interaction;other";NA
+Avi;23121439;2;NA;subgroup_table;Col;1;subgroup_name;NA
+Avi;23121439;3;NA;subgroup_table;Row;1;"arms;other;p-interaction";NA
+Avi;23121439;3;NA;subgroup_table;Row;2;other;NA
+Avi;23121439;3;NA;subgroup_table;Col;1;subgroup_name;NA
 Avi;23110471;3;NA;subgroup_table;Row;1;subgroup_name;NA
 Avi;23110471;3;NA;subgroup_table;Row;2;arms;NA
 Avi;23110471;3;NA;subgroup_table;Row;3;arms;NA
@@ -1186,21 +1026,12 @@ Lili;23020650;2;NA;subgroup_table;Row;1;other;NA
 Lili;23020650;2;NA;subgroup_table;Row;2;subgroup_level;NA
 Lili;23020650;2;NA;subgroup_table;Row;3;arms;NA
 Lili;23020650;2;NA;subgroup_table;Col;1;"outcomes;measures";NA
-Lili;22932716 & Supplementary Append;1;NA;baseline_table;Row;1;arms;bold
-Lili;22932716 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;22932716 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Lili;22932716 & Supplementary Append;2;NA;subgroup_table;Row;1;"arms;measures";NA
-Lili;22932716 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;empty_row_with_p_value
-Lili;22932716 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;NA
 Lili;22913893;1;NA;baseline_table;Row;1;subgroup_level;NA
 Lili;22913893;1;NA;baseline_table;Row;2;"arms;measures";NA
 Lili;22913893;1;NA;baseline_table;Col;1;"baseline_level_1;baseline_level_2";NA
 Lili;22913893;2;NA;subgroup_table;Row;1;measures;NA
 Lili;22913893;2;NA;subgroup_table;Col;1;outcomes;NA
 Lili;22913893;2;NA;subgroup_table;Col;2;subgroup_level;NA
-Katherine;22873530 & Supplementary Append;1;NA;baseline_table;Row;1;arms;bold
-Katherine;22873530 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Katherine;22873530 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;22799613;2;NA;subgroup_table;Row;1;arms;NA
 Lili;22799613;2;NA;subgroup_table;Row;2;subgroup_level;NA
 Lili;22799613;2;NA;subgroup_table;Row;3;measures;NA
@@ -1239,17 +1070,6 @@ David;22504093;1;NA;baseline_table;Row;1;subgroup_level;NA
 David;22504093;1;NA;baseline_table;Row;2;arms;NA
 David;22504093;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 David;22504093;1;NA;baseline_table;Col;1;baseline_level_2;NA
-David;22443427 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-David;22443427 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-David;22443427 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-David;22443427 & Supplementary Append;2;NA;subgroup_table;Row;1;"arms;measures;p-interaction";NA
-David;22443427 & Supplementary Append;2;NA;subgroup_table;Row;2;other;NA
-David;22443427 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;empty_row_with_p_value
-David;22443427 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;NA
-David;22443427 & Supplementary Append;3;NA;subgroup_table;Row;1;"arms;p-interaction";NA
-David;22443427 & Supplementary Append;3;NA;subgroup_table;Row;2;measures;NA
-David;22443427 & Supplementary Append;3;NA;subgroup_table;Col;1;subgroup_name;empty_row_with_p_value
-David;22443427 & Supplementary Append;3;NA;subgroup_table;Col;1;subgroup_level;NA
 David;22369287;1;NA;baseline_table;Row;1;arms;NA
 David;22369287;1;NA;baseline_table;Col;1;baseline_level_1;NA
 David;22369287;2;NA;subgroup_table;Row;1;arms;NA
@@ -1331,8 +1151,6 @@ Lili;21332627;2;NA;subgroup_table;Col;1;measures;indented
 Lili;21332627;3;NA;subgroup_table;Row;1;subgroup_level;NA
 Lili;21332627;3;NA;subgroup_table;Row;2;arms;NA
 Lili;21332627;3;NA;subgroup_table;Col;1;measures;NA
-Lili;21227674 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-Lili;21227674 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;NA
 Lili;21209123;1;NA;baseline_table;Row;1;arms;NA
 Lili;21209123;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;21209123;1;NA;baseline_table;Col;1;baseline_level_2;NA
@@ -1343,17 +1161,6 @@ Lili;21174145;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;21174145;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;21174145;2;NA;subgroup_table;Row;1;arms;NA
 Lili;21174145;2;NA;subgroup_table;Col;1;"outcomes;measures";NA
-Lili;21128814 & Supplementary Append;1;NA;baseline_table;Row;1;other;bold
-Lili;21128814 & Supplementary Append;1;NA;baseline_table;Row;2;arms;NA
-Lili;21128814 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;21128814 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-Lili;21128814 & Supplementary Append;2;NA;subgroup_table;Row;1;arms;NA
-Lili;21128814 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_name;empty_row
-Lili;21128814 & Supplementary Append;2;NA;subgroup_table;Col;1;subgroup_level;NA
-Lili;21128814 & Supplementary Append;3;NA;subgroup_table;Row;1;arms;NA
-Lili;21128814 & Supplementary Append;3;NA;subgroup_table;Row;2;measures;NA
-Lili;21128814 & Supplementary Append;3;NA;subgroup_table;Col;1;subgroup_name;empty_row
-Lili;21128814 & Supplementary Append;3;NA;subgroup_table;Col;1;subgroup_level;NA
 Lili;21118495;2;NA;baseline_table;Row;1;subgroup_level;bold
 Lili;21118495;2;NA;baseline_table;Row;2;arms;bold
 Lili;21118495;2;NA;baseline_table;Col;1;other;bold
@@ -1429,9 +1236,6 @@ David;20418083;2;NA;subgroup_table;Row;2;"measures;arms";NA
 David;20418083;2;NA;subgroup_table;Row;3;measures;NA
 David;20418083;2;NA;subgroup_table;Col;1;outcomes;empty_row
 David;20418083;2;NA;subgroup_table;Col;1;subgroup_level;indented
-Lili;20393175 & Supplementary Append;1;NA;baseline_table;Row;1;"arms;measures";NA
-Lili;20393175 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-Lili;20393175 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
 Lili;20357382;1;NA;baseline_table;Row;1;arms;NA
 Lili;20357382;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;20357382;1;NA;baseline_table;Col;1;baseline_level_2;NA
@@ -1958,13 +1762,6 @@ David;28948656;3;NA;NA;Col;1;subgroup_level;NA
 David;28910237;2;NA;result_table_subgroup;Row;1;"arms;measures;p-interaction";NA
 David;28910237;2;NA;result_table_subgroup;Col;1;subgroup_name;empty_row_with_p_value
 David;28910237;2;NA;result_table_subgroup;Col;1;subgroup_level;NA
-Peter;28902593 & Supplementary Append;2;NA;result_table_subgroup;Row;1;"arms;measures;p-interaction";NA
-Peter;28902593 & Supplementary Append;2;NA;result_table_subgroup;Row;2;measures;NA
-Peter;28902593 & Supplementary Append;2;NA;result_table_subgroup;Col;1;subgroup_name;empty_row_with_p_value
-Peter;28902593 & Supplementary Append;2;NA;result_table_subgroup;Col;1;subgroup_level;NA
-David;28877027 & Supplementary Append;1;Appends baseline level 1 incorrectly to some baseline level 2s;baseline_table;Row;1;"arms;measures";NA
-David;28877027 & Supplementary Append;1;Appends baseline level 1 incorrectly to some baseline level 2s;baseline_table;Col;1;baseline_level_1;empty_row_with_p_value
-David;28877027 & Supplementary Append;1;Appends baseline level 1 incorrectly to some baseline level 2s;baseline_table;Col;1;baseline_level_2;NA
 Peter;28854085;2;NA;result_table_subgroup;Row;1;"measures;p-interaction";NA
 Peter;28854085;2;NA;result_table_subgroup;Col;1;subgroup_name;empty_row_with_p_value
 Peter;28854085;2;NA;result_table_subgroup;Col;1;subgroup_level;NA
@@ -1988,10 +1785,6 @@ Dagm;28573499;2;NA;result_table_subgroup;Col;1;outcomes;NA
 Dagm;28573499;3;NA;result_table_subgroup;Row;1;subgroup_level;NA
 Dagm;28573499;3;NA;result_table_subgroup;Row;2;arms;NA
 Dagm;28573499;3;NA;result_table_subgroup;Col;1;outcomes;NA
-Katherine;28467869 & Supplementary Append;2;NA;baseline_table;Row;1;"arms;measures";NA
-Katherine;28467869 & Supplementary Append;2;NA;baseline_table;Col;1;baseline_level_1;NA
-Katherine;28467869 & Supplementary Append;3;NA;baseline_table;Col;1;baseline_level_1;NA
-Katherine;28467869 & Supplementary Append;3;NA;baseline_table;Row;1;"measures;arms";NA
 Lili;28386990;1;NA;result_table_subgroup;Row;1;arms;NA
 Lili;28386990;1;NA;result_table_subgroup;Row;2;subgroup_level;NA
 Lili;28386990;1;NA;result_table_subgroup;Col;1;outcomes;NA
@@ -2033,10 +1826,6 @@ David;28231942;2;Outcomes not being pulled across to label data. Outcome spread 
 David;28231942;2;Outcomes not being pulled across to label data. Outcome spread between two rows. Not sure why this is not happening;result_table_subgroup;Row;3;measures;NA
 David;28231942;2;Outcomes not being pulled across to label data. Outcome spread between two rows. Not sure why this is not happening;result_table_subgroup;Row;4;measures;NA
 David;28231942;2;Outcomes not being pulled across to label data. Outcome spread between two rows. Not sure why this is not happening;result_table_subgroup;Col;1;outcomes;NA
-Katherine;27689735 & Supplementary Append;4;NA;baseline_table;Row;1;measures;NA
-Katherine;27689735 & Supplementary Append;4;NA;baseline_table;Row;2;"p-interaction;arms";NA
-Katherine;27689735 & Supplementary Append;4;NA;baseline_table;Col;1;baseline_level_1;"empty_row;bold"
-Katherine;27689735 & Supplementary Append;4;NA;baseline_table;Col;2;baseline_level_2;NA
 David;27576774;1;NA;baseline_table;Row;1;"subgroup_level;measures";NA
 David;27576774;1;NA;baseline_table;Row;2;arms;NA
 David;27576774;1;NA;baseline_table;Col;1;baseline_level_1;NA
@@ -2051,9 +1840,6 @@ Lili;27448534;1;NA;baseline_table;Col;1;baseline_level_2;NA
 David;27448534;2;NA;baseline_table;Row;1;subgroup_level;NA
 David;27448534;2;NA;baseline_table;Col;1;baseline_level_1;empty_row
 David;27448534;2;NA;baseline_table;Col;1;baseline_level_2;NA
-David;27418597 & Supplementary Append;1;NA;baseline_table;Row;1;"arms;measures";NA
-David;27418597 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;NA
-David;27418597 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;indented
 Lili;27335114;1;NA;baseline_table;Row;1;arms;NA
 Lili;27335114;1;NA;baseline_table;Row;2;arms;NA
 Lili;27335114;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
@@ -2062,10 +1848,6 @@ David;27144849;2;Rows 1-3 should be a single row. Cant separate subgroup names a
 David;27144849;2;Rows 1-3 should be a single row. Cant separate subgroup names and levels becuase it gives a statistic in the second last column;result_table_subgroup;Row;2;measures;NA
 David;27144849;2;Rows 1-3 should be a single row. Cant separate subgroup names and levels becuase it gives a statistic in the second last column;result_table_subgroup;Row;3;measures;NA
 David;27144849;2;Rows 1-3 should be a single row. Cant separate subgroup names and levels becuase it gives a statistic in the second last column;result_table_subgroup;Col;1;"subgroup_name;subgroup_level";NA
-Jo;27046159 & Supplementary Append;2;NA;result_table_without_subgroup;Row;1;"arms;measures";NA
-Jo;27046159 & Supplementary Append;2;NA;result_table_without_subgroup;Row;2;measures;NA
-Jo;27046159 & Supplementary Append;2;NA;result_table_without_subgroup;Col;1;outcomes;NA
-Jo;27046159 & Supplementary Append;2;NA;result_table_without_subgroup;Col;2;measures;NA
 Peter;27033025;2;Rows 11, 20 and 29, which contain the p-value for interaction are lost. However, there is sufficient data to estimate the subgroups without these.;result_table_subgroup;Row;1;subgroup_level;NA
 Peter;27033025;2;Rows 11, 20 and 29, which contain the p-value for interaction are lost. However, there is sufficient data to estimate the subgroups without these.;result_table_subgroup;Row;2;arms;NA
 Peter;27033025;2;Rows 11, 20 and 29, which contain the p-value for interaction are lost. However, there is sufficient data to estimate the subgroups without these.;result_table_subgroup;Col;1;outcomes;empty_row
@@ -2078,14 +1860,6 @@ David;26886418;2;Not clear why failing seems described perfectly;result_table_su
 David;26886418;2;Not clear why failing seems described perfectly;result_table_subgroup;Row;2;measures;NA
 David;26886418;2;Not clear why failing seems described perfectly;result_table_subgroup;Col;1;subgroup_name;empty_row_with_p_value
 David;26886418;2;Not clear why failing seems described perfectly;result_table_subgroup;Col;1;subgroup_level;NA
-David;26792812 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-David;26792812 & Supplementary Append;1;NA;baseline_table;Row;2;arms;NA
-David;26792812 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-David;26792812 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-David;26792812 & Supplementary Append;2;NA;result_table_subgroup;Row;1;time/period;NA
-David;26792812 & Supplementary Append;2;NA;result_table_subgroup;Row;2;arms;NA
-David;26792812 & Supplementary Append;2;NA;result_table_subgroup;Col;1;subgroup_name;empty_row
-David;26792812 & Supplementary Append;2;NA;result_table_subgroup;Col;1;subgroup_level;NA
 Lili;26774608;1;NA;baseline_table;Row;1;arms;NA
 Lili;26774608;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 Lili;26774608;1;NA;baseline_table;Col;1;baseline_level_2;NA
@@ -2168,11 +1942,6 @@ jesus;25189213;1;NA;result_table_subgroup;Row;1;"p-interaction;subgroup_name";NA
 David;25189213;2;NA;result_table_subgroup;Row;1;"measures;arms;p-interaction";NA
 David;25189213;2;NA;result_table_subgroup;Col;1;subgroup_name;NA
 David;25189213;2;NA;result_table_subgroup;Col;2;subgroup_level;NA
-David;25175921 & Supplementary Append;3;Table fails despite appearing well specified;result_table_subgroup;Row;1;outcomes;NA
-David;25175921 & Supplementary Append;3;Table fails despite appearing well specified;result_table_subgroup;Row;2;"measures;p-interaction";NA
-David;25175921 & Supplementary Append;3;Table fails despite appearing well specified;result_table_subgroup;Row;3;arms;NA
-David;25175921 & Supplementary Append;3;Table fails despite appearing well specified;result_table_subgroup;Col;1;subgroup_name;empty_row
-David;25175921 & Supplementary Append;3;Table fails despite appearing well specified;result_table_subgroup;Col;1;subgroup_level;NA
 David;25135178;1;NA;baseline_table;Row;1;subgroup_name;NA
 David;25135178;1;NA;baseline_table;Row;2;subgroup_level;NA
 David;25135178;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
@@ -2192,11 +1961,6 @@ David;24281137;2;NA;baseline_table;Row;1;"measures;other";NA
 David;24281137;2;NA;baseline_table;Col;1;baseline_level_1;NA
 David;24281137;3;Does not include treatment effects;result_table_without_subgroup;Row;1;subgroup_level;NA
 David;24281137;3;Does not include treatment effects;result_table_without_subgroup;Col;1;subgroup_level;NA
-David;24253831 & Supplementary Append;1;NA;baseline_table;Row;1;arms;NA
-David;24253831 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
-David;24253831 & Supplementary Append;1;NA;baseline_table;Col;1;baseline_level_2;NA
-David;24253831 & Supplementary Append;3;Cannot separate subgroup name from subgroup level because of error in row 2. THe P-value is in column one instead of in the last column;result_table_subgroup;Row;1;measures;NA
-David;24253831 & Supplementary Append;3;Cannot separate subgroup name from subgroup level because of error in row 2. THe P-value is in column one instead of in the last column;result_table_subgroup;Col;1;"subgroup_name;subgroup_level";NA
 David;24247616;3;Problem with table, dont know why not rendering;result_table_subgroup;Row;1;outcomes;NA
 David;24247616;3;Problem with table, dont know why not rendering;result_table_subgroup;Col;1;subgroup_level;NA
 David;24245566;2;NA;result_table_subgroup;Row;1;"arms;p-interaction";NA
@@ -2377,20 +2141,6 @@ Lili;20582594;2;again, 1 row mismatch in each subgroup;result_table_subgroup;Col
 Lili;20582594;2;again, 1 row mismatch in each subgroup;result_table_subgroup;Col;1;subgroup_level;NA
 David;20469975;1;NA;baseline_table;Row;1;arms;NA
 David;20469975;1;NA;baseline_table;Col;1;subgroup_level;NA
-David;20393175 & Supplementary Append;2;Table fails. No reason clear why;result_table_subgroup;Row;1;"arms;measures";NA
-David;20393175 & Supplementary Append;2;Table fails. No reason clear why;result_table_subgroup;Row;2;measures;NA
-David;20393175 & Supplementary Append;2;Table fails. No reason clear why;result_table_subgroup;Col;1;subgroup_name;empty_row
-David;20393175 & Supplementary Append;2;Table fails. No reason clear why;result_table_subgroup;Col;1;subgroup_level;NA
-David;20393175 & Supplementary Append;3;Table conversion fails. No apparent reason;result_table_subgroup;Row;1;outcomes;NA
-David;20393175 & Supplementary Append;3;Table conversion fails. No apparent reason;result_table_subgroup;Row;2;"arms;measures";NA
-David;20393175 & Supplementary Append;3;Table conversion fails. No apparent reason;result_table_subgroup;Row;3;measures;NA
-David;20393175 & Supplementary Append;3;Table conversion fails. No apparent reason;result_table_subgroup;Col;1;subgroup_name;NA
-David;20393175 & Supplementary Append;3;Table conversion fails. No apparent reason;result_table_subgroup;Col;1;subgroup_level;NA
-David;20393175 & Supplementary Append;4;NA;result_table_subgroup;Row;1;outcomes;NA
-David;20393175 & Supplementary Append;4;NA;result_table_subgroup;Row;2;"arms;measures";NA
-David;20393175 & Supplementary Append;4;NA;result_table_subgroup;Col;3;measures;NA
-David;20393175 & Supplementary Append;4;NA;result_table_subgroup;Col;1;subgroup_name;empty_row
-David;20393175 & Supplementary Append;4;NA;result_table_subgroup;Col;1;subgroup_level;NA
 Lili;20385930;2;the results are not as what the table shows, the format of the table is incorrect with its row and col. But this doesn't need to be fixed because the contents in the next page is totally the same and that one is correct.;result_table_subgroup;Row;1;"measures;p-interaction";NA
 Lili;20385930;2;the results are not as what the table shows, the format of the table is incorrect with its row and col. But this doesn't need to be fixed because the contents in the next page is totally the same and that one is correct.;result_table_subgroup;Col;1;outcomes;NA
 Lili;20385930;2;the results are not as what the table shows, the format of the table is incorrect with its row and col. But this doesn't need to be fixed because the contents in the next page is totally the same and that one is correct.;result_table_subgroup;Col;1;subgroup_level;indented
@@ -2664,11 +2414,19 @@ David;13679479;2;This does not appear to be a treatment effect estimate table. A
 David;11918909;1;NA;baseline_table;Row;1;arms;NA
 David;11918909;1;NA;baseline_table;Col;1;baseline_level_1;empty_row
 David;11918909;1;NA;baseline_table;Col;1;baseline_level_2;NA
+David;9892586;1;NA;baseline_table;Col;1;characteristic_level;indented
+David;9892586;1;NA;baseline_table;Row;1;measures;NA
+David;9892586;1;NA;baseline_table;Row;2;arms;NA
+David;9892586;1;NA;baseline_table;Col;1;characteristic_name;NA
 David;30591006;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 David;30591006;1;NA;baseline_table;Col;1;characteristic_level;indented
 David;30591006;1;NA;baseline_table;Row;1;characteristic_level;NA
 David;30591006;1;NA;baseline_table;Row;3;arms;NA
 David;30591006;1;NA;baseline_table;Col;1;characteristic_name;empty_row_with_p_value
+David;30591006;2;NA;result_table_subgroup;Col;1;characteristic_level;NA
+David;30591006;2;NA;result_table_subgroup;Col;1;"other;characteristic_name";empty_row
+David;30591006;2;NA;result_table_subgroup;Row;1;measures;NA
+David;30591006;2;NA;result_table_subgroup;Row;2;arms;NA
 David;30590387;1;Rows 2 and 3 need collapsed;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 David;30590387;1;Rows 2 and 3 need collapsed;baseline_table;Col;1;characteristic_name;empty_row
 David;30590387;1;Rows 2 and 3 need collapsed;baseline_table;Row;1;arms;NA
@@ -2717,6 +2475,24 @@ David;30586757;3;"Results table with similar 4-part structure which completely d
 David;30586757;3;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;characteristic_name;empty_row_with_p_value
 David;30586757;3;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;characteristic_level;indented
 David;30586757;3;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;"characteristic_name;characteristic_level";NA
+David;30586757;4;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;"characteristic_name;characteristic_level";NA
+David;30586757;4;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;outcomes;empty_row
+David;30586757;4;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;characteristic_name;empty_row_with_p_value
+David;30586757;4;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;characteristic_level;indented
+David;30586757;4;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Row;1;"arms;measures";NA
+David;30586757;4;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Row;2;measures;NA
+David;30586757;5;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;"characteristic_name;characteristic_level";NA
+David;30586757;5;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;outcomes;empty_row
+David;30586757;5;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;characteristic_name;empty_row_with_p_value
+David;30586757;5;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;characteristic_level;indented
+David;30586757;5;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Row;1;"arms;measures";NA
+David;30586757;5;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Row;2;measures;NA
+David;30586757;6;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;"characteristic_name;characteristic_level";NA
+David;30586757;6;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;characteristic_name;empty_row_with_p_value
+David;30586757;6;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;characteristic_level;indented
+David;30586757;6;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Col;1;outcomes;empty_row
+David;30586757;6;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Row;1;"arms;measures";NA
+David;30586757;6;"Results table with similar 4-part structure which completely describes column1; empty rows (outcomes). Unusual in that it uses empty row and empty row ithe p-value as separate concepts.";result_table_subgroup;Row;2;measures;NA
 David;30586723;1;Strangely requires characteristic name to be indented despite already having empty row.;baseline_table;Col;1;characteristic_level;indented
 David;30586723;1;Strangely requires characteristic name to be indented despite already having empty row.;baseline_table;Col;1;characteristic_name;"empty_row;indented"
 David;30586723;1;Strangely requires characteristic name to be indented despite already having empty row.;baseline_table;Row;1;"characteristic_name;characteristic_level";NA
@@ -4123,6 +3899,10 @@ Lili;27406394;2;NA;result_table_subgroup;Col;1;"characteristic_level;outcomes";N
 Lili;27406394;2;NA;result_table_subgroup;Row;1;characteristic_name;NA
 Lili;27406394;2;NA;result_table_subgroup;Row;2;characteristic_level;NA
 Lili;27406394;2;NA;result_table_subgroup;Row;3;"arms;measures";NA
+Lili;27358434;1;confused and not sure;baseline_table;Col;1;characteristic_name;empty_row
+Lili;27358434;1;confused and not sure;baseline_table;Row;1;characteristic_name;NA
+Lili;27358434;1;confused and not sure;baseline_table;Row;2;characteristic_level;NA
+Lili;27358434;1;confused and not sure;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 Lili;27358434;2;NA;result_table_subgroup;Col;1;outcomes;empty_row_with_p_value
 Lili;27358434;2;NA;result_table_subgroup;Col;1;characteristic_level;indented
 Lili;27358434;2;NA;result_table_subgroup;Row;1;measures;NA
@@ -4634,9 +4414,14 @@ David;24966672;2;The baseline use of tiotropium is the subgroup;result_table_sub
 David;24966672;2;The baseline use of tiotropium is the subgroup;result_table_subgroup;Col;1;time/period;empty_row
 David;24966672;2;The baseline use of tiotropium is the subgroup;result_table_subgroup;Row;1;arms;NA
 David;24966672;2;The baseline use of tiotropium is the subgroup;result_table_subgroup;Row;2;other;NA
+David;24942540;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
+David;24942540;1;NA;baseline_table;Row;1;arms;NA
 David;24918789;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 David;24918789;1;NA;baseline_table;Col;1;characteristic_name;empty_row
 David;24918789;1;NA;baseline_table;Row;1;arms;NA
+David;24918789;2;NA;result_table_subgroup;Col;1;measures;NA
+David;24918789;2;NA;result_table_subgroup;Row;1;characteristic_level;NA
+David;24918789;2;NA;result_table_subgroup;Row;2;arms;NA
 David;24859203;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 David;24859203;1;NA;baseline_table;Row;1;arms;NA
 David;24859203;1;NA;baseline_table;Row;2;characteristic_level;NA
@@ -4713,6 +4498,9 @@ David;24339179;2;NA;result_table_subgroup;Col;1;outcomes;empty_row
 David;24339179;2;NA;result_table_subgroup;Col;1;time/period;NA
 David;24339179;2;NA;result_table_subgroup;Row;1;characteristic_level;NA
 David;24339179;2;NA;result_table_subgroup;Row;2;arms;NA
+David;24323795;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
+David;24323795;1;NA;baseline_table;Col;1;characteristic_name;empty_row_with_p_value
+David;24323795;1;NA;baseline_table;Row;1;"measures;arms";NA
 David;24323795;2;'Net clinical benefit*' not detected as an outcome;result_table_subgroup;Row;1;"measures;arms";NA
 David;24323795;2;'Net clinical benefit*' not detected as an outcome;result_table_subgroup;Row;2;"arms;measures;p-interaction";NA
 David;24323795;2;'Net clinical benefit*' not detected as an outcome;result_table_subgroup;Col;1;outcomes;empty_row_with_p_value
@@ -4983,6 +4771,10 @@ David;22932716;2;Row%20header%20error%20has%20%22Vorapaxar%20Placebo%203-yr.%20K
 David;22932716;2;Row%20header%20error%20has%20%22Vorapaxar%20Placebo%203-yr.%20KM%%22%20when%20voraxapar%20and%20placebo%20shoudl%20be%20separate;result_table_subgroup;Row;2;"characteristic_level;characteristic_name;arms";NA
 David;22931315;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 David;22931315;1;NA;baseline_table;Row;1;arms;NA
+David;22913890;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
+David;22913890;1;NA;baseline_table;Col;1;characteristic_name;empty_row
+David;22913890;1;NA;baseline_table;Col;1;characteristic_level;indented
+David;22913890;1;NA;baseline_table;Row;1;arms;NA
 David;22873530;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";indented
 David;22873530;1;NA;baseline_table;Col;1;characteristic_name;"indented;empty_row"
 David;22873530;1;NA;baseline_table;Row;1;arms;NA
@@ -5098,6 +4890,9 @@ David;22193143;1;NA;baseline_table;Col;1;characteristic_level;indented
 David;22193143;1;NA;baseline_table;Col;1;characteristic_name;empty_row
 David;22193143;1;NA;baseline_table;Row;1;characteristic_name;NA
 David;22193143;1;NA;baseline_table;Row;2;characteristic_level;NA
+David;22193143;2;NA;result_table_subgroup;Col;1;measures;NA
+David;22193143;2;NA;result_table_subgroup;Col;1;characteristic_level;empty_row
+David;22193143;2;NA;result_table_subgroup;Row;1;arms;NA
 David;22085343;1;NA;result_table_subgroup;Col;1;characteristic_name;empty_row
 David;22085343;1;NA;result_table_subgroup;Col;1;"characteristic_name;characteristic_level";NA
 David;22085343;1;NA;result_table_subgroup;Row;1;arms;NA
@@ -5278,111 +5073,26 @@ David;20593911;1;NA;baseline_table;Col;1;characteristic_name;empty_row
 David;20593911;1;NA;baseline_table;Row;1;arms;NA
 David;20582993;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 David;20582993;1;NA;baseline_table;Row;1;"arms;measures";NA
+David;20484828;1;NA;result_table_subgroup;Col;1;characteristic_name;NA
+David;20484828;1;NA;result_table_subgroup;Col;2;arms;NA
+David;20484828;1;NA;result_table_subgroup;Row;1;measures;NA
 David;20436046;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 David;20436046;1;NA;baseline_table;Row;1;characteristic_level;NA
 David;20436046;1;NA;baseline_table;Row;2;arms;NA
-David;9892586;1;NA;baseline_table;Col;1;characteristic_level;indented
-David;9892586;1;NA;baseline_table;Row;1;measures;NA
-David;9892586;1;NA;baseline_table;Row;2;arms;NA
-David;9892586;1;NA;baseline_table;Col;1;characteristic_name;NA
-Elaine;30882239;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
-Elaine;30882239;1;NA;baseline_table;Col;1;characteristic_name;empty_row
-Elaine;30882239;1;NA;baseline_table;Col;1;characteristic_level;indented
-Elaine;30882239;1;NA;baseline_table;Row;1;"characteristic_level;measures;characteristic_name";NA
-Elaine;30882239;2;Wrong title from data, same paper but this data is from figure 3B, not 1. Row 1 was incorrectly CV death/HHF changed to MACE which is correct match for this data. Also not working, unclear why.;result_table_subgroup;Col;1;"measures;characteristic_name";NA
-Elaine;30882239;2;Wrong title from data, same paper but this data is from figure 3B, not 1. Row 1 was incorrectly CV death/HHF changed to MACE which is correct match for this data. Also not working, unclear why.;result_table_subgroup;Row;1;outcomes;NA
-Elaine;30882239;3;This data has the wrong title. From the same paper but this is the data from Figure 3B not 2.;result_table_subgroup;Col;1;"measures;characteristic_level;characteristic_name";NA
-Elaine;30882239;3;This data has the wrong title. From the same paper but this is the data from Figure 3B not 2.;result_table_subgroup;Row;1;outcomes;NA
-Elaine;30882239;4;Wrong title, same paper but this is the data from figure 2A, not 3.;result_table_subgroup;Col;1;"measures;characteristic_level;characteristic_name";NA
-Elaine;30882239;4;Wrong title, same paper but this is the data from figure 2A, not 3.;result_table_subgroup;Row;1;outcomes;NA
-Elaine;30882239;5;NA;result_table_subgroup;Col;1;"characteristic_level;characteristic_name;measures";NA
-Elaine;30882239;5;NA;result_table_subgroup;Row;1;outcomes;NA
-Elaine;30882238;2;Not working, tried editing format, unable to get working.;result_table_subgroup;Col;1;outcomes;empty_row
-Elaine;30882238;2;Not working, tried editing format, unable to get working.;result_table_subgroup;Row;1;arms;NA
-Elaine;30882238;2;Not working, tried editing format, unable to get working.;result_table_subgroup;Row;2;"measures;p-interaction";NA
-Elaine;30882238;2;Not working, tried editing format, unable to get working.;result_table_subgroup;Col;1;characteristic_level;indented
-Elaine;30851070;2;NA;result_table_subgroup;Col;1;other;NA
-Elaine;30851070;2;NA;result_table_subgroup;Col;2;outcomes;NA
-Elaine;30851070;2;NA;result_table_subgroup;Col;3;characteristic_level;NA
-Elaine;30851070;2;NA;result_table_subgroup;Row;1;"arms;measures";NA
-Elaine;30851070;2;NA;result_table_subgroup;Row;2;measures;NA
-Elaine;30851070;3;NA;result_table_subgroup;Col;1;other;NA
-Elaine;30851070;3;NA;result_table_subgroup;Row;1;"outcomes;p-interaction";NA
-Elaine;30851070;3;NA;result_table_subgroup;Col;2;outcomes;bold
-Elaine;30830724;3;should be 2 tables.;result_table_subgroup;Col;1;arms;NA
-Elaine;30830724;3;should be 2 tables.;result_table_subgroup;Row;1;time/period;NA
-Elaine;30830724;3;should be 2 tables.;result_table_subgroup;Row;2;measures;NA
-Elaine;30830724;3;should be 2 tables.;result_table_subgroup;Row;6;measures;NA
-Elaine;30830724;4;should be split to 2 tables. need to fix. EB;result_table_subgroup;Col;1;arms;NA
-Elaine;30830724;4;should be split to 2 tables. need to fix. EB;result_table_subgroup;Row;1;time/period;NA
-Elaine;30830724;4;should be split to 2 tables. need to fix. EB;result_table_subgroup;Row;2;measures;NA
-Elaine;30830724;4;should be split to 2 tables. need to fix. EB;result_table_subgroup;Row;7;"measures;p-interaction";bold
-Elaine;30830724;5;NA;result_table_subgroup;Col;1;outcomes;empty_row
-Elaine;30830724;5;NA;result_table_subgroup;Col;1;characteristic_level;indented
-Elaine;30830724;5;NA;result_table_subgroup;Row;1;arms;NA
-Elaine;30830724;6;not letting me add additional row;result_table_without_subgroup;Col;1;characteristic_level;NA
-Elaine;30830724;6;not letting me add additional row;result_table_without_subgroup;Col;1;outcomes;empty_row
-Elaine;30830724;6;not letting me add additional row;result_table_without_subgroup;Row;1;arms;NA
-Elaine;30614616;2;NA;result_table_subgroup;Col;1;outcomes;NA
-Elaine;30614616;2;NA;result_table_subgroup;Col;2;characteristic_level;NA
-Elaine;30614616;2;NA;result_table_subgroup;Col;3;arms;bold
-Elaine;30614616;2;NA;result_table_subgroup;Row;1;"measures;time/period";NA
-Elaine;30609212;3;NA;result_table_subgroup;Col;1;outcomes;empty_row
-Elaine;30609212;3;NA;result_table_subgroup;Col;1;characteristic_level;"indented;bold"
-Elaine;30609212;3;NA;result_table_subgroup;Row;1;arms;NA
-Elaine;30609212;3;NA;result_table_subgroup;Col;1;measures;indented
-Elaine;30591006;2;NA;result_table_subgroup;Col;1;characteristic_level;NA
-Elaine;30591006;2;NA;result_table_subgroup;Col;1;characteristic_name;empty_row
-Elaine;30591006;2;NA;result_table_subgroup;Row;1;measures;NA
-Elaine;30591006;2;NA;result_table_subgroup;Row;2;arms;NA
-Elaine;30591006;3;worked very nicely;result_table_subgroup;Col;1;outcomes;"bold;empty_row"
-Elaine;30591006;3;worked very nicely;result_table_subgroup;Col;1;characteristic_level;indented
-Elaine;30591006;3;worked very nicely;result_table_subgroup;Row;1;measures;NA
-Elaine;30591006;3;worked very nicely;result_table_subgroup;Row;2;arms;NA
-Elaine;30586757;4;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Col;1;characteristic_name;NA
-Elaine;30586757;4;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Col;1;outcomes;"bold;empty_row"
-Elaine;30586757;4;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Col;1;characteristic_name;"empty_row;empty_row_with_p_value"
-Elaine;30586757;4;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Col;1;characteristic_level;indented
-Elaine;30586757;4;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Row;1;"arms;measures";NA
-Elaine;30586757;4;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Row;2;measures;NA
-Elaine;30586757;5;NA;result_table_subgroup;Col;1;characteristic_name;NA
-Elaine;30586757;5;NA;result_table_subgroup;Col;1;outcomes;"bold;empty_row"
-Elaine;30586757;5;NA;result_table_subgroup;Col;1;"outcomes;characteristic_name";empty_row_with_p_value
-Elaine;30586757;5;NA;result_table_subgroup;Col;1;characteristic_level;indented
-Elaine;30586757;5;NA;result_table_subgroup;Row;1;"arms;measures";NA
-Elaine;30586757;5;NA;result_table_subgroup;Row;2;measures;NA
-Elaine;30586757;6;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Col;1;characteristic_name;"bold;empty_row_with_p_value"
-Elaine;30586757;6;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Col;1;outcomes;"bold;empty_row"
-Elaine;30586757;6;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Col;1;characteristic_level;"indented;bold"
-Elaine;30586757;6;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Col;1;characteristic_name;bold
-Elaine;30586757;6;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Row;1;"arms;measures";NA
-Elaine;30586757;6;difficulty distinguishing all patients from subgroup, all groups name currently blank;result_table_subgroup;Row;2;measures;NA
-David;27358434;1;NA;baseline_table;Col;1;characteristic_name;empty_row
-David;27358434;1;NA;baseline_table;Col;1;characteristic_level;indented
-David;27358434;1;NA;baseline_table;Row;1;characteristic_name;NA
-David;27358434;1;NA;baseline_table;Row;2;"characteristic_level;arms";NA
-David;27358434;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
-David;24942540;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
-David;24942540;1;NA;baseline_table;Row;1;arms;NA
-David;24918789;2;NA;result_table_subgroup;Col;1;measures;NA
-David;24918789;2;NA;result_table_subgroup;Row;1;characteristic_level;NA
-David;24918789;2;NA;result_table_subgroup;Row;2;arms;NA
-David;24727254;3;NA;result_table_subgroup;Col;1;characteristic_level;NA
-David;24727254;3;NA;result_table_subgroup;Col;1;characteristic_name;empty_row
-David;24727254;3;NA;result_table_subgroup;Row;1;measures;NA
-David;24323795;1;NA;NA;Col;1;"characteristic_level;characteristic_name";NA
-David;24323795;1;NA;NA;Col;1;characteristic_name;empty_row_with_p_value
-David;24323795;1;NA;NA;Row;1;"measures;arms";NA
-Elaine;22913890;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
-Elaine;22913890;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";empty_row
-Elaine;22913890;1;NA;baseline_table;Col;1;characteristic_level;indented
-Elaine;22913890;1;NA;baseline_table;Row;1;"arms;characteristic_name";NA
-Elaine;22193143;2;unable to get working;result_table_subgroup;Col;1;characteristic_level;"bold;empty_row;italic"
-Elaine;22193143;2;unable to get working;result_table_subgroup;Col;1;measures;"indented;italic"
-Elaine;22193143;2;unable to get working;result_table_subgroup;Col;1;outcomes;indented
-Elaine;22193143;2;unable to get working;result_table_subgroup;Row;1;arms;bold
+David;20436046;2;NA;result_table_subgroup;Col;1;characteristic_level;NA
+David;20436046;2;NA;result_table_subgroup;Row;1;"measures;p-interaction";NA
+David;20436046;2;NA;result_table_subgroup;Col;1;characteristic_name;empty_row
+David;20436046;3;NA;result_table_without_subgroup;Col;1;outcomes;NA
+David;20436046;3;NA;result_table_without_subgroup;Row;1;"arms;measures";NA
+David;20409909;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
+David;20409909;1;NA;baseline_table;Col;1;characteristic_name;empty_row
+David;20409909;1;NA;baseline_table;Col;1;characteristic_level;indented
+David;20409909;1;NA;baseline_table;Row;1;arms;NA
+David;20400762;1;NA;result_table_subgroup;Col;1;characteristic_name;NA
+David;20400762;1;NA;result_table_subgroup;Col;2;characteristic_level;NA
+David;20400762;1;NA;result_table_subgroup;Row;1;"arms;measures";NA
 David;20393175;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_name";indented
-David;20393175;1;NA;baseline_table;Col;1;characteristic_name;empty_row
+David;20393175;1;NA;baseline_table;Col;1;characteristic_name;"indented;empty_row"
 David;20393175;1;NA;baseline_table;Row;1;"arms;measures";NA
 David;20393175;2;Table fails. Don't know why.;result_table_subgroup;Col;1;characteristic_level;NA
 David;20393175;2;Table fails. Don't know why.;result_table_subgroup;Col;1;characteristic_name;empty_row
@@ -5525,8 +5235,8 @@ David;19717844;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_na
 David;19717844;1;NA;baseline_table;Col;1;characteristic_name;empty_row
 David;19717844;1;NA;baseline_table;Col;1;characteristic_level;indented
 David;19717844;1;NA;baseline_table;Row;1;arms;NA
-David;19717844;2;Cannot separate characteristic names and levels in column because the rows are not 'empty with P-value'because two arm comparisons are presented;result_table_subgroup;Col;1;"characteristic_name;characteristic_level";NA
-David;19717844;2;Cannot separate characteristic names and levels in column because the rows are not 'empty with P-value'because two arm comparisons are presented;result_table_subgroup;Row;1;"measures;arms";NA
+David;19717844;2;Cannot separate characteristic names and levels in column because the rows are not 'empty with P-value' because two arm comparisons are presented;result_table_subgroup;Col;1;"characteristic_name;characteristic_level";NA
+David;19717844;2;Cannot separate characteristic names and levels in column because the rows are not 'empty with P-value' because two arm comparisons are presented;result_table_subgroup;Row;1;"measures;arms";NA
 David;19704100;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
 David;19704100;1;NA;baseline_table;Col;1;characteristic_level;indented
 David;19704100;1;NA;baseline_table;Row;1;characteristic_level;NA
@@ -5724,9 +5434,9 @@ David;17980928;2;NA;baseline_table;Col;1;"characteristic_level;characteristic_na
 David;17980928;2;NA;baseline_table;Row;1;arms;NA
 David;17980928;2;NA;baseline_table;Col;1;characteristic_name;empty_row
 David;17980928;2;NA;baseline_table;Col;1;characteristic_level;indented
-David;17980928;3;NA;result_table_without_subgroup;Col;1;"time/period;measures";NA
-David;17980928;3;NA;result_table_without_subgroup;Col;1;outcomes;empty_row
-David;17980928;3;NA;result_table_without_subgroup;Row;1;arms;NA
+David;17980928;3;NA;result_table_subgroup;Col;1;"time/period;measures";NA
+David;17980928;3;NA;result_table_subgroup;Col;1;outcomes;empty_row
+David;17980928;3;NA;result_table_subgroup;Row;1;arms;NA
 David;17969365;1;Table doesn't seem to match PMID;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 David;17969365;1;Table doesn't seem to match PMID;baseline_table;Col;1;characteristic_name;empty_row
 David;17969365;1;Table doesn't seem to match PMID;baseline_table;Col;1;characteristic_level;indented
@@ -5747,10 +5457,10 @@ David;17846352;2;NA;result_table_subgroup;Row;2;measures;NA
 David;17723125;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
 David;17723125;1;NA;baseline_table;Col;1;other;"empty_row;indented"
 David;17723125;1;NA;baseline_table;Row;1;arms;NA
-Jesus;17634458;1;NA;NA;Col;1;"characteristic_level;characteristic_name";NA
-Jesus;17634458;1;NA;NA;Col;1;characteristic_level;indented
-Jesus;17634458;1;NA;NA;Col;1;characteristic_name;empty_row
-Jesus;17634458;1;NA;NA;Row;1;"arms;measures";NA
+David;17634458;1;Lovely job from autoadd again. 3 differnet types of thing in column 1, all captured;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
+David;17634458;1;Lovely job from autoadd again. 3 differnet types of thing in column 1, all captured;baseline_table;Col;1;characteristic_level;indented
+David;17634458;1;Lovely job from autoadd again. 3 differnet types of thing in column 1, all captured;baseline_table;Col;1;characteristic_name;empty_row
+David;17634458;1;Lovely job from autoadd again. 3 differnet types of thing in column 1, all captured;baseline_table;Row;1;"arms;measures";NA
 David;17634458;2;Produces table, but annotator cannot capture the fact that the outcome differs in the last 7 rows of this table. Maybe a split table here feature.;result_table_subgroup;Col;1;"characteristic_level;characteristic_name";empty_row
 David;17634458;2;Produces table, but annotator cannot capture the fact that the outcome differs in the last 7 rows of this table. Maybe a split table here feature.;result_table_subgroup;Col;1;time/period;indented
 David;17634458;2;Produces table, but annotator cannot capture the fact that the outcome differs in the last 7 rows of this table. Maybe a split table here feature.;result_table_subgroup;Row;1;"arms;measures";NA
@@ -5764,14 +5474,18 @@ David;17605774;2;I think that this is a post-randomisation stratifying variable;
 David;17605774;3;This is a 4 row table which is really a two row table. Rows 1 and 2 are one thing. Rows 3 and 4 another;result_table_subgroup;Col;1;characteristic_level;NA
 David;17605774;3;This is a 4 row table which is really a two row table. Rows 1 and 2 are one thing. Rows 3 and 4 another;result_table_subgroup;Row;1;outcomes;NA
 David;17605774;3;This is a 4 row table which is really a two row table. Rows 1 and 2 are one thing. Rows 3 and 4 another;result_table_subgroup;Row;2;arms;NA
-David;17456819v2;2;NA;NA;Col;1;characteristic_name;empty_row
-David;17456819v2;2;NA;NA;Col;1;characteristic_level;indented
-David;17456819v2;2;NA;NA;Row;1;outcomes;NA
-David;17456819v2;2;NA;NA;Row;2;"arms;measures;p-interaction";NA
 David;17456819;2;NA;result_table_subgroup;Col;1;characteristic_name;empty_row
 David;17456819;2;NA;result_table_subgroup;Col;1;characteristic_level;indented
 David;17456819;2;NA;result_table_subgroup;Row;1;measures;NA
 David;17456819;2;NA;result_table_subgroup;Row;2;"arms;measures;p-interaction";NA
+David;17392541;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
+David;17392541;1;NA;baseline_table;Row;1;characteristic_level;NA
+David;17392541;1;NA;baseline_table;Row;2;arms;NA
+David;17384437v2;1;Beautiful, completely right by auto-add;result_table_subgroup;Col;1;characteristic_level;NA
+David;17384437v2;1;Beautiful, completely right by auto-add;result_table_subgroup;Col;1;characteristic_name;empty_row
+David;17384437v2;1;Beautiful, completely right by auto-add;result_table_subgroup;Row;1;outcomes;NA
+David;17384437v2;1;Beautiful, completely right by auto-add;result_table_subgroup;Row;2;measures;NA
+David;17384437v2;1;Beautiful, completely right by auto-add;result_table_subgroup;Row;3;arms;NA
 David;17384437;1;Auto add's first choice was right in every case. Need to think about handling strings which include characteristic levels AND names if implement the mutually excluding approach;baseline_table;Col;1;characteristic_level;indented
 David;17384437;1;Auto add's first choice was right in every case. Need to think about handling strings which include characteristic levels AND names if implement the mutually excluding approach;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
 David;17384437;1;Auto add's first choice was right in every case. Need to think about handling strings which include characteristic levels AND names if implement the mutually excluding approach;baseline_table;Col;1;characteristic_name;empty_row
@@ -5858,13 +5572,12 @@ David;16508926;2;Not a true subgroup effects table, but may be able to estimate 
 David;16508926;3;Should read 'Normal CRP and ESR' but ESR is in its own row.;result_table_subgroup;Col;1;"characteristic_name;characteristic_level";NA
 David;16508926;3;Should read 'Normal CRP and ESR' but ESR is in its own row.;result_table_subgroup;Row;1;measures;NA
 David;16508926;3;Should read 'Normal CRP and ESR' but ESR is in its own row.;result_table_subgroup;Row;2;arms;NA
-David;16495392v2;2;Table fails. Again maybe an empty row issue?;result_table_subgroup;Col;1;outcomes;empty_row_with_p_value
-David;16495392v2;2;Table fails. Again maybe an empty row issue?;result_table_subgroup;Col;1;"measures;time/period";NA
-David;16495392v2;2;Table fails. Again maybe an empty row issue?;result_table_subgroup;Row;1;arms;NA
-David;16495392v2;2;Table fails. Again maybe an empty row issue?;result_table_subgroup;Col;1;characteristic_level;bold
-David;16488800;1;Fails. DOnt know why. Maybe empty row issue.;baseline_table;Col;1;"characteristic_level;characteristic_name";indented
-David;16488800;1;Fails. DOnt know why. Maybe empty row issue.;baseline_table;Row;1;arms;NA
-David;16488800;1;Fails. DOnt know why. Maybe empty row issue.;baseline_table;Col;1;characteristic_name;empty_row
+David;16495392v2;2;NA;result_table_subgroup;Col;1;outcomes;empty_row_with_p_value
+David;16495392v2;2;NA;result_table_subgroup;Col;1;"measures;time/period";NA
+David;16495392v2;2;NA;result_table_subgroup;Row;1;arms;NA
+David;16488800;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_name";indented
+David;16488800;1;NA;baseline_table;Row;1;arms;NA
+David;16488800;1;NA;baseline_table;Col;1;characteristic_name;empty_row
 David;16278257;1;Some rows without labels as values are split across two rows. Would need to collapse rows to fix this. Can fix this in post processing by filling across the column.;baseline_table;Row;1;characteristic_level;NA
 David;16278257;1;Some rows without labels as values are split across two rows. Would need to collapse rows to fix this. Can fix this in post processing by filling across the column.;baseline_table;Row;2;arms;NA
 David;16278257;1;Some rows without labels as values are split across two rows. Would need to collapse rows to fix this. Can fix this in post processing by filling across the column.;baseline_table;Col;1;characteristic_level;NA
@@ -5882,18 +5595,23 @@ David;16139123;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_na
 David;16139123;1;NA;baseline_table;Row;1;arms;NA
 David;16139123;2;NA;baseline_table;Row;1;characteristic_level;NA
 David;16139123;2;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
-David;16139123;3;Auto add gets everything right, but adds 1 to each row number. NB whole table is subgroup;result_table_without_subgroup;Col;1;outcomes;NA
-David;16139123;3;Auto add gets everything right, but adds 1 to each row number. NB whole table is subgroup;result_table_without_subgroup;Row;1;"measures;arms";NA
-David;16139123;3;Auto add gets everything right, but adds 1 to each row number. NB whole table is subgroup;result_table_without_subgroup;Row;2;measures;NA
-David;16139123;4;Auto add gets everything right, but adds 1 to each row number. NB whole table is subgroup;result_table_without_subgroup;Col;1;outcomes;NA
-David;16139123;4;Auto add gets everything right, but adds 1 to each row number. NB whole table is subgroup;result_table_without_subgroup;Row;1;"measures;arms";NA
-David;16139123;4;Auto add gets everything right, but adds 1 to each row number. NB whole table is subgroup;result_table_without_subgroup;Row;2;measures;NA
+David;16139123;3;NA;result_table_without_subgroup;Col;1;outcomes;NA
+David;16139123;3;NA;result_table_without_subgroup;Row;1;"arms;measures";NA
+David;16139123;3;NA;result_table_without_subgroup;Row;2;measures;NA
+David;16139123;3;NA;result_table_without_subgroup;Col;1;other;empty_row
+David;16139123;4;NA;result_table_without_subgroup;Col;1;outcomes;NA
+David;16139123;4;NA;result_table_without_subgroup;Row;1;"measures;arms";NA
+David;16139123;4;NA;result_table_without_subgroup;Row;2;measures;NA
+David;16139123;4;NA;result_table_without_subgroup;Col;1;other;empty_row
 David;16116047;1;NA;baseline_table;Col;1;characteristic_name;NA
 David;16116047;1;NA;baseline_table;Row;1;characteristic_level;NA
 David;16116047;1;NA;baseline_table;Row;2;arms;NA
 David;16116047;2;NA;baseline_table;Col;1;characteristic_name;NA
 David;16116047;2;NA;baseline_table;Row;1;characteristic_level;NA
 David;16116047;2;NA;baseline_table;Row;2;arms;NA
+David;16116047;3;Auto add did nice job;result_table_subgroup;Col;1;outcomes;NA
+David;16116047;3;Auto add did nice job;result_table_subgroup;Row;1;"measures;characteristic_level";NA
+David;16116047;3;Auto add did nice job;result_table_subgroup;Row;2;measures;NA
 David;16116047;4;NA;result_table_without_subgroup;Col;1;outcomes;NA
 David;16116047;4;NA;result_table_without_subgroup;Row;1;"measures;arms";NA
 David;16116047;4;NA;result_table_without_subgroup;Row;2;measures;NA
@@ -5903,11 +5621,11 @@ David;16116047;5;NA;result_table_without_subgroup;Row;2;measures;NA
 David;16053964;1;NA;baseline_table;Col;1;characteristic_level;indented
 David;16053964;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
 David;16053964;1;NA;baseline_table;Row;1;arms;NA
-David;15883637;1;Interesting table. Where have indentation and empty rows, the characteristic name and level are different. Where the formatting is standard (not indented and not empty row) the characteristic name and elvel is the same.;result_table_subgroup;Col;1;"characteristic_name;characteristic_level";NA
-David;15883637;1;Interesting table. Where have indentation and empty rows, the characteristic name and level are different. Where the formatting is standard (not indented and not empty row) the characteristic name and elvel is the same.;result_table_subgroup;Col;1;characteristic_level;indented
-David;15883637;1;Interesting table. Where have indentation and empty rows, the characteristic name and level are different. Where the formatting is standard (not indented and not empty row) the characteristic name and elvel is the same.;result_table_subgroup;Row;1;"characteristic_level;characteristic_name";NA
-David;15883637;1;Interesting table. Where have indentation and empty rows, the characteristic name and level are different. Where the formatting is standard (not indented and not empty row) the characteristic name and elvel is the same.;result_table_subgroup;Row;2;arms;NA
-David;15883637;1;Interesting table. Where have indentation and empty rows, the characteristic name and level are different. Where the formatting is standard (not indented and not empty row) the characteristic name and elvel is the same.;result_table_subgroup;Col;1;characteristic_name;empty_row
+David;15883637;1;First example of a very useful table format. Part of column alternates between empty rows and indentations where the characteristic name and level correspond to each. Other part of column is neither empty nor indented, but has a single characteristic name and level.;result_table_subgroup;Col;1;"characteristic_name;characteristic_level";NA
+David;15883637;1;First example of a very useful table format. Part of column alternates between empty rows and indentations where the characteristic name and level correspond to each. Other part of column is neither empty nor indented, but has a single characteristic name and level.;result_table_subgroup;Col;1;characteristic_level;indented
+David;15883637;1;First example of a very useful table format. Part of column alternates between empty rows and indentations where the characteristic name and level correspond to each. Other part of column is neither empty nor indented, but has a single characteristic name and level.;result_table_subgroup;Row;2;arms;NA
+David;15883637;1;First example of a very useful table format. Part of column alternates between empty rows and indentations where the characteristic name and level correspond to each. Other part of column is neither empty nor indented, but has a single characteristic name and level.;result_table_subgroup;Col;1;characteristic_name;empty_row
+David;15883637;1;First example of a very useful table format. Part of column alternates between empty rows and indentations where the characteristic name and level correspond to each. Other part of column is neither empty nor indented, but has a single characteristic name and level.;result_table_subgroup;Row;1;characteristic_level;NA
 David;15883637;2;NA;result_table_subgroup;Row;1;outcomes;NA
 David;15883637;2;NA;result_table_subgroup;Row;2;arms;NA
 David;15883637;2;NA;result_table_subgroup;Col;1;characteristic_level;NA
@@ -5915,41 +5633,44 @@ David;15851647;1;NA;baseline_table;Row;1;characteristic_level;NA
 David;15851647;1;NA;baseline_table;Row;2;arms;NA
 David;15851647;1;NA;baseline_table;Col;1;characteristic_name;empty_row
 David;15851647;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
-David;15851647;2;Table fails don't know why;result_table_subgroup;Col;1;"characteristic_level;measures;other";NA
-David;15851647;2;Table fails don't know why;result_table_subgroup;Row;1;measures;NA
-David;15851647;2;Table fails don't know why;result_table_subgroup;Row;2;arms;NA
-David;15851647;2;Table fails don't know why;result_table_subgroup;Col;1;characteristic_name;empty_row
-David;15851647;3;Table fails, dont know why;result_table_subgroup;Row;1;measures;NA
-David;15851647;3;Table fails, dont know why;result_table_subgroup;Row;2;arms;NA
-David;15851647;3;Table fails, dont know why;result_table_subgroup;Col;1;characteristic_name;empty_row
-David;15851647;3;Table fails, dont know why;result_table_subgroup;Col;1;characteristic_level;NA
+David;15851647;2;NA;result_table_subgroup;Col;1;"characteristic_name;characteristic_level";NA
+David;15851647;2;NA;result_table_subgroup;Row;1;measures;NA
+David;15851647;2;NA;result_table_subgroup;Row;2;arms;NA
+David;15851647;2;NA;result_table_subgroup;Col;1;characteristic_name;empty_row
+David;15851647;3;NA;result_table_subgroup;Row;1;measures;NA
+David;15851647;3;NA;result_table_subgroup;Row;2;arms;NA
+David;15851647;3;NA;result_table_subgroup;Col;1;characteristic_name;empty_row
+David;15851647;3;NA;result_table_subgroup;Col;1;characteristic_level;NA
 David;15537681;1;NA;NA;Col;1;characteristic_name;empty_row
 David;15537681;1;NA;NA;Col;1;"characteristic_level;characteristic_name";NA
 David;15537681;1;NA;NA;Row;1;"arms;measures";NA
 David;15337732;2;Jesus - This one misses out characteristic name on the columns below;result_table_subgroup;Col;1;characteristic_level;NA
 David;15337732;2;Jesus - This one misses out characteristic name on the columns below;result_table_subgroup;Row;2;arms;NA
 David;15337732;2;Jesus - This one misses out characteristic name on the columns below;result_table_subgroup;Col;1;characteristic_name;empty_row
-David;15238590;1;Table fails, don't know why.;baseline_table;Col;1;characteristic_name;empty_row
-David;15238590;1;Table fails, don't know why.;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
-David;15238590;1;Table fails, don't know why.;baseline_table;Row;1;arms;NA
-David;15103313;1;No treatment arms in this table.Table 'fails, don't know why.;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
-David;15103313;1;No treatment arms in this table.Table 'fails, don't know why.;baseline_table;Row;2;characteristic_level;NA
-David;15103313;1;No treatment arms in this table.Table 'fails, don't know why.;baseline_table;Row;1;characteristic_name;NA
-David;15103313;1;No treatment arms in this table.Table 'fails, don't know why.;baseline_table;Col;1;characteristic_name;empty_row
-David;15051694v2;2;Interesting that this succeeds although other one fails on first attempt. On second attempt fails. Fails when described as 'other table';other_table;Col;1;"characteristic_level;characteristic_name";NA
-David;15051694v2;2;Interesting that this succeeds although other one fails on first attempt. On second attempt fails. Fails when described as 'other table';other_table;Row;1;measures;NA
-David;15051694v2;2;Interesting that this succeeds although other one fails on first attempt. On second attempt fails. Fails when described as 'other table';other_table;Row;2;"measures;characteristic_level";NA
-David;15051694;2;This is not a treatment comparison table. Also fails. Dont know why.;other_table;Col;1;"characteristic_level;characteristic_name";NA
-David;15051694;2;This is not a treatment comparison table. Also fails. Dont know why.;other_table;Row;1;measures;NA
-David;15051694;2;This is not a treatment comparison table. Also fails. Dont know why.;other_table;Row;2;arms;NA
-David;15049402;1;Fails when add empty row;baseline_table;Col;1;"characteristic_level;characteristic_name";indented
-David;15049402;1;Fails when add empty row;baseline_table;Col;1;characteristic_name;"indented;empty_row"
-David;15049402;1;Fails when add empty row;baseline_table;Row;1;arms;NA
+David;15238590;1;NA;baseline_table;Col;1;characteristic_name;empty_row
+David;15238590;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
+David;15238590;1;NA;baseline_table;Row;1;arms;NA
+David;15103313;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
+David;15103313;1;NA;baseline_table;Row;2;characteristic_level;NA
+David;15103313;1;NA;baseline_table;Row;1;characteristic_name;NA
+David;15103313;1;NA;baseline_table;Col;1;characteristic_name;empty_row
+David;15051694v2;2;Same as previous table.;other_table;Col;1;"characteristic_level;characteristic_name";NA
+David;15051694v2;2;Same as previous table.;other_table;Row;1;measures;NA
+David;15051694v2;2;Same as previous table.;other_table;Row;2;"measures;characteristic_level";NA
+David;15051694;2;This is not a treatment comparison table.;other_table;Col;1;"characteristic_level;characteristic_name";NA
+David;15051694;2;This is not a treatment comparison table.;other_table;Row;1;measures;NA
+David;15051694;2;This is not a treatment comparison table.;other_table;Row;2;arms;NA
+David;15049402;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";indented
+David;15049402;1;NA;baseline_table;Col;1;characteristic_name;"indented;empty_row"
+David;15049402;1;NA;baseline_table;Row;1;arms;NA
 David;15049402;2;NA;result_table_subgroup;Col;1;"characteristic_level;characteristic_name";NA
 David;15049402;2;NA;result_table_subgroup;Row;1;measures;NA
 David;15049402;2;NA;result_table_subgroup;Row;2;"arms;measures";NA
 David;15028365;1;NA;result_table_subgroup;Row;1;p-interaction;NA
 David;15028365;1;NA;result_table_subgroup;Col;1;characteristic_name;NA
+David;14996776;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
+David;14996776;1;NA;baseline_table;Row;1;measures;NA
+David;14996776;1;NA;baseline_table;Row;2;arms;NA
 David;14661009;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 David;14661009;1;NA;baseline_table;Row;1;arms;NA
 David;12899584;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
@@ -5976,12 +5697,12 @@ David;12601075;2;Still fails with empty row with P-value;result_table_subgroup;R
 David;12601075;2;Still fails with empty row with P-value;result_table_subgroup;Row;2;measures;NA
 David;12601075;2;Still fails with empty row with P-value;result_table_subgroup;Col;1;characteristic_name;empty_row_with_p_value
 David;12601075;2;Still fails with empty row with P-value;result_table_subgroup;Col;1;characteristic_level;NA
+David;12479763;1;NA;baseline_table;Col;1;characteristic_name;empty_row
 David;12479763;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
-David;12479763;1;NA;baseline_table;Col;1;characteristic_level;indented
 David;12479763;1;NA;baseline_table;Row;1;measures;NA
 David;12479763;1;NA;baseline_table;Row;2;arms;NA
-David;12466506;1;Table fails, don't know why;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
-David;12466506;1;Table fails, don't know why;baseline_table;Row;1;"arms;measures";NA
+David;12466506;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
+David;12466506;1;NA;baseline_table;Row;1;"arms;measures";NA
 David;12456232v2;3;Fails, dont know why;result_table_subgroup;Col;1;characteristic_level;NA
 David;12456232v2;3;Fails, dont know why;result_table_subgroup;Row;1;measures;NA
 David;12456232;2;Table already in canonical format.;result_table_subgroup;Col;1;outcomes;NA
@@ -5993,9 +5714,9 @@ David;12456232;3;Jesus please take a look at this one.Characteristic name is not
 David;12243636;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 David;12243636;1;NA;baseline_table;Col;1;characteristic_level;indented
 David;12243636;1;NA;baseline_table;Row;2;arms;NA
-David;12243636;1;NA;baseline_table;Col;1;characteristic_name;empty_row
-David;11937179;1;NA;baseline_table;Col;1;"characteristic_level;characteristic_name";NA
+David;11937179;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
 David;11937179;1;NA;baseline_table;Row;1;"characteristic_level;arms";NA
+David;11937179;1;NA;baseline_table;Col;1;characteristic_name;empty_row
 David;11527638;1;NA;NA;Row;1;characteristic_name;NA
 David;11527638;1;NA;NA;Row;2;characteristic_level;NA
 David;11527638;1;NA;NA;Row;3;arms;NA
@@ -6007,10 +5728,9 @@ David;11419426;1;NA;baseline_table;Col;1;characteristic_name;empty_row
 David;11419425;2;NA;NA;Col;1;characteristic_name;indented
 David;11419425;2;NA;NA;Col;1;"characteristic_level;characteristic_name";NA
 David;11419425;2;NA;NA;Row;1;"arms;measures";NA
-David;10438259;1;NA;baseline_table;Col;1;"characteristic_name;characteristic_level";NA
-David;10438259;1;NA;baseline_table;Row;1;arms;NA
-David;10438259;1;NA;baseline_table;Col;1;characteristic_level;indented
-David;10438259;1;NA;baseline_table;Col;1;characteristic_name;empty_row
+David;10789664;1;NA;baseline_table;Col;1;characteristic_name;NA
+David;10789664;1;NA;baseline_table;Col;1;characteristic_level;indented
+David;10789664;1;NA;baseline_table;Row;1;arms;NA
 David;10438259;2;NA;result_table_subgroup;Col;1;characteristic_level;NA
 David;10438259;2;NA;result_table_subgroup;Row;1;arms;NA
 David;10438259;2;NA;result_table_subgroup;Row;2;measures;NA

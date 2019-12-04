@@ -1,0 +1,77 @@
+MODEL: from sklearn.linear_model import SGDClassifier
+
+https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html
+
+
+FIRST 
+accuracy 0.8172690763052208
+                      precision    recall  f1-score   support
+
+                arms       0.89      0.90      0.90       110
+characteristic_level       0.78      0.87      0.82       168
+ characteristic_name       0.81      0.85      0.83       143
+            measures       0.70      0.51      0.59        37
+               other       0.80      0.31      0.44        13
+            outcomes       0.89      0.63      0.74        27
+
+            accuracy                           0.82       498
+           macro avg       0.81      0.68      0.72       498
+        weighted avg       0.82      0.82      0.81       498
+
+SECOND
+
+accuracy 0.676056338028169
+                      precision    recall  f1-score   support
+
+                arms       0.86      0.75      0.80        32
+characteristic_level       0.46      0.83      0.59        29
+ characteristic_name       0.82      0.72      0.77        43
+            measures       0.76      0.59      0.67        22
+               other       0.00      0.00      0.00         3
+            outcomes       0.67      0.33      0.44        12
+         time/period       0.00      0.00      0.00         1
+
+            accuracy                           0.68       142
+           macro avg       0.51      0.46      0.47       142
+        weighted avg       0.71      0.68      0.67       142
+
+
+
+
+COMBINED
+
+accuracy 0.8109375
+                      precision    recall  f1-score   support
+
+                arms       0.92      0.89      0.91       140
+characteristic_level       0.81      0.84      0.83       227
+ characteristic_name       0.73      0.88      0.80       161
+            measures       0.79      0.60      0.68        52
+               other       0.83      0.31      0.45        16
+            outcomes       0.81      0.60      0.68        42
+         time/period       1.00      0.50      0.67         2
+
+            accuracy                           0.81       640
+           macro avg       0.84      0.66      0.72       640
+        weighted avg       0.82      0.81      0.81       640
+
+COMBINED - in-annotation duplicates removed (Frequency seems to be valuable. But very small effect.)
+
+accuracy 0.7953125
+                      precision    recall  f1-score   support
+
+                arms       0.94      0.88      0.91       140
+characteristic_level       0.80      0.80      0.80       227
+ characteristic_name       0.71      0.86      0.78       161
+            measures       0.73      0.62      0.67        52
+               other       0.75      0.38      0.50        16
+            outcomes       0.81      0.62      0.70        42
+         time/period       1.00      0.50      0.67         2
+
+            accuracy                           0.80       640
+           macro avg       0.82      0.66      0.72       640
+        weighted avg       0.80      0.80      0.79       640
+
+
+
+

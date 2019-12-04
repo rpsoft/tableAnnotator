@@ -722,7 +722,7 @@ class AnnotationView extends Component {
       } else {
           table_editor = "";
       }
-      
+
       var metaAnnotator = <MetaAnnotator annotationData={data}
                      annotationText={this.state.table ? this.state.table.formattedPage : ""}
                      titleSubgroups={this.state.titleSubgroups}
@@ -799,7 +799,7 @@ class AnnotationView extends Component {
                         : <div>
                           <div style={{paddingBottom: 10, fontWeight:"bold",marginBottom:10}}>
                             <a href={"https://www.ncbi.nlm.nih.gov/pubmed/?term="+ this.state.docid.split("v")[0]} target="_blank">{"PMID: " + this.state.docid}</a>
-                              { "(Page "+this.state.page + ") | " + (this.state.table.title ? this.state.table.title.title.trim() : "")}
+                              { "(Page "+this.state.page + ") | " + (this.state.table.title && this.state.table.title.title ? this.state.table.title.title.trim() : (this.state.table.title && this.state.table.title.abstract ? this.state.table.title.abstract : "") )}
                           </div>
 
                           <div style={{paddingBottom: 10, fontWeight:"bold"}} dangerouslySetInnerHTML={{__html:decodeURI(this.state.table.htmlHeader)}}></div>
@@ -869,9 +869,9 @@ class AnnotationView extends Component {
 
         <Card id="annotations" style={{padding:10,minHeight:200,paddingBottom:40,marginTop:10}}>
 
-          <h3 style={{marginBottom:0,marginTop:0}}>Annotations
-              <RaisedButton variant={"contained"}  className={"redbutton"} style={{marginLeft:10, backgroundColor:"#b8efaf"}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
-              <RaisedButton variant={"contained"}  style={{marginLeft:10,float:"right", backgroundColor:"#b8c0ff"}} onClick={ () => {this.autoAdd()} }><PowerIcon /> Auto Add </RaisedButton>
+          <h3 style={{marginBottom:0,marginTop:0}}> Annotations
+              <RaisedButton variant={"contained"} className={"redbutton"} style={{marginLeft:10, backgroundColor:"#b8efaf"}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
+              <RaisedButton variant={"contained"} style={{marginLeft:10,float:"right", backgroundColor:"#b8c0ff"}} onClick={ () => {this.autoAdd()} }><PowerIcon /> Auto Add </RaisedButton>
           </h3>
           <hr />
           {
