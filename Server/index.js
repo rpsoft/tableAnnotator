@@ -290,7 +290,7 @@ function _prepareAvailableDocuments() {
                 DOCS = DOCS.reduce(function (acc, docfile) {
                   var docid = docfile.split("_")[0].split("v")[0];
                   var docid_V = docfile.split("_")[0];
-                  var page = docfile.split("_")[1].split(".")[0]; // if ( docfile.indexOf("27046159") > -1 ){
+                  var page = docfile.split("_")[1].split(".")[0]; // if ( docfile.indexOf("29937431") > -1 ){
                   //   debugger
                   // }
 
@@ -308,26 +308,22 @@ function _prepareAvailableDocuments() {
 
                     var type_enabled = ftyp.length > 0;
                     var type_intersection = type_enabled && filtered_docs_ttype.length > 0 && filtered_docs_ttype.indexOf(docid_V + "_" + page) > -1;
-                    var accept_docid = false;
+                    var isAnnotated = all_annotated_docids.indexOf(docid_V + "_" + page) > -1;
+                    var show_not_annotated = !hua;
+                    var accept_docid = false; // Logic to control the filter. It depends in many variables with many controlled outcomes, so it looks a bit complicated
 
                     if (topic_enabled && type_enabled) {
-                      if (topic_intersection && type_intersection) {
-                        accept_docid = true;
-                      }
-                    }
+                      accept_docid = topic_intersection ? true : accept_docid;
+                      accept_docid = type_intersection || show_not_annotated && !isAnnotated ? accept_docid : false;
+                    } else if (topic_enabled && !type_enabled) {
+                      accept_docid = topic_intersection ? true : accept_docid;
+                      accept_docid = !show_not_annotated ? isAnnotated && topic_intersection : accept_docid;
+                    } else if (!topic_enabled && type_enabled) {
+                      accept_docid = type_intersection || show_not_annotated && !isAnnotated ? true : false;
+                    } else if (!topic_enabled && !type_enabled) {
+                      accept_docid = !show_not_annotated ? isAnnotated : true;
+                    } // End of filter logic.
 
-                    if (!type_enabled && topic_enabled && topic_intersection) {
-                      accept_docid = true;
-                    }
-
-                    if (!topic_enabled && type_enabled && type_intersection) {
-                      accept_docid = true;
-                    }
-
-                    if (!hua && all_annotated_docids.indexOf(docid_V + "_" + page) < 0) {
-                      // The document is not annotated, so always add.
-                      accept_docid = true;
-                    }
 
                     if (accept_docid) {
                       acc.push(docfile);

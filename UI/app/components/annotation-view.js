@@ -812,7 +812,7 @@ class AnnotationView extends Component {
                                 onKeyDown={(event, index) => {
                                   if (event.key === 'Enter') {
                                       this.addTitleSubgroup()
-                                      event.preventDefault();
+                                      event.preventDefault(); 
                                   }
                                 }}
 
