@@ -49,7 +49,7 @@ async function insertAnnotation(docid, page, user, annotation, corrupted, tableT
 
   var client = await pool.connect()
 
-  var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT (docid, page,"user") DO UPDATE SET annotation = $4, corrupted = $5, "tableType" = $6, "corrupted_text" = $7 ;', [docid, page, user, annotation, corrupted,tableType, corrupted_text])
+  var done = await client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6,$7);', [docid, page, user, annotation, corrupted, tableType, corrupted_text])
     .then(result => console.log("insert: "+ result))
     .catch(e => console.error(e.stack))
     .then(() => client.release())

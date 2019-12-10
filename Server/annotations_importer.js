@@ -68,7 +68,7 @@ function _insertAnnotation() {
           case 2:
             client = _context2.sent;
             _context2.next = 5;
-            return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT (docid, page,"user") DO UPDATE SET annotation = $4, corrupted = $5, "tableType" = $6, "corrupted_text" = $7 ;', [docid, page, user, annotation, corrupted, tableType, corrupted_text]).then(function (result) {
+            return client.query('INSERT INTO annotations VALUES($1,$2,$3,$4,$5,$6,$7);', [docid, page, user, annotation, corrupted, tableType, corrupted_text]).then(function (result) {
               return console.log("insert: " + result);
             }).catch(function (e) {
               return console.error(e.stack);

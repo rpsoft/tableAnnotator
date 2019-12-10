@@ -798,7 +798,7 @@ class AnnotationView extends Component {
             { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/>
                         : <div>
                           <div style={{paddingBottom: 10, fontWeight:"bold",marginBottom:10}}>
-                            <a href={"https://www.ncbi.nlm.nih.gov/pubmed/?term="+ this.state.docid.split("v")[0]} target="_blank">{"PMID: " + this.state.docid}</a>
+                            <a href={"https://www.ncbi.nlm.nih.gov/pubmed/?term="+ this.state.docid.split("v")[0].split("fig")[0].split("app")[0]} target="_blank">{"PMID: " + this.state.docid}</a>
                               { "(Page "+this.state.page + ") | " + (this.state.table.title && this.state.table.title.title ? this.state.table.title.title.trim() : (this.state.table.title && this.state.table.title.abstract ? this.state.table.title.abstract : "") )}
                           </div>
 
@@ -812,7 +812,7 @@ class AnnotationView extends Component {
                                 onKeyDown={(event, index) => {
                                   if (event.key === 'Enter') {
                                       this.addTitleSubgroup()
-                                      event.preventDefault(); 
+                                      event.preventDefault();
                                   }
                                 }}
 
