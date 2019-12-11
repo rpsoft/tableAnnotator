@@ -35,6 +35,7 @@ class MetaItem extends Component {
         user: urlparams.get("user") ? urlparams.get("user") : "",
         page: urlparams.get("page") ? urlparams.get("page") : "",
         docid: urlparams.get("docid") ? urlparams.get("docid") : "",
+        adminEnabled: urlparams.get("admin") ? urlparams.get("admin").toLowerCase().trim() == "true" : false,
         term : props.term,
         matching_term : props.matching_term, // This is the term after processing/cleaning to match it with our knowledge base.
         anchorEl : null,
@@ -289,7 +290,7 @@ class MetaItem extends Component {
               }
 
               {
-              this.state.dialogType === "cuiAdder" ? <Button onClick={ this.toggleAdder } style={{fontWeight:"bolder",margin:5}}>
+              this.state.dialogType === "cuiAdder" && this.state.adminEnabled ? <Button onClick={ this.toggleAdder } style={{fontWeight:"bolder",margin:5}}>
                 Add New Concept
               </Button> : ""
               }
