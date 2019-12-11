@@ -400,13 +400,15 @@ class AnnotationView extends Component {
 
   removeOverrideTable = async (docid,page) => {
 
-     let fetch = new fetchData();
-     await fetch.removeOverrideTable(docid,page)
+    if ( this.state.recoverEnabled ) {
+       let fetch = new fetchData();
+       await fetch.removeOverrideTable(docid,page)
 
-     var data = await fetch.getTable(docid,page)
+       var data = await fetch.getTable(docid,page)
 
-     this.setState({table: JSON.parse(data), editor_enabled : this.state.editor_enabled ? false : true, overrideTable: null})
-     // this.forceUpdate();
+       this.setState({table: JSON.parse(data), editor_enabled : this.state.editor_enabled ? false : true, overrideTable: null})
+     }
+
    }
 
 
@@ -824,8 +826,12 @@ class AnnotationView extends Component {
         <Card id="tableHolder" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center", minHeight: 580}}>
           <RaisedButton variant={"contained"} style={{marginBottom:20}} onClick={ () => { this.setState({editor_enabled : this.state.editor_enabled ? false : true}) } }>Edit Table</RaisedButton>
 
-          { this.state.editor_enabled ? <RaisedButton variant={"contained"} style={{marginBottom:20,float:"right"}} onClick={ () => this.removeOverrideTable(this.state.docid, this.state.page) }>Recover Original</RaisedButton> : ""}
-          { this.state.editor_enabled ? <RaisedButton variant={"contained"} style={{marginBottom:20,float:"right"}} onClick={ () => this.saveTableChanges( this.state ) }>Save Table Changes</RaisedButton> : ""}
+          { this.state.editor_enabled ?
+              <div style={{float:"right", border: "1px solid black",marginLeft:2}}>
+                <RaisedButton variant={"contained"} style={{marginTop: 2, float: "right", marginRight: 3, backgroundColor: this.state.recoverEnabled ? "red" : "" }} onClick={ () => this.removeOverrideTable(this.state.docid, this.state.page) }>Recover Original</RaisedButton>
+                <Checkbox style={{float:"right"}} checked={this.state.recoverEnabled} onChange={ (event,data) => {this.setState({recoverEnabled : this.state.recoverEnabled ? false : true}) } }> </Checkbox>
+              </div> : ""}
+          { this.state.editor_enabled ? <RaisedButton variant={"contained"} style={{marginTop: 2, marginRight:5, marginBottom:20,float:"right"}} onClick={ () => this.saveTableChanges( this.state ) }>Save Table Changes</RaisedButton> : ""}
           { !this.state.table ? <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : ( this.state.editor_enabled ? table_editor : <div dangerouslySetInnerHTML={{__html:this.state.overrideTable || this.state.table.formattedPage}}></div> ) }
 
         </Card>
