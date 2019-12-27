@@ -899,7 +899,7 @@ app.get('/api/cuisIndexAdd',async function(req,res){
 
   var insertCUI = async (cui,preferred,hasMSH) => {
       var client = await pool.connect()
-      var done = await client.query('INSERT INTO cuis_index(cui,preferred,"hasMSH") VALUES ($1, $2, $3) ON CONFLICT (cui) DO UPDATE SET preferred = $2, "hasMSH" = $3', [cui,preferred,hasMSH])
+      var done = await client.query('INSERT INTO cuis_index(cui,preferred,"hasMSH",user_defined,admin_approved) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (cui) DO UPDATE SET preferred = $2, "hasMSH" = $3, user_defined = $4, admin_approved = $5',  [cui,preferred,hasMSH,true,false])
         .then(result => console.log("insert: "+ new Date()))
         .catch(e => console.error(e.stack))
         .then(() => client.release())

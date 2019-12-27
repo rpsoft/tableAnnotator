@@ -35,7 +35,7 @@ class MetaItem extends Component {
         user: urlparams.get("user") ? urlparams.get("user") : "",
         page: urlparams.get("page") ? urlparams.get("page") : "",
         docid: urlparams.get("docid") ? urlparams.get("docid") : "",
-        adminEnabled: urlparams.get("admin") ? urlparams.get("admin").toLowerCase().trim() == "true" : false,
+        adminEnabled: true, //urlparams.get("admin") ? urlparams.get("admin").toLowerCase().trim() == "true" : false,
         term : props.term,
         matching_term : props.matching_term, // This is the term after processing/cleaning to match it with our knowledge base.
         anchorEl : null,
@@ -111,6 +111,13 @@ class MetaItem extends Component {
 
 
   customCUIAdd = async (cui, description) => {
+
+      if ( this.state["cuis_data"][cui] ) {
+
+        alert( "The CUI for the concept you are adding already exists. Use another. [ ADD IS CANCELLED ! ]." );
+
+        return;
+      }
 
       let fetch = new fetchData();
       await fetch.addCustomCUI(cui,description)
