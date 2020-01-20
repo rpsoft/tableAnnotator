@@ -32,6 +32,7 @@ import {
   ClusterIndex,
   ClusterResultsView,
   ClusterResultsContainer,
+  CuiAdminContainer,
 } from '../../components/'
 
 const urlBase = URL_BASE
@@ -46,6 +47,7 @@ export default function App() {
         <Route path={urlBase + "metaresults"} component={MetaContainer}></Route>
         <Route path={urlBase + "cluster"} component={ClusterContainer}></Route>
         <Route path={urlBase + "clusterresults"} component={ClusterResultsContainer}></Route>
+        <Route path={urlBase + "cuiadmin"} component={CuiAdminContainer}></Route>
       </Switch>
       <GlobalStyle />
     </div>

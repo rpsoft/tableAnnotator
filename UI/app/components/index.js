@@ -24,3 +24,5 @@ export ClusterContainer from './cluster-container'
 
 export ClusterResultsView from './cluster-results-view'
 export ClusterResultsContainer from './cluster-results-container'
+
+export CuiAdminContainer from './cui-admin-container'

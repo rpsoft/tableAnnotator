@@ -1942,7 +1942,9 @@ function () {
                         result.rows.map(function (row) {
                           cuis[row.cui] = {
                             preferred: row.preferred,
-                            hasMSH: row.hasMSH
+                            hasMSH: row.hasMSH,
+                            userDefined: row.user_defined,
+                            adminApproved: row.admin_approved
                           };
                         });
                         return _context28.abrupt("return", cuis);

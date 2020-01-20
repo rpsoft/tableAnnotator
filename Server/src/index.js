@@ -883,7 +883,7 @@ app.get('/api/cuisIndex',async function(req,res){
               client.release()
 
         result.rows.map( row => {
-          cuis[row.cui] = {preferred : row.preferred, hasMSH: row.hasMSH}
+          cuis[row.cui] = {preferred : row.preferred, hasMSH: row.hasMSH, userDefined: row.user_defined, adminApproved: row.admin_approved}
         })
 
         return cuis
