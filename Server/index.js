@@ -1942,7 +1942,9 @@ function () {
                         result.rows.map(function (row) {
                           cuis[row.cui] = {
                             preferred: row.preferred,
-                            hasMSH: row.hasMSH
+                            hasMSH: row.hasMSH,
+                            userDefined: row.user_defined,
+                            adminApproved: row.admin_approved
                           };
                         });
                         return _context28.abrupt("return", cuis);
@@ -2011,7 +2013,7 @@ function () {
                       case 2:
                         client = _context30.sent;
                         _context30.next = 5;
-                        return client.query('INSERT INTO cuis_index(cui,preferred,"hasMSH") VALUES ($1, $2, $3) ON CONFLICT (cui) DO UPDATE SET preferred = $2, "hasMSH" = $3', [cui, preferred, hasMSH]).then(function (result) {
+                        return client.query('INSERT INTO cuis_index(cui,preferred,"hasMSH",user_defined,admin_approved) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (cui) DO UPDATE SET preferred = $2, "hasMSH" = $3, user_defined = $4, admin_approved = $5', [cui, preferred, hasMSH, true, false]).then(function (result) {
                           return console.log("insert: " + new Date());
                         }).catch(function (e) {
                           return console.error(e.stack);

@@ -208,9 +208,9 @@ export default class fetchData {
         return JSON.parse(r)
   }
 
-  async addCustomCUI(cui,description) {
+  async addCustomCUI(cui,description,isMSH) {
 
-    var urlQueryRequest = urlBase + "cuisIndexAdd?cui="+encodeURIComponent(cui)+"&preferred="+encodeURIComponent(description)+"&hasMSH=true"
+    var urlQueryRequest = urlBase + "cuisIndexAdd?cui="+encodeURIComponent(cui)+"&preferred="+encodeURIComponent(description)+"&hasMSH="+(isMSH ? true : false)
 
     var r = await this.getGeneric( urlQueryRequest  )
 
