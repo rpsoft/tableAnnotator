@@ -7,7 +7,7 @@ var html = require("html");
 var fs = require('fs');
 var request = require("request");
 const cheerio = require('cheerio');
-const { Pool, Client } = require('pg')
+const { Pool, Client, Query } = require('pg')
 
 const csv = require('csv-parser');
 const fs = require('fs');
@@ -573,6 +573,77 @@ app.get('/api/listDeletedTables', async function(req,res){
 });
 
 
+
+
+app.get('/api/modifyCUIData', async function(req,res){
+
+  var modifyCUIData = async (cui, preferred, adminApproved, prevcui) => {
+      var client = await pool.connect()
+
+      var result = await client.query(`UPDATE cuis_index SET cui=$1, preferred=$2, admin_approved=$3 WHERE cui = $4`,
+        [cui, preferred, adminApproved, prevcui] )
+
+      if ( result && result.rowCount ){
+        var q = new Query(`UPDATE metadata SET cuis = array_to_string(array_replace(regexp_split_to_array(cuis, ';'), $2, $1), ';'), cuis_selected = array_to_string(array_replace(regexp_split_to_array(cuis_selected, ';'), $2, $1), ';')`, [cui, prevcui])
+        result = await client.query( q )
+      }
+
+      client.release()
+      return result
+  }
+
+  if ( req.query && req.query.cui && req.query.preferred && req.query.adminApproved && req.query.prevcui ){
+    var result = await modifyCUIData(req.query.cui, req.query.preferred, req.query.adminApproved, req.query.prevcui)
+    res.send(result)
+  } else {
+    res.send("UPDATE failed");
+  }
+
+});
+
+
+app.get('/api/cuiDeleteIndex', async function(req,res){
+
+  var cuiDeleteIndex = async (cui) => {
+      var client = await pool.connect()
+
+      var done = await client.query('delete from cuis_index where cui = $1', [cui ])
+        .then(result => console.log("deleted: "+ new Date()))
+        .catch(e => console.error(e.stack))
+        .then(() => client.release())
+
+  }
+
+  if ( req.query && req.query.cui){
+    await cuiDeleteIndex(req.query.cui)
+    res.send("done")
+  } else {
+    res.send("clear failed");
+  }
+
+});
+
+app.get('/api/getMetadataForCUI', async function(req,res){
+
+  var getCuiTables = async (cui) => {
+      var client = await pool.connect()
+      var result = await client.query(`select docid,page,"user" from metadata where cuis like $1 `, ["%"+cui+"%"])
+            client.release()
+      return result
+
+  }
+  //console.log(req.query)
+  if ( req.query && req.query.cui ){
+    var meta = await getCuiTables(req.query.cui)
+    //console.log(meta)
+    res.send(meta)
+  } else {
+    res.send("clear failed");
+  }
+
+});
+
+
 app.get('/api/clearMetadata', async function(req,res){
 
   var setMetadata = async (docid, page, user) => {
@@ -883,7 +954,7 @@ app.get('/api/cuisIndex',async function(req,res){
               client.release()
 
         result.rows.map( row => {
-          cuis[row.cui] = {preferred : row.preferred, hasMSH: row.hasMSH}
+          cuis[row.cui] = {preferred : row.preferred, hasMSH: row.hasMSH, userDefined: row.user_defined, adminApproved: row.admin_approved}
         })
 
         return cuis
