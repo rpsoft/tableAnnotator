@@ -77,6 +77,38 @@ export default class fetchData {
         return r
   }
 
+  async getMetadataForCUI(cui){
+
+            var urlQueryRequest = urlBase+ "getMetadataForCUI?cui="+encodeURIComponent(cui)
+
+            var r = await this.getGeneric( urlQueryRequest  )
+
+            return JSON.parse( r ).rows
+
+  }
+
+  async modifyCUIData(cui,preferred,adminApproved,prevcui){
+
+      // debugger
+
+      var urlQueryRequest = urlBase+ "modifyCUIData?cui="+encodeURIComponent(cui)+"&preferred="+encodeURIComponent(preferred)+"&adminApproved="+encodeURIComponent(adminApproved)+"&prevcui="+prevcui
+
+      var r = await this.getGeneric( urlQueryRequest  )
+
+      return r
+
+  }
+
+
+  async cuiDeleteIndex(cui){
+
+      var urlQueryRequest = urlBase+ "cuiDeleteIndex?cui="+encodeURIComponent(cui)
+
+      var r = await this.getGeneric( urlQueryRequest  )
+
+      return r
+
+  }
 
   async deleteTable(docid,page) {
 
