@@ -22,7 +22,7 @@ async function getMMatch(phrase){
     request.post({
         headers: {'content-type' : 'application/x-www-form-urlencoded'},
         url:     'http://localhost:8080/form',
-        body:    "input="+phrase+" &args=--JSONn -E"
+        body:    "input="+phrase+" &args=-AsI+ --JSONn -E"
       }, (error, res, body) => {
       if (error) {
         reject(error)

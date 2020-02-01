@@ -148,7 +148,7 @@ const R = require("r-script");
 
 //Important to use this function for all text extracted from the tables.
 function prepare_cell_text(text){
-    return text.replace(/[0-9]+/g, '$nmbr$').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g," ").trim().toLowerCase()
+    return text.replace(/([^A-z0-9 ])/g, " $1 ").replace(/[0-9]+/g, ' $nmbr$ ').replace(/ +/g," ").trim().toLowerCase()
 }
 
 async function prepareAvailableDocuments(filter_topic, filter_type, hua){
@@ -767,9 +767,7 @@ async function updateClusterAnnotation(cn,concept,cuis,isdefault,cn_override){
   // console.log("DONE: "+(ops_counter++))
 }
 
-
-app.get('/api/cuiRecommend', async function(req,res){
-
+async function getRecommendedCUIS(){
   var cuiRecommend = async () => {
     var client = await pool.connect()
     var result = await client.query(`select * from cuis_recommend`)
@@ -811,8 +809,14 @@ app.get('/api/cuiRecommend', async function(req,res){
     recommend_cuis[item.concept] = { cuis: rep_cuis.concat(rec_cuis), cc: item.cc }
 
   }) : ""
+  return recommend_cuis
+}
 
-  res.send( recommend_cuis )
+app.get('/api/cuiRecommend', async function(req,res){
+
+  var cuirec = await getRecommendedCUIS()
+
+  res.send( cuirec )
 
 });
 
@@ -985,33 +989,101 @@ app.get('/api/cuisIndexAdd',async function(req,res){
   res.send("saved annotation: "+JSON.stringify(req.query))
 });
 
+async function allPredictions(){
+  // var predictions = "user,docid,page,corrupted,tableType,location,number,content,qualifiers\n"
+
+  var count = 1;
+
+  for ( var docid in available_documents){
+    for ( var page in available_documents[docid].pages ) {
+      console.log(docid+"  --  "+page+"  --  "+count+" / "+DOCS.length)
+      count = count + 1;
+
+      if ( count > 10 ){
+         return ""
+      }
+      // try {
+      var page = available_documents[docid].pages[page]
+      var data = await readyTableData(docid,page)
+
+       // if ( data.status == "bad" ){
+       //   console.log(a+"  --  "+p+"  --  "+"failed")
+       //   continue;
+       // } else {
+       //   console.log("good")
+       // }
+
+      // for ( var c in data.predicted.cols) {
+      //    var col = data.predicted.cols[c]
+      //    predictions += ["auto_"+METHOD,docid,page,false,"na","Col",(parseInt(col.c)+1),col.descriptors.join(";"),col.unique_modifier.split(" ").join(";")].join(",")+"\n"
+      // }
+      //
+      // for ( var r in data.predicted.rows) {
+      //    var row = data.predicted.rows[r]
+      //    predictions += ["auto_"+METHOD,docid,page,false,"na","Row",(parseInt(row.c)+1),row.descriptors.join(";"),row.unique_modifier.split(" ").join(";")].join(",")+"\n"
+      // }
+     // } catch (e){
+     //   console.log("failed")
+     // }
+
+      // for ( var row = 0; row < data.predicted.predictions.length; row++ ){
+      //    for ( var col = 0; col < data.predicted.predictions[row].terms.length; col++ ){
+      //
+      //      console.log(data.predicted.predictions[row].terms[col])
+      //
+      //    }
+      // }
+      var cols = data.predicted.cols.reduce( (acc,e) => {acc[e.c] = {descriptors : e.descriptors.join(";"), modifier: e.unique_modifier}; return acc},{} )
+      var rows = data.predicted.rows.reduce( (acc,e) => {acc[e.c] = {descriptors : e.descriptors.join(";"), modifier: e.unique_modifier}; return acc},{} )
+
+      var cuirec = await getRecommendedCUIS()
+
+      debugger
+
+      var csvData = data.predicted.predictions.map(
+        (row_el,row) => {
+          return row_el.terms.map( ( term, col ) => {
+              // debugger;
+              return {
+                concept : prepare_cell_text(term),
+                original : term,
+                onlyNumbers : term.replace(/[^a-z]/g," ").replace(/ +/g," ").trim() == "",
+                // row: row,
+                // col: col,
+                pos_start: row == 0 ? 1 : 0,
+                pos_middle: row > 0 && row < (data.predicted.predictions.length-1)  ? 1 : 0,
+                pos_end: row == data.predicted.predictions.length-1 ? 1 : 0,
+                // isCharacteristic_name: cols[col] && cols[col].descriptors.indexOf("characteristic_name") > -1 ? 1 : 0,
+                // isCharacteristic_level: cols[col] && cols[col].descriptors.indexOf("characteristic_level") > -1 ? 1 : 0,
+                // isOutcome: cols[col] && cols[col].descriptors.indexOf("outcomes") > -1 ? 1 : 0,
+                inRow : rows[row] ? 1 : 0,
+                inCol : cols[col] ? 1 : 0,
+                is_bold : data.predicted.predictions[row].cellClasses[col].indexOf("bold") > -1 ? 1 : 0,
+                is_italic : data.predicted.predictions[row].cellClasses[col].indexOf("italic") > -1 ? 1 : 0,
+                is_indent : data.predicted.predictions[row].cellClasses[col].indexOf("indent") > -1 ? 1 : 0,
+                is_empty_row : data.predicted.predictions[row].cellClasses[col].indexOf("empty_row") > -1 ? 1 : 0,
+                is_empty_row_p : data.predicted.predictions[row].cellClasses[col].indexOf("empty_row_with_p_value") > -1 ? 1 : 0,
+                label : cols[col] && cols[col].descriptors,
+              }
+            })
+          }
+        )
+
+      debugger
+
+      csvData = csvData.flat().filter(el => el.onlyNumbers == false);
+    }
+  }var cuirec = await getRecommendedCUIS()
+
+  return predictions
+}
 
 app.get('/api/allPredictions', async function(req,res){
   console.log("getting all predictions")
 
-  var predictions = "user,docid,page,corrupted,tableType,location,number,content,qualifiers\n"
+  var allP = await allPredictions()
 
-  for ( var a in available_documents){
-    for ( var p in available_documents[a].pages ) {
-      console.log(a+"  --  "+p)
-       var page = available_documents[a].pages[p]
-       var docid = a
-       var data = await readyTableData(docid,page)
-
-       for ( var c in data.predicted.cols) {
-         var col = data.predicted.cols[c]
-         predictions += ["auto_"+METHOD,docid,page,false,"na","Col",(parseInt(col.c)+1),col.descriptors.join(";"),col.unique_modifier.split(" ").join(";")].join(",")+"\n"
-       }
-
-       for ( var r in data.predicted.rows) {
-         var row = data.predicted.rows[r]
-         predictions += ["auto_"+METHOD,docid,page,false,"na","Row",(parseInt(row.c)+1),row.descriptors.join(";"),row.unique_modifier.split(" ").join(";")].join(",")+"\n"
-       }
-
-    }
-  }
-
-  res.send(predictions)
+  res.send(allP)
 });
 
 
@@ -1179,7 +1251,7 @@ async function getMMatch(phrase){
     request.post({
         headers: {'content-type' : 'application/x-www-form-urlencoded'},
         url:     'http://localhost:8080/form',
-        body:    "input="+phrase+" &args=--JSONn -E"
+        body:    "input="+phrase+" &args=-AsI+ --JSONn -E"
       }, (error, res, body) => {
       if (error) {
         reject(error)
@@ -1276,6 +1348,7 @@ app.get('/api/classify', async function(req,res){
 
 
 async function readyTableData(docid,page,method){
+  try {
   var docid = docid+"_"+page+".html"
 
   var htmlFolder = tables_folder+"/"
@@ -1283,6 +1356,7 @@ async function readyTableData(docid,page,method){
 
   //If an override file exists then use it!. Overrides are those produced by the editor.
   var file_exists = await fs.existsSync("HTML_TABLES_OVERRIDE/"+docid)
+
   if ( file_exists ) {
     htmlFolder = "HTML_TABLES_OVERRIDE/"
   }
@@ -1345,12 +1419,9 @@ async function readyTableData(docid,page,method){
 
                                   }
 
-
                                   htmlHeader = "<table>"+htmlHeader.htmlHeader+"</table>"
 
                                   var htmlHeaderText = cheerio(htmlHeader).find("td").text()
-
-
 
                                   var actual_table = tablePage("table").parent().html();
                                       actual_table = cheerio.load(actual_table);
@@ -1521,7 +1592,7 @@ async function readyTableData(docid,page,method){
 
                                   // Estimate row predictions
                                   var row_top_descriptors = []
-
+                                  // debugger
                                   for (var r in preds_matrix){
                                           var content_types_in_row = content_type_matrix[r].reduce( (countMap, word) => {
                                             switch (word) {
@@ -1586,7 +1657,8 @@ async function readyTableData(docid,page,method){
 
                                   var predicted = {
                                                   cols: col_top_descriptors,
-                                                  rows: row_top_descriptors
+                                                  rows: row_top_descriptors,
+                                                  predictions : predictions
                                                 }
                                   // res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
 
@@ -1595,10 +1667,13 @@ async function readyTableData(docid,page,method){
 
                 });
         } catch ( e ){
-            reject(e)
+            reject({status:"bad"})
         }
       });
       return result
+    } catch (e){
+      return {status:"bad"}
+    }
 }
 
 
@@ -1722,3 +1797,50 @@ app.get('/api/recordAnnotation',async function(req,res){
 app.listen(PORT, function () {
   console.log('Express Server running on port '+PORT+' ' + new Date().toISOString());
 });
+
+
+//////////////////  Evaluation bit.
+
+// var runDocuments = async () => {
+//   console.log("getting all predictions")
+//
+//   var predictions = "user,docid,page,corrupted,tableType,location,number,content,qualifiers\n"
+//
+//   var count = 1;
+//
+//   for ( var a in available_documents){
+//     for ( var p in available_documents[a].pages ) {
+//       console.log(a+"  --  "+p+"  --  "+count+" / "+DOCS.length)
+//       count = count + 1;
+//
+//       try {
+//        var page = available_documents[a].pages[p]
+//        var docid = a
+//        var data = await readyTableData(docid,page)
+//
+//        if ( data.status == "bad" ){
+//          console.log(a+"  --  "+p+"  --  "+"failed")
+//          continue;
+//        } else {
+//          console.log("good")
+//        }
+//
+//        debugger
+//
+//        for ( var c in data.predicted.cols) {
+//          var col = data.predicted.cols[c]
+//          predictions += ["auto_"+METHOD,docid,page,false,"na","Col",(parseInt(col.c)+1),col.descriptors.join(";"),col.unique_modifier.split(" ").join(";")].join(",")+"\n"
+//        }
+//
+//        for ( var r in data.predicted.rows) {
+//          var row = data.predicted.rows[r]
+//          predictions += ["auto_"+METHOD,docid,page,false,"na","Row",(parseInt(row.c)+1),row.descriptors.join(";"),row.unique_modifier.split(" ").join(";")].join(",")+"\n"
+//        }
+//      } catch (e){
+//        console.log("failed")
+//      }
+//     }
+//   }
+// }
+//
+// runDocuments();

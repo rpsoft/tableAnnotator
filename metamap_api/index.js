@@ -88,6 +88,9 @@ var cui_def_csvWriter = createCsvWriter({
   }, {
     id: 'hasmsh',
     title: 'hasMSH'
+  }, {
+    id: 'semTypes',
+    title: 'semTypes'
   }]
 });
 
@@ -137,7 +140,8 @@ function cleanTerm(term) {
 
 function extractMMData(r) {
   try {
-    r = JSON.parse(r);
+    r = JSON.parse(r); // debugger
+
     r = r.AllDocuments[0].Document.Utterances.map(function (utterances) {
       return utterances.Phrases.map(function (phrases) {
         return phrases.Mappings.map(function (mappings) {
@@ -146,7 +150,8 @@ function extractMMData(r) {
               CUI: candidate.CandidateCUI,
               matchedText: candidate.CandidateMatched,
               preferred: candidate.CandidatePreferred,
-              hasMSH: candidate.Sources.indexOf("MSH") > -1
+              hasMSH: candidate.Sources.indexOf("MSH") > -1,
+              semTypes: candidate.SemTypes.join(";")
             };
           });
         });
@@ -186,7 +191,7 @@ function _askMM() {
           case 0:
             // debugger
             mm_concepts = new Promise(function (resolve, reject) {
-              var dir = exec('curl -X POST -d "input=' + term + '&args=-AItd+ --JSONf 2 --prune 2 -V USAbase" "http://localhost:8080/form" | tail -n +3 ', function (err, stdout, stderr) {
+              var dir = exec('curl -X POST -d "input=' + term + '&args=-AsItd+ --JSONf 2 --prune 2 -V USAbase" "http://localhost:8080/form" | tail -n +3 ', function (err, stdout, stderr) {
                 if (err) {
                   reject(err);
                 } //console.log(stdout)
@@ -278,7 +283,8 @@ function _main() {
                 cui: conps[e].CUI,
                 matchedtext: conps[e].matchedText,
                 preferred: conps[e].preferred,
-                hasmsh: conps[e].hasMSH
+                hasmsh: conps[e].hasMSH,
+                semTypes: conps[e].semTypes
               }]).then(function () {//console.log("'"+conps[e].CUI+"','"+conps[e].matchedText+"','"+conps[e].preferred+"','"+conps[e].hasMSH+"'")
               });
             }
