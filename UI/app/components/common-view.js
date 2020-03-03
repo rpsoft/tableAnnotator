@@ -78,7 +78,7 @@ class CommonView extends Component {
       group : group,
       hideUnannotated : urlparams.get("hua") ? urlparams.get("hua") == "true" : false,
       activeDelete : "",
-
+      loading : false,
     };
 
   }
@@ -113,7 +113,7 @@ class CommonView extends Component {
        let fetch = new fetchData();
        var annotations = JSON.parse(await fetch.getAllAnnotations())
        var tables = JSON.parse(await fetch.getAllAvailableTables())
-
+       this.setState({loading:true});
        var allInfo = JSON.parse(await fetch.getAllInfo(filter_topic.join("_"), filter_type.join("_"), hua, group.join("_")))
 
        this.setState({
@@ -129,6 +129,8 @@ class CommonView extends Component {
            user: urlparams.get("user") && urlparams.get("user") != "undefined" ? urlparams.get("user") : "",
        })
      }
+
+     this.setState({loading:false});
   }
 
   async setFilters(tableTopic, tableType, group){
@@ -171,6 +173,9 @@ class CommonView extends Component {
   }
 
    render() {
+
+
+
       var annotations = this.state.annotations ? this.state.annotations.rows : []
       var annotations_formatted = {}
           annotations.map( (v,i) => {
@@ -211,7 +216,7 @@ class CommonView extends Component {
             <Card><div style={{padding:10, fontWeight:"bold", fontSize:20}}>{"All tables, and annotations (Total: "+ (this.state.allInfo ? this.state.allInfo.abs_index.length : 0)+" )"}</div>
 
             {
-              this.state.allInfo ?
+              this.state.allInfo && (!this.state.loading) ?
                 <div style={{display:"inline"}}>
                     <div style={{margin:15, marginBottom:5}}>
                       <MultiplePopover
@@ -246,7 +251,8 @@ class CommonView extends Component {
 
             </Card>
 
-            <div style={{height:"72vh",overflowY:"scroll", paddingTop:10, padding:20, marginTop: 1}}>{this.state.tables && this.state.allInfo ?
+            <div style={{height:"72vh",overflowY:"scroll", paddingTop:10, padding:20, marginTop: 1}}>{
+              this.state.tables && this.state.allInfo && (!this.state.loading) ?
                 (
                     this.state.allInfo.abs_index.length > 0 ? this.state.allInfo.abs_index.map(
                       (v,i) => <div key={v.docid+"_"+v.page}>
