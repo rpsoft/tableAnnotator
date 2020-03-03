@@ -47,6 +47,7 @@ class MetaAnnotator extends Component {
         filter_topics : props.filterTopic,
         filter_type : props.filterType,
         filter_group : props.filter_group,
+        filter_labelgroup : props.filter_labelgroup,
       };
 
     }
@@ -69,6 +70,7 @@ class MetaAnnotator extends Component {
               + (this.state.filter_topics.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.filter_topics.join("_")) : "")
               + (this.state.filter_type.length > 0 ? "&filter_type="+encodeURIComponent(this.state.filter_type.join("_")) : "")
               + (this.state.filter_group.length > 0 ? "&filter_group="+encodeURIComponent(this.state.filter_group.join("_")) : "")
+              + (this.state.filter_labelgroup.length > 0 ? "&filter_labelgroup="+encodeURIComponent(this.state.filter_labelgroup.join("_")) : "")
   }
 
   updateLabeller(labeller){
@@ -240,6 +242,8 @@ class MetaAnnotator extends Component {
       titleSubgroups : next.titleSubgroups,
       filter_topics : next.filterTopic,
       filter_type : next.filterType,
+      filter_group : next.filter_group,
+      filter_labelgroup : next.filter_labelgroup,
     })
 
   }

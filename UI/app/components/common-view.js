@@ -118,7 +118,7 @@ class CommonView extends Component {
        var annotations = JSON.parse(await fetch.getAllAnnotations())
        var tables = JSON.parse(await fetch.getAllAvailableTables())
        this.setState({loading:true});
-       var allInfo = JSON.parse(await fetch.getAllInfo(filter_topic.join("_"), filter_type.join("_"), hua, group.join("_")))
+       var allInfo = JSON.parse(await fetch.getAllInfo(filter_topic.join("_"), filter_type.join("_"), hua, group.join("_"), labelgroup.join("_")))
 
        this.setState({
            user: urlparams.get("user") && urlparams.get("user") != "undefined" ? urlparams.get("user") : "",
@@ -256,7 +256,7 @@ class CommonView extends Component {
                       <MultiplePopover
                                      value={this.arrayToObject(this.state.labelgroup)}
                                      variable={"Labelling Batches"}
-                                     options={[...range(1,100)]}
+                                     options={[...range(1,53)]}
                                      updateAnnotation={ (values) => { this.setFilters(this.arrayToObject(this.state.tableTopic), this.arrayToObject(this.state.tableType), this.arrayToObject(this.state.group), values) } }
                               />
 
