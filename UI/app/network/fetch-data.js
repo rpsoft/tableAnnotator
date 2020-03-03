@@ -188,7 +188,7 @@ export default class fetchData {
         return r
   }
 
-  async getAllInfo(filter_topic, filter_type, hua) {
+  async getAllInfo(filter_topic, filter_type, hua, filter_group) {
       // debugger
         // filter = filter == "nofilter" ? null : filter
         var params = []
@@ -199,6 +199,10 @@ export default class fetchData {
 
         if ( filter_type && filter_type.length > 0 ){
           params.push("filter_type=" + encodeURIComponent(filter_type))
+        }
+
+        if ( filter_group && filter_group.length > 0 ){
+          params.push("filter_group=" + encodeURIComponent(filter_group))
         }
 
         if (hua) {

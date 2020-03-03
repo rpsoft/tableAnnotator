@@ -10,6 +10,8 @@ const cheerio = require('cheerio');
 const { Pool, Client, Query } = require('pg')
 
 const csv = require('csv-parser');
+const CsvReadableStream = require('csv-reader');
+
 const fs = require('fs');
 
 function sleep(ms){
@@ -105,6 +107,109 @@ fs.createReadStream('pmid_msh_label.csv')
      msh_categories = {catIndex: catIndex, allcats: allcats, pmids_w_cat}
   });
 
+async function CUIData (){
+
+    var semtypes = new Promise( (resolve,reject) =>{
+
+        let inputStream = fs.createReadStream('cui_def.csv', 'utf8');
+
+        var result = {};
+
+        inputStream
+            .pipe(new CsvReadableStream({ parseNumbers: true, parseBooleans: true, trim: true, skipHeader: true }))
+            .on('data', function (row) {
+                //console.log('A row arrived: ', row);
+                row[4].split(";").map( st => {
+                    result[st] = result[st] ? result[st]+1 : 1
+                })
+
+            })
+            .on('end', function (data) {
+                resolve(result);
+            });
+    })
+
+    semtypes = await semtypes
+
+    var cui_def = new Promise( (resolve,reject) =>{
+
+        let inputStream = fs.createReadStream('cui_def.csv', 'utf8');
+
+        var result = {};
+
+        inputStream
+            .pipe(new CsvReadableStream({ parseNumbers: true, parseBooleans: true, trim: true, skipHeader: true }))
+            .on('data', function (row) {
+                //console.log('A row arrived: ', row);
+                result[row[0]] = {"matchedText": row[1], "preferred": row[2], "hasMSH":row[3], "semTypes":row[4]}
+            })
+            .on('end', function (data) {
+                resolve(result);
+            });
+    })
+
+    cui_def = await cui_def
+
+
+    var cui_concept = new Promise( (resolve,reject) =>{
+
+        let inputStream = fs.createReadStream('cui_concept.csv', 'utf8');
+
+        var result = {};
+
+        inputStream
+            .pipe(new CsvReadableStream({ parseNumbers: true, parseBooleans: true, trim: true, skipHeader: true }))
+            .on('data', function (row) {
+                //console.log('A row arrived: ', row);
+                result[row[0]] = row[1]
+            })
+            .on('end', function (data) {
+                resolve(result);
+            });
+    })
+
+    cui_concept = await cui_concept
+
+    var actual_results = new Promise( (resolve,reject) =>{
+
+            let inputStream = fs.createReadStream('Feb2020_allresults.csv', 'utf8');
+
+            var result = {};
+
+            inputStream
+                .pipe(new CsvReadableStream({ parseNumbers: true, parseBooleans: true, trim: true, skipHeader: true }))
+                .on('data', function (row) {
+
+                    var currentItem = result[row[1]+"_"+row[2]] || {}
+
+                    // Only want one version of the annotations. There should be only one. If not, clean it up! As we have no automatic way to determine which one is best.
+                    if ( (currentItem["user"] && currentItem["user"].length > 0) && (currentItem["user"] !== row[0])){
+                       currentItem = {}
+                    }
+
+                    currentItem["user"] = row[0]
+
+                    currentItem["minPos"] = currentItem["minPos"] && currentItem["minPos"] < row[6] ? currentItem["minPos"] : row[6]
+
+
+                    var currentLoc = currentItem[row[5]] ? currentItem[row[5]] : {}
+
+                    currentLoc[row[6]] = { descriptors: row[7], modifier: row[8] }
+
+                    currentItem[row[5]] = currentLoc
+
+                    result[row[1]+"_"+row[2]] = currentItem
+
+                })
+                .on('end', function (data) {
+                    resolve(result);
+                });
+        })
+
+    actual_results = await actual_results
+
+    return { cui_def, cui_concept, actual_results, semtypes }
+}
 
 function extractMMData (r) {
   try{
@@ -151,12 +256,13 @@ function prepare_cell_text(text){
     return text.replace(/([^A-z0-9 ])/g, " $1 ").replace(/[0-9]+/g, ' $nmbr$ ').replace(/ +/g," ").trim().toLowerCase()
 }
 
-async function prepareAvailableDocuments(filter_topic, filter_type, hua){
+async function prepareAvailableDocuments(filter_topic, filter_type, hua, filter_group){
 
-  //debugger
+  // debugger
 
   var ftop = filter_topic ? filter_topic : []
   var ftyp = filter_type ? filter_type : []
+  var fgroup = filter_group ? filter_group : []
 
   var hua = hua
 
@@ -202,7 +308,19 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua){
         filtered_docs_ttype = Array.from(new Set(filtered_docs_ttype));
   }
 
+  var ordered_Splits = [["30936738_1.html","30936738_2.html","30936738_3.html","30936738_4.html","30936738_5.html","16508926_6.html","27744141_2.html","27098404_1.html","30341453_1.html","30341453_2.html"],["16495392fig_2.html","24907147_2.html","24907147_3.html","24907147_4.html","24907147_5.html","27502582_2.html","30473179_3.html","25047021_1.html","27165179_2.html","29338762_2.html"],["27493790_2.html","29299340_2.html","30696483_2.html","29409133_1.html","28968735_2.html","28968735_3.html","29045207_2.html","29685860fig_1.html","20484828_2.html","26589819_1.html"],["19515181_2.html","25414932_1.html","26833744_2.html","26833744_3.html","30287422_2.html","29937431_2.html","25881510_2.html","25772548_2.html","29941478fig_1.html","30425095_1.html"],["30425095b_1.html","27161178_2.html","30609212_1.html","30609212_2.html","19210140_2.html","26579834_1.html","26579834_5.html","26580237_3.html","27299675_1.html","29777264fig_1.html"],["30393950_2.html","19614946_2.html","19614946_3.html","26934128_2.html","30614616_1.html","30571562_2.html","26786577_2.html","18284434_2.html","22672586_2.html","30851070_1.html"],["30830724_1.html","30830724_2.html","25468945_2.html","25629790_2.html","30882238_1.html","19508464_1.html","19508464_2.html","30566006fig_1.html","30566004_2.html","30392095_2.html"],["19650752_2.html","30953107_1.html","30953107_2.html","21545947fig_2.html","19917888app_1.html","19917888fig_2.html","17384437fig_1.html","9036306_1.html","18371559_1.html","27395349_2.html"],["27354044_3.html","26541915_6.html","26027630fig_1.html","30183102fig_1.html","15639688_2.html","17560879_2.html","27619750_3.html","24411003_1.html","25743173_2.html","25743173_3.html"],["19166691_2.html","27956003_2.html","27846344fig_2.html","25135178_2.html","25282519_2.html","19190658_2.html","20670726_2.html","22747613_2.html","22747613_3.html","21925996_2.html"],["21925996_3.html","21925996_4.html","24067881_2.html","22504093_2.html","30203005_2.html","29857145_3.html","29857145_4.html","29857145_5.html","29857145_6.html","29857145_7.html"],["21723220_1.html","21723220_2.html","21723220_3.html","16267322_2.html","22704916_2.html","17634459_2.html","20491747_2.html","29909019_2.html","29797519_1.html","24120253_4.html"],["20429821_2.html","20429821_3.html","20429821_4.html","21227674_2.html","20463178_2.html","27609408_2.html","24966672_3.html","30815468_1.html","30815468_2.html","30815468_3.html"],["27087007_1.html","27316465_2.html","27316465_3.html","27316465_4.html","27316465_5.html","27215749_3.html","27715335_2.html","18511702_2.html","21627828_2.html","21627828_3.html"],["27039236_2.html","21586508_2.html","28558833_2.html","28558833_3.html","29413502_2.html","21875546_2.html","23040786_2.html","28903864_2.html","30053967fig_1.html","20925534_2.html"],["20925534_3.html","29073947_2.html","26994121_2.html","25787199_2.html","24727254_2.html","26059896fig_2.html","20385930fig_2.html","19389561fig_2.html","21816478_2.html","7997016_1.html"],["9603532_1.html","9848888_2.html","18479744_2.html","24780614_3.html","17244641_2.html","26630143_2.html","26304934_2.html","19915221_2.html","8950879_1.html","30659410_1.html"],["30659410_2.html","30659410_3.html","30465321_2.html","30465321_3.html","30465321_4.html","30465321_5.html","30465321_6.html","26547918_2.html","22316106_2.html","22436129_2.html"],["22709460_2.html","23564919_2.html","23683134_2.html","24251359_3.html","26093161_1.html","26578849_2.html","27103795_1.html","27207971_1.html","27387994_1.html","27496855_1.html"]];
 
+
+  var selected_group_docs = []
+
+  for ( i in fgroup ) {
+    var group_index = parseInt(fgroup[i])-1;
+    selected_group_docs = [...selected_group_docs, ...ordered_Splits[group_index]]
+  }
+
+  selected_group_docs = selected_group_docs.flat();
+
+  // debugger
 
   var results = new Promise(function(resolve, reject) {
 
@@ -222,8 +340,18 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua){
 
           fs.readdir(tables_folder, function(err, items) {
 
-              DOCS = items.sort(  (a,b) => {return fixVersionOrder(a).localeCompare(fixVersionOrder(b))} );
+              if ( selected_group_docs.length > 0 ){
+                DOCS = selected_group_docs
+              } else {
+                DOCS = items.sort(  (a,b) => {return fixVersionOrder(a).localeCompare(fixVersionOrder(b))} );
+              }
+              // DOCS = selected_group_docs.length > 0 ? selected_group_docs : DOCS;
 
+
+              // DOCS
+              // console.log(selected_group_docs)
+              //
+              // debugger
               DOCS = DOCS.reduce( (acc,docfile) => {
                   var docid = docfile.split("_")[0].split("v")[0]
                   var docid_V = docfile.split("_")[0]
@@ -721,10 +849,12 @@ app.get('/api/allInfo',async function(req,res){
   var labellers = await getMetadataLabellers();
       labellers = labellers.rows.reduce( (acc,item) => { acc[item.docid+"_"+item.page] = item.labeller; return acc;},{})
 
-  if ( req.query && (req.query.filter_topic || req.query.filter_type || req.query.hua) ){
+  if ( req.query && (req.query.filter_topic || req.query.filter_type || req.query.hua || req.query.filter_group) ){
+    // debugger;
     var result = await prepareAvailableDocuments( req.query.filter_topic ? req.query.filter_topic.split("_") : [],
                                                   req.query.filter_type ? req.query.filter_type.split("_") : [],
-                                                  req.query.hua ? req.query.hua == "true" : false)
+                                                  req.query.hua ? req.query.hua == "true" : false,
+                                                  req.query.filter_group ? req.query.filter_group.split("_") : [])
 
 
 
@@ -992,90 +1122,187 @@ app.get('/api/cuisIndexAdd',async function(req,res){
 async function allPredictions(){
   // var predictions = "user,docid,page,corrupted,tableType,location,number,content,qualifiers\n"
 
+  var cui_data =  await CUIData ()
+
+  var header = [
+      {id: 'docid', title: 'docid'},
+      {id: 'page', title: 'page'},
+      {id: 'concept', title: 'concept'},
+      {id: 'clean_concept', title: 'clean_concept'},
+      {id: 'original', title: 'original'},
+      {id: 'onlyNumbers', title: 'onlyNumbers'},
+      {id: 'pos_start', title: 'pos_start'},
+      {id: 'pos_middle', title: 'pos_middle'},
+      {id: 'pos_end', title: 'pos_end'},
+      {id: 'inRow', title: 'inRow'},
+      {id: 'inCol', title: 'inCol'},
+      {id: 'is_bold', title: 'is_bold'},
+      {id: 'is_italic', title: 'is_italic'},
+      {id: 'is_indent', title: 'is_indent'},
+      {id: 'is_empty_row', title: 'is_empty_row'},
+      {id: 'is_empty_row_p', title: 'is_empty_row_p'},
+      {id: 'cuis', title: 'cuis'},
+      {id: 'semanticTypes', title: 'semanticTypes'},
+      {id: 'label', title: 'label'}
+  ]
+
+  Object.keys(cui_data.cui_def).map( c => {header.push({id: c, title: c})})
+  Object.keys(cui_data.semtypes).map( s => {header.push({id: s, title: s})})
+
+
+  const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+  const csvWriter = createCsvWriter({
+      path: 'prediction_data.csv',
+      header: header
+  });
+  //
+  // debugger
+
+  // const records = [
+  //     {name: 'Bob',  lang: 'French, English'},
+  //     {name: 'Mary', lang: 'English'}
+  // ];
+
+
   var count = 1;
 
   for ( var docid in available_documents){
     for ( var page in available_documents[docid].pages ) {
       console.log(docid+"  --  "+page+"  --  "+count+" / "+DOCS.length)
-      count = count + 1;
 
-      if ( count > 10 ){
-         return ""
-      }
-      // try {
+
       var page = available_documents[docid].pages[page]
       var data = await readyTableData(docid,page)
 
-       // if ( data.status == "bad" ){
-       //   console.log(a+"  --  "+p+"  --  "+"failed")
-       //   continue;
-       // } else {
-       //   console.log("good")
-       // }
+      var ac_res = cui_data.actual_results
 
-      // for ( var c in data.predicted.cols) {
-      //    var col = data.predicted.cols[c]
-      //    predictions += ["auto_"+METHOD,docid,page,false,"na","Col",(parseInt(col.c)+1),col.descriptors.join(";"),col.unique_modifier.split(" ").join(";")].join(",")+"\n"
-      // }
-      //
-      // for ( var r in data.predicted.rows) {
-      //    var row = data.predicted.rows[r]
-      //    predictions += ["auto_"+METHOD,docid,page,false,"na","Row",(parseInt(row.c)+1),row.descriptors.join(";"),row.unique_modifier.split(" ").join(";")].join(",")+"\n"
-      // }
-     // } catch (e){
-     //   console.log("failed")
-     // }
+      if ( !ac_res[docid+"_"+page] ) { // table could not be annotated yet, so we skip it.
+        continue
+      }
 
-      // for ( var row = 0; row < data.predicted.predictions.length; row++ ){
-      //    for ( var col = 0; col < data.predicted.predictions[row].terms.length; col++ ){
-      //
-      //      console.log(data.predicted.predictions[row].terms[col])
-      //
-      //    }
+      // if (! (docid == "16351668" && page == 2) ){
+      //    continue
       // }
+      //
+      // debugger
+
+      // These are predicted, using the SGDClassifier
       var cols = data.predicted.cols.reduce( (acc,e) => {acc[e.c] = {descriptors : e.descriptors.join(";"), modifier: e.unique_modifier}; return acc},{} )
       var rows = data.predicted.rows.reduce( (acc,e) => {acc[e.c] = {descriptors : e.descriptors.join(";"), modifier: e.unique_modifier}; return acc},{} )
 
+      var annotation_cols
+      var annotation_rows
+
+      try{
+      // These are manually annotated
+        annotation_cols = Object.keys(ac_res[docid+"_"+page].Col).reduce( (acc,e) => {  acc[e-1] = ac_res[docid+"_"+page].Col[e]; return acc }, {} )
+        annotation_rows = Object.keys(ac_res[docid+"_"+page].Row).reduce( (acc,e) => {  acc[e-1] = ac_res[docid+"_"+page].Row[e]; return acc }, {} )
+      } catch (e) {
+        console.log( "skipping: "+ docid+"_"+page)
+        continue
+      }
+      // Now we use the manual annotations here to build our dataset, to train the classifiers.
+      cols = annotation_cols
+      rows = annotation_rows
+
+
       var cuirec = await getRecommendedCUIS()
 
-      debugger
+      var cleanTerm = (term) => {
+
+        term = term.toLowerCase().replace(/[^A-z0-9 ]/gi, " ").replace(/[0-9]+/gi, " $nmbr$ " ).replace(/ +/gi," ").trim()
+
+        return term
+      }
+
+      var getSemanticTypes = (cuis, cui_data) => {
+
+        if ( ! cuis ){
+          return []
+        }
+
+        var semType = []
+
+        cuis.split(";").map( (cui) => {
+
+            semType.push(cui_data.cui_def[cui].semTypes.split(";"))
+
+        });
+
+        return semType.flat()
+      }
+      //
+      count = count + 1;
+      // if ( count > 10 ){
+      //    return ""
+      // }
+      //
+      // debugger
 
       var csvData = data.predicted.predictions.map(
         (row_el,row) => {
           return row_el.terms.map( ( term, col ) => {
+
+              var clean_concept = cleanTerm(term)
+              var row_terms = data.predicted.predictions[row].terms
               // debugger;
-              return {
+
+              var toReturn = {
+                docid: docid,
+                page: page,
                 concept : prepare_cell_text(term),
+                clean_concept : clean_concept,
                 original : term,
                 onlyNumbers : term.replace(/[^a-z]/g," ").replace(/ +/g," ").trim() == "",
                 // row: row,
                 // col: col,
-                pos_start: row == 0 ? 1 : 0,
-                pos_middle: row > 0 && row < (data.predicted.predictions.length-1)  ? 1 : 0,
-                pos_end: row == data.predicted.predictions.length-1 ? 1 : 0,
+                pos_start: row == 0 ? 1 : "",
+                pos_middle: row > 0 && row < (data.predicted.predictions.length-1)  ? 1 : "",
+                pos_end: row == data.predicted.predictions.length-1 ? 1 : "",
                 // isCharacteristic_name: cols[col] && cols[col].descriptors.indexOf("characteristic_name") > -1 ? 1 : 0,
                 // isCharacteristic_level: cols[col] && cols[col].descriptors.indexOf("characteristic_level") > -1 ? 1 : 0,
                 // isOutcome: cols[col] && cols[col].descriptors.indexOf("outcomes") > -1 ? 1 : 0,
-                inRow : rows[row] ? 1 : 0,
-                inCol : cols[col] ? 1 : 0,
-                is_bold : data.predicted.predictions[row].cellClasses[col].indexOf("bold") > -1 ? 1 : 0,
-                is_italic : data.predicted.predictions[row].cellClasses[col].indexOf("italic") > -1 ? 1 : 0,
-                is_indent : data.predicted.predictions[row].cellClasses[col].indexOf("indent") > -1 ? 1 : 0,
-                is_empty_row : data.predicted.predictions[row].cellClasses[col].indexOf("empty_row") > -1 ? 1 : 0,
-                is_empty_row_p : data.predicted.predictions[row].cellClasses[col].indexOf("empty_row_with_p_value") > -1 ? 1 : 0,
-                label : cols[col] && cols[col].descriptors,
+                inRow : rows[row] ? 1 : "",
+                inCol : cols[col] ? 1 : "",
+                is_bold : data.predicted.predictions[row].cellClasses[col].indexOf("bold") > -1 ? 1 : "",
+                is_italic : data.predicted.predictions[row].cellClasses[col].indexOf("italic") > -1 ? 1 : "",
+                is_indent : data.predicted.predictions[row].cellClasses[col].indexOf("indent") > -1 ? 1 : "",
+                is_empty_row : row_terms[0] == row_terms.join("") ? 1 : "",
+                is_empty_row_p : row_terms.length > 2 && (row_terms[0]+row_terms[row_terms.length-1] == row_terms.join("")) ? 1 : "",  // this one is a crude estimation of P values structure. Assume the row has P value if multiple columns are detected but only first and last are populated.
+                label : cols[col] ? cols[col].descriptors : (rows[row] ? rows[row].descriptors : ""),
+                cuis: cui_data.cui_concept[clean_concept],
+                semanticTypes: getSemanticTypes(cui_data.cui_concept[clean_concept],cui_data).join(";"),
+
+                // cui_def, cui_concept
               }
+
+              if ( cui_data.cui_concept[clean_concept] ){
+                cui_data.cui_concept[clean_concept].split(";").map( cui => {
+                    toReturn[cui] = 1
+                })
+              }
+
+              getSemanticTypes(cui_data.cui_concept[clean_concept],cui_data).map( semType => {
+                  toReturn[semType] = 1
+              })
+
+              return toReturn
             })
           }
         )
 
-      debugger
-
       csvData = csvData.flat().filter(el => el.onlyNumbers == false);
-    }
-  }var cuirec = await getRecommendedCUIS()
 
-  return predictions
+      await csvWriter.writeRecords(csvData)       // returns a promise
+          .then(() => {
+              console.log('...Done');
+          });
+    }
+  }
+
+  // var cuirec = await getRecommendedCUIS()
+
+  return {}
 }
 
 app.get('/api/allPredictions', async function(req,res){

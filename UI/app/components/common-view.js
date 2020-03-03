@@ -51,6 +51,11 @@ var ReactDOMServer = require('react-dom/server');
 var HtmlToReact = require('html-to-react')
 var HtmlToReactParser = require('html-to-react').Parser;
 
+function* range(start, end) {
+    for (let i = start; i <= end; i++) {
+        yield i;
+    }
+}
 
 class CommonView extends Component {
 
@@ -61,6 +66,7 @@ class CommonView extends Component {
 
     var filter_topics = urlparams.get("filter_topic") ? urlparams.get("filter_topic").split("_") : []
     var filter_type = urlparams.get("filter_type") ? urlparams.get("filter_type").split("_") : []
+    var group = urlparams.get("filter_group") ? urlparams.get("filter_group").split("_") : []
 
 
     this.state = {
@@ -69,6 +75,7 @@ class CommonView extends Component {
       user: urlparams.get("user") && urlparams.get("user") != "undefined" ? urlparams.get("user") : "",
       tableTopic : filter_topics,
       tableType : filter_type,
+      group : group,
       hideUnannotated : urlparams.get("hua") ? urlparams.get("hua") == "true" : false,
       activeDelete : "",
 
@@ -81,7 +88,7 @@ class CommonView extends Component {
     var annotations = JSON.parse(await fetch.getAllAnnotations())
     var tables = JSON.parse(await fetch.getAllAvailableTables())
 
-    var allInfo = JSON.parse(await fetch.getAllInfo(this.state.tableTopic.join("_"), this.state.tableType.join("_"), this.state.hideUnannotated))
+    var allInfo = JSON.parse(await fetch.getAllInfo(this.state.tableTopic.join("_"), this.state.tableType.join("_"), this.state.hideUnannotated, this.state.group.join("_")))
 
     this.setState({annotations,tables,allInfo})
   }
@@ -92,19 +99,22 @@ class CommonView extends Component {
 
      var filter_topic = urlparams.get("filter_topic") ? urlparams.get("filter_topic").split("_") : []
      var filter_type = urlparams.get("filter_type") ? urlparams.get("filter_type").split("_") : []
+     var group = urlparams.get("filter_group") ? urlparams.get("filter_group").split("_") : []
 
      var isNewTopic = urlparams.get("filter_topic") !== this.state.tableTopic.join("_")
      var isNewType = urlparams.get("filter_type") !== this.state.tableType.join("_")
+     var isNewGroup = urlparams.get("filter_group") !== this.state.group.join("_")
 
      var hua = urlparams.get("hua") ? urlparams.get("hua") == "true" : false
      var changed_hua = this.state.hideUnannotated != hua
      // debugger
-     if ( !this.state.allInfo || isNewTopic || isNewType || changed_hua){
+     if ( !this.state.allInfo || isNewTopic || isNewType || changed_hua || isNewGroup ){
+
        let fetch = new fetchData();
        var annotations = JSON.parse(await fetch.getAllAnnotations())
        var tables = JSON.parse(await fetch.getAllAvailableTables())
 
-       var allInfo = JSON.parse(await fetch.getAllInfo(filter_topic.join("_"), filter_type.join("_"), hua ))
+       var allInfo = JSON.parse(await fetch.getAllInfo(filter_topic.join("_"), filter_type.join("_"), hua, group.join("_")))
 
        this.setState({
            user: urlparams.get("user") && urlparams.get("user") != "undefined" ? urlparams.get("user") : "",
@@ -112,20 +122,23 @@ class CommonView extends Component {
            tableType : filter_type,
            annotations,tables,allInfo,
            hideUnannotated : hua,
+           group,
        })
      } else {
        this.setState({
-           user: urlparams.get("user") ? urlparams.get("user") : "",
+           user: urlparams.get("user") && urlparams.get("user") != "undefined" ? urlparams.get("user") : "",
        })
      }
   }
 
-  async setFilters(tableTopic, tableType){
+  async setFilters(tableTopic, tableType, group){
 
       var ttop = Object.keys(tableTopic).reduce( (acc, item) => {if ( tableTopic[item] ){acc.push(item)} return acc},[]);
       var ttype = Object.keys(tableType).reduce( (acc, item) => {if ( tableType[item] ){acc.push(item)} return acc},[]);
-      // debugger
-      this.props.goToUrl("/?user="+event.currentTarget.value +"&filter_topic="+ttop.join("_")+"&filter_type="+ttype.join("_")+(this.state.hideUnannotated ? "&hua=true" : ""))
+
+      var group = Object.keys(group).reduce( (acc, item) => {if ( group[item] ){acc.push(item)} return acc},[]);
+
+      this.props.goToUrl("/?user="+event.currentTarget.value +"&filter_topic="+ttop.join("_")+"&filter_type="+ttype.join("_")+(this.state.hideUnannotated ? "&hua=true" : "")+"&filter_group="+group.join("_"))
   }
 
   toggleHideAnnotated(){
@@ -138,6 +151,7 @@ class CommonView extends Component {
       return ""
               + (this.state.tableTopic.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.tableTopic.join("_")) : "")
               + (this.state.tableType.length > 0 ? "&filter_type="+encodeURIComponent(this.state.tableType.join("_")) : "")
+              + (this.state.group.length > 0 ? "&filter_group="+encodeURIComponent(this.state.group.join("_")) : "")
   }
 
   async deleteTable( docid, page ){
@@ -147,7 +161,7 @@ class CommonView extends Component {
 
     var annotations = JSON.parse(await fetch.getAllAnnotations())
     var tables = JSON.parse(await fetch.getAllAvailableTables())
-    var allInfo = JSON.parse(await fetch.getAllInfo(this.state.tableTopic.join("_"), this.state.tableType.join("_"), this.state.hideUnannotated))
+    var allInfo = JSON.parse(await fetch.getAllInfo(this.state.tableTopic.join("_"), this.state.tableType.join("_"), this.state.hideUnannotated, this.state.group.join("_")))
 
     this.setState({annotations,tables,allInfo})
   }
@@ -204,13 +218,20 @@ class CommonView extends Component {
                                      value={this.arrayToObject(this.state.tableTopic)}
                                      variable={"Table Topic"}
                                      options={this.state.allInfo.msh_categories.allcats.sort()}
-                                     updateAnnotation={ (values) => { this.setFilters(values, this.arrayToObject(this.state.tableType)) } }
+                                     updateAnnotation={ (values) => { this.setFilters(values, this.arrayToObject(this.state.tableType), this.arrayToObject(this.state.group)) } }
                               />
                       <MultiplePopover
                                      value={this.arrayToObject(this.state.tableType)}
                                      variable={"Table Types"}
                                      options={["Baseline Characteristics", "Results with subgroups", "Results without subgroups", "Other", "Unassigned"]}
-                                     updateAnnotation={ (values) => { this.setFilters(this.arrayToObject(this.state.tableTopic), values) } }
+                                     updateAnnotation={ (values) => { this.setFilters(this.arrayToObject(this.state.tableTopic), values , this.arrayToObject(this.state.group)) } }
+                              />
+
+                      <MultiplePopover
+                                     value={this.arrayToObject(this.state.group)}
+                                     variable={"Batches"}
+                                     options={[...range(1, 19)]}
+                                     updateAnnotation={ (values) => { this.setFilters(this.arrayToObject(this.state.tableTopic), this.arrayToObject(this.state.tableType), values) } }
                               />
                       <div style={{marginTop:10, marginBottom:0}}>
                            Hide Unnanotated

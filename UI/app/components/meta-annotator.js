@@ -46,6 +46,7 @@ class MetaAnnotator extends Component {
         titleSubgroups : props.titleSubgroups || [],
         filter_topics : props.filterTopic,
         filter_type : props.filterType,
+        filter_group : props.filter_group,
       };
 
     }
@@ -67,6 +68,7 @@ class MetaAnnotator extends Component {
       return ""
               + (this.state.filter_topics.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.filter_topics.join("_")) : "")
               + (this.state.filter_type.length > 0 ? "&filter_type="+encodeURIComponent(this.state.filter_type.join("_")) : "")
+              + (this.state.filter_group.length > 0 ? "&filter_group="+encodeURIComponent(this.state.filter_group.join("_")) : "")
   }
 
   updateLabeller(labeller){
@@ -387,7 +389,7 @@ class MetaAnnotator extends Component {
                               var currentItem = this.state.concept_metadata[concept_key]
                               var elems = concept_key.split(";")
                               var concept = elems[elems.length-1]
-                              
+
                               return <MetaItem
                                                 key = {"concept_item_"+concept_key+"_"+i}
                                                 term = {concept}
