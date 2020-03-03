@@ -68,6 +68,9 @@ class AnnotationView extends Component {
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
 
     var filter_group = urlparams["filter_group"] ? urlparams["filter_group"].split("_") : []
+    var filter_labelgroup = urlparams["filter_labelgroup"] ? urlparams["filter_labelgroup"].split("_") : []
+
+
 
 
 
@@ -96,6 +99,7 @@ class AnnotationView extends Component {
         filter_type : filter_type,
         hideUnannotated : urlparams["hua"] ? urlparams["hua"] == "true" : false,
         filter_group : filter_group,
+        filter_labelgroup : filter_labelgroup,
     };
   }
 
@@ -111,6 +115,7 @@ class AnnotationView extends Component {
     var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
     var filter_group = urlparams["filter_group"] ? urlparams["filter_group"].split("_") : []
+    var filter_labelgroup = urlparams["filter_labelgroup"] ? urlparams["filter_labelgroup"].split("_") : []
 
     let fetch = new fetchData();
 
@@ -153,6 +158,7 @@ class AnnotationView extends Component {
       filter_type : filter_type,
       hideUnannotated : urlparams["hua"] ? urlparams["hua"] == "true" : false,
       filter_group : filter_group,
+      filter_labelgroup : filter_labelgroup,
     })
 
     if( !this.state.preview ){
@@ -175,6 +181,8 @@ class AnnotationView extends Component {
     var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
     var filter_group = urlparams["filter_group"] ? urlparams["filter_group"].split("_") : []
+    var filter_labelgroup = urlparams["filter_labelgroup"] ? urlparams["filter_labelgroup"].split("_") : []
+
 
     var hua = urlparams["hua"] ? urlparams["hua"] == "true" : false
 
@@ -207,8 +215,8 @@ class AnnotationView extends Component {
         }
 
         var allInfo;
-        if ( (filter_topics.length + filter_type.length + filter_group.length) > 0){
-          allInfo = JSON.parse(await fetch.getAllInfo(filter_topics.join("_"), filter_type.join("_"), hua, filter_group.join("_")))
+        if ( (filter_topics.length + filter_type.length + filter_group.length + filter_labelgroup.length) > 0){
+          allInfo = JSON.parse(await fetch.getAllInfo(filter_topics.join("_"), filter_type.join("_"), hua, filter_group.join("_"), filter_labelgroup.join("_")))
 
         } else {
           allInfo = JSON.parse(await fetch.getAllInfo())
@@ -255,6 +263,7 @@ class AnnotationView extends Component {
             filter_type : filter_type,
             hideUnannotated : hua,
             filter_group : filter_group,
+            filter_labelgroup : filter_labelgroup,
           })
         } else {
           this.setState({
@@ -274,6 +283,7 @@ class AnnotationView extends Component {
             filter_type : filter_type,
             hideUnannotated : hua,
             filter_group : filter_group,
+            filter_labelgroup : filter_labelgroup,
           })
         }
 
@@ -562,6 +572,7 @@ class AnnotationView extends Component {
                + (this.state.filter_topics.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.filter_topics.join("_")) : "")
                + (this.state.filter_type.length > 0 ? "&filter_type="+encodeURIComponent(this.state.filter_type.join("_")) : "")
                + (this.state.filter_group.length > 0 ? "&filter_group="+encodeURIComponent(this.state.filter_group.join("_")) : "")
+               + (this.state.filter_labelgroup.length > 0 ? "&filter_labelgroup="+encodeURIComponent(this.state.filter_labelgroup.join("_")) : "")
    }
 
    render() {
@@ -743,6 +754,7 @@ class AnnotationView extends Component {
                      filterTopic={this.state.filter_topic}
                      filterType={this.state.filter_type}
                      filter_group={this.state.filter_group}
+                     filter_labelgroup={this.state.filter_labelgroup}
                      />
 
 
