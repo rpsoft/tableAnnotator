@@ -75,6 +75,8 @@ var _require = require('pg'),
 
 var csv = require('csv-parser');
 
+var CsvReadableStream = require('csv-reader');
+
 var fs = require('fs');
 
 function sleep(ms) {
@@ -162,6 +164,136 @@ fs.createReadStream('pmid_msh_label.csv').pipe(csv({
   };
 });
 
+function CUIData() {
+  return _CUIData.apply(this, arguments);
+}
+
+function _CUIData() {
+  _CUIData = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee49() {
+    var semtypes, cui_def, cui_concept, actual_results;
+    return _regenerator.default.wrap(function _callee49$(_context49) {
+      while (1) {
+        switch (_context49.prev = _context49.next) {
+          case 0:
+            semtypes = new Promise(function (resolve, reject) {
+              var inputStream = fs.createReadStream('cui_def.csv', 'utf8');
+              var result = {};
+              inputStream.pipe(new CsvReadableStream({
+                parseNumbers: true,
+                parseBooleans: true,
+                trim: true,
+                skipHeader: true
+              })).on('data', function (row) {
+                //console.log('A row arrived: ', row);
+                row[4].split(";").map(function (st) {
+                  result[st] = result[st] ? result[st] + 1 : 1;
+                });
+              }).on('end', function (data) {
+                resolve(result);
+              });
+            });
+            _context49.next = 3;
+            return semtypes;
+
+          case 3:
+            semtypes = _context49.sent;
+            cui_def = new Promise(function (resolve, reject) {
+              var inputStream = fs.createReadStream('cui_def.csv', 'utf8');
+              var result = {};
+              inputStream.pipe(new CsvReadableStream({
+                parseNumbers: true,
+                parseBooleans: true,
+                trim: true,
+                skipHeader: true
+              })).on('data', function (row) {
+                //console.log('A row arrived: ', row);
+                result[row[0]] = {
+                  "matchedText": row[1],
+                  "preferred": row[2],
+                  "hasMSH": row[3],
+                  "semTypes": row[4]
+                };
+              }).on('end', function (data) {
+                resolve(result);
+              });
+            });
+            _context49.next = 7;
+            return cui_def;
+
+          case 7:
+            cui_def = _context49.sent;
+            cui_concept = new Promise(function (resolve, reject) {
+              var inputStream = fs.createReadStream('cui_concept.csv', 'utf8');
+              var result = {};
+              inputStream.pipe(new CsvReadableStream({
+                parseNumbers: true,
+                parseBooleans: true,
+                trim: true,
+                skipHeader: true
+              })).on('data', function (row) {
+                //console.log('A row arrived: ', row);
+                result[row[0]] = row[1];
+              }).on('end', function (data) {
+                resolve(result);
+              });
+            });
+            _context49.next = 11;
+            return cui_concept;
+
+          case 11:
+            cui_concept = _context49.sent;
+            actual_results = new Promise(function (resolve, reject) {
+              var inputStream = fs.createReadStream('Feb2020_allresults.csv', 'utf8');
+              var result = {};
+              inputStream.pipe(new CsvReadableStream({
+                parseNumbers: true,
+                parseBooleans: true,
+                trim: true,
+                skipHeader: true
+              })).on('data', function (row) {
+                var currentItem = result[row[1] + "_" + row[2]] || {}; // Only want one version of the annotations. There should be only one. If not, clean it up! As we have no automatic way to determine which one is best.
+
+                if (currentItem["user"] && currentItem["user"].length > 0 && currentItem["user"] !== row[0]) {
+                  currentItem = {};
+                }
+
+                currentItem["user"] = row[0];
+                currentItem["minPos"] = currentItem["minPos"] && currentItem["minPos"] < row[6] ? currentItem["minPos"] : row[6];
+                var currentLoc = currentItem[row[5]] ? currentItem[row[5]] : {};
+                currentLoc[row[6]] = {
+                  descriptors: row[7],
+                  modifier: row[8]
+                };
+                currentItem[row[5]] = currentLoc;
+                result[row[1] + "_" + row[2]] = currentItem;
+              }).on('end', function (data) {
+                resolve(result);
+              });
+            });
+            _context49.next = 15;
+            return actual_results;
+
+          case 15:
+            actual_results = _context49.sent;
+            return _context49.abrupt("return", {
+              cui_def: cui_def,
+              cui_concept: cui_concept,
+              actual_results: actual_results,
+              semtypes: semtypes
+            });
+
+          case 17:
+          case "end":
+            return _context49.stop();
+        }
+      }
+    }, _callee49, this);
+  }));
+  return _CUIData.apply(this, arguments);
+}
+
 function extractMMData(r) {
   try {
     r = JSON.parse(r);
@@ -212,25 +344,26 @@ var R = require("r-script"); //Important to use this function for all text extra
 
 
 function prepare_cell_text(text) {
-  return text.replace(/[0-9]+/g, '$nmbr$').replace(/([^A-z0-9 ])/g, " $1 ").replace(/ +/g, " ").trim().toLowerCase();
+  return text.replace(/([^A-z0-9 ])/g, " $1 ").replace(/[0-9]+/g, ' $nmbr$ ').replace(/ +/g, " ").trim().toLowerCase();
 }
 
-function prepareAvailableDocuments(_x, _x2, _x3) {
+function prepareAvailableDocuments(_x, _x2, _x3, _x4) {
   return _prepareAvailableDocuments.apply(this, arguments);
 }
 
 function _prepareAvailableDocuments() {
   _prepareAvailableDocuments = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee50(filter_topic, filter_type, hua) {
-    var ftop, ftyp, type_lookup, i, filtered_docs_ttype, allAnnotations, all_annotated_docids, results;
+  _regenerator.default.mark(function _callee50(filter_topic, filter_type, hua, filter_group) {
+    var ftop, ftyp, fgroup, type_lookup, i, filtered_docs_ttype, allAnnotations, all_annotated_docids, ordered_Splits, selected_group_docs, group_index, results;
     return _regenerator.default.wrap(function _callee50$(_context50) {
       while (1) {
         switch (_context50.prev = _context50.next) {
           case 0:
-            //debugger
+            // debugger
             ftop = filter_topic ? filter_topic : [];
             ftyp = filter_type ? filter_type : [];
+            fgroup = filter_group ? filter_group : [];
             hua = hua;
             type_lookup = {
               "Baseline Characteristics": "baseline_table",
@@ -245,10 +378,10 @@ function _prepareAvailableDocuments() {
             }
 
             filtered_docs_ttype = [];
-            _context50.next = 8;
+            _context50.next = 9;
             return getAnnotationResults();
 
-          case 8:
+          case 9:
             allAnnotations = _context50.sent;
             all_annotated_docids = Array.from(new Set(allAnnotations.rows.reduce(function (acc, ann) {
               acc = acc ? acc : [];
@@ -269,6 +402,16 @@ function _prepareAvailableDocuments() {
               filtered_docs_ttype = Array.from(new Set(filtered_docs_ttype));
             }
 
+            ordered_Splits = [["30936738_1.html", "30936738_2.html", "30936738_3.html", "30936738_4.html", "30936738_5.html", "16508926_6.html", "27744141_2.html", "27098404_1.html", "30341453_1.html", "30341453_2.html"], ["16495392fig_2.html", "24907147_2.html", "24907147_3.html", "24907147_4.html", "24907147_5.html", "27502582_2.html", "30473179_3.html", "25047021_1.html", "27165179_2.html", "29338762_2.html"], ["27493790_2.html", "29299340_2.html", "30696483_2.html", "29409133_1.html", "28968735_2.html", "28968735_3.html", "29045207_2.html", "29685860fig_1.html", "20484828_2.html", "26589819_1.html"], ["19515181_2.html", "25414932_1.html", "26833744_2.html", "26833744_3.html", "30287422_2.html", "29937431_2.html", "25881510_2.html", "25772548_2.html", "29941478fig_1.html", "30425095_1.html"], ["30425095b_1.html", "27161178_2.html", "30609212_1.html", "30609212_2.html", "19210140_2.html", "26579834_1.html", "26579834_5.html", "26580237_3.html", "27299675_1.html", "29777264fig_1.html"], ["30393950_2.html", "19614946_2.html", "19614946_3.html", "26934128_2.html", "30614616_1.html", "30571562_2.html", "26786577_2.html", "18284434_2.html", "22672586_2.html", "30851070_1.html"], ["30830724_1.html", "30830724_2.html", "25468945_2.html", "25629790_2.html", "30882238_1.html", "19508464_1.html", "19508464_2.html", "30566006fig_1.html", "30566004_2.html", "30392095_2.html"], ["19650752_2.html", "30953107_1.html", "30953107_2.html", "21545947fig_2.html", "19917888app_1.html", "19917888fig_2.html", "17384437fig_1.html", "9036306_1.html", "18371559_1.html", "27395349_2.html"], ["27354044_3.html", "26541915_6.html", "26027630fig_1.html", "30183102fig_1.html", "15639688_2.html", "17560879_2.html", "27619750_3.html", "24411003_1.html", "25743173_2.html", "25743173_3.html"], ["19166691_2.html", "27956003_2.html", "27846344fig_2.html", "25135178_2.html", "25282519_2.html", "19190658_2.html", "20670726_2.html", "22747613_2.html", "22747613_3.html", "21925996_2.html"], ["21925996_3.html", "21925996_4.html", "24067881_2.html", "22504093_2.html", "30203005_2.html", "29857145_3.html", "29857145_4.html", "29857145_5.html", "29857145_6.html", "29857145_7.html"], ["21723220_1.html", "21723220_2.html", "21723220_3.html", "16267322_2.html", "22704916_2.html", "17634459_2.html", "20491747_2.html", "29909019_2.html", "29797519_1.html", "24120253_4.html"], ["20429821_2.html", "20429821_3.html", "20429821_4.html", "21227674_2.html", "20463178_2.html", "27609408_2.html", "24966672_3.html", "30815468_1.html", "30815468_2.html", "30815468_3.html"], ["27087007_1.html", "27316465_2.html", "27316465_3.html", "27316465_4.html", "27316465_5.html", "27215749_3.html", "27715335_2.html", "18511702_2.html", "21627828_2.html", "21627828_3.html"], ["27039236_2.html", "21586508_2.html", "28558833_2.html", "28558833_3.html", "29413502_2.html", "21875546_2.html", "23040786_2.html", "28903864_2.html", "30053967fig_1.html", "20925534_2.html"], ["20925534_3.html", "29073947_2.html", "26994121_2.html", "25787199_2.html", "24727254_2.html", "26059896fig_2.html", "20385930fig_2.html", "19389561fig_2.html", "21816478_2.html", "7997016_1.html"], ["9603532_1.html", "9848888_2.html", "18479744_2.html", "24780614_3.html", "17244641_2.html", "26630143_2.html", "26304934_2.html", "19915221_2.html", "8950879_1.html", "30659410_1.html"], ["30659410_2.html", "30659410_3.html", "30465321_2.html", "30465321_3.html", "30465321_4.html", "30465321_5.html", "30465321_6.html", "26547918_2.html", "22316106_2.html", "22436129_2.html"], ["22709460_2.html", "23564919_2.html", "23683134_2.html", "24251359_3.html", "26093161_1.html", "26578849_2.html", "27103795_1.html", "27207971_1.html", "27387994_1.html", "27496855_1.html"]];
+            selected_group_docs = [];
+
+            for (i in fgroup) {
+              group_index = parseInt(fgroup[i]) - 1;
+              selected_group_docs = (0, _toConsumableArray2.default)(selected_group_docs).concat((0, _toConsumableArray2.default)(ordered_Splits[group_index]));
+            }
+
+            selected_group_docs = selected_group_docs.flat(); // debugger
+
             results = new Promise(function (resolve, reject) {
               var available_documents = {};
               var abs_index = [];
@@ -285,9 +428,19 @@ function _prepareAvailableDocuments() {
               };
 
               fs.readdir(tables_folder, function (err, items) {
-                DOCS = items.sort(function (a, b) {
-                  return fixVersionOrder(a).localeCompare(fixVersionOrder(b));
-                });
+                if (selected_group_docs.length > 0) {
+                  DOCS = selected_group_docs;
+                } else {
+                  DOCS = items.sort(function (a, b) {
+                    return fixVersionOrder(a).localeCompare(fixVersionOrder(b));
+                  });
+                } // DOCS = selected_group_docs.length > 0 ? selected_group_docs : DOCS;
+                // DOCS
+                // console.log(selected_group_docs)
+                //
+                // debugger
+
+
                 DOCS = DOCS.reduce(function (acc, docfile) {
                   var docid = docfile.split("_")[0].split("v")[0];
                   var docid_V = docfile.split("_")[0];
@@ -388,13 +541,13 @@ function _prepareAvailableDocuments() {
                 }
               });
             });
-            _context50.next = 14;
+            _context50.next = 19;
             return results;
 
-          case 14:
+          case 19:
             return _context50.abrupt("return", _context50.sent);
 
-          case 15:
+          case 20:
           case "end":
             return _context50.stop();
         }
@@ -476,7 +629,7 @@ function _getMetadataLabellers() {
   return _getMetadataLabellers.apply(this, arguments);
 }
 
-function getAnnotationByID(_x4, _x5, _x6) {
+function getAnnotationByID(_x5, _x6, _x7) {
   return _getAnnotationByID.apply(this, arguments);
 }
 
@@ -525,7 +678,7 @@ console.log(process.cwd()); //   sgd = pickle.load(open("./src/sgd_multiterm.sav
 
 python.ex(_templateObject2());
 
-function classify(_x7) {
+function classify(_x8) {
   return _classify.apply(this, arguments);
 }
 
@@ -574,7 +727,7 @@ function _classify() {
   return _classify.apply(this, arguments);
 }
 
-function grouped_predictor(_x8) {
+function grouped_predictor(_x9) {
   return _grouped_predictor.apply(this, arguments);
 }
 
@@ -610,7 +763,7 @@ function _grouped_predictor() {
   return _grouped_predictor.apply(this, arguments);
 }
 
-function attempt_predictions(_x9) {
+function attempt_predictions(_x10) {
   return _attempt_predictions.apply(this, arguments);
 }
 
@@ -626,7 +779,7 @@ function _attempt_predictions() {
             result = new Promise(
             /*#__PURE__*/
             function () {
-              var _ref50 = (0, _asyncToGenerator2.default)(
+              var _ref49 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
               _regenerator.default.mark(function _callee56(resolve, reject) {
                 var a, lines, predictions, l, currentLine, terms, cellClasses, cellClass, c, cellClassSelector, pred_class;
@@ -696,8 +849,8 @@ function _attempt_predictions() {
                 }, _callee56, this, [[0, 21]]);
               }));
 
-              return function (_x125, _x126) {
-                return _ref50.apply(this, arguments);
+              return function (_x126, _x127) {
+                return _ref49.apply(this, arguments);
               };
             }());
             return _context57.abrupt("return", result);
@@ -712,7 +865,7 @@ function _attempt_predictions() {
   return _attempt_predictions.apply(this, arguments);
 }
 
-function insertAnnotation(_x10, _x11, _x12, _x13, _x14, _x15, _x16) {
+function insertAnnotation(_x11, _x12, _x13, _x14, _x15, _x16, _x17) {
   return _insertAnnotation.apply(this, arguments);
 }
 
@@ -862,7 +1015,7 @@ function () {
     }, _callee, this);
   }));
 
-  return function (_x17, _x18) {
+  return function (_x18, _x19) {
     return _ref.apply(this, arguments);
   };
 }());
@@ -895,7 +1048,7 @@ function () {
     }, _callee2, this);
   }));
 
-  return function (_x19, _x20) {
+  return function (_x20, _x21) {
     return _ref2.apply(this, arguments);
   };
 }());
@@ -925,7 +1078,7 @@ function () {
     }, _callee3, this);
   }));
 
-  return function (_x21, _x22) {
+  return function (_x22, _x23) {
     return _ref3.apply(this, arguments);
   };
 }());
@@ -986,7 +1139,7 @@ function () {
                 }, _callee4, this);
               }));
 
-              return function modifyCUIData(_x25, _x26, _x27, _x28) {
+              return function modifyCUIData(_x26, _x27, _x28, _x29) {
                 return _ref5.apply(this, arguments);
               };
             }();
@@ -1016,7 +1169,7 @@ function () {
     }, _callee5, this);
   }));
 
-  return function (_x23, _x24) {
+  return function (_x24, _x25) {
     return _ref4.apply(this, arguments);
   };
 }());
@@ -1067,7 +1220,7 @@ function () {
                 }, _callee6, this);
               }));
 
-              return function cuiDeleteIndex(_x31) {
+              return function cuiDeleteIndex(_x32) {
                 return _ref7.apply(this, arguments);
               };
             }();
@@ -1096,7 +1249,7 @@ function () {
     }, _callee7, this);
   }));
 
-  return function (_x29, _x30) {
+  return function (_x30, _x31) {
     return _ref6.apply(this, arguments);
   };
 }());
@@ -1143,7 +1296,7 @@ function () {
                 }, _callee8, this);
               }));
 
-              return function getCuiTables(_x34) {
+              return function getCuiTables(_x35) {
                 return _ref9.apply(this, arguments);
               };
             }(); //console.log(req.query)
@@ -1175,7 +1328,7 @@ function () {
     }, _callee9, this);
   }));
 
-  return function (_x32, _x33) {
+  return function (_x33, _x34) {
     return _ref8.apply(this, arguments);
   };
 }());
@@ -1226,7 +1379,7 @@ function () {
                 }, _callee10, this);
               }));
 
-              return function setMetadata(_x37, _x38, _x39) {
+              return function setMetadata(_x38, _x39, _x40) {
                 return _ref11.apply(this, arguments);
               };
             }();
@@ -1255,7 +1408,7 @@ function () {
     }, _callee11, this);
   }));
 
-  return function (_x35, _x36) {
+  return function (_x36, _x37) {
     return _ref10.apply(this, arguments);
   };
 }());
@@ -1306,7 +1459,7 @@ function () {
                 }, _callee12, this);
               }));
 
-              return function setMetadata(_x42, _x43, _x44, _x45, _x46, _x47, _x48, _x49, _x50, _x51) {
+              return function setMetadata(_x43, _x44, _x45, _x46, _x47, _x48, _x49, _x50, _x51, _x52) {
                 return _ref13.apply(this, arguments);
               };
             }();
@@ -1335,7 +1488,7 @@ function () {
     }, _callee13, this);
   }));
 
-  return function (_x40, _x41) {
+  return function (_x41, _x42) {
     return _ref12.apply(this, arguments);
   };
 }());
@@ -1382,7 +1535,7 @@ function () {
                 }, _callee14, this);
               }));
 
-              return function getMetadata(_x54, _x55, _x56) {
+              return function getMetadata(_x55, _x56, _x57) {
                 return _ref15.apply(this, arguments);
               };
             }();
@@ -1417,7 +1570,7 @@ function () {
     }, _callee15, this);
   }));
 
-  return function (_x52, _x53) {
+  return function (_x53, _x54) {
     return _ref14.apply(this, arguments);
   };
 }());
@@ -1445,13 +1598,13 @@ function () {
               return acc;
             }, {});
 
-            if (!(req.query && (req.query.filter_topic || req.query.filter_type || req.query.hua))) {
+            if (!(req.query && (req.query.filter_topic || req.query.filter_type || req.query.hua || req.query.filter_group))) {
               _context16.next = 14;
               break;
             }
 
             _context16.next = 7;
-            return prepareAvailableDocuments(req.query.filter_topic ? req.query.filter_topic.split("_") : [], req.query.filter_type ? req.query.filter_type.split("_") : [], req.query.hua ? req.query.hua == "true" : false);
+            return prepareAvailableDocuments(req.query.filter_topic ? req.query.filter_topic.split("_") : [], req.query.filter_type ? req.query.filter_type.split("_") : [], req.query.hua ? req.query.hua == "true" : false, req.query.filter_group ? req.query.filter_group.split("_") : []);
 
           case 7:
             result = _context16.sent;
@@ -1485,12 +1638,12 @@ function () {
     }, _callee16, this);
   }));
 
-  return function (_x57, _x58) {
+  return function (_x58, _x59) {
     return _ref16.apply(this, arguments);
   };
 }());
 
-function updateClusterAnnotation(_x59, _x60, _x61, _x62, _x63) {
+function updateClusterAnnotation(_x60, _x61, _x62, _x63, _x64) {
   return _updateClusterAnnotation.apply(this, arguments);
 }
 
@@ -1530,60 +1683,62 @@ function _updateClusterAnnotation() {
   return _updateClusterAnnotation.apply(this, arguments);
 }
 
-app.get('/api/cuiRecommend',
-/*#__PURE__*/
-function () {
-  var _ref17 = (0, _asyncToGenerator2.default)(
+function getRecommendedCUIS() {
+  return _getRecommendedCUIS.apply(this, arguments);
+}
+
+function _getRecommendedCUIS() {
+  _getRecommendedCUIS = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee18(req, res) {
+  _regenerator.default.mark(function _callee63() {
     var cuiRecommend, recommend_cuis, rec_cuis, splitConcepts;
-    return _regenerator.default.wrap(function _callee18$(_context18) {
+    return _regenerator.default.wrap(function _callee63$(_context63) {
       while (1) {
-        switch (_context18.prev = _context18.next) {
+        switch (_context63.prev = _context63.next) {
           case 0:
             cuiRecommend =
             /*#__PURE__*/
             function () {
-              var _ref18 = (0, _asyncToGenerator2.default)(
+              var _ref50 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee17() {
+              _regenerator.default.mark(function _callee62() {
                 var client, result;
-                return _regenerator.default.wrap(function _callee17$(_context17) {
+                return _regenerator.default.wrap(function _callee62$(_context62) {
                   while (1) {
-                    switch (_context17.prev = _context17.next) {
+                    switch (_context62.prev = _context62.next) {
                       case 0:
-                        _context17.next = 2;
+                        _context62.next = 2;
                         return pool.connect();
 
                       case 2:
-                        client = _context17.sent;
-                        _context17.next = 5;
+                        client = _context62.sent;
+                        _context62.next = 5;
                         return client.query("select * from cuis_recommend");
 
                       case 5:
-                        result = _context17.sent;
+                        result = _context62.sent;
                         client.release();
-                        return _context17.abrupt("return", result);
+                        return _context62.abrupt("return", result);
 
                       case 8:
                       case "end":
-                        return _context17.stop();
+                        return _context62.stop();
                     }
                   }
-                }, _callee17, this);
+                }, _callee62, this);
               }));
 
               return function cuiRecommend() {
-                return _ref18.apply(this, arguments);
+                return _ref50.apply(this, arguments);
               };
             }();
 
             recommend_cuis = {};
-            _context18.next = 4;
+            _context63.next = 4;
             return cuiRecommend();
 
           case 4:
-            rec_cuis = _context18.sent.rows;
+            rec_cuis = _context63.sent.rows;
 
             splitConcepts = function splitConcepts(c) {
               if (c == null) {
@@ -1612,324 +1767,352 @@ function () {
                 cc: item.cc
               };
             }) : "";
-            res.send(recommend_cuis);
+            return _context63.abrupt("return", recommend_cuis);
 
           case 8:
           case "end":
-            return _context18.stop();
+            return _context63.stop();
         }
       }
-    }, _callee18, this);
+    }, _callee63, this);
+  }));
+  return _getRecommendedCUIS.apply(this, arguments);
+}
+
+app.get('/api/cuiRecommend',
+/*#__PURE__*/
+function () {
+  var _ref17 = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee17(req, res) {
+    var cuirec;
+    return _regenerator.default.wrap(function _callee17$(_context17) {
+      while (1) {
+        switch (_context17.prev = _context17.next) {
+          case 0:
+            _context17.next = 2;
+            return getRecommendedCUIS();
+
+          case 2:
+            cuirec = _context17.sent;
+            res.send(cuirec);
+
+          case 4:
+          case "end":
+            return _context17.stop();
+        }
+      }
+    }, _callee17, this);
   }));
 
-  return function (_x64, _x65) {
+  return function (_x65, _x66) {
     return _ref17.apply(this, arguments);
   };
 }());
 app.get('/api/allClusterAnnotations',
 /*#__PURE__*/
 function () {
-  var _ref19 = (0, _asyncToGenerator2.default)(
+  var _ref18 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee20(req, res) {
+  _regenerator.default.mark(function _callee19(req, res) {
     var allClusterAnnotations;
-    return _regenerator.default.wrap(function _callee20$(_context20) {
+    return _regenerator.default.wrap(function _callee19$(_context19) {
       while (1) {
-        switch (_context20.prev = _context20.next) {
+        switch (_context19.prev = _context19.next) {
           case 0:
             allClusterAnnotations =
             /*#__PURE__*/
             function () {
-              var _ref20 = (0, _asyncToGenerator2.default)(
+              var _ref19 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee19() {
+              _regenerator.default.mark(function _callee18() {
                 var client, result;
-                return _regenerator.default.wrap(function _callee19$(_context19) {
+                return _regenerator.default.wrap(function _callee18$(_context18) {
                   while (1) {
-                    switch (_context19.prev = _context19.next) {
+                    switch (_context18.prev = _context18.next) {
                       case 0:
-                        _context19.next = 2;
+                        _context18.next = 2;
                         return pool.connect();
 
                       case 2:
-                        client = _context19.sent;
-                        _context19.next = 5;
+                        client = _context18.sent;
+                        _context18.next = 5;
                         return client.query("select COALESCE(clusters.cn_override, clusters.cn) as cn,concept,rep_cuis,excluded_cuis,status,proposed_name from clusters,clusterdata where clusters.cn = clusterdata.cn ORDER BY cn asc,concept asc");
 
                       case 5:
-                        result = _context19.sent;
+                        result = _context18.sent;
                         client.release();
-                        return _context19.abrupt("return", result);
+                        return _context18.abrupt("return", result);
 
                       case 8:
                       case "end":
-                        return _context19.stop();
+                        return _context18.stop();
                     }
                   }
-                }, _callee19, this);
+                }, _callee18, this);
               }));
 
               return function allClusterAnnotations() {
-                return _ref20.apply(this, arguments);
+                return _ref19.apply(this, arguments);
               };
             }();
 
-            _context20.t0 = res;
-            _context20.next = 4;
+            _context19.t0 = res;
+            _context19.next = 4;
             return allClusterAnnotations();
 
           case 4:
-            _context20.t1 = _context20.sent;
+            _context19.t1 = _context19.sent;
 
-            _context20.t0.send.call(_context20.t0, _context20.t1);
+            _context19.t0.send.call(_context19.t0, _context19.t1);
 
           case 6:
           case "end":
-            return _context20.stop();
+            return _context19.stop();
         }
       }
-    }, _callee20, this);
+    }, _callee19, this);
   }));
 
-  return function (_x66, _x67) {
-    return _ref19.apply(this, arguments);
+  return function (_x67, _x68) {
+    return _ref18.apply(this, arguments);
   };
 }());
 app.get('/api/allMetadata',
 /*#__PURE__*/
 function () {
-  var _ref21 = (0, _asyncToGenerator2.default)(
+  var _ref20 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee22(req, res) {
+  _regenerator.default.mark(function _callee21(req, res) {
     var allMetadataAnnotations;
-    return _regenerator.default.wrap(function _callee22$(_context22) {
+    return _regenerator.default.wrap(function _callee21$(_context21) {
       while (1) {
-        switch (_context22.prev = _context22.next) {
+        switch (_context21.prev = _context21.next) {
           case 0:
             allMetadataAnnotations =
             /*#__PURE__*/
             function () {
-              var _ref22 = (0, _asyncToGenerator2.default)(
+              var _ref21 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee21() {
+              _regenerator.default.mark(function _callee20() {
                 var client, result;
-                return _regenerator.default.wrap(function _callee21$(_context21) {
+                return _regenerator.default.wrap(function _callee20$(_context20) {
                   while (1) {
-                    switch (_context21.prev = _context21.next) {
+                    switch (_context20.prev = _context20.next) {
                       case 0:
-                        _context21.next = 2;
+                        _context20.next = 2;
                         return pool.connect();
 
                       case 2:
-                        client = _context21.sent;
-                        _context21.next = 5;
+                        client = _context20.sent;
+                        _context20.next = 5;
                         return client.query("select * from metadata");
 
                       case 5:
-                        result = _context21.sent;
+                        result = _context20.sent;
                         client.release();
-                        return _context21.abrupt("return", result);
+                        return _context20.abrupt("return", result);
 
                       case 8:
                       case "end":
-                        return _context21.stop();
+                        return _context20.stop();
                     }
                   }
-                }, _callee21, this);
+                }, _callee20, this);
               }));
 
               return function allMetadataAnnotations() {
-                return _ref22.apply(this, arguments);
+                return _ref21.apply(this, arguments);
               };
             }();
 
-            _context22.t0 = res;
-            _context22.next = 4;
+            _context21.t0 = res;
+            _context21.next = 4;
             return allMetadataAnnotations();
 
           case 4:
-            _context22.t1 = _context22.sent;
+            _context21.t1 = _context21.sent;
 
-            _context22.t0.send.call(_context22.t0, _context22.t1);
+            _context21.t0.send.call(_context21.t0, _context21.t1);
 
           case 6:
           case "end":
-            return _context22.stop();
+            return _context21.stop();
         }
       }
-    }, _callee22, this);
+    }, _callee21, this);
   }));
 
-  return function (_x68, _x69) {
-    return _ref21.apply(this, arguments);
+  return function (_x69, _x70) {
+    return _ref20.apply(this, arguments);
   };
 }());
 app.get('/api/allClusters',
 /*#__PURE__*/
 function () {
-  var _ref23 = (0, _asyncToGenerator2.default)(
+  var _ref22 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee24(req, res) {
+  _regenerator.default.mark(function _callee23(req, res) {
     var getAllClusters;
-    return _regenerator.default.wrap(function _callee24$(_context24) {
+    return _regenerator.default.wrap(function _callee23$(_context23) {
       while (1) {
-        switch (_context24.prev = _context24.next) {
+        switch (_context23.prev = _context23.next) {
           case 0:
             getAllClusters =
             /*#__PURE__*/
             function () {
-              var _ref24 = (0, _asyncToGenerator2.default)(
+              var _ref23 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee23() {
+              _regenerator.default.mark(function _callee22() {
                 var client, result;
-                return _regenerator.default.wrap(function _callee23$(_context23) {
+                return _regenerator.default.wrap(function _callee22$(_context22) {
                   while (1) {
-                    switch (_context23.prev = _context23.next) {
+                    switch (_context22.prev = _context22.next) {
                       case 0:
-                        _context23.next = 2;
+                        _context22.next = 2;
                         return pool.connect();
 
                       case 2:
-                        client = _context23.sent;
-                        _context23.next = 5;
+                        client = _context22.sent;
+                        _context22.next = 5;
                         return client.query("select COALESCE(cn_override , cn) as cn,  concept, cuis, isdefault, cn_override from clusters order by cn asc, concept asc");
 
                       case 5:
-                        result = _context23.sent;
+                        result = _context22.sent;
                         client.release();
-                        return _context23.abrupt("return", result);
+                        return _context22.abrupt("return", result);
 
                       case 8:
                       case "end":
-                        return _context23.stop();
+                        return _context22.stop();
                     }
                   }
-                }, _callee23, this);
+                }, _callee22, this);
               }));
 
               return function getAllClusters() {
-                return _ref24.apply(this, arguments);
+                return _ref23.apply(this, arguments);
               };
             }();
 
-            _context24.t0 = res;
-            _context24.next = 4;
+            _context23.t0 = res;
+            _context23.next = 4;
             return getAllClusters();
 
           case 4:
-            _context24.t1 = _context24.sent;
+            _context23.t1 = _context23.sent;
 
-            _context24.t0.send.call(_context24.t0, _context24.t1);
+            _context23.t0.send.call(_context23.t0, _context23.t1);
 
           case 6:
           case "end":
-            return _context24.stop();
+            return _context23.stop();
         }
       }
-    }, _callee24, this);
+    }, _callee23, this);
   }));
 
-  return function (_x70, _x71) {
-    return _ref23.apply(this, arguments);
+  return function (_x71, _x72) {
+    return _ref22.apply(this, arguments);
   };
 }());
 app.get('/api/getCUIMods',
 /*#__PURE__*/
 function () {
-  var _ref25 = (0, _asyncToGenerator2.default)(
+  var _ref24 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee26(req, res) {
+  _regenerator.default.mark(function _callee25(req, res) {
     var getCUIMods;
-    return _regenerator.default.wrap(function _callee26$(_context26) {
+    return _regenerator.default.wrap(function _callee25$(_context25) {
       while (1) {
-        switch (_context26.prev = _context26.next) {
+        switch (_context25.prev = _context25.next) {
           case 0:
             getCUIMods =
             /*#__PURE__*/
             function () {
-              var _ref26 = (0, _asyncToGenerator2.default)(
+              var _ref25 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee25() {
+              _regenerator.default.mark(function _callee24() {
                 var client, result;
-                return _regenerator.default.wrap(function _callee25$(_context25) {
+                return _regenerator.default.wrap(function _callee24$(_context24) {
                   while (1) {
-                    switch (_context25.prev = _context25.next) {
+                    switch (_context24.prev = _context24.next) {
                       case 0:
-                        _context25.next = 2;
+                        _context24.next = 2;
                         return pool.connect();
 
                       case 2:
-                        client = _context25.sent;
-                        _context25.next = 5;
+                        client = _context24.sent;
+                        _context24.next = 5;
                         return client.query("select * from modifiers");
 
                       case 5:
-                        result = _context25.sent;
+                        result = _context24.sent;
                         client.release();
-                        return _context25.abrupt("return", result);
+                        return _context24.abrupt("return", result);
 
                       case 8:
                       case "end":
-                        return _context25.stop();
+                        return _context24.stop();
                     }
                   }
-                }, _callee25, this);
+                }, _callee24, this);
               }));
 
               return function getCUIMods() {
-                return _ref26.apply(this, arguments);
+                return _ref25.apply(this, arguments);
               };
             }();
 
-            _context26.t0 = res;
-            _context26.next = 4;
+            _context25.t0 = res;
+            _context25.next = 4;
             return getCUIMods();
 
           case 4:
-            _context26.t1 = _context26.sent;
+            _context25.t1 = _context25.sent;
 
-            _context26.t0.send.call(_context26.t0, _context26.t1);
+            _context25.t0.send.call(_context25.t0, _context25.t1);
 
           case 6:
           case "end":
-            return _context26.stop();
+            return _context25.stop();
         }
       }
-    }, _callee26, this);
+    }, _callee25, this);
   }));
 
-  return function (_x72, _x73) {
-    return _ref25.apply(this, arguments);
+  return function (_x73, _x74) {
+    return _ref24.apply(this, arguments);
   };
 }());
 app.get('/api/setCUIMod',
 /*#__PURE__*/
 function () {
-  var _ref27 = (0, _asyncToGenerator2.default)(
+  var _ref26 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee28(req, res) {
+  _regenerator.default.mark(function _callee27(req, res) {
     var setCUIMod;
-    return _regenerator.default.wrap(function _callee28$(_context28) {
+    return _regenerator.default.wrap(function _callee27$(_context27) {
       while (1) {
-        switch (_context28.prev = _context28.next) {
+        switch (_context27.prev = _context27.next) {
           case 0:
             setCUIMod =
             /*#__PURE__*/
             function () {
-              var _ref28 = (0, _asyncToGenerator2.default)(
+              var _ref27 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee27(cui, type) {
+              _regenerator.default.mark(function _callee26(cui, type) {
                 var client, done;
-                return _regenerator.default.wrap(function _callee27$(_context27) {
+                return _regenerator.default.wrap(function _callee26$(_context26) {
                   while (1) {
-                    switch (_context27.prev = _context27.next) {
+                    switch (_context26.prev = _context26.next) {
                       case 0:
-                        _context27.next = 2;
+                        _context26.next = 2;
                         return pool.connect();
 
                       case 2:
-                        client = _context27.sent;
-                        _context27.next = 5;
+                        client = _context26.sent;
+                        _context26.next = 5;
                         return client.query('INSERT INTO modifiers VALUES($1,$2) ON CONFLICT (cui) DO UPDATE SET type = $2;', [cui, type]).then(function (result) {
                           return console.log("insert: " + new Date());
                         }).catch(function (e) {
@@ -1939,141 +2122,141 @@ function () {
                         });
 
                       case 5:
-                        done = _context27.sent;
+                        done = _context26.sent;
 
                       case 6:
                       case "end":
-                        return _context27.stop();
+                        return _context26.stop();
                     }
                   }
-                }, _callee27, this);
+                }, _callee26, this);
               }));
 
-              return function setCUIMod(_x76, _x77) {
-                return _ref28.apply(this, arguments);
+              return function setCUIMod(_x77, _x78) {
+                return _ref27.apply(this, arguments);
               };
             }();
 
             if (!(req.query && req.query.cui && req.query.type)) {
-              _context28.next = 4;
+              _context27.next = 4;
               break;
             }
 
-            _context28.next = 4;
+            _context27.next = 4;
             return setCUIMod(req.query.cui, req.query.type);
 
           case 4:
           case "end":
-            return _context28.stop();
+            return _context27.stop();
         }
       }
-    }, _callee28, this);
+    }, _callee27, this);
   }));
 
-  return function (_x74, _x75) {
-    return _ref27.apply(this, arguments);
+  return function (_x75, _x76) {
+    return _ref26.apply(this, arguments);
   };
 }());
 app.get('/api/getClusterData',
 /*#__PURE__*/
 function () {
-  var _ref29 = (0, _asyncToGenerator2.default)(
+  var _ref28 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee30(req, res) {
+  _regenerator.default.mark(function _callee29(req, res) {
     var getClusterData;
-    return _regenerator.default.wrap(function _callee30$(_context30) {
+    return _regenerator.default.wrap(function _callee29$(_context29) {
       while (1) {
-        switch (_context30.prev = _context30.next) {
+        switch (_context29.prev = _context29.next) {
           case 0:
             getClusterData =
             /*#__PURE__*/
             function () {
-              var _ref30 = (0, _asyncToGenerator2.default)(
+              var _ref29 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee29() {
+              _regenerator.default.mark(function _callee28() {
                 var client, result;
-                return _regenerator.default.wrap(function _callee29$(_context29) {
+                return _regenerator.default.wrap(function _callee28$(_context28) {
                   while (1) {
-                    switch (_context29.prev = _context29.next) {
+                    switch (_context28.prev = _context28.next) {
                       case 0:
-                        _context29.next = 2;
+                        _context28.next = 2;
                         return pool.connect();
 
                       case 2:
-                        client = _context29.sent;
-                        _context29.next = 5;
+                        client = _context28.sent;
+                        _context28.next = 5;
                         return client.query("select * from clusterdata");
 
                       case 5:
-                        result = _context29.sent;
+                        result = _context28.sent;
                         client.release();
-                        return _context29.abrupt("return", result);
+                        return _context28.abrupt("return", result);
 
                       case 8:
                       case "end":
-                        return _context29.stop();
+                        return _context28.stop();
                     }
                   }
-                }, _callee29, this);
+                }, _callee28, this);
               }));
 
               return function getClusterData() {
-                return _ref30.apply(this, arguments);
+                return _ref29.apply(this, arguments);
               };
             }();
 
-            _context30.t0 = res;
-            _context30.next = 4;
+            _context29.t0 = res;
+            _context29.next = 4;
             return getClusterData();
 
           case 4:
-            _context30.t1 = _context30.sent;
+            _context29.t1 = _context29.sent;
 
-            _context30.t0.send.call(_context30.t0, _context30.t1);
+            _context29.t0.send.call(_context29.t0, _context29.t1);
 
           case 6:
           case "end":
-            return _context30.stop();
+            return _context29.stop();
         }
       }
-    }, _callee30, this);
+    }, _callee29, this);
   }));
 
-  return function (_x78, _x79) {
-    return _ref29.apply(this, arguments);
+  return function (_x79, _x80) {
+    return _ref28.apply(this, arguments);
   };
 }());
 app.get('/api/setClusterData',
 /*#__PURE__*/
 function () {
-  var _ref31 = (0, _asyncToGenerator2.default)(
+  var _ref30 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee32(req, res) {
+  _regenerator.default.mark(function _callee31(req, res) {
     var setClusterData;
-    return _regenerator.default.wrap(function _callee32$(_context32) {
+    return _regenerator.default.wrap(function _callee31$(_context31) {
       while (1) {
-        switch (_context32.prev = _context32.next) {
+        switch (_context31.prev = _context31.next) {
           case 0:
             console.log("Processing Request: " + JSON.stringify(req.query));
 
             setClusterData =
             /*#__PURE__*/
             function () {
-              var _ref32 = (0, _asyncToGenerator2.default)(
+              var _ref31 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee31(cn, rep_cuis, excluded_cuis, status, proposed_name) {
+              _regenerator.default.mark(function _callee30(cn, rep_cuis, excluded_cuis, status, proposed_name) {
                 var p_name, client, done;
-                return _regenerator.default.wrap(function _callee31$(_context31) {
+                return _regenerator.default.wrap(function _callee30$(_context30) {
                   while (1) {
-                    switch (_context31.prev = _context31.next) {
+                    switch (_context30.prev = _context30.next) {
                       case 0:
                         p_name = proposed_name && proposed_name.length > 0 && proposed_name !== "null" ? proposed_name : "";
-                        _context31.next = 3;
+                        _context30.next = 3;
                         return pool.connect();
 
                       case 3:
-                        client = _context31.sent;
-                        _context31.next = 6;
+                        client = _context30.sent;
+                        _context30.next = 6;
                         return client.query('INSERT INTO clusterdata VALUES($1,$2,$3,$4) ON CONFLICT (cn) DO UPDATE SET rep_cuis = $2, excluded_cuis = $3, status = $4, proposed_name = $5 ;', [cn, rep_cuis, excluded_cuis, status, p_name]).then(function (result) {
                           return console.log("insert: " + JSON.stringify(result));
                         }).catch(function (e) {
@@ -2083,27 +2266,27 @@ function () {
                         });
 
                       case 6:
-                        done = _context31.sent;
+                        done = _context30.sent;
 
                       case 7:
                       case "end":
-                        return _context31.stop();
+                        return _context30.stop();
                     }
                   }
-                }, _callee31, this);
+                }, _callee30, this);
               }));
 
-              return function setClusterData(_x82, _x83, _x84, _x85, _x86) {
-                return _ref32.apply(this, arguments);
+              return function setClusterData(_x83, _x84, _x85, _x86, _x87) {
+                return _ref31.apply(this, arguments);
               };
             }();
 
             if (!(req.query && req.query.cn && req.query.status)) {
-              _context32.next = 5;
+              _context31.next = 5;
               break;
             }
 
-            _context32.next = 5;
+            _context31.next = 5;
             return setClusterData(req.query.cn, req.query.rep_cuis || "", req.query.excluded_cuis || "", req.query.status, req.query.proposed_name);
 
           case 5:
@@ -2111,34 +2294,34 @@ function () {
 
           case 6:
           case "end":
-            return _context32.stop();
+            return _context31.stop();
         }
       }
-    }, _callee32, this);
+    }, _callee31, this);
   }));
 
-  return function (_x80, _x81) {
-    return _ref31.apply(this, arguments);
+  return function (_x81, _x82) {
+    return _ref30.apply(this, arguments);
   };
 }());
 app.get('/api/recordClusterAnnotation',
 /*#__PURE__*/
 function () {
-  var _ref33 = (0, _asyncToGenerator2.default)(
+  var _ref32 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee33(req, res) {
-    return _regenerator.default.wrap(function _callee33$(_context33) {
+  _regenerator.default.mark(function _callee32(req, res) {
+    return _regenerator.default.wrap(function _callee32$(_context32) {
       while (1) {
-        switch (_context33.prev = _context33.next) {
+        switch (_context32.prev = _context32.next) {
           case 0:
             console.log(JSON.stringify(req.query));
 
             if (!(req.query && req.query.cn.length > 0 && req.query.concept.length > 0 && req.query.cuis.length > 0 && req.query.isdefault.length > 0 && req.query.cn_override.length > 0)) {
-              _context33.next = 4;
+              _context32.next = 4;
               break;
             }
 
-            _context33.next = 4;
+            _context32.next = 4;
             return updateClusterAnnotation(req.query.cn, req.query.concept, req.query.cuis, req.query.isdefault, req.query.cn_override);
 
           case 4:
@@ -2146,49 +2329,49 @@ function () {
 
           case 5:
           case "end":
-            return _context33.stop();
+            return _context32.stop();
         }
       }
-    }, _callee33, this);
+    }, _callee32, this);
   }));
 
-  return function (_x87, _x88) {
-    return _ref33.apply(this, arguments);
+  return function (_x88, _x89) {
+    return _ref32.apply(this, arguments);
   };
 }());
 app.get('/api/cuisIndex',
 /*#__PURE__*/
 function () {
-  var _ref34 = (0, _asyncToGenerator2.default)(
+  var _ref33 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee35(req, res) {
+  _regenerator.default.mark(function _callee34(req, res) {
     var getCUISIndex;
-    return _regenerator.default.wrap(function _callee35$(_context35) {
+    return _regenerator.default.wrap(function _callee34$(_context34) {
       while (1) {
-        switch (_context35.prev = _context35.next) {
+        switch (_context34.prev = _context34.next) {
           case 0:
             getCUISIndex =
             /*#__PURE__*/
             function () {
-              var _ref35 = (0, _asyncToGenerator2.default)(
+              var _ref34 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee34() {
+              _regenerator.default.mark(function _callee33() {
                 var cuis, client, result;
-                return _regenerator.default.wrap(function _callee34$(_context34) {
+                return _regenerator.default.wrap(function _callee33$(_context33) {
                   while (1) {
-                    switch (_context34.prev = _context34.next) {
+                    switch (_context33.prev = _context33.next) {
                       case 0:
                         cuis = {};
-                        _context34.next = 3;
+                        _context33.next = 3;
                         return pool.connect();
 
                       case 3:
-                        client = _context34.sent;
-                        _context34.next = 6;
+                        client = _context33.sent;
+                        _context33.next = 6;
                         return client.query("select * from cuis_index");
 
                       case 6:
-                        result = _context34.sent;
+                        result = _context33.sent;
                         client.release();
                         result.rows.map(function (row) {
                           cuis[row.cui] = {
@@ -2198,72 +2381,72 @@ function () {
                             adminApproved: row.admin_approved
                           };
                         });
-                        return _context34.abrupt("return", cuis);
+                        return _context33.abrupt("return", cuis);
 
                       case 10:
                       case "end":
-                        return _context34.stop();
+                        return _context33.stop();
                     }
                   }
-                }, _callee34, this);
+                }, _callee33, this);
               }));
 
               return function getCUISIndex() {
-                return _ref35.apply(this, arguments);
+                return _ref34.apply(this, arguments);
               };
             }();
 
-            _context35.t0 = res;
-            _context35.next = 4;
+            _context34.t0 = res;
+            _context34.next = 4;
             return getCUISIndex();
 
           case 4:
-            _context35.t1 = _context35.sent;
+            _context34.t1 = _context34.sent;
 
-            _context35.t0.send.call(_context35.t0, _context35.t1);
+            _context34.t0.send.call(_context34.t0, _context34.t1);
 
           case 6:
           case "end":
-            return _context35.stop();
+            return _context34.stop();
         }
       }
-    }, _callee35, this);
+    }, _callee34, this);
   }));
 
-  return function (_x89, _x90) {
-    return _ref34.apply(this, arguments);
+  return function (_x90, _x91) {
+    return _ref33.apply(this, arguments);
   };
 }());
 app.get('/api/cuisIndexAdd',
 /*#__PURE__*/
 function () {
-  var _ref36 = (0, _asyncToGenerator2.default)(
+  var _ref35 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee37(req, res) {
+  _regenerator.default.mark(function _callee36(req, res) {
     var insertCUI;
-    return _regenerator.default.wrap(function _callee37$(_context37) {
+    return _regenerator.default.wrap(function _callee36$(_context36) {
       while (1) {
-        switch (_context37.prev = _context37.next) {
+        switch (_context36.prev = _context36.next) {
           case 0:
             console.log(JSON.stringify(req.query));
 
             insertCUI =
             /*#__PURE__*/
             function () {
-              var _ref37 = (0, _asyncToGenerator2.default)(
+              var _ref36 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee36(cui, preferred, hasMSH) {
+              _regenerator.default.mark(function _callee35(cui, preferred, hasMSH) {
                 var client, done;
-                return _regenerator.default.wrap(function _callee36$(_context36) {
+                return _regenerator.default.wrap(function _callee35$(_context35) {
                   while (1) {
-                    switch (_context36.prev = _context36.next) {
+                    switch (_context35.prev = _context35.next) {
                       case 0:
-                        _context36.next = 2;
+                        _context35.next = 2;
                         return pool.connect();
 
                       case 2:
-                        client = _context36.sent;
-                        _context36.next = 5;
+                        client = _context35.sent;
+                        _context35.next = 5;
                         return client.query('INSERT INTO cuis_index(cui,preferred,"hasMSH",user_defined,admin_approved) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (cui) DO UPDATE SET preferred = $2, "hasMSH" = $3, user_defined = $4, admin_approved = $5', [cui, preferred, hasMSH, true, false]).then(function (result) {
                           return console.log("insert: " + new Date());
                         }).catch(function (e) {
@@ -2273,27 +2456,27 @@ function () {
                         });
 
                       case 5:
-                        done = _context36.sent;
+                        done = _context35.sent;
 
                       case 6:
                       case "end":
-                        return _context36.stop();
+                        return _context35.stop();
                     }
                   }
-                }, _callee36, this);
+                }, _callee35, this);
               }));
 
-              return function insertCUI(_x93, _x94, _x95) {
-                return _ref37.apply(this, arguments);
+              return function insertCUI(_x94, _x95, _x96) {
+                return _ref36.apply(this, arguments);
               };
             }();
 
             if (!(req.query && req.query.cui.length > 0 && req.query.preferred.length > 0 && req.query.hasMSH.length > 0)) {
-              _context37.next = 5;
+              _context36.next = 5;
               break;
             }
 
-            _context37.next = 5;
+            _context36.next = 5;
             return insertCUI(req.query.cui, req.query.preferred, req.query.hasMSH);
 
           case 5:
@@ -2301,116 +2484,360 @@ function () {
 
           case 6:
           case "end":
+            return _context36.stop();
+        }
+      }
+    }, _callee36, this);
+  }));
+
+  return function (_x92, _x93) {
+    return _ref35.apply(this, arguments);
+  };
+}());
+
+function allPredictions() {
+  return _allPredictions.apply(this, arguments);
+}
+
+function _allPredictions() {
+  _allPredictions = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee64() {
+    var cui_data, header, createCsvWriter, csvWriter, count, docid, page, data, ac_res, cols, rows, annotation_cols, annotation_rows, cuirec, cleanTerm, getSemanticTypes, csvData;
+    return _regenerator.default.wrap(function _callee64$(_context64) {
+      while (1) {
+        switch (_context64.prev = _context64.next) {
+          case 0:
+            _context64.next = 2;
+            return CUIData();
+
+          case 2:
+            cui_data = _context64.sent;
+            header = [{
+              id: 'docid',
+              title: 'docid'
+            }, {
+              id: 'page',
+              title: 'page'
+            }, {
+              id: 'concept',
+              title: 'concept'
+            }, {
+              id: 'clean_concept',
+              title: 'clean_concept'
+            }, {
+              id: 'original',
+              title: 'original'
+            }, {
+              id: 'onlyNumbers',
+              title: 'onlyNumbers'
+            }, {
+              id: 'pos_start',
+              title: 'pos_start'
+            }, {
+              id: 'pos_middle',
+              title: 'pos_middle'
+            }, {
+              id: 'pos_end',
+              title: 'pos_end'
+            }, {
+              id: 'inRow',
+              title: 'inRow'
+            }, {
+              id: 'inCol',
+              title: 'inCol'
+            }, {
+              id: 'is_bold',
+              title: 'is_bold'
+            }, {
+              id: 'is_italic',
+              title: 'is_italic'
+            }, {
+              id: 'is_indent',
+              title: 'is_indent'
+            }, {
+              id: 'is_empty_row',
+              title: 'is_empty_row'
+            }, {
+              id: 'is_empty_row_p',
+              title: 'is_empty_row_p'
+            }, {
+              id: 'cuis',
+              title: 'cuis'
+            }, {
+              id: 'semanticTypes',
+              title: 'semanticTypes'
+            }, {
+              id: 'label',
+              title: 'label'
+            }];
+            Object.keys(cui_data.cui_def).map(function (c) {
+              header.push({
+                id: c,
+                title: c
+              });
+            });
+            Object.keys(cui_data.semtypes).map(function (s) {
+              header.push({
+                id: s,
+                title: s
+              });
+            });
+            createCsvWriter = require('csv-writer').createObjectCsvWriter;
+            csvWriter = createCsvWriter({
+              path: 'prediction_data.csv',
+              header: header
+            }); //
+            // debugger
+            // const records = [
+            //     {name: 'Bob',  lang: 'French, English'},
+            //     {name: 'Mary', lang: 'English'}
+            // ];
+
+            count = 1;
+            _context64.t0 = _regenerator.default.keys(available_documents);
+
+          case 10:
+            if ((_context64.t1 = _context64.t0()).done) {
+              _context64.next = 50;
+              break;
+            }
+
+            docid = _context64.t1.value;
+            _context64.t2 = _regenerator.default.keys(available_documents[docid].pages);
+
+          case 13:
+            if ((_context64.t3 = _context64.t2()).done) {
+              _context64.next = 48;
+              break;
+            }
+
+            page = _context64.t3.value;
+            console.log(docid + "  --  " + page + "  --  " + count + " / " + DOCS.length);
+            page = available_documents[docid].pages[page];
+            _context64.next = 19;
+            return readyTableData(docid, page);
+
+          case 19:
+            data = _context64.sent;
+            ac_res = cui_data.actual_results;
+
+            if (ac_res[docid + "_" + page]) {
+              _context64.next = 23;
+              break;
+            }
+
+            return _context64.abrupt("continue", 13);
+
+          case 23:
+            // if (! (docid == "16351668" && page == 2) ){
+            //    continue
+            // }
+            //
+            // debugger
+            // These are predicted, using the SGDClassifier
+            cols = data.predicted.cols.reduce(function (acc, e) {
+              acc[e.c] = {
+                descriptors: e.descriptors.join(";"),
+                modifier: e.unique_modifier
+              };
+              return acc;
+            }, {});
+            rows = data.predicted.rows.reduce(function (acc, e) {
+              acc[e.c] = {
+                descriptors: e.descriptors.join(";"),
+                modifier: e.unique_modifier
+              };
+              return acc;
+            }, {});
+            _context64.prev = 25;
+            // These are manually annotated
+            annotation_cols = Object.keys(ac_res[docid + "_" + page].Col).reduce(function (acc, e) {
+              acc[e - 1] = ac_res[docid + "_" + page].Col[e];
+              return acc;
+            }, {});
+            annotation_rows = Object.keys(ac_res[docid + "_" + page].Row).reduce(function (acc, e) {
+              acc[e - 1] = ac_res[docid + "_" + page].Row[e];
+              return acc;
+            }, {});
+            _context64.next = 34;
+            break;
+
+          case 30:
+            _context64.prev = 30;
+            _context64.t4 = _context64["catch"](25);
+            console.log("skipping: " + docid + "_" + page);
+            return _context64.abrupt("continue", 13);
+
+          case 34:
+            // Now we use the manual annotations here to build our dataset, to train the classifiers.
+            cols = annotation_cols;
+            rows = annotation_rows;
+            _context64.next = 38;
+            return getRecommendedCUIS();
+
+          case 38:
+            cuirec = _context64.sent;
+
+            cleanTerm = function cleanTerm(term) {
+              term = term.toLowerCase().replace(/[^A-z0-9 ]/gi, " ").replace(/[0-9]+/gi, " $nmbr$ ").replace(/ +/gi, " ").trim();
+              return term;
+            };
+
+            getSemanticTypes = function getSemanticTypes(cuis, cui_data) {
+              if (!cuis) {
+                return [];
+              }
+
+              var semType = [];
+              cuis.split(";").map(function (cui) {
+                semType.push(cui_data.cui_def[cui].semTypes.split(";"));
+              });
+              return semType.flat();
+            }; //
+
+
+            count = count + 1; // if ( count > 10 ){
+            //    return ""
+            // }
+            //
+            // debugger
+
+            csvData = data.predicted.predictions.map(function (row_el, row) {
+              return row_el.terms.map(function (term, col) {
+                var clean_concept = cleanTerm(term);
+                var row_terms = data.predicted.predictions[row].terms; // debugger;
+
+                var toReturn = {
+                  docid: docid,
+                  page: page,
+                  concept: prepare_cell_text(term),
+                  clean_concept: clean_concept,
+                  original: term,
+                  onlyNumbers: term.replace(/[^a-z]/g, " ").replace(/ +/g, " ").trim() == "",
+                  // row: row,
+                  // col: col,
+                  pos_start: row == 0 ? 1 : "",
+                  pos_middle: row > 0 && row < data.predicted.predictions.length - 1 ? 1 : "",
+                  pos_end: row == data.predicted.predictions.length - 1 ? 1 : "",
+                  // isCharacteristic_name: cols[col] && cols[col].descriptors.indexOf("characteristic_name") > -1 ? 1 : 0,
+                  // isCharacteristic_level: cols[col] && cols[col].descriptors.indexOf("characteristic_level") > -1 ? 1 : 0,
+                  // isOutcome: cols[col] && cols[col].descriptors.indexOf("outcomes") > -1 ? 1 : 0,
+                  inRow: rows[row] ? 1 : "",
+                  inCol: cols[col] ? 1 : "",
+                  is_bold: data.predicted.predictions[row].cellClasses[col].indexOf("bold") > -1 ? 1 : "",
+                  is_italic: data.predicted.predictions[row].cellClasses[col].indexOf("italic") > -1 ? 1 : "",
+                  is_indent: data.predicted.predictions[row].cellClasses[col].indexOf("indent") > -1 ? 1 : "",
+                  is_empty_row: row_terms[0] == row_terms.join("") ? 1 : "",
+                  is_empty_row_p: row_terms.length > 2 && row_terms[0] + row_terms[row_terms.length - 1] == row_terms.join("") ? 1 : "",
+                  // this one is a crude estimation of P values structure. Assume the row has P value if multiple columns are detected but only first and last are populated.
+                  label: cols[col] ? cols[col].descriptors : rows[row] ? rows[row].descriptors : "",
+                  cuis: cui_data.cui_concept[clean_concept],
+                  semanticTypes: getSemanticTypes(cui_data.cui_concept[clean_concept], cui_data).join(";") // cui_def, cui_concept
+
+                };
+
+                if (cui_data.cui_concept[clean_concept]) {
+                  cui_data.cui_concept[clean_concept].split(";").map(function (cui) {
+                    toReturn[cui] = 1;
+                  });
+                }
+
+                getSemanticTypes(cui_data.cui_concept[clean_concept], cui_data).map(function (semType) {
+                  toReturn[semType] = 1;
+                });
+                return toReturn;
+              });
+            });
+            csvData = csvData.flat().filter(function (el) {
+              return el.onlyNumbers == false;
+            });
+            _context64.next = 46;
+            return csvWriter.writeRecords(csvData) // returns a promise
+            .then(function () {
+              console.log('...Done');
+            });
+
+          case 46:
+            _context64.next = 13;
+            break;
+
+          case 48:
+            _context64.next = 10;
+            break;
+
+          case 50:
+            return _context64.abrupt("return", {});
+
+          case 51:
+          case "end":
+            return _context64.stop();
+        }
+      }
+    }, _callee64, this, [[25, 30]]);
+  }));
+  return _allPredictions.apply(this, arguments);
+}
+
+app.get('/api/allPredictions',
+/*#__PURE__*/
+function () {
+  var _ref37 = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee37(req, res) {
+    var allP;
+    return _regenerator.default.wrap(function _callee37$(_context37) {
+      while (1) {
+        switch (_context37.prev = _context37.next) {
+          case 0:
+            console.log("getting all predictions");
+            _context37.next = 3;
+            return allPredictions();
+
+          case 3:
+            allP = _context37.sent;
+            res.send(allP);
+
+          case 5:
+          case "end":
             return _context37.stop();
         }
       }
     }, _callee37, this);
   }));
 
-  return function (_x91, _x92) {
-    return _ref36.apply(this, arguments);
-  };
-}());
-app.get('/api/allPredictions',
-/*#__PURE__*/
-function () {
-  var _ref38 = (0, _asyncToGenerator2.default)(
-  /*#__PURE__*/
-  _regenerator.default.mark(function _callee38(req, res) {
-    var predictions, a, p, page, docid, data, c, col, r, row;
-    return _regenerator.default.wrap(function _callee38$(_context38) {
-      while (1) {
-        switch (_context38.prev = _context38.next) {
-          case 0:
-            console.log("getting all predictions");
-            predictions = "user,docid,page,corrupted,tableType,location,number,content,qualifiers\n";
-            _context38.t0 = _regenerator.default.keys(available_documents);
-
-          case 3:
-            if ((_context38.t1 = _context38.t0()).done) {
-              _context38.next = 20;
-              break;
-            }
-
-            a = _context38.t1.value;
-            _context38.t2 = _regenerator.default.keys(available_documents[a].pages);
-
-          case 6:
-            if ((_context38.t3 = _context38.t2()).done) {
-              _context38.next = 18;
-              break;
-            }
-
-            p = _context38.t3.value;
-            console.log(a + "  --  " + p);
-            page = available_documents[a].pages[p];
-            docid = a;
-            _context38.next = 13;
-            return readyTableData(docid, page);
-
-          case 13:
-            data = _context38.sent;
-
-            for (c in data.predicted.cols) {
-              col = data.predicted.cols[c];
-              predictions += ["auto_" + METHOD, docid, page, false, "na", "Col", parseInt(col.c) + 1, col.descriptors.join(";"), col.unique_modifier.split(" ").join(";")].join(",") + "\n";
-            }
-
-            for (r in data.predicted.rows) {
-              row = data.predicted.rows[r];
-              predictions += ["auto_" + METHOD, docid, page, false, "na", "Row", parseInt(row.c) + 1, row.descriptors.join(";"), row.unique_modifier.split(" ").join(";")].join(",") + "\n";
-            }
-
-            _context38.next = 6;
-            break;
-
-          case 18:
-            _context38.next = 3;
-            break;
-
-          case 20:
-            res.send(predictions);
-
-          case 21:
-          case "end":
-            return _context38.stop();
-        }
-      }
-    }, _callee38, this);
-  }));
-
-  return function (_x96, _x97) {
-    return _ref38.apply(this, arguments);
+  return function (_x97, _x98) {
+    return _ref37.apply(this, arguments);
   };
 }()); // Generates the results table live preview, connecting to the R API.
 
 app.get('/api/annotationPreview',
 /*#__PURE__*/
 function () {
-  var _ref39 = (0, _asyncToGenerator2.default)(
+  var _ref38 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee39(req, res) {
+  _regenerator.default.mark(function _callee38(req, res) {
     var annotations, page, user, final_annotations, r, ann, existing, final_annotations_array, entry;
-    return _regenerator.default.wrap(function _callee39$(_context39) {
+    return _regenerator.default.wrap(function _callee38$(_context38) {
       while (1) {
-        switch (_context39.prev = _context39.next) {
+        switch (_context38.prev = _context38.next) {
           case 0:
-            _context39.prev = 0;
+            _context38.prev = 0;
 
             if (!(req.query && req.query.docid && req.query.docid.length > 0)) {
-              _context39.next = 10;
+              _context38.next = 10;
               break;
             }
 
             page = req.query.page && req.query.page.length > 0 ? req.query.page : 1;
             user = req.query.user && req.query.user.length > 0 ? req.query.user : "";
             console.log(user + "  -- " + JSON.stringify(req.query));
-            _context39.next = 7;
+            _context38.next = 7;
             return getAnnotationByID(req.query.docid, page, user);
 
           case 7:
-            annotations = _context39.sent;
-            _context39.next = 11;
+            annotations = _context38.sent;
+            _context38.next = 11;
             break;
 
           case 10:
@@ -2475,44 +2902,44 @@ function () {
               });
             }
 
-            _context39.next = 21;
+            _context38.next = 21;
             break;
 
           case 18:
-            _context39.prev = 18;
-            _context39.t0 = _context39["catch"](0);
+            _context38.prev = 18;
+            _context38.t0 = _context38["catch"](0);
             res.send({
               "state": "failed"
             });
 
           case 21:
           case "end":
-            return _context39.stop();
+            return _context38.stop();
         }
       }
-    }, _callee39, this, [[0, 18]]);
+    }, _callee38, this, [[0, 18]]);
   }));
 
-  return function (_x98, _x99) {
-    return _ref39.apply(this, arguments);
+  return function (_x99, _x100) {
+    return _ref38.apply(this, arguments);
   };
 }());
 app.get('/api/formattedResults',
 /*#__PURE__*/
 function () {
-  var _ref40 = (0, _asyncToGenerator2.default)(
+  var _ref39 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee40(req, res) {
+  _regenerator.default.mark(function _callee39(req, res) {
     var results, finalResults, r, ann, existing, finalResults_array, formattedRes;
-    return _regenerator.default.wrap(function _callee40$(_context40) {
+    return _regenerator.default.wrap(function _callee39$(_context39) {
       while (1) {
-        switch (_context40.prev = _context40.next) {
+        switch (_context39.prev = _context39.next) {
           case 0:
-            _context40.next = 2;
+            _context39.next = 2;
             return getAnnotationResults();
 
           case 2:
-            results = _context40.sent;
+            results = _context39.sent;
 
             if (results) {
               finalResults = {};
@@ -2560,14 +2987,14 @@ function () {
 
           case 4:
           case "end":
-            return _context40.stop();
+            return _context39.stop();
         }
       }
-    }, _callee40, this);
+    }, _callee39, this);
   }));
 
-  return function (_x100, _x101) {
-    return _ref40.apply(this, arguments);
+  return function (_x101, _x102) {
+    return _ref39.apply(this, arguments);
   };
 }());
 app.get('/api/abs_index', function (req, res) {
@@ -2585,18 +3012,18 @@ app.get('/api/totalTables', function (req, res) {
   });
 });
 
-function getMMatch(_x102) {
+function getMMatch(_x103) {
   return _getMMatch.apply(this, arguments);
 }
 
 function _getMMatch() {
   _getMMatch = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee62(phrase) {
+  _regenerator.default.mark(function _callee65(phrase) {
     var result;
-    return _regenerator.default.wrap(function _callee62$(_context62) {
+    return _regenerator.default.wrap(function _callee65$(_context65) {
       while (1) {
-        switch (_context62.prev = _context62.next) {
+        switch (_context65.prev = _context65.next) {
           case 0:
             console.log("LOOKING FOR: " + phrase);
             result = new Promise(function (resolve, reject) {
@@ -2605,7 +3032,7 @@ function _getMMatch() {
                   'content-type': 'application/x-www-form-urlencoded'
                 },
                 url: 'http://localhost:8080/form',
-                body: "input=" + phrase + " &args=--JSONn -E"
+                body: "input=" + phrase + " &args=-AsI+ --JSONn -E"
               }, function (error, res, body) {
                 if (error) {
                   reject(error);
@@ -2617,14 +3044,14 @@ function _getMMatch() {
                 resolve(body.slice(start, end));
               });
             });
-            return _context62.abrupt("return", result);
+            return _context65.abrupt("return", result);
 
           case 3:
           case "end":
-            return _context62.stop();
+            return _context65.stop();
         }
       }
-    }, _callee62, this);
+    }, _callee65, this);
   }));
   return _getMMatch.apply(this, arguments);
 }
@@ -2632,28 +3059,28 @@ function _getMMatch() {
 app.get('/api/getMMatch',
 /*#__PURE__*/
 function () {
-  var _ref41 = (0, _asyncToGenerator2.default)(
+  var _ref40 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee41(req, res) {
+  _regenerator.default.mark(function _callee40(req, res) {
     var mm_match;
-    return _regenerator.default.wrap(function _callee41$(_context41) {
+    return _regenerator.default.wrap(function _callee40$(_context40) {
       while (1) {
-        switch (_context41.prev = _context41.next) {
+        switch (_context40.prev = _context40.next) {
           case 0:
-            _context41.prev = 0;
+            _context40.prev = 0;
 
             if (!(req.query && req.query.phrase)) {
-              _context41.next = 8;
+              _context40.next = 8;
               break;
             }
 
-            _context41.next = 4;
+            _context40.next = 4;
             return getMMatch(req.query.phrase);
 
           case 4:
-            mm_match = _context41.sent;
+            mm_match = _context40.sent;
             res.send(mm_match);
-            _context41.next = 9;
+            _context40.next = 9;
             break;
 
           case 8:
@@ -2663,24 +3090,24 @@ function () {
             });
 
           case 9:
-            _context41.next = 14;
+            _context40.next = 14;
             break;
 
           case 11:
-            _context41.prev = 11;
-            _context41.t0 = _context41["catch"](0);
-            console.log(_context41.t0);
+            _context40.prev = 11;
+            _context40.t0 = _context40["catch"](0);
+            console.log(_context40.t0);
 
           case 14:
           case "end":
-            return _context41.stop();
+            return _context40.stop();
         }
       }
-    }, _callee41, this, [[0, 11]]);
+    }, _callee40, this, [[0, 11]]);
   }));
 
-  return function (_x103, _x104) {
-    return _ref41.apply(this, arguments);
+  return function (_x104, _x105) {
+    return _ref40.apply(this, arguments);
   };
 }());
 app.use(bodyParser.json());
@@ -2701,24 +3128,24 @@ app.post('/saveTableOverride', function (req, res) {
 app.get('/api/removeOverrideTable',
 /*#__PURE__*/
 function () {
-  var _ref42 = (0, _asyncToGenerator2.default)(
+  var _ref41 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee42(req, res) {
+  _regenerator.default.mark(function _callee41(req, res) {
     var file_exists;
-    return _regenerator.default.wrap(function _callee42$(_context42) {
+    return _regenerator.default.wrap(function _callee41$(_context41) {
       while (1) {
-        switch (_context42.prev = _context42.next) {
+        switch (_context41.prev = _context41.next) {
           case 0:
             if (!(req.query && req.query.docid && req.query.page)) {
-              _context42.next = 8;
+              _context41.next = 8;
               break;
             }
 
-            _context42.next = 3;
+            _context41.next = 3;
             return fs.existsSync("HTML_TABLES_OVERRIDE/" + req.query.docid + "_" + req.query.page + ".html");
 
           case 3:
-            file_exists = _context42.sent;
+            file_exists = _context41.sent;
 
             if (file_exists) {
               fs.unlink("HTML_TABLES_OVERRIDE/" + req.query.docid + "_" + req.query.page + ".html", function (err) {
@@ -2730,7 +3157,7 @@ function () {
             res.send({
               status: "override removed"
             });
-            _context42.next = 9;
+            _context41.next = 9;
             break;
 
           case 8:
@@ -2740,79 +3167,80 @@ function () {
 
           case 9:
           case "end":
+            return _context41.stop();
+        }
+      }
+    }, _callee41, this);
+  }));
+
+  return function (_x106, _x107) {
+    return _ref41.apply(this, arguments);
+  };
+}());
+app.get('/api/classify',
+/*#__PURE__*/
+function () {
+  var _ref42 = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee42(req, res) {
+    return _regenerator.default.wrap(function _callee42$(_context42) {
+      while (1) {
+        switch (_context42.prev = _context42.next) {
+          case 0:
+            if (!(req.query && req.query.terms)) {
+              _context42.next = 8;
+              break;
+            }
+
+            console.log(req.query.terms);
+            _context42.t0 = res;
+            _context42.next = 5;
+            return classify(req.query.terms.split(","));
+
+          case 5:
+            _context42.t1 = _context42.sent;
+            _context42.t2 = {
+              results: _context42.t1
+            };
+
+            _context42.t0.send.call(_context42.t0, _context42.t2);
+
+          case 8:
+          case "end":
             return _context42.stop();
         }
       }
     }, _callee42, this);
   }));
 
-  return function (_x105, _x106) {
+  return function (_x108, _x109) {
     return _ref42.apply(this, arguments);
   };
 }());
-app.get('/api/classify',
-/*#__PURE__*/
-function () {
-  var _ref43 = (0, _asyncToGenerator2.default)(
-  /*#__PURE__*/
-  _regenerator.default.mark(function _callee43(req, res) {
-    return _regenerator.default.wrap(function _callee43$(_context43) {
-      while (1) {
-        switch (_context43.prev = _context43.next) {
-          case 0:
-            if (!(req.query && req.query.terms)) {
-              _context43.next = 8;
-              break;
-            }
 
-            console.log(req.query.terms);
-            _context43.t0 = res;
-            _context43.next = 5;
-            return classify(req.query.terms.split(","));
-
-          case 5:
-            _context43.t1 = _context43.sent;
-            _context43.t2 = {
-              results: _context43.t1
-            };
-
-            _context43.t0.send.call(_context43.t0, _context43.t2);
-
-          case 8:
-          case "end":
-            return _context43.stop();
-        }
-      }
-    }, _callee43, this);
-  }));
-
-  return function (_x107, _x108) {
-    return _ref43.apply(this, arguments);
-  };
-}());
-
-function readyTableData(_x109, _x110, _x111) {
+function readyTableData(_x110, _x111, _x112) {
   return _readyTableData.apply(this, arguments);
 }
 
 function _readyTableData() {
   _readyTableData = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee64(docid, page, method) {
+  _regenerator.default.mark(function _callee67(docid, page, method) {
     var htmlFolder, htmlFile, file_exists, result;
-    return _regenerator.default.wrap(function _callee64$(_context64) {
+    return _regenerator.default.wrap(function _callee67$(_context67) {
       while (1) {
-        switch (_context64.prev = _context64.next) {
+        switch (_context67.prev = _context67.next) {
           case 0:
+            _context67.prev = 0;
             docid = docid + "_" + page + ".html";
             htmlFolder = tables_folder + "/";
             htmlFile = docid; //If an override file exists then use it!. Overrides are those produced by the editor.
 
-            _context64.next = 5;
+            _context67.next = 6;
             return fs.existsSync("HTML_TABLES_OVERRIDE/" + docid);
 
-          case 5:
-            file_exists = _context64.sent;
+          case 6:
+            file_exists = _context67.sent;
 
             if (file_exists) {
               htmlFolder = "HTML_TABLES_OVERRIDE/";
@@ -2827,17 +3255,17 @@ function _readyTableData() {
                   function () {
                     var _ref51 = (0, _asyncToGenerator2.default)(
                     /*#__PURE__*/
-                    _regenerator.default.mark(function _callee63(err2, data_ss) {
+                    _regenerator.default.mark(function _callee66(err2, data_ss) {
                       var tablePage, spaceRow, htmlHeader, findHeader, possible_tags_for_title, t, htmlHeaderText, actual_table, colum_with_numbers, formattedPage, predictions, terms_matrix, preds_matrix, class_matrix, content_type_matrix, max_col, l, getTopDescriptors, cleanModifier, col_top_descriptors, c, content_types_in_column, unique_modifiers_in_column, u, unique_modifier, column_data, column_terms, k, allfreqs, all_terms, descriptors, row_top_descriptors, r, content_types_in_row, row_data, row_terms, predicted;
-                      return _regenerator.default.wrap(function _callee63$(_context63) {
+                      return _regenerator.default.wrap(function _callee66$(_context66) {
                         while (1) {
-                          switch (_context63.prev = _context63.next) {
+                          switch (_context66.prev = _context66.next) {
                             case 0:
-                              _context63.prev = 0;
+                              _context66.prev = 0;
                               tablePage = cheerio.load(data); // tablePage("col").removeAttr('style');
 
                               if (tablePage) {
-                                _context63.next = 5;
+                                _context66.next = 5;
                                 break;
                               }
 
@@ -2846,22 +3274,22 @@ function _readyTableData() {
                                 formattedPage: "",
                                 title: ""
                               });
-                              return _context63.abrupt("return");
+                              return _context66.abrupt("return");
 
                             case 5:
-                              _context63.next = 11;
+                              _context66.next = 11;
                               break;
 
                             case 7:
-                              _context63.prev = 7;
-                              _context63.t0 = _context63["catch"](0);
+                              _context66.prev = 7;
+                              _context66.t0 = _context66["catch"](0);
                               // console.log(JSON.stringify(e)+" -- " + JSON.stringify(data))
                               resolve({
                                 htmlHeader: "",
                                 formattedPage: "",
                                 title: ""
                               });
-                              return _context63.abrupt("return");
+                              return _context66.abrupt("return");
 
                             case 11:
                               spaceRow = -1;
@@ -2888,26 +3316,26 @@ function _readyTableData() {
                               };
 
                               possible_tags_for_title = [".headers", ".caption", ".captions", ".article-table-caption"];
-                              _context63.t1 = _regenerator.default.keys(possible_tags_for_title);
+                              _context66.t1 = _regenerator.default.keys(possible_tags_for_title);
 
                             case 16:
-                              if ((_context63.t2 = _context63.t1()).done) {
-                                _context63.next = 23;
+                              if ((_context66.t2 = _context66.t1()).done) {
+                                _context66.next = 23;
                                 break;
                               }
 
-                              t = _context63.t2.value;
+                              t = _context66.t2.value;
                               htmlHeader = findHeader(tablePage, possible_tags_for_title[t]);
 
                               if (!(htmlHeader.totalTextChars > 0)) {
-                                _context63.next = 21;
+                                _context66.next = 21;
                                 break;
                               }
 
-                              return _context63.abrupt("break", 23);
+                              return _context66.abrupt("break", 23);
 
                             case 21:
-                              _context63.next = 16;
+                              _context66.next = 16;
                               break;
 
                             case 23:
@@ -2931,11 +3359,11 @@ function _readyTableData() {
 
                               formattedPage = actual_table.indexOf("tr:hover" < 0) ? "<div><style>" + data_ss + "</style>" + actual_table + "</div>" : actual_table; // var formattedPage = "<div>"+actual_table+"</div>"
 
-                              _context63.next = 34;
+                              _context66.next = 34;
                               return attempt_predictions(actual_table);
 
                             case 34:
-                              predictions = _context63.sent;
+                              predictions = _context66.sent;
                               terms_matrix = predictions.map(function (e) {
                                 return e.terms.map(function (term) {
                                   return prepare_cell_text(term);
@@ -2990,7 +3418,7 @@ function _readyTableData() {
 
                             case 45:
                               if (!(c < max_col)) {
-                                _context63.next = 75;
+                                _context66.next = 75;
                                 break;
                               }
 
@@ -3018,11 +3446,11 @@ function _readyTableData() {
                               });
 
                               if (content_types_in_column.total_text >= content_types_in_column.total_numeric) {
-                                _context63.next = 49;
+                                _context66.next = 49;
                                 break;
                               }
 
-                              return _context63.abrupt("continue", 72);
+                              return _context66.abrupt("continue", 72);
 
                             case 49:
                               unique_modifiers_in_column = class_matrix.map(function (x) {
@@ -3030,15 +3458,15 @@ function _readyTableData() {
                               }).map(cleanModifier).filter(function (v, i, a) {
                                 return a.indexOf(v) === i;
                               });
-                              _context63.t3 = _regenerator.default.keys(unique_modifiers_in_column);
+                              _context66.t3 = _regenerator.default.keys(unique_modifiers_in_column);
 
                             case 51:
-                              if ((_context63.t4 = _context63.t3()).done) {
-                                _context63.next = 72;
+                              if ((_context66.t4 = _context66.t3()).done) {
+                                _context66.next = 72;
                                 break;
                               }
 
-                              u = _context63.t4.value;
+                              u = _context66.t4.value;
                               unique_modifier = unique_modifiers_in_column[u];
                               column_data = preds_matrix.map(function (x, i) {
                                 return [x[c], i];
@@ -3086,23 +3514,23 @@ function _readyTableData() {
                                 }
                               }
 
-                              _context63.t5 = METHOD;
-                              _context63.next = _context63.t5 === "grouped_predictor" ? 60 : 68;
+                              _context66.t5 = METHOD;
+                              _context66.next = _context66.t5 === "grouped_predictor" ? 60 : 68;
                               break;
 
                             case 60:
                               all_terms = column_terms[unique_modifier] ? column_terms[unique_modifier].join(" ") : "";
 
                               if (!(column_terms[unique_modifier] && all_terms && column_terms[unique_modifier].length > 1 && all_terms.length > 0)) {
-                                _context63.next = 67;
+                                _context66.next = 67;
                                 break;
                               }
 
-                              _context63.next = 64;
+                              _context66.next = 64;
                               return grouped_predictor(all_terms);
 
                             case 64:
-                              descriptors = _context63.sent;
+                              descriptors = _context66.sent;
                               descriptors = descriptors[all_terms].split(";");
                               col_top_descriptors[col_top_descriptors.length] = {
                                 descriptors: descriptors,
@@ -3111,7 +3539,7 @@ function _readyTableData() {
                               };
 
                             case 67:
-                              return _context63.abrupt("break", 70);
+                              return _context66.abrupt("break", 70);
 
                             case 68:
                               descriptors = getTopDescriptors(3, column_data.freqs, ["arms", "undefined"]);
@@ -3122,26 +3550,27 @@ function _readyTableData() {
                               };
 
                             case 70:
-                              _context63.next = 51;
+                              _context66.next = 51;
                               break;
 
                             case 72:
                               c++;
-                              _context63.next = 45;
+                              _context66.next = 45;
                               break;
 
                             case 75:
                               // Estimate row predictions
-                              row_top_descriptors = [];
-                              _context63.t6 = _regenerator.default.keys(preds_matrix);
+                              row_top_descriptors = []; // debugger
+
+                              _context66.t6 = _regenerator.default.keys(preds_matrix);
 
                             case 77:
-                              if ((_context63.t7 = _context63.t6()).done) {
-                                _context63.next = 100;
+                              if ((_context66.t7 = _context66.t6()).done) {
+                                _context66.next = 100;
                                 break;
                               }
 
-                              r = _context63.t7.value;
+                              r = _context66.t7.value;
                               content_types_in_row = content_type_matrix[r].reduce(function (countMap, word) {
                                 switch (word) {
                                   case "numeric":
@@ -3164,11 +3593,11 @@ function _readyTableData() {
                               });
 
                               if (content_types_in_row.total_text >= content_types_in_row.total_numeric) {
-                                _context63.next = 82;
+                                _context66.next = 82;
                                 break;
                               }
 
-                              return _context63.abrupt("continue", 77);
+                              return _context66.abrupt("continue", 77);
 
                             case 82:
                               row_data = preds_matrix[r].reduce(function (countMap, word) {
@@ -3198,23 +3627,23 @@ function _readyTableData() {
 
                                 return allTerms;
                               }, []);
-                              _context63.t8 = METHOD;
-                              _context63.next = _context63.t8 === "grouped_predictor" ? 88 : 96;
+                              _context66.t8 = METHOD;
+                              _context66.next = _context66.t8 === "grouped_predictor" ? 88 : 96;
                               break;
 
                             case 88:
                               all_terms = row_terms.join(" ");
 
                               if (!(row_terms.length > 1)) {
-                                _context63.next = 95;
+                                _context66.next = 95;
                                 break;
                               }
 
-                              _context63.next = 92;
+                              _context66.next = 92;
                               return grouped_predictor(all_terms);
 
                             case 92:
-                              descriptors = _context63.sent;
+                              descriptors = _context66.sent;
                               descriptors = descriptors[all_terms].split(";");
                               row_top_descriptors[row_top_descriptors.length] = {
                                 descriptors: descriptors,
@@ -3223,7 +3652,7 @@ function _readyTableData() {
                               };
 
                             case 95:
-                              return _context63.abrupt("break", 98);
+                              return _context66.abrupt("break", 98);
 
                             case 96:
                               descriptors = getTopDescriptors(3, row_data.freqs, ["undefined"]);
@@ -3234,13 +3663,14 @@ function _readyTableData() {
                               };
 
                             case 98:
-                              _context63.next = 77;
+                              _context66.next = 77;
                               break;
 
                             case 100:
                               predicted = {
                                 cols: col_top_descriptors,
-                                rows: row_top_descriptors // res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
+                                rows: row_top_descriptors,
+                                predictions: predictions // res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
 
                               };
                               resolve({
@@ -3253,29 +3683,38 @@ function _readyTableData() {
 
                             case 102:
                             case "end":
-                              return _context63.stop();
+                              return _context66.stop();
                           }
                         }
-                      }, _callee63, this, [[0, 7]]);
+                      }, _callee66, this, [[0, 7]]);
                     }));
 
-                    return function (_x127, _x128) {
+                    return function (_x128, _x129) {
                       return _ref51.apply(this, arguments);
                     };
                   }());
                 });
               } catch (e) {
-                reject(e);
+                reject({
+                  status: "bad"
+                });
               }
             });
-            return _context64.abrupt("return", result);
+            return _context67.abrupt("return", result);
 
-          case 10:
+          case 13:
+            _context67.prev = 13;
+            _context67.t0 = _context67["catch"](0);
+            return _context67.abrupt("return", {
+              status: "bad"
+            });
+
+          case 16:
           case "end":
-            return _context64.stop();
+            return _context67.stop();
         }
       }
-    }, _callee64, this);
+    }, _callee67, this, [[0, 13]]);
   }));
   return _readyTableData.apply(this, arguments);
 }
@@ -3283,28 +3722,28 @@ function _readyTableData() {
 app.get('/api/getTable',
 /*#__PURE__*/
 function () {
-  var _ref44 = (0, _asyncToGenerator2.default)(
+  var _ref43 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee44(req, res) {
+  _regenerator.default.mark(function _callee43(req, res) {
     var tableData;
-    return _regenerator.default.wrap(function _callee44$(_context44) {
+    return _regenerator.default.wrap(function _callee43$(_context43) {
       while (1) {
-        switch (_context44.prev = _context44.next) {
+        switch (_context43.prev = _context43.next) {
           case 0:
-            _context44.prev = 0;
+            _context43.prev = 0;
 
             if (!(req.query && req.query.docid && req.query.page && available_documents[req.query.docid] && available_documents[req.query.docid].pages.indexOf(req.query.page) > -1)) {
-              _context44.next = 8;
+              _context43.next = 8;
               break;
             }
 
-            _context44.next = 4;
+            _context43.next = 4;
             return readyTableData(req.query.docid, req.query.page);
 
           case 4:
-            tableData = _context44.sent;
+            tableData = _context43.sent;
             res.send(tableData);
-            _context44.next = 9;
+            _context43.next = 9;
             break;
 
           case 8:
@@ -3314,13 +3753,13 @@ function () {
             });
 
           case 9:
-            _context44.next = 15;
+            _context43.next = 15;
             break;
 
           case 11:
-            _context44.prev = 11;
-            _context44.t0 = _context44["catch"](0);
-            console.log(_context44.t0);
+            _context43.prev = 11;
+            _context43.t0 = _context43["catch"](0);
+            console.log(_context43.t0);
             res.send({
               status: "probably page out of bounds, or document does not exist",
               query: req.query
@@ -3328,14 +3767,14 @@ function () {
 
           case 15:
           case "end":
-            return _context44.stop();
+            return _context43.stop();
         }
       }
-    }, _callee44, this, [[0, 11]]);
+    }, _callee43, this, [[0, 11]]);
   }));
 
-  return function (_x112, _x113) {
-    return _ref44.apply(this, arguments);
+  return function (_x113, _x114) {
+    return _ref43.apply(this, arguments);
   };
 }());
 app.get('/api/getAvailableTables', function (req, res) {
@@ -3344,62 +3783,62 @@ app.get('/api/getAvailableTables', function (req, res) {
 app.get('/api/getAnnotations',
 /*#__PURE__*/
 function () {
-  var _ref45 = (0, _asyncToGenerator2.default)(
+  var _ref44 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee45(req, res) {
-    return _regenerator.default.wrap(function _callee45$(_context45) {
+  _regenerator.default.mark(function _callee44(req, res) {
+    return _regenerator.default.wrap(function _callee44$(_context44) {
       while (1) {
-        switch (_context45.prev = _context45.next) {
+        switch (_context44.prev = _context44.next) {
           case 0:
-            _context45.t0 = res;
-            _context45.next = 3;
+            _context44.t0 = res;
+            _context44.next = 3;
             return getAnnotationResults();
 
           case 3:
-            _context45.t1 = _context45.sent;
+            _context44.t1 = _context44.sent;
 
-            _context45.t0.send.call(_context45.t0, _context45.t1);
+            _context44.t0.send.call(_context44.t0, _context44.t1);
 
           case 5:
           case "end":
-            return _context45.stop();
+            return _context44.stop();
         }
       }
-    }, _callee45, this);
+    }, _callee44, this);
   }));
 
-  return function (_x114, _x115) {
-    return _ref45.apply(this, arguments);
+  return function (_x115, _x116) {
+    return _ref44.apply(this, arguments);
   };
 }());
 app.get('/api/deleteAnnotation',
 /*#__PURE__*/
 function () {
-  var _ref46 = (0, _asyncToGenerator2.default)(
+  var _ref45 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee47(req, res) {
+  _regenerator.default.mark(function _callee46(req, res) {
     var deleteAnnotation;
-    return _regenerator.default.wrap(function _callee47$(_context47) {
+    return _regenerator.default.wrap(function _callee46$(_context46) {
       while (1) {
-        switch (_context47.prev = _context47.next) {
+        switch (_context46.prev = _context46.next) {
           case 0:
             deleteAnnotation =
             /*#__PURE__*/
             function () {
-              var _ref47 = (0, _asyncToGenerator2.default)(
+              var _ref46 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee46(docid, page, user) {
+              _regenerator.default.mark(function _callee45(docid, page, user) {
                 var client, done;
-                return _regenerator.default.wrap(function _callee46$(_context46) {
+                return _regenerator.default.wrap(function _callee45$(_context45) {
                   while (1) {
-                    switch (_context46.prev = _context46.next) {
+                    switch (_context45.prev = _context45.next) {
                       case 0:
-                        _context46.next = 2;
+                        _context45.next = 2;
                         return pool.connect();
 
                       case 2:
-                        client = _context46.sent;
-                        _context46.next = 5;
+                        client = _context45.sent;
+                        _context45.next = 5;
                         return client.query('DELETE FROM annotations WHERE docid = $1 AND page = $2 AND "user" = $3', [docid, page, user]).then(function (result) {
                           return console.log("Annotation deleted: " + new Date());
                         }).catch(function (e) {
@@ -3409,32 +3848,32 @@ function () {
                         });
 
                       case 5:
-                        done = _context46.sent;
+                        done = _context45.sent;
 
                       case 6:
                       case "end":
-                        return _context46.stop();
+                        return _context45.stop();
                     }
                   }
-                }, _callee46, this);
+                }, _callee45, this);
               }));
 
-              return function deleteAnnotation(_x118, _x119, _x120) {
-                return _ref47.apply(this, arguments);
+              return function deleteAnnotation(_x119, _x120, _x121) {
+                return _ref46.apply(this, arguments);
               };
             }();
 
             if (!(req.query && req.query.docid && req.query.page && req.query.user)) {
-              _context47.next = 7;
+              _context46.next = 7;
               break;
             }
 
-            _context47.next = 4;
+            _context46.next = 4;
             return deleteAnnotation(req.query.docid, req.query.page, req.query.user);
 
           case 4:
             res.send("done");
-            _context47.next = 8;
+            _context46.next = 8;
             break;
 
           case 7:
@@ -3442,39 +3881,39 @@ function () {
 
           case 8:
           case "end":
-            return _context47.stop();
+            return _context46.stop();
         }
       }
-    }, _callee47, this);
+    }, _callee46, this);
   }));
 
-  return function (_x116, _x117) {
-    return _ref46.apply(this, arguments);
+  return function (_x117, _x118) {
+    return _ref45.apply(this, arguments);
   };
 }());
 app.get('/api/getAnnotationByID',
 /*#__PURE__*/
 function () {
-  var _ref48 = (0, _asyncToGenerator2.default)(
+  var _ref47 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee48(req, res) {
+  _regenerator.default.mark(function _callee47(req, res) {
     var page, user, annotations, final_annotations, r, ann, existing, final_annotations_array, entry;
-    return _regenerator.default.wrap(function _callee48$(_context48) {
+    return _regenerator.default.wrap(function _callee47$(_context47) {
       while (1) {
-        switch (_context48.prev = _context48.next) {
+        switch (_context47.prev = _context47.next) {
           case 0:
             if (!(req.query && req.query.docid && req.query.docid.length > 0)) {
-              _context48.next = 13;
+              _context47.next = 13;
               break;
             }
 
             page = req.query.page && req.query.page.length > 0 ? req.query.page : 1;
             user = req.query.user && req.query.user.length > 0 ? req.query.user : "";
-            _context48.next = 5;
+            _context47.next = 5;
             return getAnnotationByID(req.query.docid, page, user);
 
           case 5:
-            annotations = _context48.sent;
+            annotations = _context47.sent;
             final_annotations = {};
             /**
             * There are multiple versions of the annotations. When calling reading the results from the database, here we will return only the latest/ most complete version of the annotation.
@@ -3511,7 +3950,7 @@ function () {
               res.send({});
             }
 
-            _context48.next = 14;
+            _context47.next = 14;
             break;
 
           case 13:
@@ -3521,34 +3960,34 @@ function () {
 
           case 14:
           case "end":
-            return _context48.stop();
+            return _context47.stop();
         }
       }
-    }, _callee48, this);
+    }, _callee47, this);
   }));
 
-  return function (_x121, _x122) {
-    return _ref48.apply(this, arguments);
+  return function (_x122, _x123) {
+    return _ref47.apply(this, arguments);
   };
 }());
 app.get('/api/recordAnnotation',
 /*#__PURE__*/
 function () {
-  var _ref49 = (0, _asyncToGenerator2.default)(
+  var _ref48 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee49(req, res) {
-    return _regenerator.default.wrap(function _callee49$(_context49) {
+  _regenerator.default.mark(function _callee48(req, res) {
+    return _regenerator.default.wrap(function _callee48$(_context48) {
       while (1) {
-        switch (_context49.prev = _context49.next) {
+        switch (_context48.prev = _context48.next) {
           case 0:
             console.log(JSON.stringify(req.query));
 
             if (!(req.query && req.query.docid.length > 0 && req.query.page.length > 0 && req.query.user.length > 0 && req.query.annotation.length > 0)) {
-              _context49.next = 4;
+              _context48.next = 4;
               break;
             }
 
-            _context49.next = 4;
+            _context48.next = 4;
             return insertAnnotation(req.query.docid, req.query.page, req.query.user, {
               annotations: JSON.parse(req.query.annotation)
             }, req.query.corrupted, req.query.tableType, req.query.corrupted_text);
@@ -3559,16 +3998,59 @@ function () {
 
           case 5:
           case "end":
-            return _context49.stop();
+            return _context48.stop();
         }
       }
-    }, _callee49, this);
+    }, _callee48, this);
   }));
 
-  return function (_x123, _x124) {
-    return _ref49.apply(this, arguments);
+  return function (_x124, _x125) {
+    return _ref48.apply(this, arguments);
   };
 }());
 app.listen(_config.PORT, function () {
   console.log('Express Server running on port ' + _config.PORT + ' ' + new Date().toISOString());
-});
+}); //////////////////  Evaluation bit.
+// var runDocuments = async () => {
+//   console.log("getting all predictions")
+//
+//   var predictions = "user,docid,page,corrupted,tableType,location,number,content,qualifiers\n"
+//
+//   var count = 1;
+//
+//   for ( var a in available_documents){
+//     for ( var p in available_documents[a].pages ) {
+//       console.log(a+"  --  "+p+"  --  "+count+" / "+DOCS.length)
+//       count = count + 1;
+//
+//       try {
+//        var page = available_documents[a].pages[p]
+//        var docid = a
+//        var data = await readyTableData(docid,page)
+//
+//        if ( data.status == "bad" ){
+//          console.log(a+"  --  "+p+"  --  "+"failed")
+//          continue;
+//        } else {
+//          console.log("good")
+//        }
+//
+//        debugger
+//
+//        for ( var c in data.predicted.cols) {
+//          var col = data.predicted.cols[c]
+//          predictions += ["auto_"+METHOD,docid,page,false,"na","Col",(parseInt(col.c)+1),col.descriptors.join(";"),col.unique_modifier.split(" ").join(";")].join(",")+"\n"
+//        }
+//
+//        for ( var r in data.predicted.rows) {
+//          var row = data.predicted.rows[r]
+//          predictions += ["auto_"+METHOD,docid,page,false,"na","Row",(parseInt(row.c)+1),row.descriptors.join(";"),row.unique_modifier.split(" ").join(";")].join(",")+"\n"
+//        }
+//      } catch (e){
+//        console.log("failed")
+//      }
+//     }
+//   }
+// }
+//
+// runDocuments();

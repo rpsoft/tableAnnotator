@@ -67,6 +67,8 @@ class AnnotationView extends Component {
     var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
 
+    var filter_group = urlparams["filter_group"] ? urlparams["filter_group"].split("_") : []
+
 
 
     this.state = {
@@ -92,7 +94,8 @@ class AnnotationView extends Component {
         deleteEnabled: false,
         filter_topics : filter_topics,
         filter_type : filter_type,
-        hideUnannotated : urlparams["hua"] ? urlparams["hua"] == "true" : false
+        hideUnannotated : urlparams["hua"] ? urlparams["hua"] == "true" : false,
+        filter_group : filter_group,
     };
   }
 
@@ -107,6 +110,7 @@ class AnnotationView extends Component {
 
     var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
+    var filter_group = urlparams["filter_group"] ? urlparams["filter_group"].split("_") : []
 
     let fetch = new fetchData();
 
@@ -147,7 +151,8 @@ class AnnotationView extends Component {
       deleteEnabled: false,
       filter_topics : filter_topics,
       filter_type : filter_type,
-      hideUnannotated : urlparams["hua"] ? urlparams["hua"] == "true" : false
+      hideUnannotated : urlparams["hua"] ? urlparams["hua"] == "true" : false,
+      filter_group : filter_group,
     })
 
     if( !this.state.preview ){
@@ -169,6 +174,7 @@ class AnnotationView extends Component {
 
     var filter_topics = urlparams["filter_topic"] ? urlparams["filter_topic"].split("_") : []
     var filter_type = urlparams["filter_type"] ? urlparams["filter_type"].split("_") : []
+    var filter_group = urlparams["filter_group"] ? urlparams["filter_group"].split("_") : []
 
     var hua = urlparams["hua"] ? urlparams["hua"] == "true" : false
 
@@ -201,8 +207,8 @@ class AnnotationView extends Component {
         }
 
         var allInfo;
-        if ( (filter_topics.length + filter_type.length) > 0){
-          allInfo = JSON.parse(await fetch.getAllInfo(filter_topics.join("_"), filter_type.join("_"), hua))
+        if ( (filter_topics.length + filter_type.length + filter_group.length) > 0){
+          allInfo = JSON.parse(await fetch.getAllInfo(filter_topics.join("_"), filter_type.join("_"), hua, filter_group.join("_")))
 
         } else {
           allInfo = JSON.parse(await fetch.getAllInfo())
@@ -247,7 +253,8 @@ class AnnotationView extends Component {
             deleteEnabled: false,
             filter_topics : filter_topics,
             filter_type : filter_type,
-            hideUnannotated : hua
+            hideUnannotated : hua,
+            filter_group : filter_group,
           })
         } else {
           this.setState({
@@ -265,7 +272,8 @@ class AnnotationView extends Component {
             deleteEnabled: false,
             filter_topics : filter_topics,
             filter_type : filter_type,
-            hideUnannotated : hua
+            hideUnannotated : hua,
+            filter_group : filter_group,
           })
         }
 
@@ -553,6 +561,7 @@ class AnnotationView extends Component {
        return ""
                + (this.state.filter_topics.length > 0 ? "&filter_topic="+encodeURIComponent(this.state.filter_topics.join("_")) : "")
                + (this.state.filter_type.length > 0 ? "&filter_type="+encodeURIComponent(this.state.filter_type.join("_")) : "")
+               + (this.state.filter_group.length > 0 ? "&filter_group="+encodeURIComponent(this.state.filter_group.join("_")) : "")
    }
 
    render() {
@@ -733,6 +742,7 @@ class AnnotationView extends Component {
                      newTitleSubgroup={this.state.newTitleSubgroup}
                      filterTopic={this.state.filter_topic}
                      filterType={this.state.filter_type}
+                     filter_group={this.state.filter_group}
                      />
 
 

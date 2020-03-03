@@ -64,6 +64,7 @@ const cui_def_csvWriter = createCsvWriter({
         {id: 'matchedtext', title: 'matchedText'},
         {id: 'preferred', title: 'preferred'},
         {id: 'hasmsh', title: 'hasMSH'},
+        {id: 'semTypes',title: 'semTypes'}
     ]
 });
 
@@ -98,6 +99,7 @@ function cleanTerm (term){
 function extractMMData (r) {
   try{
     r = JSON.parse(r)
+    // debugger
     r = r.AllDocuments[0].Document.Utterances.map(
                     utterances => utterances.Phrases.map(
                       phrases => phrases.Mappings.map(
@@ -106,12 +108,14 @@ function extractMMData (r) {
                                     CUI:candidate.CandidateCUI,
                                     matchedText: candidate.CandidateMatched,
                                     preferred: candidate.CandidatePreferred,
-                                    hasMSH: candidate.Sources.indexOf("MSH") > -1
+                                    hasMSH: candidate.Sources.indexOf("MSH") > -1,
+                                    semTypes: candidate.SemTypes.join(";")
                                  })
                                )
                              )
                            )
                          ).flat().flat().flat()
+
 
     // This removes duplicate cuis
     r = r.reduce( (acc,el) => {if ( acc.cuis.indexOf(el.CUI) < 0 ){acc.cuis.push(el.CUI); acc.data.push(el)}; return acc }, {cuis: [], data: []} ).data
@@ -124,8 +128,7 @@ function extractMMData (r) {
 async function askMM(term){
   // debugger
   var mm_concepts = new Promise( function (resolve, reject) {
-
-      var dir = exec('curl -X POST -d "input='+term+'&args=-AItd+ --JSONf 2 --prune 2 -V USAbase" "http://localhost:8080/form" | tail -n +3 ', function(err, stdout, stderr) {
+      var dir = exec('curl -X POST -d "input='+term+'&args=-AsItd+ --JSONf 2 --prune 2 -V USAbase" "http://localhost:8080/form" | tail -n +3 ', function(err, stdout, stderr) {
         if (err) {
             reject(err)
         }
@@ -184,7 +187,7 @@ async function main(){
 
       cuis.push(conps[e].CUI)
 
-      cui_def_csvWriter.writeRecords( [{cui: conps[e].CUI, matchedtext: conps[e].matchedText, preferred: conps[e].preferred, hasmsh: conps[e].hasMSH}] )
+      cui_def_csvWriter.writeRecords( [{cui: conps[e].CUI, matchedtext: conps[e].matchedText, preferred: conps[e].preferred, hasmsh: conps[e].hasMSH, semTypes: conps[e].semTypes}] )
           .then(() => {
             //console.log("'"+conps[e].CUI+"','"+conps[e].matchedText+"','"+conps[e].preferred+"','"+conps[e].hasMSH+"'")
           });
