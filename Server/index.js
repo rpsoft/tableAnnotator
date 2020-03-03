@@ -3765,7 +3765,7 @@ function _readyTableData() {
 
                               cleanModifier = function cleanModifier(modifier) {
                                 // I used to .replace("firstCol","").replace("firstLastCol","") the modifier.
-                                modifier = modifier ? modifier : ""; //prevent blow up 
+                                modifier = modifier ? modifier : ""; //prevent blow up
 
                                 return modifier.replace("firstCol", "empty_row").replace("firstLastCol", "empty_row_with_p_value").replace("indent0", "indent").replace("indent1", "indent").replace("indent2", "indent").replace("indent3", "indent").replace("indent4", "indent").trim();
                               }; //Estimate column predictions.
@@ -3851,7 +3851,7 @@ function _readyTableData() {
                                 word = terms_matrix[i][c];
 
                                 if (unique_modifier === cleanModifier(class_matrix[i][c])) {
-                                  if (word.length > 0 && word != undefined) {
+                                  if (word && word.length > 0) {
                                     if (countMap[unique_modifier]) {
                                       countMap[unique_modifier].push(word);
                                     } else {
