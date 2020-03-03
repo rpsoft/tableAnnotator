@@ -58,7 +58,7 @@
     "bluebird": "^3.5.3",
     "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.5",
-    "csv-parser": "^2.3.0",
+    "csv-parser": "^2.3.2",
     "csv-reader": "^1.0.5",
     "csv-writer": "^1.6.0",
     "double-ended-queue": "^2.1.0-0",

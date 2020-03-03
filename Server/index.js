@@ -347,15 +347,15 @@ function prepare_cell_text(text) {
   return text.replace(/([^A-z0-9 ])/g, " $1 ").replace(/[0-9]+/g, ' $nmbr$ ').replace(/ +/g, " ").trim().toLowerCase();
 }
 
-function prepareAvailableDocuments(_x, _x2, _x3, _x4) {
+function prepareAvailableDocuments(_x, _x2, _x3, _x4, _x5) {
   return _prepareAvailableDocuments.apply(this, arguments);
 }
 
 function _prepareAvailableDocuments() {
   _prepareAvailableDocuments = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee50(filter_topic, filter_type, hua, filter_group) {
-    var ftop, ftyp, fgroup, type_lookup, i, filtered_docs_ttype, allAnnotations, all_annotated_docids, ordered_Splits, selected_group_docs, group_index, results;
+  _regenerator.default.mark(function _callee50(filter_topic, filter_type, hua, filter_group, filter_labelgroup) {
+    var ftop, ftyp, fgroup, flgroup, type_lookup, i, filtered_docs_ttype, allAnnotations, all_annotated_docids, ordered_Splits, labellers, selected_group_docs, group_index, results;
     return _regenerator.default.wrap(function _callee50$(_context50) {
       while (1) {
         switch (_context50.prev = _context50.next) {
@@ -364,6 +364,7 @@ function _prepareAvailableDocuments() {
             ftop = filter_topic ? filter_topic : [];
             ftyp = filter_type ? filter_type : [];
             fgroup = filter_group ? filter_group : [];
+            flgroup = filter_labelgroup ? filter_labelgroup : [];
             hua = hua;
             type_lookup = {
               "Baseline Characteristics": "baseline_table",
@@ -378,10 +379,10 @@ function _prepareAvailableDocuments() {
             }
 
             filtered_docs_ttype = [];
-            _context50.next = 9;
+            _context50.next = 10;
             return getAnnotationResults();
 
-          case 9:
+          case 10:
             allAnnotations = _context50.sent;
             all_annotated_docids = Array.from(new Set(allAnnotations.rows.reduce(function (acc, ann) {
               acc = acc ? acc : [];
@@ -403,6 +404,339 @@ function _prepareAvailableDocuments() {
             }
 
             ordered_Splits = [["30936738_1.html", "30936738_2.html", "30936738_3.html", "30936738_4.html", "30936738_5.html", "16508926_6.html", "27744141_2.html", "27098404_1.html", "30341453_1.html", "30341453_2.html"], ["16495392fig_2.html", "24907147_2.html", "24907147_3.html", "24907147_4.html", "24907147_5.html", "27502582_2.html", "30473179_3.html", "25047021_1.html", "27165179_2.html", "29338762_2.html"], ["27493790_2.html", "29299340_2.html", "30696483_2.html", "29409133_1.html", "28968735_2.html", "28968735_3.html", "29045207_2.html", "29685860fig_1.html", "20484828_2.html", "26589819_1.html"], ["19515181_2.html", "25414932_1.html", "26833744_2.html", "26833744_3.html", "30287422_2.html", "29937431_2.html", "25881510_2.html", "25772548_2.html", "29941478fig_1.html", "30425095_1.html"], ["30425095b_1.html", "27161178_2.html", "30609212_1.html", "30609212_2.html", "19210140_2.html", "26579834_1.html", "26579834_5.html", "26580237_3.html", "27299675_1.html", "29777264fig_1.html"], ["30393950_2.html", "19614946_2.html", "19614946_3.html", "26934128_2.html", "30614616_1.html", "30571562_2.html", "26786577_2.html", "18284434_2.html", "22672586_2.html", "30851070_1.html"], ["30830724_1.html", "30830724_2.html", "25468945_2.html", "25629790_2.html", "30882238_1.html", "19508464_1.html", "19508464_2.html", "30566006fig_1.html", "30566004_2.html", "30392095_2.html"], ["19650752_2.html", "30953107_1.html", "30953107_2.html", "21545947fig_2.html", "19917888app_1.html", "19917888fig_2.html", "17384437fig_1.html", "9036306_1.html", "18371559_1.html", "27395349_2.html"], ["27354044_3.html", "26541915_6.html", "26027630fig_1.html", "30183102fig_1.html", "15639688_2.html", "17560879_2.html", "27619750_3.html", "24411003_1.html", "25743173_2.html", "25743173_3.html"], ["19166691_2.html", "27956003_2.html", "27846344fig_2.html", "25135178_2.html", "25282519_2.html", "19190658_2.html", "20670726_2.html", "22747613_2.html", "22747613_3.html", "21925996_2.html"], ["21925996_3.html", "21925996_4.html", "24067881_2.html", "22504093_2.html", "30203005_2.html", "29857145_3.html", "29857145_4.html", "29857145_5.html", "29857145_6.html", "29857145_7.html"], ["21723220_1.html", "21723220_2.html", "21723220_3.html", "16267322_2.html", "22704916_2.html", "17634459_2.html", "20491747_2.html", "29909019_2.html", "29797519_1.html", "24120253_4.html"], ["20429821_2.html", "20429821_3.html", "20429821_4.html", "21227674_2.html", "20463178_2.html", "27609408_2.html", "24966672_3.html", "30815468_1.html", "30815468_2.html", "30815468_3.html"], ["27087007_1.html", "27316465_2.html", "27316465_3.html", "27316465_4.html", "27316465_5.html", "27215749_3.html", "27715335_2.html", "18511702_2.html", "21627828_2.html", "21627828_3.html"], ["27039236_2.html", "21586508_2.html", "28558833_2.html", "28558833_3.html", "29413502_2.html", "21875546_2.html", "23040786_2.html", "28903864_2.html", "30053967fig_1.html", "20925534_2.html"], ["20925534_3.html", "29073947_2.html", "26994121_2.html", "25787199_2.html", "24727254_2.html", "26059896fig_2.html", "20385930fig_2.html", "19389561fig_2.html", "21816478_2.html", "7997016_1.html"], ["9603532_1.html", "9848888_2.html", "18479744_2.html", "24780614_3.html", "17244641_2.html", "26630143_2.html", "26304934_2.html", "19915221_2.html", "8950879_1.html", "30659410_1.html"], ["30659410_2.html", "30659410_3.html", "30465321_2.html", "30465321_3.html", "30465321_4.html", "30465321_5.html", "30465321_6.html", "26547918_2.html", "22316106_2.html", "22436129_2.html"], ["22709460_2.html", "23564919_2.html", "23683134_2.html", "24251359_3.html", "26093161_1.html", "26578849_2.html", "27103795_1.html", "27207971_1.html", "27387994_1.html", "27496855_1.html"]];
+            labellers = {
+              "23529173_3": "lili",
+              "15851647_2": "David",
+              "30729456_2": "David",
+              "17113426_2": "David",
+              "12205648_2": "David",
+              "28882235_2": "lili",
+              "16508926_4": "David",
+              "28818881_2": "David",
+              "20801500_2": "lili",
+              "30882239_3": null,
+              "30352894_1": "Elaine",
+              "30525116_2": "lili",
+              "18032739_2": "lili",
+              "19001508_2": "lili",
+              "26627989_2": "David",
+              "19917888_2": "lili",
+              "30830724_5": null,
+              "26151264_2": "lili",
+              "17846352_2": "lili",
+              "15659722_1": "lili",
+              "21209123_2": "Elaine",
+              "15851647_3": "Vicky",
+              "11527638_1": "lili",
+              "29028981_3": "Elaine",
+              "17097378_1": "Elaine",
+              "11419425_2": "lili",
+              "27465265_2": "lili",
+              "29299340_2": "Elaine",
+              "15659722_2": "lili",
+              "23735746_2": "Elaine ",
+              "26541915_2": "lili",
+              "29146124_3": "lili",
+              "18757089_2": "lili",
+              "30248105_3": "David",
+              "8121459_2": "lili",
+              "20979470_3": "David",
+              "16380589_2": "David",
+              "28382371_2": "lili",
+              "30591006_2": null,
+              "19717850_2": "lili",
+              "24842697_3": "lili",
+              "30609212_3": null,
+              "22235820_3": "lili",
+              "29132880_2": "lili",
+              "17804843_2": "David",
+              "20621900_2": "lili",
+              "19683639_2": "lili",
+              "15238590_1": null,
+              "30525116_4": "lili",
+              "23465037_2": "Elaine",
+              "17470434_2": "David",
+              "21332630_2": "Elaine",
+              "27576775_2": "lili",
+              "19336502_2": "David",
+              "30830724_3": null,
+              "23992602_2": null,
+              "20801495_2": "lili",
+              "17456819_2": null,
+              "20393175_3": "Elaine",
+              "21128814_3": "lili",
+              "23964932_2": "Elaine",
+              "25681464_2": "lili",
+              "29544870_2": "lili",
+              "20883926_2": "lili",
+              "28882235_3": "lili",
+              "25465416_2": "lili",
+              "12899584_2": "David",
+              "28316279_2": "lili",
+              "28847206_2": "lili",
+              "27313282_2": "lili",
+              "28801539_3": "lili",
+              "29544870_4": "lili",
+              "18451347_2": "David",
+              "25046337_2": "David",
+              "12803733_2": "Elaine",
+              "19409693_2": "Elaine",
+              "28118533_2": "David",
+              "17292766_4": "David",
+              "29406853_2": "lili",
+              "30026335_2": "Elaine",
+              "18227370_2": "lili",
+              "17846352_3": "lili",
+              "28902593_2": "lili",
+              "12479763_1": null,
+              "30830724_4": null,
+              "25465417_2": "lili",
+              "24621834_2": "lili",
+              "27144849_2": "David",
+              "30614616_2": null,
+              "14657064_2": "David",
+              "22443427_2": "lili",
+              "22443427_3": "lili",
+              "23425163_2": "lili",
+              "18972097_1": "lili",
+              "16508926_3": "David",
+              "15051694_2": null,
+              "23216615_2": "lili",
+              "23500237_2": "lili",
+              "23726159_2": "lili",
+              "30696483_1": "Elaine",
+              "26491109_2": "lili",
+              "25728587_3": "Elaine",
+              "22490878_3": "lili",
+              "25698905_2": "lili",
+              "21216833_2": "lili",
+              "19850525_2": "lili",
+              "24842697_2": "lili",
+              "12803733_3": "Elaine",
+              "26054553_2": "David",
+              "28899222_2": "Elaine",
+              "24283598_2": "lili",
+              "17060377_3": "lili",
+              "21642014_3": "Elaine",
+              "28573499_3": "lili",
+              "26653621_2": "lili",
+              "29685860_2": "lili",
+              "22490878_1": "lili",
+              "30525116_3": "lili",
+              "27612281_2": "Elaine",
+              "12803733_5": "Elaine",
+              "23812596_2": "Elaine",
+              "20163842_2": "Elaine",
+              "30654882_1": "lili",
+              "27659566_3": "lili",
+              "26475142_3": "lili",
+              "30882239_5": null,
+              "20925544_3": "lili",
+              "30586757_4": null,
+              "29132879_4": "lili",
+              "26762525_2": "lili",
+              "21645018_2": "Elaine",
+              "20393175_4": "Elaine",
+              "18753638_2": "lili",
+              "22490878_2": "lili",
+              "28801539_4": "lili",
+              "19336502_3": "David",
+              "30371334_6": "lili",
+              "17398308_2": "David",
+              "29132879_3": "lili",
+              "27765312_2": "lili",
+              "29146124_2": "lili",
+              "28189475_2": "lili",
+              "28801539_2": "lili",
+              "10438259_1": "David",
+              "18227370_5": "lili",
+              "24716680_3": "lili",
+              "26762525_3": "lili",
+              "27935736_2": "lili",
+              "28467869_3": "Elaine",
+              "22085343_1": "lili",
+              "30734043_2": "lili",
+              "21871706_2": "Elaine",
+              "25182247_2": "David",
+              "18753639_3": "lili",
+              "30248105_2": "David",
+              "19447387_3": "David",
+              "27144849_4": "David",
+              "26446706_1": "lili",
+              "23529173_2": "lili",
+              "20801495_3": "lili",
+              "26052984_2": "David",
+              "12456232_2": "David",
+              "25792124_2": "lili",
+              "30465321_3": "Elaine",
+              "30026335_3": "Elaine",
+              "18674411_2": "David",
+              "19596014_2": "Elaine",
+              "26754626_2": "lili",
+              "27589414_2": "David",
+              "29544870_3": "lili",
+              "28473423_2": "Elaine",
+              "18227370_3": "lili",
+              "26471380_2": "lili",
+              "10438259_2": "David",
+              "27708114_2": "David",
+              "18667204_2": "David",
+              "30586757_6": null,
+              "30865796_2": "lili",
+              "24664227_2": "Elaine",
+              "29028981_2": "Elaine",
+              "25728587_2": "Elaine",
+              "15028365_1": "Vicky",
+              "28246237_2": "lili",
+              "15998891_2": "Elaine",
+              "27672117_2": "David",
+              "30830724_6": null,
+              "30882238_2": null,
+              "28573499_2": "lili",
+              "21545947_3": "lili",
+              "19470885_2": "David",
+              "29685860_1": "lili",
+              "17304660_2": "David",
+              "20393175_2": "Elaine",
+              "19704100_2": "lili",
+              "16572114_2": "Elaine",
+              "27616196_4": null,
+              "27959607_2": "Elaine",
+              "25002161_2": "lili",
+              "10789664_1": "David",
+              "29793629_2": "lili",
+              "19369667_2": "David",
+              "19847908_2": "David",
+              "17065671_2": "Elaine",
+              "27335114_2": "lili",
+              "18753639_2": "lili",
+              "27612281_3": "Elaine",
+              "17470824_2": "Elaine",
+              "26699168_2": "David",
+              "22396585_2": "lili",
+              "26792812_2": "Elaine",
+              "22337213_2": "lili",
+              "29307087_2": "David",
+              "27190009_2": "Elaine",
+              "20883926_3": "lili",
+              "17984166_2": "lili",
+              "25399274_2": "David",
+              "15579515_2": "David",
+              "25406305_2": "lili",
+              "26547918_2": "Elaine",
+              "26135703_2": "Elaine",
+              "20979470_2": "David",
+              "27144849_3": "David",
+              "27647847_2": "lili",
+              "29045207_2": "Elaine",
+              "17259484_2": "David",
+              "26338971_2": "lili",
+              "21128814_2": "lili",
+              "18676075_2": "lili",
+              "28382371_3": "lili",
+              "26523993_2": "lili",
+              "27418597_2": "lili",
+              "18398080_2": "lili",
+              "25354738_2": "Elaine",
+              "28968735_3": "Elaine",
+              "20484828_1": "David",
+              "29132879_2": "lili",
+              "23451835_2": "lili",
+              "23128104_2": "David",
+              "14724302_2": "David",
+              "20436046_3": "David",
+              "24184169_2": "lili",
+              "25176136_2": "lili",
+              "17292766_5": "David",
+              "26523993_3": "lili",
+              "16508926_5": "David",
+              "12456232_3": "David",
+              "22470539_2": "lili",
+              "25773268_2": "lili",
+              "16533938_2": "lili",
+              "30465321_2": "Elaine",
+              "26886418_2": "lili",
+              "19201775_2": "Elaine",
+              "24727258_2": "lili",
+              "30696483_2": "Elaine",
+              "27589414_1": "David",
+              "27576559_2": "Elaine",
+              "27144849_1": "David",
+              "12601075_2": "David",
+              "22235820_2": "lili",
+              "15028365_2": "Vicky",
+              "30586757_5": null,
+              "18537526_2": "lili",
+              "30609212_2": null,
+              "25637937_2": "lili",
+              "28279891_2": "lili",
+              "28801539_5": "lili",
+              "24839241_2": "Elaine",
+              "22932716_2": "lili",
+              "27046162_2": "lili",
+              "19447387_2": "David",
+              "30591006_3": null,
+              "30465321_4": "Elaine",
+              "17634458_2": "Elaine",
+              "30667279_1": "lili",
+              "30352894_2": "Elaine ",
+              "27144849_5": "David",
+              "18000186_2": "lili",
+              "28844192_2": "lili",
+              "30248105_4": "David",
+              "30882239_4": null,
+              "23473369_2": "lili",
+              "25698905_3": "lili",
+              "29084736_2": "lili",
+              "28300867_2": "lili",
+              "20707767_1": "Vicky",
+              "18821708_2": "David",
+              "18227370_4": "lili",
+              "30465321_5": "Elaine",
+              "24119319_2": "Elaine",
+              "19726772_2": "lili",
+              "17384437_1": null,
+              "22335737_1": "lili",
+              "16495392_2": "David",
+              "16714187_2": "lili",
+              "28968735_2": "Elaine",
+              "28467869_2": "Elaine",
+              "19917888_3": "lili",
+              "12803733_4": "Elaine",
+              "17097378_2": "Elaine",
+              "21502549_2": "lili",
+              "26400827_3": "lili",
+              "20678878_2": "lili",
+              "18757090_2": "lili",
+              "30851070_2": null,
+              "28975241_2": "lili",
+              "16651474_1": "lili",
+              "22576673_2": "lili",
+              "17292766_3": "David",
+              "17060377_2": "lili",
+              "22672586_2": null,
+              "30465321_6": "Elaine",
+              "20436046_2": "David",
+              "27639327_2": "Elaine",
+              "15883637_2": "Elaine",
+              "29409133_1": "Elaine",
+              "23425163_3": "lili",
+              "20925544_2": "lili",
+              "15049402_2": "David",
+              "12243636_1": null,
+              "12899584_1": null,
+              "19567517_2": "Elaine",
+              "26374849_2": "lili",
+              "27046160_2": "lili",
+              "29490509_2": "Elaine",
+              "28573499_4": "lili",
+              "25455006_2": "lili",
+              "22305835_2": "lili",
+              "30851070_3": null,
+              "15537681_2": "lili",
+              "23325525_1": "David",
+              "27659566_2": "lili"
+            };
             selected_group_docs = [];
 
             for (i in fgroup) {
@@ -428,6 +762,10 @@ function _prepareAvailableDocuments() {
               };
 
               fs.readdir(tables_folder, function (err, items) {
+                var label_filters = flgroup;
+                var labelled = Object.keys(labellers);
+                debugger;
+
                 if (selected_group_docs.length > 0) {
                   DOCS = selected_group_docs;
                 } else {
@@ -541,13 +879,13 @@ function _prepareAvailableDocuments() {
                 }
               });
             });
-            _context50.next = 19;
+            _context50.next = 21;
             return results;
 
-          case 19:
+          case 21:
             return _context50.abrupt("return", _context50.sent);
 
-          case 20:
+          case 22:
           case "end":
             return _context50.stop();
         }
@@ -629,7 +967,7 @@ function _getMetadataLabellers() {
   return _getMetadataLabellers.apply(this, arguments);
 }
 
-function getAnnotationByID(_x5, _x6, _x7) {
+function getAnnotationByID(_x6, _x7, _x8) {
   return _getAnnotationByID.apply(this, arguments);
 }
 
@@ -678,7 +1016,7 @@ console.log(process.cwd()); //   sgd = pickle.load(open("./src/sgd_multiterm.sav
 
 python.ex(_templateObject2());
 
-function classify(_x8) {
+function classify(_x9) {
   return _classify.apply(this, arguments);
 }
 
@@ -727,7 +1065,7 @@ function _classify() {
   return _classify.apply(this, arguments);
 }
 
-function grouped_predictor(_x9) {
+function grouped_predictor(_x10) {
   return _grouped_predictor.apply(this, arguments);
 }
 
@@ -763,7 +1101,7 @@ function _grouped_predictor() {
   return _grouped_predictor.apply(this, arguments);
 }
 
-function attempt_predictions(_x10) {
+function attempt_predictions(_x11) {
   return _attempt_predictions.apply(this, arguments);
 }
 
@@ -849,7 +1187,7 @@ function _attempt_predictions() {
                 }, _callee56, this, [[0, 21]]);
               }));
 
-              return function (_x126, _x127) {
+              return function (_x127, _x128) {
                 return _ref49.apply(this, arguments);
               };
             }());
@@ -865,7 +1203,7 @@ function _attempt_predictions() {
   return _attempt_predictions.apply(this, arguments);
 }
 
-function insertAnnotation(_x11, _x12, _x13, _x14, _x15, _x16, _x17) {
+function insertAnnotation(_x12, _x13, _x14, _x15, _x16, _x17, _x18) {
   return _insertAnnotation.apply(this, arguments);
 }
 
@@ -1015,7 +1353,7 @@ function () {
     }, _callee, this);
   }));
 
-  return function (_x18, _x19) {
+  return function (_x19, _x20) {
     return _ref.apply(this, arguments);
   };
 }());
@@ -1048,7 +1386,7 @@ function () {
     }, _callee2, this);
   }));
 
-  return function (_x20, _x21) {
+  return function (_x21, _x22) {
     return _ref2.apply(this, arguments);
   };
 }());
@@ -1078,7 +1416,7 @@ function () {
     }, _callee3, this);
   }));
 
-  return function (_x22, _x23) {
+  return function (_x23, _x24) {
     return _ref3.apply(this, arguments);
   };
 }());
@@ -1139,7 +1477,7 @@ function () {
                 }, _callee4, this);
               }));
 
-              return function modifyCUIData(_x26, _x27, _x28, _x29) {
+              return function modifyCUIData(_x27, _x28, _x29, _x30) {
                 return _ref5.apply(this, arguments);
               };
             }();
@@ -1169,7 +1507,7 @@ function () {
     }, _callee5, this);
   }));
 
-  return function (_x24, _x25) {
+  return function (_x25, _x26) {
     return _ref4.apply(this, arguments);
   };
 }());
@@ -1220,7 +1558,7 @@ function () {
                 }, _callee6, this);
               }));
 
-              return function cuiDeleteIndex(_x32) {
+              return function cuiDeleteIndex(_x33) {
                 return _ref7.apply(this, arguments);
               };
             }();
@@ -1249,7 +1587,7 @@ function () {
     }, _callee7, this);
   }));
 
-  return function (_x30, _x31) {
+  return function (_x31, _x32) {
     return _ref6.apply(this, arguments);
   };
 }());
@@ -1296,7 +1634,7 @@ function () {
                 }, _callee8, this);
               }));
 
-              return function getCuiTables(_x35) {
+              return function getCuiTables(_x36) {
                 return _ref9.apply(this, arguments);
               };
             }(); //console.log(req.query)
@@ -1328,7 +1666,7 @@ function () {
     }, _callee9, this);
   }));
 
-  return function (_x33, _x34) {
+  return function (_x34, _x35) {
     return _ref8.apply(this, arguments);
   };
 }());
@@ -1379,7 +1717,7 @@ function () {
                 }, _callee10, this);
               }));
 
-              return function setMetadata(_x38, _x39, _x40) {
+              return function setMetadata(_x39, _x40, _x41) {
                 return _ref11.apply(this, arguments);
               };
             }();
@@ -1408,7 +1746,7 @@ function () {
     }, _callee11, this);
   }));
 
-  return function (_x36, _x37) {
+  return function (_x37, _x38) {
     return _ref10.apply(this, arguments);
   };
 }());
@@ -1459,7 +1797,7 @@ function () {
                 }, _callee12, this);
               }));
 
-              return function setMetadata(_x43, _x44, _x45, _x46, _x47, _x48, _x49, _x50, _x51, _x52) {
+              return function setMetadata(_x44, _x45, _x46, _x47, _x48, _x49, _x50, _x51, _x52, _x53) {
                 return _ref13.apply(this, arguments);
               };
             }();
@@ -1488,7 +1826,7 @@ function () {
     }, _callee13, this);
   }));
 
-  return function (_x41, _x42) {
+  return function (_x42, _x43) {
     return _ref12.apply(this, arguments);
   };
 }());
@@ -1535,7 +1873,7 @@ function () {
                 }, _callee14, this);
               }));
 
-              return function getMetadata(_x55, _x56, _x57) {
+              return function getMetadata(_x56, _x57, _x58) {
                 return _ref15.apply(this, arguments);
               };
             }();
@@ -1570,7 +1908,7 @@ function () {
     }, _callee15, this);
   }));
 
-  return function (_x53, _x54) {
+  return function (_x54, _x55) {
     return _ref14.apply(this, arguments);
   };
 }());
@@ -1598,13 +1936,13 @@ function () {
               return acc;
             }, {});
 
-            if (!(req.query && (req.query.filter_topic || req.query.filter_type || req.query.hua || req.query.filter_group))) {
+            if (!(req.query && (req.query.filter_topic || req.query.filter_type || req.query.hua || req.query.filter_group || req.query.filter_labelgroup))) {
               _context16.next = 14;
               break;
             }
 
             _context16.next = 7;
-            return prepareAvailableDocuments(req.query.filter_topic ? req.query.filter_topic.split("_") : [], req.query.filter_type ? req.query.filter_type.split("_") : [], req.query.hua ? req.query.hua == "true" : false, req.query.filter_group ? req.query.filter_group.split("_") : []);
+            return prepareAvailableDocuments(req.query.filter_topic ? req.query.filter_topic.split("_") : [], req.query.filter_type ? req.query.filter_type.split("_") : [], req.query.hua ? req.query.hua == "true" : false, req.query.filter_group ? req.query.filter_group.split("_") : [], req.query.filter_labelgroup ? req.query.filter_labelgroup.split("_") : []);
 
           case 7:
             result = _context16.sent;
@@ -1638,12 +1976,12 @@ function () {
     }, _callee16, this);
   }));
 
-  return function (_x58, _x59) {
+  return function (_x59, _x60) {
     return _ref16.apply(this, arguments);
   };
 }());
 
-function updateClusterAnnotation(_x60, _x61, _x62, _x63, _x64) {
+function updateClusterAnnotation(_x61, _x62, _x63, _x64, _x65) {
   return _updateClusterAnnotation.apply(this, arguments);
 }
 
@@ -1805,7 +2143,7 @@ function () {
     }, _callee17, this);
   }));
 
-  return function (_x65, _x66) {
+  return function (_x66, _x67) {
     return _ref17.apply(this, arguments);
   };
 }());
@@ -1874,7 +2212,7 @@ function () {
     }, _callee19, this);
   }));
 
-  return function (_x67, _x68) {
+  return function (_x68, _x69) {
     return _ref18.apply(this, arguments);
   };
 }());
@@ -1943,7 +2281,7 @@ function () {
     }, _callee21, this);
   }));
 
-  return function (_x69, _x70) {
+  return function (_x70, _x71) {
     return _ref20.apply(this, arguments);
   };
 }());
@@ -2012,7 +2350,7 @@ function () {
     }, _callee23, this);
   }));
 
-  return function (_x71, _x72) {
+  return function (_x72, _x73) {
     return _ref22.apply(this, arguments);
   };
 }());
@@ -2081,7 +2419,7 @@ function () {
     }, _callee25, this);
   }));
 
-  return function (_x73, _x74) {
+  return function (_x74, _x75) {
     return _ref24.apply(this, arguments);
   };
 }());
@@ -2132,7 +2470,7 @@ function () {
                 }, _callee26, this);
               }));
 
-              return function setCUIMod(_x77, _x78) {
+              return function setCUIMod(_x78, _x79) {
                 return _ref27.apply(this, arguments);
               };
             }();
@@ -2153,7 +2491,7 @@ function () {
     }, _callee27, this);
   }));
 
-  return function (_x75, _x76) {
+  return function (_x76, _x77) {
     return _ref26.apply(this, arguments);
   };
 }());
@@ -2222,7 +2560,7 @@ function () {
     }, _callee29, this);
   }));
 
-  return function (_x79, _x80) {
+  return function (_x80, _x81) {
     return _ref28.apply(this, arguments);
   };
 }());
@@ -2276,7 +2614,7 @@ function () {
                 }, _callee30, this);
               }));
 
-              return function setClusterData(_x83, _x84, _x85, _x86, _x87) {
+              return function setClusterData(_x84, _x85, _x86, _x87, _x88) {
                 return _ref31.apply(this, arguments);
               };
             }();
@@ -2300,7 +2638,7 @@ function () {
     }, _callee31, this);
   }));
 
-  return function (_x81, _x82) {
+  return function (_x82, _x83) {
     return _ref30.apply(this, arguments);
   };
 }());
@@ -2335,7 +2673,7 @@ function () {
     }, _callee32, this);
   }));
 
-  return function (_x88, _x89) {
+  return function (_x89, _x90) {
     return _ref32.apply(this, arguments);
   };
 }());
@@ -2413,7 +2751,7 @@ function () {
     }, _callee34, this);
   }));
 
-  return function (_x90, _x91) {
+  return function (_x91, _x92) {
     return _ref33.apply(this, arguments);
   };
 }());
@@ -2466,7 +2804,7 @@ function () {
                 }, _callee35, this);
               }));
 
-              return function insertCUI(_x94, _x95, _x96) {
+              return function insertCUI(_x95, _x96, _x97) {
                 return _ref36.apply(this, arguments);
               };
             }();
@@ -2490,7 +2828,7 @@ function () {
     }, _callee36, this);
   }));
 
-  return function (_x92, _x93) {
+  return function (_x93, _x94) {
     return _ref35.apply(this, arguments);
   };
 }());
@@ -2806,7 +3144,7 @@ function () {
     }, _callee37, this);
   }));
 
-  return function (_x97, _x98) {
+  return function (_x98, _x99) {
     return _ref37.apply(this, arguments);
   };
 }()); // Generates the results table live preview, connecting to the R API.
@@ -2920,7 +3258,7 @@ function () {
     }, _callee38, this, [[0, 18]]);
   }));
 
-  return function (_x99, _x100) {
+  return function (_x100, _x101) {
     return _ref38.apply(this, arguments);
   };
 }());
@@ -2993,7 +3331,7 @@ function () {
     }, _callee39, this);
   }));
 
-  return function (_x101, _x102) {
+  return function (_x102, _x103) {
     return _ref39.apply(this, arguments);
   };
 }());
@@ -3012,7 +3350,7 @@ app.get('/api/totalTables', function (req, res) {
   });
 });
 
-function getMMatch(_x103) {
+function getMMatch(_x104) {
   return _getMMatch.apply(this, arguments);
 }
 
@@ -3106,7 +3444,7 @@ function () {
     }, _callee40, this, [[0, 11]]);
   }));
 
-  return function (_x104, _x105) {
+  return function (_x105, _x106) {
     return _ref40.apply(this, arguments);
   };
 }());
@@ -3173,7 +3511,7 @@ function () {
     }, _callee41, this);
   }));
 
-  return function (_x106, _x107) {
+  return function (_x107, _x108) {
     return _ref41.apply(this, arguments);
   };
 }());
@@ -3213,12 +3551,12 @@ function () {
     }, _callee42, this);
   }));
 
-  return function (_x108, _x109) {
+  return function (_x109, _x110) {
     return _ref42.apply(this, arguments);
   };
 }());
 
-function readyTableData(_x110, _x111, _x112) {
+function readyTableData(_x111, _x112, _x113) {
   return _readyTableData.apply(this, arguments);
 }
 
@@ -3689,7 +4027,7 @@ function _readyTableData() {
                       }, _callee66, this, [[0, 7]]);
                     }));
 
-                    return function (_x128, _x129) {
+                    return function (_x129, _x130) {
                       return _ref51.apply(this, arguments);
                     };
                   }());
@@ -3773,7 +4111,7 @@ function () {
     }, _callee43, this, [[0, 11]]);
   }));
 
-  return function (_x113, _x114) {
+  return function (_x114, _x115) {
     return _ref43.apply(this, arguments);
   };
 }());
@@ -3807,7 +4145,7 @@ function () {
     }, _callee44, this);
   }));
 
-  return function (_x115, _x116) {
+  return function (_x116, _x117) {
     return _ref44.apply(this, arguments);
   };
 }());
@@ -3858,7 +4196,7 @@ function () {
                 }, _callee45, this);
               }));
 
-              return function deleteAnnotation(_x119, _x120, _x121) {
+              return function deleteAnnotation(_x120, _x121, _x122) {
                 return _ref46.apply(this, arguments);
               };
             }();
@@ -3887,7 +4225,7 @@ function () {
     }, _callee46, this);
   }));
 
-  return function (_x117, _x118) {
+  return function (_x118, _x119) {
     return _ref45.apply(this, arguments);
   };
 }());
@@ -3966,7 +4304,7 @@ function () {
     }, _callee47, this);
   }));
 
-  return function (_x122, _x123) {
+  return function (_x123, _x124) {
     return _ref47.apply(this, arguments);
   };
 }());
@@ -4004,7 +4342,7 @@ function () {
     }, _callee48, this);
   }));
 
-  return function (_x124, _x125) {
+  return function (_x125, _x126) {
     return _ref48.apply(this, arguments);
   };
 }());
