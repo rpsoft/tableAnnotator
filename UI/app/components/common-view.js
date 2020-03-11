@@ -249,14 +249,14 @@ class CommonView extends Component {
                       <MultiplePopover
                                      value={this.arrayToObject(this.state.group)}
                                      variable={"Annotation Batches"}
-                                     options={[...range(1, 19)]}
+                                     options={[...range(1, 15)]}
                                      updateAnnotation={ (values) => { this.setFilters(this.arrayToObject(this.state.tableTopic), this.arrayToObject(this.state.tableType), values, this.arrayToObject(this.state.labelgroup)) } }
                               />
 
                       <MultiplePopover
                                      value={this.arrayToObject(this.state.labelgroup)}
                                      variable={"Labelling Batches"}
-                                     options={[...range(1,53)]}
+                                     options={[...range(1,44)]}
                                      updateAnnotation={ (values) => { this.setFilters(this.arrayToObject(this.state.tableTopic), this.arrayToObject(this.state.tableType), this.arrayToObject(this.state.group), values) } }
                               />
 

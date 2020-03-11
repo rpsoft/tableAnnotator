@@ -1,0 +1,162 @@
+﻿PMID,Subgroup Variable,Subgroup Level Names
+19508464,Medical History:  triglyceride level at baseline,<200 mg/dl / ≥200 mg/dl
+30659410,Medical History: 25(OH)D Sufficiency category,Sufficient / Insufficient
+30571562,Medical History: Acute Serum Creatinine increase,≥30% / 20-29% / 10-19% / <10%
+27576559,Medical History: Affected Body Region,Trunk / Upper Limbs / Lower Limbs
+12205648,Medical History: Alzheimer's Severity (MMSE Score catagories),MMSE 12-20 / 21-26 
+16139123,Medical History: Aspirin Use at Baseline,With / Without
+26589819,Medical History: Baseline CHD,CHD / No CHD
+22747613,Medical History: Baseline EOS serum K+ Levels,Baseline and EOS >3.9 / Baseline > 3.9 and EOS <=3.9 / Baseline <=3.9 and EOS >3.9 or <= 3.9
+27672117,Medical History: Baseline FVC % Predicted,>90% / <=90%
+25135178,Medical History: Baseline HDL-C level,<=60 / >60-<=90 / >90 mg/dL
+29143919,Medical History: Baseline Hemoglobin A1c,<=8% / 8%<HbA1c<=9% / HbA1c>9%
+26524706,Medical History: Baseline Hemoglobin A1c,<7% / 7-<8% / 8-<9% / >9%
+22193143,Medical History: Baseline Hemoglobin A1c,<=7.5% / >7.5-8% / >8-8.5% / >9%
+30465321,Medical History: Baseline Itch NRS,4-6 / 7-8 / 9-10
+16278257,Medical History: Baseline Nasal Congestion Score,>2.5 / >2.75 / 3
+21332627,Medical History: Baseline renel impairment ,Moderate / Severe / ESRD
+27912982,Medical History: Baseline Symptom Frequency (days per week),0 to 1 / >1 to <=2 / >2
+20723849,Medical History: CADILLAC Risk,Low / Intermediate / High
+28720336,Medical History: CAT Score,>= 10 / >=15 / >=20
+22084332,Medical History: CHADS2 Score,0-1 / 2 / 3-6
+20883926,Medical History: Coenzyme Q10 Concentration at baseline,Tertile 1 / Tertile 2 / Tertile 3
+23812596,Medical History: Cognitive Impairment,No CI / CI
+11937179,Medical History: Diabetes,No other data reported
+22396585,Medical History: Diabetes,No Diabetes / Diabetes at baseline / incident diabetes
+19349325,Medical History: Diabetes at baseline,With / Without
+26093161,Medical History: Diabetes at baseline,DM / without DM
+18537526,Medical History: Diabetes at baseline,With DM / Without DM
+25681464,Medical History: Diabetes at baseline,Diabetes Mellitus  / No Diabetes Mellitus 
+28300867,Medical History: Diabetes at baseline,Diabetes / No Diabetes
+27046160,Medical History: Diabetes at baseline,No Diabetes / Diabetes
+30302940,Medical History: Diabetes at Baseline,Diabetes / No Diabetes
+30851070,Medical History: Diabetes Duration at baseline,<5 / 5-<15 / 15-<25 / >=25 years
+28948656,Medical History: Diabetes mellitus,Diabetes / No Diabetes
+26523993,Medical History: Diabetes mellitus,Diabetes / No Diabetes
+17058629,Medical History: Diabetes or Metabolic Sydrome at Baseline,Diabetes Mellitus / Metabolic syndrome / Neither
+11104295,Medical History: digital blood pressure responses to cooling,10 / 15 / 20 / 30
+22704916,Medical History: Disease Duration,<2 years / 2-<5 years / >=5 year
+30191421,Medical History: DMARD use at baseline,DMARD+ / DMARD-
+27395349,Medical History: duration since Prior HF Hospitalisation ,<3 / 3-6 / 6-12 />12 months / No prior
+18676075,Medical History: eGFR at baseline,Normal or increased / mildly decreased / moderate or severe decrease
+22490878,Medical History: eGFR at baseline,≥90 / 60-89 / <60
+16801465,Medical History: eGFR at baseline,<45.0 / 45-59.9 / 60-74.9 / >75  
+29941478,Medical History: eGFR at baseline,<45 / 45-<60 / 60-<90 /  ≥90
+19001024,Medical History: Ejection Fraction data,PEF/ REF/ No EF Data
+29431256,Medical History: Ejection Fraction data,<40% / 40-49% / >= 50%
+27039236,Medical History: FAO status,FAO+ / FAO- / Inconsistant
+22432932,Medical History: FEV1 at baseline,>=60 %
+30203580,Medical History: GAD antibody presence,GAD + / GAD - 
+19447387,Medical History: Glucose metabolism at baseline,impared / normal
+19716598,Medical History: GOLD stage,stage II 
+12803733,Medical History: HbA1c at baseline,≥9% / <9%
+25765696,Medical History: Heart Failure at baseline,History / No History
+20801495,Medical History: Heart Rate at Baseline,70-<72/ 72-<75/ 75<80/ 80-<87/ ≥87
+30882238,Medical History: HF at baseline,HFrEF / HF without known reduced EF / No hx of HF
+19917888,Medical History: hs-CRP level at baseline,<2.0 / ≥2.0 mg/L 
+27609678,Medical History: Increased Risk of Falling,At increased risk / not at increased risk
+23117723,Medical History: Ischemic Stroke ,Ischemic Stroke Patients
+30354517,Medical History: LDL level,<50 / 50-70 / >70 mg/dL
+28520924,Medical History: LVH diagnosis,Absent / Present
+27796912,Medical History: Maintenance-naïve,Maintenance Naïve
+18000186,Medical History: Metabolic Syndrome at baseline,With MetS / Without MetS
+18370800,Medical History: Metabolic Syndrome at baseline,With MetS / Without MetS
+22573644,Medical History: Metabolic Syndrome At Baseline,Metbolic Syndrome / No Metabolic Sydrome
+23279632,Medical History: Metabolic Syndrome At Baseline,With MetS / Without MetS
+25787199,Medical History: MI,MI / without MI
+19688336,Medical History: MMSE Score at baseline,>=28/ 24-27/ ≤23
+26238672,Medical History: MTX dose at baseline,<15 / >=15 mg/week
+29406853,Medical History: Multivessel Coronary Disease,MVD / No MVD
+29903515,Medical History: NAFLD Fibrosis Score,Low Risk / High Risk
+20436046,Medical History: NYHA class II/III CHF and a left ventricular ejection fraction ≤0.40 at baseline ,NYHA II/III patients with LVEF ≤0.40 at baseline
+20484828,Medical History: PAD severity at baseline,Complicated with PAD / newly diagnosed PAD / Without PAD
+23501976,Medical History: Peripheral Artery Disease at baseline,PAD cohort
+27098404,Medical History: Physician reported Spondylitis at baseline,Spondylitis patients
+29777264,Medical History: Previous CABG,History / No History
+21059484,Medical History: Previous Stroke or TIA,Previous / No Previous
+27387994,Medical History: Previous Stroke/TIA,Previous / No Previous
+15734614,Medical History: Prior Atrial Fibrillation,Atrial fibrillation/ Nonatrial fibrillation
+28679611,Medical History: Prior Hospitalisation,With / Without
+22932716,Medical History: Prior MI,MI cohort
+30566004,Medical History: Prior MI or Stroke,Prior MI or Stroke / CVD without MI or Stroke / CV Risk Factors Alone
+29447769,Medical History: Prior Stroke,Prior / No Prior
+24323795,Medical History: Renal Function Level,≥80 / 50-<80 / <50 mL/min
+25552421,Medical History: Renal Function Level,>50 / 30-50 / <30 mL/min/1.73m3
+27493790,Medical History: Rheumatoid arthritis duratio,Early / Established
+16116047,Medical History: Risk,Low / High
+28231942,Medical History: Risk of recurrent CV events,Low / Intermediate / High
+19704100,Medical History: Seattle Heart Failure Model quintiles,1 / 2 / 3 / 4 / 5
+20707767,Medical History: Severe overactive bladder,Severe OAB group
+27708114,Medical History: Statin Use at Baseline,Users / Non-users
+27267268,Medical History: SUIT Quartile,1 / 2 / 3 / 4
+30341453,Medical History: Symptom Duration,≤3 months / >3-≤6 months / >6 months
+29661699,Medical History: T2 Diabetes at baseline,Diabetes / No Diabetes
+20151997,Medical History: T2DM or MetS at baseline,Neither / MetS without T2D / T2D
+28924103,Medical History: Time since initial stroke event,<6 months / >=6 months
+25657183,Medical History: Type of prior stroke,TACI / PACI / POCI / LACI
+21723220,Medical History: Week 8 Mayo Endoscopy Subscore,0 / 1 / 2 / 3
+21939839,Medical History: Week 8 Mayo Endoscopy Subscore,0 / 1 / 2 / 3
+29307087,Medical History: WHO FC Symptoms at baseline,WHO FC II / WHO FC III
+30183102,Medical Histroy: Diabetes at baseline,Diabetes / No Diabetes
+27589414,Patient Variable: Age,>=65 
+28531241,Patient Variable: Age,65-74 / >=75
+27448534,Patient Variable: Age,<=50 / >50
+27161178,Patient Variable: Age,>=65 / <65
+24742013,Patient Variable: Age,<65 / ≥65
+28801539,Patient Variable: Age,<75 / ≥75
+27207971,Patient Variable: Age,<65 / 65-74 / >=75
+20670726,Patient Variable: Age,<60 / 60-<70 / 70-<80 / ≥80
+28213368,Patient Variable: Age,<75 / >=75-80 / >=80-85 / >=85
+27502866,Patient Variable: Age,<=54 / 55-64 / 65-74 / >=75
+25758769,Patient Variable: Age,<65 / >= 65 / <75 / >=75
+17060377,Patient Variable: Age at randomisation,≤70 / >70
+17065671,Patient Variable: Age at randomisation,≥65 / <65
+17392541,Patient Variable: Age at randomisation,≥55 / <55
+19793357,Patient Variable: Age at randomisation,≥65 / <65
+24842697,Patient Variable: BMI,Normal / Overweight / Obese
+23219284,Patient Variable: BMI,Normal / Overweight / Obese
+20429821,Patient Variable: BMI at baseline,<20 / 20-24.9 / 25-29.9 / 30-34.9  / 35-39.9 / ≥40
+26934128,Patient Variable: consumed meal with the highest postprandial blood glucose level ,Breakfast / Lunch / Dinner
+21502969,Patient Variable: Ethnicity,European
+21680990,Patient Variable: Ethnicity,US
+22913890,Patient Variable: Ethnicity,Hispanic Patients
+23672632,Patient Variable: Ethnicity,Chinese Patients
+30425195,Patient Variable: Ethnicity,Chinese Patients
+26039935,Patient Variable: Ethnicity,Japanese Patients
+30729456,Patient Variable: Ethnicity,Chinese Patients
+25354738,Patient Variable: Ethnicity,Japanese Patients
+29743836,Patient Variable: Ethnicity,East Asian
+30200078,Patient Variable: Ethnicity,Latin American
+29128192,Patient Variable: Ethnicity,Japan
+25406305,Patient Variable: Ethnicity,Americas / Russia and Georgia
+23743976,Patient Variable: Ethnicity,Asian / Non-Asian
+22248871,Patient Variable: Ethnicity,Afican Americans / Caucasians
+26179767,Patient Variable: Ethnicity,East Asian / Non-East Asian
+27600862,Patient Variable: Ethnicity,Patients from hot climates / other climates
+27313282,Patient Variable: Ethnicity,US / Non-US
+26704701,Patient Variable: Ethnicity,Japanese Patients  / Non-Japanese Patients  
+27482610,Patient Variable: Ethnicity,Hispanic or Non-Hispanic
+27354044,Patient Variable: Ethnicity,North America / Western Europe / Central or Eastern Europe and Russia / Latin America / Asia-Pacific
+12409542,Patient Variable: Gender,Male / Female
+23529173,Patient Variable: Gender,Male / Female
+20385930,Patient Variable: Gender,Male / Female
+20418083,Patient Variable: Gender,Male / Female
+29151034,Patient Variable: Gender,Male / Female
+18259029,Patient Variable: Gender,Male / Female
+26762525,Patient Variable: Gender,Male / Female
+28939567,Patient Variable: Gender,Male / Female
+26762481,Patient Variable: Gender,Male / Female
+22470539,Patient Variable: Genotype,CC / CT+TT / AA / AG+GG / GG / GT + TT
+28637881,Patient Variable: Physical Activity Level,Poor Activity / Intermediate / Ideal
+18813219,Patient Variable: Race,Asian 
+28544533,Patient Variable: Race,Asian
+15811979,Patient Variable: Race,Black / Non-Black
+29664406,Patient Variable: Race,Black / Non-Black
+22799613,Patient Variable: Race,Black / Non-Black
+17846352,Patient Variable: Race,Black Hispanic / White Hispanic / Black Non-hispanic / White non-hispanic
+22509859,Patient Variable: Race,White / Black or African American / Non-Hispanic Latino / Hispanic Latino
+26744025,Patient Variable: Race,White / Black or African American / Asian / Other
+28689179,Patient Variable: Response warfarin sensitivity due to genotype,Normal / Sensitive / Highly Sensitive
+25769357,Patient Variable: Warfarin response due to genotype,Normal / Sensitive / Highly Sensitive
+15103313,Patient Variable: Weekly Drink Consumption,None / 1-7 drinks / >8 drinks
+26400827,Treatment Arm: Access Site,Femoral OR Radial
