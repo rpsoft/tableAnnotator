@@ -337,7 +337,7 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua, filter_
 
   var selected_group_docs = []
 
-  if (fgroup.indexOf("all")){
+  if (fgroup == "all" || (fgroup.indexOf("all") > -1)){
     selected_group_docs = ordered_Splits.flat()
   } else {
     for ( i in fgroup ) {
@@ -349,7 +349,7 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua, filter_
 
   var selected_label_docs = []
 
-  if (flgroup.indexOf("all")){
+  if (flgroup == "all" || (flgroup.indexOf("all") > -1)){
     selected_label_docs = ordered_docs_to_label.flat()
   } else {
     for ( i in flgroup ) {
