@@ -32,7 +32,7 @@ import { push } from 'connected-react-router'
 import Checkbox from '@material-ui/core/Checkbox';
 
 import Annotation from './annotation'
-
+import Home from '@material-ui/icons/Home';
 import MultiplePopover from './MultiplePopover'
 
 import CommonStyles from './common-styles.css';
@@ -214,7 +214,8 @@ class CommonView extends Component {
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
 
         <Card style={{marginBottom:10}}>
-          <h2 style={{marginTop:0,padding:20}}>TableTidier Prototype</h2>
+          <Home style={{marginLeft:10, marginTop:10, float:"left",height:45,width:45, cursor:"pointer", marginRight:15}} onClick={() => this.props.goToUrl("/"+"?user="+(this.state.user ? this.state.user : "" ))}/>
+          <h2>TableTidier Prototype</h2>
         </Card>
 
         <Card id="userData" style={{padding:15,marginBottom:10}}>
@@ -249,14 +250,14 @@ class CommonView extends Component {
                       <MultiplePopover
                                      value={this.arrayToObject(this.state.group)}
                                      variable={"Annotation Batches"}
-                                     options={[...range(1, 15)]}
+                                     options={["all",...range(1, 15)]}
                                      updateAnnotation={ (values) => { this.setFilters(this.arrayToObject(this.state.tableTopic), this.arrayToObject(this.state.tableType), values, this.arrayToObject(this.state.labelgroup)) } }
                               />
 
                       <MultiplePopover
                                      value={this.arrayToObject(this.state.labelgroup)}
                                      variable={"Labelling Batches"}
-                                     options={[...range(1,44)]}
+                                     options={["all",...range(1,15)]}
                                      updateAnnotation={ (values) => { this.setFilters(this.arrayToObject(this.state.tableTopic), this.arrayToObject(this.state.tableType), this.arrayToObject(this.state.group), values) } }
                               />
 

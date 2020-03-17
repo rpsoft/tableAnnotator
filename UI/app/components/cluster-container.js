@@ -14,7 +14,7 @@ import ClusterView from './cluster-view';
 export default class ClusterContainer extends Component {
   render() {
     return (
-     <div id="maincontainer" style={{height:"calc(100%)",  backgroundSize: "52%",backgroundAttachment:"fixed", backgroundColor:"grey", paddingTop:10,paddingBottom:10, minWidth:1200}}>
+     <div id="maincontainer" style={{height:"calc(100%)",  backgroundSize: "52%",backgroundAttachment:"fixed", backgroundColor:"grey", paddingTop:10,paddingBottom:10}}>
        <MuiThemeProvider theme={ muiTheme }>
          <ClusterView {...this.props} />
        </MuiThemeProvider>

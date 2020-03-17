@@ -758,7 +758,7 @@ class AnnotationView extends Component {
                      />
 
 
-      return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
+      return <div  style={{paddingLeft:"1%",paddingRight:"5%"}} >
 
         {metaAnnotator}
 
@@ -925,7 +925,7 @@ class AnnotationView extends Component {
 
 
         <div style={{marginTop:10, position: "fixed", width: "100vw", bottom: 0, left:0, backgroundColor:"#00000061"}}>
-        <Card style={{padding:10,  paddingBottom:10, maxHeight:600, width: "90%",marginLeft:"5%",marginTop:3}}>
+        <Card style={{padding:10,  paddingBottom:10, maxHeight:600, width: "94%",marginLeft:"1%",marginTop:3}}>
 
         <RaisedButton variant={"contained"} onClick={ () => {this.setState({toggeLiveResults : this.state.toggeLiveResults ? false : true })} } style={{padding:5,marginBottom:10}}> Toggle Live Results </RaisedButton>
 
