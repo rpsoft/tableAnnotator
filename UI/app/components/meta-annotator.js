@@ -394,6 +394,8 @@ class MetaAnnotator extends Component {
                               var elems = concept_key.split(";")
                               var concept = elems[elems.length-1]
 
+			     var isLevel = this.state.concepts_indexing[concept] ? this.state.concepts_indexing[concept].category == "characteristic_level" : false;
+
                               return <MetaItem
                                                 key = {"concept_item_"+concept_key+"_"+i}
                                                 term = {concept}
@@ -403,7 +405,7 @@ class MetaAnnotator extends Component {
                                                 cuis_selected = { currentItem.cuis_selected }
                                                 qualifiers_selected = {currentItem.qualifiers_selected }
                                                 updateConceptData = {this.updateConceptData}
-                                                isLevel = {this.state.concepts_indexing[concept].category == "characteristic_level"}
+                                                isLevel = {isLevel}
                                                 istitle = {currentItem.istitle}
                                       />
                             })}
