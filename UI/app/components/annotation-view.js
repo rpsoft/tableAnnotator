@@ -544,8 +544,14 @@ class AnnotationView extends Component {
 
    addTitleSubgroup = () => {
      if ( this.state.newTitleSubgroup && this.state.newTitleSubgroup.length > 0){
+       var titleSgs = this.state.newTitleSubgroup.trim().split("\n")
+
        var sgs = this.state.titleSubgroups ? this.state.titleSubgroups : []
-       sgs.push(this.state.newTitleSubgroup)
+
+       for (t in titleSgs){
+         sgs.push(titleSgs[t])
+       }
+
        this.setState({newTitleSubgroup: "", titleSubgroups: sgs })
      }
    }
@@ -832,6 +838,7 @@ class AnnotationView extends Component {
                                 value={this.state.newTitleSubgroup}
                                 placeholder="Enter title subgroup here to add"
                                 style={{width:400}}
+                                multiline
                                 onChange={(event) => {this.setState({newTitleSubgroup: event.target.value})}}
                                 onKeyDown={(event, index) => {
                                   if (event.key === 'Enter') {

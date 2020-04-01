@@ -283,6 +283,7 @@ class MetaItem extends Component {
             >
               {
               this.state.dialogType === "cuiAdder" ? <TextField
+                autoFocus
                 inputRef={this.state.searchTextInput}
                 value={this.state.cuisearch}
                 placeholder="search concepts here"

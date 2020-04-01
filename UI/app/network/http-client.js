@@ -1,6 +1,6 @@
 import http from 'http'
 
-var hostname = "sephirhome.ddns.net" //"sephirhome.ddns.net"
+var hostname = "localhost" //"sephirhome.ddns.net"
 
 export default class HttpClient {
   constructor(config={}) {
