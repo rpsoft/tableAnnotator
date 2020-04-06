@@ -15,7 +15,7 @@ baseFolder <- "~/ihw/tableAnnotator/Server/src/"
 # setwd("~/ihw/tableAnnotator/Server/src")
 
 tablesDirectory <- "~/ihw/tableAnnotator/Server/HTML_TABLES_OVERRIDE/"
-new_obj <- readRDS(paste0(baseFolder,"Full_set_of_tables_Prepared.Rds"))
+# new_obj <- readRDS(paste0(baseFolder,"Full_set_of_tables_Prepared.Rds"))
 
 html_2_df <- function (pmid,page){
 
@@ -35,8 +35,16 @@ html_2_df <- function (pmid,page){
   
   
   df_tds <- data.frame("path"=xml_path(tds), "character"=xml_text(tds))
+  
   df_ps <- data.frame("path" = xml_path(ps), "attr" = xml_attr(ps, "class") )
   df_ps <- df_ps %>% mutate("path" = gsub("/p", "", path) )
+  
+  
+  strongs <- xml_text(xml_find_all(tds, ".//strong"))
+  df_tds_strong <- df_tds %>% mutate (hasStrong = character %in% strongs )
+  df_ps <- df_ps %>% inner_join(df_tds_strong) %>% mutate ( attr = paste0(attr," ",ifelse(hasStrong, "bold", "")) ) %>% select( path, attr)
+  
+  
   # debugger()
   possible_cols <- c(letters %>% str_to_upper(), c(outer(letters %>% str_to_upper() , letters %>% str_to_upper() , FUN=paste0)) )
   
@@ -51,6 +59,7 @@ html_2_df <- function (pmid,page){
   if(str_length(textHeader) > 0){
     newdata <- newdata %>% mutate( row = as.double(row)+1)
     header <- newdata %>% filter(NA)
+    newdata <- newdata %>% mutate ( col = ifelse(is.na(col), 1, col))
     maxcol <- as.integer(newdata$col ) %>% max()
     header <- data_frame(path=c("header"), character=c(NA), attr= c(NA), row=c(1), col=c(1:maxcol))
     header <- header %>% mutate(character=ifelse(col==1, textHeader, character))
@@ -594,9 +603,9 @@ function(req, anns = "" ) {
   # url <- paste0("http://localhost:6541/api/getTable?docid=11527638&page=1")
   # JsonData <- fromJSON(file= url )
   # 
-  # write_rds(anns, paste0(baseFolder,"last_out.rds"))
+  #write_rds(anns, paste0(baseFolder,"last_out.rds"))
   # 
-   #anns <- read_rds(paste0(baseFolder,"annsout.rds"))
+   # anns <- read_rds(paste0(baseFolder,"last_out.rds"))
   #print(anns)
   
   annotations <- anns$annotation %>% 
@@ -610,7 +619,7 @@ function(req, anns = "" ) {
     as_tibble()
   
   #print(annotations)
-  # annotations <- readRDS(paste0(baseFolder,"testing-annotations.rds"))
+  # annotations <- readRDS(paste0(b aseFolder,"testing-annotations.rds"))
   result <- value( future( runAll(annotations) ) )
   
   list(

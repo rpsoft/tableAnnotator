@@ -39,6 +39,15 @@ import TableCSS from './table.css';
 
 import MetaAnnotator from './meta-annotator';
 
+import EditIcon from '@material-ui/icons/Edit';
+import SaveIcon from '@material-ui/icons/Save';
+import RotateLeftIcon from '@material-ui/icons/RotateLeft';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
+
 import {
   Table,
   TableBody,
@@ -70,10 +79,6 @@ class AnnotationView extends Component {
     var filter_group = urlparams["filter_group"] ? urlparams["filter_group"].split("_") : []
     var filter_labelgroup = urlparams["filter_labelgroup"] ? urlparams["filter_labelgroup"].split("_") : []
 
-
-
-
-
     this.state = {
         user: urlparams["user"] ? urlparams["user"] : "",
         docid: urlparams["docid"] ? urlparams["docid"] : "",
@@ -100,6 +105,9 @@ class AnnotationView extends Component {
         hideUnannotated : urlparams["hua"] ? urlparams["hua"] == "true" : false,
         filter_group : filter_group,
         filter_labelgroup : filter_labelgroup,
+        toggleHeaderEdit : false,
+        headerEditText : "",
+        openedTab:0,
     };
   }
 
@@ -222,6 +230,9 @@ class AnnotationView extends Component {
           allInfo = JSON.parse(await fetch.getAllInfo())
 
         }
+        // debugger
+        // allInfo.abs_index = allInfo.abs_index.sort( (st_a,st_b) => {var dd = st_a.docid.localeCompare(st_b.docid); return dd == 0 ? parseInt(st_a.page) - parseInt(st_b.page) : dd} )
+
 
         var documentData = allInfo.available_documents[urlparams.docid]
         var current_table_g_index = documentData.abs_pos[documentData.pages.indexOf(urlparams.page)]
@@ -241,7 +252,13 @@ class AnnotationView extends Component {
         }
 
 
+        // debugger
+
         if ( annotation ){
+          // var theTableData = JSON.parse(data)
+
+
+
           this.setState({
             table: JSON.parse(data),
             docid : annotation.docid || urlparams.docid,
@@ -429,6 +446,30 @@ class AnnotationView extends Component {
 
    }
 
+   toggleHeaderEdit(){
+    var headerText = ""
+
+    try{
+      var el = document.createElement( 'html' )
+      el.innerHTML = this.state.table.htmlHeader
+      headerText = decodeURI(el.innerText)
+    } catch(e) {
+        console.log("probably empty header?")
+    }
+    this.setState({toggleHeaderEdit: this.state.toggleHeaderEdit ? false : true, headerEditText: headerText})
+   }
+
+   saveHeaderEdit(){
+
+     var tableData = this.state.table
+
+     tableData.htmlHeader = '<table><tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">'+this.state.headerEditText+'</td></tr></table>'
+
+     // debugger
+     this.setState({toggleHeaderEdit: false, table : tableData})
+
+     this.saveTableChanges()
+   }
 
    goToGIndex(index){
      if ( index > (this.state.allInfo.total-1)  ){
@@ -536,7 +577,7 @@ class AnnotationView extends Component {
 
      fetch.saveTableEdit( this.state.docid, this.state.page, tableToSave )
 
-     this.setState({editor_enabled : this.state.editor_enabled ? false : true})
+     this.setState({editor_enabled : false  })
 
      // this.getPreview()
      this.props.goToUrl("/table/?docid="+this.state.docid+"&page="+this.state.page+"&user="+this.state.user+this.formatFiltersForURL()+(this.state.hideUnannotated ? "&hua=true" : ""))
@@ -664,7 +705,7 @@ class AnnotationView extends Component {
                                 } else {
                                   return parseInt(bk) - parseInt(ak);
                                 }
-                              } else {
+                              } else {black
                                 if ( dir == "asc" ) {
                                   return ak.localeCompare(bk)
                                 } else {
@@ -683,8 +724,9 @@ class AnnotationView extends Component {
                                     data={data}
                                     columns={cols}
                                     style={{
-                                      height: "540px",
-                                      marginBottom: 10
+                                      height: "360px",
+                                      marginBottom: 10,
+                                      backgroundColor:"#f6f5f5"
 
                                     }}
                                     defaultPageSize={data.length}
@@ -692,10 +734,10 @@ class AnnotationView extends Component {
 
 
                 } else {
-                  preparedPreview = <div style={{marginTop:20}}>Table could not be produced. Try altering annotations, or move on</div>
+                  preparedPreview = <div style={{fontWeight:"bold", color:"grey", padding:10, marginTop:20}}>Table could not be produced. Try altering annotations, or move on</div>
                 }
               } else {
-                preparedPreview = <div style={{marginTop:20}}>Table could not be produced. Try altering annotations, or move on</div>
+                preparedPreview = <div style={{fontWeight:"bold", color:"grey", padding:10, paddingTop: 0,  marginTop:20}}>Table could not be produced. Try altering annotations, or move on</div>
               }
 
        }
@@ -768,7 +810,7 @@ class AnnotationView extends Component {
 
         {metaAnnotator}
 
-        <Card id="userData" style={{padding:15}}>
+        <Card id="userData" style={{padding:15, height: 85}}>
           <Home style={{float:"left",height:45,width:45, cursor:"pointer"}} onClick={() => this.props.goToUrl("/"+"?user="+(this.state.user ? this.state.user : "" )+this.formatFiltersForURL()+(this.state.hideUnannotated ? "&hua=true" : ""))}/>
 
           <TextField
@@ -803,23 +845,17 @@ class AnnotationView extends Component {
 
             />
             <RaisedButton variant={"contained"} style={{marginLeft:20}} onClick={ () => { this.goToGIndex(this.state.currentGPage) } }>Go!</RaisedButton>
+            <RaisedButton variant={"contained"} onClick={ () => {this.shiftTables(-1)} } style={{marginLeft:45,padding:5,marginRight:5}}>Previous Table</RaisedButton>
+            <RaisedButton variant={"contained"} onClick={ () => {this.shiftTables(1)} } style={{padding:5,marginRight:45}}>Next Table</RaisedButton>
+            <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} } style={{float:"right", fontWeight:"bolder"}}>Show Saved Changes <Refresh style={{marginLeft:5}}/></RaisedButton>
+
+            <Checkbox checked={this.state.deleteEnabled}
+                  onChange={ (event,data) => {this.setState({deleteEnabled : this.state.deleteEnabled ? false : true}) } }> </Checkbox>
+            <RaisedButton variant={"contained"} onClick={ this.deleteAnnotation } style={{padding:5,marginRight:5, backgroundColor : this.state.deleteEnabled ? "red" : "gray"}}>Delete Annotation <DeleteIcon style={{marginLeft:5}}/></RaisedButton>
           </div>
 
           <div>{previousAnnotations}</div>
 
-          <div style={{float:"right", position: "relative", top: -45}}>
-
-                      <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} } style={{margin:1,marginRight:5,fontWeight:"bolder"}}><Refresh />Show Saved Changes</RaisedButton>
-                      <RaisedButton variant={"contained"} onClick={ () => {this.shiftTables(-1)} } style={{padding:5,marginRight:5}}>Previous Table</RaisedButton>
-                      <RaisedButton variant={"contained"} onClick={ () => {this.shiftTables(1)} } style={{padding:5,marginRight:5}}>Next Table</RaisedButton>
-
-          </div>
-
-          <div>
-              <Checkbox checked={this.state.deleteEnabled}
-                    onChange={ (event,data) => {this.setState({deleteEnabled : this.state.deleteEnabled ? false : true}) } }> </Checkbox>
-              <RaisedButton variant={"contained"} onClick={ this.deleteAnnotation } style={{padding:5,marginRight:5, backgroundColor : this.state.deleteEnabled ? "red" : "gray"}}>Delete Annotation</RaisedButton>
-          </div>
 
         </Card>
 
@@ -827,12 +863,33 @@ class AnnotationView extends Component {
 
             { !this.state.table ?  <Loader type="Circles" color="#00aaaa" height={150} width={150}/>
                         : <div>
+
+                          <div style={{float:"right"}}>
+                            { this.state.toggleHeaderEdit ? <RaisedButton variant={"contained"} onClick={ () => {this.saveHeaderEdit()} } style={{margin:1,marginRight:5,fontWeight:"bolder"}}>Save Title Changes <SaveIcon style={{marginLeft:5}}/></RaisedButton> : "" }
+                            <RaisedButton variant={"contained"} onClick={ () => {this.toggleHeaderEdit()} } style={{margin:1,marginRight:5,fontWeight:"bolder"}}>Edit <EditIcon style={{marginLeft:5}}/></RaisedButton>
+                          </div>
                           <div style={{paddingBottom: 10, fontWeight:"bold",marginBottom:10}}>
-                            <a href={"https://www.ncbi.nlm.nih.gov/pubmed/?term="+ this.state.docid.split("v")[0].split("fig")[0].split("app")[0]} target="_blank">{"PMID: " + this.state.docid}</a>
-                              { "(Page "+this.state.page + ") | " + (this.state.table.title && this.state.table.title.title ? this.state.table.title.title.trim() : (this.state.table.title && this.state.table.title.abstract ? this.state.table.title.abstract : "") )}
+                            <a href={"http://sephirhome.ddns.net:6680/"+ this.state.docid+".pdf"} target="_blank">{"Open PDF: " + this.state.docid+".pdf "}</a>
+                              { "(Table "+this.state.page + ") | " + (this.state.table.title && this.state.table.title.title ? this.state.table.title.title.trim() : (this.state.table.title && this.state.table.title.abstract ? this.state.table.title.abstract : "") )}
                           </div>
 
-                          <div style={{paddingBottom: 10, fontWeight:"bold"}} dangerouslySetInnerHTML={{__html:decodeURI(this.state.table.htmlHeader)}}></div>
+                          <div>
+                            {
+                              this.state.toggleHeaderEdit
+
+                               ? <TextField
+                                value={this.state.headerEditText}
+                                placeholder="Type table header/caption here"
+                                onChange={(event,value) => {this.setState({headerEditText: event.currentTarget.value})}}
+                                fullWidth={true}
+                                multiline={true}
+                                />
+
+                              : <div style={{paddingBottom: 10, fontWeight:"bold", display: "inline-block"}} dangerouslySetInnerHTML={{__html:decodeURI(this.state.table.htmlHeader)}}></div>
+                            }
+                          </div>
+
+
                           {this.state.titleSubgroups ? this.state.titleSubgroups.map( (sg,i) => <div key={"title_sg_"+i} style={{cursor:"pointer"}} onClick= { () => this.removeTitleSG(sg) }> {sg+","} </div> ) : ""}
                           <TextField
                                 value={this.state.newTitleSubgroup}
@@ -853,19 +910,20 @@ class AnnotationView extends Component {
         </Card>
 
         <Card id="tableHolder" style={{padding:15,marginTop:10, textAlign: this.state.table ? "left" : "center", minHeight: 580}}>
-          <RaisedButton variant={"contained"} style={{marginBottom:20}} onClick={ () => { this.setState({editor_enabled : this.state.editor_enabled ? false : true}) } }>Edit Table</RaisedButton>
+          <div style={{float:"right"}}>
+            { this.state.editor_enabled ? <Checkbox checked={this.state.recoverEnabled} onChange={ (event,data) => {this.setState({recoverEnabled : this.state.recoverEnabled ? false : true}) } }> </Checkbox> : ""}
+            { this.state.editor_enabled ? <RaisedButton variant={"contained"} style={{marginRight: 15, backgroundColor: this.state.recoverEnabled ? "red" : "" }} onClick={ () => this.removeOverrideTable(this.state.docid, this.state.page) }>Recover Original  <RotateLeftIcon style={{marginLeft:5}}/> </RaisedButton> : ""}
 
-          { this.state.editor_enabled ?
-              <div style={{float:"right", border: "1px solid black",marginLeft:2}}>
-                <RaisedButton variant={"contained"} style={{marginTop: 2, float: "right", marginRight: 3, backgroundColor: this.state.recoverEnabled ? "red" : "" }} onClick={ () => this.removeOverrideTable(this.state.docid, this.state.page) }>Recover Original</RaisedButton>
-                <Checkbox style={{float:"right"}} checked={this.state.recoverEnabled} onChange={ (event,data) => {this.setState({recoverEnabled : this.state.recoverEnabled ? false : true}) } }> </Checkbox>
-              </div> : ""}
-          { this.state.editor_enabled ? <RaisedButton variant={"contained"} style={{marginTop: 2, marginRight:5, marginBottom:20,float:"right"}} onClick={ () => this.saveTableChanges( this.state ) }>Save Table Changes</RaisedButton> : ""}
+            { this.state.editor_enabled ? <RaisedButton variant={"contained"} style={{marginRight:15}} onClick={ () => this.saveTableChanges( this.state ) }>Save Table Changes <SaveIcon style={{marginLeft:5}}/> </RaisedButton> : ""}
+            <RaisedButton variant={"contained"} style={{marginRight:10}} onClick={ () => { this.setState({editor_enabled : this.state.editor_enabled ? false : true}) } }>Edit <EditIcon style={{marginLeft:5}}/></RaisedButton>
+          </div>
+
+          <div style={{marginTop:50}}></div>
+
           { !this.state.table ? <Loader type="Circles" color="#00aaaa" height={150} width={150}/> : ( this.state.editor_enabled ? table_editor : <div dangerouslySetInnerHTML={{__html:this.state.overrideTable || this.state.table.formattedPage}}></div> ) }
-
         </Card>
 
-        <Card style={{padding:8,marginTop:10,fontWeight:"bold"}}>
+        <Card style={{padding:8,marginTop:10,fontWeight:"bold", marginBottom: 500}}>
             <div style={{width:"100%"}}>
 
               <table>
@@ -902,44 +960,54 @@ class AnnotationView extends Component {
             </div>
         </Card>
 
-        <Card id="annotations" style={{padding:10,minHeight:200,paddingBottom:40,marginTop:10}}>
 
-          <h3 style={{marginBottom:0,marginTop:0}}> Annotations
-              <RaisedButton variant={"contained"} className={"redbutton"} style={{marginLeft:10, backgroundColor:"#b8efaf"}} onClick={ () => {this.newAnnotation()} }>+ Add</RaisedButton>
-              <RaisedButton variant={"contained"} style={{marginLeft:10,float:"right", backgroundColor:"#b8c0ff"}} onClick={ () => {this.autoAdd()} }><PowerIcon /> Auto Add </RaisedButton>
-          </h3>
+
+
+
+
+
+      <div style={{marginTop:10, position: "fixed", width: "100vw", bottom: 0, left:0, backgroundColor:"#00000061", minHeight:400}}>
+        <Card style={{padding:10,  paddingBottom:10, maxHeight:600, width: "94%",marginLeft:"1%",marginTop:3, minHeight:400}}>
+
+          <div style={{float:"right"}}>
+            <RaisedButton variant={"contained"} onClick={ () => {this.saveAnnotations(); this.loadPageFromProps(this.props); } }  style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton>
+            <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} }  style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}><Refresh/>Reload Changes</RaisedButton>
+          </div>
+          <Tabs
+              orientation="vertical"
+              variant="scrollable"
+              value={this.state.openedTab}
+              onChange={(ev,value) => {this.setState({openedTab: value})}}
+              aria-label="Vertical tabs example"
+
+            >
+            <Tab label="Annotations"  />
+            <Tab label="Data Results"  />
+
+          </Tabs>
           <hr />
-          {
-            this.state.annotations ? this.state.annotations.map(
-              (v,i) => {
-                return <Annotation key={i}
-                                   annotationData ={this.state.annotations[i]}
-                                   addAnnotation={ (data) => {this.addAnnotation(i,data)}}
-                                   deleteAnnotation = { () => {this.deleteAnnotations(i)} }
-                                   />
-             }
-           ) : null
-          }
 
-        </Card>
+        { this.state.openedTab == 0 ? <RaisedButton variant={"contained"} className={"redbutton"} style={{marginLeft:10, backgroundColor:"#b8efaf"}} onClick={ () => {this.newAnnotation()} }>+ Add Annotation</RaisedButton> : ""}
+        { this.state.openedTab == 0 ? <RaisedButton variant={"contained"} style={{marginLeft:10, backgroundColor:"#b8c0ff"}} onClick={ () => {this.autoAdd()} }><PowerIcon /> Auto Add </RaisedButton> : ""}
 
 
-        <Card style={{padding:5,marginTop:10,marginBottom:600}}>
-          <RaisedButton variant={"contained"} onClick={ () => {this.saveAnnotations(); this.loadPageFromProps(this.props); } }  style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton>
-          <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} }  style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}><Refresh/>Reload Changes</RaisedButton>
-        </Card>
-
-
-
-        <div style={{marginTop:10, position: "fixed", width: "100vw", bottom: 0, left:0, backgroundColor:"#00000061"}}>
-        <Card style={{padding:10,  paddingBottom:10, maxHeight:600, width: "94%",marginLeft:"1%",marginTop:3}}>
-
-        <RaisedButton variant={"contained"} onClick={ () => {this.setState({toggeLiveResults : this.state.toggeLiveResults ? false : true })} } style={{padding:5,marginBottom:10}}> Toggle Live Results </RaisedButton>
+        <div style={{marginBottom:20}}/>
 
 
         {
+           this.state.openedTab == 0 && this.state.annotations && this.state.annotations.length > 0 ? this.state.annotations.map(
+            (v,i) => {
+              return <Annotation key={i}
+                                 annotationData ={this.state.annotations[i]}
+                                 addAnnotation={ (data) => {this.addAnnotation(i,data)}}
+                                 deleteAnnotation = { () => {this.deleteAnnotations(i)} }
+                                 />
+           }
+         ) : this.state.openedTab != 0 ? "" : <div style={{fontWeight:"bold", color:"grey", padding:10}}>No annotations yet</div>
+        }
 
-        this.state.toggeLiveResults ?
+
+        { this.state.openedTab == 1 ?
           <div>
 
             {

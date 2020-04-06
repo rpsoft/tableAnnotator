@@ -106,7 +106,7 @@ class Landing extends Component {
           <div>{
 
             finalResults_array.map( (value, i) => {
-
+              
               return value.annotation.annotations.map( (ann , j ) => {
                 try {
                 return <div key={i+"_"+j}>{  '"'+value.user

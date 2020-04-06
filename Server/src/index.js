@@ -405,13 +405,24 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua, filter_
               // DOCS
               // console.log(selected_group_docs)
               //
-              // debugger
+             debugger
+              DOCS = DOCS.sort(  (a,b) => {
+
+                a
+
+                return fixVersionOrder(a).localeCompare(fixVersionOrder(b))
+
+              } );
+
               DOCS = DOCS.reduce( (acc,docfile) => {
-                  var docid = docfile.split("_")[0].split("v")[0]
-                  var docid_V = docfile.split("_")[0]
 
-                  var page = docfile.split("_")[1].split(".")[0]
+                  var file_parts = docfile.match(/([\w\W]*)_([0-9]*).html/)
 
+                  var docid = file_parts[1]
+                  var docid_V = file_parts[1]
+                  var page = file_parts[2]
+
+                  //debugger
                   // if ( docfile.indexOf("29937431") > -1 ){
                   //   debugger
                   // }
@@ -481,10 +492,11 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua, filter_
                 for ( var d in DOCS ){
 
                   var docfile = DOCS[d]
-                  var fileElements = docfile.split("_")
-                  var docid = fileElements[0]
-                  var page = fileElements[1].split(".")[0]
-                  var extension = fileElements[1].split(".")[1]
+
+                  var fileElements = docfile.match(/([\w\W]*)_([0-9]*).html/);
+                  var docid = fileElements[1]
+                  var page = fileElements[2] //.split(".")[0]
+                  var extension = ".html" //fileElements[1].split(".")[1]
 
                   if ( available_documents[docid] ){
                     var prev_data = available_documents[docid]
@@ -1578,7 +1590,7 @@ app.use(function (req, res, next) {
 // POST method route
 app.post('/saveTableOverride', function (req, res) {
 
-
+  // debugger
   fs.writeFile("HTML_TABLES_OVERRIDE/"+req.body.docid+"_"+req.body.page+'.html',  req.body.table, function (err) {
     if (err) throw err;
     console.log('Written replacement for: '+req.body.docid+"_"+req.body.page+'.html');
@@ -1724,7 +1736,9 @@ async function readyTableData(docid,page,method){
                                       actual_table = actual_table.html();
 
                                   // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
-                                   var formattedPage = actual_table.indexOf("tr:hover" < 0) ? "<div><style>"+data_ss+"</style>"+actual_table+"</div>" : actual_table
+                                  var styles = actual_table.indexOf('<style type="text/css">.indent0') > -1 ? "" : "<style>"+data_ss+"</style>"
+
+                                   var formattedPage = actual_table.indexOf("tr:hover" < 0) ? "<div>"+styles+actual_table+"</div>" : actual_table
 
                                   // var formattedPage = "<div>"+actual_table+"</div>"
 

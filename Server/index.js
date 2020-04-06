@@ -485,13 +485,19 @@ function _prepareAvailableDocuments() {
                 // DOCS
                 // console.log(selected_group_docs)
                 //
-                // debugger
 
 
+                debugger;
+                DOCS = DOCS.sort(function (a, b) {
+                  a;
+                  return fixVersionOrder(a).localeCompare(fixVersionOrder(b));
+                });
                 DOCS = DOCS.reduce(function (acc, docfile) {
-                  var docid = docfile.split("_")[0].split("v")[0];
-                  var docid_V = docfile.split("_")[0];
-                  var page = docfile.split("_")[1].split(".")[0]; // if ( docfile.indexOf("29937431") > -1 ){
+                  var file_parts = docfile.match(/([\w\W]*)_([0-9]*).html/);
+                  var docid = file_parts[1];
+                  var docid_V = file_parts[1];
+                  var page = file_parts[2]; //debugger
+                  // if ( docfile.indexOf("29937431") > -1 ){
                   //   debugger
                   // }
 
@@ -548,10 +554,11 @@ function _prepareAvailableDocuments() {
                 try {
                   for (var d in DOCS) {
                     var docfile = DOCS[d];
-                    var fileElements = docfile.split("_");
-                    var docid = fileElements[0];
-                    var page = fileElements[1].split(".")[0];
-                    var extension = fileElements[1].split(".")[1];
+                    var fileElements = docfile.match(/([\w\W]*)_([0-9]*).html/);
+                    var docid = fileElements[1];
+                    var page = fileElements[2]; //.split(".")[0]
+
+                    var extension = ".html"; //fileElements[1].split(".")[1]
 
                     if (available_documents[docid]) {
                       var prev_data = available_documents[docid];
@@ -3166,6 +3173,7 @@ app.use(function (req, res, next) {
 }); // POST method route
 
 app.post('/saveTableOverride', function (req, res) {
+  // debugger
   fs.writeFile("HTML_TABLES_OVERRIDE/" + req.body.docid + "_" + req.body.page + '.html', req.body.table, function (err) {
     if (err) throw err;
     console.log('Written replacement for: ' + req.body.docid + "_" + req.body.page + '.html');
@@ -3303,7 +3311,7 @@ function _readyTableData() {
                     var _ref51 = (0, _asyncToGenerator2.default)(
                     /*#__PURE__*/
                     _regenerator.default.mark(function _callee66(err2, data_ss) {
-                      var tablePage, spaceRow, htmlHeader, findHeader, possible_tags_for_title, t, htmlHeaderText, actual_table, colum_with_numbers, formattedPage, predictions, terms_matrix, preds_matrix, class_matrix, content_type_matrix, max_col, l, getTopDescriptors, cleanModifier, col_top_descriptors, c, content_types_in_column, unique_modifiers_in_column, u, unique_modifier, column_data, column_terms, k, allfreqs, all_terms, descriptors, row_top_descriptors, r, content_types_in_row, row_data, row_terms, predicted;
+                      var tablePage, spaceRow, htmlHeader, findHeader, possible_tags_for_title, t, htmlHeaderText, actual_table, colum_with_numbers, styles, formattedPage, predictions, terms_matrix, preds_matrix, class_matrix, content_type_matrix, max_col, l, getTopDescriptors, cleanModifier, col_top_descriptors, c, content_types_in_column, unique_modifiers_in_column, u, unique_modifier, column_data, column_terms, k, allfreqs, all_terms, descriptors, row_top_descriptors, r, content_types_in_row, row_data, row_terms, predicted;
                       return _regenerator.default.wrap(function _callee66$(_context66) {
                         while (1) {
                           switch (_context66.prev = _context66.next) {
@@ -3404,12 +3412,13 @@ function _readyTableData() {
 
                               actual_table = actual_table.html(); // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
 
-                              formattedPage = actual_table.indexOf("tr:hover" < 0) ? "<div><style>" + data_ss + "</style>" + actual_table + "</div>" : actual_table; // var formattedPage = "<div>"+actual_table+"</div>"
+                              styles = actual_table.indexOf('<style type="text/css">.indent0') > -1 ? "" : "<style>" + data_ss + "</style>";
+                              formattedPage = actual_table.indexOf("tr:hover" < 0) ? "<div>" + styles + actual_table + "</div>" : actual_table; // var formattedPage = "<div>"+actual_table+"</div>"
 
-                              _context66.next = 34;
+                              _context66.next = 35;
                               return attempt_predictions(actual_table);
 
-                            case 34:
+                            case 35:
                               predictions = _context66.sent;
                               terms_matrix = predictions.map(function (e) {
                                 return e.terms.map(function (term) {
@@ -3465,9 +3474,9 @@ function _readyTableData() {
                               col_top_descriptors = [];
                               c = 0;
 
-                            case 45:
+                            case 46:
                               if (!(c < max_col)) {
-                                _context66.next = 75;
+                                _context66.next = 76;
                                 break;
                               }
 
@@ -3495,13 +3504,13 @@ function _readyTableData() {
                               });
 
                               if (content_types_in_column.total_text >= content_types_in_column.total_numeric) {
-                                _context66.next = 49;
+                                _context66.next = 50;
                                 break;
                               }
 
-                              return _context66.abrupt("continue", 72);
+                              return _context66.abrupt("continue", 73);
 
-                            case 49:
+                            case 50:
                               unique_modifiers_in_column = class_matrix.map(function (x) {
                                 return x[c];
                               }).map(cleanModifier).filter(function (v, i, a) {
@@ -3509,9 +3518,9 @@ function _readyTableData() {
                               });
                               _context66.t3 = _regenerator.default.keys(unique_modifiers_in_column);
 
-                            case 51:
+                            case 52:
                               if ((_context66.t4 = _context66.t3()).done) {
-                                _context66.next = 72;
+                                _context66.next = 73;
                                 break;
                               }
 
@@ -3564,21 +3573,21 @@ function _readyTableData() {
                               }
 
                               _context66.t5 = METHOD;
-                              _context66.next = _context66.t5 === "grouped_predictor" ? 60 : 68;
+                              _context66.next = _context66.t5 === "grouped_predictor" ? 61 : 69;
                               break;
 
-                            case 60:
+                            case 61:
                               all_terms = column_terms[unique_modifier] ? column_terms[unique_modifier].join(" ") : "";
 
                               if (!(column_terms[unique_modifier] && all_terms && column_terms[unique_modifier].length > 1 && all_terms.length > 0)) {
-                                _context66.next = 67;
+                                _context66.next = 68;
                                 break;
                               }
 
-                              _context66.next = 64;
+                              _context66.next = 65;
                               return grouped_predictor(all_terms);
 
-                            case 64:
+                            case 65:
                               descriptors = _context66.sent;
                               descriptors = descriptors[all_terms].split(";");
                               col_top_descriptors[col_top_descriptors.length] = {
@@ -3587,10 +3596,10 @@ function _readyTableData() {
                                 unique_modifier: unique_modifier
                               };
 
-                            case 67:
-                              return _context66.abrupt("break", 70);
-
                             case 68:
+                              return _context66.abrupt("break", 71);
+
+                            case 69:
                               descriptors = getTopDescriptors(3, column_data.freqs, ["arms", "undefined"]);
                               if (descriptors.length > 0) col_top_descriptors[col_top_descriptors.length] = {
                                 descriptors: descriptors,
@@ -3598,24 +3607,24 @@ function _readyTableData() {
                                 unique_modifier: unique_modifier
                               };
 
-                            case 70:
-                              _context66.next = 51;
+                            case 71:
+                              _context66.next = 52;
                               break;
 
-                            case 72:
+                            case 73:
                               c++;
-                              _context66.next = 45;
+                              _context66.next = 46;
                               break;
 
-                            case 75:
+                            case 76:
                               // Estimate row predictions
                               row_top_descriptors = []; // debugger
 
                               _context66.t6 = _regenerator.default.keys(preds_matrix);
 
-                            case 77:
+                            case 78:
                               if ((_context66.t7 = _context66.t6()).done) {
-                                _context66.next = 100;
+                                _context66.next = 101;
                                 break;
                               }
 
@@ -3642,13 +3651,13 @@ function _readyTableData() {
                               });
 
                               if (content_types_in_row.total_text >= content_types_in_row.total_numeric) {
-                                _context66.next = 82;
+                                _context66.next = 83;
                                 break;
                               }
 
-                              return _context66.abrupt("continue", 77);
+                              return _context66.abrupt("continue", 78);
 
-                            case 82:
+                            case 83:
                               row_data = preds_matrix[r].reduce(function (countMap, word) {
                                 countMap.freqs[word] = ++countMap.freqs[word] || 1;
                                 var max = countMap["max"] || 0;
@@ -3677,21 +3686,21 @@ function _readyTableData() {
                                 return allTerms;
                               }, []);
                               _context66.t8 = METHOD;
-                              _context66.next = _context66.t8 === "grouped_predictor" ? 88 : 96;
+                              _context66.next = _context66.t8 === "grouped_predictor" ? 89 : 97;
                               break;
 
-                            case 88:
+                            case 89:
                               all_terms = row_terms.join(" ");
 
                               if (!(row_terms.length > 1)) {
-                                _context66.next = 95;
+                                _context66.next = 96;
                                 break;
                               }
 
-                              _context66.next = 92;
+                              _context66.next = 93;
                               return grouped_predictor(all_terms);
 
-                            case 92:
+                            case 93:
                               descriptors = _context66.sent;
                               descriptors = descriptors[all_terms].split(";");
                               row_top_descriptors[row_top_descriptors.length] = {
@@ -3700,10 +3709,10 @@ function _readyTableData() {
                                 unique_modifier: ""
                               };
 
-                            case 95:
-                              return _context66.abrupt("break", 98);
-
                             case 96:
+                              return _context66.abrupt("break", 99);
+
+                            case 97:
                               descriptors = getTopDescriptors(3, row_data.freqs, ["undefined"]);
                               if (descriptors.length > 0) row_top_descriptors[row_top_descriptors.length] = {
                                 descriptors: descriptors,
@@ -3711,11 +3720,11 @@ function _readyTableData() {
                                 unique_modifier: ""
                               };
 
-                            case 98:
-                              _context66.next = 77;
+                            case 99:
+                              _context66.next = 78;
                               break;
 
-                            case 100:
+                            case 101:
                               predicted = {
                                 cols: col_top_descriptors,
                                 rows: row_top_descriptors,
@@ -3730,7 +3739,7 @@ function _readyTableData() {
                                 predicted: predicted
                               });
 
-                            case 102:
+                            case 103:
                             case "end":
                               return _context66.stop();
                           }

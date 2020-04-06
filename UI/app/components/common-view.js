@@ -278,8 +278,10 @@ class CommonView extends Component {
             <div style={{height:"72vh",overflowY:"scroll", paddingTop:10, padding:20, marginTop: 1}}>{
               this.state.tables && this.state.allInfo && (!this.state.loading) ?
                 (
-                    this.state.allInfo.abs_index.length > 0 ? this.state.allInfo.abs_index.map(
-                      (v,i) => <div key={v.docid+"_"+v.page}>
+                    this.state.allInfo.abs_index.length > 0 ? this.state.allInfo.abs_index.sort( (st_a,st_b) => {var dd = st_a.docid.localeCompare(st_b.docid); return dd == 0 ? parseInt(st_a.page) - parseInt(st_b.page) : dd} ).map(
+                      (v,i) => {
+
+                        return <div key={v.docid+"_"+v.page}>
                             <Delete className={"deleteButton"} onClick={ () => { this.setState({activeDelete: v.docid+"_"+v.page == this.state.activeDelete ? "" : v.docid+"_"+v.page })  }}></Delete>
                             { this.state.activeDelete == (v.docid+"_"+v.page) ? <div className={"delete"} style={{display:"inline"}} onClick={ () => { this.deleteTable( v.docid, v.page );} }> Delete </div> : "" }
                             <div style={{display:"inline",fontWeight:"bold"}}>{v.docid+"_"+v.page +" : "}</div>
@@ -300,7 +302,7 @@ class CommonView extends Component {
                             </a>
                             {  corrupted_texts[v.docid+"_"+v.page] ? <div style={{display:"inline",fontWeight:"bold",paddingLeft:20}}><WarningIcon style={{marginRight:5}} />{  corrupted_texts[v.docid+"_"+v.page].replace(/(%[A-z0-9]{2})/g," ") }</div> : ""}
                          </div>
-
+                       }
                     ) : ""
                 ) : <Loader type="Circles" color="#00aaaa" height={150} width={150}/>
                 }</div>

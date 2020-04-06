@@ -1,6 +1,7 @@
 import http from 'http'
 
-var hostname = "localhost" //"sephirhome.ddns.net"
+var hostname = "sephirhome.ddns.net"
+var port = 6540
 
 export default class HttpClient {
   constructor(config={}) {
@@ -8,7 +9,7 @@ export default class HttpClient {
 
     this.standardOptions = {
       host: hostname,
-      port: (typeof location != "undefined") ? 6541 : 0,
+      port: (typeof location != "undefined") ? port : 0,
       method: 'GET',
     };
 
@@ -62,7 +63,7 @@ export default class HttpClient {
 
         options = {
           hostname: hostname,
-          port: (typeof location != "undefined") ? 6541 : 0,
+          port: (typeof location != "undefined") ? port : 0,
           path: options.path,
           method: 'POST',
           headers: {
