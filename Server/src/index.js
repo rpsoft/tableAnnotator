@@ -405,15 +405,19 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua, filter_
               // DOCS
               // console.log(selected_group_docs)
               //
-             debugger
+
               DOCS = DOCS.sort(  (a,b) => {
 
-                a
+                  a = a.match(/([\w\W]*)_([0-9]*).html/)
+                  b = b.match(/([\w\W]*)_([0-9]*).html/)
+                  var st_a = {docid: a[1], page:a[2]}
+                  var st_b = {docid: b[1], page:b[2]}
+                  // debugger
+                  var dd = st_a.docid.localeCompare(st_b.docid);
+                  return dd == 0 ? parseInt(st_a.page) - parseInt(st_b.page) : dd
 
-                return fixVersionOrder(a).localeCompare(fixVersionOrder(b))
-
-              } );
-
+              });
+              // debugger
               DOCS = DOCS.reduce( (acc,docfile) => {
 
                   var file_parts = docfile.match(/([\w\W]*)_([0-9]*).html/)

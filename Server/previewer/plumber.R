@@ -603,9 +603,9 @@ function(req, anns = "" ) {
   # url <- paste0("http://localhost:6541/api/getTable?docid=11527638&page=1")
   # JsonData <- fromJSON(file= url )
   # 
-  #write_rds(anns, paste0(baseFolder,"last_out.rds"))
+  write_rds(anns, paste0(baseFolder,"last_out_other.rds"))
   # 
-   # anns <- read_rds(paste0(baseFolder,"last_out.rds"))
+  #anns <- read_rds(paste0(baseFolder,"last_out_other.rds"))
   #print(anns)
   
   annotations <- anns$annotation %>% 

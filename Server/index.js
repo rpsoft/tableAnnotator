@@ -487,11 +487,22 @@ function _prepareAvailableDocuments() {
                 //
 
 
-                debugger;
                 DOCS = DOCS.sort(function (a, b) {
-                  a;
-                  return fixVersionOrder(a).localeCompare(fixVersionOrder(b));
-                });
+                  a = a.match(/([\w\W]*)_([0-9]*).html/);
+                  b = b.match(/([\w\W]*)_([0-9]*).html/);
+                  var st_a = {
+                    docid: a[1],
+                    page: a[2]
+                  };
+                  var st_b = {
+                    docid: b[1],
+                    page: b[2] // debugger
+
+                  };
+                  var dd = st_a.docid.localeCompare(st_b.docid);
+                  return dd == 0 ? parseInt(st_a.page) - parseInt(st_b.page) : dd;
+                }); // debugger
+
                 DOCS = DOCS.reduce(function (acc, docfile) {
                   var file_parts = docfile.match(/([\w\W]*)_([0-9]*).html/);
                   var docid = file_parts[1];

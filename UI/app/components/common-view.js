@@ -278,7 +278,7 @@ class CommonView extends Component {
             <div style={{height:"72vh",overflowY:"scroll", paddingTop:10, padding:20, marginTop: 1}}>{
               this.state.tables && this.state.allInfo && (!this.state.loading) ?
                 (
-                    this.state.allInfo.abs_index.length > 0 ? this.state.allInfo.abs_index.sort( (st_a,st_b) => {var dd = st_a.docid.localeCompare(st_b.docid); return dd == 0 ? parseInt(st_a.page) - parseInt(st_b.page) : dd} ).map(
+                    this.state.allInfo.abs_index.length > 0 ? this.state.allInfo.abs_index.map(
                       (v,i) => {
 
                         return <div key={v.docid+"_"+v.page}>

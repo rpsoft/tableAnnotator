@@ -43,6 +43,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -108,6 +111,7 @@ class AnnotationView extends Component {
         toggleHeaderEdit : false,
         headerEditText : "",
         openedTab:0,
+        bottomHeight: 600,
     };
   }
 
@@ -553,7 +557,9 @@ class AnnotationView extends Component {
           //
           // // Inline styles
           // { name: 'CSS Style', element: 'span', attributes: { 'class': 'my_style' } },
-          { name: 'Indent', element: 'p',  attributes: { 'class': 'indent1' }}
+          { name: 'Indent', element: 'p',  attributes: { 'class': 'indent1' }},
+          { name: 'Superscript', element: 'sup',  attributes: {}},
+          { name: 'Subscript', element: 'sub',  attributes: {}}
         ] );
 
         CKEDITOR.config.stylesSet = 'my_styles';
@@ -612,6 +618,14 @@ class AnnotationView extends Component {
         this.shiftTables(0)
 
      }
+   }
+
+   toggleBottom(){
+     this.state.bottomHeight == 600 ? this.setState({bottomHeight:70}) : this.setState({bottomHeight:600})
+   }
+
+   openBottom(){
+     this.setState({bottomHeight:600})
    }
 
    formatFiltersForURL(){
@@ -966,18 +980,19 @@ class AnnotationView extends Component {
 
 
 
-      <div style={{marginTop:10, position: "fixed", width: "100vw", bottom: 0, left:0, backgroundColor:"#00000061", minHeight:400}}>
-        <Card style={{padding:10,  paddingBottom:10, maxHeight:600, width: "94%",marginLeft:"1%",marginTop:3, minHeight:400}}>
+      <div style={{marginTop:10, position: "fixed", width: "100vw", bottom: 0, left:0, backgroundColor:"#00000061", minHeight: this.state.bottomHeight-200 < 0 ? 0 : this.state.bottomHeight-200 }}>
+        <Card style={{padding:10,  paddingBottom:10, maxHeight: this.state.bottomHeight, width: "94%",marginLeft:"1%",marginTop:3, minHeight: this.state.bottomHeight-200 < 0 ? 0 : this.state.bottomHeight-200 }}>
 
           <div style={{float:"right"}}>
             <RaisedButton variant={"contained"} onClick={ () => {this.saveAnnotations(); this.loadPageFromProps(this.props); } }  style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}>Save Changes & Update!</RaisedButton>
-            <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} }  style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}><Refresh/>Reload Changes</RaisedButton>
+            <RaisedButton variant={"contained"} onClick={ () => {this.loadPageFromProps(this.props)} }  style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}><Refresh/>Reload</RaisedButton>
+            <RaisedButton variant={"contained"} onClick={ () => {this.toggleBottom()} }  style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}>{ this.state.bottomHeight == 600 ? <ArrowDropDownIcon /> : <ArrowDropUpIcon /> }{ this.state.bottomHeight == 600 ? "Hide" : "Show"}</RaisedButton>
           </div>
           <Tabs
               orientation="vertical"
               variant="scrollable"
               value={this.state.openedTab}
-              onChange={(ev,value) => {this.setState({openedTab: value})}}
+              onChange={(ev,value) => {this.setState({openedTab: value}); this.openBottom();}}
               aria-label="Vertical tabs example"
 
             >
