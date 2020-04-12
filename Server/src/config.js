@@ -1,9 +1,13 @@
-// // existdb Config
-// export const URL_BASE = "CUCU" // Just example of export. Nothing important.
-//
-// export const EDB_LOGIN = {  // ExistDB login details. Used in the existDB.js module.
-//     username :"admin",
-//     password: "qwerty1234"
-//   }
-
-export const PORT = 6541;
+export const CONFIG = {
+  local_server_path: "/home/suso/ihw/tableAnnotator/Server",
+  port: 6541,
+  port_ui: 7531,
+  host: "sephirhome.ddns.net", // localhost if testing?.
+  db : {
+      user: 'postgres',
+      host: 'localhost',
+      database: 'ihw_annotator',
+      password: 'melacome86',
+      port: 5432,
+    },
+}

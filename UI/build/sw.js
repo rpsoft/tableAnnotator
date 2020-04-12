@@ -7,9 +7,9 @@ var __wpo = {
     ],
     "additional": [
       "/npm.intl.fe0752ccae22bd4a51aa.chunk.js",
-      "/main.df0e657ec4931cd4a4b7.chunk.js",
+      "/main.d25ab7a35bab997d3627.chunk.js",
       "/npm.babel.9f6dfb303ae0cad55aa7.chunk.js",
-      "/npm.material-ui.f570653d9a5e67f0fb9e.chunk.js",
+      "/npm.material-ui.dc595076d2e06f1af650.chunk.js",
       "/npm.ramda.4d876898d82379c1684e.chunk.js",
       "/npm.react-app-polyfill.51725f8fce7b346c3b68.chunk.js",
       "/npm.react-loader-spinner.7460a69bc7460b690b92.chunk.js",
@@ -27,9 +27,9 @@ var __wpo = {
   "hashesMap": {
     "5e53ef208f3fa79a48f8374488f473c76e1233de": "/favicon.ico",
     "38bb2a127083fda304e2ea4ef9b9b3e96d119749": "/npm.intl.fe0752ccae22bd4a51aa.chunk.js",
-    "eefd0d6d45def555d50a012dc9ba337cd0e3709a": "/main.df0e657ec4931cd4a4b7.chunk.js",
+    "b852aa64f94655a820c88651a16a286fa9f40483": "/main.d25ab7a35bab997d3627.chunk.js",
     "035ba9181cc83f47e321c9530bc3956087c975c7": "/npm.babel.9f6dfb303ae0cad55aa7.chunk.js",
-    "3d6b610f8e680fc7a00e308ba39e98c428260605": "/npm.material-ui.f570653d9a5e67f0fb9e.chunk.js",
+    "9b619b6536d181772618387d7a49d803bd9c9163": "/npm.material-ui.dc595076d2e06f1af650.chunk.js",
     "799c704f03a4ebc1c235d6cfb78551db0ff87656": "/npm.ramda.4d876898d82379c1684e.chunk.js",
     "6bcf1ee1ba691fcaf383fbfae27b88dd00e42a45": "/npm.react-app-polyfill.51725f8fce7b346c3b68.chunk.js",
     "97ebac948620f43f076f9a6593dbce3d244c4681": "/npm.react-loader-spinner.7460a69bc7460b690b92.chunk.js",
@@ -41,11 +41,11 @@ var __wpo = {
     "c001087db9a12bcaed1c9c7282c451efbb110a05": "/12.89ec2660f9cd04c25aa2.chunk.js",
     "657e8ec9182321fd49832e468bb89dc6e4330f2b": "/13.15d3efb94fa346deee8d.chunk.js",
     "cbc1438d9cbff7fffcfa2560aa355c7a8d0f778f": "/14.2b2f5102986e5b26a922.chunk.js",
-    "397099627fffa9d52f7710ba270e4381af6ebb1f": "/"
+    "6f38d8399c36b16f36a0f7b4c207cfaf0a18f69b": "/"
   },
   "strategy": "changed",
   "responseStrategy": "cache-first",
-  "version": "3/17/2020, 19:58:19",
+  "version": "4/12/2020, 14:56:30",
   "name": "webpack-offline",
   "pluginVersion": "5.0.6",
   "relativePaths": false

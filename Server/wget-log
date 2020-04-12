@@ -1,11 +1,0 @@
---2018-12-11 17:25:52--  http://localhost:6541/getTable?docid=24383720
-Resolving localhost (localhost)... 127.0.0.1
-Connecting to localhost (localhost)|127.0.0.1|:6541... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 58 [application/json]
-Saving to: ‘getTable?docid=24383720’
-
-getTable?docid=24383720                                                0%[                                                                                                                                                                      ]       0  --.-KB/s               getTable?docid=24383720                                              100%[=====================================================================================================================================================================>]      58  --.-KB/s    in 0s      
-
-2018-12-11 17:25:52 (19.8 MB/s) - ‘getTable?docid=24383720’ saved [58/58]
-

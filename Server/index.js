@@ -2,17 +2,15 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime/helpers/taggedTemplateLiteral"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
-
 var _config = require("./config");
-
-var _titles = require("./titles");
 
 function _templateObject4() {
   var data = (0, _taggedTemplateLiteral2.default)(["\n        groupedPredict(", ")\n      "]);
@@ -77,6 +75,8 @@ var csv = require('csv-parser');
 
 var CsvReadableStream = require('csv-reader');
 
+var path = require('path');
+
 var fs = require('fs');
 
 function sleep(ms) {
@@ -85,32 +85,29 @@ function sleep(ms) {
   });
 }
 
-var cors = require('cors'); // var whitelist = ['http://sephirhome.ddns.net:7532', 'http://sephirhome.ddns.net:7531','http://localhost:7531']
+var cors = require('cors');
 
+// import {TITLES} from "./titles"
+var TITLES = []; // legacy stuff
+// var whitelist = ['http://sephirhome.ddns.net:7532', 'http://sephirhome.ddns.net:7531','http://localhost:7531']
 
-app.use(cors()); // var corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// }
+app.use(cors());
+app.use(cors("*")); // app.use('/public', express.static(path.join(__dirname, 'public')))
+// app.use(express.static(__dirname + '/domainParserviews'));
 //
+// //Store all HTML files in view folder.
+// app.use(express.static(__dirname + '/views'));
+// app.use('/public', express.static(path.join(__dirname, 'public')))
 //
+// //Store all JS and CSS in Scripts folder.
+// app.use(express.static(__dirname + '/dist'));
+// app.use('/public', express.static(path.join(__dirname, 'public')))
 //
-// app.options('*', cors(corsOptions))
-// use it before all route definitions
+// app.use(express.static(__dirname + '/images'));
 
-app.use(cors("*")); // import {PythonShell} from 'python-shell';
+app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/pdfs', express.static(path.join(__dirname, 'pdfs'))); // app.use(express.static('public'));
 
-app.use(express.static(__dirname + '/domainParserviews')); //Store all HTML files in view folder.
-
-app.use(express.static(__dirname + '/views')); //Store all JS and CSS in Scripts folder.
-
-app.use(express.static(__dirname + '/dist'));
-app.use(express.static(__dirname + '/images'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 var titles_obj = {};
@@ -123,10 +120,10 @@ Object.defineProperty(Array.prototype, 'flat', {
   }
 });
 
-for (var t in _titles.TITLES) {
-  titles_obj[_titles.TITLES[t].pmid.split(" ")[0]] = {
-    title: _titles.TITLES[t].title,
-    abstract: _titles.TITLES[t].abstract
+for (var t in TITLES) {
+  titles_obj[TITLES[t].pmid.split(" ")[0]] = {
+    title: TITLES[t].title,
+    abstract: TITLES[t].abstract
   };
 }
 
@@ -139,30 +136,33 @@ var cssFolder = "HTML_STYLES";
 var DOCS = [];
 var clusterTerms = {};
 var msh_categories_csv = [];
-var msh_categories = {};
-fs.createReadStream('pmid_msh_label.csv').pipe(csv({
-  separator: ';'
-})).on('data', function (data) {
-  return msh_categories_csv.push(data);
-}).on('end', function () {
-  var catIndex = msh_categories_csv.reduce(function (acc, item) {
-    acc[item.mesh_broad_label] = item.pmid.split("&");
-    return acc;
-  }, {});
-  var pmids_w_cat = msh_categories_csv.reduce(function (acc, item) {
-    var pmids = item.pmid.split("&");
-    acc = (0, _toConsumableArray2.default)(acc).concat([pmids]);
-    return acc;
-  }, []).flat();
-  var allcats = Object.keys(catIndex);
-  allcats.push("NA");
-  catIndex["NA"] = [];
-  msh_categories = {
-    catIndex: catIndex,
-    allcats: allcats,
-    pmids_w_cat: pmids_w_cat
-  };
-});
+var msh_categories = {
+  catIndex: {},
+  allcats: [],
+  pmids_w_cat: [] // fs.createReadStream('pmid_msh_label.csv')
+  //   .pipe(csv({ separator: ';' }))
+  //   .on('data', (data) => msh_categories_csv.push(data))
+  //   .on('end', () => {
+  //
+  //     var catIndex = msh_categories_csv.reduce(function (acc, item) {
+  //                     acc[item.mesh_broad_label] = item.pmid.split("&");
+  //                     return acc;
+  //                   }, {});
+  //
+  //     var pmids_w_cat = msh_categories_csv.reduce(function (acc, item) {
+  //                    var pmids = item.pmid.split("&")
+  //                    acc = [...acc,pmids]
+  //                    return acc;
+  //                  }, []).flat();
+  //
+  //      var allcats = Object.keys(catIndex)
+  //
+  //          allcats.push("NA")
+  //          catIndex["NA"] = []
+  //      msh_categories = {catIndex: catIndex, allcats: allcats, pmids_w_cat}
+  //   });
+
+};
 
 function CUIData() {
   return _CUIData.apply(this, arguments);
@@ -333,11 +333,11 @@ function extractMMData(r) {
 var METHOD = "grouped_predictor"; // Postgres configuration.
 
 var pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'ihw_annotator',
-  password: 'melacome86',
-  port: 5432
+  user: _config.CONFIG.db.user,
+  host: _config.CONFIG.db.host,
+  database: _config.CONFIG.db.database,
+  password: _config.CONFIG.db.password,
+  port: _config.CONFIG.db.port
 }); //NODE R CONFIGURATION.
 
 var R = require("r-script"); //Important to use this function for all text extracted from the tables.
@@ -4077,8 +4077,8 @@ function () {
     return _ref48.apply(this, arguments);
   };
 }());
-app.listen(_config.PORT, function () {
-  console.log('Express Server running on port ' + _config.PORT + ' ' + new Date().toISOString());
+app.listen(_config.CONFIG.port, function () {
+  console.log('Express Server running on port ' + _config.CONFIG.port + ' ' + new Date().toISOString());
 }); //////////////////  Evaluation bit.
 // var runDocuments = async () => {
 //   console.log("getting all predictions")
@@ -4106,7 +4106,7 @@ app.listen(_config.PORT, function () {
 //
 //        debugger
 //
-//        for ( var c in data.predicted.cols) {
+//        for ( var c in data.predMETHODicted.cols) {
 //          var col = data.predicted.cols[c]
 //          predictions += ["auto_"+METHOD,docid,page,false,"na","Col",(parseInt(col.c)+1),col.descriptors.join(";"),col.unique_modifier.split(" ").join(";")].join(",")+"\n"
 //        }

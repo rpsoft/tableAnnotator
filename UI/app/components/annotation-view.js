@@ -25,7 +25,7 @@ import SortIcon from '@material-ui/icons/Sort';
 import SelectField from '@material-ui/core/Select';
 import PowerIcon from '@material-ui/icons/Power';
 
-
+var process = require('process');
 import Loader from 'react-loader-spinner'
 import { push } from 'connected-react-router'
 import Checkbox from '@material-ui/core/Checkbox';
@@ -81,6 +81,8 @@ class AnnotationView extends Component {
 
     var filter_group = urlparams["filter_group"] ? urlparams["filter_group"].split("_") : []
     var filter_labelgroup = urlparams["filter_labelgroup"] ? urlparams["filter_labelgroup"].split("_") : []
+
+
 
     this.state = {
         user: urlparams["user"] ? urlparams["user"] : "",
@@ -637,6 +639,10 @@ class AnnotationView extends Component {
    }
 
    render() {
+
+
+         var heyy = process.env
+         debugger
 
        var preparedPreview = <div>Preview not available</div>
 

@@ -11,7 +11,7 @@ const { Pool, Client, Query } = require('pg')
 
 const csv = require('csv-parser');
 const CsvReadableStream = require('csv-reader');
-
+const path = require('path');
 const fs = require('fs');
 
 function sleep(ms){
@@ -21,41 +21,39 @@ function sleep(ms){
 }
 var cors = require('cors');
 
+import {CONFIG} from "./config"
+
+// import {TITLES} from "./titles"
+var TITLES = [] // legacy stuff
+
 // var whitelist = ['http://sephirhome.ddns.net:7532', 'http://sephirhome.ddns.net:7531','http://localhost:7531']
 
 app.use(cors());
 
-// var corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// }
-//
-//
-//
-// app.options('*', cors(corsOptions))
-
-// use it before all route definitions
 app.use(cors("*"));
 
-// import {PythonShell} from 'python-shell';
-app.use(express.static(__dirname + '/domainParserviews'));
-//Store all HTML files in view folder.
-app.use(express.static(__dirname + '/views'));
-//Store all JS and CSS in Scripts folder.
-app.use(express.static(__dirname + '/dist'));
 
-app.use(express.static(__dirname + '/images'));
+// app.use('/public', express.static(path.join(__dirname, 'public')))
+// app.use(express.static(__dirname + '/domainParserviews'));
+//
+// //Store all HTML files in view folder.
+// app.use(express.static(__dirname + '/views'));
+// app.use('/public', express.static(path.join(__dirname, 'public')))
+//
+// //Store all JS and CSS in Scripts folder.
+// app.use(express.static(__dirname + '/dist'));
+// app.use('/public', express.static(path.join(__dirname, 'public')))
+//
+// app.use(express.static(__dirname + '/images'));
+
+app.use('/images', express.static(path.join(__dirname, 'images')))
+app.use('/pdfs', express.static(path.join(__dirname, 'pdfs')))
+
+// app.use(express.static('public'));
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-import {PORT} from "./config"
-import {TITLES} from "./titles"
 
 var titles_obj = {}
 
@@ -82,30 +80,30 @@ var DOCS = [];
 var clusterTerms = {}
 
 var msh_categories_csv = [];
-var msh_categories = {}
+var msh_categories = {catIndex: {}, allcats: [], pmids_w_cat: []}
 
-fs.createReadStream('pmid_msh_label.csv')
-  .pipe(csv({ separator: ';' }))
-  .on('data', (data) => msh_categories_csv.push(data))
-  .on('end', () => {
-
-    var catIndex = msh_categories_csv.reduce(function (acc, item) {
-                    acc[item.mesh_broad_label] = item.pmid.split("&");
-                    return acc;
-                  }, {});
-
-    var pmids_w_cat = msh_categories_csv.reduce(function (acc, item) {
-                   var pmids = item.pmid.split("&")
-                   acc = [...acc,pmids]
-                   return acc;
-                 }, []).flat();
-
-     var allcats = Object.keys(catIndex)
-
-         allcats.push("NA")
-         catIndex["NA"] = []
-     msh_categories = {catIndex: catIndex, allcats: allcats, pmids_w_cat}
-  });
+// fs.createReadStream('pmid_msh_label.csv')
+//   .pipe(csv({ separator: ';' }))
+//   .on('data', (data) => msh_categories_csv.push(data))
+//   .on('end', () => {
+//
+//     var catIndex = msh_categories_csv.reduce(function (acc, item) {
+//                     acc[item.mesh_broad_label] = item.pmid.split("&");
+//                     return acc;
+//                   }, {});
+//
+//     var pmids_w_cat = msh_categories_csv.reduce(function (acc, item) {
+//                    var pmids = item.pmid.split("&")
+//                    acc = [...acc,pmids]
+//                    return acc;
+//                  }, []).flat();
+//
+//      var allcats = Object.keys(catIndex)
+//
+//          allcats.push("NA")
+//          catIndex["NA"] = []
+//      msh_categories = {catIndex: catIndex, allcats: allcats, pmids_w_cat}
+//   });
 
 async function CUIData (){
 
@@ -241,11 +239,11 @@ var METHOD = "grouped_predictor"
 
 // Postgres configuration.
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'ihw_annotator',
-    password: 'melacome86',
-    port: 5432,
+    user: CONFIG.db.user,
+    host: CONFIG.db.host,
+    database: CONFIG.db.database,
+    password: CONFIG.db.password,
+    port: CONFIG.db.port,
   })
 
 //NODE R CONFIGURATION.
@@ -2098,8 +2096,8 @@ app.get('/api/recordAnnotation',async function(req,res){
   res.send("saved annotation: "+JSON.stringify(req.query))
 });
 
-app.listen(PORT, function () {
-  console.log('Express Server running on port '+PORT+' ' + new Date().toISOString());
+app.listen(CONFIG.port, function () {
+  console.log('Express Server running on port '+CONFIG.port+' ' + new Date().toISOString());
 });
 
 
@@ -2131,7 +2129,7 @@ app.listen(PORT, function () {
 //
 //        debugger
 //
-//        for ( var c in data.predicted.cols) {
+//        for ( var c in data.predMETHODicted.cols) {
 //          var col = data.predicted.cols[c]
 //          predictions += ["auto_"+METHOD,docid,page,false,"na","Col",(parseInt(col.c)+1),col.descriptors.join(";"),col.unique_modifier.split(" ").join(";")].join(",")+"\n"
 //        }
