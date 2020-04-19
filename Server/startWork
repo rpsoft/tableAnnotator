@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Script examples
-# https://github.com/Murodese/pynab/blob/master/monitor.sh
-# http://www.leehodgkinson.com/blog/quickly-setup-multiple-pane-and-multiple-window-sessions-in-your-terminal/
-
 SESSION=$USER
+
+#Import configurations from config.json.
+export PORT_UI=$(cat config.json | jq '.port_ui')
 
 # -2: forces 256 colors,
 byobu-tmux -2 new-session -d -s $SESSION
@@ -14,6 +13,7 @@ byobu-tmux rename-window -t $SESSION:0 'Dev'
 byobu-tmux split-window  -v
 byobu-tmux split-window  -v
 byobu-tmux split-window  -h
+
 # Select 1st pane cd and venv
 byobu-tmux select-pane -t 0
 byobu-tmux send-keys "cd ." C-m
@@ -25,12 +25,10 @@ byobu-tmux select-pane -t 1
 byobu-tmux send-keys "cd ." C-m
 byobu-tmux send-keys "gulp watch" C-m
 
-
 # R preview on 3rd pane
 byobu-tmux select-pane -t 2
 byobu-tmux send-keys "cd ./previewer" C-m
 byobu-tmux send-keys "./runPreviewer" C-m
-
 
 # UI on 4th pane
 byobu-tmux select-pane -t 3

@@ -8,6 +8,8 @@
 // Needed for redux-saga es6 generator support
 import '@babel/polyfill';
 
+const argv = require('../server/argv');
+
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -38,12 +40,17 @@ const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
+export const ServerContext = React.createContext(argv.ext_host);
+export const PortContext = React.createContext(argv.port);
+
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <App />
+          <ServerContext.Provider>
+            <App />
+          </ServerContext.Provider>
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,
@@ -74,6 +81,8 @@ if (!window.Intl) {
 } else {
   render(translationMessages);
 }
+
+
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,

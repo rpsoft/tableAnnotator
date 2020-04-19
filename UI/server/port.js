@@ -4,4 +4,4 @@ module.exports = parseInt(argv.port || process.env.PORT || '7531', 10);
 
 console.log(argv);
 
-// console.log(process.env);
+// console.log(process.argv);

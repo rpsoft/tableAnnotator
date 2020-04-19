@@ -5,6 +5,7 @@
  */
 module.exports = (app, options) => {
   const isProd = process.env.NODE_ENV === 'production';
+  const sitename = process.env.REACT_APP_WEBSITE_NAME;
 
   if (isProd) {
     const addProdMiddlewares = require('./addProdMiddlewares');

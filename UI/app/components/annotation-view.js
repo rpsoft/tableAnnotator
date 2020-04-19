@@ -50,7 +50,6 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-
 import {
   Table,
   TableBody,
@@ -68,7 +67,13 @@ var HtmlToReact = require('html-to-react')
 var HtmlToReactParser = require('html-to-react').Parser;
 
 
+import { ServerContext, PortContext } from "../app.js";
+
+
 class AnnotationView extends Component {
+
+  static server = ServerContext;
+  static port = PortContext;
 
 
   constructor(props) {
@@ -615,7 +620,7 @@ class AnnotationView extends Component {
    deleteAnnotation = async () => {
      if (this.state.deleteEnabled){
         let fetch = new fetchData();
-        await fetch.deleteAnnotation( this.state.docid, this.state.page, this.state.user )
+        await fetch.deleteAnnotation( this.state.docidserver, this.state.page, this.state.user )
         this.setState({deleteEnabled:false})
         this.shiftTables(0)
 
@@ -640,9 +645,13 @@ class AnnotationView extends Component {
 
    render() {
 
+      let blah = this.server;
 
-         var heyy = process.env
-         debugger
+      var hey = ServerContext
+
+      var peet = PortContext
+
+      debugger
 
        var preparedPreview = <div>Preview not available</div>
 

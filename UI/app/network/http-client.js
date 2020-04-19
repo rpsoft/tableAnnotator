@@ -1,6 +1,6 @@
 import http from 'http'
 
-var hostname = "sephirhome.ddns.net"
+var hostname =  "sephirhome.ddns.net"
 var port = 6540
 
 export default class HttpClient {

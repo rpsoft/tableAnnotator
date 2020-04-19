@@ -21,14 +21,14 @@ function sleep(ms){
 }
 var cors = require('cors');
 
-import {CONFIG} from "./config"
+import CONFIG from './config.json'
 
 // import {TITLES} from "./titles"
 var TITLES = [] // legacy stuff
 
 // var whitelist = ['http://sephirhome.ddns.net:7532', 'http://sephirhome.ddns.net:7531','http://localhost:7531']
 
-app.use(cors());
+// app.use(cors());
 
 app.use(cors("*"));
 

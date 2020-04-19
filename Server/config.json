@@ -1,0 +1,13 @@
+{
+  "system_path": "/home/suso/ihw/tableAnnotator/",
+  "port": 6541,
+  "port_ui": 7531,
+  "host": "sephirhome.ddns.net",
+  "db" : {
+      "user": "postgres",
+      "host": "localhost",
+      "database": "ihw_annotator",
+      "password": "melacome86",
+      "port": 5432
+    }
+}

@@ -10,7 +10,7 @@ var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _config = require("./config");
+var _config = _interopRequireDefault(require("./config.json"));
 
 function _templateObject4() {
   var data = (0, _taggedTemplateLiteral2.default)(["\n        groupedPredict(", ")\n      "]);
@@ -90,8 +90,8 @@ var cors = require('cors');
 // import {TITLES} from "./titles"
 var TITLES = []; // legacy stuff
 // var whitelist = ['http://sephirhome.ddns.net:7532', 'http://sephirhome.ddns.net:7531','http://localhost:7531']
+// app.use(cors());
 
-app.use(cors());
 app.use(cors("*")); // app.use('/public', express.static(path.join(__dirname, 'public')))
 // app.use(express.static(__dirname + '/domainParserviews'));
 //
@@ -333,11 +333,11 @@ function extractMMData(r) {
 var METHOD = "grouped_predictor"; // Postgres configuration.
 
 var pool = new Pool({
-  user: _config.CONFIG.db.user,
-  host: _config.CONFIG.db.host,
-  database: _config.CONFIG.db.database,
-  password: _config.CONFIG.db.password,
-  port: _config.CONFIG.db.port
+  user: _config.default.db.user,
+  host: _config.default.db.host,
+  database: _config.default.db.database,
+  password: _config.default.db.password,
+  port: _config.default.db.port
 }); //NODE R CONFIGURATION.
 
 var R = require("r-script"); //Important to use this function for all text extracted from the tables.
@@ -4077,8 +4077,8 @@ function () {
     return _ref48.apply(this, arguments);
   };
 }());
-app.listen(_config.CONFIG.port, function () {
-  console.log('Express Server running on port ' + _config.CONFIG.port + ' ' + new Date().toISOString());
+app.listen(_config.default.port, function () {
+  console.log('Express Server running on port ' + _config.default.port + ' ' + new Date().toISOString());
 }); //////////////////  Evaluation bit.
 // var runDocuments = async () => {
 //   console.log("getting all predictions")
