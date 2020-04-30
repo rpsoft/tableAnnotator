@@ -15,6 +15,8 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 
+import Login from '../Login'
+
 import {
   URL_BASE,
 } from '../../links'
@@ -27,11 +29,6 @@ import {
   MetaContainer,
   TableContainer,
   AnnotationView,
-  ClusterContainer,
-  ClusterView,
-  ClusterIndex,
-  ClusterResultsView,
-  ClusterResultsContainer,
   CuiAdminContainer,
 } from '../../components/'
 
@@ -41,13 +38,12 @@ export default function App() {
   return (
     <div>
       <Switch>
-        <Route exact path={urlBase} component={AppContainer} ></Route>
-        <Route path={urlBase + "table"} component={TableContainer}></Route>
-        <Route path={urlBase + "allresults"} component={ResultsContainer}></Route>
-        <Route path={urlBase + "metaresults"} component={MetaContainer}></Route>
-        <Route path={urlBase + "cluster"} component={ClusterContainer}></Route>
-        <Route path={urlBase + "clusterresults"} component={ClusterResultsContainer}></Route>
-        <Route path={urlBase + "cuiadmin"} component={CuiAdminContainer}></Route>
+        <Route path="/login" component={Login} />
+        <Route path="/table" component={TableContainer}></Route>
+        <Route path="/allresults" component={ResultsContainer}></Route>
+        <Route path="/metaresults" component={MetaContainer}></Route>
+        <Route path="/cuiadmin" component={CuiAdminContainer}></Route>
+        <Route path="/" component={AppContainer}></Route>
       </Switch>
       <GlobalStyle />
     </div>

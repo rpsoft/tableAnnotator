@@ -51,6 +51,7 @@ var ReactDOMServer = require('react-dom/server');
 var HtmlToReact = require('html-to-react')
 var HtmlToReactParser = require('html-to-react').Parser;
 
+
 function* range(start, end) {
     for (let i = start; i <= end; i++) {
         yield i;
@@ -216,6 +217,7 @@ class CommonView extends Component {
         <Card style={{marginBottom:10}}>
           <Home style={{marginLeft:10, marginTop:10, float:"left",height:45,width:45, cursor:"pointer", marginRight:15}} onClick={() => this.props.goToUrl("/"+"?user="+(this.state.user ? this.state.user : "" ))}/>
           <h2>TableTidier Prototype</h2>
+
         </Card>
 
         <Card id="userData" style={{padding:15,marginBottom:10}}>
