@@ -23,13 +23,16 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card'
 
 import {loginAction, loginSuccessAction, loginFailedAction, changeLoginDetailsAction} from './actions'
+import { push } from 'connected-react-router';
 
 export function Login({
   token,
   username,
   password,
   changeLoginDetails,
+  goTo,
 }) {
+
 
   const [user_name, setUsername] = useState("");
   const [pass_word, setPassword] = useState("");
@@ -45,10 +48,10 @@ export function Login({
   // console.log("username", username)
   // console.log("token", token)
   // console.log("password", password)
-
-  const loginProps = {
-    token,
-  };
+  //
+  // const loginProps = {
+  //   token,
+  // };
 
   return (
     <div style={{width:"100%", height:"100%"}}>
@@ -82,6 +85,8 @@ export function Login({
         </div>
 
         <div>name here : {user_name} {pass_word} {token}</div>
+
+        <Button onClick={ () => {goTo('/annotator')}} > Annotator </Button>
       </Card>
     </div>
   );
@@ -95,6 +100,7 @@ Login.propTypes = {
   username : PropTypes.string,
   password : PropTypes.string,
   changeLoginDetails : PropTypes.func,
+  goTo : PropTypes.func
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -105,6 +111,7 @@ function mapDispatchToProps(dispatch) {
   return {
     // dispatch,
     changeLoginDetails : (username,password) => dispatch(changeLoginDetailsAction(username,password)),
+    goTo : (path) => dispatch(push(path)),
     // doLogin : (evt) => dispatch(loginAction(evt.target.value))
   };
 }

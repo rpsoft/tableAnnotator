@@ -14,7 +14,6 @@ const selectLoginDomain = state => state.login || initialState;
 /**
  * Default selector used by Login
  */
-
 const makeSelectLogin = () =>
   createSelector(
     selectLoginDomain,

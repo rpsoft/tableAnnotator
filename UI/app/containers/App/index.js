@@ -16,6 +16,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import GlobalStyle from '../../global-styles';
 
 import Login from '../Login'
+import Annotator from '../Annotator'
 
 import {
   URL_BASE,
@@ -39,6 +40,7 @@ export default function App() {
     <div>
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/annotator" component={Annotator} />
         <Route path="/table" component={TableContainer}></Route>
         <Route path="/allresults" component={ResultsContainer}></Route>
         <Route path="/metaresults" component={MetaContainer}></Route>
