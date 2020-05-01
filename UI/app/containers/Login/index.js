@@ -19,6 +19,8 @@ import saga from './saga';
 import messages from './messages';
 
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card'
 
 import {loginAction, loginSuccessAction, loginFailedAction, changeLoginDetailsAction} from './actions'
 
@@ -29,8 +31,10 @@ export function Login({
   changeLoginDetails,
 }) {
 
+  const [user_name, setUsername] = useState("");
+  const [pass_word, setPassword] = useState("");
   // const hey = useState(0);
-
+// debugger
   useInjectReducer({ key: 'login', reducer });
   useInjectSaga({ key: 'login', saga });
   //
@@ -48,36 +52,51 @@ export function Login({
   };
 
   return (
-    <div>
+    <div style={{width:"100%", height:"100%"}}>
       <Helmet>
         <title>Login</title>
         <meta name="description" content="Description of Login" />
       </Helmet>
 
-      <TextField
-        id="username"
-        value={username}
-        placeholder="Set your username here"
-        onChange={ (evt) => {changeLoginDetails(evt.currentTarget.value, password)} }
-        />
+      <Card style={{padding:5}}>
 
-      <TextField
-        id="password"
-        value={username}
-        placeholder="Set your Password here"
-        onChange={ (evt) => {changeLoginDetails(username, evt.currentTarget.value )} }
-        />
+        <TextField
+          id="username"
+          value={user_name}
+          placeholder="Username"
+          onChange={ (evt) => {setUsername(evt.currentTarget.value)} }
 
-      <FormattedMessage {...messages.header} />
+          />
+
+        <br />
+        <TextField
+          id="password"
+          value={pass_word}
+          placeholder="Password"
+          type="password"
+          onChange={ (evt) => {setPassword(evt.currentTarget.value)} }
+          />
+
+        <br />
+        <div style={{marginTop:10, marginBottom:10}} >
+          <Button variant="contained" onClick={ () => { changeLoginDetails(user_name,pass_word) } } >Login</Button>
+          <Button variant="contained" style={{marginLeft:5}}>Register</Button>
+        </div>
+
+        <div>name here : {user_name} {pass_word}</div>
+      </Card>
     </div>
   );
 }
+
+// <FormattedMessage {...messages.header} />
 
 Login.propTypes = {
   // dispatch: PropTypes.func.isRequired,
   token : PropTypes.string,
   username : PropTypes.string,
   password : PropTypes.string,
+  changeLoginDetails : PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -87,7 +106,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     // dispatch,
-    changeLoginDetails : () => {dispatch(changeLoginDetailsAction(username,password))},
+    changeLoginDetails : (username,password) => dispatch(changeLoginDetailsAction(username,password)),
     // doLogin : (evt) => dispatch(loginAction(evt.target.value))
   };
 }

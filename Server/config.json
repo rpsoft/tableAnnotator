@@ -9,5 +9,6 @@
       "database": "ihw_annotator",
       "password": "melacome86",
       "port": 5432
-    }
+    },
+  "hashSecret": "something here"
 }
