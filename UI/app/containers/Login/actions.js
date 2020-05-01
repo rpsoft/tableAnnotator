@@ -34,7 +34,7 @@ export function loginFailedAction(error) {
 }
 
 export function changeLoginDetailsAction(username, password) {
-  
+
   return {
     type: LOGIN_CHANGE_DETAILS,
     username,

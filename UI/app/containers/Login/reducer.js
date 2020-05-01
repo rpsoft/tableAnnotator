@@ -27,12 +27,12 @@ const loginReducer = (state = initialState, action) =>
         break;
       case LOGIN_ACTION_SUCCESS:
         draft.token = action.payload;
+        draft.error = null;
         break;
       case LOGIN_ACTION_FAILED:
         draft.error = action.payload;
+        draft.token = "";
         break;
-
-
       case DEFAULT_ACTION:
         break;
     }

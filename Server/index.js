@@ -111,6 +111,15 @@ var records = [{
     value: 'jill@example.com'
   }],
   registered: "1588283575644"
+}, {
+  id: 3,
+  username: 'suso',
+  password: 'me',
+  displayName: 'Jesus',
+  emails: [{
+    value: 'suso@example.com'
+  }],
+  registered: "1588283589667"
 }];
 
 function getUserHash(user) {
@@ -159,6 +168,7 @@ app.use(require('body-parser').urlencoded({
 app.use(passport.initialize());
 app.post('/login', function (req, res, next) {
   passport.authenticate('custom', function (err, user, info) {
+    // console.log("login_req",JSON.stringify(req))
     if (err) {
       res.json({
         status: "failed",

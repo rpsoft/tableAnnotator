@@ -33,11 +33,10 @@ export function Login({
 
   const [user_name, setUsername] = useState("");
   const [pass_word, setPassword] = useState("");
-  // const hey = useState(0);
-// debugger
+
   useInjectReducer({ key: 'login', reducer });
   useInjectSaga({ key: 'login', saga });
-  //
+
   // useEffect(() => {
   //   // When initial state username is not null, submit the form to load repos
   //   if (username && username.trim().length > 0) login();
@@ -65,7 +64,6 @@ export function Login({
           value={user_name}
           placeholder="Username"
           onChange={ (evt) => {setUsername(evt.currentTarget.value)} }
-
           />
 
         <br />
@@ -83,7 +81,7 @@ export function Login({
           <Button variant="contained" style={{marginLeft:5}}>Register</Button>
         </div>
 
-        <div>name here : {user_name} {pass_word}</div>
+        <div>name here : {user_name} {pass_word} {token}</div>
       </Card>
     </div>
   );

@@ -29,14 +29,13 @@ import CONFIG from './config.json'
 
 var TITLES = [] // legacy stuff
 
-
 var records = [
     { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ], registered : "1588283579685" }
   , { id: 2, username: 'jill', password: 'birthday', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ], registered : "1588283575644" }
+  , { id: 3, username: 'suso', password: 'me', displayName: 'Jesus', emails: [ { value: 'suso@example.com' } ], registered : "1588283589667" }
 ];
 
 function getUserHash(user){
-
   var hash = crypto.createHmac('sha256', CONFIG.hashSecret)
                      .update(user.username+user.password+user.registered)
                      .digest('hex');
@@ -82,13 +81,14 @@ app.use('/pdfs', express.static(path.join(__dirname, 'pdfs')))
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
+
 app.use(require('body-parser').urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 
 app.post('/login', function(req, res, next) {
   passport.authenticate('custom', function(err, user, info) {
-
+    // console.log("login_req",JSON.stringify(req))
     if ( err ){
       res.json({status:"failed", payload: null})
     } else if ( !user ) {

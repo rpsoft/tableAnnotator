@@ -28,4 +28,4 @@ const makeLoginSelector = () =>
   );
 
 export default makeSelectLogin;
-export { selectLoginDomain, makeLoginSelector };
+export { selectLoginDomain, makeLoginSelector, makeSelectLogin  };
