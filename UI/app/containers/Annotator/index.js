@@ -19,11 +19,24 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 
+import { useCookies } from 'react-cookie';
+
 export function Annotator({
   annotator
 }) {
   useInjectReducer({ key: 'annotator', reducer });
   useInjectSaga({ key: 'annotator', saga });
+
+  const [cookies] = useCookies();
+
+  // useEffect(() => {
+  //   // This reloads the authentication token if it's available in the cookies.
+  //   if ( token ) {
+  //     setCookie("hash", token)
+  //   }
+  //
+  // });
+
 
   return (
     <div>
@@ -32,7 +45,8 @@ export function Annotator({
         <meta name="description" content="Description of Annotator" />
       </Helmet>
       <FormattedMessage {...messages.header} />
-      <div>{JSON.stringify(annotator)}</div>
+      <div>Logged in as {cookies.username}</div>
+      <div>{cookies.hash}</div>
     </div>
   );
 }

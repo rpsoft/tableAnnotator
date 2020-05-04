@@ -11,8 +11,8 @@ import request from '../../utils/request';
 // const httpClient = new HttpClient()
 
 export function* doLogin() {
-  const login_details = yield select(makeSelectLogin());
 
+  const login_details = yield select(makeSelectLogin());
   const requestURL = `http://localhost:6541/login`;
 
   const params = new URLSearchParams();
@@ -33,8 +33,11 @@ export function* doLogin() {
     body: params
   }
 
+
+
   try {
     const response = yield call(request, requestURL, options);
+
     yield put(loginSuccessAction(response.payload.hash));
   } catch (err) {
     yield put(loginFailedAction(err));

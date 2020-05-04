@@ -38,8 +38,8 @@ const urlBase = URL_BASE
 export default function App() {
   return (
     <div>
+      <Login/>
       <Switch>
-        <Route path="/login" component={Login} />
         <Route path="/annotator" component={Annotator} />
         <Route path="/table" component={TableContainer}></Route>
         <Route path="/allresults" component={ResultsContainer}></Route>

@@ -21,40 +21,69 @@ import messages from './messages';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card'
+import Popover from '@material-ui/core/Popover';
 
 import {loginAction, loginSuccessAction, loginFailedAction, changeLoginDetailsAction} from './actions'
 import { push } from 'connected-react-router';
 
+import { useCookies } from 'react-cookie';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+
+
 export function Login({
   token,
-  username,
-  password,
   changeLoginDetails,
   goTo,
 }) {
+  const [cookies, setCookie, removeCookie ] = useCookies();
+
+  const [username, setUsername] = useState(cookies.username);
+  const [password, setPassword] = useState("");
 
 
-  const [user_name, setUsername] = useState("");
-  const [pass_word, setPassword] = useState("");
+  const [loginWarning, setLoginWarning] = useState("");
+
+  const [isLoginShown, toggleLogin] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleLoginToggle = (event) => {
+    if( isLoginShown ){
+      toggleLogin(false)
+      setAnchorEl(null);
+    } else {
+      toggleLogin(true);
+      setAnchorEl(event.currentTarget);
+    }
+  }
+
+  const logOut = () => {
+    removeCookie("hash");
+    removeCookie("username");
+    setUsername("")
+    setPassword("")
+  }
+
+  const onKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        event.stopPropagation();
+        changeLoginDetails(username, password);
+      }
+    }
+
+  useEffect(() => {
+    // This reloads the authentication token if it's available in the cookies.
+    if ( token ) {
+      setCookie("hash", token)
+      setCookie("username", username)
+    }
+  });
 
   useInjectReducer({ key: 'login', reducer });
   useInjectSaga({ key: 'login', saga });
 
-  // useEffect(() => {
-  //   // When initial state username is not null, submit the form to load repos
-  //   if (username && username.trim().length > 0) login();
-  // }, []);
-  //
-  // console.log("username", username)
-  // console.log("token", token)
-  // console.log("password", password)
-  //
-  // const loginProps = {
-  //   token,
-  // };
-
   return (
-    <div style={{width:"100%", height:"100%"}}>
+    <div style={{width:"100%"}}>
       <Helmet>
         <title>Login</title>
         <meta name="description" content="Description of Login" />
@@ -62,31 +91,54 @@ export function Login({
 
       <Card style={{padding:5}}>
 
-        <TextField
-          id="username"
-          value={user_name}
-          placeholder="Username"
-          onChange={ (evt) => {setUsername(evt.currentTarget.value)} }
-          />
 
-        <br />
-        <TextField
-          id="password"
-          value={pass_word}
-          placeholder="Password"
-          type="password"
-          onChange={ (evt) => {setPassword(evt.currentTarget.value)} }
-          />
+        <div style={{display:"inline-block",float:"right"}} >
 
-        <br />
-        <div style={{marginTop:10, marginBottom:10}} >
-          <Button variant="contained" onClick={ () => { changeLoginDetails(user_name,pass_word) } } >Login</Button>
-          <Button variant="contained" style={{marginLeft:5}}>Register</Button>
+          <Button variant="contained" onClick={ handleLoginToggle }style={{marginLeft:5}}><AccountBoxIcon/> {cookies.username ? "Logged as: "+cookies.username : " guest "}</Button>
         </div>
 
-        <div>name here : {user_name} {pass_word} {token}</div>
 
-        <Button onClick={ () => {goTo('/annotator')}} > Annotator </Button>
+        <Popover
+        id={"loginDropDown"}
+        open={isLoginShown}
+        anchorEl={anchorEl}
+        onClose={ handleLoginToggle }
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        >
+          <div style={{padding:10, maxWidth:300}}>
+            <TextField
+              id="username"
+              value={username}
+              placeholder="Username"
+              onChange={ (evt) => {setUsername(evt.currentTarget.value)} }
+              onKeyDown ={onKeyDown}
+              />
+              <br />
+
+            <TextField
+              id="password"
+              value={password}
+              placeholder="Password"
+              type="password"
+              onChange={ (evt) => {setPassword(evt.currentTarget.value)} }
+              onKeyDown ={onKeyDown}
+              />
+
+            { loginWarning ? <div style={{color:"red",marginTop:5,marginBottom:5}}> {loginWarning} </div> : <br /> }
+
+            <div style={{marginTop:10,textAlign:"right"}}>
+              <Button variant="contained" onClick={ () => { changeLoginDetails(username, password) } } style={{backgroundColor:"#93de85"}} >Login</Button>
+              <Button variant="contained" onClick={ () => { logOut() } } style={{marginLeft:5,backgroundColor:"#f98989"}}>Logout</Button>
+            </div>
+          </div>
+        </Popover>
       </Card>
     </div>
   );
@@ -97,10 +149,8 @@ export function Login({
 Login.propTypes = {
   // dispatch: PropTypes.func.isRequired,
   token : PropTypes.string,
-  username : PropTypes.string,
-  password : PropTypes.string,
   changeLoginDetails : PropTypes.func,
-  goTo : PropTypes.func
+  goTo : PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
