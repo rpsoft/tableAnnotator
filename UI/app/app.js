@@ -43,13 +43,15 @@ const MOUNT_NODE = document.getElementById('app');
 export const ServerContext = React.createContext(argv.ext_host);
 export const PortContext = React.createContext(argv.port);
 
+// const app_params = require('minimist')(process.argv.slice(2));
+
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <ServerContext.Provider>
-            <App />
+            <App params={process.env.REACT_APP_WEBSITE_NAME}/>
           </ServerContext.Provider>
         </ConnectedRouter>
       </LanguageProvider>

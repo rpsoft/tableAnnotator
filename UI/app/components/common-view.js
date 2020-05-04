@@ -213,13 +213,13 @@ class CommonView extends Component {
       }
 
       return <div  style={{paddingLeft:"5%",paddingRight:"5%"}} >
-
-        <Card style={{marginBottom:10}}>
-          <Home style={{marginLeft:10, marginTop:10, float:"left",height:45,width:45, cursor:"pointer", marginRight:15}} onClick={() => this.props.goToUrl("/"+"?user="+(this.state.user ? this.state.user : "" ))}/>
-          <h2>TableTidier Prototype</h2>
-
-        </Card>
-
+      {
+        // <Card style={{marginBottom:10}}>
+        //   <Home style={{marginLeft:10, marginTop:10, float:"left",height:45,width:45, cursor:"pointer", marginRight:15}} onClick={() => this.props.goToUrl("/"+"?user="+(this.state.user ? this.state.user : "" ))}/>
+        //   <h2>TableTidier Prototype</h2>
+        //
+        // </Card>
+      }
         <Card id="userData" style={{padding:15,marginBottom:10}}>
           <TextField
             value={this.state.user}

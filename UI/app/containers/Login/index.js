@@ -22,6 +22,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card'
 import Popover from '@material-ui/core/Popover';
+import Home from '@material-ui/icons/Home';
 
 import {loginAction, loginSuccessAction, loginFailedAction, changeLoginDetailsAction} from './actions'
 import { push } from 'connected-react-router';
@@ -91,9 +92,10 @@ export function Login({
 
       <Card style={{padding:5}}>
 
+        <Home style={{float:"left",height:45,width:45, cursor:"pointer", marginRight:15}} onClick={() => goTo('/')}/>
+        <h2 style={{float:"left",margin:0, marginTop:10}}>TableTidier <div style={{color:"red",display:"inline-block",fontSize:15}}>(beta)</div></h2>
 
-        <div style={{display:"inline-block",float:"right"}} >
-
+        <div style={{display:"inline-block",float:"right",marginTop:5}} >
           <Button variant="contained" onClick={ handleLoginToggle }style={{marginLeft:5}}><AccountBoxIcon/> {cookies.username ? "Logged as: "+cookies.username : " guest "}</Button>
         </div>
 

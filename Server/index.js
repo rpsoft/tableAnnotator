@@ -101,7 +101,8 @@ var records = [{
   emails: [{
     value: 'jack@example.com'
   }],
-  registered: "1588283579685"
+  registered: "1588283579685",
+  role: "viewer"
 }, {
   id: 2,
   username: 'jill',
@@ -110,7 +111,8 @@ var records = [{
   emails: [{
     value: 'jill@example.com'
   }],
-  registered: "1588283575644"
+  registered: "1588283575644",
+  role: "user"
 }, {
   id: 3,
   username: 'suso',
@@ -119,7 +121,8 @@ var records = [{
   emails: [{
     value: 'suso@example.com'
   }],
-  registered: "1588283589667"
+  registered: "1588283589667",
+  role: "admin"
 }];
 
 function getUserHash(user) {

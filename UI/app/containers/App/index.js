@@ -35,7 +35,11 @@ import {
 
 const urlBase = URL_BASE
 
-export default function App() {
+export default function App({params}) {
+
+  var hey = params
+
+  debugger
   return (
     <div>
       <Login/>

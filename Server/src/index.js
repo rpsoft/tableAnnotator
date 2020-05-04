@@ -30,9 +30,9 @@ import CONFIG from './config.json'
 var TITLES = [] // legacy stuff
 
 var records = [
-    { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ], registered : "1588283579685" }
-  , { id: 2, username: 'jill', password: 'birthday', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ], registered : "1588283575644" }
-  , { id: 3, username: 'suso', password: 'me', displayName: 'Jesus', emails: [ { value: 'suso@example.com' } ], registered : "1588283589667" }
+    { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ], registered : "1588283579685", role: "viewer" }
+  , { id: 2, username: 'jill', password: 'birthday', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ], registered : "1588283575644", role: "user" }
+  , { id: 3, username: 'suso', password: 'me', displayName: 'Jesus', emails: [ { value: 'suso@example.com' } ], registered : "1588283589667", role: "admin" }
 ];
 
 function getUserHash(user){
