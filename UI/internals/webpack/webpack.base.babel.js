@@ -113,7 +113,9 @@ module.exports = options => ({
     // drop any unreachable code.
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
-      REACT_APP_WEBSITE_NAME: 'sephirhost',
+      REACT_APP_WEBSITE_NAME: 'localhost',
+      REACT_APP_WEBSITE_PORT: 7531,
+      REACT_APP_SERVER_PORT: 6541,
     }),
   ]),
   resolve: {

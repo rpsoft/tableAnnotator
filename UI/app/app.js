@@ -51,7 +51,7 @@ const render = messages => {
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <ServerContext.Provider>
-            <App params={process.env.REACT_APP_WEBSITE_NAME}/>
+            <App params={process.env.REACT_APP_WEBSITE_NAME+":"+ process.env.REACT_APP_SERVER_PORT +" / "+process.env.REACT_APP_WEBSITE_PORT}/>
           </ServerContext.Provider>
         </ConnectedRouter>
       </LanguageProvider>
