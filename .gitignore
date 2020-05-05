@@ -27,25 +27,12 @@ build/Release
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules
 .Rproj.user
-
-Server/ALLTABLES/
-frankenstein/
+.Trash-1000/
+Server/package-lock.json
+Server/config.json
 
 Server/HTML_TABLES/
 Server/HTML_TABLES_OVERRIDE/
-Server/SCRATCH
-Server/src/clean_full_tables_rds_jul_2019.rds
-Server/src/full_tables_rds_jul_2019.rds
-Server/src/tableScript-bak.R
-Server/src/test-july.rds
-Server/src/test-title.rds
-Server/transfer.zip
-
-.Trash-1000/
-
-Server/package-lock.json
-UI/package-lock.json
-
 Server/HTML_TABLES_DELETED/
 
-Server/config.json
+UI/package-lock.json
