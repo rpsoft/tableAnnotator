@@ -1,0 +1,1160 @@
+,terms,label,prediction,extended_terms,extended_prediction
+0,"p value """,arms;measures,measures,"p value """,measures
+1,placebo,arms;measures,arms,placebo,arms
+2,gemfibrozil,arms;measures,characteristic_name,gemfibrozil,characteristic_name
+3,risk reduction ( nmbr % cl ),arms;measures,measures,risk reduction ( nmbr % cl ),measures
+4,p value,arms;measures,measures,p value,measures
+5,stent plus abciximab,arms;measures,arms,stent plus abciximab,arms
+6,"balloon angioplasty plus abciximab """,arms;measures,arms,"balloon angioplasty plus abciximab """,arms
+7,p *,arms;measures,characteristic_name,p *,characteristic_name
+8,pt,arms;measures,measures,pt,measures
+9,balloon angioplasty plus abciximab,arms;measures,arms,balloon angioplasty plus abciximab,arms
+10,stent plus placebo,arms;measures,arms,stent plus placebo,arms
+11,no . of patients,measures;arms,characteristic_level,no . of patients,characteristic_level
+12,irofiban,measures;arms,characteristic_name,irofiban,characteristic_name
+13,abciximab,measures;arms,arms,abciximab,arms
+14,"abciximab """,measures;arms,arms,"abciximab """,arms
+15,ticlopidine ( n = nmbr ),arms;measures,characteristic_level,ticlopidine ( n = nmbr ),characteristic_level
+16,p,arms;measures,characteristic_name,p,characteristic_name
+17,clopidogrel ( n = nmbr ),arms;measures,arms,clopidogrel ( n = nmbr ),arms
+18,"ticlopidine ( n = nmbr ) """,arms;measures,characteristic_level,"ticlopidine ( n = nmbr ) """,characteristic_level
+19,"warfarin group ( n = nmbr ) """,arms;measures,arms,"warfarin group ( n = nmbr ) """,arms
+21,placebo group ( n = nmbr ),arms;measures,arms,placebo group ( n = nmbr ),arms
+22,warfarin group ( n = nmbr ),arms;measures,arms,warfarin group ( n = nmbr ),arms
+23,"placebo group """,arms;measures;p-interaction,arms,"placebo group """,arms
+24,p value for interaction^,arms;measures;p-interaction,measures,p value for interaction^,measures
+25,hazard ratio ( nmbr % ci ) *,arms;measures;p-interaction,measures,hazard ratio ( nmbr % ci ) *,measures
+26,warfarin group,arms;measures;p-interaction,arms,warfarin group,arms
+27,placebo group,arms;measures;p-interaction,arms,placebo group,arms
+28,rr ( nmbr % cl ),arms;measures,measures,rr ( nmbr % cl ),measures
+29,"non - calcium antagonist strategy ( ncas ) ( events / n ) """,arms;measures,arms,"non - calcium antagonist strategy ( ncas ) ( events / n ) """,arms
+30,non - calcium antagonist strategy ( ncas ) ( events / n ),arms;measures,arms,non - calcium antagonist strategy ( ncas ) ( events / n ),arms
+31,calcium antagonist strategy ( cas ) ( events / n ),arms;measures,arms,calcium antagonist strategy ( cas ) ( events / n ),arms
+32,gfr ( ml / min per nmbr . nmbr nr ),measures;arms,characteristic_level,gfr ( ml / min per nmbr . nmbr nr ),characteristic_level
+33,esrd on losartan ( % ),measures;arms,outcomes,esrd on losartan ( % ),outcomes
+34,chf on placebo ( % ),measures;arms,arms,chf on placebo ( % ),arms
+35,esrd on placebo ( % ),measures;arms,arms,esrd on placebo ( % ),arms
+36,p ( losartan versus placebo ),measures;arms,arms,p ( losartan versus placebo ),arms
+37,risk reduction ( % ; nmbr % ci ),measures;arms,measures,risk reduction ( % ; nmbr % ci ),measures
+38,chf on losartan ( % ),measures;arms,measures,chf on losartan ( % ),measures
+40,"p ( losartan versus placebo ) """,measures;arms,arms,"p ( losartan versus placebo ) """,arms
+41,"beta - carotene ( n = nmbr , nmbr )",arms;measures,arms,"beta - carotene ( n = nmbr , nmbr )",arms
+42,"nmbr % ci """,arms;measures,measures,"nmbr % ci """,measures
+43,"placebo ( n = nmbr , nmbr )",arms;measures,arms,"placebo ( n = nmbr , nmbr )",arms
+44,rr *,arms;measures,characteristic_name,rr *,characteristic_name
+45,nmbr % ci,arms;measures,measures,nmbr % ci,measures
+51,p interaction,arms;measures,characteristic_name,p interaction,characteristic_name
+53,beta - carotene,arms;measures,arms,beta - carotene,arms
+58,rr ( nmbr % ci ),arms;measures,measures,rr ( nmbr % ci ),measures
+59,pla,arms;measures,arms,pla,arms
+60,asp,arms;measures,characteristic_name,asp,characteristic_name
+62,patients with end point,arms;measures,measures,patients with end point,measures
+63,"patients with end point """,arms;measures,measures,"patients with end point """,measures
+64,pbo,arms;p-interaction,arms,pbo,arms
+65,"p - value * ' ' """,arms;p-interaction,measures,"p - value * ' ' """,measures
+66,eze nmbr mg,arms;p-interaction,arms,eze nmbr mg,arms
+67,p - value * ' ',arms;p-interaction,measures,p - value * ' ',measures
+68,"placebo ( n = nmbr nmbr ) """,arms;p-interaction,arms,"placebo ( n = nmbr nmbr ) """,arms
+69,placebo ( n = nmbr nmbr ),arms;p-interaction,arms,placebo ( n = nmbr nmbr ),arms
+70,aspirin ( n = nmbr nmbr ),arms;p-interaction,characteristic_level,aspirin ( n = nmbr nmbr ),characteristic_level
+71,total ( n = nmbr nmbr ),arms;p-interaction,arms,total ( n = nmbr nmbr ),arms
+72,p value,arms;p-interaction,measures,p value,measures
+73,lips,other;outcomes,characteristic_name,lips,characteristic_name
+74,cards,other;outcomes,characteristic_name,cards,characteristic_name
+75,woscops,other;outcomes,characteristic_name,woscops,characteristic_name
+76,total,other;outcomes,arms,total,arms
+77,hps,other;outcomes,characteristic_name,hps,characteristic_name
+78,gissi prevention nmbr / nmbr - nmbr / nmbr,other;outcomes,characteristic_level,gissi prevention nmbr / nmbr - nmbr / nmbr,characteristic_level
+79,alert,other;outcomes,characteristic_name,alert,characteristic_name
+80,lipid,other;outcomes,characteristic_name,lipid,characteristic_name
+81,afcaps /,other;outcomes,characteristic_name,afcaps /,characteristic_name
+82,nmbr,other;outcomes,characteristic_level,nmbr,characteristic_level
+83,post - cabg,other;outcomes,characteristic_level,post - cabg,characteristic_level
+84,allhat - llt,other;outcomes,characteristic_name,allhat - llt,characteristic_name
+85,care,other;outcomes,arms,care,arms
+86,prosper,other;outcomes,characteristic_name,prosper,characteristic_name
+87,ascot - lla,other;outcomes,characteristic_name,ascot - lla,characteristic_name
+88,"post - cabg """,other;outcomes,characteristic_level,"post - cabg """,characteristic_level
+89,baseline history of vascular disease ( % ),measures;characteristic_name,characteristic_name,baseline history of vascular disease ( % ),characteristic_name
+90,"baseline history of vascular disease ( % ) """,measures;characteristic_name,characteristic_name,"baseline history of vascular disease ( % ) """,characteristic_name
+91,heterogeneity / trend test,arms;other,characteristic_name,heterogeneity / trend test,characteristic_name
+92,"events treatment ( nmbr ) """,arms;other,measures,"events treatment ( nmbr ) """,measures
+93,events treatment ( nmbr ),arms;other,measures,events treatment ( nmbr ),measures
+94,rr ( cl ),arms;other,measures,rr ( cl ),measures
+95,( % ) control ( nmbr ),arms;other,arms,( % ) control ( nmbr ),arms
+96,heterogeneity / trend test,arms;other;measures,characteristic_name,heterogeneity / trend test,characteristic_name
+97,"events treatment ( nmbr ) """,arms;other;measures,measures,"events treatment ( nmbr ) """,measures
+98,events treatment ( nmbr ),arms;other;measures,measures,events treatment ( nmbr ),measures
+99,rr ( cl ),arms;other;measures,measures,rr ( cl ),measures
+100,( % ) control ( nmbr ),arms;other;measures,arms,( % ) control ( nmbr ),arms
+101,white,measures;characteristic_level,characteristic_level,white,characteristic_level
+102,"white """,measures;characteristic_level,characteristic_level,"white """,characteristic_level
+103,asian,measures;characteristic_level,characteristic_level,asian,characteristic_level
+104,black,measures;characteristic_level,characteristic_level,black,characteristic_level
+105,hispanic,measures;characteristic_level,characteristic_level,hispanic,characteristic_level
+106,pre - specified hr ( nmbr % cl ),arms;measures,measures,pre - specified hr ( nmbr % cl ),measures
+108,adjusted hr ( nmbr % cl ),arms;measures,measures,adjusted hr ( nmbr % cl ),measures
+109,"adjusted hr ( nmbr % cl ) """,arms;measures,measures,"adjusted hr ( nmbr % cl ) """,measures
+110,losartan,arms;measures,characteristic_name,losartan,characteristic_name
+111,"nmbr - year rates in placebo groups """,measures;p-interaction,arms,"nmbr - year rates in placebo groups """,arms
+112,| interactior nmbr p,measures;p-interaction,characteristic_level,| interactior nmbr p,characteristic_level
+113,number of patients,measures;p-interaction,measures,number of patients,measures
+114,nmbr - year rates in placebo groups,measures;p-interaction,arms,nmbr - year rates in placebo groups,arms
+115,p value for interaction,measures;p-interaction,measures,p value for interaction,measures
+116,hr ( nmbr % ci ),measures;p-interaction,measures,hr ( nmbr % ci ),measures
+117,"p value for interaction """,measures;p-interaction,measures,"p value for interaction """,measures
+118,metabolic syndrome *,characteristic_level;arms,characteristic_level,metabolic syndrome *,characteristic_level
+119,neither pbo + statin eze + statin,characteristic_level;arms,arms,neither pbo + statin eze + statin,arms
+120,"metabolic syndrome * """,characteristic_level;arms,characteristic_level,"metabolic syndrome * """,characteristic_level
+121,diabetes mellitus,characteristic_level;arms,characteristic_level,diabetes mellitus,characteristic_level
+123,"placebo ( n = nmbr ) """,arms;measures,arms,"placebo ( n = nmbr ) """,arms
+124,abciximab ( n = nmbr ),arms;measures,arms,abciximab ( n = nmbr ),arms
+125,placebo ( n = nmbr ),arms;measures,arms,placebo ( n = nmbr ),arms
+130,etoricoxib,measures;arms,arms,etoricoxib,arms
+131,"diclofenac """,measures;arms,arms,"diclofenac """,arms
+132,diclofenac,measures;arms,arms,diclofenac,arms
+133,history of upper,characteristic_name;characteristic_level,characteristic_name,history of upper,characteristic_name
+134,> nmbr years,characteristic_name;characteristic_level,characteristic_level,> nmbr years,characteristic_level
+135,methotrexate use,characteristic_name;characteristic_level,characteristic_name,methotrexate use,characteristic_name
+136,ppi use,characteristic_name;characteristic_level,characteristic_name,ppi use,characteristic_name
+137,low - dose aspirin use,characteristic_name;characteristic_level,characteristic_name,low - dose aspirin use,characteristic_name
+138,other dmard use,characteristic_name;characteristic_level,characteristic_name,other dmard use,characteristic_name
+139,cox - nmbr selective inhibitor use,characteristic_name;characteristic_level,characteristic_level,cox - nmbr selective inhibitor use,characteristic_level
+140,sex ( female ),characteristic_name;characteristic_level,characteristic_name,sex ( female ),characteristic_name
+141,> nmbr to < nmbr years,characteristic_name;characteristic_level,characteristic_level,> nmbr to < nmbr years,characteristic_level
+142,traditional nsaid use,characteristic_name;characteristic_level,characteristic_name,traditional nsaid use,characteristic_name
+143,systemic corticosteroid use,characteristic_name;characteristic_level,characteristic_name,systemic corticosteroid use,characteristic_name
+144,"cox - nmbr selective inhibitor use """,characteristic_name;characteristic_level,characteristic_level,"cox - nmbr selective inhibitor use """,characteristic_level
+145,age ( years ),characteristic_name;characteristic_level,characteristic_name,age ( years ),characteristic_name
+146,rheumatoid arthritis,characteristic_name;characteristic_level,characteristic_name,rheumatoid arthritis,characteristic_name
+147,osteoarthritis,characteristic_name;characteristic_level,characteristic_name,osteoarthritis,characteristic_name
+148,< nmbr years,characteristic_name;characteristic_level,characteristic_level,< nmbr years,characteristic_level
+149,cigarette smoker,characteristic_name;characteristic_level,characteristic_level,cigarette smoker,characteristic_level
+150,"etoricoxib """,arms;measures,arms,"etoricoxib """,arms
+151,hazard ratio ( nmbr % ci ),arms;measures,measures,hazard ratio ( nmbr % ci ),measures
+152,etoricoxib,arms;measures,arms,etoricoxib,arms
+153,diclofenac,arms;measures,arms,diclofenac,arms
+154,interaction p,arms;measures;p-interaction,characteristic_name,interaction p,characteristic_name
+155,control ( n = nmbr ),arms;measures;p-interaction,arms,control ( n = nmbr ),arms
+156,epa ( n = nmbr ),arms;measures;p-interaction,arms,epa ( n = nmbr ),arms
+157,"hazard ratio ( nmbr % cl ) """,arms;measures;p-interaction,measures,"hazard ratio ( nmbr % cl ) """,measures
+158,hazard ratio ( nmbr % cl ),arms;measures;p-interaction,measures,hazard ratio ( nmbr % cl ),measures
+159,hyperlipidemia,characteristic_name;characteristic_level,arms,hyperlipidemia,arms
+160,unstable angina,characteristic_name;characteristic_level,arms,unstable angina,arms
+161,statin,characteristic_name;characteristic_level,arms,statin,arms
+162,"age , median ( iqr ) , y",characteristic_name;characteristic_level,characteristic_level,"age , median ( iqr ) , y",characteristic_level
+163,hypertension,characteristic_name;characteristic_level,characteristic_level,hypertension,characteristic_level
+164,glycoprotein llb / llla receptor inhibitor,characteristic_name;characteristic_level,characteristic_level,glycoprotein llb / llla receptor inhibitor,characteristic_level
+165,current smoker,characteristic_name;characteristic_level,characteristic_level,current smoker,characteristic_level
+166,aspirin,characteristic_name;characteristic_level,arms,aspirin,arms
+167,diabetes mellitus,characteristic_name;characteristic_level,characteristic_level,diabetes mellitus,characteristic_level
+168,p - blocker,characteristic_name;characteristic_level,characteristic_level,p - blocker,characteristic_level
+169,prior ml,characteristic_name;characteristic_level,characteristic_level,prior ml,characteristic_level
+170,female sex,characteristic_name;characteristic_level,characteristic_name,female sex,characteristic_name
+171,st - segment depression > nmbr . nmbr mv,characteristic_name;characteristic_level,characteristic_level,st - segment depression > nmbr . nmbr mv,characteristic_level
+172,prior coronary revascularization,characteristic_name;characteristic_level,characteristic_level,prior coronary revascularization,characteristic_level
+173,ace inhibitor or angiotensin ii receptor blocker,characteristic_name;characteristic_level,characteristic_level,ace inhibitor or angiotensin ii receptor blocker,characteristic_level
+174,estimated creatinine clearance < nmbr ml / mint,characteristic_name;characteristic_level,characteristic_name,estimated creatinine clearance < nmbr ml / mint,characteristic_name
+175,"female sex """,characteristic_name;characteristic_level,characteristic_name,"female sex """,characteristic_name
+176,non - st - elevation ml,characteristic_name;characteristic_level,characteristic_level,non - st - elevation ml,characteristic_level
+177,"weight , median ( iqr ) , kg",characteristic_name;characteristic_level,characteristic_level,"weight , median ( iqr ) , kg",characteristic_level
+178,age > nmbr y,characteristic_name;characteristic_level,characteristic_name,age > nmbr y,characteristic_name
+179,thienopyridine,characteristic_name;characteristic_level,arms,thienopyridine,arms
+180,"body mass index , median ( iqr )",characteristic_name;characteristic_level,characteristic_name,"body mass index , median ( iqr )",characteristic_name
+181,other,characteristic_name;characteristic_level,characteristic_level,other,characteristic_level
+182,white race,characteristic_name;characteristic_level,characteristic_name,white race,characteristic_name
+183,prior heart failure,characteristic_name;characteristic_level,characteristic_name,prior heart failure,characteristic_name
+184,heparin,characteristic_name;characteristic_level,characteristic_level,heparin,characteristic_level
+185,nmbr - nmbr,characteristic_name;characteristic_level,characteristic_level,nmbr - nmbr,characteristic_level
+186,"time from onset of pain to randomization , median ( iqr ) , h",characteristic_name;characteristic_level,characteristic_name,"time from onset of pain to randomization , median ( iqr ) , h",characteristic_name
+187,coronary angiography during the index hospitalization,characteristic_name;characteristic_level,characteristic_name,coronary angiography during the index hospitalization,characteristic_name
+188,placebo group ( n = nmbr ) f,arms;measures,arms,placebo group ( n = nmbr ) f,arms
+189,certolizumab group ( n = nmbr ),arms;measures,arms,certolizumab group ( n = nmbr ),arms
+190,"certolizumab group ( n = nmbr ) """,arms;measures,arms,"certolizumab group ( n = nmbr ) """,arms
+192,rrr ( nmbr % cl ),arms;measures,measures,rrr ( nmbr % cl ),measures
+193,p - valuea,arms;measures,characteristic_name,p - valuea,characteristic_name
+195,"placebo """,arms;measures,arms,"placebo """,arms
+196,interactionnmbr,arms;measures,characteristic_name,interactionnmbr,characteristic_name
+198,"nmbr . nmbr """,arms;measures,characteristic_level,"nmbr . nmbr """,characteristic_level
+199,nmbr . nmbr,arms;measures,characteristic_level,nmbr . nmbr,characteristic_level
+200,nmbr . nmbr ( nmbr . nmbr - nmbr . nmbr ),arms;measures,characteristic_level,nmbr . nmbr ( nmbr . nmbr - nmbr . nmbr ),characteristic_level
+201,p,measures;other,characteristic_name,p,characteristic_name
+202,id genotype,measures;other,arms,id genotype,arms
+203,"id genotype """,measures;other,arms,"id genotype """,arms
+204,"adjustednmbr risk reduction losartan vs placebo ( nmbr % cl ) """,arms;measures;p-interaction,measures,"adjustednmbr risk reduction losartan vs placebo ( nmbr % cl ) """,measures
+205,"placebo , n / n ( % )",arms;measures;p-interaction,arms,"placebo , n / n ( % )",arms
+206,"losartan , n / n ( % )",arms;measures;p-interaction,characteristic_name,"losartan , n / n ( % )",characteristic_name
+207,f * >,arms;measures;p-interaction,characteristic_name,f * >,characteristic_name
+208,adjustednmbr risk reduction losartan vs placebo ( nmbr % cl ),arms;measures;p-interaction,measures,adjustednmbr risk reduction losartan vs placebo ( nmbr % cl ),measures
+209,amlodipine / valsartan nmbr / nmbr mg ( n = nmbr ),arms;other,arms,amlodipine / valsartan nmbr / nmbr mg ( n = nmbr ),arms
+210,"amlodipine / valsartan nmbr / nmbr mg ( n = nmbri ) """,arms;other,arms,"amlodipine / valsartan nmbr / nmbr mg ( n = nmbri ) """,arms
+211,amlodipine / valsartan nmbr / nmbr mg ( n = nmbri ),arms;other,arms,amlodipine / valsartan nmbr / nmbr mg ( n = nmbri ),arms
+212,total study population ( n = nmbr ),arms;other,other,total study population ( n = nmbr ),other
+213,"aspirin ( n = nmbr nmbr ) """,arms;measures,characteristic_level,"aspirin ( n = nmbr nmbr ) """,characteristic_level
+214,placebo ( n = nmbr nmbr ),arms;measures,arms,placebo ( n = nmbr nmbr ),arms
+215,aspirin ( n = nmbr nmbr ),arms;measures,characteristic_level,aspirin ( n = nmbr nmbr ),characteristic_level
+217,aspirin group ( n = nmbr nmbr ) ( nmbr nmbr person years ),arms;measures,characteristic_level,aspirin group ( n = nmbr nmbr ) ( nmbr nmbr person years ),characteristic_level
+218,placebo group ( n = nmbr nmbr ) ( nmbr nmbr person years ),arms;measures,arms,placebo group ( n = nmbr nmbr ) ( nmbr nmbr person years ),arms
+219,"placebo group ( n = nmbr nmbr ) ( nmbr nmbr person years ) """,arms;measures,arms,"placebo group ( n = nmbr nmbr ) ( nmbr nmbr person years ) """,arms
+220,hazard ratio * ( nmbr % ci ),arms;measures,measures,hazard ratio * ( nmbr % ci ),measures
+222,lumbar spine bmd t - score,characteristic_name;characteristic_level,characteristic_name,lumbar spine bmd t - score,characteristic_name
+223,serum pnmbrnp ( ^g / liter ),characteristic_name;characteristic_level,characteristic_level,serum pnmbrnp ( ^g / liter ),characteristic_level
+224,< nmbr yr since menopause,characteristic_name;characteristic_level,characteristic_level,< nmbr yr since menopause,characteristic_level
+225,> nmbr yr since menopause,characteristic_name;characteristic_level,characteristic_level,> nmbr yr since menopause,characteristic_level
+226,serum ctx ( ng / ml ),characteristic_name;characteristic_level,characteristic_level,serum ctx ( ng / ml ),characteristic_level
+227,bodymass index ( kg / mnmbr ),characteristic_name;characteristic_level,characteristic_name,bodymass index ( kg / mnmbr ),characteristic_name
+228,age ( yr ),characteristic_name;characteristic_level,characteristic_level,age ( yr ),characteristic_level
+229,"< nmbr yr since menopause """,characteristic_name;characteristic_level,characteristic_level,"< nmbr yr since menopause """,characteristic_level
+230,serum trap - nmbrb ( u / liter ),characteristic_name;characteristic_level,characteristic_name,serum trap - nmbrb ( u / liter ),characteristic_name
+231,years since menopause,characteristic_name;characteristic_level,characteristic_level,years since menopause,characteristic_level
+232,"denosumab ( n = nmbr ) """,arms;measures,characteristic_level,"denosumab ( n = nmbr ) """,characteristic_level
+233,all ( n = nmbr ),arms;measures,characteristic_level,all ( n = nmbr ),characteristic_level
+234,denosumab ( n = nmbr ),arms;measures,characteristic_level,denosumab ( n = nmbr ),characteristic_level
+236,crp ( mg / dl ) < nmbr . nmbr,characteristic_name;characteristic_level,characteristic_level,crp ( mg / dl ) < nmbr . nmbr,characteristic_level
+237,current smoker yes,characteristic_name;characteristic_level,characteristic_level,current smoker yes,characteristic_level
+238,bmi ( kg / mnmbr ) < nmbr,characteristic_name;characteristic_level,characteristic_level,bmi ( kg / mnmbr ) < nmbr,characteristic_level
+239,ldl - c ( mg / dl ) < nmbr,characteristic_name;characteristic_level,characteristic_level,ldl - c ( mg / dl ) < nmbr,characteristic_level
+240,female,characteristic_name;characteristic_level,characteristic_level,female,characteristic_level
+241,ale < nmbr,characteristic_name;characteristic_level,characteristic_level,ale < nmbr,characteristic_level
+242,no,characteristic_name;characteristic_level,measures,no,measures
+243,"> nmbr """,characteristic_name;characteristic_level,characteristic_level,"> nmbr """,characteristic_level
+244,nmbr . nmbr - nmbr . nmbr,characteristic_name;characteristic_level,characteristic_level,nmbr . nmbr - nmbr . nmbr,characteristic_level
+245,sbp ( mmhg ) < nmbr,characteristic_name;characteristic_level,arms,sbp ( mmhg ) < nmbr,arms
+247,age ( yrs ) < nmbr,characteristic_name;characteristic_level,characteristic_level,age ( yrs ) < nmbr,characteristic_level
+248,non - hdl ( mg / dl ) < nmbr,characteristic_name;characteristic_level,characteristic_level,non - hdl ( mg / dl ) < nmbr,characteristic_level
+249,gender male,characteristic_name;characteristic_level,characteristic_level,gender male,characteristic_level
+250,> nmbr . nmbr,characteristic_name;characteristic_level,characteristic_level,> nmbr . nmbr,characteristic_level
+251,egfr < nmbr,characteristic_name;characteristic_level,characteristic_level,egfr < nmbr,characteristic_level
+252,> nmbr,characteristic_name;characteristic_level,characteristic_level,> nmbr,characteristic_level
+253,no epa group n = nmbr,arms;measures,arms,no epa group n = nmbr,arms
+254,epa group n = nmbr,arms;measures,arms,epa group n = nmbr,arms
+255,"epa group n = nmbr """,arms;measures,arms,"epa group n = nmbr """,arms
+257,no epa group no . of events ( % ),measures;p-interaction,arms,no epa group no . of events ( % ),arms
+258,"p value """,measures;p-interaction,measures,"p value """,measures
+259,"hr , nmbr % cl",measures;p-interaction,measures,"hr , nmbr % cl",measures
+260,epa group no . of events ( % ),measures;p-interaction,arms,epa group no . of events ( % ),arms
+261,p value,measures;p-interaction,measures,p value,measures
+262,"placebo group ( n = nmbr ) """,measures;arms,arms,"placebo group ( n = nmbr ) """,arms
+263,metoprolol group ( n = nmbr ),measures;arms,arms,metoprolol group ( n = nmbr ),arms
+264,placebo group ( n = nmbr ),measures;arms,arms,placebo group ( n = nmbr ),arms
+265,p *,arms;p-interaction,characteristic_name,p *,characteristic_name
+266,"valsartan ( n = nmbr ) """,arms;p-interaction,arms,"valsartan ( n = nmbr ) """,arms
+267,valsartan ( n = nmbr ),arms;p-interaction,arms,valsartan ( n = nmbr ),arms
+268,valsartan / hctz ( n = nmbr ),arms;p-interaction,arms,valsartan / hctz ( n = nmbr ),arms
+269,p *,p-interaction;arms,characteristic_name,p *,characteristic_name
+270,"valsartan / hctz , n / n ( % ) """,p-interaction;arms,arms,"valsartan / hctz , n / n ( % ) """,arms
+271,"valsartan , n / n ( % )",p-interaction;arms,arms,"valsartan , n / n ( % )",arms
+272,"valsartan / hctz , n / n ( % )",p-interaction;arms,arms,"valsartan / hctz , n / n ( % )",arms
+273,valsartan,arms;p-interaction,arms,valsartan,arms
+274,p,arms;p-interaction,characteristic_name,p,characteristic_name
+275,valsartan / hctz,arms;p-interaction,arms,valsartan / hctz,arms
+276,"valsartan / hctz """,arms;p-interaction,arms,"valsartan / hctz """,arms
+277,usual care ( n = nmbra ),arms;measures,arms,usual care ( n = nmbra ),arms
+278,"usual care ( n = nmbrla ) """,arms;measures,arms,"usual care ( n = nmbrla ) """,arms
+279,proactive intervention ( n = nmbra ),arms;measures,characteristic_name,proactive intervention ( n = nmbra ),characteristic_name
+280,usual care ( n = nmbrla ),arms;measures,arms,usual care ( n = nmbrla ),arms
+281,p valuenmbr,arms;measures,characteristic_name,p valuenmbr,characteristic_name
+282,"standard control ( n = nmbr ) no . of patients ( percent ) """,arms;measures,measures,"standard control ( n = nmbr ) no . of patients ( percent ) """,measures
+283,intensive control ( n = nmbr ) no . of patients ( percent ),arms;measures,measures,intensive control ( n = nmbr ) no . of patients ( percent ),measures
+284,standard control ( n = nmbr ) no . of patients ( percent ),arms;measures,measures,standard control ( n = nmbr ) no . of patients ( percent ),measures
+285,relative risk reduction ( nmbr % cl ) percent,arms;measures,measures,relative risk reduction ( nmbr % cl ) percent,measures
+286,verapamil sr n = nmbr no . ( % ),arms;measures,arms,verapamil sr n = nmbr no . ( % ),arms
+287,hr ( nmbr % cl ),arms;measures,measures,hr ( nmbr % cl ),measures
+288,"atenolol n = nmbr no . ( % ) """,arms;measures,arms,"atenolol n = nmbr no . ( % ) """,arms
+289,atenolol n = nmbr no . ( % ),arms;measures,arms,atenolol n = nmbr no . ( % ),arms
+290,"aspirin - erdp clopidogrel no . of patients / total no . """,arms;measures,arms,"aspirin - erdp clopidogrel no . of patients / total no . """,arms
+291,aspirin - erdp clopidogrel no . of patients / total no .,arms;measures,arms,aspirin - erdp clopidogrel no . of patients / total no .,arms
+292,hr ( nmbr % cl ) *,arms;measures,measures,hr ( nmbr % cl ) *,measures
+293,placebo events / patients ( % ),arms;measures,measures,placebo events / patients ( % ),measures
+294,"placebo events / patients ( % ) """,arms;measures,measures,"placebo events / patients ( % ) """,measures
+295,rosuvastatin events / patients ( % ),arms;measures,measures,rosuvastatin events / patients ( % ),measures
+299,n - nmbr pufa events / patients ( % ),arms;measures,measures,n - nmbr pufa events / patients ( % ),measures
+300,p inleraclion,arms;measures;p-interaction,characteristic_name,p inleraclion,characteristic_name
+301,aspirin group,arms;measures;p-interaction,arms,aspirin group,arms
+302,"rr ( nmbr % ci ) * """,arms;measures;p-interaction,measures,"rr ( nmbr % ci ) * """,measures
+303,rr ( nmbr % ci ) *,arms;measures;p-interaction,measures,rr ( nmbr % ci ) *,measures
+305,"irbesartan """,arms;p-interaction,arms,"irbesartan """,arms
+306,p value for interaction,arms;p-interaction,measures,p value for interaction,measures
+307,irbesartan,arms;p-interaction,arms,irbesartan,arms
+308,placebo,arms;p-interaction,arms,placebo,arms
+309,india,characteristic_name;characteristic_level,characteristic_level,india,characteristic_level
+310,hbanmbrc ( % ) all countries,characteristic_name;characteristic_level,characteristic_name,hbanmbrc ( % ) all countries,characteristic_name
+311,"india """,characteristic_name;characteristic_level,characteristic_level,"india """,characteristic_level
+312,china,characteristic_name;characteristic_level,arms,china,arms
+313,all countries,characteristic_name;characteristic_level,arms,all countries,arms
+314,korea,characteristic_name;characteristic_level,arms,korea,arms
+315,hydochlorothiazide ( n = nmbr ),arms;measures,characteristic_level,hydochlorothiazide ( n = nmbr ),characteristic_level
+316,aliskiren ( n = nmbr ),arms;measures,arms,aliskiren ( n = nmbr ),arms
+317,"hydochlorothiazide ( n = nmbr ) """,arms;measures,characteristic_level,"hydochlorothiazide ( n = nmbr ) """,characteristic_level
+323,value for nteraction,measures;p-interaction,measures,value for nteraction,measures
+324,"value for nteraction """,measures;p-interaction,measures,"value for nteraction """,measures
+325,hr,arms;measures,measures,hr,measures
+326,ranozaline,arms;measures,characteristic_name,ranozaline,characteristic_name
+327,"ranozaline """,arms;measures,characteristic_name,"ranozaline """,characteristic_name
+329,"placebo """,arms;p-interaction,arms,"placebo """,arms
+333,total,arms;measures,arms,total,arms
+334,fp nmbr mg,arms;measures,arms,fp nmbr mg,arms
+336,sfc nmbr mg / nmbr mg,arms;measures,arms,sfc nmbr mg / nmbr mg,arms
+338,sal nmbr mg,arms;measures,arms,sal nmbr mg,arms
+339,triglyceride ( median : mg / dl ) a [nmbr - nmbr percentile],outcomes;measures,characteristic_level,triglyceride ( median : mg / dl ) a [nmbr - nmbr percentile],characteristic_level
+340,ldl - cholesterol ( mg / dl ),outcomes;measures,characteristic_name,ldl - cholesterol ( mg / dl ),characteristic_name
+341,hdl - cholesterol ( mg / dl ),outcomes;measures,characteristic_name,hdl - cholesterol ( mg / dl ),characteristic_name
+342,diastolic fmmhff ' ),outcomes;measures,characteristic_name,diastolic fmmhff ' ),characteristic_name
+343,total cholesterol ( mg / dl ),outcomes;measures,arms,total cholesterol ( mg / dl ),arms
+344,systolic ( mmhg ),outcomes;measures,arms,systolic ( mmhg ),arms
+345,epa ( mol % ),outcomes;measures,arms,epa ( mol % ),arms
+346,fpg ( mg / dl ),outcomes;measures,outcomes,fpg ( mg / dl ),outcomes
+347,"hba , c ( % )",outcomes;measures,characteristic_name,"hba , c ( % )",characteristic_name
+348,"systolic ( mmhg ) """,outcomes;measures,arms,"systolic ( mmhg ) """,arms
+349,non - epa number of <,arms;measures,arms,non - epa number of <,arms
+350,"non - epa number of < """,arms;measures,arms,"non - epa number of < """,arms
+352,epa hr events ( % ),arms;measures,measures,epa hr events ( % ),measures
+354,"p value for trend """,characteristic_name;p-interaction,measures,"p value for trend """,measures
+355,mmse score,characteristic_name;p-interaction,characteristic_name,mmse score,characteristic_name
+356,p value for trend,characteristic_name;p-interaction,measures,p value for trend,measures
+357,mmse > nmbr,characteristic_name;characteristic_level,characteristic_name,mmse > nmbr,characteristic_name
+358,all participants,characteristic_name;characteristic_level,measures,all participants,measures
+359,mmse nmbr - nmbr,characteristic_name;characteristic_level,arms,mmse nmbr - nmbr,arms
+360,mmse < nmbr,characteristic_name;characteristic_level,characteristic_name,mmse < nmbr,characteristic_name
+361,"all participants """,characteristic_name;characteristic_level,measures,"all participants """,measures
+362,no history of paroxysmal af,characteristic_level;characteristic_name,characteristic_name,no history of paroxysmal af,characteristic_name
+363,history of paroxysmal af,characteristic_level;characteristic_name,characteristic_name,history of paroxysmal af,characteristic_name
+364,total cholesterolnmbr > nmbr mg / dl,characteristic_level;characteristic_name,arms,total cholesterolnmbr > nmbr mg / dl,arms
+365,nyha ii,characteristic_level;characteristic_name,characteristic_level,nyha ii,characteristic_level
+366,nyha lll - iv,characteristic_level;characteristic_name,characteristic_level,nyha lll - iv,characteristic_level
+367,diabetes,characteristic_level;characteristic_name,characteristic_level,diabetes,characteristic_level
+368,ischemic aetiology,characteristic_level;characteristic_name,outcomes,ischemic aetiology,outcomes
+369,egfr > nmbr ( ml / min / nmbr . nmbr mnmbr ),characteristic_level;characteristic_name,characteristic_level,egfr > nmbr ( ml / min / nmbr . nmbr mnmbr ),characteristic_level
+370,"no history of paroxysmal af """,characteristic_level;characteristic_name,characteristic_name,"no history of paroxysmal af """,characteristic_name
+371,lvef > nmbr %,characteristic_level;characteristic_name,characteristic_level,lvef > nmbr %,characteristic_level
+372,age > nmbr yearsnmbr,characteristic_level;characteristic_name,characteristic_name,age > nmbr yearsnmbr,characteristic_name
+373,age < nmbr yearsnmbr,characteristic_level;characteristic_name,characteristic_name,age < nmbr yearsnmbr,characteristic_name
+374,egfr < nmbr ( ml / min / nmbr . nmbr mnmbr ),characteristic_level;characteristic_name,characteristic_level,egfr < nmbr ( ml / min / nmbr . nmbr mnmbr ),characteristic_level
+375,no diabetes,characteristic_level;characteristic_name,characteristic_level,no diabetes,characteristic_level
+376,total cholesterolnmbr < nmbr mg / dl,characteristic_level;characteristic_name,arms,total cholesterolnmbr < nmbr mg / dl,arms
+377,non - ischaemic aetiology,characteristic_level;characteristic_name,characteristic_level,non - ischaemic aetiology,characteristic_level
+378,lvef < nmbr %,characteristic_level;characteristic_name,characteristic_level,lvef < nmbr %,characteristic_level
+379,p value for heterogeneity,arms;p-interaction,measures,p value for heterogeneity,measures
+380,"fluvastatin ( n = nmbr ) """,arms;p-interaction,characteristic_level,"fluvastatin ( n = nmbr ) """,characteristic_level
+381,placebo ( n = nmbr ),arms;p-interaction,arms,placebo ( n = nmbr ),arms
+382,fluvastatin ( n = nmbr ),arms;p-interaction,characteristic_level,fluvastatin ( n = nmbr ),characteristic_level
+383,primary pci ( n = nmbr ),arms;measures,outcomes,primary pci ( n = nmbr ),outcomes
+384,reteplase / abciximab - facilitated pci ( n = nmbr ),arms;measures,arms,reteplase / abciximab - facilitated pci ( n = nmbr ),arms
+385,abciximab - facilitated pci ( n = nmbr ),arms;measures,arms,abciximab - facilitated pci ( n = nmbr ),arms
+386,"primary pci ( n = nmbr ) """,arms;measures,outcomes,"primary pci ( n = nmbr ) """,outcomes
+388,subgroup p - valuenmbr,arms;measures;p-interaction,characteristic_level,subgroup p - valuenmbr,characteristic_level
+389,nmbr % cinmbr,arms;measures;p-interaction,characteristic_level,nmbr % cinmbr,characteristic_level
+390,placebo n ( rate ) nmbr,arms;measures;p-interaction,arms,placebo n ( rate ) nmbr,arms
+391,interaction p - valuenmbr,arms;measures;p-interaction,characteristic_name,interaction p - valuenmbr,characteristic_name
+392,rosuvastatin n ( rate ) nmbr,arms;measures;p-interaction,measures,rosuvastatin n ( rate ) nmbr,measures
+393,"hazard rationmbr """,arms;measures;p-interaction,measures,"hazard rationmbr """,measures
+394,hazard rationmbr,arms;measures;p-interaction,measures,hazard rationmbr,measures
+395,"rosuvastatin , n ( rate )",arms;measures;p-interaction,measures,"rosuvastatin , n ( rate )",measures
+396,"p , interaction !",arms;measures;p-interaction,characteristic_name,"p , interaction !",characteristic_name
+397,"p , subgroup *",arms;measures;p-interaction,characteristic_level,"p , subgroup *",characteristic_level
+398,"placebo , n ( rate )",arms;measures;p-interaction,arms,"placebo , n ( rate )",arms
+399,hr ( nmbr % cl ),arms;measures;p-interaction,measures,hr ( nmbr % cl ),measures
+400,"p , subgroup * """,arms;measures;p-interaction,characteristic_level,"p , subgroup * """,characteristic_level
+401,all patients ( n = nmbr ),arms;measures,characteristic_level,all patients ( n = nmbr ),characteristic_level
+402,p valued,arms;measures,characteristic_name,p valued,characteristic_name
+403,infliximab ( n = nmbr ),arms;measures,arms,infliximab ( n = nmbr ),arms
+404,combination therapy ( n = nmbr ),arms;measures,arms,combination therapy ( n = nmbr ),arms
+405,"azathioprine ( n = nmbr ) """,arms;measures,characteristic_level,"azathioprine ( n = nmbr ) """,characteristic_level
+406,azathioprine ( n = nmbr ),arms;measures,characteristic_level,azathioprine ( n = nmbr ),characteristic_level
+407,"control """,arms;measures,arms,"control """,arms
+408,control,arms;measures,arms,control,arms
+409,difference,arms;measures,measures,difference,measures
+410,mean yearly decline,measures;arms,measures,mean yearly decline,measures
+411,"mean yearly decline """,measures;arms,measures,"mean yearly decline """,measures
+412,control,measures;arms,arms,control,arms
+413,tiotropium,measures;arms,arms,tiotropium,arms
+414,events,arms;measures,measures,events,measures
+415,"n """,arms;measures,characteristic_name,"n """,characteristic_name
+416,n,arms;measures,characteristic_name,n,characteristic_name
+417,p value for interaction,arms;measures;p-interaction,measures,p value for interaction,measures
+418,macce ( % ) abciximab placebo,arms;measures;p-interaction,arms,macce ( % ) abciximab placebo,arms
+419,"macce ( % ) abciximab placebo """,arms;measures;p-interaction,arms,"macce ( % ) abciximab placebo """,arms
+420,relative risk ( nmbr % confidence interval ),arms;measures;p-interaction,measures,relative risk ( nmbr % confidence interval ),measures
+421,"placebo , n / n ( % ) """,arms;measures,arms,"placebo , n / n ( % ) """,arms
+422,"extended - duration enoxaparin , n / n ( % )",arms;measures,arms,"extended - duration enoxaparin , n / n ( % )",arms
+423,"absolute risk difference ( ci ) , % *",arms;measures,measures,"absolute risk difference ( ci ) , % *",measures
+424,"placebo , n / n ( % )",arms;measures,arms,"placebo , n / n ( % )",arms
+425,fp ( n[nmbr ),arms;measures,characteristic_level,fp ( n[nmbr ),characteristic_level
+426,sfc ( n[nmbr ),arms;measures,measures,sfc ( n[nmbr ),measures
+428,placebo ( n[nmbr ),arms;measures,arms,placebo ( n[nmbr ),arms
+429,salmeterol ( n[nmbr ),arms;measures,arms,salmeterol ( n[nmbr ),arms
+431,ivabradine group,arms;measures,arms,ivabradine group,arms
+432,"ivabradine group """,arms;measures,arms,"ivabradine group """,arms
+434,placebo group,arms;measures,arms,placebo group,arms
+435,"tertile nmbr ( n = nmbr ) """,characteristic_level;measures,characteristic_level,"tertile nmbr ( n = nmbr ) """,characteristic_level
+436,p value for trend across tertiles,characteristic_level;measures,measures,p value for trend across tertiles,measures
+437,"all with coenzyme qnmbr ( n = nmbr , nmbr )",characteristic_level;measures,arms,"all with coenzyme qnmbr ( n = nmbr , nmbr )",arms
+438,tertile nmbr ( n = nmbr ),characteristic_level;measures,characteristic_level,tertile nmbr ( n = nmbr ),characteristic_level
+439,"tertile nmbr """,outcomes;characteristic_level,characteristic_level,"tertile nmbr """,characteristic_level
+440,all randomized all - cause mortality,outcomes;characteristic_level,outcomes,all randomized all - cause mortality,outcomes
+441,primary end point |,outcomes;characteristic_level,measures,primary end point |,measures
+442,tertile nmbr,outcomes;characteristic_level,characteristic_level,tertile nmbr,characteristic_level
+443,all randomized,outcomes;characteristic_level,outcomes,all randomized,outcomes
+444,all randomized coronary end point,outcomes;characteristic_level,characteristic_name,all randomized coronary end point,characteristic_name
+445,all randomized all - cause mortality or hospitalization for worsening hf^,outcomes;characteristic_level,outcomes,all randomized all - cause mortality or hospitalization for worsening hf^,outcomes
+448,rolofylline,arms;measures,characteristic_name,rolofylline,characteristic_name
+449,"mayo < nmbr , n",measures;characteristic_level,characteristic_level,"mayo < nmbr , n",characteristic_level
+450,"no aminosalicylates , n",measures;characteristic_level,characteristic_level,"no aminosalicylates , n",characteristic_level
+451,"difference from placebo ( nmbr % ci ) """,measures;characteristic_level,measures,"difference from placebo ( nmbr % ci ) """,measures
+452,"crp < nmbr mg / l , n",measures;characteristic_level,arms,"crp < nmbr mg / l , n",arms
+453,"remission , n ( % )",measures;characteristic_level,arms,"remission , n ( % )",arms
+454,"immy ( without corticosteroid ) , n",measures;characteristic_level,characteristic_level,"immy ( without corticosteroid ) , n",characteristic_level
+455,"weight < nmbr . nmbr kg , n",measures;characteristic_level,characteristic_level,"weight < nmbr . nmbr kg , n",characteristic_level
+456,"mayo $ nmbr , n",measures;characteristic_level,characteristic_level,"mayo $ nmbr , n",characteristic_level
+457,difference from placebo * ( nmbr % ci ),measures;characteristic_level,measures,difference from placebo * ( nmbr % ci ),measures
+458,difference from placebo ( nmbr % ci ),measures;characteristic_level,measures,difference from placebo ( nmbr % ci ),measures
+459,"weight $ nmbr . nmbr kg , n",measures;characteristic_level,characteristic_level,"weight $ nmbr . nmbr kg , n",characteristic_level
+460,"corticosteroid ( without imm ) , n",measures;characteristic_level,characteristic_level,"corticosteroid ( without imm ) , n",characteristic_level
+461,"no extensive colitis , n",measures;characteristic_level,characteristic_level,"no extensive colitis , n",characteristic_level
+462,"extensive colitis , n",measures;characteristic_level,characteristic_level,"extensive colitis , n",characteristic_level
+463,"no corticosteroid + no imm , n",measures;characteristic_level,characteristic_level,"no corticosteroid + no imm , n",characteristic_level
+464,"crp $ nmbr mg / l , n",measures;characteristic_level,arms,"crp $ nmbr mg / l , n",arms
+465,"weight $ nmbr . nmbr kg , < nmbr . nmbr kg , n",measures;characteristic_level,characteristic_level,"weight $ nmbr . nmbr kg , < nmbr . nmbr kg , n",characteristic_level
+466,"imm + corticosteroid , n",measures;characteristic_level,characteristic_level,"imm + corticosteroid , n",characteristic_level
+467,"aminosalicylates , n",measures;characteristic_level,arms,"aminosalicylates , n",arms
+468,bosentan,arms;measures,characteristic_name,bosentan,characteristic_name
+471,nmbr % cl,arms;measures,measures,nmbr % cl,measures
+472,"bosentan """,arms;measures,characteristic_name,"bosentan """,characteristic_name
+473,"sal ( n = nmbr ) """,arms;measures,characteristic_level,"sal ( n = nmbr ) """,characteristic_level
+474,sal ( n = nmbr ),arms;measures,characteristic_level,sal ( n = nmbr ),characteristic_level
+476,fp ( n = nmbr ),arms;measures,characteristic_level,fp ( n = nmbr ),characteristic_level
+477,sfc ( n = nmbr ),arms;measures,measures,sfc ( n = nmbr ),measures
+478,total ho population ( n = nmbr ),arms;measures,other,total ho population ( n = nmbr ),other
+479,total population ( n = nmbr ),arms;measures,other,total population ( n = nmbr ),other
+480,rr^ ( nmbr % ci ),arms;measures,measures,rr^ ( nmbr % ci ),measures
+481,"pla """,arms;measures,arms,"pla """,arms
+482,r | r ' ' ' ( nmbr % ci ),arms;measures,measures,r | r ' ' ' ( nmbr % ci ),measures
+483,asa,arms;measures,characteristic_level,asa,characteristic_level
+485,history of chd,characteristic_level;measures,characteristic_name,history of chd,characteristic_name
+486,mean ( sd ),characteristic_level;measures,characteristic_level,mean ( sd ),characteristic_level
+487,hypertension *,characteristic_level;measures,characteristic_level,hypertension *,characteristic_level
+488,hyperlipidemia^,characteristic_level;measures,arms,hyperlipidemia^,arms
+489,history of carotid artery disease,characteristic_level;measures,characteristic_name,history of carotid artery disease,characteristic_name
+490,history of peripheral artery disease,characteristic_level;measures,characteristic_name,history of peripheral artery disease,characteristic_name
+491,male,characteristic_level;measures,characteristic_level,male,characteristic_level
+492,range,characteristic_level;measures,characteristic_level,range,characteristic_level
+493,"history of pci """,characteristic_level;measures,characteristic_name,"history of pci """,characteristic_name
+494,current smoker,characteristic_level;measures,characteristic_level,current smoker,characteristic_level
+495,history of pci,characteristic_level;measures,characteristic_name,history of pci,characteristic_name
+496,diabetes mellitus,characteristic_level;measures,characteristic_level,diabetes mellitus,characteristic_level
+497,"group c ( n = nmbr ) """,p-interaction;other,arms,"group c ( n = nmbr ) """,arms
+498,group b ( n = nmbr ),p-interaction;other,arms,group b ( n = nmbr ),arms
+499,p,p-interaction;other,characteristic_name,p,characteristic_name
+500,group c ( n = nmbr ),p-interaction;other,arms,group c ( n = nmbr ),arms
+501,group a ( n = nmbr ),p-interaction;other,arms,group a ( n = nmbr ),arms
+502,"cmh rr ( nmbr % ci ) """,measures;arms,measures,"cmh rr ( nmbr % ci ) """,measures
+503,cox hr ( nmbr % ci ),measures;arms,measures,cox hr ( nmbr % ci ),measures
+504,"total comparators , patients with events / total patients",measures;arms,measures,"total comparators , patients with events / total patients",measures
+505,"linagliptin , patients with events / total patients",measures;arms,measures,"linagliptin , patients with events / total patients",measures
+506,cmh rr ( nmbr % ci ),measures;arms,measures,cmh rr ( nmbr % ci ),measures
+507,p - value for interaction,arms;measures;p-interaction,measures,p - value for interaction,measures
+508,"hazard ratio ( nmbr % cl ) nmbr . nmbr ( nmbr . nmbr , nmbr . nmbr )",arms;measures;p-interaction,measures,"hazard ratio ( nmbr % cl ) nmbr . nmbr ( nmbr . nmbr , nmbr . nmbr )",measures
+509,vorapaxar placebo nmbr - yr %,arms;measures;p-interaction,arms,vorapaxar placebo nmbr - yr %,arms
+510,"hazard ratio ( nmbr % cl ) nmbr . nmbr ( nmbr . nmbr , nmbr . nmbr ) """,arms;measures;p-interaction,measures,"hazard ratio ( nmbr % cl ) nmbr . nmbr ( nmbr . nmbr , nmbr . nmbr ) """,measures
+511,p - value for interaction,arms;p-interaction,measures,p - value for interaction,measures
+512,"p - value for interaction """,arms;p-interaction,measures,"p - value for interaction """,measures
+513,nonmetabolic syndrome ( n = nmbr ),characteristic_level;measures,characteristic_level,nonmetabolic syndrome ( n = nmbr ),characteristic_level
+514,"nonmetabolic syndrome ( n = nmbr ) """,characteristic_level;measures,characteristic_level,"nonmetabolic syndrome ( n = nmbr ) """,characteristic_level
+515,metabolic syndrome ( n = nmbr ),characteristic_level;measures,characteristic_level,metabolic syndrome ( n = nmbr ),characteristic_level
+516,p value,characteristic_level;measures,measures,p value,measures
+517,"patients without ra , as , or psa ( n = nmbr , nmbr )",arms;measures,characteristic_level,"patients without ra , as , or psa ( n = nmbr , nmbr )",characteristic_level
+518,"patients with ra , as , or psa ( n = nmbr )",arms;measures,characteristic_level,"patients with ra , as , or psa ( n = nmbr )",characteristic_level
+520,"patients without ra , as , or psa ( n = nmbr , nmbr ) """,arms;measures,characteristic_level,"patients without ra , as , or psa ( n = nmbr , nmbr ) """,characteristic_level
+521,"atorvastatin nmbr mg ( n = nmbr , nmbr )",arms;measures,arms,"atorvastatin nmbr mg ( n = nmbr , nmbr )",arms
+522,simvastatin nmbr mg ( n = nmbr ),arms;measures,arms,simvastatin nmbr mg ( n = nmbr ),arms
+523,"pt """,arms;measures,measures,"pt """,measures
+524,p +,arms;measures,characteristic_name,p +,characteristic_name
+526,"simvastatin nmbr mg ( n = nmbr , nmbr )",arms;measures,arms,"simvastatin nmbr mg ( n = nmbr , nmbr )",arms
+527,atorvastatin nmbr mg ( n = nmbr ),arms;measures,arms,atorvastatin nmbr mg ( n = nmbr ),arms
+528,standard care n ( % ) / nmbrpy,measures;arms,arms,standard care n ( % ) / nmbrpy,arms
+529,hr ( nmbr % cl ),measures;arms,measures,hr ( nmbr % cl ),measures
+530,"hr ( nmbr % cl ) """,measures;arms,measures,"hr ( nmbr % cl ) """,measures
+531,p,measures;arms,characteristic_name,p,characteristic_name
+532,insulin glargine n ( % ) / nmbrpy,measures;arms,arms,insulin glargine n ( % ) / nmbrpy,arms
+533,"egfr , ml / min / nmbr . nmbr mnmbr , mean ( sd )",characteristic_level;measures,characteristic_level,"egfr , ml / min / nmbr . nmbr mnmbr , mean ( sd )",characteristic_level
+534,prediabeticb,characteristic_level;measures,characteristic_name,prediabeticb,characteristic_name
+536,median,characteristic_level;measures,characteristic_level,median,characteristic_level
+537,"age , y , mean ( sd )",characteristic_level;measures,characteristic_name,"age , y , mean ( sd )",characteristic_name
+538,"> nmbr y , no . ( % )",characteristic_level;measures,characteristic_level,"> nmbr y , no . ( % )",characteristic_level
+539,"normoglycemicnmbr """,characteristic_level;measures,characteristic_name,"normoglycemicnmbr """,characteristic_name
+540,diabeticnmbr,characteristic_level;measures,characteristic_name,diabeticnmbr,characteristic_name
+541,"hbanmbrc , % , mean ( sd )",characteristic_level;measures,characteristic_name,"hbanmbrc , % , mean ( sd )",characteristic_name
+542,normoglycemicnmbr,characteristic_level;measures,characteristic_name,normoglycemicnmbr,characteristic_name
+548,vorapaxar placebo nmbr - yr . km %,arms;measures,arms,vorapaxar placebo nmbr - yr . km %,arms
+549,hr ( nmbr % ci ) p value for interaction *,arms;measures,measures,hr ( nmbr % ci ) p value for interaction *,measures
+550,"vorapaxar placebo nmbr - yr . km % """,arms;measures,arms,"vorapaxar placebo nmbr - yr . km % """,arms
+551,"ics use , yes / no %",characteristic_name;characteristic_level,characteristic_level,"ics use , yes / no %",characteristic_level
+552,"sex , male / female , %",characteristic_name;characteristic_level,characteristic_level,"sex , male / female , %",characteristic_level
+553,fevnmbr / fvc ( post - albuterol ),characteristic_name;characteristic_level,characteristic_name,fevnmbr / fvc ( post - albuterol ),characteristic_name
+554,"smoking history , pack - years",characteristic_name;characteristic_level,characteristic_name,"smoking history , pack - years",characteristic_name
+555,"age , years """,characteristic_name;characteristic_level,characteristic_name,"age , years """,characteristic_name
+556,baseline dyspnea index score,characteristic_name;characteristic_level,characteristic_name,baseline dyspnea index score,characteristic_name
+557,"race , % caucasian",characteristic_name;characteristic_level,characteristic_name,"race , % caucasian",characteristic_name
+558,"age , years",characteristic_name;characteristic_level,characteristic_name,"age , years",characteristic_name
+559,severe / very severea,characteristic_name;characteristic_level,characteristic_level,severe / very severea,characteristic_level
+560,baseline sgrq score,characteristic_name;characteristic_level,characteristic_name,baseline sgrq score,characteristic_name
+561,"fevnmbr reversibility , % b",characteristic_name;characteristic_level,characteristic_name,"fevnmbr reversibility , % b",characteristic_name
+562,"ex - smoker / smoker , %",characteristic_name;characteristic_level,characteristic_name,"ex - smoker / smoker , %",characteristic_name
+563,asian,characteristic_name;characteristic_level,characteristic_level,asian,characteristic_level
+564,"fevnmbr ( post - albuterol ) , l",characteristic_name;characteristic_level,characteristic_name,"fevnmbr ( post - albuterol ) , l",characteristic_name
+565,black,characteristic_name;characteristic_level,characteristic_level,black,characteristic_level
+566,"duration of copd , years",characteristic_name;characteristic_level,characteristic_name,"duration of copd , years",characteristic_name
+567,"fevnmbr ( pre - albuterol ) , l",characteristic_name;characteristic_level,characteristic_name,"fevnmbr ( pre - albuterol ) , l",characteristic_name
+569,"severity of copd , n ( % ) ( gold nmbr ) : moderate",characteristic_name;characteristic_level,characteristic_name,"severity of copd , n ( % ) ( gold nmbr ) : moderate",characteristic_name
+570,"fevnmbr % pred . ( post - albuterol ) , %",characteristic_name;characteristic_level,characteristic_name,"fevnmbr % pred . ( post - albuterol ) , %",characteristic_name
+571,( baseline ),outcomes;measures,characteristic_name,( baseline ),characteristic_name
+572,sgrq total score,outcomes;measures,arms,sgrq total score,arms
+573,sgrq total score ( week,outcomes;measures,outcomes,sgrq total score ( week,outcomes
+574,"sgrq total score ( week """,outcomes;measures,outcomes,"sgrq total score ( week """,outcomes
+575,nmbr locf ),outcomes;measures,characteristic_level,nmbr locf ),characteristic_level
+576,change from baseline,outcomes;measures,measures,change from baseline,measures
+577,bdi total score ( baseline ),outcomes;measures,characteristic_name,bdi total score ( baseline ),characteristic_name
+578,locf ),outcomes;measures,characteristic_name,locf ),characteristic_name
+579,tdi total score ( week nmbr,outcomes;measures,other,tdi total score ( week nmbr,other
+580,"fevnmbr , % predicteda",characteristic_name;characteristic_level,characteristic_name,"fevnmbr , % predicteda",characteristic_name
+581,indian,characteristic_name;characteristic_level,characteristic_level,indian,characteristic_level
+582,"ics use , %",characteristic_name;characteristic_level,characteristic_name,"ics use , %",characteristic_name
+585,"fevnmbr / fvc , % a",characteristic_name;characteristic_level,characteristic_name,"fevnmbr / fvc , % a",characteristic_name
+586,"smoking history , """,characteristic_name;characteristic_level,characteristic_name,"smoking history , """,characteristic_name
+587,korean,characteristic_name;characteristic_level,arms,korean,arms
+588,japanese,characteristic_name;characteristic_level,characteristic_name,japanese,characteristic_name
+589,"fevnmbr , la",characteristic_name;characteristic_level,characteristic_name,"fevnmbr , la",characteristic_name
+590,ex - smoker / current,characteristic_name;characteristic_level,characteristic_level,ex - smoker / current,characteristic_level
+591,"smoking history ,",characteristic_name;characteristic_level,characteristic_name,"smoking history ,",characteristic_name
+592,reversibility to,characteristic_name;characteristic_level,characteristic_name,reversibility to,characteristic_name
+593,taiwan,characteristic_name;characteristic_level,characteristic_name,taiwan,characteristic_name
+594,"copd severity , n ( % )",characteristic_name;characteristic_level,characteristic_name,"copd severity , n ( % )",characteristic_name
+595,"duration of copd ,",characteristic_name;characteristic_level,characteristic_name,"duration of copd ,",characteristic_name
+596,"male / female , %",characteristic_name;characteristic_level,characteristic_level,"male / female , %",characteristic_level
+597,m o nito ring treatment,arms;p-interaction;other,characteristic_name,m o nito ring treatment,characteristic_name
+598,p interaction,arms;p-interaction;other,characteristic_name,p interaction,characteristic_name
+599,r elative risk ( nmbr % ci ),arms;p-interaction;other,measures,r elative risk ( nmbr % ci ),measures
+600,"conventional treatment """,arms;p-interaction;other,characteristic_name,"conventional treatment """,characteristic_name
+601,conventional treatment,arms;p-interaction;other,characteristic_name,conventional treatment,characteristic_name
+602,m o nito ring treatment,arms;other;p-interaction,characteristic_name,m o nito ring treatment,characteristic_name
+603,p interaction,arms;other;p-interaction,characteristic_name,p interaction,characteristic_name
+604,r elative risk ( nmbr % ci ),arms;other;p-interaction,measures,r elative risk ( nmbr % ci ),measures
+605,conventional treatment,arms;other;p-interaction,characteristic_name,conventional treatment,characteristic_name
+606,"r elative risk ( nmbr % ci ) """,arms;other;p-interaction,measures,"r elative risk ( nmbr % ci ) """,measures
+607,ejection fraction : < nmbr % ( n = nmbr ),characteristic_name;characteristic_level,characteristic_name,ejection fraction : < nmbr % ( n = nmbr ),characteristic_name
+608,peri - op amiodarone : no ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,peri - op amiodarone : no ( n = nmbr ),characteristic_level
+609,sex : male ( n = nmbr ),characteristic_name;characteristic_level,characteristic_name,sex : male ( n = nmbr ),characteristic_name
+610,peri - op beta - blockers : no ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,peri - op beta - blockers : no ( n = nmbr ),characteristic_level
+611,country : argentina ( n = nmbr ),characteristic_name;characteristic_level,characteristic_name,country : argentina ( n = nmbr ),characteristic_name
+612,phospholipid omega - nmbr levels : < nmbr % ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,phospholipid omega - nmbr levels : < nmbr % ( n = nmbr ),characteristic_level
+613,"peri - op beta - blockers : no ( n = nmbr ) """,characteristic_name;characteristic_level,characteristic_level,"peri - op beta - blockers : no ( n = nmbr ) """,characteristic_level
+614,peri - op statins : no ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,peri - op statins : no ( n = nmbr ),characteristic_level
+615,left atrial diameter : < nmbr mm ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,left atrial diameter : < nmbr mm ( n = nmbr ),characteristic_level
+616,hypertension : no ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,hypertension : no ( n = nmbr ),characteristic_level
+617,overall ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,overall ( n = nmbr ),characteristic_level
+618,age : < nmbr years ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,age : < nmbr years ( n = nmbr ),characteristic_level
+619,cardiac valve surgery : no ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,cardiac valve surgery : no ( n = nmbr ),characteristic_level
+620,nyha class nmbr - nmbr : no { n = llll ),characteristic_name;characteristic_level,characteristic_level,nyha class nmbr - nmbr : no { n = llll ),characteristic_level
+621,study drug loading days ( actual ) : nmbr ( n = nmbr ),characteristic_name;characteristic_level,other,study drug loading days ( actual ) : nmbr ( n = nmbr ),other
+622,peri - op ace - inhibitors / arbs : no ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,peri - op ace - inhibitors / arbs : no ( n = nmbr ),characteristic_level
+623,habitual fish intake : < nmbr servings / wk ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,habitual fish intake : < nmbr servings / wk ( n = nmbr ),characteristic_level
+624,serum potassium : < nmbr . nmbrmmol / l ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,serum potassium : < nmbr . nmbrmmol / l ( n = nmbr ),characteristic_level
+625,cross - damp time : < l : llhrs : min ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,cross - damp time : < l : llhrs : min ( n = nmbr ),characteristic_level
+626,on - pump time : < l : nmbrhrs : min ( n = nmbr ),characteristic_name;characteristic_level,characteristic_level,on - pump time : < l : nmbrhrs : min ( n = nmbr ),characteristic_level
+628,( nmbr % cl ) interaction,arms;p-interaction,measures,( nmbr % cl ) interaction,measures
+629,n - nmbr pufa,arms;p-interaction,arms,n - nmbr pufa,arms
+631,"baseline crp < nmbrmg / l """,characteristic_name;measures,characteristic_name,"baseline crp < nmbrmg / l """,characteristic_name
+632,% change median baseline crp > nmbrmg / l,characteristic_name;measures,measures,% change median baseline crp > nmbrmg / l,measures
+633,baseline crp < nmbrmg / l,characteristic_name;measures,characteristic_name,baseline crp < nmbrmg / l,characteristic_name
+634,baseline,other;measures,characteristic_name,baseline,characteristic_name
+635,"baseline """,other;measures,characteristic_name,"baseline """,characteristic_name
+636,week nmbr,other;measures,measures,week nmbr,measures
+637,change from baseline,other;measures,measures,change from baseline,measures
+638,fibrinolysis ( n = nmbr ),arms;other,characteristic_level,fibrinolysis ( n = nmbr ),characteristic_level
+639,primary pci ( n = nmbr ),arms;other,outcomes,primary pci ( n = nmbr ),outcomes
+640,"p valuey """,arms;other,characteristic_name,"p valuey """,characteristic_name
+641,p valuey,arms;other,characteristic_name,p valuey,characteristic_name
+642,fibrinolysis primary pci ( n = nmbr ) ( n = nmbr ) no . of patients / total no . ( % ),arms;measures;other;p-interaction,characteristic_level,fibrinolysis primary pci ( n = nmbr ) ( n = nmbr ) no . of patients / total no . ( % ),characteristic_level
+643,"fibrinolysis primary pci ( n = nmbr ) ( n = nmbr ) no . of patients / total no . ( % ) """,arms;measures;other;p-interaction,characteristic_level,"fibrinolysis primary pci ( n = nmbr ) ( n = nmbr ) no . of patients / total no . ( % ) """,characteristic_level
+644,p value for interaction,arms;measures;other;p-interaction,measures,p value for interaction,measures
+645,relative risk ( nmbr % ci ) ofprimary end point,arms;measures;other;p-interaction,measures,relative risk ( nmbr % ci ) ofprimary end point,measures
+646,p value,arms;measures;other;p-interaction,measures,p value,measures
+647,control ( n = nmbr ),arms;other,arms,control ( n = nmbr ),arms
+648,watchman ( n = nmbr ),arms;other,characteristic_level,watchman ( n = nmbr ),characteristic_level
+649,"p value """,arms;other,measures,"p value """,measures
+650,p value,arms;other,measures,p value,measures
+651,all,characteristic_name;measures,outcomes,all,outcomes
+652,diabetes,characteristic_name;measures,characteristic_level,diabetes,characteristic_level
+653,p,characteristic_name;measures,characteristic_name,p,characteristic_name
+654,"p """,characteristic_name;measures,characteristic_name,"p """,characteristic_name
+655,no diabetes,characteristic_name;measures,characteristic_level,no diabetes,characteristic_level
+656,p value *,arms;measures,measures,p value *,measures
+657,control ( n - nmbr ),arms;measures,arms,control ( n - nmbr ),arms
+658,"control ( n - nmbr ) """,arms;measures,arms,"control ( n - nmbr ) """,arms
+659,statin ( n - nmbr ),arms;measures,arms,statin ( n - nmbr ),arms
+660,oradj ( nmbr % cl ),arms;measures;p-interaction,measures,oradj ( nmbr % cl ),measures
+661,"events / control group """,arms;measures;p-interaction,arms,"events / control group """,arms
+662,p for interaction,arms;measures;p-interaction,characteristic_name,p for interaction,characteristic_name
+663,events / control group,arms;measures;p-interaction,arms,events / control group,arms
+664,events / statin group,arms;measures;p-interaction,measures,events / statin group,measures
+665,orc ( nmbr % cl ),arms;measures;p-interaction,measures,orc ( nmbr % cl ),measures
+666,p value,arms;measures;p-interaction,measures,p value,measures
+667,p [int],arms;measures;p-interaction,characteristic_name,p [int],characteristic_name
+668,ipst,arms;measures;p-interaction,characteristic_name,ipst,characteristic_name
+669,"ipst """,arms;measures;p-interaction,characteristic_name,"ipst """,characteristic_name
+670,no ipst,arms;measures;p-interaction,measures,no ipst,measures
+671,or [nmbr % ci],arms;measures;p-interaction,other,or [nmbr % ci],other
+672,"ff nmbr gg ( n = nmbr , nmbr ) """,arms;measures,arms,"ff nmbr gg ( n = nmbr , nmbr ) """,arms
+673,"ff nmbr gg ( n = nmbr , nmbr )",arms;measures,arms,"ff nmbr gg ( n = nmbr , nmbr )",arms
+674,"total ( n = nmbr , nmbr )",arms;measures,arms,"total ( n = nmbr , nmbr )",arms
+675,"ff / vi nmbr / nmbr gg ( n = nmbr , nmbr )",arms;measures,arms,"ff / vi nmbr / nmbr gg ( n = nmbr , nmbr )",arms
+676,indacaterol nmbr ug ( n = nmbr ),arms;measures,arms,indacaterol nmbr ug ( n = nmbr ),arms
+677,"total ( n = nmbr ) """,arms;measures,arms,"total ( n = nmbr ) """,arms
+678,total ( n = nmbr ),arms;measures,arms,total ( n = nmbr ),arms
+680,overall,characteristic_name;characteristic_level,characteristic_level,overall,characteristic_level
+681,sex : male,characteristic_name;characteristic_level,characteristic_name,sex : male,characteristic_name
+682,bmi : < nmbr . nmbr kg / mnmbr,characteristic_name;characteristic_level,characteristic_level,bmi : < nmbr . nmbr kg / mnmbr,characteristic_level
+683,smoking : current smoker,characteristic_name;characteristic_level,characteristic_level,smoking : current smoker,characteristic_level
+684,ics use at baseline : yes,characteristic_name;characteristic_level,characteristic_name,ics use at baseline : yes,characteristic_name
+685,reversibility : > nmbr %,characteristic_name;characteristic_level,characteristic_level,reversibility : > nmbr %,characteristic_level
+686,bmi : > nmbr . nmbr kg / mnmbr,characteristic_name;characteristic_level,characteristic_level,bmi : > nmbr . nmbr kg / mnmbr,characteristic_level
+687,reversibility : < nmbr %,characteristic_name;characteristic_level,characteristic_level,reversibility : < nmbr %,characteristic_level
+688,"sex : male """,characteristic_name;characteristic_level,characteristic_name,"sex : male """,characteristic_name
+689,age : < nmbr years,characteristic_name;characteristic_level,characteristic_level,age : < nmbr years,characteristic_level
+690,smoking : ex - smoker,characteristic_name;characteristic_level,characteristic_name,smoking : ex - smoker,characteristic_name
+691,sex : female,characteristic_name;characteristic_level,characteristic_name,sex : female,characteristic_name
+692,severe or worse airflow limitation,characteristic_name;characteristic_level,characteristic_level,severe or worse airflow limitation,characteristic_level
+693,age : > nmbr years,characteristic_name;characteristic_level,characteristic_level,age : > nmbr years,characteristic_level
+694,reversibility : > nmbr - < nmbr %,characteristic_name;characteristic_level,characteristic_level,reversibility : > nmbr - < nmbr %,characteristic_level
+695,ics use at baseline : no,characteristic_name;characteristic_level,characteristic_name,ics use at baseline : no,characteristic_name
+696,moderate or less airflow limitation,characteristic_name;characteristic_level,characteristic_level,moderate or less airflow limitation,characteristic_level
+697,age < nmbryrs,characteristic_level;characteristic_name,characteristic_name,age < nmbryrs,characteristic_name
+698,bl updrs : low,characteristic_level;characteristic_name,characteristic_name,bl updrs : low,characteristic_name
+699,bl h / y : unilateral,characteristic_level;characteristic_name,characteristic_name,bl h / y : unilateral,characteristic_name
+700,age nmbr + yrs,characteristic_level;characteristic_name,characteristic_level,age nmbr + yrs,characteristic_level
+701,male,characteristic_level;characteristic_name,characteristic_level,male,characteristic_level
+702,female,characteristic_level;characteristic_name,characteristic_level,female,characteristic_level
+703,bl updrs : high,characteristic_level;characteristic_name,characteristic_level,bl updrs : high,characteristic_level
+704,bl h / y : bilateral,characteristic_level;characteristic_name,characteristic_name,bl h / y : bilateral,characteristic_name
+705,"bl updrs : low """,characteristic_level;characteristic_name,characteristic_name,"bl updrs : low """,characteristic_name
+706,p - value ( lnteraction ),measures;p-interaction,measures,p - value ( lnteraction ),measures
+707,"nmbrmg vs placebo """,measures;p-interaction,arms,"nmbrmg vs placebo """,arms
+708,nmbrmg vs placebo,measures;p-interaction,arms,nmbrmg vs placebo,arms
+709,men,characteristic_name;characteristic_level,characteristic_level,men,characteristic_level
+710,hba < median,characteristic_name;characteristic_level,characteristic_level,hba < median,characteristic_level
+711,"education > nmbr years """,characteristic_name;characteristic_level,characteristic_level,"education > nmbr years """,characteristic_level
+712,omega - nmbr fatty acid,characteristic_name;characteristic_level,arms,omega - nmbr fatty acid,arms
+714,age < nmbr years,characteristic_name;characteristic_level,characteristic_level,age < nmbr years,characteristic_level
+715,depression,characteristic_name;characteristic_level,characteristic_name,depression,characteristic_name
+716,women,characteristic_name;characteristic_level,characteristic_level,women,characteristic_level
+717,placebo,characteristic_name;characteristic_level,arms,placebo,arms
+718,education < nmbr years,characteristic_name;characteristic_level,characteristic_level,education < nmbr years,characteristic_level
+719,hbak < median,characteristic_name;characteristic_level,characteristic_level,hbak < median,characteristic_level
+720,hbak > median,characteristic_name;characteristic_level,characteristic_level,hbak > median,characteristic_level
+721,no depression,characteristic_name;characteristic_level,measures,no depression,measures
+722,diabetes,characteristic_name;characteristic_level,characteristic_level,diabetes,characteristic_level
+723,no diabetes,characteristic_name;characteristic_level,characteristic_level,no diabetes,characteristic_level
+724,education > nmbr years,characteristic_name;characteristic_level,characteristic_level,education > nmbr years,characteristic_level
+725,age > nmbr years,characteristic_name;characteristic_level,characteristic_level,age > nmbr years,characteristic_level
+726,hbalc > median,characteristic_name;characteristic_level,characteristic_level,hbalc > median,characteristic_level
+727,education nmbr - nmbr years,characteristic_name;characteristic_level,characteristic_level,education nmbr - nmbr years,characteristic_level
+728,number standard care,p-interaction;measures,arms,number standard care,arms
+729,number insulin glargine,p-interaction;measures,arms,number insulin glargine,arms
+730,p nmbr interaction,p-interaction;measures,characteristic_name,p nmbr interaction,characteristic_name
+731,insulin glargine vs standard care least - squares mean ( nmbr % cl ),p-interaction;measures,arms,insulin glargine vs standard care least - squares mean ( nmbr % cl ),arms
+732,"number standard care """,p-interaction;measures,arms,"number standard care """,arms
+741,insulin glargine,characteristic_name;characteristic_level,arms,insulin glargine,arms
+744,standard care,characteristic_name;characteristic_level,arms,standard care,arms
+746,hbalc < median,characteristic_name;characteristic_level,characteristic_level,hbalc < median,characteristic_level
+750,number omega - nmbr number placeb fatty acid,measures;p-interaction,characteristic_name,number omega - nmbr number placeb fatty acid,characteristic_name
+751,omega - nmbr fatty acid vs placebo least - squares mean ( nmbr % cl ),measures;p-interaction,arms,omega - nmbr fatty acid vs placebo least - squares mean ( nmbr % cl ),arms
+752,p . interaction,measures;p-interaction,characteristic_name,p . interaction,characteristic_name
+753,"number omega - nmbr number placeb fatty acid """,measures;p-interaction,characteristic_name,"number omega - nmbr number placeb fatty acid """,characteristic_name
+754,bmi < nmbrkg / mnmbr,characteristic_name;characteristic_level,characteristic_level,bmi < nmbrkg / mnmbr,characteristic_level
+755,with beta blocker,characteristic_name;characteristic_level,characteristic_level,with beta blocker,characteristic_level
+756,family history of diabetes ( - ),characteristic_name;characteristic_level,characteristic_name,family history of diabetes ( - ),characteristic_name
+757,without acei / arb,characteristic_name;characteristic_level,characteristic_level,without acei / arb,characteristic_level
+758,age > = nmbr years old,characteristic_name;characteristic_level,characteristic_level,age > = nmbr years old,characteristic_level
+759,age < nmbr years old,characteristic_name;characteristic_level,characteristic_level,age < nmbr years old,characteristic_level
+760,fbs < nmbr mg / dl,characteristic_name;characteristic_level,characteristic_level,fbs < nmbr mg / dl,characteristic_level
+762,male,characteristic_name;characteristic_level,characteristic_level,male,characteristic_level
+763,with acei / arb,characteristic_name;characteristic_level,arms,with acei / arb,arms
+764,without beta blocker,characteristic_name;characteristic_level,characteristic_level,without beta blocker,characteristic_level
+765,"age > = nmbr years old """,characteristic_name;characteristic_level,characteristic_level,"age > = nmbr years old """,characteristic_level
+766,family history of diabetes ( + ),characteristic_name;characteristic_level,characteristic_name,family history of diabetes ( + ),characteristic_name
+767,all patients,characteristic_name;characteristic_level,characteristic_level,all patients,characteristic_level
+768,bmi > = nmbrkg / mnmbr,characteristic_name;characteristic_level,characteristic_level,bmi > = nmbrkg / mnmbr,characteristic_level
+769,fbs > = nmbr mg / dl,characteristic_name;characteristic_level,characteristic_level,fbs > = nmbr mg / dl,characteristic_level
+770,unadjusted hr,measures;p-interaction,measures,unadjusted hr,measures
+771,"number ( % ) """,measures;p-interaction,characteristic_name,"number ( % ) """,characteristic_name
+772,p : interaction,measures;p-interaction,characteristic_name,p : interaction,characteristic_name
+773,number ( % ),measures;p-interaction,characteristic_name,number ( % ),characteristic_name
+774,relative risk ( nmbr % cl ),arms;measures;p-interaction,measures,relative risk ( nmbr % cl ),measures
+775,interruption,arms;measures;p-interaction,characteristic_name,interruption,characteristic_name
+777,"relative risk ( nmbr % cl ) """,arms;measures;p-interaction,measures,"relative risk ( nmbr % cl ) """,measures
+778,continuation,arms;measures;p-interaction,characteristic_name,continuation,characteristic_name
+779,"interruption """,arms;measures;p-interaction,characteristic_name,"interruption """,characteristic_name
+784,p - value ( int ),measures;p-interaction,measures,p - value ( int ),measures
+785,"endpoint rate """,measures;p-interaction,measures,"endpoint rate """,measures
+786,endpoint rate,measures;p-interaction,measures,endpoint rate,measures
+787,interact !,measures;arms;p-interaction,characteristic_name,interact !,characteristic_name
+788,"hazard ratio ( nmbr % cl ) """,measures;arms;p-interaction,measures,"hazard ratio ( nmbr % cl ) """,measures
+789,hazard ratio ( nmbr % cl ),measures;arms;p-interaction,measures,hazard ratio ( nmbr % cl ),measures
+791,sal nmbr pg ( n = nmbr ),arms;measures,arms,sal nmbr pg ( n = nmbr ),arms
+792,fp / sal nmbr / nmbr pg ( n = nmbr ),arms;measures,arms,fp / sal nmbr / nmbr pg ( n = nmbr ),arms
+793,"sal nmbr pg ( n = nmbr ) """,arms;measures,arms,"sal nmbr pg ( n = nmbr ) """,arms
+794,dapa + met n = nmbr,arms;measures,arms,dapa + met n = nmbr,arms
+795,"total n = nmbr """,arms;measures,arms,"total n = nmbr """,arms
+796,saxa + dapa + met n = nmbr,arms;measures,arms,saxa + dapa + met n = nmbr,arms
+797,saxa + met n = nmbr,arms;measures,arms,saxa + met n = nmbr,arms
+798,total n = nmbr,arms;measures,arms,total n = nmbr,arms
+799,device group,arms;other,arms,device group,arms
+800,"device group """,arms;other,arms,"device group """,arms
+801,hr ( nmbr % ci ),arms;other,measures,hr ( nmbr % ci ),measures
+802,warfarin group,arms;other,arms,warfarin group,arms
+803,n,measures;arms;p-interaction;other,characteristic_name,n,characteristic_name
+804,hrnmbr and nmbr % cl,measures;arms;p-interaction;other,measures,hrnmbr and nmbr % cl,measures
+805,continued thienopyridine n ( % ),measures;arms;p-interaction;other,arms,continued thienopyridine n ( % ),arms
+806,p value for interaction,measures;arms;p-interaction;other,measures,p value for interaction,measures
+807,placebo n ( % ),measures;arms;p-interaction;other,arms,placebo n ( % ),arms
+808,"continued thienopyridine n ( % ) """,measures;arms;p-interaction;other,arms,"continued thienopyridine n ( % ) """,arms
+809,"placebo ( n = nmbr , nmbr )",arms;p-interaction,arms,"placebo ( n = nmbr , nmbr )",arms
+810,"placebo ( n = nmbr , nmbr ) """,arms;p-interaction,arms,"placebo ( n = nmbr , nmbr ) """,arms
+811,"vorapaxar ( n = nmbr , nmbr )",arms;p-interaction,arms,"vorapaxar ( n = nmbr , nmbr )",arms
+813,women > nmbr years,characteristic_name;characteristic_level,characteristic_level,women > nmbr years,characteristic_level
+814,total study population,characteristic_name;characteristic_level,other,total study population,other
+815,women < nmbr years,characteristic_name;characteristic_level,characteristic_level,women < nmbr years,characteristic_level
+816,"total study population """,characteristic_name;characteristic_level,other,"total study population """,other
+817,hr ( nmbr % ci ),arms;measures;p-interaction,measures,hr ( nmbr % ci ),measures
+818,"saxagliptin nmbr mg ( n = nmbr , nmbr )",arms;measures;p-interaction,arms,"saxagliptin nmbr mg ( n = nmbr , nmbr )",arms
+819,saxagliptin nmbr . nmbr mg ( n = nmbr ),arms;measures;p-interaction,arms,saxagliptin nmbr . nmbr mg ( n = nmbr ),arms
+820,"hr ( nmbr % ci ) """,arms;measures;p-interaction,measures,"hr ( nmbr % ci ) """,measures
+821,"saxagliptin nmbr . nmbr mg ( n = nmbr , nmbr )",arms;measures;p-interaction,arms,"saxagliptin nmbr . nmbr mg ( n = nmbr , nmbr )",arms
+822,placebo ( n = nmbr ),arms;measures;p-interaction,arms,placebo ( n = nmbr ),arms
+823,"placebo ( n = nmbr , nmbr )",arms;measures;p-interaction,arms,"placebo ( n = nmbr , nmbr )",arms
+824,p,arms;measures;p-interaction,characteristic_name,p,characteristic_name
+825,p for interaction *,arms;measures;p-interaction,characteristic_name,p for interaction *,characteristic_name
+826,"hr ( nmbr % cl ) """,measures;p-interaction,measures,"hr ( nmbr % cl ) """,measures
+827,p - value for interaction,measures;p-interaction,measures,p - value for interaction,measures
+828,hr ( nmbr % cl ),measures;p-interaction,measures,hr ( nmbr % cl ),measures
+829,nmbr yr km % ( n ),measures;p-interaction,characteristic_level,nmbr yr km % ( n ),characteristic_level
+830,no dm ( n = nmbr ),characteristic_level;measures,characteristic_name,no dm ( n = nmbr ),characteristic_name
+831,dm ( n = nmbr ),characteristic_level;measures,characteristic_name,dm ( n = nmbr ),characteristic_name
+832,"no dm ( n = nmbr ) """,characteristic_level;measures,characteristic_name,"no dm ( n = nmbr ) """,characteristic_name
+834,hr ( nmbr % ci ),measures;p-interaction;arms,measures,hr ( nmbr % ci ),measures
+835,"vorapaxar event rate ( n = nmbr ) , %",measures;p-interaction;arms,measures,"vorapaxar event rate ( n = nmbr ) , %",measures
+836,"placebo event rate ( n = nmbr ) , %",measures;p-interaction;arms,measures,"placebo event rate ( n = nmbr ) , %",measures
+837,"vorapaxar event rate ( n = nmbr ) , % """,measures;p-interaction;arms,measures,"vorapaxar event rate ( n = nmbr ) , % """,measures
+838,p value ( int ),measures;p-interaction;arms,measures,p value ( int ),measures
+839,p value,measures;p-interaction;arms,measures,p value,measures
+840,hr,measures;p-interaction,measures,hr,measures
+842,nmbr % cl,measures;p-interaction,measures,nmbr % cl,measures
+843,"hr """,measures;p-interaction,measures,"hr """,measures
+847,nmbr % ci,measures;p-interaction,measures,nmbr % ci,measures
+848,saxagliptin,arms;measures,arms,saxagliptin,arms
+849,"saxagliptin """,arms;measures,arms,"saxagliptin """,arms
+851,vorapaxar placebo nmbr - yr . km % rate,arms;measures;p-interaction,arms,vorapaxar placebo nmbr - yr . km % rate,arms
+855,total no .,arms;measures;p-interaction,measures,total no .,measures
+857,p vs placebo,arms;measures,arms,p vs placebo,arms
+859,nnmbr / nnmbr,measures;arms,characteristic_name,nnmbr / nnmbr,characteristic_name
+860,"nnmbr / nnmbr """,measures;arms,characteristic_name,"nnmbr / nnmbr """,characteristic_name
+861,lsm ( nmbr % cl ),measures;arms,measures,lsm ( nmbr % cl ),measures
+862,"estimated difference """,arms;measures,measures,"estimated difference """,measures
+863,estimated difference,arms;measures,measures,estimated difference,measures
+864,placebo mean ( n ),arms;measures,arms,placebo mean ( n ),arms
+865,liraglutide nmbr . nmbr mg mean ( n ),arms;measures,arms,liraglutide nmbr . nmbr mg mean ( n ),arms
+866,p for i,arms;measures,characteristic_name,p for i,characteristic_name
+868,"p for i """,arms;measures,characteristic_name,"p for i """,characteristic_name
+869,warfarin,arms;measures,arms,warfarin,arms
+870,hr nmbr % cl,arms;measures,measures,hr nmbr % cl,measures
+871,apixaban,arms;measures,arms,apixaban,arms
+872,apixaban vs . placebo,arms;measures,arms,apixaban vs . placebo,arms
+875,odds ratio ( nmbr % cl ),arms;measures;p-interaction,measures,odds ratio ( nmbr % cl ),measures
+876,cyclo,arms;measures;p-interaction,characteristic_name,cyclo,characteristic_name
+877,"p - value for interaction nmbr . nmbr """,arms;measures;p-interaction,measures,"p - value for interaction nmbr . nmbr """,measures
+878,control,arms;measures;p-interaction,arms,control,arms
+879,p - value for interaction nmbr . nmbr,arms;measures;p-interaction,measures,p - value for interaction nmbr . nmbr,measures
+880,no thienopyridine,characteristic_level;p-interaction,arms,no thienopyridine,arms
+881,thienopyridine,characteristic_level;p-interaction,arms,thienopyridine,arms
+882,"no thienopyridine """,characteristic_level;p-interaction,arms,"no thienopyridine """,arms
+883,tp vs no tp,characteristic_level;p-interaction,measures,tp vs no tp,measures
+884,vorapaxar n = nmbr,measures;arms,arms,vorapaxar n = nmbr,arms
+885,all n = nmbr,measures;arms,characteristic_level,all n = nmbr,characteristic_level
+886,all n = nmbr nmbr,measures;arms,characteristic_level,all n = nmbr nmbr,characteristic_level
+887,"vorapaxar n = nmbr """,measures;arms,arms,"vorapaxar n = nmbr """,arms
+888,placebo n = nmbr,measures;arms,arms,placebo n = nmbr,arms
+889,"sex , male",characteristic_level;characteristic_name,characteristic_name,"sex , male",characteristic_name
+890,"region , asia / paafic",characteristic_level;characteristic_name,characteristic_name,"region , asia / paafic",characteristic_name
+891,age > = nmbr,characteristic_level;characteristic_name,characteristic_name,age > = nmbr,characteristic_name
+892,"renal function , normal - mild",characteristic_level;characteristic_name,characteristic_name,"renal function , normal - mild",characteristic_name
+893,"renal function , severe",characteristic_level;characteristic_name,characteristic_name,"renal function , severe",characteristic_name
+894,"region , europe union",characteristic_level;characteristic_name,characteristic_name,"region , europe union",characteristic_name
+895,cvd subjects,characteristic_level;characteristic_name,arms,cvd subjects,arms
+896,mrf subjects,characteristic_level;characteristic_name,arms,mrf subjects,arms
+897,age < nmbr,characteristic_level;characteristic_name,characteristic_name,age < nmbr,characteristic_name
+898,"region , europe",characteristic_level;characteristic_name,characteristic_name,"region , europe",characteristic_name
+899,"sex , female",characteristic_level;characteristic_name,characteristic_name,"sex , female",characteristic_name
+900,"race , while",characteristic_level;characteristic_name,characteristic_name,"race , while",characteristic_name
+901,"region , latin america",characteristic_level;characteristic_name,characteristic_name,"region , latin america",characteristic_name
+902,"region , north america",characteristic_level;characteristic_name,characteristic_name,"region , north america",characteristic_name
+903,"renal function , moderate",characteristic_level;characteristic_name,characteristic_name,"renal function , moderate",characteristic_name
+904,oretal,characteristic_level;characteristic_name,characteristic_name,oretal,characteristic_name
+905,"renal function , moderate """,characteristic_level;characteristic_name,characteristic_name,"renal function , moderate """,characteristic_name
+906,"race , non - white",characteristic_level;characteristic_name,characteristic_level,"race , non - white",characteristic_level
+907,"hazard ratio """,measures;p-interaction,measures,"hazard ratio """,measures
+909,hazard ratio,measures;p-interaction,measures,hazard ratio,measures
+910,( nmbr % ci ),measures;p-interaction,measures,( nmbr % ci ),measures
+914,patients with event / patients analyzed,measures;p-interaction,characteristic_level,patients with event / patients analyzed,characteristic_level
+916,cangrelor,arms;measures;p-interaction,arms,cangrelor,arms
+917,p interaction,arms;measures;p-interaction,characteristic_name,p interaction,characteristic_name
+918,or ( nmbr % cl ),arms;measures;p-interaction,measures,or ( nmbr % cl ),measures
+919,clopidogrel,arms;measures;p-interaction,arms,clopidogrel,arms
+920,"or ( nmbr % cl ) """,arms;measures;p-interaction,measures,"or ( nmbr % cl ) """,measures
+921,pbo ( n = nmbr ),arms;measures,arms,pbo ( n = nmbr ),arms
+922,"brv nmbr mg / day ( n = nmbr ) """,arms;measures,arms,"brv nmbr mg / day ( n = nmbr ) """,arms
+923,brv nmbr mg / day ( n = nmbr ),arms;measures,arms,brv nmbr mg / day ( n = nmbr ),arms
+924,"outcome """,arms;outcomes;measures;p-interaction,outcomes,"outcome """,outcomes
+925,hr ( nmbr % cl ),arms;outcomes;measures;p-interaction,measures,hr ( nmbr % cl ),measures
+926,outcome,arms;outcomes;measures;p-interaction,outcomes,outcome,outcomes
+927,p interaction,arms;outcomes;measures;p-interaction,characteristic_name,p interaction,characteristic_name
+930,saxagliptin ( % ),arms;measures;p-interaction,arms,saxagliptin ( % ),arms
+931,placebo ( % ),arms;measures;p-interaction,arms,placebo ( % ),arms
+932,"saxagliptin ( % ) """,arms;measures;p-interaction,arms,"saxagliptin ( % ) """,arms
+938,"placebo % """,arms;measures;p-interaction,arms,"placebo % """,arms
+940,n,arms;measures;p-interaction,characteristic_name,n,characteristic_name
+941,continued thienopyridine %,arms;measures;p-interaction,arms,continued thienopyridine %,arms
+942,p value for interactiont,arms;measures;p-interaction,measures,p value for interactiont,measures
+943,placebo %,arms;measures;p-interaction,arms,placebo %,arms
+944,pvalue,arms;measures,measures,pvalue,measures
+945,treatment arm,arms;measures,characteristic_name,treatment arm,characteristic_name
+946,"treatment arm """,arms;measures,characteristic_name,"treatment arm """,characteristic_name
+947,hazard ratio ( nmbr % confi dence interval ),arms;measures;p-interaction,measures,hazard ratio ( nmbr % confi dence interval ),measures
+949,"hazard ratio ( nmbr % confi dence interval ) """,arms;measures;p-interaction,measures,"hazard ratio ( nmbr % confi dence interval ) """,measures
+950,laa closure,arms;measures;p-interaction,characteristic_name,laa closure,characteristic_name
+951,warfarin,arms;measures;p-interaction,arms,warfarin,arms
+953,"subgroup """,arms;measures,characteristic_level,"subgroup """,characteristic_level
+954,subgroup,arms;measures,characteristic_level,subgroup,characteristic_level
+955,medical therapy ( n = nmbr ),arms;measures,characteristic_name,medical therapy ( n = nmbr ),characteristic_name
+956,stent ( n = nmbr ),arms;measures,arms,stent ( n = nmbr ),arms
+959,medical therapy,arms;measures,characteristic_name,medical therapy,characteristic_name
+960,value,arms;measures,measures,value,measures
+961,"value """,arms;measures,measures,"value """,measures
+963,stent,arms;measures,characteristic_name,stent,characteristic_name
+964,hazard ratio ( nmbr % cl ),arms;measures,measures,hazard ratio ( nmbr % cl ),measures
+965,standard care n ( % ),arms;measures;p-interaction,arms,standard care n ( % ),arms
+967,insulin glargine n ( x ),arms;measures;p-interaction,arms,insulin glargine n ( x ),arms
+968,nmbr % cl,arms;measures;p-interaction,measures,nmbr % cl,measures
+969,hazard ratio,arms;measures;p-interaction,measures,hazard ratio,measures
+970,"standard care n ( % ) """,arms;measures;p-interaction,arms,"standard care n ( % ) """,arms
+971,selexipag ( n = nmbr ),arms;measures,arms,selexipag ( n = nmbr ),arms
+972,"selexipag ( n = nmbr ) """,arms;measures,arms,"selexipag ( n = nmbr ) """,arms
+975,"change from baseline ( % ) """,measures;p-interaction,measures,"change from baseline ( % ) """,measures
+976,change from baseline ( % ),measures;p-interaction,measures,change from baseline ( % ),measures
+977,etd ( % ) [nmbr % ci],arms;p-interaction,measures,etd ( % ) [nmbr % ci],measures
+978,"placebo ls means ( n ) """,arms;p-interaction,arms,"placebo ls means ( n ) """,arms
+979,placebo ls means ( n ),arms;p-interaction,arms,placebo ls means ( n ),arms
+980,liraglutide nmbr . nmbr mg ls means ( n ),arms;p-interaction,arms,liraglutide nmbr . nmbr mg ls means ( n ),arms
+981,"ratio of hrs ( nmbr % ci ) , p for sex interaction",measures;p-interaction,characteristic_name,"ratio of hrs ( nmbr % ci ) , p for sex interaction",characteristic_name
+982,no of events women men *,measures;p-interaction,characteristic_level,no of events women men *,characteristic_level
+983,"ratio of hrs ( nmbr % ci ) , p for sex interaction """,measures;p-interaction,characteristic_name,"ratio of hrs ( nmbr % ci ) , p for sex interaction """,characteristic_name
+984,no of events womenmen *,measures;p-interaction,measures,no of events womenmen *,measures
+985,"ratio of hrs ( nmbr % cl ) , p for sex interaction",measures;p-interaction,characteristic_name,"ratio of hrs ( nmbr % cl ) , p for sex interaction",characteristic_name
+986,"ratio of hrs ( nmbr % cl ) , p for sex interaction """,measures;p-interaction,characteristic_name,"ratio of hrs ( nmbr % cl ) , p for sex interaction """,characteristic_name
+987,p value ( men versus women ),characteristic_level;measures,characteristic_level,p value ( men versus women ),characteristic_level
+988,p value ( cangrelor versus clopidogrel in women ),characteristic_level;measures,arms,p value ( cangrelor versus clopidogrel in women ),arms
+989,p value ( cangrelor versus clopidogrel in men ),characteristic_level;measures,arms,p value ( cangrelor versus clopidogrel in men ),arms
+990,"men ( n = nmbr ) """,characteristic_level;measures,characteristic_level,"men ( n = nmbr ) """,characteristic_level
+991,women ( n = nmbr ),characteristic_level;measures,characteristic_level,women ( n = nmbr ),characteristic_level
+992,men ( n = nmbr ),characteristic_level;measures,characteristic_level,men ( n = nmbr ),characteristic_level
+993,"nmbr - wk kaplan - meier rate , %",measures;p-interaction,measures,"nmbr - wk kaplan - meier rate , %",measures
+994,"total no . """,measures;p-interaction,measures,"total no . """,measures
+995,"events , no .",measures;p-interaction,measures,"events , no .",measures
+997,total no .,measures;p-interaction,measures,total no .,measures
+998,hazard ratio ( nmbr % cl ),measures;p-interaction,measures,hazard ratio ( nmbr % cl ),measures
+999,"prior mi ( n - nmbr , nmbr )",characteristic_level;measures,characteristic_level,"prior mi ( n - nmbr , nmbr )",characteristic_level
+1000,"any mi ( n - nmbr , nmbr )",characteristic_level;measures,characteristic_level,"any mi ( n - nmbr , nmbr )",characteristic_level
+1001,"no mi ( n - nmbr , nmbr )",characteristic_level;measures,characteristic_level,"no mi ( n - nmbr , nmbr )",characteristic_level
+1002,"index mi ( n - nmbr , nmbr )",characteristic_level;measures,characteristic_level,"index mi ( n - nmbr , nmbr )",characteristic_level
+1003,"any mi ( n - nmbr , nmbr ) """,characteristic_level;measures,characteristic_level,"any mi ( n - nmbr , nmbr ) """,characteristic_level
+1004,pvaluefor any mi versus no mi,characteristic_level;measures,characteristic_level,pvaluefor any mi versus no mi,characteristic_level
+1005,"no diabetes ( n - nmbr , nmbr )",characteristic_level;measures,characteristic_level,"no diabetes ( n - nmbr , nmbr )",characteristic_level
+1006,"diabetes ( n - nmbr , nmbr )",characteristic_level;measures,characteristic_level,"diabetes ( n - nmbr , nmbr )",characteristic_level
+1007,"diabetes ( n - nmbr , nmbr ) """,characteristic_level;measures,characteristic_level,"diabetes ( n - nmbr , nmbr ) """,characteristic_level
+1009,"pad ( n - nmbr , nmbr )",arms;measures,characteristic_level,"pad ( n - nmbr , nmbr )",characteristic_level
+1010,"pad ( n - nmbr , nmbr ) """,arms;measures,characteristic_level,"pad ( n - nmbr , nmbr ) """,characteristic_level
+1011,"no pad ( n - nmbr , nmbr )",arms;measures,characteristic_level,"no pad ( n - nmbr , nmbr )",characteristic_level
+1013,"odds ratio ( nmbr % cl ) """,arms;measures,measures,"odds ratio ( nmbr % cl ) """,measures
+1015,odds ratio ( nmbr % cl ),arms;measures,measures,odds ratio ( nmbr % cl ),measures
+1016,rosuvastatin,arms;measures,arms,rosuvastatin,arms
+1017,trend / het . test,arms;measures,characteristic_name,trend / het . test,characteristic_name
+1018,heterogeneity test,arms;measures,characteristic_name,heterogeneity test,characteristic_name
+1019,"percentage difference ( nmbr % cl ) """,arms;measures,measures,"percentage difference ( nmbr % cl ) """,measures
+1022,percentage difference ( nmbr % cl ),arms;measures,measures,percentage difference ( nmbr % cl ),measures
+1028,all patients n = nmbr,arms;measures,characteristic_level,all patients n = nmbr,characteristic_level
+1029,pbo + mtx n = nmbr,arms;measures,arms,pbo + mtx n = nmbr,arms
+1030,"czp + mtx n = nmbr """,arms;measures,arms,"czp + mtx n = nmbr """,arms
+1031,czp + mtx n = nmbr,arms;measures,arms,czp + mtx n = nmbr,arms
+1032,salmeterol - fluticasone group,measures;arms,arms,salmeterol - fluticasone group,arms
+1033,"indacaterol - glycopyrronium group """,measures;arms,arms,"indacaterol - glycopyrronium group """,arms
+1034,rate ratio ( nmbr % cl ),measures;arms,measures,rate ratio ( nmbr % cl ),measures
+1035,indacaterol - glycopyrronium group,measures;arms,arms,indacaterol - glycopyrronium group,arms
+1038,liraglutide,arms;measures,arms,liraglutide,arms
+1039,hazard ratio,arms;measures,measures,hazard ratio,measures
+1041,us ( n = nmbr ),arms;measures,arms,us ( n = nmbr ),arms
+1043,non - us ( n = nmbr ),arms;measures,characteristic_level,non - us ( n = nmbr ),characteristic_level
+1045,"p , treatment - by - region interaction",characteristic_level;p-interaction,characteristic_name,"p , treatment - by - region interaction",characteristic_name
+1046,non - us ( n = nmbr ),characteristic_level;p-interaction,characteristic_level,non - us ( n = nmbr ),characteristic_level
+1047,us ( n = nmbr ),characteristic_level;p-interaction,arms,us ( n = nmbr ),arms
+1048,"p , regional difference",characteristic_level;p-interaction,measures,"p , regional difference",measures
+1049,"non - us ( n = nmbr ) """,characteristic_level;p-interaction,characteristic_level,"non - us ( n = nmbr ) """,characteristic_level
+1050,"or ( nmbr % ci ) """,arms;measures,other,"or ( nmbr % ci ) """,other
+1051,clopidogrel,arms;measures,arms,clopidogrel,arms
+1052,cangrelor,arms;measures,arms,cangrelor,arms
+1053,or ( nmbr % ci ),arms;measures,other,or ( nmbr % ci ),other
+1054,pfor interaction,measures;characteristic_level;p-interaction,characteristic_name,pfor interaction,characteristic_name
+1055,central / eastern europe and russia hr ( nmbr % cl ),measures;characteristic_level;p-interaction,measures,central / eastern europe and russia hr ( nmbr % cl ),measures
+1056,asia - pacific hr ( nmbr % cl ),measures;characteristic_level;p-interaction,measures,asia - pacific hr ( nmbr % cl ),measures
+1057,latin america hr ( nmbr % cl ),measures;characteristic_level;p-interaction,measures,latin america hr ( nmbr % cl ),measures
+1058,western europe hr ( nmbr % cl ),measures;characteristic_level;p-interaction,measures,western europe hr ( nmbr % cl ),measures
+1059,overall hr ( nmbr % cl ),measures;characteristic_level;p-interaction,measures,overall hr ( nmbr % cl ),measures
+1060,"central / eastern europe and russia hr ( nmbr % cl ) """,measures;characteristic_level;p-interaction,measures,"central / eastern europe and russia hr ( nmbr % cl ) """,measures
+1061,north america hr ( nmbr % cl ),measures;characteristic_level;p-interaction,measures,north america hr ( nmbr % cl ),measures
+1062,"< nmbr months in - nmbr kill """,characteristic_level;measures,arms,"< nmbr months in - nmbr kill """,arms
+1063,"no prior hf hospitalization ( n = nmbr , nmbr )",characteristic_level;measures,characteristic_level,"no prior hf hospitalization ( n = nmbr , nmbr )",characteristic_level
+1064,nmbr - nmbr months fn = nmbr . nmbr ),characteristic_level;measures,characteristic_level,nmbr - nmbr months fn = nmbr . nmbr ),characteristic_level
+1065,nmbr - nmbr months ( n = nmbr ),characteristic_level;measures,characteristic_level,nmbr - nmbr months ( n = nmbr ),characteristic_level
+1066,< nmbr months in - nmbr kill,characteristic_level;measures,arms,< nmbr months in - nmbr kill,arms
+1067,"> nmbr months ( n = nmbr , nmbr )",characteristic_level;measures,characteristic_level,"> nmbr months ( n = nmbr , nmbr )",characteristic_level
+1070,"event rates , %",measures;p-interaction,measures,"event rates , %",measures
+1071,"event rates , % """,measures;p-interaction,measures,"event rates , % """,measures
+1072,relative risk ( nmbr % ci ),measures;p-interaction,measures,relative risk ( nmbr % ci ),measures
+1073,p - value for variance,measures;p-interaction,measures,p - value for variance,measures
+1074,"> nmbr egfr , ml / min / nmbr . nmbr mnmbr",characteristic_name;characteristic_level,characteristic_level,"> nmbr egfr , ml / min / nmbr . nmbr mnmbr",characteristic_level
+1075,ethnicitya hispanic or latino,characteristic_name;characteristic_level,characteristic_level,ethnicitya hispanic or latino,characteristic_level
+1076,body mass indexa < median,characteristic_name;characteristic_level,characteristic_name,body mass indexa < median,characteristic_name
+1077,< nmbr,characteristic_name;characteristic_level,characteristic_level,< nmbr,characteristic_level
+1078,asia pacific and other,characteristic_name;characteristic_level,characteristic_level,asia pacific and other,characteristic_level
+1080,age < median,characteristic_name;characteristic_level,characteristic_name,age < median,characteristic_name
+1081,p - blocker yes,characteristic_name;characteristic_level,characteristic_level,p - blocker yes,characteristic_level
+1082,racea white,characteristic_name;characteristic_level,characteristic_level,racea white,characteristic_level
+1083,western europe,characteristic_name;characteristic_level,characteristic_level,western europe,characteristic_level
+1085,"> nmbr egfr , ml / min / nmbr . nmbr mnmbr a """,characteristic_name;characteristic_level,characteristic_level,"> nmbr egfr , ml / min / nmbr . nmbr mnmbr a """,characteristic_level
+1086,baseline heart failure severity nyha class i,characteristic_name;characteristic_level,characteristic_name,baseline heart failure severity nyha class i,characteristic_name
+1087,"> nmbr egfr , ml / min / nmbr . nmbr mnmbr a",characteristic_name;characteristic_level,characteristic_level,"> nmbr egfr , ml / min / nmbr . nmbr mnmbr a",characteristic_level
+1088,prior myocardial infarction yes,characteristic_name;characteristic_level,characteristic_level,prior myocardial infarction yes,characteristic_level
+1089,> nmbr to < nmbr,characteristic_name;characteristic_level,characteristic_level,> nmbr to < nmbr,characteristic_level
+1091,not hispanic or latino,characteristic_name;characteristic_level,characteristic_level,not hispanic or latino,characteristic_level
+1092,prior hypertensiona yes,characteristic_name;characteristic_level,characteristic_level,prior hypertensiona yes,characteristic_level
+1093,"> nmbr to < nmbr egfr , ml / min / nmbr . nmbr mnmbr a",characteristic_name;characteristic_level,characteristic_level,"> nmbr to < nmbr egfr , ml / min / nmbr . nmbr mnmbr a",characteristic_level
+1094,prior congestive heart failure yes,characteristic_name;characteristic_level,characteristic_level,prior congestive heart failure yes,characteristic_level
+1095,prior coronary artery disease yes,characteristic_name;characteristic_level,characteristic_level,prior coronary artery disease yes,characteristic_level
+1096,thiazolidinedione yes,characteristic_name;characteristic_level,characteristic_level,thiazolidinedione yes,characteristic_level
+1097,nyha class not reported,characteristic_name;characteristic_level,characteristic_name,nyha class not reported,characteristic_name
+1101,none,characteristic_name;characteristic_level,characteristic_name,none,characteristic_name
+1102,insulin yes,characteristic_name;characteristic_level,characteristic_level,insulin yes,characteristic_level
+1103,region latin american,characteristic_name;characteristic_level,characteristic_name,region latin american,characteristic_name
+1104,glycated hemoglobin < median,characteristic_name;characteristic_level,characteristic_name,glycated hemoglobin < median,characteristic_name
+1105,"systolic blood pressure , mm hg < nmbr",characteristic_name;characteristic_level,characteristic_level,"systolic blood pressure , mm hg < nmbr",characteristic_level
+1106,"renal function < nmbr egfr , ml / min / nmbr . nmbr mnmbr",characteristic_name;characteristic_level,characteristic_level,"renal function < nmbr egfr , ml / min / nmbr . nmbr mnmbr",characteristic_level
+1107,diuretic thiazide,characteristic_name;characteristic_level,arms,diuretic thiazide,arms
+1108,sexa male,characteristic_name;characteristic_level,characteristic_level,sexa male,characteristic_level
+1109,> median,characteristic_name;characteristic_level,characteristic_level,> median,characteristic_level
+1111,eastern europe,characteristic_name;characteristic_level,characteristic_level,eastern europe,characteristic_level
+1112,north america,characteristic_name;characteristic_level,characteristic_level,north america,characteristic_level
+1113,diabetes durationa < median,characteristic_name;characteristic_level,characteristic_level,diabetes durationa < median,characteristic_level
+1114,nyha class > ii,characteristic_name;characteristic_level,characteristic_level,nyha class > ii,characteristic_level
+1115,ace inhibitor yes,characteristic_name;characteristic_level,characteristic_level,ace inhibitor yes,characteristic_level
+1116,angiotensin receptor blocker yes,characteristic_name;characteristic_level,characteristic_level,angiotensin receptor blocker yes,characteristic_level
+1117,sitagliptin no . / total no .,arms;measures;p-interaction,arms,sitagliptin no . / total no .,arms
+1119,placebo no . / total no .,arms;measures;p-interaction,arms,placebo no . / total no .,arms
+1120,p value fo interactio,arms;measures;p-interaction,measures,p value fo interactio,measures
+1121,"placebo no . / total no . """,arms;measures;p-interaction,arms,"placebo no . / total no . """,arms
+1123,p - value *,arms;measures,measures,p - value *,measures
+1124,"hr ( nmbr % cl ) """,arms;measures,measures,"hr ( nmbr % cl ) """,measures
+1125,placebo events / n ( % ),arms;measures,arms,placebo events / n ( % ),arms
+1126,pioglitazone events / n ( % ),arms;measures,measures,pioglitazone events / n ( % ),measures
+1127,ticagrelor nmbr mg nmbr yr km %,arms;measures;p-interaction,arms,ticagrelor nmbr mg nmbr yr km %,arms
+1128,placebo nmbr yr km %,arms;measures;p-interaction,arms,placebo nmbr yr km %,arms
+1129,"placebo nmbr yr km % """,arms;measures;p-interaction,arms,"placebo nmbr yr km % """,arms
+1130,ticagrelor nmbr mg vs . placebo hr ( nmbr % ci ),arms;measures;p-interaction,arms,ticagrelor nmbr mg vs . placebo hr ( nmbr % ci ),arms
+1131,p - interaction,arms;measures;p-interaction,characteristic_name,p - interaction,characteristic_name
+1132,p - interactio n,arms;measures;p-interaction,characteristic_name,p - interactio n,characteristic_name
+1133,number of patients,arms;measures;p-interaction,measures,number of patients,measures
+1134,hazard ratio ( nmbr % ci ),arms;p-interaction;measures,measures,hazard ratio ( nmbr % ci ),measures
+1135,p interaction,arms;p-interaction;measures,characteristic_name,p interaction,characteristic_name
+1136,monitoring treatment,arms;p-interaction;measures,arms,monitoring treatment,arms
+1137,"p interaction """,arms;p-interaction;measures,characteristic_name,"p interaction """,characteristic_name
+1138,conventional treatment,arms;p-interaction;measures,characteristic_name,conventional treatment,characteristic_name
+1142,p - value,arms;measures,measures,p - value,measures
+1143,"stent """,arms;measures,characteristic_name,"stent """,characteristic_name
+1144,"stable angina ( n - nmbr , nmbr )",characteristic_level;measures,characteristic_level,"stable angina ( n - nmbr , nmbr )",characteristic_level
+1145,"acs ( n - nmbr , nmbr ) """,characteristic_level;measures,characteristic_level,"acs ( n - nmbr , nmbr ) """,characteristic_level
+1146,"acs ( n - nmbr , nmbr )",characteristic_level;measures,characteristic_level,"acs ( n - nmbr , nmbr )",characteristic_level
+1148,statin non - users ( n = nmbr ),arms;measures,characteristic_level,statin non - users ( n = nmbr ),characteristic_level
+1149,"statin non - users ( n = nmbr ) """,arms;measures,characteristic_level,"statin non - users ( n = nmbr ) """,characteristic_level
+1150,statin users ( n = nmbr ),arms;measures,arms,statin users ( n = nmbr ),arms
+1158,peripheral revascularization ( n = nmbr ),arms;measures,characteristic_level,peripheral revascularization ( n = nmbr ),characteristic_level
+1159,"no peripheral revascularization ( n = nmbr , nmbr ) """,arms;measures,characteristic_level,"no peripheral revascularization ( n = nmbr , nmbr ) """,characteristic_level
+1160,"no peripheral revascularization ( n = nmbr , nmbr )",arms;measures,characteristic_level,"no peripheral revascularization ( n = nmbr , nmbr )",characteristic_level
+1162,adjusted hr ( enl vs lcz ) ( nmbr % cl ),arms;measures,measures,adjusted hr ( enl vs lcz ) ( nmbr % cl ),measures
+1164,"patients receiving enl , no . ( % )",arms;measures,characteristic_level,"patients receiving enl , no . ( % )",characteristic_level
+1165,incidencea,arms;measures,characteristic_name,incidencea,characteristic_name
+1166,hr ( enl vs lcz ) ( nmbr % cl ),arms;measures,measures,hr ( enl vs lcz ) ( nmbr % cl ),measures
+1167,"patients receiving lcz , no . ( % )",arms;measures,characteristic_level,"patients receiving lcz , no . ( % )",characteristic_level
+1170,nmbr mg sirukumab every nmbr weeks ( n = nmbr ),arms;measures,arms,nmbr mg sirukumab every nmbr weeks ( n = nmbr ),arms
+1173,pioglitazone pts / n ( % ),arms;measures,characteristic_name,pioglitazone pts / n ( % ),characteristic_name
+1174,placebo pts / n ( % ),arms;measures,arms,placebo pts / n ( % ),arms
+1176,"pioglitazone pts / n ( % ) """,arms;measures,characteristic_name,"pioglitazone pts / n ( % ) """,characteristic_name
+1178,"copd - placebo ( n = nmbr ) """,arms;measures,arms,"copd - placebo ( n = nmbr ) """,arms
+1179,copd - placebo ( n = nmbr ),arms;measures,arms,copd - placebo ( n = nmbr ),arms
+1180,copd ( n = nmbr ),arms;measures,characteristic_name,copd ( n = nmbr ),characteristic_name
+1182,copd - rosuvastatin ( n = nmbr ),arms;measures,arms,copd - rosuvastatin ( n = nmbr ),arms
+1183,"adjusted """,arms;measures,arms,"adjusted """,arms
+1184,adjusted,arms;measures,arms,adjusted,arms
+1185,unadjusted,arms;measures,characteristic_name,unadjusted,characteristic_name
+1187,"abatacept / open - label abatacept """,arms;measures,arms,"abatacept / open - label abatacept """,arms
+1188,estimated difference ( nmbr % ci ),arms;measures,measures,estimated difference ( nmbr % ci ),measures
+1189,abatacept,arms;measures,arms,abatacept,arms
+1190,placebo / open - label abatacept,arms;measures,arms,placebo / open - label abatacept,arms
+1191,abatacept / open - label abatacept,arms;measures,arms,abatacept / open - label abatacept,arms
+1192,hazard ratio ( nmbr % ci ),arms;measures;p-interaction,measures,hazard ratio ( nmbr % ci ),measures
+1193,"canagliflozin """,arms;measures;p-interaction,characteristic_name,"canagliflozin """,characteristic_name
+1194,placebo,arms;measures;p-interaction,arms,placebo,arms
+1195,canagliflozin,arms;measures;p-interaction,characteristic_name,canagliflozin,characteristic_name
+1197,treatment difference,arms;measures,measures,treatment difference,measures
+1200,linagliptin,arms;measures,arms,linagliptin,arms
+1202,or ( nmbr % ci ),arms;measures;p-interaction,other,or ( nmbr % ci ),other
+1203,"clopidogrel , %",arms;measures;p-interaction,arms,"clopidogrel , %",arms
+1204,p value ( int ),arms;measures;p-interaction,measures,p value ( int ),measures
+1205,"cangrelor , % """,arms;measures;p-interaction,arms,"cangrelor , % """,arms
+1206,"cangrelor , %",arms;measures;p-interaction,arms,"cangrelor , %",arms
+1207,"hazard ratio for cardiovascular death , stroke , or myocardial infarction ( nmbr % ci )",arms;measures;p-interaction,outcomes,"hazard ratio for cardiovascular death , stroke , or myocardial infarction ( nmbr % ci )",outcomes
+1208,rivaroxaban + aspirin,arms;measures;p-interaction,arms,rivaroxaban + aspirin,arms
+1209,aspirin alone,arms;measures;p-interaction,arms,aspirin alone,arms
+1211,"rivaroxaban + aspirin """,arms;measures;p-interaction,arms,"rivaroxaban + aspirin """,arms
+1212,ppci ( n = nmbr ),arms;measures,characteristic_level,ppci ( n = nmbr ),characteristic_level
+1214,"ppci ( n = nmbr ) """,arms;measures,characteristic_level,"ppci ( n = nmbr ) """,characteristic_level
+1215,phi ( n = nmbr ),arms;measures,characteristic_level,phi ( n = nmbr ),characteristic_level
+1217,phi ( n - nmbr ),arms;measures,characteristic_level,phi ( n - nmbr ),characteristic_level
+1218,( nmbr % cl ),arms;measures,measures,( nmbr % cl ),measures
+1219,rr,arms;measures,characteristic_name,rr,characteristic_name
+1220,"( nmbr % cl ) """,arms;measures,measures,"( nmbr % cl ) """,measures
+1221,ppci in - nmbr,arms;measures,arms,ppci in - nmbr,arms
+1222,rate ratio,arms;measures;p-interaction,measures,rate ratio,measures
+1223,non - hdl - c,arms;measures;p-interaction,outcomes,non - hdl - c,outcomes
+1224,hdl - c,arms;measures;p-interaction,characteristic_name,hdl - c,characteristic_name
+1226,anacetrapib ( n = nmbr ),arms;measures;p-interaction,arms,anacetrapib ( n = nmbr ),arms
+1227,"non - hdl - c """,arms;measures;p-interaction,outcomes,"non - hdl - c """,outcomes
+1228,p - value interaction,arms;measures;p-interaction,measures,p - value interaction,measures
+1229,baseline,measures;other,characteristic_name,baseline,characteristic_name
+1230,monthnmbr,measures;other,characteristic_name,monthnmbr,characteristic_name
+1231,month nmbr,measures;other,characteristic_name,month nmbr,characteristic_name
+1232,"month nmbr """,measures;other,characteristic_name,"month nmbr """,characteristic_name
+1233,tiotropium,arms;measures,arms,tiotropium,arms
+1236,difference ( tiotropium - placebo ) ml ( nmbr % ci ),arms;measures,arms,difference ( tiotropium - placebo ) ml ( nmbr % ci ),arms
+1237,p values,arms;measures,characteristic_name,p values,characteristic_name
+1239,"rate ratio ( nmbr % cl ) """,measures;arms,measures,"rate ratio ( nmbr % cl ) """,measures
+1240,mepolizumab group,measures;arms,arms,mepolizumab group,arms
+1241,placebo group,measures;arms,arms,placebo group,arms
+1242,ldl particle numbers ( week nmbr ),measures;outcomes,measures,ldl particle numbers ( week nmbr ),measures
+1243,calculated ldl cholesterol ( week nmbr ),measures;outcomes,characteristic_name,calculated ldl cholesterol ( week nmbr ),characteristic_name
+1244,total cholesterol ( week nmbr ),measures;outcomes,characteristic_name,total cholesterol ( week nmbr ),characteristic_name
+1245,hdl cholesterol ( week nmbr ) a,measures;outcomes,characteristic_name,hdl cholesterol ( week nmbr ) a,characteristic_name
+1246,apob ( week nmbr ),measures;outcomes,outcomes,apob ( week nmbr ),outcomes
+1247,ldl particle size ( week nmbr ),measures;outcomes,measures,ldl particle size ( week nmbr ),measures
+1248,ls mean ( s . e . ) primary endpoint : % change from baseline to week nmbr,measures;outcomes,measures,ls mean ( s . e . ) primary endpoint : % change from baseline to week nmbr,measures
+1249,lp ( a ) ( week nmbr ),measures;outcomes,measures,lp ( a ) ( week nmbr ),measures
+1250,"mmol / l """,measures;outcomes,characteristic_level,"mmol / l """,characteristic_level
+1251,mmol / l,measures;outcomes,characteristic_level,mmol / l,characteristic_level
+1252,triglycerides ( week nmbr ) a,measures;outcomes,measures,triglycerides ( week nmbr ) a,measures
+1253,non - hdl cholesterol ( week nmbr ),measures;outcomes,characteristic_name,non - hdl cholesterol ( week nmbr ),characteristic_name
+1254,mg / dl,measures;outcomes,arms,mg / dl,arms
+1255,total ( n = nmbr ),measures;arms,arms,total ( n = nmbr ),arms
+1256,"total ( n = nmbr ) """,measures;arms,arms,"total ( n = nmbr ) """,arms
+1257,ertugliflozin nmbr mg ( n = nmbr ),measures;arms,arms,ertugliflozin nmbr mg ( n = nmbr ),arms
+1258,placebo ( n = nmbr ),measures;arms,arms,placebo ( n = nmbr ),arms
+1259,change in sbp ( nmbr months ),outcomes;measures,arms,change in sbp ( nmbr months ),arms
+1260,first hhf,outcomes;measures,characteristic_name,first hhf,characteristic_name
+1261,kccq ( nmbr months ),outcomes;measures,arms,kccq ( nmbr months ),arms
+1262,death ( all - cause ),outcomes;measures,outcomes,death ( all - cause ),outcomes
+1263,"months ( log - transformed ) """,outcomes;measures,characteristic_name,"months ( log - transformed ) """,characteristic_name
+1264,change in nt - probnp at nmbr months ( log - transformed ),outcomes;measures,arms,change in nt - probnp at nmbr months ( log - transformed ),arms
+1265,cv death or first hhf,outcomes;measures,outcomes,cv death or first hhf,outcomes
+1266,months ( log - transformed ),outcomes;measures,characteristic_name,months ( log - transformed ),characteristic_name
+1267,cv death,outcomes;measures,outcomes,cv death,outcomes
+1268,"no stroke ( n = nmbr ) """,outcomes;other,characteristic_level,"no stroke ( n = nmbr ) """,characteristic_level
+1269,p value,outcomes;other,measures,p value,measures
+1270,no stroke ( n = nmbr ),outcomes;other,characteristic_level,no stroke ( n = nmbr ),characteristic_level
+1271,any stroke ( n = nmbr ),outcomes;other,outcomes,any stroke ( n = nmbr ),outcomes
+1272,hr ( nmbr % ci ),arms;other;p-interaction,measures,hr ( nmbr % ci ),measures
+1273,p - int,arms;other;p-interaction,characteristic_name,p - int,characteristic_name
+1274,ez / simva < % >,arms;other;p-interaction,arms,ez / simva < % >,arms
+1275,total patients,arms;other;p-interaction,measures,total patients,measures
+1276,"p - int """,arms;other;p-interaction,characteristic_name,"p - int """,characteristic_name
+1277,simva ( % ),arms;other;p-interaction,arms,simva ( % ),arms
+1278,prior stroke,characteristic_name;p-interaction,characteristic_level,prior stroke,characteristic_level
+1279,"no prior stroke """,characteristic_name;p-interaction,characteristic_level,"no prior stroke """,characteristic_level
+1280,no prior stroke,characteristic_name;p-interaction,characteristic_level,no prior stroke,characteristic_level
+1281,p interaction,characteristic_name;p-interaction,characteristic_name,p interaction,characteristic_name
+1282,arr ( nmbr % cl ),arms;measures,measures,arr ( nmbr % cl ),measures
+1283,"simva n = nmbr n ( % ) """,arms;measures,arms,"simva n = nmbr n ( % ) """,arms
+1285,simva n = nmbr n ( % ),arms;measures,arms,simva n = nmbr n ( % ),arms
+1286,ez / simva n = nmbr n ( % ),arms;measures,arms,ez / simva n = nmbr n ( % ),arms
+1288,risk difference,arms;measures,measures,risk difference,measures
+1289,pioglitazone,arms;measures,characteristic_name,pioglitazone,characteristic_name
+1291,"complex anatomy ( n - nmbr , nmbr )",arms;other,arms,"complex anatomy ( n - nmbr , nmbr )",arms
+1292,"noncomplex anatomy ( n - nmbr , nmbr )",arms;other,characteristic_level,"noncomplex anatomy ( n - nmbr , nmbr )",characteristic_level
+1293,"complex anatomy ( n - nmbr , nmbr ) """,arms;other,arms,"complex anatomy ( n - nmbr , nmbr ) """,arms
+1296,"placebo """,arms;measures;p-interaction,arms,"placebo """,arms
+1297,int . p *,arms;measures;p-interaction,characteristic_name,int . p *,characteristic_name
+1298,pioglitazone,arms;measures;p-interaction,characteristic_name,pioglitazone,characteristic_name
+1300,hr ( nmbr % ci ),arms;p-interaction,measures,hr ( nmbr % ci ),measures
+1301,low - dose rivaroxaban + aspirin ( n / n ),arms;p-interaction,arms,low - dose rivaroxaban + aspirin ( n / n ),arms
+1302,"hr ( nmbr % ci ) """,arms;p-interaction,measures,"hr ( nmbr % ci ) """,measures
+1303,aspirin alone ( n / n ),arms;p-interaction,arms,aspirin alone ( n / n ),arms
+1304,pinteraction,arms;p-interaction,characteristic_name,pinteraction,characteristic_name
+1305,"aspirin alone group no of events / total n ( % ) """,arms;p-interaction;measures,arms,"aspirin alone group no of events / total n ( % ) """,arms
+1306,hr ( nmbr % ci ),arms;p-interaction;measures,measures,hr ( nmbr % ci ),measures
+1307,aspirin alone group no of events / total n ( % ),arms;p-interaction;measures,arms,aspirin alone group no of events / total n ( % ),arms
+1308,pinteraction,arms;p-interaction;measures,characteristic_name,pinteraction,characteristic_name
+1309,low - dose rivaroxaban + aspirin group,arms;p-interaction;measures,arms,low - dose rivaroxaban + aspirin group,arms
+1310,"placebo ,",measures;arms,arms,"placebo ,",arms
+1311,etd ( nmbr % ci ),measures;arms,measures,etd ( nmbr % ci ),measures
+1312,"etd ( nmbr % ci ) """,measures;arms,measures,"etd ( nmbr % ci ) """,measures
+1313,"liraglutide nmbr . nmbr mg ,",measures;arms,arms,"liraglutide nmbr . nmbr mg ,",arms
+1314,liraglutide nmbr . nmbr mg,arms;measures,arms,liraglutide nmbr . nmbr mg,arms
+1315,"placebo ,",arms;measures,arms,"placebo ,",arms
+1316,"liraglutide nmbr . nmbr mg ,",arms;measures,arms,"liraglutide nmbr . nmbr mg ,",arms
+1317,etd ( nmbr % ci ),arms;measures,measures,etd ( nmbr % ci ),measures
+1318,"etd ( nmbr % ci ) """,arms;measures,measures,"etd ( nmbr % ci ) """,measures
+1319,pbo / simva - nmbryr km rale ( % ),arms;measures,arms,pbo / simva - nmbryr km rale ( % ),arms
+1320,hr ( nmbr % ci ),arms;measures,measures,hr ( nmbr % ci ),measures
+1321,"eze / simva - nmbryr km rale ( % ) """,arms;measures,arms,"eze / simva - nmbryr km rale ( % ) """,arms
+1322,eze / simva - nmbryr km rale ( % ),arms;measures,arms,eze / simva - nmbryr km rale ( % ),arms
+1323,placebo / simvastatin,arms;p-interaction;other,arms,placebo / simvastatin,arms
+1324,pin /,arms;p-interaction;other,characteristic_name,pin /,characteristic_name
+1325,ezetimibe / simvastatin,arms;p-interaction;other,arms,ezetimibe / simvastatin,arms
+1326,p value *,arms;p-interaction;other,measures,p value *,measures
+1327,"pin / """,arms;p-interaction;other,characteristic_name,"pin / """,characteristic_name
+1328,placebo / simvastatin,arms;measures;p-interaction,arms,placebo / simvastatin,arms
+1329,pin /,arms;measures;p-interaction,characteristic_name,pin /,characteristic_name
+1330,ezetimibe / simvastatin,arms;measures;p-interaction,arms,ezetimibe / simvastatin,arms
+1331,p value *,arms;measures;p-interaction,measures,p value *,measures
+1332,"pin / """,arms;measures;p-interaction,characteristic_name,"pin / """,characteristic_name
+1333,"diabetes present nmbr ( nmbr . nmbr ) """,arms;measures,characteristic_level,"diabetes present nmbr ( nmbr . nmbr ) """,characteristic_level
+1334,diabetes absent nmbr ( nmbr . nmbr ),arms;measures,characteristic_level,diabetes absent nmbr ( nmbr . nmbr ),characteristic_level
+1335,diabetes present nmbr ( nmbr . nmbr ),arms;measures,characteristic_level,diabetes present nmbr ( nmbr . nmbr ),characteristic_level
+1340,"placebo / simvastatin """,arms;measures;p-interaction,arms,"placebo / simvastatin """,arms
+1342,"no mvd ( n - nmbr , nmbr ) """,arms;other,characteristic_level,"no mvd ( n - nmbr , nmbr ) """,characteristic_level
+1344,"mvd ( n - nmbr , nmbr )",arms;other,characteristic_level,"mvd ( n - nmbr , nmbr )",characteristic_level
+1345,"no mvd ( n - nmbr , nmbr )",arms;other,characteristic_level,"no mvd ( n - nmbr , nmbr )",characteristic_level
+1346,"ef nmbr - nmbr % hfmref ( n = nmbr , nmbr % )",arms;measures,characteristic_level,"ef nmbr - nmbr % hfmref ( n = nmbr , nmbr % )",characteristic_level
+1347,"ef < nmbr % hfref ( n = nmbr , nmbr % )",arms;measures,characteristic_level,"ef < nmbr % hfref ( n = nmbr , nmbr % )",characteristic_level
+1348,p - value for trend *,arms;measures,measures,p - value for trend *,measures
+1349,"ef > nmbr % hfpef ( n = nmbr , nmbr % )",arms;measures,characteristic_level,"ef > nmbr % hfpef ( n = nmbr , nmbr % )",characteristic_level
+1350,"p - value for trend * """,arms;measures,measures,"p - value for trend * """,measures
+1351,ef < nmbr %,characteristic_name;p-interaction,arms,ef < nmbr %,arms
+1352,p - interaction,characteristic_name;p-interaction,characteristic_name,p - interaction,characteristic_name
+1353,"ef > nmbr % """,characteristic_name;p-interaction,arms,"ef > nmbr % """,arms
+1354,ef nmbr - nmbr %,characteristic_name;p-interaction,characteristic_level,ef nmbr - nmbr %,characteristic_level
+1355,ef > nmbr %,characteristic_name;p-interaction,arms,ef > nmbr %,arms
