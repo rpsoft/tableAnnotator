@@ -1,11 +1,13 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
+import { initialState as initialStateApp } from '../App/reducer';
 
 /**
  * Direct selector to the login state domain
  */
 
 const selectLoginDomain = state => state.login || initialState;
+const selectAppDomain = state => state.app || initialStateApp;
 
 /**
  * Other specific selectors
@@ -23,6 +25,7 @@ const makeSelectLogin = () =>
 const makeLoginSelector = () =>
   createSelector(
     selectLoginDomain,
+    selectAppDomain,
     substate => substate.token,
   );
 

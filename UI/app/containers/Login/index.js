@@ -57,6 +57,12 @@ export function Login({
     }
   }
 
+  const logIn = () =>{
+    if ( username && username != undefined && password && password != undefined  ){
+      changeLoginDetails(username, password)
+    }
+  }
+
   const logOut = () => {
     removeCookie("hash");
     removeCookie("username");
@@ -73,11 +79,16 @@ export function Login({
     }
 
   useEffect(() => {
-    // This reloads the authentication token if it's available in the cookies.
-    if ( token ) {
-      setCookie("hash", token)
+    // If authentication token is available and it's different from the cookie token it will be set in the cookies.
+    if ( token ){
+      setCookie("hash", token) // 86400 seconds in a day. Login will expire after a day.
       setCookie("username", username)
     }
+    // }
+  }, [token]);
+
+  useEffect(() => {
+    document.title = Date.now();
   });
 
   useInjectReducer({ key: 'login', reducer });
@@ -136,7 +147,7 @@ export function Login({
             { loginWarning ? <div style={{color:"red",marginTop:5,marginBottom:5}}> {loginWarning} </div> : <br /> }
 
             <div style={{marginTop:10,textAlign:"right"}}>
-              <Button variant="contained" onClick={ () => { changeLoginDetails(username, password) } } style={{backgroundColor:"#93de85"}} >Login</Button>
+              <Button variant="contained" onClick={ () => { logIn() } } style={{backgroundColor:"#93de85"}} >Login</Button>
               <Button variant="contained" onClick={ () => { logOut() } } style={{marginLeft:5,backgroundColor:"#f98989"}}>Logout</Button>
             </div>
           </div>

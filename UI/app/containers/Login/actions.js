@@ -4,13 +4,8 @@
  *
  */
 
-import { DEFAULT_ACTION, LOGIN_ACTION, LOGIN_ACTION_SUCCESS, LOGIN_ACTION_FAILED, LOGIN_CHANGE_DETAILS } from './constants';
+import { LOGIN_ACTION, LOGIN_ACTION_SUCCESS, LOGIN_ACTION_FAILED, LOGIN_CHANGE_DETAILS } from './constants';
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
 
 export function loginAction(username, password) {
   return {
@@ -34,7 +29,7 @@ export function loginFailedAction(error) {
 }
 
 export function changeLoginDetailsAction(username, password) {
-
+  console.log("action called")
   return {
     type: LOGIN_CHANGE_DETAILS,
     username,

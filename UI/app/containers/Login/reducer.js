@@ -4,7 +4,7 @@
  *
  */
 import produce from 'immer';
-import { DEFAULT_ACTION, LOGIN_ACTION, LOGIN_ACTION_SUCCESS, LOGIN_ACTION_FAILED, LOGIN_CHANGE_DETAILS } from './constants';
+import { LOGIN_ACTION, LOGIN_ACTION_SUCCESS, LOGIN_ACTION_FAILED, LOGIN_CHANGE_DETAILS } from './constants';
 
 export const initialState = {
   username : "",
@@ -33,8 +33,7 @@ const loginReducer = (state = initialState, action) =>
         draft.error = action.payload;
         draft.token = "";
         break;
-      case DEFAULT_ACTION:
-        break;
+
     }
   });
 

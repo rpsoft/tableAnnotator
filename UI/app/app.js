@@ -36,23 +36,19 @@ import configureStore from './configureStore';
 import { translationMessages } from './i18n';
 
 // Create redux store with history
-const initialState = {};
+// const initialState = { global :{ host : process.env.REACT_APP_WEBSITE_NAME, server_port: process.env.REACT_APP_SERVER_PORT, ui_port: process.env.REACT_APP_WEBSITE_PORT } };
+const initialState = { app: { host : process.env.REACT_APP_WEBSITE_NAME, server_port: process.env.REACT_APP_SERVER_PORT, ui_port: process.env.REACT_APP_WEBSITE_PORT }}
+
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
-export const ServerContext = React.createContext(argv.ext_host);
-export const PortContext = React.createContext(argv.port);
-
-// const app_params = require('minimist')(process.argv.slice(2));
 
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <ServerContext.Provider>
-            <App params={process.env.REACT_APP_WEBSITE_NAME+":"+ process.env.REACT_APP_SERVER_PORT +" / "+process.env.REACT_APP_WEBSITE_PORT}/>
-          </ServerContext.Provider>
+            <App/>
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

@@ -67,13 +67,10 @@ var HtmlToReact = require('html-to-react')
 var HtmlToReactParser = require('html-to-react').Parser;
 
 
-import { ServerContext, PortContext } from "../app.js";
+// import { ServerContext, PortContext } from "../app.js";
 
 
 class AnnotationView extends Component {
-
-  static server = ServerContext;
-  static port = PortContext;
 
 
   constructor(props) {

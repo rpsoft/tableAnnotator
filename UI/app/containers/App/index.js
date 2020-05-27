@@ -10,6 +10,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
@@ -35,11 +37,9 @@ import {
 
 const urlBase = URL_BASE
 
-export default function App({params}) {
+export function App() {
 
-  var hey = params
 
-  debugger
   return (
     <div>
       <Login/>
@@ -55,3 +55,7 @@ export default function App({params}) {
     </div>
   );
 }
+
+
+
+export default App;

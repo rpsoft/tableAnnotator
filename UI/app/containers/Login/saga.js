@@ -33,12 +33,14 @@ export function* doLogin() {
     body: params
   }
 
-
-
   try {
     const response = yield call(request, requestURL, options);
+    if ( response.status && response.status == "unauthorised"){
+      yield put(loginFailedAction(response.status));
+    } else {
+      yield put(loginSuccessAction(response.payload.hash));
+    }
 
-    yield put(loginSuccessAction(response.payload.hash));
   } catch (err) {
     yield put(loginFailedAction(err));
   }
@@ -48,5 +50,6 @@ export function* doLogin() {
 // Individual exports for testing
 export default function* loginSaga() {
   // See example in containers/HomePage/saga.js
+  // console.log("saga executed")
   yield takeLatest(LOGIN_CHANGE_DETAILS, doLogin);
 }
