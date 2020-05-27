@@ -1,0 +1,2 @@
+[submodule "tools/IHW_table_classifier"]
+	url = https://github.com/rpsoft/IHW_table_classifier.git
