@@ -5,30 +5,45 @@ import { BrowserRouter, Link, Route } from 'react-router-dom';
 // import { templateListSet } from '../actions/actions';
 import QString from 'query-string';
 
-import Card from '@material-ui/core/Card';
+
 import {URL_BASE} from '../links'
 import fetchData from '../network/fetch-data';
 
 //import Bootstrap from '../../assets/bootstrap.css';
-import RaisedButton from '@material-ui/core/Button';
-import MenuItem from '@material-ui/core/MenuItem';
-import Popover from '@material-ui/core/Popover';
-import Menu from '@material-ui/core/Menu';
-import Divider from '@material-ui/core/Divider';
+import {
+  Card, Checkbox,
+  Select as SelectField,
+  Input as TextField,
+  Button as RaisedButton,
+  MenuItem,
+  Popover,
+  Menu,
+  Divider,
+  Tabs, Tab,
+  Table,
+  TableBody,
+  TableHead,
+  TableCell,
+  TableRow
+} from '@material-ui/core';
 
-import DownArrow from '@material-ui/icons/ArrowDropDown';
-import Refresh from '@material-ui/icons/Refresh';
-import Home from '@material-ui/icons/Home';
-import TextField from '@material-ui/core/Input';
-// import Input from '@material-ui/core/Input';
-import SortIcon from '@material-ui/icons/Sort';
-import SelectField from '@material-ui/core/Select';
-import PowerIcon from '@material-ui/icons/Power';
+import {ArrowDropDown as DownArrow} from '@material-ui/icons';
 
-var process = require('process');
+import {
+  Refresh, Home,
+  Sort as SortIcon,
+  Power as PowerIcon,
+  Edit as EditIcon,
+  Save as SaveIcon,
+  RotateLeft as RotateLeftIcon,
+  Delete as DeleteIcon,
+  ArrowDropDown as ArrowDropDownIcon,
+  ArrowDropUp as ArrowDropUpIcon
+} from '@material-ui/icons';
+
+
 import Loader from 'react-loader-spinner'
 import { push } from 'connected-react-router'
-import Checkbox from '@material-ui/core/Checkbox';
 
 import Annotation from './annotation'
 
@@ -39,28 +54,10 @@ import TableCSS from './table.css';
 
 import MetaAnnotator from './meta-annotator';
 
-import EditIcon from '@material-ui/icons/Edit';
-import SaveIcon from '@material-ui/icons/Save';
-import RotateLeftIcon from '@material-ui/icons/RotateLeft';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-
-
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableCell,
-  TableRow,
-} from '@material-ui/core';
-
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 
+var process = require('process');
 
 var ReactDOMServer = require('react-dom/server');
 var HtmlToReact = require('html-to-react')
@@ -70,8 +67,8 @@ var HtmlToReactParser = require('html-to-react').Parser;
 // import { ServerContext, PortContext } from "../app.js";
 
 
-class AnnotationView extends Component {
 
+class AnnotationView extends Component {
 
   constructor(props) {
     super()
@@ -83,8 +80,6 @@ class AnnotationView extends Component {
 
     var filter_group = urlparams["filter_group"] ? urlparams["filter_group"].split("_") : []
     var filter_labelgroup = urlparams["filter_labelgroup"] ? urlparams["filter_labelgroup"].split("_") : []
-
-
 
     this.state = {
         user: urlparams["user"] ? urlparams["user"] : "",
@@ -156,6 +151,7 @@ class AnnotationView extends Component {
     if ( !metadata.error ){
         metadata.rows.map ( item => { if ( item.istitle ){ titleSubgroups.push(item.concept) } })
     }
+
 
     this.setState({
       //user : this.state.user.length > 0 ? this.state.user : this.props.location.query.user,
@@ -238,7 +234,7 @@ class AnnotationView extends Component {
           allInfo = JSON.parse(await fetch.getAllInfo())
 
         }
-        // debugger
+
         // allInfo.abs_index = allInfo.abs_index.sort( (st_a,st_b) => {var dd = st_a.docid.localeCompare(st_b.docid); return dd == 0 ? parseInt(st_a.page) - parseInt(st_b.page) : dd} )
 
 
@@ -260,7 +256,7 @@ class AnnotationView extends Component {
         }
 
 
-        // debugger
+
 
         if ( annotation ){
           // var theTableData = JSON.parse(data)
@@ -355,6 +351,7 @@ class AnnotationView extends Component {
      var process_auto_annotations = (annotations,loc) => {
        return Object.keys(annotations).map( (N) => {
 
+          debugger
           var current = annotations[N]
 
           var content = {}
@@ -473,7 +470,7 @@ class AnnotationView extends Component {
 
      tableData.htmlHeader = '<table><tr ><td style="font-size:20px; font-weight:bold; white-space: normal;">'+this.state.headerEditText+'</td></tr></table>'
 
-     // debugger
+
      this.setState({toggleHeaderEdit: false, table : tableData})
 
      this.saveTableChanges()
@@ -642,13 +639,13 @@ class AnnotationView extends Component {
 
    render() {
 
-      let blah = this.server;
-
-      var hey = ServerContext
-
-      var peet = PortContext
-
-      debugger
+      // let blah = this.server;
+      //
+      // var hey = ServerContext
+      //
+      // var peet = PortContext
+      //
+      // debugger
 
        var preparedPreview = <div>Preview not available</div>
 
@@ -1001,7 +998,7 @@ class AnnotationView extends Component {
             <RaisedButton variant={"contained"} onClick={ () => {this.toggleBottom()} }  style={{margin:1,height:45,marginRight:5,fontWeight:"bolder"}}>{ this.state.bottomHeight == 600 ? <ArrowDropDownIcon /> : <ArrowDropUpIcon /> }{ this.state.bottomHeight == 600 ? "Hide" : "Show"}</RaisedButton>
           </div>
           <Tabs
-              orientation="vertical"
+              orientation="horizontal"
               variant="scrollable"
               value={this.state.openedTab}
               onChange={(ev,value) => {this.setState({openedTab: value}); this.openBottom();}}
@@ -1024,6 +1021,7 @@ class AnnotationView extends Component {
         {
            this.state.openedTab == 0 && this.state.annotations && this.state.annotations.length > 0 ? this.state.annotations.map(
             (v,i) => {
+
               return <Annotation key={i}
                                  annotationData ={this.state.annotations[i]}
                                  addAnnotation={ (data) => {this.addAnnotation(i,data)}}

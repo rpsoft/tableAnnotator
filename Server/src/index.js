@@ -54,7 +54,7 @@ passport.use(new CustomStrategy(
         }
         return done(null, getUserHash(records[i]));
       }
-    }
+    }ns
 
     return done(null, false);
   }
@@ -422,7 +422,7 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua, filter_
                   return dd == 0 ? parseInt(st_a.page) - parseInt(st_b.page) : dd
 
               });
-              // debugger
+
               DOCS = DOCS.reduce( (acc,docfile) => {
 
                   var file_parts = docfile.match(/([\w\W]*)_([0-9]*).html/)
@@ -430,11 +430,6 @@ async function prepareAvailableDocuments(filter_topic, filter_type, hua, filter_
                   var docid = file_parts[1]
                   var docid_V = file_parts[1]
                   var page = file_parts[2]
-
-                  //debugger
-                  // if ( docfile.indexOf("29937431") > -1 ){
-                  //   debugger
-                  // }
 
                   if( (ftop.length+ftyp.length > 0) && msh_categories && msh_categories.catIndex ){
 
@@ -577,9 +572,10 @@ python.ex`
   import sys
   import json
   import pandas as pd
+  import numpy as np
 `;
 
-console.log(process.cwd())
+// console.log(process.cwd())
 //   sgd = pickle.load(open("./src/sgd_multiterm.sav", 'rb'))
 //   sgd = pickle.load(open("./src/sgd_l_svm_char.sav", 'rb'))
 python.ex`
@@ -588,12 +584,25 @@ python.ex`
     d={}
     result = sgd.predict(h)
     for r in range(0,len(h)):
-      d[h[r]] = result[r]
+        d[h[r]] = result[r]
     return d
-  def getTopConfidenceTerms(df):
+  def classifyThreshold(h,threshold):
+      d={}
+      result = sgd.predict(h)
+      probs = sgd.decision_function(h)
+      for r in range(0,len(h)):
+          innerProbs = probs[r]
+          maximum = np.max(innerProbs)
+          if ( maximum > threshold):
+              d[h[r]] = result[r]
+          else:
+              d[h[r]] = ""
+      return d
+  def getTopConfidenceTerms(df,threshold = -0.5):
       df = df.sort_values(by=['confidence'], ascending=False)
-      mean = df.mean(axis=0)
-      return df[df["confidence"] > mean[0]]["classes"].values
+      mean = np.percentile(df["confidence"], 90)
+      df = df[df["confidence"] > threshold]
+      return df[df["confidence"] > mean]["classes"].values
   def groupedPredict( terms ):
       result = {}
       for t in range(0,len(terms)):
@@ -615,7 +624,7 @@ async function classify(terms){
       var term = prepare_cell_text(terms[t])
 
       if (term.length > 0){
-        if ( term.replace(/[^a-z]/g,"").length > 2 ){ // na's and "to" as part of ranges matching this length. Potentially other rubbish picked up here.
+        if ( term.replace(/[^a-z]/g,"").trim().length > 2 ){ // na's and "to" as part of ranges matching this length. Potentially other rubbish picked up here.
           cleanTerms[cleanTerms.length] = term
         }
       }
@@ -624,7 +633,7 @@ async function classify(terms){
     if ( cleanTerms.length > 0 ){
 
       python`
-        classify(${cleanTerms})
+        classifyThreshold(${cleanTerms},-0.5)
       `.then( x => resolve(x))
       .catch(python.Exception, (e) => console.log("python error: "+e));
     } else {
@@ -640,7 +649,7 @@ async function grouped_predictor(terms){
   var result = new Promise(function(resolve, reject) {
     if ( terms.length > 0 ){
       python`
-        groupedPredict(${[terms]})
+        groupedPredict(${terms})
       `.then( x => resolve(x))
       .catch(python.Exception, (e) => console.log("python error: "+e));
     } else {
@@ -662,6 +671,8 @@ async function attempt_predictions(actual_table){
 
       var predictions = new Array(lines.length)
 
+      var allowedFormatKeys = ["bold", "italic", "indent"]
+
       for( var l = 0; l < lines.length; l++ ){
           var currentLine = cheerio(lines[l])
           var terms = []
@@ -669,15 +680,30 @@ async function attempt_predictions(actual_table){
           var cellClass = ""
 
           for ( var c = 0 ; c < currentLine.children().length; c++){
-            terms[terms.length] = cheerio(currentLine.children()[c]).text().trim().replace(/\n/g, " ").toLowerCase()
 
-            var cellClassSelector = (cheerio(currentLine.children()[c]).children()[0])
-            if ( cellClassSelector ){
-              cellClass = cellClassSelector.attribs.class || ""
-            }
+            var term = cheerio(currentLine.children()[c]).text().trim().replace(/\n/g, " ").toLowerCase()
+            terms[terms.length] = term
 
-            cellClasses[cellClasses.length] = cellClass
+
+            var currentTDclass = (currentLine.children()[c].attribs.class || "").replace(/[0-9]+/g, '').split(" ")
+
+
+            var childrenClasses = Array.from( new Set(cheerio(currentLine.children()[c]).find("*").toArray().map( (i,el) => { return i.attribs.class || ""} ).join(" ").replace(/[0-9]+/g, '').split(" ")))
+
+
+            var cellClass = Array.from( new Set([...currentTDclass, ...childrenClasses])).filter( (el) => el.length > 0)
+
+                cellClass = cellClass.filter( (el) => allowedFormatKeys.indexOf(el) > -1 )
+
+            cellClasses[cellClasses.length] = (term.length > 0 ? cellClass.join(" ") : "").trim()
+
           }
+
+          var emptyRow = terms.join("") == terms[0]
+          var comb = terms[0]+terms[terms.length-1]
+          var emptyRow_pvalue = (terms.join("") == comb) && (comb.length > terms[0].length)
+
+          cellClasses[0] = cellClasses[0] + (emptyRow ? " empty_row" : "") + (emptyRow_pvalue ? " empty_row_with_p_value" : "").trim()
 
           var pred_class = await classify(terms)
 
@@ -685,7 +711,7 @@ async function attempt_predictions(actual_table){
       }
 
       resolve(predictions)
-    }catch ( e){
+    } catch ( e){
       reject(e)
     }
   });
@@ -1195,6 +1221,14 @@ app.get('/api/cuisIndexAdd',async function(req,res){
   res.send("saved annotation: "+JSON.stringify(req.query))
 });
 
+var cleanTerm = (term) => {
+
+  term = term.toLowerCase().replace(/[^A-z0-9 ]/gi, " ").replace(/[0-9]+/gi, " $nmbr$ " ).replace(/ +/gi," ").trim()
+
+  return term
+}
+
+
 async function allPredictions(){
   // var predictions = "user,docid,page,corrupted,tableType,location,number,content,qualifiers\n"
 
@@ -1231,13 +1265,6 @@ async function allPredictions(){
       path: 'prediction_data.csv',
       header: header
   });
-  //
-  // debugger
-
-  // const records = [
-  //     {name: 'Bob',  lang: 'French, English'},
-  //     {name: 'Mary', lang: 'English'}
-  // ];
 
 
   var count = 1;
@@ -1284,13 +1311,6 @@ async function allPredictions(){
 
       var cuirec = await getRecommendedCUIS()
 
-      var cleanTerm = (term) => {
-
-        term = term.toLowerCase().replace(/[^A-z0-9 ]/gi, " ").replace(/[0-9]+/gi, " $nmbr$ " ).replace(/ +/gi," ").trim()
-
-        return term
-      }
-
       var getSemanticTypes = (cuis, cui_data) => {
 
         if ( ! cuis ){
@@ -1307,13 +1327,8 @@ async function allPredictions(){
 
         return semType.flat()
       }
-      //
+
       count = count + 1;
-      // if ( count > 10 ){
-      //    return ""
-      // }
-      //
-      // debugger
 
       var csvData = data.predicted.predictions.map(
         (row_el,row) => {
@@ -1652,10 +1667,9 @@ app.get('/api/classify', async function(req,res){
 
 async function readyTableData(docid,page,method){
   try {
-  var docid = docid+"_"+page+".html"
-
-  var htmlFolder = tables_folder+"/"
-  var htmlFile = docid
+  var docid = docid+"_"+page+".html",
+      htmlFolder = tables_folder+"/",
+      htmlFile = docid
 
   //If an override file exists then use it!. Overrides are those produced by the editor.
   var file_exists = await fs.existsSync("HTML_TABLES_OVERRIDE/"+docid)
@@ -1670,7 +1684,7 @@ async function readyTableData(docid,page,method){
 
   var result = new Promise(function(resolve, reject) {
 
-    try {
+  try {
     fs.readFile(htmlFolder+htmlFile,
                 "utf8",
                 function(err, data) {
@@ -1682,11 +1696,38 @@ async function readyTableData(docid,page,method){
 
                                   try{
                                       tablePage = cheerio.load(data);
+
                                       // tablePage("col").removeAttr('style');
                                       if ( !tablePage ){
                                             resolve({htmlHeader: "",formattedPage : "", title: "" })
                                             return;
                                       }
+
+                                      if ( tablePage("strong").length > 0 || tablePage("b").length > 0 || tablePage("i").length > 0){
+
+                                        // fixing strong, b and i tags on the fly. using "bold" and "italic" classes is preferred
+                                        tablePage("strong").closest("td").addClass("bold")
+                                        tablePage("strong").map( (i,el) => { var content = cheerio(el).html(); var parent = cheerio(el).parent(); cheerio(el).remove(); parent.append( content ) } )
+
+                                        tablePage("b").closest("td").addClass("bold")
+                                        tablePage("b").map( (i,el) => { var content = cheerio(el).html(); var parent = cheerio(el).parent(); cheerio(el).remove(); parent.append( content ) } )
+
+                                        tablePage("i").closest("td").addClass("italic")
+                                        tablePage("i").map( (i,el) => { var content = cheerio(el).html(); var parent = cheerio(el).parent(); cheerio(el).remove(); parent.append( content ) } )
+
+                                        debugger
+
+                                        fs.writeFile(htmlFolder+htmlFile,  tablePage.html(), function (err) {
+                                          if (err) throw err;
+                                          console.log('Substituted strong tags by "bold" class for: '+htmlFolder+htmlFile);
+                                        });
+
+                                      }
+
+                                      // debugger
+
+
+
                                   } catch (e){
                                     // console.log(JSON.stringify(e)+" -- " + JSON.stringify(data))
                                     resolve({htmlHeader: "",formattedPage : "", title: "" })
@@ -1734,6 +1775,7 @@ async function readyTableData(docid,page,method){
 
                                   // The following lines remove, line numbers present in some tables, as well as positions in headings derived from the excel sheets  if present.
                                   var colum_with_numbers = actual_table("tr > td:nth-child(1), tr > td:nth-child(2), tr > th:nth-child(1), tr > th:nth-child(2)")
+
                                   if ( colum_with_numbers.text().replace( /[0-9]/gi, "").replace(/\s+/g,"").toLowerCase() === "row/col" ){
                                     colum_with_numbers.remove()
                                   }
@@ -1742,15 +1784,15 @@ async function readyTableData(docid,page,method){
                                       actual_table("thead").remove();
                                   }
                                   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                      actual_table = actual_table.html();
+
+                                  // Correction here for bold
+
+                                  actual_table = actual_table.html();
 
                                   // var ss = "<style>"+data_ss+" td {width: auto;} tr:hover {background: aliceblue} td:hover {background: #82c1f8} col{width:100pt} </style>"
                                   var styles = actual_table.indexOf('<style type="text/css">.indent0') > -1 ? "" : "<style>"+data_ss+"</style>"
 
-                                   var formattedPage = actual_table.indexOf("tr:hover" < 0) ? "<div>"+styles+actual_table+"</div>" : actual_table
-
-                                  // var formattedPage = "<div>"+actual_table+"</div>"
-
+                                  var formattedPage = actual_table.indexOf("tr:hover" < 0) ? "<div>"+styles+actual_table+"</div>" : actual_table
 
                                   var predictions = await attempt_predictions(actual_table)
 
@@ -1766,8 +1808,11 @@ async function readyTableData(docid,page,method){
                                     )
                                   )
 
-                                  var class_matrix = predictions.map( e => e.cellClasses.map( cellClass => cellClass ))
 
+                                  var format_matrix = predictions.map( e => e.cellClasses.map( cellClass => cellClass ))
+
+
+                                  // debugger
                                   // values in this matrix represent the cell contents, and can be: "text", "numeric" or ""
                                   var content_type_matrix = predictions.map(
                                     e => e.terms.map(
@@ -1781,10 +1826,8 @@ async function readyTableData(docid,page,method){
                                     )
                                   )
 
-                                  var max_col = 0;
-                                  for ( var l=0; l < preds_matrix.length; l++){
-                                      max_col = max_col > preds_matrix[l].length ? max_col : preds_matrix[l].length
-                                  }
+                                  var max_col = preds_matrix.reduce( (acc,n) => n.length > acc ? n.length : acc, 0);
+                                  var max_row = preds_matrix.length
 
 
                                   var getTopDescriptors = (N,freqs,ignore) => {
@@ -1799,19 +1842,67 @@ async function readyTableData(docid,page,method){
                                   }
 
                                   var cleanModifier = (modifier) => {
-                                    // I used to .replace("firstCol","").replace("firstLastCol","") the modifier.
                                     modifier = modifier ? modifier : ""; //prevent blow up
-
                                     return modifier.replace("firstCol","empty_row").replace("firstLastCol","empty_row_with_p_value")
                                                    .replace("indent0","indent").replace("indent1","indent")
                                                    .replace("indent2","indent").replace("indent3","indent")
                                                    .replace("indent4","indent").trim()
                                   }
 
+                                  var isTermNumber = (term) => {
+                                    var statsRelated = ["nmbr", "mean", "median", "percent", "mode", "std","nan","na","nr"]
+                                    var stats = term.toLowerCase().replace(/[^A-z0-9 ]/gi, " ")
+                                                .replace(/ +/gi," ").trim().split(" ").filter( el => el.length > 1)
+                                                .reduce( (acc, term) => {
+                                                  if (statsRelated.indexOf(term) > -1){ acc.numbers++ };
+                                                    acc.total++;
+                                                  return acc }, {numbers: 0, total: 0} )
+                                    return stats.numbers > stats.total/2
+                                  }
+
+                                  /*
+                                    Used to check if more than half elements in the column/row are just numbers.
+                                    This is useful as they can be detected as characteristic_level by the classifier.
+                                    We use this function to not accept predictions if most elements are just numbers, I.e very likely a results column/row
+                                  */
+                                  var isMostlyNumbers = (all_terms, equals=false) => {
+                                      var numberTerms_number = all_terms.map( (term) => isTermNumber(term)).reduce( (sum,isNumber) => isNumber ? sum+1 : sum , 0 )
+                                      return equals ? numberTerms_number >= all_terms.length/2 : numberTerms_number > all_terms.length/2
+                                  }
+
+                                  var selectTopDescriptors = async (allTerms) => {
+
+                                    var descriptors = await grouped_predictor( all_terms )
+
+                                     // debugger
+                                    var freqs = all_terms.filter( el => el.length > 0 ).reduce( (acc,term) => {var item = descriptors[term]; acc[item] = acc[item] ? acc[item]+1 : 1; return acc;}, {} )
+
+                                    delete freqs[""] // By eliminating empty predictions, we rely only on the cells with valid predictions. I.e. above the threshold applied to the classifier.
+
+                                    var meanFreq = Object.values(freqs).reduce((previous, current) => current += previous, 0)/Object.values(freqs).length
+
+                                    var selected_descriptors = []
+
+                                    for ( k in Object.keys(freqs) ){
+                                      if ( Object.keys(freqs)[k].length > 0  && freqs[Object.keys(freqs)[k]] >= meanFreq){
+
+                                        var key = Object.keys(freqs)[k]
+
+                                        if ( key.length > 0){
+                                          selected_descriptors.push(key)
+                                        }
+
+                                      }
+                                    }
+
+                                    return selected_descriptors
+                                  }
+
+
                                   //Estimate column predictions.
                                   var col_top_descriptors = []
 
-                                  for ( var c=0; c < max_col; c++ ){
+                                  for ( var c = 0; c < max_col; c++ ){
 
                                             var content_types_in_column = content_type_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
                                                switch (word[0]) {
@@ -1832,7 +1923,7 @@ async function readyTableData(docid,page,method){
                                             }
 
 
-                                            var unique_modifiers_in_column = class_matrix.map(x => x[c]).map(cleanModifier).filter((v, i, a) => a.indexOf(v) === i)
+                                            var unique_modifiers_in_column = format_matrix.map(x => x[c]).map(cleanModifier).filter((v, i, a) => a.indexOf(v) === i)
 
                                             for( var u in unique_modifiers_in_column){
 
@@ -1841,7 +1932,7 @@ async function readyTableData(docid,page,method){
                                                 var column_data = preds_matrix.map( (x,i) => [x[c],i]).reduce( (countMap, word) => {
                                                       var i = word[1]
                                                           word = word[0]
-                                                      if ( unique_modifier === cleanModifier(class_matrix[i][c]) ){
+                                                      if ( unique_modifier === cleanModifier(format_matrix[i][c]) ){
                                                         countMap.freqs[word] = ++countMap.freqs[word] || 1
                                                         var max = (countMap["max"] || 0)
                                                         countMap["max"] = max < countMap.freqs[word] ? countMap.freqs[word] : max
@@ -1854,7 +1945,7 @@ async function readyTableData(docid,page,method){
 
                                                       var i = word[1]
                                                           word = terms_matrix[i][c]
-                                                      if ( unique_modifier === cleanModifier(class_matrix[i][c]) ){
+                                                      if ( unique_modifier === cleanModifier(format_matrix[i][c]) ){
 
                                                         if ( word && word.length > 0 ){
                                                             if ( countMap[unique_modifier] ){
@@ -1867,25 +1958,31 @@ async function readyTableData(docid,page,method){
                                                       }
                                                       return countMap
                                                 },{})
-
-                                                for ( var k in column_data.freqs ){ // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
-
-                                                  if ( (column_data.freqs[undefined] == column_data.max) || column_data.freqs[k] == 1 ) {
-                                                      var allfreqs = column_data.freqs
-                                                      delete allfreqs[k]
-                                                      column_data.freqs = allfreqs
-                                                  }
-                                                }
+                                                //
+                                                // for ( var k in column_data.freqs ){ // to qualify for a column descriptor the frequency should at least be half of the length of the column headings.
+                                                //
+                                                //   if ( (column_data.freqs[undefined] == column_data.max) || column_data.freqs[k] == 1 ) {
+                                                //       var allfreqs = column_data.freqs
+                                                //       delete allfreqs[k]
+                                                //       column_data.freqs = allfreqs
+                                                //   }
+                                                // }
 
                                                 switch (METHOD) {
                                                   case "grouped_predictor":
 
-                                                    var all_terms = column_terms[unique_modifier] ? column_terms[unique_modifier].join(" ") : ""
+                                                    var all_terms = column_terms[unique_modifier] ? column_terms[unique_modifier] : []
+
+                                                    if ( isMostlyNumbers(all_terms) ){
+                                                      break;
+                                                    }
 
                                                     if ( column_terms[unique_modifier] && all_terms && column_terms[unique_modifier].length > 1 && all_terms.length > 0) { // Only attempt prediction if group contains more than one cell.
-                                                      var descriptors = await grouped_predictor( all_terms )
-                                                          descriptors = descriptors[all_terms].split(";")
-                                                          col_top_descriptors[col_top_descriptors.length] = {descriptors, c , unique_modifier}
+
+                                                      var selected_descriptors =  await selectTopDescriptors(all_terms)
+
+                                                      if ( selected_descriptors.length > 0)
+                                                        col_top_descriptors[col_top_descriptors.length] = {descriptors: selected_descriptors, c , unique_modifier}
                                                     }
 
                                                     break;
@@ -1896,12 +1993,12 @@ async function readyTableData(docid,page,method){
 
                                                 }
 
-                                              }
+                                      }
                                   }
 
                                   // Estimate row predictions
                                   var row_top_descriptors = []
-                                  // debugger
+
                                   for (var r in preds_matrix){
                                           var content_types_in_row = content_type_matrix[r].reduce( (countMap, word) => {
                                             switch (word) {
@@ -1947,13 +2044,20 @@ async function readyTableData(docid,page,method){
                                           switch (METHOD) {
                                             case "grouped_predictor":
 
-                                              var all_terms = row_terms.join(" ")
-                                              if ( row_terms.length > 1 ) { // Only attempt prediction if group contains more than one cell.
-                                                var descriptors = await grouped_predictor( all_terms )
-                                                    descriptors = descriptors[all_terms].split(";")
-                                                    row_top_descriptors[row_top_descriptors.length] = {descriptors,c : r,unique_modifier:""}
-                                              }
+                                              var all_terms = row_terms
 
+                                              if ( row_terms.length > 1 ) { // Only attempt prediction if group contains more than one cell.
+
+                                                //debugger
+                                                if ( isMostlyNumbers(all_terms,true) ){
+
+                                                  break;
+                                                }
+
+                                                var selected_descriptors =  await selectTopDescriptors(all_terms)
+
+                                                row_top_descriptors[row_top_descriptors.length] = {descriptors: selected_descriptors,c : r,unique_modifier:""}
+                                              }
 
                                               break;
                                             default:
@@ -1963,12 +2067,30 @@ async function readyTableData(docid,page,method){
                                           }
 
                                   }
+                                  // debugger
 
+
+                                  // final health check. If the predicted number of rows and cols exceed more than an existing threshold. Then select N rows/cols.
+
+                                  // if these cases happen, something has gone very badly with the predictions. So we take the first predictions, as they are closest to the headers.
+                                  if ( row_top_descriptors.length >= max_row/2 ){
+                                      row_top_descriptors = row_top_descriptors.filter( el => el.c == row_top_descriptors[0].c )
+                                  }
+
+                                  if ( col_top_descriptors.length >= max_col/2 ){
+
+                                      col_top_descriptors = col_top_descriptors.filter( el => el.c == col_top_descriptors[0].c )
+                                  }
+
+                                  //
+
+                                  // debugger
                                   var predicted = {
                                                   cols: col_top_descriptors,
                                                   rows: row_top_descriptors,
                                                   predictions : predictions
                                                 }
+
                                   // res.send({status: "good", htmlHeader,formattedPage, title:  titles_obj[req.query.docid.split(" ")[0]], predicted })
 
                                   resolve({status: "good", htmlHeader,formattedPage, title:  titles_obj[docid.split("_")[0]], predicted })

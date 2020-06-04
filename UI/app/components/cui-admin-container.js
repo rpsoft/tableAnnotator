@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // import createPalette from '@material-ui/styles/createPalette';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 

@@ -394,12 +394,7 @@ print(classification_report(y_test, y_pred))
 ##
 ##print(df['terms'].apply(lambda x: len( str(x).split(' '))).sum())
 ##
-##
-###my_tags = ['java','html','asp.net','c#','ruby-on-rails','jquery','mysql','php','ios','javascript','python','c','css','android','iphone','sql','objective-c','c++','angularjs','.net']
-##plt.figure(figsize=(10,4))
-##df.descriptor.value_counts().plot(kind='bar')
-##
-###part 2
+##5
 ##
 ##REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
 ##BAD_SYMBOLS_RE = re.compile('[^0-9a-z #+_]')
@@ -714,3 +709,84 @@ print(classification_report(y_test, y_pred))
 ##testing_data
 ##
 ##np.ndarray.flatten(testing_data)
+
+
+sgd = pickle.load(open("../../Server/src/sgd_nbmr_full.sav", 'rb'))
+
+def classify(h):
+    d={}
+    result = sgd.predict(h)
+    for r in range(0,len(h)):
+        d[h[r]] = result[r]
+    return d
+
+def classifyThreshold(h,threshold):
+    d={}
+    result = sgd.predict(h)
+    probs = sgd.decision_function(h)
+    for r in range(0,len(h)):
+        innerProbs = probs[r]        
+        maximum = np.max(innerProbs)
+        if ( maximum > threshold):
+            d[h[r]] = result[r]
+        else:
+            d[h[r]] = ""
+    return d
+
+def getTopConfidenceTerms(df,threshold = -0.5):
+    df = df.sort_values(by=['confidence'], ascending=False)
+    mean = np.percentile(df["confidence"], 90)
+    df = df[df["confidence"] > threshold]
+    return df[df["confidence"] > mean]["classes"].values
+
+def groupedPredict( terms , threshold = -0.5):
+    result = {}
+    for t in range(0,len(terms)):
+        d = {'classes': sgd[2].classes_, 'confidence': sgd.decision_function([terms[t]])[0]}
+        df = pd.DataFrame(data=d)
+        res = getTopConfidenceTerms(df,threshold)
+        result[terms[t]] = ";".join(res)
+    return result
+
+
+groupedPredict(["aspirin","other thing"])
+
+
+sgd.predict(["aspirin","other thing"])
+
+probs = sgd.decision_function(["years"])[0]
+maximum = np.max(probs)
+index_of_maximum = np.where(probs == maximum)
+sgd.classes_[index_of_maximum]
+
+
+
+classifyThreshold(["NR"],-0.5)
+
+classifyThreshold(["nmbr"],-0.5)
+
+
+terms = ["Study ID","Country","N. Cases","Age","Female (%)", "Platelet Count: all x 10A9/L", "Platelet Count: Non-Severe x 10^9/L", "Platelet Count: Severe x 10^9/L", "Thrombocytopeni a (%): All", "Thrombocytopeni a (%): Non-Severe", "Thrombocytopeni a (%): Severe"]
+
+groupedPredict(terms)
+
+terms = ["Liu W et al. [13]","China", "78 (11 severe)","38 (median)","50.0%","169.1 (57.3)","173.2 (55.4)","143.9 (64.8)","NR","NR","NR"]
+
+terms = ["country", "china", "china", "china", "china", "china", "china", "china", "singapore", "china"]
+groupedPredict(terms)
+
+result = {}
+for t in range(0,len(terms)):
+    d = {'classes': sgd[2].classes_, 'confidence': sgd.decision_function([terms[t]])[0]}
+    df = pd.DataFrame(data=d)
+    res = getTopConfidenceTerms(df)
+    result[terms[t]] = ";".join(res)
+
+
+np.percentile(df["confidence"], 90)
+
+terms = ["47 (median)", "49 year (median)", "38 (median)", "54 years (mean)", "67 (median) died, 50 (median) survived", "56 (median)", "59.7 (mean)", "47 (median)", "56 (median)" ]
+
+groupedPredict(terms)
+
+classifyThreshold(["years"])
